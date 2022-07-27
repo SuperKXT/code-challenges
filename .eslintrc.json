@@ -17,6 +17,26 @@
 		"@typescript-eslint",
 		"jest"
 	],
+	"rules": {
+		"import/extensions": [
+			"warn",
+			{
+				".ts": "never",
+				".tsx": "never"
+			}
+		],
+		"import/order": [
+			"error",
+			{
+				"newlines-between": "always",
+				"alphabetize": {
+					"order": "asc",
+					"caseInsensitive": true
+				}
+			}
+		],
+		"import/prefer-default-export": "off"
+	},
 	"settings": {
 		"jest": {
 			"version": 26
