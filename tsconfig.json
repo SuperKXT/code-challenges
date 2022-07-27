@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"baseUrl": "./src",
-		"target": "es2016",
+		"target": "esnext",
 		"lib": [
 			"dom",
 			"dom.iterable",
@@ -28,8 +28,5 @@
 		"strictNullChecks": true,
 		"strictFunctionTypes": true,
 		"strictPropertyInitialization": true,
-	},
-	"include": [
-		"src"
-	]
+	}
 }

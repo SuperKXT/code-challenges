@@ -4,8 +4,9 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"lint": "eslint --fix",
-		"test": "jest --runInBand"
+		"lint": "eslint . --fix",
+		"test": "jest --runInBand",
+		"wordle": "tsc ./wordle/wordle.ts && node ./wordle/wordle.js"
 	},
 	"devDependencies": {
 		"@types/jest": "^28.1.4",

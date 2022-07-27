@@ -17,13 +17,13 @@ export type Intersection = [number, number] | LinkListNode;
 
 const arrayToLinkedList = (array: number[]) => {
 	const list: LinkList = {
-		head: undefined,
+		head: null,
 	};
-	let lastNode: LinkListNode = undefined;
+	let lastNode: LinkListNode = null;
 	for (const item of array) {
 		const node: LinkListNode = {
 			value: item,
-			next: undefined,
+			next: null,
 		};
 
 		if (!list.head) {
