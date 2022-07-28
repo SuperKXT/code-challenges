@@ -16,10 +16,12 @@ export interface LinkList {
 export type Intersection = [number, number] | LinkListNode;
 
 const arrayToLinkedList = (array: number[]) => {
+
 	const list: LinkList = {
 		head: null,
 	};
 	let lastNode: LinkListNode = null;
+
 	for (const item of array) {
 		const node: LinkListNode = {
 			value: item,
@@ -37,6 +39,7 @@ const arrayToLinkedList = (array: number[]) => {
 
 	}
 	return list;
+
 };
 
 const findIntersection = <Type extends LinkListNode | number[]>(
@@ -47,45 +50,55 @@ const findIntersection = <Type extends LinkListNode | number[]>(
 	if (!Array.isArray(paramA)) {
 
 		let nodeA = paramA as LinkListNode;
-		let nodeB = paramB as LinkListNode;
 
 		while (nodeA) {
+			let nodeB = paramB as LinkListNode;
 			while (nodeB) {
-				if (nodeA === nodeB) return nodeA;
-				nodeB = nodeB.next;
+				if (
+					JSON.stringify(nodeA)
+					=== JSON.stringify(nodeB)
+				) return nodeA;
+				nodeB = nodeB.next ?? null;
 			}
 			nodeA = nodeA.next;
 		}
 		return null;
 	}
+	else {
 
-	const reversedA = (paramA as number[]).reverse();
-	const reversedB = (paramB as number[]).reverse();
+		const reversedA = [...(paramA as number[])].reverse();
+		const reversedB = [...(paramB as number[])].reverse();
 
-	for (let index = 0; index < reversedA.length; index++) {
+		for (let index = 0; index < reversedA.length; index++) {
 
-		const subA = reversedA.slice(0, reversedA.length - index);
-		const subB = reversedB.slice(0, reversedA.length - index);
+			const subA = reversedA.slice(0, reversedA.length - index);
+			const subB = reversedB.slice(0, reversedA.length - index);
 
-		if (areArraysEqual(subA, subB)) {
-			return [
-				index,
-				reversedB.length - subB.length,
-			];
+			if (areArraysEqual(subA, subB)) {
+				return [
+					index,
+					reversedB.length - subB.length,
+				];
+			}
+
 		}
+
+		return null;
 
 	}
 
-	return null;
-
 };
 
-const arrayA = [1, 4, 5, 6];
-const arrayB = [2, 3, 4, 5, 6];
+// const arrayA = [1, 4, 5, 6];
+// const arrayB = [2, 3, 4, 5, 6];
 
-const listA = arrayToLinkedList(arrayA);
-const listB = arrayToLinkedList(arrayB);
-console.log(findIntersection(arrayA, arrayB));
-console.log(findIntersection(listA.head, listB.head));
+// const listA = arrayToLinkedList(arrayA);
+// const listB = arrayToLinkedList(arrayB);
+// console.log(findIntersection(arrayA, arrayB));
+// console.log(findIntersection(listA.head, listB.head));
 
-export default findIntersection;
+export {
+	areArraysEqual,
+	arrayToLinkedList,
+	findIntersection,
+};

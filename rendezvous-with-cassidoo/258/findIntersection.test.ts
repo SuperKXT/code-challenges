@@ -1,64 +1,41 @@
-import findIntersection, { LinkList } from './findIntersection';
+import { arrayToLinkedList, findIntersection } from './findIntersection';
+
+const arrayA = [1, 4, 5, 6];
+const arrayB = [2, 3, 4, 5, 6];
+const arrayC = [9, 1, 4, 5, 6, 12];
+
+const listA = arrayToLinkedList(arrayA);
+const listB = arrayToLinkedList(arrayB);
+const listC = arrayToLinkedList(arrayC);
+const solutionNode = listA.head?.next;
 
 describe('arrays', () => {
 
 	it('should find intersection [1, 2]', () => {
-		const listA = [1, 4, 5, 6];
-		const listB = [2, 3, 4, 5, 6];
-		const intersection = findIntersectionInArrays(listA, listB);
+		const intersection = findIntersection(arrayA, arrayB);
 		expect(intersection).toStrictEqual([1, 2]);
 	});
 
 	it('should not find any intersection', () => {
-		const listA = [1, 4, 5, 6];
-		const listB = [9, 10, 11, 12];
-		const intersection = findIntersectionInArrays(listA, listB);
+		const intersection = findIntersection(arrayA, arrayC);
 		expect(intersection).toBeNull();
 	});
 
 });
 
 describe('linked lists', () => {
-	it('should find intersection node 4', () => {
-		// listA: 1 -> 4 -> 5 -> 6
-		const node6: Node = { value: 6, next: null };
-		const node5: Node = { value: 5, next: node6 };
-		const node4: Node = { value: 4, next: node5 };
-		const node1: Node = { value: 1, next: node4 };
-
-		// listB: 2 -> 3 -> 4 -> 5 -> 6
-		const node3: Node = { value: 3, next: node4 };
-		const node2: Node = { value: 2, next: node3 };
-
-		const intersection = findIntersectionInLinkedLists(node1, node2);
-		expect(intersection).toBe(node4);
+	it('should find intersection', () => {
+		const node = findIntersection(listA.head, listB.head);
+		expect(node).toBe(solutionNode);
 	});
 
 	it('should not find any intersection for non-intersecting lists', () => {
-		// listA: 1 -> 4 -> 5 -> 6
-		const node6: Node = { value: 6, next: null };
-		const node5: Node = { value: 5, next: node6 };
-		const node4: Node = { value: 4, next: node5 };
-		const node1: Node = { value: 1, next: node4 };
-
-		// listB: 9 -> 10 -> 11 -> 12
-		const node12: Node = { value: 12, next: null };
-		const node11: Node = { value: 11, next: node12 };
-		const node10: Node = { value: 10, next: node11 };
-		const node9: Node = { value: 9, next: node10 };
-
-		const intersection = findIntersectionInLinkedLists(node1, node9);
-		expect(intersection).toBeNull();
+		const node = findIntersection(listA.head, listC.head);
+		expect(node).toBeNull();
 	});
 
-	it('should not find any intersection for null lists', () => {
-		// listA: 1 -> 4 -> 5 -> 6
-		const node6: Node = { value: 6, next: null };
-		const node5: Node = { value: 5, next: node6 };
-		const node4: Node = { value: 4, next: node5 };
-		const node1: Node = { value: 1, next: node4 };
-
-		const intersection = findIntersectionInLinkedLists(node1, null);
-		expect(intersection).toBeNull();
+	it('should not find any intersection with node', () => {
+		const node = findIntersection(listA.head, null);
+		expect(node).toBeNull();
 	});
 });
