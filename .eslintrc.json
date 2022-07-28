@@ -15,7 +15,8 @@
 	},
 	"plugins": [
 		"@typescript-eslint",
-		"jest"
+		"jest",
+		"import"
 	],
 	"rules": {
 		"import/extensions": [

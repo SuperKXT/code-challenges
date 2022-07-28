@@ -30,4 +30,4 @@ const matchPattern = (pattern: RegExp) => {
 // // findWord('wtyuopfghjkvmqzxvm');
 
 /* cspell: disable-next-line */
-matchPattern(/el[qzxomwtypfgjv][qzxomwtypfgjv]n/);
+matchPattern(/sto[stowyuipadfgjvbnm][stowyuipadfgjvbnm]/);

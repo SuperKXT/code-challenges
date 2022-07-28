@@ -85,5 +85,7 @@ const arrayB = [2, 3, 4, 5, 6];
 
 const listA = arrayToLinkedList(arrayA);
 const listB = arrayToLinkedList(arrayB);
+console.log(findIntersection(arrayA, arrayB));
+console.log(findIntersection(listA.head, listB.head));
 
 export default findIntersection;
