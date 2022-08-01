@@ -1,16 +1,14 @@
 const numberOfOnes = (integer: number): number => {
 	if (integer < 1) return 0;
-	let oneCount = 0;
-	[...new Array(integer)].forEach((_, index) => {
+	return [...new Array(integer)].reduce((count, _, index) => {
 		const current = index + 1;
 		const matches = current.toString().match(/1/g);
-		if (!matches) return;
-		oneCount += matches.length;
-	});
-	return oneCount;
+		if (!matches) return count;
+		return count += matches.length;
+	}, 0);
 };
 
-// console.log(numberOfOnes(121));
+// console.log(numberOfOnes(14));
 
 export {
 	numberOfOnes,
