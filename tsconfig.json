@@ -28,5 +28,8 @@
 		"strictNullChecks": true,
 		"strictFunctionTypes": true,
 		"strictPropertyInitialization": true,
-	}
+	},
+	"exclude": [
+		"coverage/"
+	]
 }
