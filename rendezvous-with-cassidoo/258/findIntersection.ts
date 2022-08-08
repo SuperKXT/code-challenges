@@ -1,3 +1,7 @@
+import { LinkListNode } from '@helpers/linked-list';
+
+export type Intersection = [number, number] | LinkListNode<number>;
+
 const areArraysEqual = (first: unknown[], second: unknown[]) => {
 	if (first.length !== second.length) return false;
 	for (let index = 0; index < first.length; index++) {
@@ -6,53 +10,17 @@ const areArraysEqual = (first: unknown[], second: unknown[]) => {
 	return true;
 };
 
-export type LinkListNode = null | {
-	value: number,
-	next: LinkListNode,
-};
-export interface LinkList {
-	head: LinkListNode,
-}
-export type Intersection = [number, number] | LinkListNode;
-
-const arrayToLinkedList = (array: number[]) => {
-
-	const list: LinkList = {
-		head: null,
-	};
-	let lastNode: LinkListNode = null;
-
-	for (const item of array) {
-		const node: LinkListNode = {
-			value: item,
-			next: null,
-		};
-
-		if (!list.head) {
-			list.head = node;
-			lastNode = list.head;
-		}
-		else if (lastNode) {
-			lastNode.next = node;
-			lastNode = node;
-		}
-
-	}
-	return list;
-
-};
-
-const findIntersection = <Type extends LinkListNode | number[]>(
+const findIntersection = <Type extends LinkListNode<number> | number[]>(
 	paramA: Type,
 	paramB: Type
 ): Intersection | null => {
 
 	if (!Array.isArray(paramA)) {
 
-		let nodeA = paramA as LinkListNode;
+		let nodeA = paramA as LinkListNode<number>;
 
 		while (nodeA) {
-			let nodeB = paramB as LinkListNode;
+			let nodeB = paramB as LinkListNode<number>;
 			while (nodeB) {
 				if (
 					JSON.stringify(nodeA)
@@ -89,16 +57,7 @@ const findIntersection = <Type extends LinkListNode | number[]>(
 
 };
 
-// const arrayA = [1, 4, 5, 6];
-// const arrayB = [2, 3, 4, 5, 6];
-
-// const listA = arrayToLinkedList(arrayA);
-// const listB = arrayToLinkedList(arrayB);
-// console.log(findIntersection(arrayA, arrayB));
-// console.log(findIntersection(listA.head, listB.head));
-
 export {
 	areArraysEqual,
-	arrayToLinkedList,
 	findIntersection,
 };
