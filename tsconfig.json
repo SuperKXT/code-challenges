@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"baseUrl": "./src",
+		"baseUrl": "./",
 		"target": "esnext",
 		"lib": [
 			"dom",
@@ -28,6 +28,11 @@
 		"strictNullChecks": true,
 		"strictFunctionTypes": true,
 		"strictPropertyInitialization": true,
+		"paths": {
+			"@helpers/*": [
+				"./helpers/*"
+			]
+		}
 	},
 	"exclude": [
 		"coverage/"
