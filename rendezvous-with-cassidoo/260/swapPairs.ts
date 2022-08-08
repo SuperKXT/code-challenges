@@ -1,6 +1,8 @@
 import { LinkedList } from '@helpers/linked-list';
 
-export const swapPairsArray = (array: number[]): number[] => (
+export const swapPairsArray = (
+	array: number[]
+): number[] => (
 	array
 		.join('')
 		.replace(/(.)(.)/g, '$2$1')
@@ -11,6 +13,7 @@ export const swapPairsArray = (array: number[]): number[] => (
 export const swapPairsLinkList = (
 	list: LinkedList<number>
 ): LinkedList<number> => {
+
 	const swapped = { ...list };
 	let node = swapped.head;
 	while (
@@ -24,4 +27,5 @@ export const swapPairsLinkList = (
 		node = node.next.next;
 	}
 	return swapped;
+
 };
