@@ -1,4 +1,4 @@
-import { LinkList } from '@helpers/linked-list';
+import { LinkedList } from '@helpers/linked-list';
 
 export const areArraysEqual = (first: unknown[], second: unknown[]) => {
 	if (first.length !== second.length) return false;
@@ -8,7 +8,7 @@ export const areArraysEqual = (first: unknown[], second: unknown[]) => {
 	return true;
 };
 
-export const linkedListToArray = <Type>(list: LinkList<Type>): Type[] => {
+export const linkedListToArray = <Type>(list: LinkedList<Type>): Type[] => {
 	let array: Type[] = [];
 	let node = list.head;
 	while (node) {

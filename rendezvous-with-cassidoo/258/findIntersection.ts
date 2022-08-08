@@ -1,6 +1,6 @@
-import { LinkListNode } from '@helpers/linked-list';
+import { LinkedListNode } from '@helpers/linked-list';
 
-export type Intersection = [number, number] | LinkListNode<number>;
+export type Intersection = [number, number] | LinkedListNode<number>;
 
 const areArraysEqual = (first: unknown[], second: unknown[]) => {
 	if (first.length !== second.length) return false;
@@ -10,17 +10,17 @@ const areArraysEqual = (first: unknown[], second: unknown[]) => {
 	return true;
 };
 
-const findIntersection = <Type extends LinkListNode<number> | number[]>(
+const findIntersection = <Type extends LinkedListNode<number> | number[]>(
 	paramA: Type,
 	paramB: Type
 ): Intersection | null => {
 
 	if (!Array.isArray(paramA)) {
 
-		let nodeA = paramA as LinkListNode<number>;
+		let nodeA = paramA as LinkedListNode<number>;
 
 		while (nodeA) {
-			let nodeB = paramB as LinkListNode<number>;
+			let nodeB = paramB as LinkedListNode<number>;
 			while (nodeB) {
 				if (
 					JSON.stringify(nodeA)

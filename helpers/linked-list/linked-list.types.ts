@@ -1,7 +1,7 @@
-export type LinkListNode<Type> = null | {
+export type LinkedListNode<Type> = null | {
 	value: Type,
-	next: LinkListNode<Type>,
+	next: LinkedListNode<Type>,
 };
-export interface LinkList<Type> {
-	head: LinkListNode<Type>,
+export interface LinkedList<Type> {
+	head: LinkedListNode<Type>,
 }
