@@ -1,8 +1,8 @@
 import { linkedListToArray } from '@helpers/array';
 import { arrayToLinkedList } from '@helpers/linked-list';
-import { swapPairsArray, swapPairsLinkList } from './swapPairs';
+import { swapArrayPairsWithRecursion, swapArrayPairsWithRegex, swapPairsLinkList } from './swapPairs';
 
-const array1 = [1, 2, 3];
+const array1 = [1, 2, 3, 4];
 const array2: number[] = [];
 const array3 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -14,20 +14,39 @@ const solution1 = [2, 1, 3];
 const solution2 = array2;
 const solution3 = [2, 1, 4, 3, 6, 5, 8, 7, 9];
 
-describe('swap array pairs', () => {
+describe('swap array pairs with regex', () => {
 
 	it('should return [2, 1, 4, 3] for [1, 2, 3, 4]', () => {
-		const solution = swapPairsArray(array1);
+		const solution = swapArrayPairsWithRegex(array1);
 		expect(solution).toStrictEqual(solution1);
 	});
 
 	it('should return [] for []', () => {
-		const solution = swapPairsArray(array2);
+		const solution = swapArrayPairsWithRegex(array2);
 		expect(solution).toStrictEqual(solution2);
 	});
 
 	it('should return [2, 1, 4, 3, 6, 5, 8, 7, 9] for [1, 2, 3, 4, 5, 6, 7, 8, 9]', () => {
-		const solution = swapPairsArray(array3);
+		const solution = swapArrayPairsWithRegex(array3);
+		expect(solution).toStrictEqual(solution3);
+	});
+
+});
+
+describe('swap array pairs with recursion', () => {
+
+	it('should return [2, 1, 4, 3] for [1, 2, 3, 4]', () => {
+		const solution = swapArrayPairsWithRecursion(array1);
+		expect(solution).toStrictEqual(solution1);
+	});
+
+	it('should return [] for []', () => {
+		const solution = swapArrayPairsWithRecursion(array2);
+		expect(solution).toStrictEqual(solution2);
+	});
+
+	it('should return [2, 1, 4, 3, 6, 5, 8, 7, 9] for [1, 2, 3, 4, 5, 6, 7, 8, 9]', () => {
+		const solution = swapArrayPairsWithRecursion(array3);
 		expect(solution).toStrictEqual(solution3);
 	});
 

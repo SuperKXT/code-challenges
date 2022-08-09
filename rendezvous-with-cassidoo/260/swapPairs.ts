@@ -1,6 +1,6 @@
 import { LinkedList } from '@helpers/linked-list';
 
-export const swapPairsArray = (
+export const swapArrayPairsWithRegex = (
 	array: number[]
 ): number[] => (
 	array
@@ -9,6 +9,18 @@ export const swapPairsArray = (
 		.split('')
 		.map(Number)
 );
+
+export const swapArrayPairsWithRecursion = (
+	array: number[]
+): number[] => {
+	const [first, second, ...rest] = array;
+	const swapped: number[] = [];
+	first && swapped.push(first);
+	second && swapped.unshift(second);
+	rest.length > 0 && swapped.push(...swapArrayPairsWithRecursion(rest));
+	return swapped;
+};
+
 
 export const swapPairsLinkList = (
 	list: LinkedList<number>

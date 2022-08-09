@@ -61,4 +61,4 @@ const matchPattern = (
 //findWordByLetters('stue');
 
 /* cspell: disable-next-line */
-matchPattern(/[wryupdfgjkvbm][wryupdfgjkvbm][wryupdfgjkvbm][wryupdfgjkvbm][wryupdfgjkvbm]/);
+matchPattern(/[lrdwyfjxvbzq][rdwyfjxvbzq][ldwyfjxvbzq][lrdwyfjxvbzq][lrwyfjxvbzq]/, 'lrd');
