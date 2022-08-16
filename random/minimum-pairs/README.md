@@ -1,10 +1,11 @@
 # Minimum Pairs
 
-## The Question
+## Description
 
 Given an array of numbers, find the minimum distance between two numbers and print all the pair of numbers with that distance.
 
-Example:
+## Example:
+
 ```ts
 const listA = [4, 3, 2 ,1];
 
