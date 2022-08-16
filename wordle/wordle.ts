@@ -14,7 +14,7 @@ const matchStrings = (
 	return matched === matchAtLeast;
 };
 
-const findWordsByLetters = (
+export const findWordsByLetters = (
 	letters: string,
 	matchAtLeast: number = 5,
 	noRepeat?: boolean,
@@ -33,7 +33,7 @@ const findWordsByLetters = (
 	return matches;
 };
 
-const matchPattern = (
+export const matchPattern = (
 	pattern: RegExp,
 	knownLetters?: string
 ): string[] => {
@@ -61,4 +61,4 @@ const matchPattern = (
 //findWordByLetters('stue');
 
 /* cspell: disable-next-line */
-matchPattern(/[seiwyfjkvmzxq][e][siwyfjkvmzxq][eiwyfjkvmzxq][eiwyfjkvmzxq]/, 'sei');
+matchPattern(/[seiwyfjkvmzxq][e][siwyfjkvmzxq][eiwyfjkvmzxq][eiwyfjkvmzxq]/, 'sei'); // eslint-disable-line jest/require-hook

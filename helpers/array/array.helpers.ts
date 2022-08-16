@@ -9,7 +9,7 @@ export const areArraysEqual = (first: unknown[], second: unknown[]) => {
 };
 
 export const linkedListToArray = <Type>(list: LinkedList<Type>): Type[] => {
-	let array: Type[] = [];
+	const array: Type[] = [];
 	let node = list.head;
 	while (node) {
 		array.push(node.value);

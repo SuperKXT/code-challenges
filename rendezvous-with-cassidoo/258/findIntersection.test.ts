@@ -1,5 +1,6 @@
-import { arrayToLinkedList } from '@helpers/linked-list';
 import { findIntersection } from './findIntersection';
+
+import { arrayToLinkedList } from '@helpers/linked-list';
 
 const arrayA = [1, 4, 5, 6];
 const arrayB = [2, 3, 4, 5, 6];

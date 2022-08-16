@@ -39,6 +39,8 @@ const config = {
 				}
 			}
 		],
+		'jest/prefer-expect-assertions': 'off',
+		'jest/require-top-level-describe': 'off',
 		'import/prefer-default-export': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
 		'@typescript-eslint/no-inferrable-types': 'off',
