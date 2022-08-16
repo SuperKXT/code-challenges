@@ -1,4 +1,4 @@
-import { parensSubstring } from './parensSubstring';
+import { parenthesisSubstring } from './parenthesis-substring';
 
 const tests = [
 	{ string: '(()(', solution: 2 },
@@ -11,7 +11,7 @@ describe('swap array pairs with regex', () => {
 
 	for (const test of tests) {
 		it(`should return ${test.solution} for ${test.string}`, () => {
-			const solution = parensSubstring(test.string);
+			const solution = parenthesisSubstring(test.string);
 			expect(solution).toStrictEqual(test.solution);
 		});
 	}

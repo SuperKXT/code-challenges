@@ -1,4 +1,4 @@
-export const parensSubstring = (string: string): number => {
+export const parenthesisSubstring = (string: string): number => {
 
 	let startParens: number = 0;
 	let longest: number = 0;

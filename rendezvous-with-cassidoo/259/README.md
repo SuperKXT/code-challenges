@@ -1,4 +1,4 @@
-# numberOfOnes
+# Number Of ONes
 
 [issue #259 of rendezvous with cassidoo](https://buttondown.email/cassidoo/archive/science-is-not-a-boys-game-its-not-a-girls-game/).
 

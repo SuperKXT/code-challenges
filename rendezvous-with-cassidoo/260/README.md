@@ -1,4 +1,4 @@
-# swapPairs
+# Swap Pairs
 
 [issue #260 of rendezvous with cassidoo](https://buttondown.email/cassidoo/archive/youve-got-to-get-up-every-morning-with-a-smile-on/).
 

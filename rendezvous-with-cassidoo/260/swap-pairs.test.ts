@@ -3,7 +3,7 @@ import {
 	swapArrayPairsWithRecursion,
 	swapArrayPairsWithRegex,
 	swapLinkedListPairs,
-} from './swapPairs';
+} from './swap-pairs';
 
 import { linkedListToArray } from '@helpers/array';
 import { arrayToLinkedList } from '@helpers/linked-list';

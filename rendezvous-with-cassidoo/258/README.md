@@ -1,4 +1,4 @@
-# findIntersection
+# Find Intersection
 
 [issue #258 of rendezvous with cassidoo](https://buttondown.email/cassidoo/archive/discovering-the-truth-about-ourselves-is-a/).
 

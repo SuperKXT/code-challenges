@@ -1,4 +1,4 @@
-import { numberOfOnes } from './numberOfOnes';
+import { numberOfOnes } from './number-of-ones';
 
 const test1 = { number: 14, answer: 7, };
 const test2 = { number: 121, answer: 55, };
