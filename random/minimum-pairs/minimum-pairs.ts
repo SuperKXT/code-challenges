@@ -1,6 +1,8 @@
 export type Pair = `${number} ${number}`;
 
-export const minimumPairs = (numbers: number[]) => {
+export const minimumPairs = (
+	numbers: number[]
+): Pair[] => {
 
 	const sorted = numbers.sort((a, b) => a - b);
 	let minimumDistance = Infinity;
