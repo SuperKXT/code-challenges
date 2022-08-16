@@ -15,4 +15,5 @@ describe('swap array pairs with regex', () => {
 			expect(solution).toStrictEqual(test.solution);
 		});
 	}
+
 });
