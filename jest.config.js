@@ -1,10 +1,14 @@
+// @ts-check
+
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
-module.exports = {
+const config = {
 	preset: 'ts-jest',
 	testEnvironment: 'node',
 	clearMocks: true,
-	collectCoverage: false,
+	collectCoverage: true,
 	moduleNameMapper: {
 		'^@helpers/(.*)$': '<rootDir>/helpers/$1',
 	}
 };
+
+module.exports = config;

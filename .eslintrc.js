@@ -5,29 +5,29 @@ const config = {
 	env: {
 		es2021: true,
 		node: true,
-		jest: true
+		jest: true,
 	},
 	extends: [
 		'plugin:@typescript-eslint/recommended',
-		'plugin:jest/all'
+		'plugin:jest/all',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaVersion: 'latest',
-		sourceType: 'module'
+		sourceType: 'module',
 	},
 	plugins: [
 		'@typescript-eslint',
 		'jest',
-		'import'
+		'import',
 	],
 	rules: {
 		'import/extensions': [
 			'warn',
 			{
 				'.ts': 'never',
-				'.tsx': 'never'
-			}
+				'.tsx': 'never',
+			},
 		],
 		'import/order': [
 			'error',
@@ -35,9 +35,9 @@ const config = {
 				'newlines-between': 'always',
 				alphabetize: {
 					order: 'asc',
-					caseInsensitive: true
-				}
-			}
+					caseInsensitive: true,
+				},
+			},
 		],
 		'jest/prefer-expect-assertions': 'off',
 		'jest/require-top-level-describe': 'off',
@@ -58,12 +58,12 @@ const config = {
 	},
 	settings: {
 		'import/resolver': {
-			typescript: {}
+			typescript: {},
 		},
 		jest: {
-			version: 26
-		}
-	}
+			version: 26,
+		},
+	},
 };
 
 module.exports = config;
