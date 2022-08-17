@@ -1,14 +1,7 @@
+import { areArraysEqual } from '@helpers/array';
 import { LinkedListNode } from '@helpers/linked-list';
 
 export type Intersection = [number, number] | LinkedListNode<number>;
-
-const areArraysEqual = (first: unknown[], second: unknown[]) => {
-	if (first.length !== second.length) return false;
-	for (let index = 0; index < first.length; index++) {
-		if (first[index] !== second[index]) return false;
-	}
-	return true;
-};
 
 const findIntersection = <Type extends LinkedListNode<number> | number[]>(
 	paramA: Type,
@@ -58,6 +51,5 @@ const findIntersection = <Type extends LinkedListNode<number> | number[]>(
 };
 
 export {
-	areArraysEqual,
 	findIntersection,
 };

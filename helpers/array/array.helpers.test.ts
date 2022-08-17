@@ -1,6 +1,6 @@
 import {
 	areArraysEqual,
-	linkedListToArray
+	linkedListToArray,
 } from './array.helpers';
 
 import { LinkedList } from '@helpers/linked-list';
@@ -37,7 +37,7 @@ const equalityTests: EqualityTest[] = [
 const toArrayTests: ToArrayTest<number>[] = [
 	{
 		array: [1, 2, 3],
-		list: { head: { value: 1, next: { value: 2, next: { value: 3, next: null, } } } },
+		list: { head: { value: 1, next: { value: 2, next: { value: 3, next: null } } } },
 	},
 	{
 		array: [],

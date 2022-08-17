@@ -4,7 +4,7 @@ const matchStrings = (
 	string1: string,
 	string2: string,
 	matchAtLeast: number = 5,
-	noRepeat?: boolean,
+	noRepeat?: boolean
 ): boolean => {
 	let array1 = string1.split('');
 	if (noRepeat) array1 = Array.from(new Set(array1));
@@ -17,7 +17,7 @@ const matchStrings = (
 export const findWordsByLetters = (
 	letters: string,
 	matchAtLeast: number = 5,
-	noRepeat?: boolean,
+	noRepeat?: boolean
 ): string[] => {
 
 	const matches = wordList.filter(word =>
@@ -61,4 +61,4 @@ export const matchPattern = (
 //findWordByLetters('stue');
 
 /* cspell: disable-next-line */
-matchPattern(/[seiwyfjkvmzxq][e][siwyfjkvmzxq][eiwyfjkvmzxq][eiwyfjkvmzxq]/, 'sei'); // eslint-disable-line jest/require-hook
+matchPattern(/[lwtdhjkvzxq][awtdhjkvzxq][alwtdhjkvzxq][ltdhjkvzxq][alwdhjkvzxq]/, 'alwt'); // eslint-disable-line jest/require-hook

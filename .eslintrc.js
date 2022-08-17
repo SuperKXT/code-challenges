@@ -22,6 +22,13 @@ const config = {
 		'import',
 	],
 	rules: {
+		'comma-dangle': ['error', {
+			arrays: 'always-multiline',
+			objects: 'always-multiline',
+			imports: 'always-multiline',
+			exports: 'always-multiline',
+			functions: 'never',
+		}],
 		'import/extensions': [
 			'warn',
 			{
@@ -45,7 +52,8 @@ const config = {
 		'@typescript-eslint/no-explicit-any': 'off',
 		'@typescript-eslint/no-inferrable-types': 'off',
 		'@typescript-eslint/no-unnecessary-type-constraint': 'off',
-		'@typescript-eslint/prefer-nullish-coalescing': 'off', '@typescript-eslint/member-delimiter-style': ['error', {
+		'@typescript-eslint/prefer-nullish-coalescing': 'off',
+		'@typescript-eslint/member-delimiter-style': ['error', {
 			multiline: {
 				delimiter: 'comma',
 				requireLast: true,
