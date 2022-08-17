@@ -1,8 +1,9 @@
-import { arrayToLinkedList, LinkedList } from '@helpers/linked-list';
 import {
 	areArraysEqual,
 	linkedListToArray
 } from './array.helpers';
+
+import { LinkedList } from '@helpers/linked-list';
 
 interface EqualityTest {
 	first: any[],
@@ -10,7 +11,7 @@ interface EqualityTest {
 	areEqual: boolean,
 }
 
-interface ToLinkedListTest<Type> {
+interface ToArrayTest<Type> {
 	array: Type[],
 	list: LinkedList<Type>,
 }
@@ -33,7 +34,7 @@ const equalityTests: EqualityTest[] = [
 	},
 ];
 
-const toLinkedListTests: ToLinkedListTest<number>[] = [
+const toArrayTests: ToArrayTest<number>[] = [
 	{
 		array: [1, 2, 3],
 		list: { head: { value: 1, next: { value: 2, next: { value: 3, next: null, } } } },
@@ -55,12 +56,12 @@ describe('array equality helper', () => {
 
 });
 
-describe('array to linked list helper', () => {
+describe('linked list to array helper', () => {
 
-	for (const test of toLinkedListTests) {
-		it(`should return ${test.list} for [${test.array}]`, () => {
-			const list = arrayToLinkedList(test.array);
-			expect(JSON.stringify(list)).toStrictEqual(JSON.stringify(test.list));
+	for (const test of toArrayTests) {
+		it(`should return [${test.array}] for ${test.list}`, () => {
+			const array = linkedListToArray(test.list);
+			expect(array).toStrictEqual(test.array);
 		});
 	}
 

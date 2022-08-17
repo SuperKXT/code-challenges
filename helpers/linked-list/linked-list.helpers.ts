@@ -23,6 +23,7 @@ export const arrayToLinkedList = <Type>(array: Type[]) => {
 		}
 
 	}
+
 	return list;
 
 };
