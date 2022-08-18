@@ -14,6 +14,10 @@ const tests: Test[] = [
 		input: [10, 1, 9, 2, 15, 3, 14],
 		solution: ['1 2', '2 3', '9 10', '14 15'],
 	},
+	{
+		input: [4, 7, 2, 9],
+		solution: ['2 4', '7 9'],
+	},
 ];
 
 describe('should find correct minimum pairs for all number arrays', () => {
