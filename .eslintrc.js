@@ -22,6 +22,11 @@ const config = {
 		'import',
 	],
 	rules: {
+		indent: ['off', 'tab'],
+		'linebreak-style': ['error', 'unix'],
+		quotes: ['error', 'single'],
+		semi: ['error', 'always'],
+		radix: ['warn', 'as-needed'],
 		'comma-dangle': ['error', {
 			arrays: 'always-multiline',
 			objects: 'always-multiline',
