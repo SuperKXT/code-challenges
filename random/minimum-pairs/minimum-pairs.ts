@@ -25,7 +25,7 @@ export const minimumPairs = (
 
 	}
 
-	console.log(pairs.join('\n'));
+	// // console.log(pairs.join('\n'));
 	return pairs;
 
 };
