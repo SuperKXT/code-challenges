@@ -5,10 +5,10 @@ const formatMarkdownTable = (
 ): string => {
 
 	const rowStrings = string.match(/^.+$/gm);
-	const noOfColumns = rowStrings?.[0]?.match(columnMatcher)?.length ?? 0;
 	const rowCells = rowStrings?.map(row =>
 		row.match(columnMatcher) ?? []
 	);
+	const noOfColumns = rowCells?.[0]?.length ?? 0;
 
 	if (
 		!rowStrings
