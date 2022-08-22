@@ -1,4 +1,4 @@
-# Parenthesis Substring
+# Format Markdown Table String
 
 [issue #262 of rendezvous with cassidoo](https://buttondown.email/cassidoo/archive/find-something-youre-passionate-about-and-keep/).
 
