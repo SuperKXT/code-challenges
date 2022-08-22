@@ -40,7 +40,7 @@ const tests: Test[] = [
 		input: [
 			'',
 			'| Syntax     | Description | Extra |',
-			'| --- |      ----------- |',
+			'     | --- |      ----------- |',
 			'| Header | Title | Ex |  ',
 			'   | Paragraph | Text |   ',
 			'',
@@ -67,6 +67,10 @@ const tests: Test[] = [
 			'| Header    | Title       |',
 			'| Paragraph | Text        |',
 		].join('\n'),
+	},
+	{
+		input: '',
+		output: '',
 	},
 ];
 
