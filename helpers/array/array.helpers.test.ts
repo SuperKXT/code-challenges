@@ -3,7 +3,7 @@ import {
 	linkedListToArray,
 } from './array.helpers';
 
-import { LinkedList } from '@helpers/linked-list';
+import { LinkedList } from '~/helpers/linked-list';
 
 interface EqualityTest {
 	first: any[],

@@ -61,4 +61,4 @@ export const matchPattern = (
 //findWordByLetters('stue');
 
 /* cspell: disable-next-line */
-matchPattern(/[lwtdhjkvzxq][awtdhjkvzxq][alwtdhjkvzxq][ltdhjkvzxq][alwdhjkvzxq]/, 'alwt'); // eslint-disable-line jest/require-hook
+matchPattern(/[aueqwydgjzxv][aueqwydgjzxv][u][aueqwydgjzxv][e]/, 'aue'); // eslint-disable-line jest/require-hook

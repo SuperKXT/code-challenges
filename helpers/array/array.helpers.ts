@@ -1,4 +1,4 @@
-import { LinkedList } from '@helpers/linked-list';
+import { LinkedList } from '~/helpers/linked-list';
 
 export const areArraysEqual = <Type extends any[]>(
 	first: Type,
