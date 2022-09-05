@@ -1,8 +1,8 @@
 {
-	"name": "rendezvous-with-cassidoo",
+	"name": "code-challenges",
 	"version": "1.0.0",
-	"main": "index.js",
 	"license": "MIT",
+	"author": "Saad Khan",
 	"scripts": {
 		"lint": "eslint . --fix",
 		"test": "jest --runInBand",
