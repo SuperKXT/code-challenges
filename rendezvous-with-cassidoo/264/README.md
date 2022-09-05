@@ -1,6 +1,6 @@
 # Format Markdown Table String
 
-[issue #262 of rendezvous with cassidoo](https://buttondown.email/cassidoo/archive/find-something-youre-passionate-about-and-keep/).
+[issue #264 of rendezvous with cassidoo](https://buttondown.email/cassidoo/archive/if-everything-was-perfect-you-would-never-learn/).
 
 ## Description
 Write a function fromTo that produces a generator, that will produce values in a range.
