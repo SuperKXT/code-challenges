@@ -1,54 +1,37 @@
+import argumentParser from 'minimist-lite';
+import z from 'zod';
+
 import wordList from './word-list';
 
-const matchStrings = (
-	string1: string,
-	string2: string,
-	matchAtLeast: number = 5,
-	noRepeat?: boolean
-): boolean => {
-	let array1 = string1.split('');
-	if (noRepeat) array1 = Array.from(new Set(array1));
-	const matched = array1.filter(char =>
-		string2.includes(char)
-	).length;
-	return matched === matchAtLeast;
-};
+const charactersPattern = /[a-z]/i;
+const excludeCharactersPattern = /-\(([a-z]+)\)/gi;
+const validWordPattern = /((-\([a-z]+\))|[a-z*]){5}/i;
+/* cspell: disable-next-line */
+const alphabets = 'abcdefghijklmnopqrstuvxwyz';
 
-export const findWordsByLetters = (
-	letters: string,
-	matchAtLeast: number = 5,
-	noRepeat?: boolean
-): string[] => {
+export const matchPattern = (parameters: Arguments): string[] => {
 
-	const matches = wordList.filter(word =>
-		matchStrings(
-			word,
-			letters,
-			matchAtLeast,
-			noRepeat
-		)
-	);
-	console.log(`Found (\x1b[32m${matches.length}\x1b[0m) Matches`);
-	console.log(`\x1b[32m${matches.join(', ')}\x1b[0m`);
-	return matches;
-};
+	const parsed = argumentSchema.parse(parameters);
+	const availableCharacters = parsed.available ?? parsed.a ?? alphabets;
+	const knownPattern = parsed.pattern ?? parsed.p ?? '*****';
+	const knownCharacters = parsed.known ?? parsed.k ?? '';
 
-export const matchPattern = (
-	pattern: RegExp,
-	knownLetters?: string
-): string[] => {
-
-	const matches = wordList.filter(word =>
-		word.match(pattern)
-		&& (
-			!knownLetters
-			|| matchStrings(
-				word,
-				knownLetters,
-				knownLetters.length,
-				true
+	const pattern = new RegExp(
+		knownPattern
+			.replace(
+				/\*/g,
+				`[${availableCharacters}]`
 			)
-		)
+			.replace(
+				excludeCharactersPattern,
+				(_, p1) => `[${availableCharacters.replace(new RegExp(`[${p1}]`, 'gi'), '')}]`
+			),
+		'i'
+	);
+
+	const matches = wordList.filter(word =>
+		knownCharacters.split('').every(character => word.includes(character))
+		&& pattern.test(word)
 	);
 
 	console.log(`Found (\x1b[32m${matches.length}\x1b[0m) Matches`);
@@ -57,8 +40,19 @@ export const matchPattern = (
 
 };
 
-/* cspell: disable-next-line */
-//findWordByLetters('stue');
+const argumentSchema = z.strictObject({
+	'_': z.string().array().length(0),
+	'--': z.string().array().length(0).optional(),
+	available: z.string().regex(charactersPattern).min(1).max(26).optional(),
+	a: z.string().regex(charactersPattern).min(1).max(26).optional(),
+	pattern: z.string().regex(validWordPattern).optional(),
+	p: z.string().regex(validWordPattern).optional(),
+	known: z.string().regex(charactersPattern).min(1).max(5).optional(),
+	k: z.string().regex(charactersPattern).min(1).max(5).optional(),
+});
 
-/* cspell: disable-next-line */
-matchPattern(/[aueqwydgjzxv][aueqwydgjzxv][u][aueqwydgjzxv][e]/, 'aue'); // eslint-disable-line jest/require-hook
+type Arguments = z.infer<typeof argumentSchema>;
+
+const args = argumentParser<Arguments>(process.argv.slice(2));
+
+matchPattern(args); // eslint-disable-line jest/require-hook
