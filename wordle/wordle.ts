@@ -1,7 +1,7 @@
 import argumentParser from 'minimist-lite';
 import z from 'zod';
 
-import wordList from './word-list';
+import { wordleWords } from './word-list';
 
 const charactersPattern = /[a-z]/i;
 const excludeCharactersPattern = /-\(([a-z]+)\)/gi;
@@ -9,7 +9,7 @@ const validWordPattern = /((-\([a-z]+\))|[a-z*]){5}/i;
 /* cspell: disable-next-line */
 const alphabets = 'abcdefghijklmnopqrstuvxwyz';
 
-export const matchPattern = (parameters: Arguments): string[] => {
+export const findWordle = (parameters: Arguments): string[] => {
 
 	const parsed = argumentSchema.parse(parameters);
 	const availableCharacters = parsed.available ?? parsed.a ?? alphabets;
@@ -29,19 +29,21 @@ export const matchPattern = (parameters: Arguments): string[] => {
 		'i'
 	);
 
-	const matches = wordList.filter(word =>
+	const matches = wordleWords.filter(word =>
 		knownCharacters.split('').every(character => word.includes(character))
 		&& pattern.test(word)
 	);
 
-	console.log(`Found (\x1b[32m${matches.length}\x1b[0m) Matches`);
-	console.log(`\x1b[32m${matches.join(', ')}\x1b[0m`);
+	if (process.env.NODE_ENV !== 'test') {
+		console.log(`Found (\x1b[32m${matches.length}\x1b[0m) Matches`);
+		console.log(`\x1b[32m${matches.join(', ')}\x1b[0m`);
+	}
 	return matches;
 
 };
 
 const argumentSchema = z.strictObject({
-	'_': z.string().array().length(0),
+	'_': z.string().array().length(0).optional(),
 	'--': z.string().array().length(0).optional(),
 	available: z.string().regex(charactersPattern).min(1).max(26).optional(),
 	a: z.string().regex(charactersPattern).min(1).max(26).optional(),
@@ -51,8 +53,9 @@ const argumentSchema = z.strictObject({
 	k: z.string().regex(charactersPattern).min(1).max(5).optional(),
 });
 
-type Arguments = z.infer<typeof argumentSchema>;
+export type Arguments = z.infer<typeof argumentSchema>;
 
-const args = argumentParser<Arguments>(process.argv.slice(2));
-
-matchPattern(args); // eslint-disable-line jest/require-hook
+if (process.env.NODE_ENV !== 'test') {
+	const args = argumentParser<Arguments>(process.argv.slice(2));
+	findWordle(args); // eslint-disable-line jest/require-hook
+}
