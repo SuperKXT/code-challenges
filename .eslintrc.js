@@ -51,6 +51,9 @@ const config = {
 				},
 			},
 		],
+		'no-console': ['error', {
+			allow: ['warn', 'error', 'info'],
+		}],
 		'jest/prefer-expect-assertions': 'off',
 		'jest/require-top-level-describe': 'off',
 		'import/prefer-default-export': 'off',
