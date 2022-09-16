@@ -24,10 +24,20 @@ const tests: Test[] = [
 	},
 	{
 		arguments: {
+			/* cspell: disable-next-line */
 			available: 'prudeaqwzxjhiu',
 			pattern: 'p*u-(pu)*',
 		},
 		results: ['prude'],
+	},
+	{
+		arguments: {
+			known: 'loc',
+			/* cspell: disable-next-line */
+			available: 'qwygjzxmloc',
+			pattern: '-(l)o-(o)-(co)*',
+		},
+		results: ['colly', 'coyly'],
 	},
 ];
 
