@@ -9,7 +9,7 @@ interface Test {
 const tests: Test[] = [
 	{
 		arguments: {
-			pattern: 'q*e-(ueq)-(ueq)',
+			pattern: 'q*e~(ueq)~(ueq)',
 			known: 'qul',
 		},
 		results: ['quell'],
@@ -26,7 +26,7 @@ const tests: Test[] = [
 		arguments: {
 			/* cspell: disable-next-line */
 			available: 'prudeaqwzxjhiu',
-			pattern: 'p*u-(pu)*',
+			pattern: 'p*u~(pu)*',
 		},
 		results: ['prude'],
 	},
@@ -35,7 +35,7 @@ const tests: Test[] = [
 			known: 'loc',
 			/* cspell: disable-next-line */
 			available: 'qwygjzxmloc',
-			pattern: '-(l)o-(o)-(co)*',
+			pattern: '~(l)o~(o)~(co)*',
 		},
 		results: ['colly', 'coyly'],
 	},
