@@ -3,18 +3,21 @@ import z from 'zod';
 
 import { wordleWords } from './word-list';
 
-const charactersPattern = /[a-z]/i;
-const excludeCharactersPattern = /~\(([a-z]+)\)/gi;
-const validWordPattern = /((~\([a-z]+\))|[a-z*]){5}/i;
+const CHARACTERS_REGEX = /[a-z]/i;
+const EXCLUDE_CHARACTERS_REGEX = /~\(([a-z]+)\)/gi;
+const VALID_WORD_PATTERN = /((~\([a-z]+\))|[a-z*]){5}/i;
+const DUPLICATE_CHARACTER_REGEX = /(.).*\1/i;
 /* cspell: disable-next-line */
-const alphabets = 'abcdefghijklmnopqrstuvxwyz';
+const ALPHABETS = 'abcdefghijklmnopqrstuvxwyz';
 
 export const findWordle = (parameters: Arguments): string[] => {
 
 	const parsed = argumentSchema.parse(parameters);
-	const availableCharacters = parsed.available ?? parsed.a ?? alphabets;
+	console.log(parsed);
+	const availableCharacters = parsed.available ?? parsed.a ?? ALPHABETS;
 	const knownPattern = parsed.pattern ?? parsed.p ?? '*****';
 	const knownCharacters = parsed.known ?? parsed.k ?? '';
+	const noRepeat = !parsed.repeat;
 
 	const pattern = new RegExp(
 		knownPattern
@@ -23,14 +26,15 @@ export const findWordle = (parameters: Arguments): string[] => {
 				`[${availableCharacters}]`
 			)
 			.replace(
-				excludeCharactersPattern,
+				EXCLUDE_CHARACTERS_REGEX,
 				(_, p1) => `[${availableCharacters.replace(new RegExp(`[${p1}]`, 'gi'), '')}]`
 			),
 		'i'
 	);
 
 	const matches = wordleWords.filter(word =>
-		knownCharacters.split('').every(character => word.includes(character))
+		(!noRepeat || !DUPLICATE_CHARACTER_REGEX.test(word))
+		&& knownCharacters.split('').every(character => word.includes(character))
 		&& pattern.test(word)
 	);
 
@@ -45,12 +49,13 @@ export const findWordle = (parameters: Arguments): string[] => {
 const argumentSchema = z.strictObject({
 	'_': z.string().array().length(0).optional(),
 	'--': z.string().array().length(0).optional(),
-	available: z.string().regex(charactersPattern).min(1).max(26).optional(),
-	a: z.string().regex(charactersPattern).min(1).max(26).optional(),
-	pattern: z.string().regex(validWordPattern).optional(),
-	p: z.string().regex(validWordPattern).optional(),
-	known: z.string().regex(charactersPattern).min(1).max(5).optional(),
-	k: z.string().regex(charactersPattern).min(1).max(5).optional(),
+	available: z.string().regex(CHARACTERS_REGEX).min(1).max(26).optional(),
+	a: z.string().regex(CHARACTERS_REGEX).min(1).max(26).optional(),
+	pattern: z.string().regex(VALID_WORD_PATTERN).optional(),
+	p: z.string().regex(VALID_WORD_PATTERN).optional(),
+	known: z.string().regex(CHARACTERS_REGEX).min(1).max(5).optional(),
+	k: z.string().regex(CHARACTERS_REGEX).min(1).max(5).optional(),
+	repeat: z.boolean(),
 });
 
 export type Arguments = z.infer<typeof argumentSchema>;
