@@ -13,7 +13,6 @@ const ALPHABETS = 'abcdefghijklmnopqrstuvxwyz';
 export const findWordle = (parameters: Arguments): string[] => {
 
 	const parsed = argumentSchema.parse(parameters);
-	console.log(parsed);
 	const availableCharacters = parsed.available ?? parsed.a ?? ALPHABETS;
 	const knownPattern = parsed.pattern ?? parsed.p ?? '*****';
 	const knownCharacters = parsed.known ?? parsed.k ?? '';
@@ -55,7 +54,7 @@ const argumentSchema = z.strictObject({
 	p: z.string().regex(VALID_WORD_PATTERN).optional(),
 	known: z.string().regex(CHARACTERS_REGEX).min(1).max(5).optional(),
 	k: z.string().regex(CHARACTERS_REGEX).min(1).max(5).optional(),
-	repeat: z.boolean(),
+	repeat: z.boolean().optional(),
 });
 
 export type Arguments = z.infer<typeof argumentSchema>;

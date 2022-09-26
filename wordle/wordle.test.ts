@@ -42,12 +42,8 @@ const tests: Test[] = [
 ];
 
 describe('find wordle word', () => {
-
-	for (const test of tests) {
-		it(`should find ${test.results.length} results for test # ${tests.indexOf(test) + 1}`, () => {
-			const results = findWordle(test.arguments);
-			expect(results).toStrictEqual(test.results);
-		});
-	}
-
+	it.each(tests)('should find matched words by the given flags', (test) => {
+		const results = findWordle(test.arguments);
+		expect(results).toStrictEqual(test.results);
+	});
 });
