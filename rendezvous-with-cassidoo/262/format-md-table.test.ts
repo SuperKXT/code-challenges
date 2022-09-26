@@ -75,12 +75,8 @@ const tests: Test[] = [
 ];
 
 describe('format markdown table string', () => {
-
-	for (const test of tests) {
-		it(`should return correctly formatted markdown string for ${test.input}`, () => {
-			const formatted = formatMarkdownTable(test.input);
-			expect(formatted).toStrictEqual(test.output);
-		});
-	}
-
+	it.each(tests)('should return correctly formatted markdown', (test) => {
+		const formatted = formatMarkdownTable(test.input);
+		expect(formatted).toStrictEqual(test.output);
+	});
 });

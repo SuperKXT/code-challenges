@@ -23,10 +23,8 @@ const tests: Test[] = [
 ];
 
 describe('testing cornerHit', () => {
-	for (const test of tests) {
-		it(`should return ${test.result} for box: ${test.boxSize}, position: ${test.initialPosition}, size: ${test.screenSize}`, () => {
-			const result = cornerHit(test.boxSize, test.initialPosition, test.screenSize);
-			expect(result).toStrictEqual(test.result);
-		});
-	}
+	it.each(tests)('should return if the box hits the corner for given input', (test) => {
+		const result = cornerHit(test.boxSize, test.initialPosition, test.screenSize);
+		expect(result).toStrictEqual(test.result);
+	});
 });

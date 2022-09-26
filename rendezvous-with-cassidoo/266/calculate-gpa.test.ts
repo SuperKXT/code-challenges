@@ -29,10 +29,8 @@ const tests: Test[] = [
 ];
 
 describe('testing calculateGpa', () => {
-	for (const test of tests) {
-		it(`should return ${test.output} for box: calculateGpa([${test.input.join(', ')}])`, () => {
-			const output = calculateGpa(test.input);
-			expect(output).toStrictEqual(test.output);
-		});
-	}
+	it.each(tests)('should return correct gpa for the given input', (test) => {
+		const output = calculateGpa(test.input);
+		expect(output).toStrictEqual(test.output);
+	});
 });

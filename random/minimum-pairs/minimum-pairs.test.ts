@@ -20,13 +20,9 @@ const tests: Test[] = [
 	},
 ];
 
-describe('should find correct minimum pairs for all number arrays', () => {
-
-	for (const test of tests) {
-		it(`should return ${test.solution} for ${test.input}`, () => {
-			const solution = minimumPairs(test.input);
-			expect(solution).toStrictEqual(test.solution);
-		});
-	}
-
+describe('testing minimumPairs', () => {
+	it.each(tests)('should find minimum difference pairs for the given array', (test) => {
+		const solution = minimumPairs(test.input);
+		expect(solution).toStrictEqual(test.solution);
+	});
 });

@@ -46,23 +46,15 @@ const toArrayTests: ToArrayTest<number>[] = [
 ];
 
 describe('array equality helper', () => {
-
-	for (const test of equalityTests) {
-		it(`should return ${test.areEqual} for [${test.first}] and [${test.second}]`, () => {
-			const areEqual = areArraysEqual(test.first, test.second);
-			expect(areEqual).toStrictEqual(test.areEqual);
-		});
-	}
-
+	it.each(equalityTests)('should calculate if the two arrays are equal', (test) => {
+		const areEqual = areArraysEqual(test.first, test.second);
+		expect(areEqual).toStrictEqual(test.areEqual);
+	});
 });
 
 describe('linked list to array helper', () => {
-
-	for (const test of toArrayTests) {
-		it(`should return [${test.array}] for ${test.list}`, () => {
-			const array = linkedListToArray(test.list);
-			expect(array).toStrictEqual(test.array);
-		});
-	}
-
+	it.each(toArrayTests)('should return array by given linked list', (test) => {
+		const array = linkedListToArray(test.list);
+		expect(array).toStrictEqual(test.array);
+	});
 });

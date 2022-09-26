@@ -14,13 +14,11 @@ const tests: Test[] = [
 ];
 
 describe('testing fromTo', () => {
-	for (const test of tests) {
-		it(`fromTo(${test.min}, ${test.max}) should generate numbers from ${test.min} to ${test.max}`, () => {
-			const generator = fromTo(test.min, test.max);
-			for (let index = test.min; index <= test.max; index++) {
-				expect(index).toBe(generator());
-			}
-			expect(generator()).toBeUndefined();
-		});
-	}
+	it.each(tests)('generate the numbers in the given range', (test) => {
+		const generator = fromTo(test.min, test.max);
+		for (let index = test.min; index <= test.max; index++) {
+			expect(index).toBe(generator());
+		}
+		expect(generator()).toBeUndefined();
+	});
 });

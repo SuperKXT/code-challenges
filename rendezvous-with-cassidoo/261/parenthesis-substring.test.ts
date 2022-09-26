@@ -7,13 +7,9 @@ const tests = [
 	{ string: '())(())', solution: 4 },
 ];
 
-describe('swap array pairs with regex', () => {
-
-	for (const test of tests) {
-		it(`should return ${test.solution} for ${test.string}`, () => {
-			const solution = parenthesisSubstring(test.string);
-			expect(solution).toStrictEqual(test.solution);
-		});
-	}
-
+describe('test parenthesisSubstring', () => {
+	it.each(tests)('should return longest valid string length', (test) => {
+		const solution = parenthesisSubstring(test.string);
+		expect(solution).toStrictEqual(test.solution);
+	});
 });

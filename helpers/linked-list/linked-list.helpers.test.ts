@@ -1,12 +1,12 @@
 import { arrayToLinkedList } from './linked-list.helpers';
 import { LinkedList } from './linked-list.types';
 
-interface ToLinkedListTest<Type> {
+interface Test<Type> {
 	array: Type[],
 	list: LinkedList<Type>,
 }
 
-const toLinkedListTests: ToLinkedListTest<number>[] = [
+const tests: Test<number>[] = [
 	{
 		array: [1, 2, 3],
 		list: { head: { value: 1, next: { value: 2, next: { value: 3, next: null } } } },
@@ -18,12 +18,8 @@ const toLinkedListTests: ToLinkedListTest<number>[] = [
 ];
 
 describe('array to linked list helper', () => {
-
-	for (const test of toLinkedListTests) {
-		it(`should return ${test.list} for [${test.array}]`, () => {
-			const list = arrayToLinkedList(test.array);
-			expect(JSON.stringify(list)).toStrictEqual(JSON.stringify(test.list));
-		});
-	}
-
+	it.each(tests)('should return linked list by the given array', (test) => {
+		const list = arrayToLinkedList(test.array);
+		expect(JSON.stringify(list)).toStrictEqual(JSON.stringify(test.list));
+	});
 });

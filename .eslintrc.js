@@ -9,7 +9,6 @@ const config = {
 	},
 	extends: [
 		'plugin:@typescript-eslint/recommended',
-		'plugin:jest/all',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -18,7 +17,6 @@ const config = {
 	},
 	plugins: [
 		'@typescript-eslint',
-		'jest',
 		'import',
 	],
 	rules: {
@@ -54,8 +52,6 @@ const config = {
 		'no-console': ['error', {
 			allow: ['warn', 'error', 'info'],
 		}],
-		'jest/prefer-expect-assertions': 'off',
-		'jest/require-top-level-describe': 'off',
 		'import/prefer-default-export': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
 		'@typescript-eslint/no-inferrable-types': 'off',
@@ -72,6 +68,17 @@ const config = {
 			},
 		}],
 	},
+	overrides: [
+		{
+			files: ['*.test.ts'],
+			extends: ['plugin:jest/all'],
+			plugins: ['jest'],
+			rules: {
+				'jest/prefer-expect-assertions': 'off',
+				'jest/require-top-level-describe': 'off',
+			},
+		}
+	],
 	settings: {
 		'import/resolver': {
 			typescript: {},
