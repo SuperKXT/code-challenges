@@ -16,7 +16,7 @@ export const findWordle = (parameters: Arguments): string[] => {
 	const availableCharacters = parsed.available ?? parsed.a ?? ALPHABETS;
 	const knownPattern = parsed.pattern ?? parsed.p ?? '*****';
 	const knownCharacters = parsed.known ?? parsed.k ?? '';
-	const noRepeat = !parsed.repeat;
+	const noRepeat = parsed.repeat === false;
 
 	const pattern = new RegExp(
 		knownPattern

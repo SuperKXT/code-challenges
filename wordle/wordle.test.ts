@@ -39,6 +39,25 @@ const tests: Test[] = [
 		},
 		results: ['colly', 'coyly'],
 	},
+	{
+		arguments: {
+			known: 'loc',
+			/* cspell: disable-next-line */
+			available: 'qwygjzxmloc',
+			pattern: '~(l)o~(o)~(co)*',
+			repeat: false,
+		},
+		results: [],
+	},
+	{
+		arguments: {
+			/* cspell: disable-next-line */
+			available: 'qwtypafghjkzxvbm',
+			repeat: false,
+		},
+		/* cspell: disable-next-line */
+		results: ['bawty', 'thawy', 'pawky', 'mawky', 'gawky', 'vampy'],
+	},
 ];
 
 describe('find wordle word', () => {
