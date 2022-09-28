@@ -4,8 +4,8 @@ import z from 'zod';
 import { wordleWords } from './word-list';
 
 const CHARACTERS_REGEX = /[a-z]/i;
-const EXCLUDE_CHARACTERS_REGEX = /~\(([a-z]+)\)/gi;
-const VALID_WORD_PATTERN = /((~\([a-z]+\))|[a-z*]){5}/i;
+const EXCLUDE_CHARACTERS_REGEX = /\(([a-z]+)\)/gi;
+const VALID_WORD_PATTERN = /((\([a-z]+\))|[a-z*]){5}/i;
 const DUPLICATE_CHARACTER_REGEX = /(.).*\1/i;
 /* cspell: disable-next-line */
 const ALPHABETS = 'abcdefghijklmnopqrstuvxwyz';
