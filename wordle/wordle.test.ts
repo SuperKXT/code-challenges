@@ -1,15 +1,15 @@
 import { WordleWord } from './word-list';
-import { findWordle, Arguments } from './wordle';
+import { findWordle, Arguments, defaultArguments } from './wordle';
 
 interface Test {
-	arguments: Arguments,
+	arguments: Partial<Arguments>,
 	results: WordleWord[],
 }
 
 const tests: Test[] = [
 	{
 		arguments: {
-			pattern: 'q*e~(ueq)~(ueq)',
+			pattern: 'q*e(ueq)(ueq)',
 			known: 'qul',
 		},
 		results: ['quell'],
@@ -26,7 +26,7 @@ const tests: Test[] = [
 		arguments: {
 			/* cspell: disable-next-line */
 			available: 'prudeaqwzxjhiu',
-			pattern: 'p*u~(pu)*',
+			pattern: 'p*u(pu)*',
 		},
 		results: ['prude'],
 	},
@@ -35,7 +35,7 @@ const tests: Test[] = [
 			known: 'loc',
 			/* cspell: disable-next-line */
 			available: 'qwygjzxmloc',
-			pattern: '~(l)o~(o)~(co)*',
+			pattern: '(l)o(o)(co)*',
 		},
 		results: ['colly', 'coyly'],
 	},
@@ -44,7 +44,7 @@ const tests: Test[] = [
 			known: 'loc',
 			/* cspell: disable-next-line */
 			available: 'qwygjzxmloc',
-			pattern: '~(l)o~(o)~(co)*',
+			pattern: '(l)o(o)(co)*',
 			repeat: false,
 		},
 		results: [],
@@ -58,11 +58,22 @@ const tests: Test[] = [
 		/* cspell: disable-next-line */
 		results: ['bawty', 'thawy', 'pawky', 'mawky', 'gawky', 'vampy'],
 	},
+	{
+		arguments: {
+			/* cspell: disable-next-line */
+			unavailable: 'bayouiw',
+			/* cspell: disable-next-line */
+			known: 'feth',
+			repeat: false,
+		},
+		/* cspell: disable-next-line */
+		results: ['hefts', 'fecht', 'fetch', 'thelf'],
+	},
 ];
 
 describe('find wordle word', () => {
 	it.each(tests)('should find matched words by the given flags', (test) => {
-		const results = findWordle(test.arguments);
+		const results = findWordle({ ...defaultArguments, ...test.arguments });
 		expect(results).toStrictEqual(test.results);
 	});
 });
