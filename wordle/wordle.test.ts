@@ -61,13 +61,11 @@ const tests: Test[] = [
 	{
 		arguments: {
 			/* cspell: disable-next-line */
-			unavailable: 'bayouiw',
-			/* cspell: disable-next-line */
-			known: 'feth',
-			repeat: false,
+			unavailable: 'asduiopkbn',
+			known: 'ec',
+			pattern: 'e(e)c*(ce)',
 		},
-		/* cspell: disable-next-line */
-		results: ['hefts', 'fecht', 'fetch', 'thelf'],
+		results: ['excel'],
 	},
 ];
 
