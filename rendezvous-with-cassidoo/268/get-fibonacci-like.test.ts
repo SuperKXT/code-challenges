@@ -25,7 +25,6 @@ const badGetTests: BadGetTest[] = [
 	{ input: [5, undefined as any, 5], error: Errors.Undefined },
 ];
 
-
 interface CheckTest {
 	input: number[],
 	output: boolean,

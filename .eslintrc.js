@@ -7,9 +7,6 @@ const config = {
 		node: true,
 		jest: true,
 	},
-	extends: [
-		'plugin:@typescript-eslint/recommended',
-	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaVersion: 'latest',
@@ -49,26 +46,40 @@ const config = {
 				},
 			},
 		],
+		'import/prefer-default-export': 'off',
 		'no-console': ['error', {
 			allow: ['warn', 'error', 'info'],
 		}],
-		'import/prefer-default-export': 'off',
-		'@typescript-eslint/no-explicit-any': 'off',
-		'@typescript-eslint/no-inferrable-types': 'off',
-		'@typescript-eslint/no-unnecessary-type-constraint': 'off',
-		'@typescript-eslint/prefer-nullish-coalescing': 'off',
-		'@typescript-eslint/member-delimiter-style': ['error', {
-			multiline: {
-				delimiter: 'comma',
-				requireLast: true,
-			},
-			singleline: {
-				delimiter: 'comma',
-				requireLast: true,
-			},
+		'no-multiple-empty-lines': ['error', {
+			max: 1,
+			maxEOF: 0,
+			maxBOF: 0,
 		}],
+		'eol-last': ['error', 'always'],
+		'quote-props': ['error', 'as-needed'],
 	},
 	overrides: [
+		{
+			files: ['**/*.ts', '**/*.tsx'],
+			extends: ['plugin:@typescript-eslint/recommended',],
+			plugins: ['@typescript-eslint'],
+			rules: {
+				'@typescript-eslint/no-explicit-any': 'off',
+				'@typescript-eslint/no-inferrable-types': 'off',
+				'@typescript-eslint/no-unnecessary-type-constraint': 'off',
+				'@typescript-eslint/prefer-nullish-coalescing': 'off',
+				'@typescript-eslint/member-delimiter-style': ['error', {
+					multiline: {
+						delimiter: 'comma',
+						requireLast: true,
+					},
+					singleline: {
+						delimiter: 'comma',
+						requireLast: true,
+					},
+				}],
+			},
+		},
 		{
 			files: ['*.test.ts'],
 			extends: ['plugin:jest/all'],

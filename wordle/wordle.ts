@@ -65,7 +65,7 @@ export const findWordle = (parameters: Arguments): string[] => {
 };
 
 const argumentSchema = z.strictObject({
-	'_': z.string().array().length(0).optional(),
+	_: z.string().array().length(0).optional(),
 	'--': z.string().array().length(0).optional(),
 	available: z.string().regex(/^[a-z]{0,26}$/i),
 	a: z.string().regex(/^[a-z]{0,26}$/i),

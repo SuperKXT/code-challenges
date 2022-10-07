@@ -33,6 +33,7 @@
 			"~/helpers*": [ "./helpers/*" ]
 		}
 	},
+	"include": [ "./" ],
 	"exclude": [
 		"coverage/"
 	]
