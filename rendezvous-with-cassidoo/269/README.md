@@ -1,11 +1,13 @@
 # Get Fibonacci Like Sequence
 
-[issue #268 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/subscribers/73939c40-d71e-4d15-988d-1087f88ef7fe/archive/instant-gratification-takes-too-long-carrie-fisher)
+[issue #269 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/subscribers/73939c40-d71e-4d15-988d-1087f88ef7fe/archive/instant-gratification-takes-too-long-carrie-fisher)
 
 ## Description
+
 Write a function that truncates words in a string to length `n`.
 
-## Example:
+## Example
+
 ```ts
 const n = 3
 
