@@ -1,4 +1,4 @@
-# Get Fibonacci Like Sequence
+# Open Doors After Passes
 
 [issue #270 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/i-never-regretted-what-i-turned-down-angela/)
 
