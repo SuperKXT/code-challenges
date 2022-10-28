@@ -1,20 +1,35 @@
-// import { printBinaryTree } from './print-binary-tree';
+import { printBinaryTree } from './print-binary-tree';
 
-// interface Test {
-// 	input: [number, number],
-// 	output: number,
-// }
-
-// const tests: Test[] = [
-// 	{ input: [7, 3], output: 4 },
-// 	{ input: [8, 4], output: 6 },
-// 	{ input: [2, 0], output: 0 },
-// 	{ input: [3, 1], output: 3 },
-// ];
-
-// describe('testing passDoors', () => {
-// 	it.each(tests)('should return number of open doors after given passes', (test) => {
-// 		const output = passDoors(...test.input);
-// 		expect(output).toStrictEqual(test.output);
-// 	});
-// });
+describe('testing passDoors', () => {
+	it('should handle invalid input', () => {
+		expect(printBinaryTree(-10)).toBe('');
+		expect(printBinaryTree(0)).toBe('');
+		expect(printBinaryTree(-Infinity)).toBe('');
+		expect(printBinaryTree(Infinity)).toBe('');
+		expect(printBinaryTree(NaN)).toBe('');
+	});
+	it('should print tree with 1 leaf node', () => {
+		expect(printBinaryTree(1)).toBe('/\n');
+	});
+	it('should print tree with 2 leaf node', () => {
+		expect(printBinaryTree(2)).toBe('/\\\n');
+	});
+	it('should print tree with 17 leaf node', () => {
+		expect(printBinaryTree(17)).toBe(`               /\\
+              /  \\
+             /    \\
+            /      \\
+           /        \\
+          /          \\
+         /            \\
+        /              \\
+       /\\              /
+      /  \\            /
+     /    \\          /
+    /      \\        /
+   /\\      /\\      /
+  /  \\    /  \\    /
+ /\\  /\\  /\\  /\\  /
+/\\/\\/\\/\\/\\/\\/\\/\\/\n`);
+	});
+});
