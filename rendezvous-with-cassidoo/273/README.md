@@ -1,6 +1,6 @@
 # Return list of anti-divisors for the given number
 
-[issue #272 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/i-dont-think-of-all-the-misery-but-of-the-beauty-4964/)
+[issue #273 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/i-dont-think-of-all-the-misery-but-of-the-beauty-4964/)
 
 ## Description
 
