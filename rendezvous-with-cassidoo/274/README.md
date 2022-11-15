@@ -20,5 +20,4 @@ is less than or equal to the max size.
 
 > combineStrings(["alpha", "beta", "gamma", "delta", "epsilon"], 20)
 > ["alpha beta gamma", "delta epsilon"]
-
 ```
