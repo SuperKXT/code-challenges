@@ -8,14 +8,12 @@ export const verticalSlashes = (
 	if (!/^[\\/]+$/.test(slashes)) {
 		throw invalidError;
 	}
-	const offset: ' '[] = [];
-	return Array.from(
-		slashes,
-		(character, index) => {
-			const current = offset.join('') + character;
-			if (slashes[index + 1] === '\\') offset.push(' ');
-			if (character === '/') offset.pop();
-			return current;
-		}
-	).join('\n');
+	let offset: number = 0;
+	return Array.from(slashes, character => (
+		' '.repeat(
+			character === '/'
+				? offset ? --offset : 0
+				: offset++
+		) + character
+	)).join('\n');
 };
