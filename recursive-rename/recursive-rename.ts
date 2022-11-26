@@ -7,9 +7,13 @@ import {
 
 import { formatToken } from '~/helpers/string';
 
-export const getRecursiveRenameLog = (
+export interface RecursiveRenameReturn {
 	renamed: number,
-	problems: string[] = []
+	problems: string[],
+}
+
+export const getRecursiveRenameLog = (
+	{ renamed, problems }: RecursiveRenameReturn
 ): string => {
 	const logs: string[] = [];
 	logs.push(`\x1b[32m${renamed}\x1b[0m renames successful!`);
@@ -23,10 +27,12 @@ export const getRecursiveRenameLog = (
 export const recursiveRename = (
 	folder: string,
 	isRecursive?: boolean
-): number => {
+): RecursiveRenameReturn => {
 	const files = readdirSync(folder);
-	const problems: string[] = [];
-	let renamed = 0;
+	const output: RecursiveRenameReturn = {
+		renamed: 0,
+		problems: [],
+	};
 	for (const file of files) {
 		const oldPath = `${folder}/${file}`;
 		try {
@@ -42,26 +48,28 @@ export const recursiveRename = (
 					throw new Error(`could not rename to \x1b[33m${newPath}\x1b[0m. path already exists`);
 				}
 				renameSync(oldPath, newPath);
-				renamed++;
+				output.renamed++;
 			}
 			if (stats.isDirectory()) {
-				renamed += recursiveRename(
+				const { renamed, problems } = recursiveRename(
 					newPath ?? oldPath,
 					true
 				);
+				output.renamed += renamed;
+				output.problems.push(...problems);
 			}
 
 		}
 		catch (error: any) {
-			problems.push(`\x1b[31m${oldPath}\x1b[0m:  ${error.message ?? error}`);
+			output.problems.push(`\x1b[33m${oldPath}\x1b[0m: ${error.message ?? error}`);
 		}
 	}
 	if (!isRecursive) {
 		console.info(
-			getRecursiveRenameLog(renamed, problems)
+			getRecursiveRenameLog(output)
 		);
 	}
-	return renamed;
+	return output;
 };
 
 if (process.env.NODE_ENV !== 'test') {
