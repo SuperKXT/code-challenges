@@ -73,7 +73,7 @@ export const getRecursiveRenameLog = ({
 
 	const labels = {
 		renames: !confirmation ? 'SUCCESS' : 'POSSIBLE',
-		errors: !confirmation ? 'ERROR' : 'POSSIBLE',
+		errors: !confirmation ? 'ERROR' : 'ISSUE',
 		unchanged: 'UNCHANGED',
 	};
 
@@ -202,26 +202,25 @@ export const recursiveRename = async (
 
 	if (!options.yes) {
 
-		if (options.verbose) {
-			console.info(
-				getRecursiveRenameLog({
-					renames,
-					unchanged,
-					errors,
-					verbose: options.verbose,
-					confirmation: true,
-				})
-			);
-		}
+		console.info(
+			getRecursiveRenameLog({
+				renames,
+				unchanged,
+				errors,
+				verbose: options.verbose,
+				confirmation: true,
+			})
+		);
 
 		prompt.start();
-
+		prompt.message = '';
+		prompt.delimiter = '';
 		const { confirm } = await prompt.get({
 			properties: {
 				confirm: {
-					description: 'Do you want to continue?[y/n]',
-					type: 'boolean',
-					pattern: /[yn]/i,
+					description: 'Do you want to continue? [y/n]: ',
+					type: 'string',
+					pattern: /^[yn]$/i,
 					message: 'Please enter y for yes or n for no',
 				},
 			},
