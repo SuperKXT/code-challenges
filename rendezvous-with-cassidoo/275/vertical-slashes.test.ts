@@ -29,6 +29,29 @@ const tests: Test[] = [
 			'   \\',
 		].join('\n'),
 	},
+	{
+		input: String.raw`//\\`,
+		output: [
+			'/',
+			'/',
+			'\\',
+			' \\',
+		].join('\n'),
+	},
+	{
+		input: String.raw`\\///\\\\`,
+		output: [
+			'\\',
+			' \\',
+			' /',
+			'/',
+			'/',
+			'\\',
+			' \\',
+			'  \\',
+			'   \\',
+		].join('\n'),
+	},
 ];
 
 describe('testing verticalSlashes', () => {
