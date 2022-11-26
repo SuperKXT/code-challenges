@@ -39,7 +39,6 @@ export const formatToken = (
 
 		const current = string[index] as string;
 		const last = string[index - 1];
-		const next = string[index + 1];
 
 		if (
 			!alphabet.includes(current)
@@ -90,12 +89,11 @@ export const formatToken = (
 				}
 			}
 		}
-
 		else if (
 			['kebab', 'snake', 'constant'].includes(strategy)
 			&& numbers.includes(current)
-			&& last
-			&& (last === ' ' || alphabet.includes(last))
+			&& formatted.at(-1)
+			&& (alphabet.includes(formatted.at(-1) ?? ''))
 		) {
 			formatted += `${strategy === 'kebab' ? '-' : '_'}${current}`;
 		}

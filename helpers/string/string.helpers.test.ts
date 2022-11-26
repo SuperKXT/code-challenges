@@ -71,6 +71,16 @@ const formatTests: FormatTest[] = [
 			snake: 'alpha_1_numeric',
 		},
 	},
+	{
+		input: '    Folder - file-2',
+		output: {
+			camel: 'folderFile2',
+			pascal: 'FolderFile2',
+			constant: 'FOLDER_FILE_2',
+			kebab: 'folder-file-2',
+			snake: 'folder_file_2',
+		},
+	},
 ];
 
 const humanizeTests: HumanizeTest[] = [
