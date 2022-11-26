@@ -6,7 +6,8 @@
 	"scripts": {
 		"lint": "eslint . --fix",
 		"test": "jest --runInBand",
-		"wordle": "ts-node ./wordle/wordle.ts"
+		"wordle": "ts-node ./wordle/wordle.ts",
+		"kebab-rename": "ts-node ./recursive-rename/recursive-rename.ts"
 	},
 	"devDependencies": {
 		"@types/eslint": "^8.4.10",
