@@ -5,7 +5,7 @@ import {
 	existsSync,
 } from 'fs';
 
-import { formatToken } from '~/helpers/string';
+import { formatToken } from '../helpers/string';
 
 export interface RecursiveRenameReturn {
 	renamed: number,
@@ -21,7 +21,7 @@ export const getRecursiveRenameLog = (
 		logs.push(`\n\x1b[31m${problems.length}\x1b[0m renames failed:`);
 		logs.push(problems.join('\n'));
 	}
-	return logs.join('\n');
+	return logs.join('\n') + '\n';
 };
 
 export const recursiveRename = (
