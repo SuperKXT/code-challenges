@@ -17,7 +17,8 @@ const lowerCase = 'abcdefghijklmnopqrstuvwxyz' as const;
 const upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' as const;
 const numbers = '0123456789' as const;
 const alphabet = `${lowerCase}${upperCase}` as const;
-const separators = ` \n-_.${numbers}` as const;
+const separators = ` \n-_${numbers}` as const;
+const alphaNumeric = `${alphabet}${numbers}` as const;
 
 /**
  * Takes a token name, and format strategy and returns the converted token name
@@ -41,9 +42,14 @@ export const formatToken = (
 		const last = string[index - 1];
 
 		if (
-			!alphabet.includes(current)
-			&& !numbers.includes(current)
-		) continue;
+			current === '.'
+			&& alphaNumeric.includes(formatted.at(-1) ?? '')
+		) {
+			formatted += '.';
+			continue;
+		}
+
+		if (!alphaNumeric.includes(current)) continue;
 
 		if (!formatted) {
 			switch (strategy) {
@@ -115,6 +121,9 @@ export const formatToken = (
 
 	}
 
+	if (formatted.at(-1) === '.') {
+		return formatted.slice(0, -1);
+	}
 	return formatted;
 
 };

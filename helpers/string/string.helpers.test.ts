@@ -44,11 +44,11 @@ const formatTests: FormatTest[] = [
 	{
 		input: 'this is a VERY     badly   -----formatted.......## STRING.',
 		output: {
-			camel: 'thisIsAVeryBadlyFormattedString',
-			pascal: 'ThisIsAVeryBadlyFormattedString',
-			constant: 'THIS_IS_A_VERY_BADLY_FORMATTED_STRING',
-			kebab: 'this-is-a-very-badly-formatted-string',
-			snake: 'this_is_a_very_badly_formatted_string',
+			camel: 'thisIsAVeryBadlyFormatted.String',
+			pascal: 'ThisIsAVeryBadlyFormatted.String',
+			constant: 'THIS_IS_A_VERY_BADLY_FORMATTED._STRING',
+			kebab: 'this-is-a-very-badly-formatted.-string',
+			snake: 'this_is_a_very_badly_formatted._string',
 		},
 	},
 	{
@@ -79,6 +79,16 @@ const formatTests: FormatTest[] = [
 			constant: 'FOLDER_FILE_2',
 			kebab: 'folder-file-2',
 			snake: 'folder_file_2',
+		},
+	},
+	{
+		input: 'api helpers.helpers.js',
+		output: {
+			camel: 'apiHelpers.helpers.js',
+			pascal: 'ApiHelpers.helpers.js',
+			constant: 'API_HELPERS.HELPERS.JS',
+			kebab: 'api-helpers.helpers.js',
+			snake: 'api_helpers.helpers.js',
 		},
 	},
 ];
