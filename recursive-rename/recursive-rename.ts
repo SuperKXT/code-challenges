@@ -208,6 +208,7 @@ export const recursiveRename = async (
 	options: Options
 ): Promise<RenameResult> => {
 
+	folder = folder.replace(/\/+$/, '');
 	if (!statSync(folder).isDirectory()) {
 		throw new Error('the given path must be a directory');
 	}
