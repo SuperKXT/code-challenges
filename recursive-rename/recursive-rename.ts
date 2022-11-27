@@ -4,9 +4,9 @@ import {
 	renameSync,
 	existsSync,
 } from 'fs';
+import path from 'path';
 
 import argumentParser from 'minimist-lite';
-import path from 'path';
 import prompt from 'prompt';
 import { z } from 'zod';
 
@@ -20,9 +20,11 @@ const argumentSchema = z.strictObject(
 		y: z.boolean(),
 		verbose: z.boolean(),
 		v: z.boolean(),
+		changes: z.boolean(),
+		c: z.boolean(),
 	},
 	{
-		invalid_type_error: 'correct usage: kebab-rename PATH [-y --yes -v --verbose]',
+		invalid_type_error: 'correct usage: kebab-rename PATH [-y --yes -v --verbose -c --changes]',
 	}
 );
 
@@ -33,6 +35,8 @@ export const defaultArguments: Omit<Arguments, '_'> = {
 	y: false,
 	verbose: false,
 	v: false,
+	changes: true,
+	c: false,
 };
 
 export interface RenameResult {
@@ -51,10 +55,12 @@ export interface RenameResult {
 interface Options {
 	verbose?: boolean,
 	yes?: boolean,
+	changes?: boolean,
 }
 
 interface LogArgs extends RenameResult {
 	verbose?: boolean,
+	changes?: boolean,
 	confirmation?: boolean,
 }
 
@@ -68,6 +74,7 @@ export const getRecursiveRenameLog = ({
 	unchanged,
 	confirmation,
 	verbose,
+	changes,
 }: LogArgs): string => {
 
 	const logs: string[] = [];
@@ -78,7 +85,7 @@ export const getRecursiveRenameLog = ({
 		unchanged: 'UNCHANGED',
 	};
 
-	if (verbose) {
+	if (verbose || changes) {
 
 		logs.push(renames.map(
 			({ oldPath, newPath }) => [
@@ -99,12 +106,14 @@ export const getRecursiveRenameLog = ({
 			].filter(Boolean).join(' ')
 		).join('\n'));
 
-		logs.push(unchanged.map(
-			string => [
-				`\x1b[43m${labels.unchanged}\x1b[0m`,
-				`${string}`,
-			].filter(Boolean).join(' ')
-		).join('\n'));
+		if (verbose) {
+			logs.push(unchanged.map(
+				string => [
+					`\x1b[43m${labels.unchanged}\x1b[0m`,
+					`${string}`,
+				].filter(Boolean).join(' ')
+			).join('\n'));
+		}
 
 	}
 
@@ -119,18 +128,6 @@ export const getRecursiveRenameLog = ({
 
 	return logs.join('\n\n') + '\n';
 
-};
-
-const getFilesRecursively = (directory: string) => {
-	const filesInDirectory = readdirSync(directory);
-	for (const file of filesInDirectory) {
-		const absolute = path.join(directory, file);
-		if (statSync(absolute).isDirectory()) {
-			getFilesRecursively(absolute);
-		} else {
-			files.push(absolute);
-		}
-	}
 };
 
 const findFiles = (
@@ -155,11 +152,11 @@ const findFiles = (
 			extension = '',
 		] = file.split(/\.(?!.*\..*)/);
 
-		const oldPath = path.join(folder, name, extension);
-		const newName = formatToken(name, 'kebab');
+		const oldPath = path.join(folder, file);
+		const newName = `${formatToken(name, 'kebab')}${extension ? '.' : ''}${extension}`;
 		const newPath = (
 			newName !== file
-				? path.join(folder, newName, extension)
+				? path.join(folder, newName)
 				: oldPath
 		);
 		try {
@@ -184,7 +181,7 @@ const findFiles = (
 			}
 			const stats = statSync(oldPath);
 			if (stats.isDirectory()) {
-				const { renames, unchanged, errors } = findFiles(newPath);
+				const { renames, unchanged, errors } = findFiles(oldPath);
 				response.renames.push(...renames);
 				response.errors.push(...errors);
 				response.unchanged.push(...unchanged);
@@ -228,6 +225,7 @@ export const recursiveRename = async (
 				unchanged,
 				errors,
 				verbose: options.verbose,
+				changes: options.changes,
 				confirmation: true,
 			})
 		);
@@ -270,6 +268,7 @@ export const recursiveRename = async (
 		getRecursiveRenameLog({
 			...response,
 			verbose: options.verbose,
+			changes: options.changes,
 		})
 	);
 	return response;
@@ -277,14 +276,20 @@ export const recursiveRename = async (
 
 if (process.env.NODE_ENV !== 'test') {
 
-	const { _: [folder], verbose, yes } = argumentParser<Arguments>(process.argv.slice(2), {
+	const {
+		_: [folder],
+		verbose,
+		yes,
+		changes,
+	} = argumentParser<Arguments>(process.argv.slice(2), {
 		alias: {
 			yes: 'y',
 			verbose: 'v',
+			changes: 'c',
 		},
 		default: defaultArguments,
 	});
 
-	recursiveRename(folder, { verbose, yes });
+	recursiveRename(folder, { verbose, yes, changes });
 
 }
