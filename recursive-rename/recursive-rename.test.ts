@@ -29,23 +29,23 @@ const tests: Test[] = [
 	[
 		[
 			{ old: 'folder', new: 'folder', unchanged: true, }, [
-				{ old: 'folderFile1', new: 'folder-file-1', },
-				{ old: 'folder_file_2', new: 'folder-file-2', },
-				{ old: '  folder  file 3', new: 'folder-file-3', },
+				{ old: 'folderFile1.txt', new: 'folder-file-1.txt', },
+				{ old: 'folder_file_2.js', new: 'folder-file-2.js', },
+				{ old: '  folder  file 3.ts', new: 'folder-file-3.ts', },
 			]
 		],
-		{ old: 'file   1', new: 'file-1', },
-		{ old: 'FILE_2', new: 'file-2', },
-		{ old: 'file-3', new: 'file-3', unchanged: true, },
+		{ old: 'file   1.txt', new: 'file-1.txt', },
+		{ old: 'FILE_2.txt', new: 'file-2.txt', },
+		{ old: 'file-3.txt', new: 'file-3.txt', unchanged: true, },
 	],
 	[
 		[
 			{ old: 'folder', new: 'folder', unchanged: true, }, [
-				{ old: 'file 1', new: 'file-1', error: RenameErrors.EXISTS, },
-				{ old: 'file-1', new: 'file-1', unchanged: true, },
+				{ old: 'file 1.json', new: 'file-1.json', error: RenameErrors.EXISTS, },
+				{ old: 'file-1.json', new: 'file-1.json', unchanged: true, },
 			],
 		],
-		{ old: 'file-1', new: 'file-1', unchanged: true, },
+		{ old: 'file-1.yml', new: 'file-1.yml', unchanged: true, },
 	],
 ];
 

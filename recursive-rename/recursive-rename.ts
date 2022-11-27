@@ -6,6 +6,7 @@ import {
 } from 'fs';
 
 import argumentParser from 'minimist-lite';
+import path from 'path';
 import prompt from 'prompt';
 import { z } from 'zod';
 
@@ -120,6 +121,18 @@ export const getRecursiveRenameLog = ({
 
 };
 
+const getFilesRecursively = (directory: string) => {
+	const filesInDirectory = readdirSync(directory);
+	for (const file of filesInDirectory) {
+		const absolute = path.join(directory, file);
+		if (statSync(absolute).isDirectory()) {
+			getFilesRecursively(absolute);
+		} else {
+			files.push(absolute);
+		}
+	}
+};
+
 const findFiles = (
 	folder: string
 ): RenameResult => {
@@ -136,11 +149,17 @@ const findFiles = (
 	};
 
 	for (const file of files) {
-		const oldPath = `${folder}/${file}`;
-		const newName = formatToken(file, 'kebab');
+
+		const [
+			name = '',
+			extension = '',
+		] = file.split(/\.(?!.*\..*)/);
+
+		const oldPath = path.join(folder, name, extension);
+		const newName = formatToken(name, 'kebab');
 		const newPath = (
 			newName !== file
-				? `${folder}/${newName}`
+				? path.join(folder, newName, extension)
 				: oldPath
 		);
 		try {
