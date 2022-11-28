@@ -12,6 +12,12 @@ import { z } from 'zod';
 
 import { formatToken } from '../helpers/string';
 
+import {
+	RenameOptions,
+	RenameErrors,
+	RenameResult,
+} from './recursive-rename.types';
+
 const argumentSchema = z.strictObject(
 	{
 		_: z.tuple([z.string()]),
@@ -39,159 +45,189 @@ export const defaultArguments: Omit<Arguments, '_'> = {
 	c: false,
 };
 
-export interface RenameResult {
-	renames: {
-		oldPath: string,
-		newPath: string,
-	}[],
-	errors: {
-		oldPath: string,
-		newPath: string,
-		error: string,
-	}[],
-	unchanged: string[],
+interface RecursiveLogResponse {
+	logs: string[],
+	success: RenameResult[],
+	error: RenameResult[],
+	unchanged: RenameResult[],
 }
 
-interface Options {
+export const getRecursiveLogs = (
+	results: RenameResult[],
 	verbose?: boolean,
-	yes?: boolean,
-	changes?: boolean,
-}
-
-interface LogArgs extends RenameResult {
-	verbose?: boolean,
-	changes?: boolean,
-	confirmation?: boolean,
-}
-
-export enum RenameErrors {
-	EXISTS = 'path already exists',
-}
-
-export const getRecursiveRenameLog = ({
-	renames,
-	errors,
-	unchanged,
-	confirmation,
-	verbose,
-	changes,
-}: LogArgs): string => {
-
-	const logs: string[] = [];
+	onlyChanges?: boolean,
+	isConfirmation?: boolean,
+	depth: number = 1
+): RecursiveLogResponse => {
 
 	const labels = {
-		renames: !confirmation ? 'SUCCESS' : 'POSSIBLE',
-		errors: !confirmation ? 'ERROR' : 'ISSUE',
-		unchanged: 'UNCHANGED',
+		success: `\x1b[42m ${!isConfirmation ? 'SUCCESS' : 'POSSIBLE'} \x1b[0m`,
+		error: `\x1b[41m ${!isConfirmation ? 'ERROR' : 'ISSUE'} \x1b[0m`,
+		unchanged: `\x1b[43m ${'UNCHANGED'} \x1b[0m`,
 	};
 
-	if (verbose || changes) {
+	const response: RecursiveLogResponse = {
+		logs: [],
+		success: [],
+		error: [],
+		unchanged: [],
+	};
 
-		logs.push(renames.map(
-			({ oldPath, newPath }) => [
-				`\x1b[42m${labels.renames}\x1b[0m`,
-				`${oldPath}`,
-				'\t->\t',
-				`\x1b[32m${newPath}\x1b[0m`,
-			].filter(Boolean).join(' ')
-		).join('\n'));
+	for (const result of results) {
 
-		logs.push(errors.map(
-			({ oldPath, newPath, error }) => [
-				`\x1b[41m${labels.errors}\x1b[0m`,
-				`${oldPath}`,
-				'\t->\t',
-				`\x1b[31m${newPath}\x1b[0m`,
-				`:${error}`,
-			].filter(Boolean).join(' ')
-		).join('\n'));
+		const {
+			type,
+			oldName,
+			newName,
+			error,
+			children,
+		} = result;
 
-		if (verbose) {
-			logs.push(unchanged.map(
-				string => [
-					`\x1b[43m${labels.unchanged}\x1b[0m`,
-					`${string}`,
-				].filter(Boolean).join(' ')
-			).join('\n'));
+		response[type].push(result);
+
+		if (
+			verbose
+			&& (!onlyChanges || type !== 'unchanged')
+		) {
+			const log = [
+				'  '.repeat(depth),
+				'\x1b[2m|_\x1b[0m',
+				`${oldName}`,
+				type !== 'unchanged' && '\x1b[2m=>\x1b[0m',
+				newName,
+				labels[type],
+				type === 'error' && `\x1b[31m${error}\x1b[0m`,
+			].filter(Boolean).join(' ');
+
+			response.logs.push(log);
+		}
+
+		if (children) {
+			const subLogs = getRecursiveLogs(
+				children,
+				verbose,
+				onlyChanges,
+				isConfirmation,
+				depth + 1
+			);
+			response.logs.push(...subLogs.logs);
+			response.success.push(...subLogs.success);
+			response.error.push(...subLogs.error);
+			response.unchanged.push(...subLogs.unchanged);
 		}
 
 	}
 
+	return response;
+
+};
+
+export const getRenameLogs = (
+	results: RenameResult[],
+	verbose?: boolean,
+	onlyChanges?: boolean,
+	isConfirmation?: boolean
+): string => {
+
+	const labels = {
+		success: !isConfirmation ? 'SUCCESS' : 'POSSIBLE',
+		errors: !isConfirmation ? 'ERROR' : 'ISSUE',
+		unchanged: 'UNCHANGED',
+	};
+
+	const {
+		logs,
+		success,
+		error,
+		unchanged,
+	} = getRecursiveLogs(
+		results,
+		verbose,
+		onlyChanges,
+		isConfirmation
+	);
+
 	logs.push([
-		`\x1b[42m${labels.renames}\x1b[0m`,
-		`\x1b[32m${renames.length}\x1b[0m`,
+		'\n',
+		`\x1b[42m${labels.success}\x1b[0m`,
+		`\x1b[32m${success.length}\x1b[0m`,
 		`\x1b[41m${labels.errors}\x1b[0m`,
-		`\x1b[31m${errors.length}\x1b[0m`,
+		`\x1b[31m${error.length}\x1b[0m`,
 		`\x1b[43m${labels.unchanged}\x1b[0m`,
 		`\x1b[33m${unchanged.length}\x1b[0m`,
+		'\n',
 	].join(' '));
 
-	return logs.join('\n\n') + '\n';
+	return logs.join('\n');
 
 };
 
 const findFiles = (
 	folder: string
-): RenameResult => {
+): RenameResult[] => {
 
 	const files = readdirSync(folder);
 	files.sort((a, b) =>
 		a.localeCompare(b)
 	);
 
-	const response: RenameResult = {
-		renames: [],
-		unchanged: [],
-		errors: [],
-	};
+	const response: RenameResult[] = [];
 
 	for (const file of files) {
 
+		const oldPath = path.join(folder, file);
 		const [
 			name = '',
 			extension = '',
 		] = file.split(/\.(?!.*\..*)/);
 
-		const oldPath = path.join(folder, file);
 		const newName = `${formatToken(name, 'kebab')}${extension ? '.' : ''}${extension}`;
 		const newPath = (
 			newName !== file
 				? path.join(folder, newName)
 				: oldPath
 		);
-		try {
-			if (newName !== file) {
-				if (existsSync(newPath)) {
-					response.errors.push({
-						oldPath,
-						newPath,
-						error: RenameErrors.EXISTS,
-					});
+		let children: RenameResult['children'] = undefined;
 
+		try {
+			if (statSync(oldPath).isDirectory()) {
+				children = findFiles(oldPath);
+			}
+			if (newName !== file) {
+
+				if (existsSync(newPath)) {
+					response.push({
+						type: 'error',
+						oldName: file,
+						newName,
+						error: RenameErrors.EXISTS,
+						children,
+					});
 				}
 				else {
-					response.renames.push({
-						oldPath,
-						newPath,
+					response.push({
+						type: 'success',
+						oldName: file,
+						newName,
+						children,
 					});
 				}
 			}
 			else {
-				response.unchanged.push(oldPath);
-			}
-			const stats = statSync(oldPath);
-			if (stats.isDirectory()) {
-				const { renames, unchanged, errors } = findFiles(oldPath);
-				response.renames.push(...renames);
-				response.errors.push(...errors);
-				response.unchanged.push(...unchanged);
+				response.push({
+					type: 'unchanged',
+					oldName: file,
+					children,
+				});
 			}
 		}
 		catch (error: any) {
-			response.errors.push({
-				oldPath,
-				newPath,
-				error: error.message ?? error,
+			response.push({
+				type: 'error',
+				oldName: file,
+				newName,
+				error: RenameErrors.EXISTS,
+				children,
 			});
 		}
 	}
@@ -200,35 +236,70 @@ const findFiles = (
 
 };
 
+const renameFiles = (
+	folder: string,
+	files: RenameResult[]
+): RenameResult[] => {
+
+	const results: RenameResult[] = [];
+
+	for (const file of files) {
+
+		const oldPath = path.join(folder, file.oldName);
+		const newPath = path.join(folder, file.newName ?? file.oldName);
+
+		const children = (
+			file.children
+				? renameFiles(newPath, file.children)
+				: undefined
+		);
+
+		if (file.type === 'success') {
+			try {
+				renameSync(oldPath, newPath);
+			}
+			catch (error: any) {
+				results.push({
+					...file,
+					type: 'error',
+					error: error.message ?? error,
+					children,
+				});
+				continue;
+			}
+		}
+
+		results.push({
+			...file,
+			children,
+		});
+
+	}
+
+	return results;
+
+};
+
 export const recursiveRename = async (
 	folder: string,
-	options: Options
-): Promise<RenameResult> => {
+	options: RenameOptions
+): Promise<RenameResult[]> => {
 
 	folder = folder.replace(/\/+$/, '');
 	if (!statSync(folder).isDirectory()) {
 		throw new Error('the given path must be a directory');
 	}
 
-	const { renames, unchanged, errors } = findFiles(folder);
-	const response: Required<RenameResult> = {
-		renames: [],
-		errors,
-		unchanged,
-	};
+	const files = findFiles(folder);
 
 	if (!options.yes) {
 
-		console.info(
-			getRecursiveRenameLog({
-				renames,
-				unchanged,
-				errors,
-				verbose: options.verbose,
-				changes: options.changes,
-				confirmation: true,
-			})
-		);
+		console.info(getRenameLogs(
+			files,
+			options.verbose,
+			options.onlyChanges,
+			true
+		));
 
 		prompt.start();
 		prompt.message = '';
@@ -245,33 +316,23 @@ export const recursiveRename = async (
 		});
 
 		if (confirm !== 'y' && confirm !== 'Y') {
-			return response;
+			return [];
 		}
 
 	}
 
-	for (const { oldPath, newPath } of renames) {
-		try {
-			renameSync(oldPath, newPath);
-			response.renames.push({ oldPath, newPath });
-		}
-		catch (error: any) {
-			response.errors.push({
-				oldPath,
-				newPath,
-				error: error.message ?? error,
-			});
-		}
-	}
+	const results = renameFiles(folder, files);
 
 	console.info(
-		getRecursiveRenameLog({
-			...response,
-			verbose: options.verbose,
-			changes: options.changes,
-		})
+		getRenameLogs(
+			results,
+			options.verbose,
+			options.onlyChanges
+		)
 	);
-	return response;
+
+	return results;
+
 };
 
 if (process.env.NODE_ENV !== 'test') {
@@ -290,6 +351,6 @@ if (process.env.NODE_ENV !== 'test') {
 		default: defaultArguments,
 	});
 
-	recursiveRename(folder, { verbose, yes, changes });
+	recursiveRename(folder, { verbose, yes, onlyChanges: changes });
 
 }
