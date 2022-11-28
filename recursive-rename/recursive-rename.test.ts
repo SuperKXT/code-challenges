@@ -8,48 +8,17 @@ import { tmpdir } from 'os';
 import path from 'path';
 
 import {
-	getRecursiveRenameLog,
+	getRenameLogs,
 	recursiveRename,
+} from './recursive-rename';
+import {
 	RenameErrors,
 	RenameResult,
-} from './recursive-rename';
+} from './recursive-rename.types';
 
 const tempPath = path.join(tmpdir(), 'test');
 
-interface AgnosticFile {
-	type: 'success' | 'error' | 'unchanged',
-	oldName: string,
-	newName?: string,
-	error?: string,
-	children?: File[],
-}
-
-interface ValidFile extends AgnosticFile {
-	type: 'success',
-	newName: string,
-	error?: undefined,
-}
-
-interface ErrorFile extends AgnosticFile {
-	type: 'error',
-	newName: string,
-	error: string,
-}
-
-interface UnchangedFile extends AgnosticFile {
-	type: 'unchanged',
-	newName?: undefined,
-	error?: undefined,
-}
-
-type File = (
-	| ValidFile
-	| ErrorFile
-	| UnchangedFile
-);
-
-type Test = File[];
-
+type Test = RenameResult[];
 
 const tests: Test[] = [
 	[
@@ -107,11 +76,24 @@ const tests: Test[] = [
 			],
 		},
 		{
-			type: 'unchanged',
-			oldName: 'file-1.yml',
+			type: 'success',
+			oldName: 'file 1.yml',
+			newName: 'file-1.yml',
 		},
 	],
 ];
+
+const recursiveSort = (
+	files: RenameResult[]
+): RenameResult[] => {
+	files.sort((a, b) => a.oldName.localeCompare(b.oldName));
+	return files.map(({ children, ...file }) => ({
+		...file,
+		children: children ? recursiveSort(children) : undefined,
+	}));
+};
+
+export const sortedTests = tests.map(recursiveSort);
 
 beforeEach(() => {
 	if (existsSync(tempPath)) {
@@ -165,62 +147,20 @@ const checkFiles = (
 	}
 };
 
-const getResponse = (
-	files: Test,
-	directory: string = tempPath
-): RenameResult => {
-	files.sort((a, b) => {
-		return a.oldName.localeCompare(b.oldName);
-	});
-	const response: RenameResult = {
-		renames: [],
-		errors: [],
-		unchanged: [],
-	};
-	for (const { type, oldName, newName, error, children } of files) {
-		const oldPath = path.join(directory, oldName);
-		const newPath = path.join(directory, newName ?? oldName);
-		if (type === 'success') {
-			response.renames.push({
-				oldPath,
-				newPath,
-			});
-		}
-		if (type === 'error') {
-			response.errors.push({
-				oldPath,
-				newPath,
-				error,
-			});
-		}
-		if (type === 'unchanged') {
-			response.unchanged.push(oldPath);
-		}
-		if (children) {
-			const { renames, errors, unchanged } = getResponse(children, newPath);
-			response.renames.push(...renames);
-			response.unchanged.push(...unchanged);
-			response.errors.push(...errors);
-		}
-	}
-	return response;
-};
-
 describe('testing recursive-rename function', () => {
-	it.each(tests)('should setup the files and rename recursively', async (...files) => {
+	it.each(sortedTests)('should setup the files and rename recursively', async (...files) => {
 
 		const logSpy = jest.spyOn(global.console, 'info').mockImplementation();
 
-		const expectedOutput = getResponse(files);
 		createFiles(files);
 
 		const output = await recursiveRename(tempPath, { yes: true });
-		expect(output).toStrictEqual(expectedOutput);
+		expect(output).toStrictEqual(files);
 		checkFiles(files);
 		expect(logSpy).toBeCalled();
 		expect(logSpy).toBeCalledTimes(1);
 		expect(logSpy).toBeCalledWith(
-			getRecursiveRenameLog(expectedOutput)
+			getRenameLogs(files)
 		);
 
 		logSpy.mockRestore();
