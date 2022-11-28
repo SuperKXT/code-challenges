@@ -5,7 +5,7 @@ export const printBinaryTree = (
 		typeof nodes !== 'number'
 		|| nodes < 1
 		|| nodes === Infinity
-		|| nodes === NaN
+		|| isNaN(nodes)
 	) return '';
 	const steps = Math.max(
 		1,
