@@ -14,38 +14,102 @@ import {
 	RenameResult,
 } from './recursive-rename';
 
-interface File {
-	old: string,
-	new: string,
-	error?: string,
-	unchanged?: boolean,
-}
-type FileOrFolder = File | [File, FileOrFolder[]];
-type Test = FileOrFolder[];
-
 const tempPath = path.join(tmpdir(), 'test');
+
+interface AgnosticFile {
+	type: 'success' | 'error' | 'unchanged',
+	oldName: string,
+	newName?: string,
+	error?: string,
+	children?: File[],
+}
+
+interface ValidFile extends AgnosticFile {
+	type: 'success',
+	newName: string,
+	error?: undefined,
+}
+
+interface ErrorFile extends AgnosticFile {
+	type: 'error',
+	newName: string,
+	error: string,
+}
+
+interface UnchangedFile extends AgnosticFile {
+	type: 'unchanged',
+	newName?: undefined,
+	error?: undefined,
+}
+
+type File = (
+	| ValidFile
+	| ErrorFile
+	| UnchangedFile
+);
+
+type Test = File[];
+
 
 const tests: Test[] = [
 	[
-		[
-			{ old: 'folder', new: 'folder', unchanged: true, }, [
-				{ old: 'folderFile1.txt', new: 'folder-file-1.txt', },
-				{ old: 'folder_file_2.js', new: 'folder-file-2.js', },
-				{ old: '  folder  file 3.ts', new: 'folder-file-3.ts', },
-			]
-		],
-		{ old: 'file   1.txt', new: 'file-1.txt', },
-		{ old: 'FILE_2.txt', new: 'file-2.txt', },
-		{ old: 'file-3.txt', new: 'file-3.txt', unchanged: true, },
+		{
+			type: 'unchanged',
+			oldName: 'folder',
+			children: [
+				{
+					type: 'success',
+					oldName: 'folderFile1.txt',
+					newName: 'folder-file-1.txt',
+				},
+				{
+					type: 'success',
+					oldName: 'folder_file_2.js',
+					newName: 'folder-file-2.js',
+				},
+				{
+					type: 'success',
+					oldName: '  folder  file 3.ts',
+					newName: 'folder-file-3.ts',
+				},
+			],
+		},
+		{
+			type: 'success',
+			oldName: 'file   1.txt',
+			newName: 'file-1.txt',
+		},
+		{
+			type: 'success',
+			oldName: 'FILE_2.txt',
+			newName: 'file-2.txt',
+		},
+		{
+			type: 'unchanged',
+			oldName: 'file-3.txt',
+		},
 	],
 	[
-		[
-			{ old: 'folder', new: 'folder', unchanged: true, }, [
-				{ old: 'file 1.json', new: 'file-1.json', error: RenameErrors.EXISTS, },
-				{ old: 'file-1.json', new: 'file-1.json', unchanged: true, },
+		{
+			type: 'unchanged',
+			oldName: 'folder',
+			children: [
+				{
+					type: 'error',
+					oldName: 'file 1.json',
+					newName: 'file-1.json',
+					error: RenameErrors.EXISTS,
+				},
+				{
+					type: 'unchanged',
+					oldName: 'file-1.json',
+				},
 			],
-		],
-		{ old: 'file-1.yml', new: 'file-1.yml', unchanged: true, },
+		},
+		{
+			type: 'unchanged',
+			oldName: 'file-1.yml',
+		},
 	],
 ];
 
@@ -70,15 +134,14 @@ const createFiles = (
 	files: Test,
 	directory: string = tempPath
 ) => {
-	for (const file of files) {
-		const isDirectory = Array.isArray(file);
-		const path = `${directory}/${isDirectory ? file[0].old : file.old}`;
-		if (isDirectory) {
-			mkdirSync(path);
-			createFiles(file[1], path);
+	for (const { oldName, children } of files) {
+		const oldPath = path.join(directory, oldName);
+		if (children) {
+			mkdirSync(oldPath);
+			createFiles(children, oldPath);
 			continue;
 		}
-		appendFileSync(path, '');
+		appendFileSync(oldPath, '');
 	}
 };
 
@@ -86,15 +149,18 @@ const checkFiles = (
 	files: Test,
 	directory: string = tempPath
 ) => {
-	for (const file of files) {
-		const isDirectory = Array.isArray(file);
-		const current = isDirectory ? file[0] : file;
-		const path = `${directory}/${!current.error && !current.unchanged && current.new ? current.new : current.old}`;
-		if (!existsSync(path)) {
-			throw new Error(`${path} expected but not found in renamed folder`);
+	for (const { type, oldName, newName, children } of files) {
+		const currentName = path.join(
+			directory,
+			type === 'success'
+				? newName
+				: oldName
+		);
+		if (!existsSync(currentName)) {
+			throw new Error(`${currentName} expected but not found in renamed folder`);
 		}
-		if (isDirectory) {
-			checkFiles(file[1], path);
+		if (children) {
+			checkFiles(children, currentName);
 		}
 	}
 };
@@ -104,39 +170,34 @@ const getResponse = (
 	directory: string = tempPath
 ): RenameResult => {
 	files.sort((a, b) => {
-		const aFile = Array.isArray(a) ? a[0] : a;
-		const bFile = Array.isArray(b) ? b[0] : b;
-		return aFile.old.localeCompare(bFile.old);
+		return a.oldName.localeCompare(b.oldName);
 	});
 	const response: RenameResult = {
 		renames: [],
 		errors: [],
 		unchanged: [],
 	};
-	for (const file of files) {
-		const isDirectory = Array.isArray(file);
-		const current = isDirectory ? file[0] : file;
-		const oldPath = `${directory}/${current.old}`;
-		const newPath = `${directory}/${current.new}`;
-		if (!current.error && !current.unchanged) {
+	for (const { type, oldName, newName, error, children } of files) {
+		const oldPath = path.join(directory, oldName);
+		const newPath = path.join(directory, newName ?? oldName);
+		if (type === 'success') {
 			response.renames.push({
 				oldPath,
 				newPath,
 			});
 		}
-		if (current.error) {
+		if (type === 'error') {
 			response.errors.push({
 				oldPath,
 				newPath,
-				error: current.error,
+				error,
 			});
 		}
-		if (current.unchanged) {
+		if (type === 'unchanged') {
 			response.unchanged.push(oldPath);
 		}
-		if (isDirectory) {
-			const path = `${directory}/${!current.error && !current.unchanged && current.new ? current.new : current.old}`;
-			const { renames, errors, unchanged } = getResponse(file[1], path);
+		if (children) {
+			const { renames, errors, unchanged } = getResponse(children, newPath);
 			response.renames.push(...renames);
 			response.unchanged.push(...unchanged);
 			response.errors.push(...errors);
