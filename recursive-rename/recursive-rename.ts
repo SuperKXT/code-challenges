@@ -13,37 +13,28 @@ import { z } from 'zod';
 import { formatToken } from '../helpers/string';
 
 import {
-	RenameOptions,
 	RenameErrors,
+	RenameOptions,
 	RenameResult,
 } from './recursive-rename.types';
 
-const argumentSchema = z.strictObject(
+const paramsSchema = z.strictObject(
 	{
 		_: z.tuple([z.string()]),
 		'--': z.string().array().length(0).optional(),
-		yes: z.boolean(),
-		y: z.boolean(),
-		verbose: z.boolean(),
-		v: z.boolean(),
-		changes: z.boolean(),
-		c: z.boolean(),
+		yes: z.boolean().optional(),
+		y: z.boolean().optional(),
+		verbose: z.boolean().optional(),
+		v: z.boolean().optional(),
+		'only-changes': z.boolean().optional(),
+		o: z.boolean().optional(),
 	},
 	{
-		invalid_type_error: 'correct usage: kebab-rename PATH [-y --yes -v --verbose -c --changes]',
+		invalid_type_error: 'correct usage: kebab-rename PATH [-y --yes -v --verbose -o --only-changes]',
 	}
 );
 
-export type Arguments = z.infer<typeof argumentSchema>;
-
-export const defaultArguments: Omit<Arguments, '_'> = {
-	yes: false,
-	y: false,
-	verbose: false,
-	v: false,
-	changes: true,
-	c: false,
-};
+export type Params = z.infer<typeof paramsSchema>;
 
 interface RecursiveLogResponse {
 	logs: string[],
@@ -90,8 +81,7 @@ export const getRecursiveLogs = (
 			&& (!onlyChanges || type !== 'unchanged')
 		) {
 			const log = [
-				'  '.repeat(depth),
-				'\x1b[2m|_\x1b[0m',
+				`${'  '.repeat(depth - 1)}\x1b[2m|_\x1b[0m`,
 				`${oldName}`,
 				type !== 'unchanged' && '\x1b[2m=>\x1b[0m',
 				newName,
@@ -282,7 +272,11 @@ const renameFiles = (
 
 export const recursiveRename = async (
 	folder: string,
-	options: RenameOptions
+	{
+		yes,
+		verbose,
+		onlyChanges,
+	}: RenameOptions
 ): Promise<RenameResult[]> => {
 
 	folder = folder.replace(/\/+$/, '');
@@ -292,12 +286,12 @@ export const recursiveRename = async (
 
 	const files = findFiles(folder);
 
-	if (!options.yes) {
+	if (!yes) {
 
 		console.info(getRenameLogs(
 			files,
-			options.verbose,
-			options.onlyChanges,
+			verbose,
+			onlyChanges,
 			true
 		));
 
@@ -326,8 +320,8 @@ export const recursiveRename = async (
 	console.info(
 		getRenameLogs(
 			results,
-			options.verbose,
-			options.onlyChanges
+			verbose,
+			onlyChanges
 		)
 	);
 
@@ -337,20 +331,25 @@ export const recursiveRename = async (
 
 if (process.env.NODE_ENV !== 'test') {
 
+	const args = argumentParser<Params>(process.argv.slice(2), {
+		alias: {
+			yes: 'y',
+			verbose: 'v',
+			'only-changes': 'o',
+		},
+	});
+
 	const {
 		_: [folder],
 		verbose,
 		yes,
-		changes,
-	} = argumentParser<Arguments>(process.argv.slice(2), {
-		alias: {
-			yes: 'y',
-			verbose: 'v',
-			changes: 'c',
-		},
-		default: defaultArguments,
-	});
+		'only-changes': onlyChanges,
+	} = paramsSchema.parse(args);
 
-	recursiveRename(folder, { verbose, yes, onlyChanges: changes });
+	recursiveRename(folder, {
+		yes,
+		verbose,
+		onlyChanges,
+	});
 
 }

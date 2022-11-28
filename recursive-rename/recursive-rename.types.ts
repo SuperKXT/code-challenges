@@ -39,10 +39,3 @@ export interface RenameOptions {
 	yes?: boolean,
 	onlyChanges?: boolean,
 }
-
-export type RenameLogFunction = (
-	results: RenameResult[],
-	verbose?: boolean,
-	onlyChanges?: boolean,
-	isConfirmation?: boolean
-) => string;

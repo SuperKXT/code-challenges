@@ -154,9 +154,14 @@ describe('testing recursive-rename function', () => {
 
 		createFiles(files);
 
-		const output = await recursiveRename(tempPath, { yes: true });
-		expect(output).toStrictEqual(files);
+		const output = await recursiveRename(
+			tempPath,
+			{ yes: true }
+		);
+
 		checkFiles(files);
+
+		expect(output).toStrictEqual(files);
 		expect(logSpy).toBeCalled();
 		expect(logSpy).toBeCalledTimes(1);
 		expect(logSpy).toBeCalledWith(
