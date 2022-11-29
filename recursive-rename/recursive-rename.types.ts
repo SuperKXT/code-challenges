@@ -38,4 +38,5 @@ export interface RenameOptions {
 	verbose?: boolean,
 	yes?: boolean,
 	onlyChanges?: boolean,
+	tree?: boolean,
 }

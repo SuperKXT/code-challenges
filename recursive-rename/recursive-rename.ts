@@ -28,9 +28,11 @@ const paramsSchema = z.strictObject(
 		v: z.boolean().optional(),
 		'only-changes': z.boolean().optional(),
 		o: z.boolean().optional(),
+		tree: z.boolean().optional(),
+		t: z.boolean().optional(),
 	},
 	{
-		invalid_type_error: 'correct usage: kebab-rename PATH [-y --yes -v --verbose -o --only-changes]',
+		invalid_type_error: 'correct usage: kebab-rename PATH [-y --yes -v --verbose -o --only-changes -t --tree]',
 	}
 );
 
@@ -47,6 +49,7 @@ export const getRecursiveLogs = (
 	results: RenameResult[],
 	verbose?: boolean,
 	onlyChanges?: boolean,
+	tree?: boolean,
 	isConfirmation?: boolean,
 	depth: number = 1
 ): RecursiveLogResponse => {
@@ -78,7 +81,7 @@ export const getRecursiveLogs = (
 
 		if (
 			verbose
-			&& (!onlyChanges || type !== 'unchanged')
+			&& (!onlyChanges || type !== 'unchanged' || children)
 		) {
 			const log = [
 				`${'  '.repeat(depth - 1)}\x1b[2m|_\x1b[0m`,
@@ -116,6 +119,7 @@ export const getRenameLogs = (
 	results: RenameResult[],
 	verbose?: boolean,
 	onlyChanges?: boolean,
+	tree?: boolean,
 	isConfirmation?: boolean
 ): string => {
 
@@ -134,6 +138,7 @@ export const getRenameLogs = (
 		results,
 		verbose,
 		onlyChanges,
+		tree,
 		isConfirmation
 	);
 
@@ -276,6 +281,7 @@ export const recursiveRename = async (
 		yes,
 		verbose,
 		onlyChanges,
+		tree,
 	}: RenameOptions
 ): Promise<RenameResult[]> => {
 
@@ -292,6 +298,7 @@ export const recursiveRename = async (
 			files,
 			verbose,
 			onlyChanges,
+			tree,
 			true
 		));
 
@@ -321,7 +328,8 @@ export const recursiveRename = async (
 		getRenameLogs(
 			results,
 			verbose,
-			onlyChanges
+			onlyChanges,
+			tree
 		)
 	);
 
@@ -336,6 +344,7 @@ if (process.env.NODE_ENV !== 'test') {
 			yes: 'y',
 			verbose: 'v',
 			'only-changes': 'o',
+			tree: 't',
 		},
 	});
 
@@ -344,12 +353,14 @@ if (process.env.NODE_ENV !== 'test') {
 		verbose,
 		yes,
 		'only-changes': onlyChanges,
+		tree,
 	} = paramsSchema.parse(args);
 
 	recursiveRename(folder, {
 		yes,
 		verbose,
 		onlyChanges,
+		tree,
 	});
 
 }
