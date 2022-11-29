@@ -13,6 +13,7 @@ import {
 } from './recursive-rename';
 import {
 	RenameErrors,
+	RenameOptions,
 	RenameResult,
 } from './recursive-rename.types';
 
@@ -165,9 +166,16 @@ describe('testing recursive-rename function', () => {
 
 		createFiles(files);
 
+		const options: RenameOptions = {
+			yes: true,
+			verbose: true,
+			onlyChanges: false,
+			tree: false,
+		};
+
 		const output = await recursiveRename(
 			tempPath,
-			{ yes: true }
+			options
 		);
 
 		checkFiles(files);
@@ -176,7 +184,12 @@ describe('testing recursive-rename function', () => {
 		expect(logSpy).toBeCalled();
 		expect(logSpy).toBeCalledTimes(1);
 		expect(logSpy).toBeCalledWith(
-			getRenameLogs(files)
+			getRenameLogs(
+				files,
+				options.verbose,
+				options.onlyChanges,
+				options.tree
+			)
 		);
 
 		logSpy.mockRestore();

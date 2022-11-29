@@ -55,9 +55,9 @@ export const getRecursiveLogs = (
 ): RecursiveLogResponse => {
 
 	const labels = {
-		success: `\x1b[42m ${!isConfirmation ? ' SUCCESS ' : ' POSSIBLE '} \x1b[0m`,
-		error: `\x1b[41m ${!isConfirmation ? ' ERROR ' : ' ISSUE '} \x1b[0m`,
-		unchanged: `\x1b[43m ${' UNCHANGED '} \x1b[0m`,
+		success: `\x1b[42m${!isConfirmation ? '  SUCCESS  ' : '  POSSIBLE '}\x1b[0m`,
+		error: `\x1b[41m${!isConfirmation ? '   ERROR   ' : '   ISSUE   '}\x1b[0m`,
+		unchanged: `\x1b[43m${' UNCHANGED '}\x1b[0m`,
 	};
 
 	const response: RecursiveLogResponse = {
@@ -82,17 +82,16 @@ export const getRecursiveLogs = (
 
 		if (
 			verbose
-			&& (!onlyChanges || type !== 'unchanged' || children)
+			&& (!onlyChanges || type !== 'unchanged' || (tree && children))
 		) {
 			const log = [
-				tree && `${'  '.repeat(depth - 1)}\x1b[2m|_\x1b[0m`,
+				tree && `${'  '.repeat(depth - 1)}\x1b[2m|_\x1b[0m `,
 				!tree && labels[type],
-				!tree && `\x1b[2m${path}/\x1b[0m`,
-				`${type === 'unchanged' ? '\x1b[33m' : '\x1b[9m'}${oldName}\x1b[0m`,
-				type !== 'unchanged' && '\x1b[2m=>\x1b[0m',
-				`${type === 'success' ? '\x1b[32m' : ''}${newName}\x1b[0m`,
-				type === 'error' && `\x1b[41m${error}\x1b[0m`,
-			].filter(Boolean).join(' ');
+				!tree && ` \x1b[2m${path}/\x1b[0m`,
+				`${type === 'unchanged' ? '' : '\x1b[9m'}${oldName}\x1b[0m`,
+				type !== 'unchanged' && ` ${type === 'success' ? '\x1b[32m' : '\x1b[31m'}${newName}\x1b[0m`,
+				type === 'error' && ` \x1b[41m ${error} \x1b[0m`,
+			].filter(Boolean).join('');
 
 			response.logs.push(log);
 		}
@@ -127,9 +126,9 @@ export const getRenameLogs = (
 ): string => {
 
 	const labels = {
-		success: !isConfirmation ? 'SUCCESS' : 'POSSIBLE',
-		errors: !isConfirmation ? 'ERROR' : 'ISSUE',
-		unchanged: 'UNCHANGED',
+		success: `\x1b[42m${!isConfirmation ? '  SUCCESS  ' : '  POSSIBLE '}\x1b[0m`,
+		error: `\x1b[41m${!isConfirmation ? '   ERROR   ' : '   ISSUE   '}\x1b[0m`,
+		unchanged: `\x1b[43m${' UNCHANGED '}\x1b[0m`,
 	};
 
 	const {
@@ -147,11 +146,11 @@ export const getRenameLogs = (
 
 	logs.push([
 		'\n',
-		`\x1b[42m${labels.success}\x1b[0m`,
+		labels.success,
 		`\x1b[32m${success.length}\x1b[0m`,
-		`\x1b[41m${labels.errors}\x1b[0m`,
+		labels.error,
 		`\x1b[31m${error.length}\x1b[0m`,
-		`\x1b[43m${labels.unchanged}\x1b[0m`,
+		labels.unchanged,
 		`\x1b[33m${unchanged.length}\x1b[0m`,
 		'\n',
 	].join(' '));
