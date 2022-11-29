@@ -55,9 +55,9 @@ export const getRecursiveLogs = (
 ): RecursiveLogResponse => {
 
 	const labels = {
-		success: `\x1b[42m ${!isConfirmation ? 'SUCCESS' : 'POSSIBLE'} \x1b[0m`,
-		error: `\x1b[41m ${!isConfirmation ? 'ERROR' : 'ISSUE'} \x1b[0m`,
-		unchanged: `\x1b[43m ${'UNCHANGED'} \x1b[0m`,
+		success: `\x1b[42m ${!isConfirmation ? ' SUCCESS ' : ' POSSIBLE '} \x1b[0m`,
+		error: `\x1b[41m ${!isConfirmation ? ' ERROR ' : ' ISSUE '} \x1b[0m`,
+		unchanged: `\x1b[43m ${' UNCHANGED '} \x1b[0m`,
 	};
 
 	const response: RecursiveLogResponse = {
@@ -71,6 +71,7 @@ export const getRecursiveLogs = (
 
 		const {
 			type,
+			path,
 			oldName,
 			newName,
 			error,
@@ -84,12 +85,13 @@ export const getRecursiveLogs = (
 			&& (!onlyChanges || type !== 'unchanged' || children)
 		) {
 			const log = [
-				`${'  '.repeat(depth - 1)}\x1b[2m|_\x1b[0m`,
-				`${oldName}`,
+				tree && `${'  '.repeat(depth - 1)}\x1b[2m|_\x1b[0m`,
+				!tree && labels[type],
+				!tree && `\x1b[2m${path}/\x1b[0m`,
+				`${type === 'unchanged' ? '\x1b[33m' : '\x1b[9m'}${oldName}\x1b[0m`,
 				type !== 'unchanged' && '\x1b[2m=>\x1b[0m',
-				newName,
-				labels[type],
-				type === 'error' && `\x1b[31m${error}\x1b[0m`,
+				`${type === 'success' ? '\x1b[32m' : ''}${newName}\x1b[0m`,
+				type === 'error' && `\x1b[41m${error}\x1b[0m`,
 			].filter(Boolean).join(' ');
 
 			response.logs.push(log);
@@ -100,6 +102,7 @@ export const getRecursiveLogs = (
 				children,
 				verbose,
 				onlyChanges,
+				tree,
 				isConfirmation,
 				depth + 1
 			);
@@ -193,6 +196,7 @@ const findFiles = (
 				if (existsSync(newPath)) {
 					response.push({
 						type: 'error',
+						path: folder,
 						oldName: file,
 						newName,
 						error: RenameErrors.EXISTS,
@@ -202,6 +206,7 @@ const findFiles = (
 				else {
 					response.push({
 						type: 'success',
+						path: folder,
 						oldName: file,
 						newName,
 						children,
@@ -211,6 +216,7 @@ const findFiles = (
 			else {
 				response.push({
 					type: 'unchanged',
+					path: folder,
 					oldName: file,
 					children,
 				});
@@ -219,6 +225,7 @@ const findFiles = (
 		catch (error: any) {
 			response.push({
 				type: 'error',
+				path: folder,
 				oldName: file,
 				newName,
 				error: RenameErrors.EXISTS,

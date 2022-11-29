@@ -4,6 +4,7 @@ export enum RenameErrors {
 
 interface AgnosticResult {
 	type: 'success' | 'error' | 'unchanged',
+	path: string,
 	oldName: string,
 	newName?: string,
 	error?: string,
