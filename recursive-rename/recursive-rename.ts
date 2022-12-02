@@ -1,9 +1,9 @@
 import {
-	statSync,
-	readdirSync,
-	renameSync,
-	existsSync,
-} from 'fs';
+	access,
+	readdir,
+	stat,
+	rename,
+} from 'fs/promises';
 import path from 'path';
 
 import chalk from 'chalk';
@@ -18,7 +18,6 @@ import {
 	RenameOptions,
 	RenameResult,
 	RenameResultType,
-	renameResultType,
 } from './recursive-rename.types';
 
 const paramsSchema = z.strictObject(
@@ -84,11 +83,11 @@ export const getRecursiveLogs = (
 			const log = [
 				tree && '  '.repeat(depth - 1),
 				tree && chalk.dim('|_ '),
-				!tree && labels[type],
-				!tree && chalk.dim(path),
+				!tree && `${labels[type]} `,
+				!tree && `${chalk.dim(path)}/`,
 				type === 'unchanged' ? oldName : chalk.strikethrough(oldName),
-				type !== 'unchanged' && chalk[type === 'success' ? 'green' : 'red'](newName),
-				type === 'error' && chalk.bgRed(error),
+				type !== 'unchanged' && chalk[type === 'success' ? 'green' : 'red'](` ${newName}`),
+				type === 'error' && ` ${chalk.bgRed(error)}`,
 			].filter(Boolean).join('');
 
 			response.logs.push(log);
@@ -125,9 +124,9 @@ export const getRenameLogs = (
 ): string => {
 
 	const labels: Record<RenameResultType, string> = {
-		success: chalk.bgGreen(!isConfirmation ? '  SUCCESS  ' : '  POSSIBLE '),
-		error: chalk.bgRed(!isConfirmation ? '   ERROR   ' : '   ISSUE   '),
-		unchanged: chalk.bgYellow(' UNCHANGED '),
+		success: chalk.bgGreen.dim(!isConfirmation ? '  SUCCESS  ' : '  POSSIBLE '),
+		error: chalk.bgRed.dim(!isConfirmation ? '   ERROR   ' : '   ISSUE   '),
+		unchanged: chalk.bgYellow.dim(' UNCHANGED '),
 	};
 
 	const {
@@ -147,30 +146,45 @@ export const getRenameLogs = (
 	logs.push([
 		'\n',
 		labels.success,
-		chalk.green(success.length),
+		chalk.bold.green(` ${success.length} `),
 		labels.error,
-		chalk.red(error.length),
+		chalk.bold.red(` ${error.length} `),
 		labels.unchanged,
-		chalk.yellow(unchanged.length),
+		chalk.bold.yellow(` ${unchanged.length} `),
 		'\n',
-	].join(' '));
+	].join(''));
 
 	return logs.join('\n');
 
 };
 
-const findFiles = (
-	folder: string
-): RenameResult[] => {
+const getExists = async (
+	path: string
+): Promise<boolean> => {
+	return access(path)
+		.then(() => true)
+		.catch(() => false);
+};
 
-	const files = readdirSync(folder);
+const getIsFolder = async (
+	path: string
+): Promise<boolean> => {
+	return getExists(path)
+		.then(() => stat(path))
+		.then((stat) => stat.isDirectory())
+		.catch(() => false);
+};
+
+const findFiles = async (
+	folder: string
+): Promise<RenameResult[]> => {
+
+	const files = await readdir(folder);
 	files.sort((a, b) =>
 		a.localeCompare(b)
 	);
 
-	const response: RenameResult[] = [];
-
-	for (const file of files) {
+	return Promise.all(files.map(async (file) => {
 
 		const oldPath = path.join(folder, file);
 		const [
@@ -187,97 +201,87 @@ const findFiles = (
 		let children: RenameResult['children'] = undefined;
 
 		try {
-			if (statSync(oldPath).isDirectory()) {
-				children = findFiles(oldPath);
-			}
-			if (newName !== file) {
 
-				if (existsSync(newPath)) {
-					response.push({
-						type: 'error',
-						path: folder,
-						oldName: file,
-						newName,
-						error: RenameErrors.EXISTS,
-						children,
-					});
-				}
-				else {
-					response.push({
-						type: 'success',
-						path: folder,
-						oldName: file,
-						newName,
-						children,
-					});
-				}
+			const isFolder = await getIsFolder(oldPath);
+			if (isFolder) {
+				children = await findFiles(oldPath);
 			}
-			else {
-				response.push({
+
+			if (newName === file) {
+				return {
 					type: 'unchanged',
 					path: folder,
 					oldName: file,
 					children,
-				});
+				};
 			}
+
+			const exists = await getExists(newPath);
+
+			if (exists) {
+				throw new Error(RenameErrors.EXISTS);
+			}
+
+			return {
+				type: 'success',
+				path: folder,
+				oldName: file,
+				newName,
+				children,
+			};
+
 		}
 		catch (error: any) {
-			response.push({
+			return {
 				type: 'error',
 				path: folder,
 				oldName: file,
 				newName,
-				error: RenameErrors.EXISTS,
+				error: error.message ?? error,
 				children,
-			});
+			};
 		}
-	}
 
-	return response;
+	}));
 
 };
 
-const renameFiles = (
+const renameFiles = async (
 	folder: string,
 	files: RenameResult[]
-): RenameResult[] => {
+): Promise<RenameResult[]> => {
 
-	const results: RenameResult[] = [];
-
-	for (const file of files) {
+	return Promise.all(files.map(async (file) => {
 
 		const oldPath = path.join(folder, file.oldName);
 		const newPath = path.join(folder, file.newName ?? file.oldName);
 
 		const children = (
 			file.children
-				? renameFiles(newPath, file.children)
+				? await renameFiles(newPath, file.children)
 				: undefined
 		);
 
 		if (file.type === 'success') {
 			try {
-				renameSync(oldPath, newPath);
+				await rename(oldPath, newPath);
 			}
 			catch (error: any) {
-				results.push({
+				return {
 					...file,
 					type: 'error',
 					error: error.message ?? error,
 					children,
-				});
-				continue;
+				};
 			}
 		}
 
-		results.push({
+		return {
 			...file,
 			children,
-		});
+		};
 
-	}
-
-	return results;
+	}));
 
 };
 
@@ -299,15 +303,11 @@ export const recursiveRename = async (
 
 	folder = folder.replace(/\/+$/, '');
 
-	const isFolder = (
-		existsSync(folder)
-		&& statSync(folder).isDirectory()
-	);
-	if (!isFolder) {
+	if (!(await getIsFolder(folder))) {
 		throw new Error(RenameErrors.BAD_PATH);
 	}
 
-	const files = findFiles(folder);
+	const files = await findFiles(folder);
 
 	if (!yes) {
 
@@ -339,10 +339,10 @@ export const recursiveRename = async (
 
 	}
 
-	const results = renameFiles(folder, files);
+	const results = await renameFiles(folder, files);
 
 	console.info(
-		getRenameLogs(
+		await getRenameLogs(
 			results,
 			verbose,
 			onlyChanges,
