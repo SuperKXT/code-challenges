@@ -6,12 +6,14 @@
 	"scripts": {
 		"lint": "eslint . --fix",
 		"test": "jest --runInBand",
-		"wordle": "ts-node ./wordle/wordle.ts"
+		"wordle": "ts-node ./wordle/wordle.ts",
+		"kebab-rename": "ts-node ./recursive-rename/recursive-rename.ts"
 	},
 	"devDependencies": {
 		"@types/eslint": "^8.4.10",
 		"@types/jest": "^29.2.3",
 		"@types/node": "^18.11.9",
+		"@types/prompt": "^1.1.4",
 		"@typescript-eslint/eslint-plugin": "^5.44.0",
 		"@typescript-eslint/parser": "^5.44.0",
 		"eslint": "^8.28.0",
@@ -25,6 +27,7 @@
 	},
 	"dependencies": {
 		"minimist-lite": "^2.2.1",
+		"prompt": "^1.3.0",
 		"zod": "^3.18.0"
 	}
 }

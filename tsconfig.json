@@ -30,7 +30,7 @@
 		"strictFunctionTypes": true,
 		"strictPropertyInitialization": true,
 		"paths": {
-			"~/helpers*": [ "./helpers/*" ]
+			"~/helpers/*": [ "./helpers/*" ]
 		}
 	},
 	"include": [ "./" ],
