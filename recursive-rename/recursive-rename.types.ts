@@ -4,8 +4,16 @@ export enum RenameErrors {
 	BAD_ARGUMENTS = 'invalid arguments provided. use -h or --help to check the correct usage',
 }
 
+export const renameResultType = [
+	'success',
+	'error',
+	'unchanged',
+] as const;
+
+export type RenameResultType = typeof renameResultType[number];
+
 interface AgnosticResult {
-	type: 'success' | 'error' | 'unchanged',
+	type: RenameResultType,
 	path: string,
 	oldName: string,
 	newName?: string,

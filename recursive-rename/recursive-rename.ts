@@ -6,6 +6,7 @@ import {
 } from 'fs';
 import path from 'path';
 
+import chalk from 'chalk';
 import argumentParser from 'minimist-lite';
 import prompt from 'prompt';
 import { z } from 'zod';
@@ -16,6 +17,8 @@ import {
 	RenameErrors,
 	RenameOptions,
 	RenameResult,
+	RenameResultType,
+	renameResultType,
 } from './recursive-rename.types';
 
 const paramsSchema = z.strictObject(
@@ -46,18 +49,13 @@ interface RecursiveLogResponse {
 
 export const getRecursiveLogs = (
 	results: RenameResult[],
+	labels: Record<RenameResultType, string>,
 	verbose?: boolean,
 	onlyChanges?: boolean,
 	tree?: boolean,
 	isConfirmation?: boolean,
 	depth: number = 1
 ): RecursiveLogResponse => {
-
-	const labels = {
-		success: `\x1b[42m${!isConfirmation ? '  SUCCESS  ' : '  POSSIBLE '}\x1b[0m`,
-		error: `\x1b[41m${!isConfirmation ? '   ERROR   ' : '   ISSUE   '}\x1b[0m`,
-		unchanged: `\x1b[43m${' UNCHANGED '}\x1b[0m`,
-	};
 
 	const response: RecursiveLogResponse = {
 		logs: [],
@@ -84,12 +82,13 @@ export const getRecursiveLogs = (
 			&& (!onlyChanges || type !== 'unchanged' || (tree && children))
 		) {
 			const log = [
-				tree && `${'  '.repeat(depth - 1)}\x1b[2m|_\x1b[0m `,
+				tree && '  '.repeat(depth - 1),
+				tree && chalk.dim('|_ '),
 				!tree && labels[type],
-				!tree && ` \x1b[2m${path}/\x1b[0m`,
-				`${type === 'unchanged' ? '' : '\x1b[9m'}${oldName}\x1b[0m`,
-				type !== 'unchanged' && ` ${type === 'success' ? '\x1b[32m' : '\x1b[31m'}${newName}\x1b[0m`,
-				type === 'error' && ` \x1b[41m ${error} \x1b[0m`,
+				!tree && chalk.dim(path),
+				type === 'unchanged' ? oldName : chalk.strikethrough(oldName),
+				type !== 'unchanged' && chalk[type === 'success' ? 'green' : 'red'](newName),
+				type === 'error' && chalk.bgRed(error),
 			].filter(Boolean).join('');
 
 			response.logs.push(log);
@@ -98,6 +97,7 @@ export const getRecursiveLogs = (
 		if (children) {
 			const subLogs = getRecursiveLogs(
 				children,
+				labels,
 				verbose,
 				onlyChanges,
 				tree,
@@ -124,10 +124,10 @@ export const getRenameLogs = (
 	isConfirmation?: boolean
 ): string => {
 
-	const labels = {
-		success: `\x1b[42m${!isConfirmation ? '  SUCCESS  ' : '  POSSIBLE '}\x1b[0m`,
-		error: `\x1b[41m${!isConfirmation ? '   ERROR   ' : '   ISSUE   '}\x1b[0m`,
-		unchanged: `\x1b[43m${' UNCHANGED '}\x1b[0m`,
+	const labels: Record<RenameResultType, string> = {
+		success: chalk.bgGreen(!isConfirmation ? '  SUCCESS  ' : '  POSSIBLE '),
+		error: chalk.bgRed(!isConfirmation ? '   ERROR   ' : '   ISSUE   '),
+		unchanged: chalk.bgYellow(' UNCHANGED '),
 	};
 
 	const {
@@ -137,6 +137,7 @@ export const getRenameLogs = (
 		unchanged,
 	} = getRecursiveLogs(
 		results,
+		labels,
 		verbose,
 		onlyChanges,
 		tree,
@@ -146,11 +147,11 @@ export const getRenameLogs = (
 	logs.push([
 		'\n',
 		labels.success,
-		`\x1b[32m${success.length}\x1b[0m`,
+		chalk.green(success.length),
 		labels.error,
-		`\x1b[31m${error.length}\x1b[0m`,
+		chalk.red(error.length),
 		labels.unchanged,
-		`\x1b[33m${unchanged.length}\x1b[0m`,
+		chalk.yellow(unchanged.length),
 		'\n',
 	].join(' '));
 
