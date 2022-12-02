@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import argumentParser from 'minimist-lite';
 import z from 'zod';
 
@@ -57,8 +58,12 @@ export const findWordle = (parameters: Arguments): string[] => {
 	);
 
 	if (process.env.NODE_ENV !== 'test') {
-		console.info(`Found \x1b[32m${matches.length}\x1b[0m Match${matches.length !== 1 ? 'es' : ''}`);
-		console.info(`\x1b[32m${matches.join(', ')}\x1b[0m`);
+		console.info([
+			'Found',
+			chalk.bgGreen(matches.length),
+			`Match${matches.length !== 1 ? 'es' : ''}`,
+		].join(' '));
+		console.info(chalk.green(matches.join(', ')));
 	}
 	return matches;
 
