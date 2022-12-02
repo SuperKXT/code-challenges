@@ -297,7 +297,12 @@ export const recursiveRename = async (
 ): Promise<RenameResult[]> => {
 
 	folder = folder.replace(/\/+$/, '');
-	if (!statSync(folder).isDirectory()) {
+
+	const isFolder = (
+		existsSync(folder)
+		&& statSync(folder).isDirectory()
+	);
+	if (!isFolder) {
 		throw new Error(RenameErrors.BAD_PATH);
 	}
 

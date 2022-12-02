@@ -160,6 +160,7 @@ const checkFiles = (
 };
 
 describe('testing recursive-rename function', () => {
+
 	it.each(sortedTests)('should setup the files and rename recursively', async (...files) => {
 
 		const logSpy = jest.spyOn(global.console, 'info').mockImplementation();
@@ -195,4 +196,20 @@ describe('testing recursive-rename function', () => {
 		logSpy.mockRestore();
 
 	});
+
+	it('should throw an error for invalid path', async () => {
+		await expect(
+			recursiveRename(
+				'./invalid-path',
+				{ yes: true }
+			)
+		).rejects.toThrow(RenameErrors.BAD_PATH);
+		await expect(
+			recursiveRename(
+				path.join(__dirname, 'README.md'),
+				{ yes: true }
+			)
+		).rejects.toThrow(RenameErrors.BAD_PATH);
+	});
+
 });
