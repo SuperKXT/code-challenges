@@ -87,7 +87,7 @@ export const getRecursiveLogs = (
 				!tree && `${chalk.dim(path)}/`,
 				type === 'unchanged' ? oldName : chalk.strikethrough(oldName),
 				type !== 'unchanged' && chalk[type === 'success' ? 'green' : 'red'](` ${newName}`),
-				type === 'error' && ` ${chalk.bgRed(error)}`,
+				type === 'error' && ` ${chalk.bgRed(` ${error} `)}`,
 			].filter(Boolean).join('');
 
 			response.logs.push(log);
@@ -124,9 +124,9 @@ export const getRenameLogs = (
 ): string => {
 
 	const labels: Record<RenameResultType, string> = {
-		success: chalk.bgGreen.dim(!isConfirmation ? '  SUCCESS  ' : '  POSSIBLE '),
-		error: chalk.bgRed.dim(!isConfirmation ? '   ERROR   ' : '   ISSUE   '),
-		unchanged: chalk.bgYellow.dim(' UNCHANGED '),
+		success: chalk.bgGreenBright(!isConfirmation ? '  SUCCESS  ' : '  POSSIBLE '),
+		error: chalk.bgRedBright(!isConfirmation ? '   ERROR   ' : '   ISSUE   '),
+		unchanged: chalk.bgYellowBright(' UNCHANGED '),
 	};
 
 	const {
