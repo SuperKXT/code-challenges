@@ -6,6 +6,7 @@
 	"scripts": {
 		"lint": "eslint . --fix",
 		"test": "jest --runInBand",
+		"test-w": "jest --runInBand --watch",
 		"wordle": "ts-node ./wordle/wordle.ts",
 		"kebab-rename": "ts-node ./recursive-rename/recursive-rename.ts"
 	},
