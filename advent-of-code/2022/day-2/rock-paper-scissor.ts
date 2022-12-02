@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { number, z } from 'zod';
+import { z } from 'zod';
 
 const arg1Schema = z.enum(['A', 'B', 'C']);
 type VersusMove = z.infer<typeof arg1Schema>;

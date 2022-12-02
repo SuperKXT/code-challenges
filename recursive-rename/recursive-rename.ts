@@ -30,9 +30,8 @@ const paramsSchema = z.strictObject(
 		o: z.boolean().optional(),
 		tree: z.boolean().optional(),
 		t: z.boolean().optional(),
-	},
-	{
-		invalid_type_error: 'correct usage: kebab-rename PATH [-y --yes -v --verbose -o --only-changes -t --tree]',
+		help: z.boolean().optional(),
+		h: z.boolean().optional(),
 	}
 );
 
@@ -281,6 +280,12 @@ const renameFiles = (
 
 };
 
+export const RECURSIVE_RENAME_HELP = [
+	'kebab-rename PATH \x12b[9m[OPTIONS]',
+	'\n',
+
+].join('\n');
+
 export const recursiveRename = async (
 	folder: string,
 	{
@@ -293,7 +298,7 @@ export const recursiveRename = async (
 
 	folder = folder.replace(/\/+$/, '');
 	if (!statSync(folder).isDirectory()) {
-		throw new Error('the given path must be a directory');
+		throw new Error(RenameErrors.BAD_PATH);
 	}
 
 	const files = findFiles(folder);
@@ -344,29 +349,37 @@ export const recursiveRename = async (
 };
 
 if (process.env.NODE_ENV !== 'test') {
+	try {
 
-	const args = argumentParser<Params>(process.argv.slice(2), {
-		alias: {
-			yes: 'y',
-			verbose: 'v',
-			'only-changes': 'o',
-			tree: 't',
-		},
-	});
+		const args = argumentParser<Params>(process.argv.slice(2), {
+			alias: {
+				yes: 'y',
+				verbose: 'v',
+				'only-changes': 'o',
+				tree: 't',
+				help: 'h',
+			},
+		});
 
-	const {
-		_: [folder],
-		verbose,
-		yes,
-		'only-changes': onlyChanges,
-		tree,
-	} = paramsSchema.parse(args);
+		const {
+			_: [folder],
+			verbose,
+			yes,
+			'only-changes': onlyChanges,
+			tree,
+			help,
+		} = paramsSchema.parse(args);
 
-	recursiveRename(folder, {
-		yes,
-		verbose,
-		onlyChanges,
-		tree,
-	});
+		recursiveRename(folder, {
+			yes,
+			verbose,
+			onlyChanges,
+			tree,
+			help,
+		});
 
+	}
+	catch {
+		throw new Error(RenameErrors.BAD_ARGUMENTS);
+	}
 }
