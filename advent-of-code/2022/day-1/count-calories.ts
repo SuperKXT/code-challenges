@@ -15,8 +15,8 @@ export const countCalories = async (): Promise<CountCaloriesSolution> => {
 		'utf-8'
 	);
 
-	const calories = input.split('\n\n').map(elf =>
-		elf.split('\n').map(Number).reduce(
+	const calories = input.split('\n\n').map(row =>
+		row.split('\n').map(Number).reduce(
 			(sum, calories) => sum += calories
 			, 0
 		)
