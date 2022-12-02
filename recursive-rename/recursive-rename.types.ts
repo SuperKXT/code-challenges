@@ -1,5 +1,7 @@
 export enum RenameErrors {
 	EXISTS = 'path already exists',
+	BAD_PATH = 'the given path must be a directory',
+	BAD_ARGUMENTS = 'invalid arguments provided. use -h or --help to check the correct usage',
 }
 
 interface AgnosticResult {
@@ -40,4 +42,5 @@ export interface RenameOptions {
 	yes?: boolean,
 	onlyChanges?: boolean,
 	tree?: boolean,
+	help?: boolean,
 }
