@@ -9,13 +9,23 @@ const input = [
 	'CrZsJsPPZsGzwwsLwLmpwMDw', /* cspell: disable-line */
 ].join('\n');
 
+type Solution = Awaited<ReturnType<typeof rucksackReorganization>>;
+
 describe('testing rucksackReorganization', () => {
 	it('should return 157 for the example input', async () => {
 		const response = await rucksackReorganization(input);
-		expect(response).toStrictEqual(157);
+		const solution: Solution = {
+			commonPriority: 157,
+			badgePriority: 70,
+		};
+		expect(response).toStrictEqual(solution);
 	});
 	it('should return 8176 for the input file', async () => {
 		const response = await rucksackReorganization();
-		expect(response).toStrictEqual(8176);
+		const solution: Solution = {
+			commonPriority: 8176,
+			badgePriority: 2689,
+		};
+		expect(response).toStrictEqual(solution);
 	});
 });
