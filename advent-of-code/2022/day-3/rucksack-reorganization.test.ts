@@ -12,7 +12,7 @@ const input = [
 type Solution = Awaited<ReturnType<typeof rucksackReorganization>>;
 
 describe('testing rucksackReorganization', () => {
-	it('should return 157 for the example input', async () => {
+	it('should return the correct solution for the example input', async () => {
 		const response = await rucksackReorganization(input);
 		const solution: Solution = {
 			commonPriority: 157,
@@ -20,7 +20,7 @@ describe('testing rucksackReorganization', () => {
 		};
 		expect(response).toStrictEqual(solution);
 	});
-	it('should return 8176 for the input file', async () => {
+	it('should return the correct solution for the input file', async () => {
 		const response = await rucksackReorganization();
 		const solution: Solution = {
 			commonPriority: 8176,
