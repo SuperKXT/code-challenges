@@ -1,40 +1,51 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
+import { object } from 'zod';
 
 export const campCleanup = async (
 	override?: string
-): Promise<number> => {
+): Promise<{
+	overlap: number,
+	fullOverlap: number,
+}> => {
 
 	const input = override ?? await readFile(
 		path.join(__dirname, 'input.txt'),
 		'utf-8'
 	);
 
-	let fullOverlap = 0;
+	return input.split('\n').reduce(
+		(object, row) => {
 
-	for (const row of input.split('\n')) {
+			if (!row) return object;
 
-		if (!row) continue;
+			const [elfA, elfB] = row.split(',');
+			const [elfAStart = 0, elfAEnd = 0] = elfA?.split('-').map(Number) ?? [];
+			const [elfBStart = 0, elfBEnd = 0] = elfB?.split('-').map(Number) ?? [];
 
-		const [elfA, elfB] = row.split(',');
-		const [elfAStart = 0, elfAEnd = 0] = elfA?.split('-').map(Number) ?? [];
-		const [elfBStart = 0, elfBEnd = 0] = elfB?.split('-').map(Number) ?? [];
+			const isAInB = (
+				elfAStart >= elfBStart
+				&& elfAEnd <= elfBEnd
+			);
+			const isBInA = (
+				elfBStart >= elfAStart
+				&& elfBEnd <= elfAEnd
+			);
+			const isOverlap = (
+				elfAStart <= elfBEnd
+				&& elfBStart <= elfAEnd
+			);
 
-		const isAInB = (
-			elfAStart >= elfBStart
-			&& elfAEnd <= elfBEnd
-		);
-		const isBInA = (
-			elfBStart >= elfAStart
-			&& elfBEnd <= elfAEnd
-		);
-		if (
-			isAInB
-			|| isBInA
-		) fullOverlap++;
+			if (isOverlap) object.overlap++;
+			if (
+				isAInB
+				|| isBInA
+			) object.fullOverlap++;
 
-	}
+			return object;
 
-	return fullOverlap;
+		},
+		{ overlap: 0, fullOverlap: 0 }
+	);
 
 };

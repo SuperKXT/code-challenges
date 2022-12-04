@@ -9,15 +9,23 @@ const input = [
 	'2-6,4-8',
 ].join('\n');
 
-// type Solution = Awaited<ReturnType<typeof rucksackReorganization>>;
+type Solution = Awaited<ReturnType<typeof campCleanup>>;
 
 describe('testing campCleanup', () => {
-	it('should return 2 for the example input', async () => {
+	it('should return the correct solution for the example input', async () => {
 		const response = await campCleanup(input);
-		expect(response).toStrictEqual(2);
+		const solution: Solution = {
+			overlap: 4,
+			fullOverlap: 2,
+		};
+		expect(response).toStrictEqual(solution);
 	});
-	it('should return 498 for the input file', async () => {
+	it('should return the correct solution for the input file', async () => {
 		const response = await campCleanup();
-		expect(response).toStrictEqual(498);
+		const solution: Solution = {
+			overlap: 859,
+			fullOverlap: 498,
+		};
+		expect(response).toStrictEqual(solution);
 	});
 });
