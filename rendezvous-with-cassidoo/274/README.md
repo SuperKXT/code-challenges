@@ -9,15 +9,16 @@ Given an 8x8 chess board, a piece, and a move coordinate, determine if the given
 ## Example
 
 ```ts
-const board =
-'~~~~~~~~
-~~kb~~~~
-~~K~~~~~
-~~~~~~~~
-~~~~~~~~
-~~~~~~~~
-~~~~~~~~
-~~~R~~~~';
+const board = [
+	'~~~~~~~~',
+	'~~kb~~~~',
+	'~~K~~~~~',
+	'~~~~~~~~',
+	'~~~~~~~~',
+	'~~~~~~~~',
+	'~~~~~~~~',
+	'~~~R~~~~',
+].join('\n');
 
 > isValidMove(board, 'R', [0,0])
 > false // A rook can only move horizontally and vertically

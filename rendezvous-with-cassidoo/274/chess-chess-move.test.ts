@@ -1,69 +1,43 @@
-import { verticalSlashes, invalidError } from './check-chess-move';
+import { isValidMove, IsValidMoveArgs } from './check-chess-move';
 
-interface Test {
-	input: string,
-	output: string,
+interface Test extends IsValidMoveArgs {
+	isValid: boolean,
 }
+
+const board = [
+	'~~~~~~~~',
+	'~~kb~~~~',
+	'~~K~~~~~',
+	'~~~~~~~~',
+	'~~~~~~~~',
+	'~~~~~~~~',
+	'~~~~~~~~',
+	'~~~R~~~~',
+].join('\n');
 
 const tests: Test[] = [
 	{
-		input: String.raw`\\\//\/\\`,
-		output: [
-			'\\',
-			' \\',
-			'  \\',
-			'  /',
-			' /',
-			' \\',
-			' /',
-			' \\',
-			'  \\',
-		].join('\n'),
+		board,
+		piece: 'R',
+		move: [0, 0],
+		isValid: false,
 	},
 	{
-		input: String.raw`\\\\`,
-		output: [
-			'\\',
-			' \\',
-			'  \\',
-			'   \\',
-		].join('\n'),
+		board,
+		piece: 'k',
+		move: [0, 1],
+		isValid: true,
 	},
 	{
-		input: String.raw`//\\`,
-		output: [
-			'/',
-			'/',
-			'\\',
-			' \\',
-		].join('\n'),
-	},
-	{
-		input: String.raw`\\///\\\\`,
-		output: [
-			'\\',
-			' \\',
-			' /',
-			'/',
-			'/',
-			'\\',
-			' \\',
-			'  \\',
-			'   \\',
-		].join('\n'),
+		board,
+		piece: 'Q',
+		move: [5, 7],
+		isValid: false,
 	},
 ];
 
-describe('testing verticalSlashes', () => {
-	it.each(tests)('should return formed slash path', ({ input, output }) => {
-		expect(verticalSlashes(input)).toStrictEqual(output);
-	});
-	it('should throw for invalid input', () => {
-		expect(() =>
-			verticalSlashes(String.raw`  \/`)
-		).toThrow(invalidError);
-		expect(() =>
-			verticalSlashes('')
-		).toThrow(invalidError);
+describe('testing isValidMove', () => {
+	it.each(tests)('should tell if the move is valid', ({ isValid, ...params }) => {
+		expect(isValidMove(params)).toStrictEqual(isValid);
 	});
 });

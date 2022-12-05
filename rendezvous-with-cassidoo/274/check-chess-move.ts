@@ -2,18 +2,45 @@ export const invalidError = new Error(
 	'the given string must be non-empty and can only contain `/` or `\\`'
 );
 
-export const verticalSlashes = (
-	slashes: string
-): string => {
-	if (!/^[\\/]+$/.test(slashes)) {
-		throw invalidError;
-	}
-	let offset: number = 0;
-	return Array.from(slashes, character => (
-		' '.repeat(
-			character === '/'
-				? offset ? --offset : 0
-				: offset++
-		) + character
-	)).join('\n');
+const piece = [
+	'kb',
+	'k',
+	'R',
+	'K',
+	'b',
+	'p',
+	'Q',
+] as const;
+
+type Piece = typeof piece[number];
+
+type Row = string;
+type Board = string;
+
+type Coord = (
+	| 0
+	| 1
+	| 2
+	| 3
+	| 4
+	| 5
+	| 6
+	| 7
+);
+
+type Move = [Coord, Coord];
+
+export interface IsValidMoveArgs {
+	board: Board,
+	piece: Piece,
+	move: Move,
+}
+
+export const isValidMove = ({
+	board,
+	piece,
+	move,
+}: IsValidMoveArgs): boolean => {
+
+	return false;
 };
