@@ -9,5 +9,8 @@
 		".vscode",
 		".vscode-insiders",
 		"./advent-of-code/**/**/input.txt"
+	],
+	"cSpell.words": [
+		"Catan"
 	]
 }
