@@ -1,28 +1,23 @@
-# Return list of anti-divisors for the given number
+# Return combined string array of given length
 
-[issue #273 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/i-dont-think-of-all-the-misery-but-of-the-beauty-4964/)
+[issue #274 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/normal-is-nothing-more-than-a-cycle-on-a-washing/)
 
 ## Description
 
-Given a positive integer `n`, return all of its anti-divisors.
-Anti-divisors are numbers that do not divide a number by the largest possible margin (1 is not an anti-divisor of any number).
-[More information here!](https://oeis.org/A066272/a066272a.html)
+Given a list of strings `arr`, and a max size `n`,
+return a new list where the strings (from left to right)
+are joined together with a space, so that each new string
+is less than or equal to the max size.
 
 ## Example
 
 ```ts
-> findAntiDivisor(1)
-> []
+> combineStrings(["a", "b", "c", "d", "e", "f", "g"], 5)
+> ["a b c", "d e f", "g"]
 
-> findAntiDivisor(3)
-> [2]
+> combineStrings(["a", "b", "c", "d", "e", "f", "g"], 12)
+> ["a b c d e f", "g"]
 
-> findAntiDivisor(5)
-> [2,3]
-
-> findAntiDivisor(10)
-> [3,4,7]
-
-> findAntiDivisor(234)
-> [4,7,12,36,52,67,156]
+> combineStrings(["alpha", "beta", "gamma", "delta", "epsilon"], 20)
+> ["alpha beta gamma", "delta epsilon"]
 ```

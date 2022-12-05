@@ -1,24 +1,40 @@
-# Detect Bouncing DVD Logo Corner Hit
+# Calculate GPA
 
-[issue #265 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/i-enjoy-the-time-passing-i-think-its-a-privilege/)
+[issue #265 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/dont-you-ever-ever-give-up-on-you-sheryl-lee-ralph)
 
 ## Description
-Remember the bouncing DVD logo? Given the dimensions of the logo, its initial coordinates, and the size of a screen,
-write a function that will determine if its next collision will hit the corner of the screen.
-Assume it is initially moving southeast with a slope of -1.
 
-Extra credit, figure out how many bounces/collisions it will take to hit a corner!
+Given a set of letter grades, output the GPA (grade point average) of those grades.
 
-## Example:
+Key:
+
+```plaintext
+A	=	4	grade points
+A-	=	3.7	grade points
+B+	=	3.3	grade points
+B	=	3	grade points
+B-	=	2.7	grade points
+C+	=	2.3	grade points
+C	=	2	grade points
+C-	=	1.7	grade points
+D+	=	1.3	grade points
+D	=	1	grade point
+D-	=	0.7	grade points
+F	=	0	grade points
+```
+
+## Example
+
 ```ts
-	let dimensions = [5,5]
-	let initialCoordinates = [0,0] // you decide which part of the logo the coords map to
-	let screenSize = [100,100]
+> calculateGPA(['A'])
+> 4
 
-	> cornerHit(dimensions, initialCoordinates, screenSize)
-	> true // in one collision
+> calculateGPA(['F', 'F', 'F'])
+> 0
 
-	> cornerHit(dimensions, [45,70], [400,200])
-	> false
+> calculateGPA(['A', 'A-', 'B+', 'B', 'B-'])
+> 3.3
 
+> calculateGPA(['A', 'B+', 'C-', 'A'])
+> 3.3
 ```

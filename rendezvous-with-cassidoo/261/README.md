@@ -1,15 +1,24 @@
-# Parenthesis Substring
+# Format Markdown Table String
 
-[issue #261 of rendezvous with cassidoo](https://buttondown.email/cassidoo/archive/friends-and-good-manners-will-carry-you-where/).
+[issue #261 of rendezvous with cassidoo](https://buttondown.email/cassidoo/archive/find-something-youre-passionate-about-and-keep/).
 
 ## Description
-Given a string s consisting of various parenthesis ( and ), find the length of the longest valid parenthesis substring.
 
-## Example:
-```ts
-> parensSubstring('(()(')
-> 2
+Given a string that represents a markdown table, return a formatted markdown table.
+A formatted markdown table means that the width of each column is the width of the longest cell in the column.
 
-> parensSubstring(')()(()))')
-> 6
+## Example
+
+```plaintext
+Input:
+| Syntax | Description |
+| --- | ----------- |
+| Header | Title |
+| Paragraph | Text |
+
+Output:
+| Syntax    | Description |
+| --------- | ----------- |
+| Header    | Title       |
+| Paragraph | Text        |
 ```

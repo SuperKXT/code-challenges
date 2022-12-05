@@ -1,49 +1,20 @@
-# Print Binary Tree With n Leaf Nodes
+# Print ASCII printable characters
 
-[issue #271 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/everybody-gets-so-much-information-all-day-long/)
+/*cSpell:disable*/
+
+[issue #272 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/keep-your-face-to-the-sunshine-and-you-cannot-see-1741/)
 
 ## Description
 
-Given an integer `n`, print a balanced binary tree with `n` leaf nodes using spaces and the characters `/` and `\`.
+Print the ASCII printable characters code page (`0x20` - `0x7E`), without any built-ins or functions that do it for you.
 
-## Example
+## Characters to be printed
 
 ```ts
-$ printBinaryTree(2)
-
-/\
-
-// or you could output something like:
-
- /\
-/  \
-
-$ printBinaryTree(3)
-
- /\
-/\ \
-
-// or you could output something like:
-
-  /\
- / /\
-/ /  \
-
-               /\
-              /  \
-             /    \
-            /      \
-           /        \
-          /          \
-         /            \
-        /              \
-       /\              /\
-      /  \            /  \
-     /    \          /    \
-    /      \        /      \
-   /\      /\      /\      /\
-  /  \    /  \    /  \    /  \
- /\  /\  /\  /\  /\  /\  /\  /\
-/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-
+ !"#$%&'()*+,-./
+0123456789:;<=>?
+@ABCDEFGHIJKLMNO
+PQRSTUVWXYZ[\]^_
+`abcdefghijklmno
+pqrstuvwxyz{|}~
 ```

@@ -1,19 +1,28 @@
-# Get Fibonacci Like Sequence
+# Open Doors After Passes
 
-[issue #269 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/subscribers/73939c40-d71e-4d15-988d-1087f88ef7fe/archive/instant-gratification-takes-too-long-carrie-fisher)
+[issue #270 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/i-never-regretted-what-i-turned-down-angela/)
 
 ## Description
 
-Write a function that truncates words in a string to length `n`.
+Let’s say you have `n` doors that start out as closed.
+With the first pass across the doors, you toggle every door open.
+With the second pass, you toggle every second door.
+With the third, every third door, and so on.
+Write a function that takes in an integer `numberOfPasses`, and returns how many doors are open after the number of passes.
 
 ## Example
 
 ```ts
-const n = 3
+const n = 7
+const numberOfPasses = 3
 
-$ truncateWords('never gonna give you up', n)
-$ 'nev gon giv you up'
+$ passDoors(n, numberOfPasses)
+$ 4
 
-$ truncateWords('*hello* darkness, my ~old_friend', n)
-$ '*hel* dar, my ~old_fri'
+// Explanation:
+// 0 means open, 1 means closed
+// Initial: 1 1 1 1 1 1 1
+// Pass 1:  0 0 0 0 0 0 0
+// Pass 2:  0 1 0 1 0 1 0
+// Pass 3:  0 1 1 1 0 0 0
 ```

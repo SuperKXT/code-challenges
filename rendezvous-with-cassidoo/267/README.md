@@ -1,15 +1,21 @@
-# Cardinal to Ordinal Numbers
+# Get Fibonacci Like Sequence
 
-[issue #267 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/every-day-brings-new-choices-martha-beck/)
+[issue #268 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/hope-is-a-gift-you-dont-have-to-surrender-a-power/)
 
 ## Description
-Write a function to output the ordinal suffix of a positive integer concatenated to an inputted number.
 
-## Example:
+**Given two integers, generate a “fibonacci-like” sequence of n digits (where the next number in the pattern is the sum of the previous two numbers).**
+
+Extra credit: Given a sequence, determine if the sequence is “fibonacci-like”.
+
+## Example
+
 ```ts
-$ getOrdinalNumber(3)
-$ '3rd'
+const n = 5
 
-$ getOrdinalNumber(57)
-$ '57th'
+$ getFibonacciLike(10, 20, n)
+$ [10, 20, 30, 50, 80]
+
+$ getFibonacciLike(3, 7, n)
+$ [3, 7, 10, 17, 27]
 ```

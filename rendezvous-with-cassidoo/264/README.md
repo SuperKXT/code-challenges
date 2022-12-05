@@ -1,16 +1,26 @@
-# Format Markdown Table String
+# Detect Bouncing DVD Logo Corner Hit
 
-[issue #264 of rendezvous with cassidoo](https://buttondown.email/cassidoo/archive/if-everything-was-perfect-you-would-never-learn/).
+[issue #264 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/i-enjoy-the-time-passing-i-think-its-a-privilege/)
 
 ## Description
-Write a function fromTo that produces a generator, that will produce values in a range.
 
-## Example:
+Remember the bouncing DVD logo? Given the dimensions of the logo, its initial coordinates, and the size of a screen,
+write a function that will determine if its next collision will hit the corner of the screen.
+Assume it is initially moving southeast with a slope of -1.
+
+Extra credit, figure out how many bounces/collisions it will take to hit a corner!
+
+## Example
+
 ```ts
-	const gen = fromTo(5,7)
-	> gen() 	//	5
-	> gen() 	//	6
-	> gen() 	//	7
-	> gen()		//	undefined
-	undefined
+let dimensions = [5,5]
+let initialCoordinates = [0,0] // you decide which part of the logo the coords map to
+let screenSize = [100,100]
+
+> cornerHit(dimensions, initialCoordinates, screenSize)
+> true // in one collision
+
+> cornerHit(dimensions, [45,70], [400,200])
+> false
+
 ```

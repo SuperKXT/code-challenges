@@ -1,28 +1,49 @@
-# Open Doors After Passes
+# Print Binary Tree With n Leaf Nodes
 
-[issue #270 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/i-never-regretted-what-i-turned-down-angela/)
+[issue #271 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/everybody-gets-so-much-information-all-day-long/)
 
 ## Description
 
-Let’s say you have `n` doors that start out as closed.
-With the first pass across the doors, you toggle every door open.
-With the second pass, you toggle every second door.
-With the third, every third door, and so on.
-Write a function that takes in an integer `numberOfPasses`, and returns how many doors are open after the number of passes.
+Given an integer `n`, print a balanced binary tree with `n` leaf nodes using spaces and the characters `/` and `\`.
 
 ## Example
 
 ```ts
-const n = 7
-const numberOfPasses = 3
+$ printBinaryTree(2)
 
-$ passDoors(n, numberOfPasses)
-$ 4
+/\
 
-// Explanation:
-// 0 means open, 1 means closed
-// Initial: 1 1 1 1 1 1 1
-// Pass 1:  0 0 0 0 0 0 0
-// Pass 2:  0 1 0 1 0 1 0
-// Pass 3:  0 1 1 1 0 0 0
+// or you could output something like:
+
+ /\
+/  \
+
+$ printBinaryTree(3)
+
+ /\
+/\ \
+
+// or you could output something like:
+
+  /\
+ / /\
+/ /  \
+
+               /\
+              /  \
+             /    \
+            /      \
+           /        \
+          /          \
+         /            \
+        /              \
+       /\              /\
+      /  \            /  \
+     /    \          /    \
+    /      \        /      \
+   /\      /\      /\      /\
+  /  \    /  \    /  \    /  \
+ /\  /\  /\  /\  /\  /\  /\  /\
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+
 ```

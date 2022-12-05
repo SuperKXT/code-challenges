@@ -1,16 +1,17 @@
-# Swap Pairs
+# Parenthesis Substring
 
-[issue #260 of rendezvous with cassidoo](https://buttondown.email/cassidoo/archive/youve-got-to-get-up-every-morning-with-a-smile-on/).
+[issue #260 of rendezvous with cassidoo](https://buttondown.email/cassidoo/archive/friends-and-good-manners-will-carry-you-where/).
 
 ## Description
-Given a list, swap every two adjacent nodes. Something to think about: How would your code change if this were a linked list, versus an array?
 
-## Example:
+Given a string s consisting of various parenthesis ( and ), find the length of the longest valid parenthesis substring.
+
+## Example
 
 ```ts
-> swapPairs([1,2,3,4])
-> [2,1,4,3]
+> parensSubstring('(()(')
+> 2
 
-> swapPairs([])
-> []
+> parensSubstring(')()(()))')
+> 6
 ```

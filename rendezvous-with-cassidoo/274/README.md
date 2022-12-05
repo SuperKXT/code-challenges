@@ -1,23 +1,30 @@
-# Return combined string array of given length
+# Check validity of a chess move
 
-[issue #274 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/normal-is-nothing-more-than-a-cycle-on-a-washing/)
+[issue #274 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/tension-is-who-you-think-you-should-be-relaxation/)
 
 ## Description
 
-Given a list of strings `arr`, and a max size `n`,
-return a new list where the strings (from left to right)
-are joined together with a space, so that each new string
-is less than or equal to the max size.
+Given an 8x8 chess board, a piece, and a move coordinate, determine if the given move is a valid chess move. Capital letters represent white pieces, lowercase letters represent black pieces, where P is a white pawn, n is a black knight, K is a white king, and so on. A ~ represents a blank square, and you can use this tool if you need a helpful visual! You can choose to do absolute coordinates or relative ones, and decide how you want to differentiate between duplicate pieces.
 
 ## Example
 
 ```ts
-> combineStrings(["a", "b", "c", "d", "e", "f", "g"], 5)
-> ["a b c", "d e f", "g"]
+const board =
+'~~~~~~~~
+~~kb~~~~
+~~K~~~~~
+~~~~~~~~
+~~~~~~~~
+~~~~~~~~
+~~~~~~~~
+~~~R~~~~';
 
-> combineStrings(["a", "b", "c", "d", "e", "f", "g"], 12)
-> ["a b c d e f", "g"]
+> isValidMove(board, 'R', [0,0])
+> false // A rook can only move horizontally and vertically
 
-> combineStrings(["alpha", "beta", "gamma", "delta", "epsilon"], 20)
-> ["alpha beta gamma", "delta epsilon"]
+> isValidMove(board, 'k', [0,1])
+> true // A king can move one square at a time in any direction
+
+> isValidMove(board, 'Q', [5,7])
+> false // The queen is not on the board
 ```

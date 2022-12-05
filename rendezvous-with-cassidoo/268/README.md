@@ -1,20 +1,19 @@
 # Get Fibonacci Like Sequence
 
-[issue #268 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/hope-is-a-gift-you-dont-have-to-surrender-a-power/)
+[issue #269 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/subscribers/73939c40-d71e-4d15-988d-1087f88ef7fe/archive/instant-gratification-takes-too-long-carrie-fisher)
 
 ## Description
-**Given two integers, generate a “fibonacci-like” sequence of n digits (where the next number in the pattern is the sum of the previous two numbers).**
 
-Extra credit: Given a sequence, determine if the sequence is “fibonacci-like”.
+Write a function that truncates words in a string to length `n`.
 
-## Example:
+## Example
+
 ```ts
-$ const n = 5
+const n = 3
 
-$ getFibonacciLike(10, 20, n)
-$ [10, 20, 30, 50, 80]
+$ truncateWords('never gonna give you up', n)
+$ 'nev gon giv you up'
 
-$ getFibonacciLike(3, 7, n)
-$ [3, 7, 10, 17, 27]
-
+$ truncateWords('*hello* darkness, my ~old_friend', n)
+$ '*hel* dar, my ~old_fri'
 ```
