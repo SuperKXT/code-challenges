@@ -11,6 +11,7 @@
 		"./advent-of-code/**/**/input.txt"
 	],
 	"cSpell.words": [
-		"Catan"
+		"Catan",
+		"datastream"
 	]
 }
