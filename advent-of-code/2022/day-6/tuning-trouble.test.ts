@@ -14,36 +14,36 @@ const tests: Test[] = [
 	{
 		input: 'mjqjpqmgbljsphdztnvjfqwrcgsmlb', /** cSpell: disable-line */
 		output: {
-			part1: 7,
-			part2: 0,
+			packetMarker: 7,
+			messageMarker: 19,
 		},
 	},
 	{
 		input: 'bvwbjplbgvbhsrlpgdmjqwftvncz', /** cSpell: disable-line */
 		output: {
-			part1: 5,
-			part2: 0,
+			packetMarker: 5,
+			messageMarker: 23,
 		},
 	},
 	{
 		input: 'nppdvjthqldpwncqszvftbrmjlhg', /** cSpell: disable-line */
 		output: {
-			part1: 6,
-			part2: 0,
+			packetMarker: 6,
+			messageMarker: 23,
 		},
 	},
 	{
 		input: 'nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg', /** cSpell: disable-line */
 		output: {
-			part1: 10,
-			part2: 0,
+			packetMarker: 10,
+			messageMarker: 29,
 		},
 	},
 	{
 		input: 'zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw', /** cSpell: disable-line */
 		output: {
-			part1: 11,
-			part2: 0,
+			packetMarker: 11,
+			messageMarker: 26,
 		},
 	},
 ];
@@ -60,8 +60,8 @@ describe('testing supplyStacks', () => {
 		);
 		const response = await tuningTrouble(input);
 		const solution: Solution = {
-			part1: 7,
-			part2: 0,
+			packetMarker: 1210,
+			messageMarker: 3476,
 		};
 		expect(response).toStrictEqual(solution);
 	});

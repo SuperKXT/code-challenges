@@ -1,25 +1,44 @@
 export const tuningTrouble = (
 	input: string
 ): {
-	part1: number,
-	part2: number,
+	packetMarker: number,
+	messageMarker: number,
 } => {
 
 	const solution = {
-		part1: 0,
-		part2: 0,
+		packetMarker: 0,
+		messageMarker: 0,
 	};
 
 	for (let index = 0; index < input.length; index++) {
 		if (index <= 4) continue;
-		const isMarker = [...new Set(
-			input.slice(index - 4, index).split('')
-		)].length === 4;
-		if (isMarker) {
-			solution.part1 = index;
-			break;
+
+		if (!solution.packetMarker) {
+			const isPacketMarker = [...new Set(
+				input.slice(index - 4, index).split('')
+			)].length === 4;
+			if (isPacketMarker) {
+				solution.packetMarker = index;
+			}
 		}
+
+		if (index <= 14) continue;
+
+		if (!solution.messageMarker) {
+			const isMessageMarker = [...new Set(
+				input.slice(index - 14, index).split('')
+			)].length === 14;
+			if (isMessageMarker) {
+				solution.messageMarker = index;
+			}
+		}
+
+		if (
+			solution.packetMarker
+			&& solution.messageMarker
+		) break;
 	}
+
 	return solution;
 
 };
