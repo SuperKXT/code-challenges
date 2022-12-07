@@ -80,7 +80,7 @@ interface ErrorChessResponse extends AgnosticChessResponse {
 
 interface ValidChessResponse extends AgnosticChessResponse {
 	isValid: true,
-	isKill?: boolean,
+	isKill: boolean,
 	path: Position[],
 }
 

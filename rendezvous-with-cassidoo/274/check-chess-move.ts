@@ -14,14 +14,14 @@ import {
 } from './check-chess-move.types';
 
 const assertBoard: AssertFunction<Board> = (board) => {
-	if (!Array.isArray('board') || board.length !== 8) {
+	if (!Array.isArray(board) || board.length !== 8) {
 		throw new Error(ChessErrors.BAD_ROWS);
 	}
 	for (const row of board) {
 		if (!Array.isArray(row) || row.length !== 8) {
 			throw new Error(ChessErrors.BAD_COLUMNS);
 		}
-		if (row.some(cell => square.includes(cell))) {
+		if (row.some(cell => !square.includes(cell))) {
 			throw new Error(ChessErrors.BAD_SQUARE);
 		}
 	}
