@@ -18,20 +18,20 @@ const board = [
 const tests: Test[] = [
 	{
 		board,
-		piece: 'R',
-		move: [0, 0],
+		from: 'R',
+		to: [0, 0],
 		isValid: false,
 	},
 	{
 		board,
-		piece: 'k',
-		move: [0, 1],
+		from: 'k',
+		to: [0, 1],
 		isValid: true,
 	},
 	{
 		board,
-		piece: 'Q',
-		move: [5, 7],
+		from: 'Q',
+		to: [5, 7],
 		isValid: false,
 	},
 ];
