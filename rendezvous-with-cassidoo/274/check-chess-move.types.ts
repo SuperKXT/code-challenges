@@ -30,23 +30,25 @@ export const square = [
 ] as const;
 export type Square = typeof square[number];
 
-export type Coord = (
-	| 0
-	| 1
-	| 2
-	| 3
-	| 4
-	| 5
-	| 6
-	| 7
-);
+export const coords = [
+	0,
+	1,
+	2,
+	3,
+	4,
+	5,
+	6,
+	7,
+] as const;
 
-export type Move = [Coord, Coord];
+export type Coord = typeof coords[number];
+
+export type Position = [Coord, Coord];
 
 export interface IsValidMoveArgs {
 	board: string,
-	from: Move,
-	to: Move,
+	from: Position,
+	to: Position,
 }
 
 type Row = RepeatedTuple<Piece | '~', 8>;
@@ -79,7 +81,7 @@ interface ErrorChessResponse extends AgnosticChessResponse {
 interface ValidChessResponse extends AgnosticChessResponse {
 	isValid: true,
 	isKill?: boolean,
-	path: Move[],
+	path: Position[],
 }
 
 export type ChessResponse = (
