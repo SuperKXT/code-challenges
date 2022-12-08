@@ -3,13 +3,6 @@ import path from 'path';
 
 import { raumdeuter } from './raumdeuter';
 
-type Solution = ReturnType<typeof raumdeuter>;
-
-interface Test {
-	input: string,
-	output: Solution,
-};
-
 const example = [
 	'$ cd /',
 	'$ ls',
