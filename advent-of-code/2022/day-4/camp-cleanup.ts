@@ -1,6 +1,5 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
-import { object } from 'zod';
 
 export const campCleanup = async (
 	override?: string

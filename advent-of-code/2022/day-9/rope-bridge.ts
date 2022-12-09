@@ -1,5 +1,3 @@
-type TailPosition = `${number},${number}`;
-
 const row = [0, 1, 2, 3, 4] as const;
 type Row = typeof row[number];
 
@@ -10,15 +8,6 @@ interface Position {
 	row: Row,
 	col: Col,
 }
-
-const isPosition = (
-	value: any
-): value is Position => (
-	value
-	&& typeof value === 'object'
-	&& col.includes(value.col)
-	&& row.includes(value.row)
-);
 
 const move = ['R', 'L', 'U', 'D'] as const;
 type Move = typeof move[number];

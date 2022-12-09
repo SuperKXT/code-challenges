@@ -11,7 +11,6 @@ const example = [
 	'35390',
 ].join('\n');
 
-
 describe('testing raumdeuter', () => {
 	it('should return the correct solution for example test', () => {
 		expect(treeHouse(example)).toStrictEqual({

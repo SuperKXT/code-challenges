@@ -8,7 +8,7 @@ type Solution = ReturnType<typeof tuningTrouble>;
 interface Test {
 	input: string,
 	output: Solution,
-};
+}
 
 const tests: Test[] = [
 	{
@@ -47,7 +47,6 @@ const tests: Test[] = [
 		},
 	},
 ];
-
 
 describe('testing supplyStacks', () => {
 	it.each(tests)('should return the correct solution for example tests', ({ input, output }) => {

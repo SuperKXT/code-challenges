@@ -29,7 +29,6 @@ const example = [
 	'7214296 k',
 ].join('\n');
 
-
 describe('testing raumdeuter', () => {
 	it('should return the correct solution for example test', () => {
 		expect(raumdeuter(example)).toStrictEqual({

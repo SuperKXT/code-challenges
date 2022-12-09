@@ -15,7 +15,7 @@ const validityTests: ValidityTest[] = [
 			' 5 6 C 8',
 			'6 4 B 5 3',
 			' 2 8 9 3',
-			'  A. 4'
+			'  A. 4',
 		].join('\n'),
 		isValid: true,
 	},

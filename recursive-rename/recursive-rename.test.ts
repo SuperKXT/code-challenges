@@ -105,8 +105,9 @@ const recursiveSort = (
 	}));
 };
 
-export const sortedTests = tests.map(recursiveSort);
+const sortedTests = tests.map(recursiveSort);
 
+// eslint-disable-next-line jest/no-hooks
 beforeEach(() => {
 	if (existsSync(tempPath)) {
 		rmSync(tempPath, {
@@ -117,6 +118,7 @@ beforeEach(() => {
 	mkdirSync(tempPath);
 });
 
+// eslint-disable-next-line jest/no-hooks
 afterEach(() => {
 	rmSync(tempPath, {
 		recursive: true,
@@ -182,9 +184,8 @@ describe('testing recursive-rename function', () => {
 		checkFiles(files);
 
 		expect(output).toStrictEqual(files);
-		expect(logSpy).toBeCalled();
-		expect(logSpy).toBeCalledTimes(1);
-		expect(logSpy).toBeCalledWith(
+		expect(logSpy).toHaveBeenCalledTimes(1);
+		expect(logSpy).toHaveBeenCalledWith(
 			getRenameLogs(
 				files,
 				options.verbose,
