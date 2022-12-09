@@ -1,50 +1,45 @@
 import {
 	generateCatanBoard,
-	isValidCatanBoard,
+	assertValidCatanBoard,
+	CatanErrors,
 } from './generate-catan-board';
 
-interface ValidityTest {
+const validBoards: string[] = [
+	[
+		'  B 9 A',
+		' 5 6 C 8',
+		'6 4 B 5 3',
+		' 2 8 9 3',
+		'  A . 4',
+	].join('\n'),
+	[
+		'  B B C',
+		' 3 A 3 A',
+		'2 4 6 . 6',
+		' 4 5 9 9',
+		'  8 5 8',
+	].join('\n'),
+	[
+		'  6 3 8',
+		' 2 4 5 A',
+		'5 9 . 6 9',
+		' A B 3 C',
+		'  8 4 B',
+	].join('\n'),
+];
+
+interface InvalidBoard {
 	board: string,
-	isValid: boolean,
+	error: CatanErrors,
 }
 
-const validityTests: ValidityTest[] = [
-	{
-		board: [
-			'  B 9 A',
-			' 5 6 C 8',
-			'6 4 B 5 3',
-			' 2 8 9 3',
-			'  A. 4',
-		].join('\n'),
-		isValid: true,
-	},
-	{
-		board: [
-			'  B B C',
-			' 3 A 3 A',
-			'2 4 6 . 6',
-			' 4 5 9 9',
-			'  8 5 8',
-		].join('\n'),
-		isValid: true,
-	},
-	{
-		board: [
-			'  6 3 8',
-			' 2 4 5 A',
-			'5 9 . 6 9',
-			' A B 3 C',
-			'  8 4 B',
-		].join('\n'),
-		isValid: true,
-	},
+const invalidBoards: InvalidBoard[] = [
 	{
 		board: [
 			'  6 3 8',
 			' 2 4 5 A',
 		].join('\n'),
-		isValid: false,
+		error: CatanErrors.BAD_FORMATTING,
 	},
 	{
 		board: [
@@ -54,29 +49,34 @@ const validityTests: ValidityTest[] = [
 			' A B 3 C',
 			'  8 4 B',
 		].join('\n'),
-		isValid: false,
+		error: CatanErrors.BAD_PIECE_COUNT,
 	},
 	{
 		board: [
 			'  6 3 A',
 			' 2 4 5 A',
-			'5 9 . 6 9',
+			'5 9 . 8 9',
 			' 8 B 3 C',
-			'  8 4 B',
+			'  6 4 B',
 		].join('\n'),
-		isValid: false,
+		error: CatanErrors.BAD_POSITIONING,
 	},
 ];
 
 describe('testing isValidCatanBoard', () => {
-	it.each(validityTests)('should check the validity of the boards', ({ board, isValid }) => {
-		expect(isValidCatanBoard(board)).toStrictEqual(isValid);
+	it.each(validBoards)('should assert the valid boards and return', (board) => {
+		expect(assertValidCatanBoard(board)).toBeUndefined();
+	});
+	it.each(invalidBoards)('should throw the correct error for invalid boards', ({ board, error }) => {
+		expect(() =>
+			assertValidCatanBoard(board)
+		).toThrow(error);
 	});
 });
 
 describe('testing generateCatanBoard', () => {
 	it('should generate a valid catan board', () => {
 		const board = generateCatanBoard();
-		expect(isValidCatanBoard(board)).toBeTruthy();
+		expect(assertValidCatanBoard(board)).toBeTruthy();
 	});
 });
