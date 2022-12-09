@@ -7,13 +7,11 @@ const config = {
 		node: true,
 		jest: true,
 	},
-	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 	},
 	plugins: [
-		'@typescript-eslint',
 		'import',
 	],
 	rules: {
@@ -62,6 +60,7 @@ const config = {
 		{
 			files: ['**/*.ts', '**/*.tsx'],
 			extends: ['plugin:@typescript-eslint/recommended',],
+			parser: '@typescript-eslint/parser',
 			plugins: ['@typescript-eslint'],
 			rules: {
 				'@typescript-eslint/no-explicit-any': 'off',
@@ -79,16 +78,21 @@ const config = {
 					},
 				}],
 			},
+			overrides: [
+				{
+					files: ['*.test.ts'],
+					extends: ['plugin:jest/all'],
+					plugins: ['jest'],
+					parserOptions: {
+						project: ['./tsconfig.json']
+					},
+					rules: {
+						'jest/prefer-expect-assertions': 'off',
+						'jest/require-top-level-describe': 'off',
+					},
+				},
+			],
 		},
-		{
-			files: ['*.test.ts'],
-			extends: ['plugin:jest/all'],
-			plugins: ['jest'],
-			rules: {
-				'jest/prefer-expect-assertions': 'off',
-				'jest/require-top-level-describe': 'off',
-			},
-		}
 	],
 	settings: {
 		'import/resolver': {
