@@ -25,31 +25,36 @@ const example2 = [
 	'U 20',
 ].join('\n');
 
+type Solution = ReturnType<typeof ropeBridge>;
+
 describe('testing ropeBridge', () => {
 	it('should return the correct solution for example test', () => {
 		const response = ropeBridge(example, {
 			row: 4,
 			col: 0,
 		});
-		expect(response).toStrictEqual({
+		const solution: Solution = {
 			firstTail: 13,
 			lastTail: 1,
-		});
+		};
+		expect(response).toStrictEqual(solution);
 	});
 	it('should return the correct solution for the 2nd example test', () => {
-		expect(ropeBridge(example2)).toStrictEqual({
+		const solution: Solution = {
 			firstTail: 88,
 			lastTail: 36,
-		});
+		};
+		expect(ropeBridge(example2)).toStrictEqual(solution);
 	});
 	it('should return the correct solution for the input file', async () => {
 		const input = await readFile(
 			path.join(__dirname, 'input.txt'),
 			'utf-8'
 		);
-		expect(ropeBridge(input)).toStrictEqual({
+		const solution: Solution = {
 			firstTail: 5902,
 			lastTail: 2445,
-		});
+		};
+		expect(ropeBridge(input)).toStrictEqual(solution);
 	});
 });
