@@ -45,6 +45,36 @@ export enum CatanErrors {
 	BAD_POSITIONING = '6 and 8 cells can not touch each other',
 }
 
+const isBadNeighbor = (
+	cell: Cell,
+	row: number,
+	col: number,
+	board: Board
+): boolean => {
+	const topLeftCol = row <= 2 ? col - 1 : col;
+	const bottomLeftCol = row < 2 ? col : col - 1;
+	const neighbors = [
+		board[row]?.[col - 1],
+		board[row]?.[col + 1],
+		board[row - 1]?.[topLeftCol],
+		board[row - 1]?.[topLeftCol + 1],
+		board[row + 1]?.[bottomLeftCol],
+		board[row + 1]?.[bottomLeftCol + 1],
+	].filter(Boolean) as Cell[];
+	const badCell = cell === '6' ? '8' : '6';
+	return neighbors.some(current =>
+		current === badCell
+	);
+};
+
+const generateCell = (
+	board: Board,
+	row: number,
+	col: number
+) => {
+	const count =
+};
+
 export const assertValidCatanBoard = (
 	input: string
 ) => {
@@ -78,22 +108,7 @@ export const assertValidCatanBoard = (
 
 			if (cell !== '6' && cell !== '8') continue;
 
-			const lastRowIndex = rowIndex <= 2 ? index - 1 : index;
-			const nextRowIndex = rowIndex < 2 ? index : index - 1;
-			const neighbors = [
-				row[index - 1],
-				row[index + 1],
-				board[rowIndex - 1]?.[lastRowIndex],
-				board[rowIndex - 1]?.[lastRowIndex + 1],
-				board[rowIndex + 1]?.[nextRowIndex],
-				board[rowIndex + 1]?.[nextRowIndex + 1],
-			].filter(Boolean) as Cell[];
-			const badCell = cell === '6' ? '8' : '6';
-			const badNeighbor = neighbors.some(current =>
-				current === badCell
-			);
-
-			if (badNeighbor) {
+			if (isBadNeighbor(cell, rowIndex, index, board)) {
 				throw new Error(CatanErrors.BAD_POSITIONING);
 			}
 
@@ -103,6 +118,13 @@ export const assertValidCatanBoard = (
 };
 
 export const generateCatanBoard = (): string => {
+	const valid;
+	return Array.from({ length: 5 }, (_, row) =>
+		Array.from({ length: 5 }, (_, col) => {
+			return;
+		})
+	);
 
 	return '';
+
 };
