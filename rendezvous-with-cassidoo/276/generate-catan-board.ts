@@ -1,18 +1,18 @@
 const singlePieces = [
 	'.',
 	'2',
-	'12',
+	'C',
 ] as const;
+
 const doublePieces = [
 	'3',
+	'4',
 	'5',
 	'6',
-	'7',
 	'8',
 	'9',
 	'A',
 	'B',
-	'C',
 ] as const;
 
 type Cell = (
@@ -21,11 +21,19 @@ type Cell = (
 );
 
 type Board = [
-	[Cell, Cell, Cell],
-	[Cell, Cell, Cell, Cell],
-	[Cell, Cell, Cell, Cell, Cell],
-	[Cell, Cell, Cell, Cell],
-	[Cell, Cell, Cell],
+	RepeatedTuple<Cell, 3>,
+	RepeatedTuple<Cell, 4>,
+	RepeatedTuple<Cell, 5>,
+	RepeatedTuple<Cell, 4>,
+	RepeatedTuple<Cell, 3>,
+];
+
+type ProspectiveBoard = [
+	RepeatedTuple<Cell | '', 3>,
+	RepeatedTuple<Cell | '', 4>,
+	RepeatedTuple<Cell | '', 5>,
+	RepeatedTuple<Cell | '', 4>,
+	RepeatedTuple<Cell | '', 3>,
 ];
 
 const ROW_PIECES = [3, 4, 5, 4, 3] as const;
@@ -49,8 +57,9 @@ const isBadNeighbor = (
 	cell: Cell,
 	row: number,
 	col: number,
-	board: Board
+	board: ProspectiveBoard
 ): boolean => {
+	if (cell !== '6' && cell !== '8') return false;
 	const topLeftCol = row <= 2 ? col - 1 : col;
 	const bottomLeftCol = row < 2 ? col : col - 1;
 	const neighbors = [
@@ -67,12 +76,26 @@ const isBadNeighbor = (
 	);
 };
 
-const generateCell = (
-	board: Board,
+const generateNextCellIndex = (
 	row: number,
-	col: number
-) => {
-	const count =
+	col: number,
+	availablePieces: Cell[],
+	board: ProspectiveBoard,
+	pieces: Cell[] = structuredClone(availablePieces)
+): number => {
+	if (pieces.length === 1) return 0;
+	const index = Math.random() * pieces.length;
+	const cell = pieces.splice(index, 1)[0] as Cell;
+	if (isBadNeighbor(cell, row, col, board)) {
+		return generateNextCellIndex(
+			row,
+			col,
+			availablePieces,
+			board,
+			pieces
+		);
+	}
+	return availablePieces.indexOf(cell);
 };
 
 export const assertValidCatanBoard = (
@@ -106,8 +129,6 @@ export const assertValidCatanBoard = (
 				)
 			) throw new Error(CatanErrors.BAD_PIECE_COUNT);
 
-			if (cell !== '6' && cell !== '8') continue;
-
 			if (isBadNeighbor(cell, rowIndex, index, board)) {
 				throw new Error(CatanErrors.BAD_POSITIONING);
 			}
@@ -118,13 +139,45 @@ export const assertValidCatanBoard = (
 };
 
 export const generateCatanBoard = (): string => {
-	const valid;
-	return Array.from({ length: 5 }, (_, row) =>
-		Array.from({ length: 5 }, (_, col) => {
-			return;
-		})
-	);
 
-	return '';
+	const availablePieces = [
+		...singlePieces,
+		...doublePieces,
+		...doublePieces,
+	];
+
+	const board: ProspectiveBoard = [
+		['', '', ''],
+		['', '', '', ''],
+		['', '', '', '', ''],
+		['', '', '', ''],
+		['', '', ''],
+	];
+
+	for (const boardRow of board) {
+		const row = board.indexOf(boardRow);
+		for (const cell of boardRow) {
+			const col = boardRow.indexOf(cell);
+			const index = generateNextCellIndex(
+				row,
+				col,
+				availablePieces,
+				board
+			);
+			boardRow[col] = availablePieces.splice(index, 1)[0] as Cell;
+		}
+	}
+
+	const boardString = board.map((row) =>
+		`${' '.repeat(5 - row.length)}${row.join(' ')}`
+	).join('\n');
+
+	try {
+		assertValidCatanBoard(boardString);
+		return boardString;
+	}
+	catch {
+		return generateCatanBoard();
+	}
 
 };

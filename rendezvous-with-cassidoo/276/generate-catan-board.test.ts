@@ -75,8 +75,12 @@ describe('testing isValidCatanBoard', () => {
 });
 
 describe('testing generateCatanBoard', () => {
-	it('should generate a valid catan board', () => {
-		const board = generateCatanBoard();
-		expect(assertValidCatanBoard(board)).toBeTruthy();
+	it('should generate a 1000 valid catan board', () => {
+		expect(() => {
+			[...new Array(1000)].forEach(() => {
+				const board = generateCatanBoard();
+				assertValidCatanBoard(board);
+			});
+		}).not.toThrow();
 	});
 });
