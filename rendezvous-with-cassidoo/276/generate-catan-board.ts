@@ -1,19 +1,6 @@
-const singlePieces = [
-	'.',
-	'2',
-	'C',
-] as const;
+const singlePieces = ['.', '2', 'C'] as const;
 
-const doublePieces = [
-	'3',
-	'4',
-	'5',
-	'6',
-	'8',
-	'9',
-	'A',
-	'B',
-] as const;
+const doublePieces = ['3', '4', '5', '6', '8', '9', 'A', 'B'] as const;
 
 type Cell = (
 	| typeof singlePieces[number]
@@ -154,10 +141,8 @@ export const generateCatanBoard = (): string => {
 		['', '', ''],
 	];
 
-	for (const boardRow of board) {
-		const row = board.indexOf(boardRow);
-		for (const cell of boardRow) {
-			const col = boardRow.indexOf(cell);
+	board.forEach((boardRow, row) =>
+		boardRow.forEach((_cell, col) => {
 			const index = generateNextCellIndex(
 				row,
 				col,
@@ -165,8 +150,8 @@ export const generateCatanBoard = (): string => {
 				board
 			);
 			boardRow[col] = availablePieces.splice(index, 1)[0] as Cell;
-		}
-	}
+		})
+	);
 
 	const boardString = board.map((row) =>
 		`${' '.repeat(5 - row.length)}${row.join(' ')}`
