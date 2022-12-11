@@ -1,44 +1,12 @@
-const singlePieces = ['.', '2', 'C'] as const;
-
-const doublePieces = ['3', '4', '5', '6', '8', '9', 'A', 'B'] as const;
-
-type Cell = (
-	| typeof singlePieces[number]
-	| typeof doublePieces[number]
-);
-
-type Board = [
-	RepeatedTuple<Cell, 3>,
-	RepeatedTuple<Cell, 4>,
-	RepeatedTuple<Cell, 5>,
-	RepeatedTuple<Cell, 4>,
-	RepeatedTuple<Cell, 3>,
-];
-
-type ProspectiveBoard = [
-	RepeatedTuple<Cell | '', 3>,
-	RepeatedTuple<Cell | '', 4>,
-	RepeatedTuple<Cell | '', 5>,
-	RepeatedTuple<Cell | '', 4>,
-	RepeatedTuple<Cell | '', 3>,
-];
-
-const ROW_PIECES = [3, 4, 5, 4, 3] as const;
-
-const PIECE_REGEX = /[0-9ABC.]/;
-
-const BOARD_REGEX = new RegExp(
-	Array.from({ length: 5 }, (_, index) => {
-		const pieces = ROW_PIECES[index] as number;
-		return ` {${5 - pieces}}(${PIECE_REGEX.source} ?){${pieces}}`;
-	}).join('\n')
-);
-
-export enum CatanErrors {
-	BAD_FORMATTING = 'The board is not properly formatted',
-	BAD_PIECE_COUNT = 'Board must have two each of 3, 4, 5, 6, 8, 9, 10, 11, and one each of 2, 12, and .',
-	BAD_POSITIONING = '6 and 8 cells can not touch each other',
-}
+import {
+	singlePieces,
+	doublePieces,
+	Cell,
+	Board,
+	ProspectiveBoard,
+	BOARD_REGEX,
+	CatanErrors,
+} from './generate.catan.types';
 
 const isBadNeighbor = (
 	cell: Cell,
@@ -63,28 +31,6 @@ const isBadNeighbor = (
 	);
 };
 
-const generateNextCellIndex = (
-	row: number,
-	col: number,
-	availablePieces: Cell[],
-	board: ProspectiveBoard,
-	pieces: Cell[] = structuredClone(availablePieces)
-): number => {
-	if (pieces.length === 1) return 0;
-	const index = Math.random() * pieces.length;
-	const cell = pieces.splice(index, 1)[0] as Cell;
-	if (isBadNeighbor(cell, row, col, board)) {
-		return generateNextCellIndex(
-			row,
-			col,
-			availablePieces,
-			board,
-			pieces
-		);
-	}
-	return availablePieces.indexOf(cell);
-};
-
 export const assertValidCatanBoard = (
 	input: string
 ) => {
@@ -98,12 +44,8 @@ export const assertValidCatanBoard = (
 
 	const counts: Partial<Record<Cell, number>> = {};
 
-	for (const row of board) {
-		const rowIndex = board.indexOf(row);
-		for (const cell of row) {
-
-			const index = row.indexOf(cell);
-
+	board.forEach((row, rowIndex) =>
+		row.forEach((cell, index) => {
 			counts[cell] = (counts[cell] ?? 0) + 1;
 			if (
 				(
@@ -119,10 +61,32 @@ export const assertValidCatanBoard = (
 			if (isBadNeighbor(cell, rowIndex, index, board)) {
 				throw new Error(CatanErrors.BAD_POSITIONING);
 			}
+		})
+	);
 
-		}
+};
+
+const generateNextCellIndex = (
+	row: number,
+	col: number,
+	availablePieces: Cell[],
+	board: ProspectiveBoard,
+	pieces: Cell[] = structuredClone(availablePieces)
+): number => {
+
+	if (pieces.length === 1) return 0;
+	const index = Math.random() * pieces.length;
+	const cell = pieces.splice(index, 1)[0] as Cell;
+	if (isBadNeighbor(cell, row, col, board)) {
+		return generateNextCellIndex(
+			row,
+			col,
+			availablePieces,
+			board,
+			pieces
+		);
 	}
-
+	return availablePieces.indexOf(cell);
 };
 
 export const generateCatanBoard = (): string => {
@@ -153,11 +117,10 @@ export const generateCatanBoard = (): string => {
 		})
 	);
 
-	const boardString = board.map((row) =>
-		`${' '.repeat(5 - row.length)}${row.join(' ')}`
-	).join('\n');
-
 	try {
+		const boardString = board.map((row) =>
+			`${' '.repeat(5 - row.length)}${row.join(' ')}`
+		).join('\n');
 		assertValidCatanBoard(boardString);
 		return boardString;
 	}

@@ -1,8 +1,8 @@
 import {
 	generateCatanBoard,
 	assertValidCatanBoard,
-	CatanErrors,
-} from './generate-catan-board';
+} from './generate-catan';
+import { CatanErrors } from './generate.catan.types';
 
 const validBoards: string[] = [
 	[
