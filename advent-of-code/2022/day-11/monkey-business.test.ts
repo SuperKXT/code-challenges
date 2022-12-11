@@ -48,8 +48,8 @@ describe('testing monkeyBusiness', () => {
 			'utf-8'
 		);
 		const solution: Solution = {
-			monkeyBusiness: 16060,
-			bigMb: 0,
+			monkeyBusiness: 120056,
+			bigMb: 21816744824,
 		};
 		expect(monkeyBusiness(input)).toStrictEqual(solution);
 	});

@@ -80,11 +80,9 @@ export const monkeyBusiness = (
 			} = monkey;
 			while (items.length) {
 				const item = items.shift() as number;
-				const newValue = (
-					isBig
-						? operation(item) % superModulo
-						: Math.floor(operation(item) / 3)
-				);
+				const newValue = Math.floor(
+					operation(item) / (isBig ? 1 : 3)
+				) % superModulo;
 				const receiver = (
 					newValue % divisor === 0
 						? trueIndex
@@ -100,7 +98,7 @@ export const monkeyBusiness = (
 		executeCycle(monkeys);
 	}
 
-	for (let cycle = 1; cycle < 10000; cycle++) {
+	for (let cycle = 1; cycle <= 10000; cycle++) {
 		executeCycle(bigMonkeys, true);
 	}
 
