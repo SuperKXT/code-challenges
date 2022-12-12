@@ -6,7 +6,7 @@ import {
 	ProspectiveBoard,
 	BOARD_REGEX,
 	CatanErrors,
-} from './generate.catan.types';
+} from './generate-catan.types';
 
 const isBadNeighbor = (
 	cell: Cell,
