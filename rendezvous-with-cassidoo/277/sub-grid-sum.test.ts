@@ -11,7 +11,7 @@ describe('testing subGridSum', () => {
 	it('should return the correct sum for example 1', () => {
 		expect(subGridSum(grid, [-1, 8, -7, 2])).toBe(2);
 	});
-	it('should return the correct sum for example 1', () => {
+	it('should return the correct sum for example 2', () => {
 		expect(subGridSum(grid, [6, 3, 2, -7])).toBe(3);
 	});
 });
