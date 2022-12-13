@@ -34,7 +34,7 @@ describe('testing orderedPairs', () => {
 		const response = orderedPairs(example);
 		const solution: Solution = {
 			indicesSum: 13,
-			part2: 0,
+			part2: 140,
 		};
 		expect(response).toStrictEqual(solution);
 	});
@@ -45,7 +45,7 @@ describe('testing orderedPairs', () => {
 		)).slice(0, -1);
 		const solution: Solution = {
 			indicesSum: 5013,
-			part2: 0,
+			part2: 25038,
 		};
 		expect(orderedPairs(input)).toStrictEqual(solution);
 	});

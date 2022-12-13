@@ -46,20 +46,28 @@ export const orderedPairs = (
 		part2: 0,
 	};
 
-	const pairs = input.split('\n\n');
+	const pairs = input.split('\n\n').map(row =>
+		row.split('\n').map(row =>
+			JSON.parse(row)
+		) as [Packet, Packet]
+	);
 
 	for (const pair of pairs) {
 		const index = pairs.indexOf(pair);
-		if (!pair.trim()) continue;
-		const [left, right] = pair.split('\n').map(row =>
-			JSON.parse(row) as Packet
-		);
-		if (!left || !right) continue;
-		if (checkPacketOrder(left, right)) {
+		if (checkPacketOrder(...pair)) {
 			solution.indicesSum += index + 1;
 		}
-		else console.log([JSON.stringify(left), JSON.stringify(right)]);
 	}
+
+	const dividers: [Packet, Packet] = [[2], [6]];
+	const sorted = pairs.flat().concat(dividers).sort((a, b) => {
+		const compare = checkPacketOrder(a, b);
+		return compare === false ? 1 : -1;
+	});
+	solution.part2 = (
+		(sorted.indexOf(dividers[0]) + 1)
+		* (sorted.indexOf(dividers[1]) + 1)
+	);
 
 	return solution;
 
