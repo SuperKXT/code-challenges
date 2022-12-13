@@ -1,4 +1,4 @@
-import { subGridSum } from './sub-grid-sum';
+import { subGridSum, subGridSumError } from './sub-grid-sum';
 
 const grid = [
 	[6, 9, -7, 3],
@@ -8,10 +8,20 @@ const grid = [
 ];
 
 describe('testing subGridSum', () => {
-	it('should return the correct sum for example 1', () => {
+	it('should return the correct sum for given marks', () => {
 		expect(subGridSum(grid, [-1, 8, -7, 2])).toBe(2);
-	});
-	it('should return the correct sum for example 2', () => {
 		expect(subGridSum(grid, [6, 3, 2, -7])).toBe(3);
+		expect(subGridSum(grid, [6, 3, -1, 9])).toBe(22);
+	});
+	it('should throw appropriate error if marks are invalid', () => {
+		expect(() =>
+			subGridSum(grid, [6, 10, 11, 12])
+		).toThrow(subGridSumError);
+		expect(() =>
+			subGridSum(grid, [6, 6, -1, 9])
+		).toThrow(subGridSumError);
+		expect(() =>
+			subGridSum(grid, [6, 6, 6, 6])
+		).toThrow(subGridSumError);
 	});
 });
