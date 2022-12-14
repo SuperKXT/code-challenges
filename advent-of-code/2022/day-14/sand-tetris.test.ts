@@ -12,8 +12,8 @@ describe('testing sandTetris', () => {
 	it('should return the correct solution for example test', () => {
 		const response = sandTetris(example);
 		const solution: Solution = {
-			sands: 24,
-			part2: 0,
+			part1: 24,
+			part2: 93,
 		};
 		expect(response).toStrictEqual(solution);
 	});
@@ -23,7 +23,7 @@ describe('testing sandTetris', () => {
 			'utf-8'
 		)).slice(0, -1);
 		const solution: Solution = {
-			sands: 692,
+			part1: 692,
 			part2: 0,
 		};
 		expect(sandTetris(input)).toStrictEqual(solution);
