@@ -5,7 +5,8 @@
 ## Description
 
 Given a 2D array n of integers, and an array m of four (4) coordinates that
-represent corners of a rectangle in n, return the sum of all of the numbers in the rectangle.
+represent corners of a rectangle in n, return the sum of all of the numbers in
+the rectangle.
 
 Example:
 
