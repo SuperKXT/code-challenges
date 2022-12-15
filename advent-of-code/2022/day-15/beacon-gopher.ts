@@ -1,41 +1,37 @@
-type MapRow = ('.' | '#')[];
-type Map = MapRow[];
-
-interface Solution {
-	part1: number,
-	part2: number,
-}
-
-interface Beacon {
+interface Point {
 	row: number,
 	col: number,
 }
-
-interface Sensor {
-	row: number,
-	col: number,
-	beacon: number,
+interface Sensor extends Point {
+	beacon: Point,
 	distance: number,
 }
 
-export const beaconGopher = (
+const getDistance = (
+	from: Point,
+	to: Point
+): number => (
+	Math.abs(to.row - from.row)
+	+ Math.abs(to.col - from.col)
+);
+
+const equal = (
+	a: Point,
+	b: Point
+) => a.row === b.row && a.col === b.col;
+
+export const beaconGopher1 = (
 	input: string,
 	row: number
-): Solution => {
+): number => {
 
-	const solution: Solution = {
-		part1: 0,
-		part2: 0,
-	};
+	let solution = 0;
 
-	const beacons: Beacon[] = [];
 	const sensors: Sensor[] = [];
 	let startRow = 0;
 	let endRow = 0;
 	let startCol = 0;
 	let endCol = 0;
-
-	const map: Map = [];
 
 	for (const line of input.split('\n')) {
 		const [
@@ -45,60 +41,138 @@ export const beaconGopher = (
 			beaconRow,
 		] = line
 			.replace(/(Sensor at x=)|( y=)|( closest beacon is at x=)/g, '')
-			.split(/,|:/)
+			.split(/\,|\:/g)
 			.map(Number) as [number, number, number, number];
 
-		const distance = (
-			Math.abs(sensorRow - beaconRow)
-			+ Math.abs(sensorCol + beaconCol)
+		const beacon: Point = {
+			row: beaconRow,
+			col: beaconCol,
+		};
+
+		const distance = getDistance(
+			{ row: sensorRow, col: sensorCol },
+			beacon
 		);
+
+		const sensor: Sensor = {
+			row: sensorRow,
+			col: sensorCol,
+			beacon,
+			distance,
+		};
 
 		const currStartRow = sensorRow - distance;
 		const currEndRow = Math.max(sensorRow, beaconRow, sensorRow + distance);
 		const currStartCol = sensorCol - distance;
 		const currEndCol = Math.max(sensorCol, beaconCol, sensorCol + distance);
 
-		if (startRow > currStartRow) {
-			map.unshift(
-				...new Array(startRow - currStartRow).fill(
-					new Array(endCol - startCol).fill('.')
-				)
-			);
-			startRow = currStartRow;
-		}
-		if (endRow < currEndRow) {
-			map.push(
-				...new Array(currEndRow - endRow).fill(
-					new Array(endCol - startCol).fill('.')
-				)
-			);
-			endRow = currEndRow;
-		}
+		if (startRow > currStartRow) startRow = currStartRow;
+		if (endRow < currEndRow) endRow = currEndRow;
 		if (startCol > currStartCol) startCol = currStartCol;
-		if (endCol > currEndCol) endCol = currEndCol;
+		if (endCol < currEndCol) endCol = currEndCol;
 
-		const beacon: Beacon = {
-			row: beaconRow,
-			col: beaconCol,
-		};
-
-		const index = beacons.findIndex(({ row, col }) =>
-			row === beaconRow && col === beaconCol
-		);
-		const sensor: Sensor = {
-			row: sensorRow,
-			col: sensorCol,
-			beacon: index === -1 ? beacons.length : index,
-			distance,
-		};
-		if (index === -1) beacons.push(beacon);
 		sensors.push(sensor);
 
 	}
 
-	console.log(sensors, beacon);
-	console.log(map.map(row => row.join('')).join('\n'));
+	for (let col = startCol; col <= endCol; col++) {
+		const point = { row, col };
+		let isCovered = false;
+		for (const sensor of sensors) {
+			const isSensorOrBeacon = (
+				equal(point, sensor)
+				|| equal(point, sensor.beacon)
+			);
+			if (isSensorOrBeacon) break;
+			if (sensor.distance >= getDistance(point, sensor)) {
+				isCovered = true;
+				break;
+			}
+		}
+		if (isCovered) solution++;
+	}
 
 	return solution;
+
+};
+
+export const beaconGopher2 = (
+	input: string,
+	max: number
+): number => {
+
+	const sensors: Sensor[] = [];
+	let startRow = 0;
+	let endRow = 0;
+	let startCol = 0;
+	let endCol = 0;
+
+	for (const line of input.split('\n')) {
+		const [
+			sensorCol,
+			sensorRow,
+			beaconCol,
+			beaconRow,
+		] = line
+			.replace(/(Sensor at x=)|( y=)|( closest beacon is at x=)/g, '')
+			.split(/\,|\:/g)
+			.map(Number) as [number, number, number, number];
+
+		const beacon: Point = {
+			row: beaconRow,
+			col: beaconCol,
+		};
+
+		const distance = getDistance(
+			{ row: sensorRow, col: sensorCol },
+			beacon
+		);
+
+		const sensor: Sensor = {
+			row: sensorRow,
+			col: sensorCol,
+			beacon,
+			distance,
+		};
+
+		const currStartRow = sensorRow - distance;
+		const currEndRow = Math.max(sensorRow, beaconRow, sensorRow + distance);
+		const currStartCol = sensorCol - distance;
+		const currEndCol = Math.max(sensorCol, beaconCol, sensorCol + distance);
+
+		if (startRow > currStartRow) startRow = currStartRow;
+		if (endRow < currEndRow) endRow = currEndRow;
+		if (startCol > currStartCol) startCol = currStartCol;
+		if (endCol < currEndCol) endCol = currEndCol;
+
+		sensors.push(sensor);
+
+	}
+
+	for (let row = 0; row <= max; row++) {
+		for (let col = 0; col <= max; col++) {
+			const point = { row, col };
+			let isCovered = false;
+			for (const sensor of sensors) {
+				const isSensorOrBeacon = (
+					equal(point, sensor)
+					|| equal(point, sensor.beacon)
+				);
+				if (isSensorOrBeacon) {
+					isCovered = true;
+					break;
+				}
+				if (sensor.distance >= getDistance(point, sensor)) {
+					isCovered = true;
+					break;
+				}
+			}
+			if (!isCovered) {
+				return col * 4000000 + row;
+			}
+		}
+	}
+
+	return 0;
 
 };
