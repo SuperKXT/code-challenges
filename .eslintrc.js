@@ -39,6 +39,20 @@ const config = {
 			'error',
 			{
 				'newlines-between': 'always',
+				groups: [
+					'builtin',
+					'external',
+					'internal',
+					'parent',
+					['sibling', 'index', 'object'],
+					'type',
+				],
+				pathGroups: [
+					{
+						pattern: '~/helpers/**',
+						group: 'internal',
+					},
+				],
 				alphabetize: {
 					order: 'asc',
 					caseInsensitive: true,
