@@ -1,4 +1,4 @@
-import fromTo from './from-to';
+import { fromTo } from './from-to';
 
 interface Test {
 	min: number,

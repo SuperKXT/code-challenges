@@ -28,13 +28,7 @@ const config = {
 			exports: 'always-multiline',
 			functions: 'never',
 		}],
-		'import/extensions': [
-			'warn',
-			{
-				'.ts': 'never',
-				'.tsx': 'never',
-			},
-		],
+		'import/extensions': 'warn',
 		'import/order': [
 			'error',
 			{
@@ -59,7 +53,7 @@ const config = {
 				},
 			},
 		],
-		'import/prefer-default-export': 'off',
+		'import/no-default-export': 'error',
 		'no-console': ['error', {
 			allow: ['warn', 'error', 'info'],
 		}],
