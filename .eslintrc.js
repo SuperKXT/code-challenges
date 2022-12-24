@@ -13,6 +13,7 @@ const config = {
 	},
 	plugins: [
 		'import',
+		'unused-imports',
 	],
 	rules: {
 		indent: ['off', 'tab'],
@@ -55,6 +56,15 @@ const config = {
 		}],
 		'eol-last': ['error', 'always'],
 		'quote-props': ['error', 'as-needed'],
+		'no-duplicate-imports': ['warn', {
+			includeExports: true,
+		}],
+		'no-unused-vars': 'off',
+		'unused-imports/no-unused-imports': 'warn',
+		'unused-imports/no-unused-vars': [
+			'warn',
+			{ vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
+		],
 	},
 	overrides: [
 		{
@@ -77,6 +87,7 @@ const config = {
 						requireLast: true,
 					},
 				}],
+				'@typescript-eslint/no-unused-vars': 'off',
 			},
 			overrides: [
 				{
