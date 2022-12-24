@@ -1,9 +1,9 @@
+import { LinkedList } from '~/helpers/linked-list';
+
 import {
 	areArraysEqual,
 	linkedListToArray,
 } from './array.helpers';
-
-import { LinkedList } from '~/helpers/linked-list';
 
 interface EqualityTest {
 	first: any[],
