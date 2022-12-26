@@ -1,4 +1,4 @@
-# Capital After Vowel
+# Replace Sequence Of Zeros With Length Of Sequence
 
 [issue #278 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/dont-be-afraid-of-hard-work-nothing-worthwhile/)
 
