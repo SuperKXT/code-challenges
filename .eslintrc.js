@@ -73,6 +73,7 @@ const config = {
 			'warn',
 			{ vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
 		],
+		'object-shorthand': ['error', 'always'],
 	},
 	overrides: [
 		{
