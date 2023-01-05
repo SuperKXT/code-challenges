@@ -15,6 +15,9 @@ const config = {
 		'import',
 		'unused-imports',
 	],
+	extends: [
+		'eslint:recommended',
+	],
 	rules: {
 		indent: ['off', 'tab'],
 		'linebreak-style': ['error', 'unix'],
