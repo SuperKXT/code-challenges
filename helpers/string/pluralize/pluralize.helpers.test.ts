@@ -25,6 +25,20 @@ describe('testing pluralize helper', () => {
 		expect(pluralize`Her ${[3, 'sole|twin|$1']} br[other|ethren] left`).toBe('Her 3 brethren left');
 	});
 
+	const getter = (arg: number) => {
+		const count = (
+			arg < 12
+				? 'less than a'
+				: Math.floor(arg / 12)
+		);
+		return `${count} dozen`;
+	};
+	it('should test providing the printing value for quantifier by getter', () => {
+		expect(pluralize`She has ${[1, getter]} eggs`).toBe('She has less than a dozen eggs');
+		expect(pluralize`She has ${[13, getter]} eggs`).toBe('She has 1 dozen eggs');
+		expect(pluralize`She has ${[100, getter]} eggs`).toBe('She has 8 dozen eggs');
+	});
+
 	it('should test not printing a value for quantifier', () => {
 		expect(pluralize`${[1]} gen[us|era]`).toBe('genus');
 		expect(pluralize`${[2]} gen[us|era]`).toBe('genera');

@@ -8,6 +8,7 @@ export const pluralize = (
 		| string
 		| [number]
 		| [number, null | string]
+		| [number, (arg: number) => null | string]
 	)[]
 ): string => {
 
@@ -19,12 +20,21 @@ export const pluralize = (
 				return [value, value.toString()] as const;
 			default: {
 				const [number, options] = value;
-				const array = options?.split('|');
-				const toShow = array?.[number - 1] ?? array?.at(-1) ?? '';
-				return [
-					value[0],
-					toShow.replace(/\$1/g, number.toString()),
-				] as const;
+				let toShow = '';
+				switch (typeof options) {
+					case 'function':
+						toShow = options(number) ?? '';
+						break;
+					case 'string':
+						const array = options.split('|');
+						toShow = (
+							array[number - 1]
+							?? array.at(-1)
+							?? ''
+						).replace(/\$1/g, number.toString());
+						break;
+				}
+				return [value[0], toShow] as const;
 			}
 		}
 	});
