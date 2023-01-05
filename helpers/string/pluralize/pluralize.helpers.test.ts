@@ -17,26 +17,15 @@ describe('testing pluralize helper', () => {
 		expect(pluralize`There [is|are] ${1} fox[|es] and ${4} octop[us|i]`).toBe('There is 1 fox and 4 octopi');
 		expect(pluralize`There [is|are] ${4} fox[|es] and ${1} octop[us|i]`).toBe('There are 4 foxes and 1 octopus');
 
-		const format = (quantity: number) => {
-			switch (quantity) {
-				case 1: return 'sole';
-				case 2: return 'twin';
-				default: return quantity.toString();
-			}
-		};
-		expect(pluralize`Her ${[1, format]} br[other|ethren] left`).toBe('Her sole brother left');
-		expect(pluralize`Her ${[2, format]} br[other|ethren] left`).toBe('Her twin brethren left');
-		expect(pluralize`Her ${[3, format]} br[other|ethren] left`).toBe('Her 3 brethren left');
+		expect(pluralize`Her ${[1, 'sole|twin|$1']} br[other|ethren] left`).toBe('Her sole brother left');
+		expect(pluralize`Her ${[2, 'sole|twin|$1']} br[other|ethren] left`).toBe('Her twin brethren left');
+		expect(pluralize`Her ${[3, 'sole|twin|$1']} br[other|ethren] left`).toBe('Her 3 brethren left');
 
 		expect(pluralize`${[1]} gen[us|era]`).toBe('genus');
 		expect(pluralize`${[2]} gen[us|era]`).toBe('genera');
 
-		const hideSingular = (quantity: number) => {
-			return quantity === 1 ? null : quantity.toString();
-		};
-
-		expect(pluralize`Delete the ${[1, hideSingular]} cact[us|i]?`).toBe('Delete the cactus?');
-		expect(pluralize`Delete the ${[2, hideSingular]} cact[us|i]?`).toBe('Delete the 2 cacti?');
+		expect(pluralize`Delete the ${[1, '|$1']} cact[us|i]?`).toBe('Delete the cactus?');
+		expect(pluralize`Delete the ${[2, '|$1']} cact[us|i]?`).toBe('Delete the 2 cacti?');
 
 		expect(pluralize`He scored a ${[1]} [single|double|triple|quadruple|multi] hundred`).toBe('He scored a single hundred');
 		expect(pluralize`He scored a ${[2]} [single|double|triple|quadruple|multi] hundred`).toBe('He scored a double hundred');

@@ -7,7 +7,7 @@ export const pluralize = (
 		number
 		| string
 		| [number]
-		| [number, (input: number) => string | undefined | null]
+		| [number, null | string]
 	)[]
 ): string => {
 
@@ -17,12 +17,19 @@ export const pluralize = (
 				return value;
 			case 'number':
 				return [value, value.toString()] as const;
-			default:
-				return [value[0], value[1]?.(value[0]) ?? null] as const;
+			default: {
+				const [number, options] = value;
+				const array = options?.split('|');
+				const toShow = array?.[number - 1] ?? array?.at(-1) ?? '';
+				return [
+					value[0],
+					toShow === '$1' ? number.toString() : toShow,
+				] as const;
+			}
 		}
 	});
 
-	const result = [];
+	const result: string[] = [];
 	const quantifiers = expressions.filter(Array.isArray) as [number, null | string][];
 	let lastQuantifier = quantifiers[0];
 
