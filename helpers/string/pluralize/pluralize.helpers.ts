@@ -23,14 +23,14 @@ export const pluralize = (
 				const toShow = array?.[number - 1] ?? array?.at(-1) ?? '';
 				return [
 					value[0],
-					toShow === '$1' ? number.toString() : toShow,
+					toShow.replace(/\$1/g, number.toString()),
 				] as const;
 			}
 		}
 	});
 
 	const result: string[] = [];
-	const quantifiers = expressions.filter(Array.isArray) as [number, null | string][];
+	const quantifiers = expressions.filter(Array.isArray) as [number, string][];
 	let lastQuantifier = quantifiers[0];
 
 	for (let string of strings) {

@@ -36,6 +36,8 @@ describe('testing pluralize helper', () => {
 	it('should test optionally printing the value of quantifier', () => {
 		expect(pluralize`Delete the ${[1, '|$1']} cact[us|i]?`).toBe('Delete the cactus?');
 		expect(pluralize`Delete the ${[2, '|$1']} cact[us|i]?`).toBe('Delete the 2 cacti?');
+		expect(pluralize`The function takes ${[1, '$1 or more']} arguments`).toBe('The function takes 1 or more arguments');
+		expect(pluralize`The function takes ${[2, '$1 or more']} arguments`).toBe('The function takes 2 or more arguments');
 	});
 
 	it('should test more than 2 options', () => {
