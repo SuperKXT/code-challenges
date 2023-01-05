@@ -1,4 +1,4 @@
-const columnMatcher = /(?<=\|)([^\|\n])*(?=\|)/g;
+const columnMatcher = /(?<=\|)([^|\n])*(?=\|)/g;
 
 const formatMarkdownTable = (
 	string: string

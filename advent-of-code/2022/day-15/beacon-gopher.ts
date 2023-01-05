@@ -41,7 +41,7 @@ export const beaconGopher1 = (
 			beaconRow,
 		] = line
 			.replace(/(Sensor at x=)|( y=)|( closest beacon is at x=)/g, '')
-			.split(/\,|\:/g)
+			.split(/,|:/g)
 			.map(Number) as [number, number, number, number];
 
 		const beacon: Point = {
@@ -115,7 +115,7 @@ export const beaconGopher2 = (
 			beaconRow,
 		] = line
 			.replace(/(Sensor at x=)|( y=)|( closest beacon is at x=)/g, '')
-			.split(/\,|\:/g)
+			.split(/,|:/g)
 			.map(Number) as [number, number, number, number];
 
 		const beacon: Point = {

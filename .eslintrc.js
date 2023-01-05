@@ -7,6 +7,10 @@ const config = {
 		node: true,
 		jest: true,
 	},
+	extends: [
+		'eslint:recommended',
+	],
+	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
@@ -14,9 +18,6 @@ const config = {
 	plugins: [
 		'import',
 		'unused-imports',
-	],
-	extends: [
-		'eslint:recommended',
 	],
 	rules: {
 		indent: ['off', 'tab'],
@@ -56,6 +57,7 @@ const config = {
 				},
 			},
 		],
+		'import/no-duplicates': 'warn',
 		'import/no-default-export': 'error',
 		'no-console': ['error', {
 			allow: ['warn', 'error', 'info'],
@@ -67,9 +69,6 @@ const config = {
 		}],
 		'eol-last': ['error', 'always'],
 		'quote-props': ['error', 'as-needed'],
-		'no-duplicate-imports': ['warn', {
-			includeExports: true,
-		}],
 		'no-unused-vars': 'off',
 		'unused-imports/no-unused-imports': 'warn',
 		'unused-imports/no-unused-vars': [
@@ -77,12 +76,16 @@ const config = {
 			{ vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
 		],
 		'object-shorthand': ['error', 'always'],
+		'no-constant-condition': ['error', {
+			checkLoops: false,
+		}],
 	},
 	overrides: [
 		{
 			files: ['**/*.ts', '**/*.tsx'],
-			extends: ['plugin:@typescript-eslint/recommended',],
-			parser: '@typescript-eslint/parser',
+			extends: [
+				'plugin:@typescript-eslint/recommended',
+			],
 			plugins: ['@typescript-eslint'],
 			rules: {
 				'@typescript-eslint/no-explicit-any': 'off',
@@ -107,7 +110,7 @@ const config = {
 					extends: ['plugin:jest/all'],
 					plugins: ['jest'],
 					parserOptions: {
-						project: ['./tsconfig.json']
+						project: ['./tsconfig.json'],
 					},
 					rules: {
 						'jest/prefer-expect-assertions': 'off',
