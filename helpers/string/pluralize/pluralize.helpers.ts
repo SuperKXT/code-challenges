@@ -22,10 +22,11 @@ export const pluralize = (
 				const [number, options] = value;
 				let toShow = '';
 				switch (typeof options) {
-					case 'function':
+					case 'function': {
 						toShow = options(number) ?? '';
 						break;
-					case 'string':
+					}
+					case 'string': {
 						const array = options.split('|');
 						toShow = (
 							array[number - 1]
@@ -33,6 +34,7 @@ export const pluralize = (
 							?? ''
 						).replace(/\$1/g, number.toString());
 						break;
+					}
 				}
 				return [value[0], toShow] as const;
 			}
