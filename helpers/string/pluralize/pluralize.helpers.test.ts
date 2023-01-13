@@ -70,4 +70,13 @@ describe('testing pluralize helper', () => {
 		expect(pluralize`He scored a ${[5, '|double|triple|quadruple|multi']} hundred`).toBe('He scored a multi hundred');
 	});
 
+	it('should quantify strings within expressions', () => {
+		/* eslint-disable no-constant-condition, jest/no-conditional-in-test */
+		expect(pluralize`I have ${1} ${true ? 'good friend[|s]' : 'bad friend[|s]'}`).toBe('I have 1 good friend');
+		expect(pluralize`I have ${1} ${false ? 'good friend[|s]' : 'bad friend[|s]'}`).toBe('I have 1 bad friend');
+		expect(pluralize`I have ${5} ${true ? 'good friend[|s]' : 'bad friend[|s]'}`).toBe('I have 5 good friends');
+		expect(pluralize`I have ${5} ${false ? 'good friend[|s]' : 'bad friend[|s]'}`).toBe('I have 5 bad friends');
+		/* eslint-enable no-constant-condition, jest/no-conditional-in-test */
+	});
+
 });

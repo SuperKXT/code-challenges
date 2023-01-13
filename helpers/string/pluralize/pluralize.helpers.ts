@@ -45,28 +45,32 @@ export const pluralize = (
 	const quantifiers = expressions.filter(Array.isArray) as [number, string][];
 	let lastQuantifier = quantifiers[0];
 
-	for (let string of strings) {
-		if (lastQuantifier) {
-			const [number, value] = lastQuantifier;
-			if (!value) {
-				string = string.replace(/^\s+/, '');
+	const replaceQuantity = (
+		input: string
+	): string => {
+		if (!lastQuantifier) return input;
+		const [number, value] = lastQuantifier;
+		if (!value) {
+			input = input.replace(/^\s+/, '');
+		}
+		return input.replace(
+			/\[(([^|]*\|?)+)\]/g,
+			(_, string) => {
+				const matches = string.split('|');
+				return matches[number - 1] ?? matches.at(-1) ?? '';
 			}
-			result.push(string.replace(
-				/\[(([^|]*\|?)+)\]/g,
-				(_, string) => {
-					const matches = string.split('|');
-					return matches[number - 1] ?? matches.at(-1) ?? '';
-				}
-			));
-		}
-		else {
-			result.push(string);
-		}
+		);
+	};
+
+	for (const string of strings) {
+
+		result.push(replaceQuantity(string));
+
 		const lastExpression = expressions.shift();
 		if (!lastExpression) break;
 		result.push(
 			typeof lastExpression === 'string'
-				? lastExpression
+				? replaceQuantity(lastExpression)
 				: lastExpression[1]
 		);
 		lastQuantifier = quantifiers.shift() ?? lastQuantifier;
