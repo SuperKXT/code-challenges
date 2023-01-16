@@ -6,9 +6,11 @@ import prompt from 'prompt';
 import { confirmPrompt } from '../../helpers/prompt';
 
 const MAX_CHOICE = 5;
+const PRIZE = 10;
 
 const spin = async (
-	score: number = 0
+	score: number = PRIZE,
+	multiplier: 1 | 2 = 1
 ): Promise<number> => {
 	const { question: choice } = await prompt.get({
 		description: `\nYour pick? [0-${MAX_CHOICE}]: `,
@@ -21,11 +23,11 @@ const spin = async (
 	const spinResult = crypto.randomInt(0, MAX_CHOICE + 1);
 	const correct = spinResult === Number(choice);
 	if (correct) {
-		score += 10;
+		score *= multiplier;
 		console.info(chalk.green(`CORRECT! You have $${score}`));
 		const isDouble = await confirmPrompt('Double or Nothing?');
 		if (!isDouble) return score;
-		return spin(score);
+		return spin(score, 2);
 	}
 	else {
 		console.info(
