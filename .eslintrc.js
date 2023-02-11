@@ -103,6 +103,7 @@ const config = {
 					},
 				}],
 				'@typescript-eslint/no-unused-vars': 'off',
+				'@typescript-eslint/no-unnecessary-condition': 'error',
 			},
 			overrides: [
 				{
