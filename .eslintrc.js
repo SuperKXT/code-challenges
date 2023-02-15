@@ -71,6 +71,9 @@ const config = {
 	overrides: [
 		{
 			files: ['**/*.ts', '**/*.tsx'],
+			parserOptions: {
+				project: './tsconfig.json',
+			},
 			extends: ['plugin:@typescript-eslint/recommended'],
 			plugins: ['@typescript-eslint'],
 			rules: {
