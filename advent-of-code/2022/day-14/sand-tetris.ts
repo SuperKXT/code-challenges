@@ -63,8 +63,8 @@ export const sandTetris = (input: string): Solution => {
 		row.split(' -> ').map(
 			(coords) =>
 				new Coord({
-					row: Number(coords.split(',')?.[1]),
-					col: Number(coords.split(',')?.[0]),
+					row: Number(coords.split(',')[1]),
+					col: Number(coords.split(',')[0]),
 				})
 		)
 	);
@@ -92,6 +92,7 @@ export const sandTetris = (input: string): Solution => {
 
 					const curr = new Coord(from);
 
+					// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 					while (true) {
 						if (curr.row > end.row) end.row = curr.row;
 						if (curr.col < start.col) start.col = curr.col;
@@ -129,12 +130,13 @@ export const sandTetris = (input: string): Solution => {
 		[...new Array(rowLength)].fill('.')
 	);
 	rocks.forEach(({ row, col }) => {
-		const mapRow = part1Map?.[row];
+		const mapRow = part1Map[row];
 		if (mapRow) (part1Map[row] as MapRow)[col] = '#';
 	});
 	const part2Map: Map = structuredClone(part1Map);
 	part2Map.push(new Array(rowLength).fill('.'), new Array(rowLength).fill('#'));
 
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 	while (true) {
 		const coord = getLanding(part1Map);
 		if (!coord) break;
@@ -143,6 +145,7 @@ export const sandTetris = (input: string): Solution => {
 		solution.part1++;
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 	while (true) {
 		const coord = getLanding(part2Map);
 		if (!coord) break;

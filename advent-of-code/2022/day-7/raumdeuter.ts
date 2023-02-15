@@ -31,7 +31,7 @@ export const raumdeuter = (
 		}
 
 		const size = Number(first);
-		if (currentDirs && !isNaN(size)) {
+		if (currentDirs.length && !isNaN(size)) {
 			currentDirs.forEach((dir) => (dirs[dir] += size));
 		}
 	}

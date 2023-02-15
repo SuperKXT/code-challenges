@@ -39,6 +39,7 @@ const spin = async (
 
 export const doubleOrNothing = async (): Promise<number> => {
 	console.info(chalk.bgRed('\nWelcome to Spin The Wheel!'));
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 	while (true) {
 		const score = await spin();
 		console.info(chalk.red('\nGAME OVER! '), `You Won: $${score}\n`);
