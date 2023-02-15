@@ -3,8 +3,8 @@ import { humanizeToken, humanizeCases } from './humanize-token.helpers';
 import type { HumanizeCase } from './humanize-token.helpers';
 
 interface Test {
-	input: string,
-	output: Record<HumanizeCase, string>,
+	input: string;
+	output: Record<HumanizeCase, string>;
 }
 
 const tests: Test[] = [
@@ -42,8 +42,11 @@ describe.each(tests)('test humanizeToken helper', (test) => {
 		const output = humanizeToken(test.input);
 		expect(output).toStrictEqual(test.output.title);
 	});
-	it.each(humanizeCases)('should return humanized string by the given casing', (casing) => {
-		const output = humanizeToken(test.input, casing);
-		expect(output).toStrictEqual(test.output[casing]);
-	});
+	it.each(humanizeCases)(
+		'should return humanized string by the given casing',
+		(casing) => {
+			const output = humanizeToken(test.input, casing);
+			expect(output).toStrictEqual(test.output[casing]);
+		}
+	);
 });

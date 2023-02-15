@@ -3,16 +3,9 @@ import path from 'path';
 
 import { ropeBridge } from './rope-bridge';
 
-const example = [
-	'R 4',
-	'U 4',
-	'L 3',
-	'D 1',
-	'R 4',
-	'D 1',
-	'L 5',
-	'R 2',
-].join('\n');
+const example = ['R 4', 'U 4', 'L 3', 'D 1', 'R 4', 'D 1', 'L 5', 'R 2'].join(
+	'\n'
+);
 
 const example2 = [
 	'R 5',
@@ -47,10 +40,7 @@ describe('testing ropeBridge', () => {
 		expect(ropeBridge(example2)).toStrictEqual(solution);
 	});
 	it('should return the correct solution for the input file', async () => {
-		const input = await readFile(
-			path.join(__dirname, 'input.txt'),
-			'utf-8'
-		);
+		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
 		const solution: Solution = {
 			firstTail: 5902,
 			lastTail: 2445,

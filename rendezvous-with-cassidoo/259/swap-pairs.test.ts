@@ -21,7 +21,6 @@ const solution2 = array2;
 const solution3 = [2, 1, 4, 3, 6, 5, 8, 7, 9];
 
 describe('swap array pairs with regex', () => {
-
 	it('should return [2, 1, 4, 3] for [1, 2, 3, 4]', () => {
 		const solution = swapArrayPairsWithRegex(array1);
 		expect(solution).toStrictEqual(solution1);
@@ -36,11 +35,9 @@ describe('swap array pairs with regex', () => {
 		const solution = swapArrayPairsWithRegex(array3);
 		expect(solution).toStrictEqual(solution3);
 	});
-
 });
 
 describe('swap array pairs with recursion', () => {
-
 	it('should return [2, 1, 4, 3] for [1, 2, 3, 4]', () => {
 		const solution = swapArrayPairsWithRecursion(array1);
 		expect(solution).toStrictEqual(solution1);
@@ -55,11 +52,9 @@ describe('swap array pairs with recursion', () => {
 		const solution = swapArrayPairsWithRecursion(array3);
 		expect(solution).toStrictEqual(solution3);
 	});
-
 });
 
 describe('swap array pairs with loop', () => {
-
 	it('should return [2, 1, 4, 3] for [1, 2, 3, 4]', () => {
 		const solution = swapArrayPairsWithLoop(array1);
 		expect(solution).toStrictEqual(solution1);
@@ -74,11 +69,9 @@ describe('swap array pairs with loop', () => {
 		const solution = swapArrayPairsWithLoop(array3);
 		expect(solution).toStrictEqual(solution3);
 	});
-
 });
 
 describe('swap linked list pairs', () => {
-
 	it('should return swappedList for list1', () => {
 		const solution = swapLinkedListPairs(list1);
 		expect(linkedListToArray(solution)).toStrictEqual(solution1);
@@ -93,5 +86,4 @@ describe('swap linked list pairs', () => {
 		const solution = swapLinkedListPairs(list3);
 		expect(linkedListToArray(solution)).toStrictEqual(solution3);
 	});
-
 });

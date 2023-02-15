@@ -1,10 +1,10 @@
 import { cornerHit, XY } from './cornet-hit';
 
 interface Test {
-	boxSize: XY,
-	initialPosition: XY,
-	screenSize: XY,
-	result: boolean,
+	boxSize: XY;
+	initialPosition: XY;
+	screenSize: XY;
+	result: boolean;
 }
 
 const tests: Test[] = [
@@ -23,8 +23,15 @@ const tests: Test[] = [
 ];
 
 describe('testing cornerHit', () => {
-	it.each(tests)('should return if the box hits the corner for given input', (test) => {
-		const result = cornerHit(test.boxSize, test.initialPosition, test.screenSize);
-		expect(result).toStrictEqual(test.result);
-	});
+	it.each(tests)(
+		'should return if the box hits the corner for given input',
+		(test) => {
+			const result = cornerHit(
+				test.boxSize,
+				test.initialPosition,
+				test.screenSize
+			);
+			expect(result).toStrictEqual(test.result);
+		}
+	);
 });

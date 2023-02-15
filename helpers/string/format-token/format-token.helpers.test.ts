@@ -3,8 +3,8 @@ import { formatStrategies, formatToken } from './format-token.helpers';
 import type { FormatStrategy } from './format-token.helpers';
 
 interface Test {
-	input: string,
-	output: Record<FormatStrategy, string>,
+	input: string;
+	output: Record<FormatStrategy, string>;
 }
 
 const tests: Test[] = [
@@ -75,8 +75,11 @@ describe.each(tests)('test formatString helper', (test) => {
 		const output = formatToken(test.input);
 		expect(output).toStrictEqual(test.output.camel);
 	});
-	it.each(formatStrategies)('should return valid formatted string by given parameters', (strategy) => {
-		const output = formatToken(test.input, strategy);
-		expect(output).toStrictEqual(test.output[strategy]);
-	});
+	it.each(formatStrategies)(
+		'should return valid formatted string by given parameters',
+		(strategy) => {
+			const output = formatToken(test.input, strategy);
+			expect(output).toStrictEqual(test.output[strategy]);
+		}
+	);
 });

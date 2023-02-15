@@ -1,8 +1,8 @@
 import { generateArrays } from './generate-arrays';
 
 interface Test {
-	input: number,
-	output: number[][],
+	input: number;
+	output: number[][];
 }
 
 const tests: Test[] = [
@@ -25,7 +25,10 @@ const tests: Test[] = [
 ];
 
 describe('testing generateArrays', () => {
-	it.each(tests)('should return array of arrays for given integer', ({ input, output }) => {
-		expect(generateArrays(input)).toStrictEqual(output);
-	});
+	it.each(tests)(
+		'should return array of arrays for given integer',
+		({ input, output }) => {
+			expect(generateArrays(input)).toStrictEqual(output);
+		}
+	);
 });

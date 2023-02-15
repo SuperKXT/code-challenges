@@ -3,5 +3,5 @@ export const fromTo = (
 	max: number
 ): (() => number | undefined) => {
 	let current = min;
-	return () => current <= max ? current++ : undefined;
+	return () => (current <= max ? current++ : undefined);
 };

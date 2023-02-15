@@ -14,14 +14,8 @@ describe('testing subGridSum', () => {
 		expect(subGridSum(grid, [6, 3, -1, 9])).toBe(22);
 	});
 	it('should throw appropriate error if marks are invalid', () => {
-		expect(() =>
-			subGridSum(grid, [6, 10, 11, 12])
-		).toThrow(subGridSumError);
-		expect(() =>
-			subGridSum(grid, [6, 6, -1, 9])
-		).toThrow(subGridSumError);
-		expect(() =>
-			subGridSum(grid, [6, 6, 6, 6])
-		).toThrow(subGridSumError);
+		expect(() => subGridSum(grid, [6, 10, 11, 12])).toThrow(subGridSumError);
+		expect(() => subGridSum(grid, [6, 6, -1, 9])).toThrow(subGridSumError);
+		expect(() => subGridSum(grid, [6, 6, 6, 6])).toThrow(subGridSumError);
 	});
 });

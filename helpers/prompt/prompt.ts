@@ -9,7 +9,7 @@ export const confirmPrompt = async (message: string) => {
 		description: `${message} [y/n]: `,
 		type: 'string',
 		pattern: /^[yn]$/i,
-		message: 'Please enter \'y\' for yes or \'n\' for no',
+		message: "Please enter 'y' for yes or 'n' for no",
 		required: true,
 	});
 	return question === 'y' || question === 'Y';

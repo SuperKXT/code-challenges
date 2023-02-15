@@ -25,9 +25,7 @@ export const getFibonacciLike = (
 	return sequence;
 };
 
-export const isFibonacciLike = (
-	sequence: number[]
-): boolean => {
+export const isFibonacciLike = (sequence: number[]): boolean => {
 	if (sequence.length < 3) return false;
 	return sequence.every((value, index, array) => {
 		if (index < 2) return true;

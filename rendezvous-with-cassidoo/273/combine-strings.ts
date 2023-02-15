@@ -2,11 +2,8 @@ export const invalidError = new Error(
 	'the given size must be greater than all array members'
 );
 
-export const combineStrings = (
-	array: string[],
-	size: number
-): string[] => {
-	if (array.some(string => string.length > size)) {
+export const combineStrings = (array: string[], size: number): string[] => {
+	if (array.some((string) => string.length > size)) {
 		throw invalidError;
 	}
 	const combined: string[] = [];
@@ -15,7 +12,7 @@ export const combineStrings = (
 		const item = array[index] as string;
 		const next = array[index + 1];
 		current += `${current ? ' ' : ''}${item}`;
-		if (!next || (current.length + next.length + 1 > size)) {
+		if (!next || current.length + next.length + 1 > size) {
 			combined.push(current);
 			current = '';
 		}

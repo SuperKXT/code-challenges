@@ -1,8 +1,8 @@
 import { missingBits } from './missing-bits';
 
 interface Test {
-	input: number[],
-	output: string,
+	input: number[];
+	output: string;
 }
 
 const tests: Test[] = [
@@ -29,7 +29,10 @@ const tests: Test[] = [
 ];
 
 describe('testing missingBits', () => {
-	it.each(tests)('should return string with missing range bits', ({ input, output }) => {
-		expect(missingBits(input)).toBe(output);
-	});
+	it.each(tests)(
+		'should return string with missing range bits',
+		({ input, output }) => {
+			expect(missingBits(input)).toBe(output);
+		}
+	);
 });

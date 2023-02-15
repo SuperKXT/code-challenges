@@ -1,17 +1,16 @@
 /**
  * Tagged template function to pluralize the designated words by checking the quantifiers
-*/
+ */
 export const pluralize = (
 	strings: TemplateStringsArray,
 	...inputExpressions: (
-		number
+		| number
 		| string
 		| [number]
 		| [number, null | string]
 		| [number, (arg: number) => null | string]
 	)[]
 ): string => {
-
 	const expressions = inputExpressions.map((value) => {
 		switch (typeof value) {
 			case 'string':
@@ -28,11 +27,10 @@ export const pluralize = (
 					}
 					case 'string': {
 						const array = options.split('|');
-						toShow = (
-							array[number - 1]
-							?? array.at(-1)
-							?? ''
-						).replace(/\$1/g, number.toString());
+						toShow = (array[number - 1] ?? array.at(-1) ?? '').replace(
+							/\$1/g,
+							number.toString()
+						);
 						break;
 					}
 				}
@@ -45,25 +43,19 @@ export const pluralize = (
 	const quantifiers = expressions.filter(Array.isArray) as [number, string][];
 	let lastQuantifier = quantifiers[0];
 
-	const replaceQuantity = (
-		input: string
-	): string => {
+	const replaceQuantity = (input: string): string => {
 		if (!lastQuantifier) return input;
 		const [number, value] = lastQuantifier;
 		if (!value) {
 			input = input.replace(/^\s+/, '');
 		}
-		return input.replace(
-			/\[(([^|]*\|?)+)\]/g,
-			(_, string) => {
-				const matches = string.split('|');
-				return matches[number - 1] ?? matches.at(-1) ?? '';
-			}
-		);
+		return input.replace(/\[(([^|]*\|?)+)\]/g, (_, string) => {
+			const matches = string.split('|');
+			return matches[number - 1] ?? matches.at(-1) ?? '';
+		});
 	};
 
 	for (const string of strings) {
-
 		result.push(replaceQuantity(string));
 
 		const lastExpression = expressions.shift();

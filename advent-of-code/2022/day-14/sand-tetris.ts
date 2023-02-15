@@ -1,15 +1,14 @@
 interface Solution {
-	part1: number,
-	part2: number,
+	part1: number;
+	part2: number;
 }
 
 interface CoordInput {
-	row: number,
-	col: number,
+	row: number;
+	col: number;
 }
 
 class Coord {
-
 	row: number;
 	col: number;
 
@@ -18,20 +17,15 @@ class Coord {
 		this.col = input.col;
 	}
 
-	equals(
-		coord: Coord
-	) {
-		return this.row === coord.row
-			&& this.col === coord.col;
+	equals(coord: Coord) {
+		return this.row === coord.row && this.col === coord.col;
 	}
 
 	existsIn(coords: Coord[]) {
-		return coords.some(coord =>
-			coord.row === this.row
-			&& coord.col === this.col
+		return coords.some(
+			(coord) => coord.row === this.row && coord.col === this.col
 		);
 	}
-
 }
 
 type MapRow = ('.' | '+' | '#' | 'o')[];
@@ -46,70 +40,59 @@ const getLanding = (
 	col: number = source.col
 ): null | Coord => {
 	const mapRow = map[row];
-	if (
-		!mapRow
-		|| mapRow[col] !== '.'
-		|| !map[row + 1]
-	) return null;
-	const colOffset = [0, -1, 1].find(offset =>
-		map[row + 1]?.[col + offset] === '.'
+	if (!mapRow || mapRow[col] !== '.' || !map[row + 1]) return null;
+	const colOffset = [0, -1, 1].find(
+		(offset) => map[row + 1]?.[col + offset] === '.'
 	);
 	if (colOffset !== undefined) {
 		row++;
 		col += colOffset;
 		return getLanding(map, row, col);
-	}
-	else {
+	} else {
 		return new Coord({ row, col });
 	}
 };
 
-export const sandTetris = (
-	input: string
-): Solution => {
-
+export const sandTetris = (input: string): Solution => {
 	const solution: Solution = {
 		part1: 0,
 		part2: 0,
 	};
 
-	const paths = input.split('\n').map(row =>
-		row.split(' -> ').map(coords => new Coord({
-			row: Number(coords.split(',')?.[1]),
-			col: Number(coords.split(',')?.[0]),
-		}))
+	const paths = input.split('\n').map((row) =>
+		row.split(' -> ').map(
+			(coords) =>
+				new Coord({
+					row: Number(coords.split(',')?.[1]),
+					col: Number(coords.split(',')?.[0]),
+				})
+		)
 	);
 
 	const start = new Coord({ row: 0, col: Infinity });
 	const end = new Coord({ row: -Infinity, col: 500 });
 
 	const rocks = paths.reduce(
-		(rocks: Coord[], path) => rocks.concat(
-			path.reduce(
-				(pathRocks: Coord[], from, index) => {
-
+		(rocks: Coord[], path) =>
+			rocks.concat(
+				path.reduce((pathRocks: Coord[], from, index) => {
 					const to = path[index + 1];
 					if (!to) return pathRocks;
 
-					if (
-						from.existsIn(rocks)
-						&& to.existsIn(rocks)
-					) return pathRocks;
+					if (from.existsIn(rocks) && to.existsIn(rocks)) return pathRocks;
 
-					const direction = (
+					const direction =
 						to.row < from.row
 							? 'left'
 							: to.row > from.row
-								? 'right'
-								: to.col < from.col
-									? 'up'
-									: 'down'
-					);
+							? 'right'
+							: to.col < from.col
+							? 'up'
+							: 'down';
 
 					const curr = new Coord(from);
 
 					while (true) {
-
 						if (curr.row > end.row) end.row = curr.row;
 						if (curr.col < start.col) start.col = curr.col;
 						if (curr.col > end.col) end.col = curr.col;
@@ -121,21 +104,25 @@ export const sandTetris = (
 						if (curr.equals(to)) break;
 
 						switch (direction) {
-							case 'left': curr.row--; break;
-							case 'right': curr.row++; break;
-							case 'up': curr.col--; break;
-							case 'down': curr.col++; break;
+							case 'left':
+								curr.row--;
+								break;
+							case 'right':
+								curr.row++;
+								break;
+							case 'up':
+								curr.col--;
+								break;
+							case 'down':
+								curr.col++;
+								break;
 						}
-
 					}
 
 					return pathRocks;
-
-				}
-				, []
-			)
-		)
-		, []
+				}, [])
+			),
+		[]
 	);
 
 	const part1Map: Map = [...new Array(end.row + 1)].map(() =>
@@ -146,10 +133,7 @@ export const sandTetris = (
 		if (mapRow) (part1Map[row] as MapRow)[col] = '#';
 	});
 	const part2Map: Map = structuredClone(part1Map);
-	part2Map.push(
-		new Array(rowLength).fill('.'),
-		new Array(rowLength).fill('#')
-	);
+	part2Map.push(new Array(rowLength).fill('.'), new Array(rowLength).fill('#'));
 
 	while (true) {
 		const coord = getLanding(part1Map);
@@ -168,5 +152,4 @@ export const sandTetris = (
 	}
 
 	return solution;
-
 };

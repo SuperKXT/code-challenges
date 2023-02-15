@@ -1,8 +1,8 @@
 import { findAntiDivisors } from './anti-divisors';
 
 interface Test {
-	input: number,
-	output: number[],
+	input: number;
+	output: number[];
 }
 
 const tests: Test[] = [
@@ -20,7 +20,10 @@ const tests: Test[] = [
 ];
 
 describe('testing findAntiDivisors', () => {
-	it.each(tests)('should return anti-divisor array for given number', ({ input, output }) => {
-		expect(findAntiDivisors(input)).toStrictEqual(output);
-	});
+	it.each(tests)(
+		'should return anti-divisor array for given number',
+		({ input, output }) => {
+			expect(findAntiDivisors(input)).toStrictEqual(output);
+		}
+	);
 });

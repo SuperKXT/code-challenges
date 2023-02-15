@@ -1,6 +1,6 @@
 export const addEventDigits = (number: number): number => {
 	return Array.from(number.toString())
-		.filter(digit => !isNaN(Number(digit)))
+		.filter((digit) => !isNaN(Number(digit)))
 		.filter((_, index) => index % 2)
 		.reduce((sum, digit) => sum + Number(digit), 0);
 };

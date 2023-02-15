@@ -1,6 +1,4 @@
-export const canBePalindrome = (
-	string: string
-): boolean => {
+export const canBePalindrome = (string: string): boolean => {
 	let hasOdd = false;
 	const arr = Array.from(string.replace(/\s/g, '')).sort();
 	for (let i = 0; i < arr.length; i++) {
@@ -10,8 +8,7 @@ export const canBePalindrome = (
 		if (sub.length % 2 === 0) {
 			i = end;
 			continue;
-		}
-		else if (hasOdd) return false;
+		} else if (hasOdd) return false;
 		else hasOdd = true;
 	}
 	return true;

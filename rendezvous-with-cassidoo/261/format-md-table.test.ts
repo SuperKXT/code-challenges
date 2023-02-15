@@ -1,8 +1,8 @@
 import { formatMarkdownTable } from './format-md-table';
 
 interface Test {
-	input: string,
-	output: string,
+	input: string;
+	output: string;
 }
 
 const tests: Test[] = [

@@ -1,5 +1,4 @@
 export const parenthesisSubstring = (string: string): number => {
-
 	let startParens: number = 0;
 	let longest: number = 0;
 	let currentLongest: number = 0;
@@ -7,22 +6,19 @@ export const parenthesisSubstring = (string: string): number => {
 	for (let i = 0; i < string.length; i++) {
 		if (string[i] === '(') {
 			startParens++;
-		}
-		else {
+		} else {
 			if (startParens > 0) {
 				currentLongest += 2;
 				startParens--;
-			}
-			else {
+			} else {
 				longest = Math.max(longest, currentLongest);
 				currentLongest = 0;
 			}
 		}
-		if ((i + 1) === string.length) {
+		if (i + 1 === string.length) {
 			longest = Math.max(longest, currentLongest);
 		}
 	}
 
 	return longest;
-
 };

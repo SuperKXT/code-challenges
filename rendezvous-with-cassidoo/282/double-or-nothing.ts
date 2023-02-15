@@ -28,8 +28,7 @@ const spin = async (
 		const isDouble = await confirmPrompt('Double or Nothing?');
 		if (!isDouble) return score;
 		return spin(score, 2);
-	}
-	else {
+	} else {
 		console.info(
 			chalk.red('INCORRECT!'),
 			chalk.blue(`Spin Result: ${spinResult}, Your Choice: ${choice}`)

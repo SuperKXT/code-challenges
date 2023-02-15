@@ -1,8 +1,8 @@
 import { replaceZeros } from './replace-zeros';
 
 interface Test {
-	input: string,
-	output: string,
+	input: string;
+	output: string;
 }
 
 const tests: Test[] = [
@@ -15,7 +15,10 @@ const tests: Test[] = [
 ];
 
 describe('testing replaceZeros', () => {
-	it.each(tests)('should return the correct string response', ({ input, output }) => {
-		expect(replaceZeros(input)).toStrictEqual(output);
-	});
+	it.each(tests)(
+		'should return the correct string response',
+		({ input, output }) => {
+			expect(replaceZeros(input)).toStrictEqual(output);
+		}
+	);
 });

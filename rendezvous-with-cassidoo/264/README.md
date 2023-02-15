@@ -13,14 +13,12 @@ Extra credit, figure out how many bounces/collisions it will take to hit a corne
 ## Example
 
 ```ts
-let dimensions = [5,5]
-let initialCoordinates = [0,0] // you decide which part of the logo the coords map to
-let screenSize = [100,100]
-
-> cornerHit(dimensions, initialCoordinates, screenSize)
-> true // in one collision
-
-> cornerHit(dimensions, [45,70], [400,200])
-> false
-
+let dimensions = [5, 5];
+let initialCoordinates = [0, 0]; // you decide which part of the logo the coords map to
+let screenSize =
+	[100, 100] >
+	cornerHit(dimensions, initialCoordinates, screenSize) >
+	true > // in one collision
+	cornerHit(dimensions, [45, 70], [400, 200]) >
+	false;
 ```

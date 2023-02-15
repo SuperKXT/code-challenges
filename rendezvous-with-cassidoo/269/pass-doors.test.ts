@@ -1,8 +1,8 @@
 import { passDoors } from './pass-doors';
 
 interface Test {
-	input: [number, number],
-	output: number,
+	input: [number, number];
+	output: number;
 }
 
 const tests: Test[] = [
@@ -13,8 +13,11 @@ const tests: Test[] = [
 ];
 
 describe('testing passDoors', () => {
-	it.each(tests)('should return number of open doors after given passes', (test) => {
-		const output = passDoors(...test.input);
-		expect(output).toStrictEqual(test.output);
-	});
+	it.each(tests)(
+		'should return number of open doors after given passes',
+		(test) => {
+			const output = passDoors(...test.input);
+			expect(output).toStrictEqual(test.output);
+		}
+	);
 });

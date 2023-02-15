@@ -5,33 +5,26 @@ import {
 	upperCase,
 } from '../string-literals';
 
-export const humanizeCases = [
-	'lower',
-	'sentence',
-	'title',
-	'upper',
-] as const;
+export const humanizeCases = ['lower', 'sentence', 'title', 'upper'] as const;
 
-export type HumanizeCase = typeof humanizeCases[number];
+export type HumanizeCase = (typeof humanizeCases)[number];
 
 /**
  * Takes a token name and returns a human readable string
  * @param string the string to humanize
  * @param casing - the casing for the humanized string. defaults to 'title'
  * @example humanizeToken('camelCaseString', 'sentence') => 'Camel case string'
-*/
+ */
 export const humanizeToken = (
 	input: string,
 	casing: HumanizeCase = 'title'
 ): string => {
-
 	const string = input.trim();
 	if (!string.trim()) return '';
 
 	let formatted = '';
 
 	for (let index = 0; index < string.length; index++) {
-
 		const current = string[index] as string;
 		const last = string[index - 1] as string;
 
@@ -50,10 +43,9 @@ export const humanizeToken = (
 					break;
 				}
 			}
-		}
-		else if (
-			(alphabet.includes(current) && wordSeparators.includes(last))
-			|| (upperCase.includes(current) && lowerCase.includes(last))
+		} else if (
+			(alphabet.includes(current) && wordSeparators.includes(last)) ||
+			(upperCase.includes(current) && lowerCase.includes(last))
 		) {
 			formatted += ' ';
 			switch (casing) {
@@ -68,8 +60,7 @@ export const humanizeToken = (
 					break;
 				}
 			}
-		}
-		else {
+		} else {
 			switch (casing) {
 				case 'lower':
 				case 'sentence':
@@ -83,13 +74,10 @@ export const humanizeToken = (
 				}
 			}
 		}
-
 	}
 
-	if (
-		formatted.toLowerCase().endsWith(' id')
-	) formatted = formatted.slice(0, -3);
+	if (formatted.toLowerCase().endsWith(' id'))
+		formatted = formatted.slice(0, -3);
 
 	return formatted;
-
 };

@@ -7,15 +7,13 @@ const smallSize = 100_000;
 export const raumdeuter = (
 	input: string
 ): {
-	smallFiles: number,
-	deletedSize: number,
+	smallFiles: number;
+	deletedSize: number;
 } => {
-
 	const dirs: Record<string, number> = {};
 	const currentDirs: string[] = [];
 
 	for (const row of input.split('\n')) {
-
 		if (!row) continue;
 
 		const [first, second, third] = row.split(' ');
@@ -34,9 +32,8 @@ export const raumdeuter = (
 
 		const size = Number(first);
 		if (currentDirs && !isNaN(size)) {
-			currentDirs.forEach(dir => dirs[dir] += size);
+			currentDirs.forEach((dir) => (dirs[dir] += size));
 		}
-
 	}
 
 	const sizes = objectValues(dirs).sort((a, b) => a - b);
@@ -56,5 +53,4 @@ export const raumdeuter = (
 	}
 
 	return solution;
-
 };

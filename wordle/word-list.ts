@@ -12950,4 +12950,4 @@ export const wordleWords = [
 	'death',
 ] as const;
 
-export type WordleWord = typeof wordleWords[number];
+export type WordleWord = (typeof wordleWords)[number];

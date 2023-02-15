@@ -2,11 +2,7 @@
 	"compilerOptions": {
 		"baseUrl": "./",
 		"target": "esnext",
-		"lib": [
-			"dom",
-			"dom.iterable",
-			"esnext"
-		],
+		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
@@ -30,11 +26,9 @@
 		"strictFunctionTypes": true,
 		"strictPropertyInitialization": true,
 		"paths": {
-			"~/helpers/*": [ "./helpers/*" ]
+			"~/helpers/*": ["./helpers/*"]
 		}
 	},
-	"include": [ "./" ],
-	"exclude": [
-		"coverage/"
-	]
+	"include": ["./"],
+	"exclude": ["coverage/"]
 }

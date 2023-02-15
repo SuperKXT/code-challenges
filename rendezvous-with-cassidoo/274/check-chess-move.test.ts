@@ -6,8 +6,8 @@ import {
 } from './check-chess-move.types';
 
 interface Test {
-	input: IsValidMoveArgs,
-	response: ChessResponse,
+	input: IsValidMoveArgs;
+	response: ChessResponse;
 }
 
 const board = [
@@ -41,7 +41,10 @@ const tests: Test[] = [
 		},
 		response: {
 			isValid: true,
-			path: [[1, 2], [0, 1]],
+			path: [
+				[1, 2],
+				[0, 1],
+			],
 			isKill: false,
 		},
 	},

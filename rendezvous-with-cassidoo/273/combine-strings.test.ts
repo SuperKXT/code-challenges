@@ -1,8 +1,8 @@
 import { combineStrings, invalidError } from './combine-strings';
 
 interface Test {
-	input: [string[], number],
-	output: string[],
+	input: [string[], number];
+	output: string[];
 }
 
 const tests: Test[] = [
@@ -37,8 +37,6 @@ describe('testing combineStrings', () => {
 		expect(combineStrings(...input)).toStrictEqual(output);
 	});
 	it('should throw for invalid size', () => {
-		expect(() =>
-			combineStrings(['ab', 'base', 'gh'], 2)
-		).toThrow(invalidError);
+		expect(() => combineStrings(['ab', 'base', 'gh'], 2)).toThrow(invalidError);
 	});
 });

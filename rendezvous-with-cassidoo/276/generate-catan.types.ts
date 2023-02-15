@@ -1,31 +1,17 @@
-export const singlePieces = [
-	'.',
-	'2',
-	'C',
-] as const;
+export const singlePieces = ['.', '2', 'C'] as const;
 
-export const doublePieces = [
-	'3',
-	'4',
-	'5',
-	'6',
-	'8',
-	'9',
-	'A',
-	'B',
-] as const;
+export const doublePieces = ['3', '4', '5', '6', '8', '9', 'A', 'B'] as const;
 
-export type Cell = (
-	| typeof singlePieces[number]
-	| typeof doublePieces[number]
-);
+export type Cell =
+	| (typeof singlePieces)[number]
+	| (typeof doublePieces)[number];
 
 export type Board = [
 	RepeatedTuple<Cell, 3>,
 	RepeatedTuple<Cell, 4>,
 	RepeatedTuple<Cell, 5>,
 	RepeatedTuple<Cell, 4>,
-	RepeatedTuple<Cell, 3>,
+	RepeatedTuple<Cell, 3>
 ];
 
 export type ProspectiveBoard = [
@@ -33,7 +19,7 @@ export type ProspectiveBoard = [
 	RepeatedTuple<Cell | '', 4>,
 	RepeatedTuple<Cell | '', 5>,
 	RepeatedTuple<Cell | '', 4>,
-	RepeatedTuple<Cell | '', 3>,
+	RepeatedTuple<Cell | '', 3>
 ];
 
 const ROW_PIECES = [3, 4, 5, 4, 3] as const;

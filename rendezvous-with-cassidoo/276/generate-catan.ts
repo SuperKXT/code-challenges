@@ -26,21 +26,16 @@ const isBadNeighbor = (
 		board[row + 1]?.[bottomLeftCol + 1],
 	].filter(Boolean) as Cell[];
 	const badCell = cell === '6' ? '8' : '6';
-	return neighbors.some(current =>
-		current === badCell
-	);
+	return neighbors.some((current) => current === badCell);
 };
 
-export const assertValidCatanBoard = (
-	input: string
-) => {
-
+export const assertValidCatanBoard = (input: string) => {
 	if (!BOARD_REGEX.test(input)) {
 		throw new Error(CatanErrors.BAD_FORMATTING);
 	}
-	const board = input.split('\n').map(
-		row => row.split(/\s+/).filter(Boolean)
-	) as Board;
+	const board = input
+		.split('\n')
+		.map((row) => row.split(/\s+/).filter(Boolean)) as Board;
 
 	const counts: Partial<Record<Cell, number>> = {};
 
@@ -48,22 +43,16 @@ export const assertValidCatanBoard = (
 		row.forEach((cell, index) => {
 			counts[cell] = (counts[cell] ?? 0) + 1;
 			if (
-				(
-					singlePieces.includes(cell as any)
-					&& (counts[cell] ?? 0) > 1
-				)
-				|| (
-					doublePieces.includes(cell as any)
-					&& (counts[cell] ?? 0) > 2
-				)
-			) throw new Error(CatanErrors.BAD_PIECE_COUNT);
+				(singlePieces.includes(cell as any) && (counts[cell] ?? 0) > 1) ||
+				(doublePieces.includes(cell as any) && (counts[cell] ?? 0) > 2)
+			)
+				throw new Error(CatanErrors.BAD_PIECE_COUNT);
 
 			if (isBadNeighbor(cell, rowIndex, index, board)) {
 				throw new Error(CatanErrors.BAD_POSITIONING);
 			}
 		})
 	);
-
 };
 
 const generateNextCellIndex = (
@@ -73,29 +62,17 @@ const generateNextCellIndex = (
 	board: ProspectiveBoard,
 	pieces: Cell[] = structuredClone(availablePieces)
 ): number => {
-
 	if (pieces.length === 1) return 0;
 	const index = Math.random() * pieces.length;
 	const cell = pieces.splice(index, 1)[0] as Cell;
 	if (isBadNeighbor(cell, row, col, board)) {
-		return generateNextCellIndex(
-			row,
-			col,
-			availablePieces,
-			board,
-			pieces
-		);
+		return generateNextCellIndex(row, col, availablePieces, board, pieces);
 	}
 	return availablePieces.indexOf(cell);
 };
 
 export const generateCatanBoard = (): string => {
-
-	const availablePieces = [
-		...singlePieces,
-		...doublePieces,
-		...doublePieces,
-	];
+	const availablePieces = [...singlePieces, ...doublePieces, ...doublePieces];
 
 	const board: ProspectiveBoard = [
 		['', '', ''],
@@ -107,25 +84,18 @@ export const generateCatanBoard = (): string => {
 
 	board.forEach((boardRow, row) =>
 		boardRow.forEach((_cell, col) => {
-			const index = generateNextCellIndex(
-				row,
-				col,
-				availablePieces,
-				board
-			);
+			const index = generateNextCellIndex(row, col, availablePieces, board);
 			boardRow[col] = availablePieces.splice(index, 1)[0] as Cell;
 		})
 	);
 
 	try {
-		const boardString = board.map((row) =>
-			`${' '.repeat(5 - row.length)}${row.join(' ')}`
-		).join('\n');
+		const boardString = board
+			.map((row) => `${' '.repeat(5 - row.length)}${row.join(' ')}`)
+			.join('\n');
 		assertValidCatanBoard(boardString);
 		return boardString;
-	}
-	catch {
+	} catch {
 		return generateCatanBoard();
 	}
-
 };

@@ -1,8 +1,8 @@
 import { OrdinalNumber, getOrdinalNumber } from './get-ordinal-number';
 
 interface Test {
-	input: number,
-	output: OrdinalNumber,
+	input: number;
+	output: OrdinalNumber;
 }
 
 const tests: Test[] = [
@@ -21,8 +21,11 @@ const tests: Test[] = [
 ];
 
 describe('testing getOrdinalNumber', () => {
-	it.each(tests)('should return the ordinal string for the given number', (test) => {
-		const output = getOrdinalNumber(test.input);
-		expect(output).toStrictEqual(test.output);
-	});
+	it.each(tests)(
+		'should return the ordinal string for the given number',
+		(test) => {
+			const output = getOrdinalNumber(test.input);
+			expect(output).toStrictEqual(test.output);
+		}
+	);
 });

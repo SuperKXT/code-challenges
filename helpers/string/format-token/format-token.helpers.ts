@@ -15,33 +15,28 @@ export const formatStrategies = [
 	'snake',
 ] as const;
 
-export type FormatStrategy = typeof formatStrategies[number];
+export type FormatStrategy = (typeof formatStrategies)[number];
 
 /**
  * Takes a token name, and format strategy and returns the converted token name
  * @param string the string to format
  * @param strategy - the strategy to format the string. defaults to 'camel'
  * @example formatToken('camelCaseString', 'kebab') => 'camel-case-string'
-*/
+ */
 export const formatToken = (
 	input: string,
 	strategy: FormatStrategy = 'camel'
 ): string => {
-
 	const string = input.trim();
 	if (!string) return '';
 
 	let formatted = '';
 
 	for (let index = 0; index < string.length; index++) {
-
 		const current = string[index] as string;
 		const last = string[index - 1];
 
-		if (
-			current === '.'
-			&& alphaNumeric.includes(formatted.at(-1) ?? '')
-		) {
+		if (current === '.' && alphaNumeric.includes(formatted.at(-1) ?? '')) {
 			formatted += '.';
 			continue;
 		}
@@ -62,10 +57,9 @@ export const formatToken = (
 					break;
 				}
 			}
-		}
-		else if (
-			(alphabet.includes(current) && last && wordSeparators.includes(last))
-			|| (upperCase.includes(current) && last && lowerCase.includes(last))
+		} else if (
+			(alphabet.includes(current) && last && wordSeparators.includes(last)) ||
+			(upperCase.includes(current) && last && lowerCase.includes(last))
 		) {
 			switch (strategy) {
 				case 'camel': {
@@ -91,16 +85,14 @@ export const formatToken = (
 					break;
 				}
 			}
-		}
-		else if (
-			['kebab', 'snake', 'constant'].includes(strategy)
-			&& numbers.includes(current)
-			&& formatted.at(-1)
-			&& (alphabet.includes(formatted.at(-1) ?? ''))
+		} else if (
+			['kebab', 'snake', 'constant'].includes(strategy) &&
+			numbers.includes(current) &&
+			formatted.at(-1) &&
+			alphabet.includes(formatted.at(-1) ?? '')
 		) {
 			formatted += `${strategy === 'kebab' ? '-' : '_'}${current}`;
-		}
-		else {
+		} else {
 			switch (strategy) {
 				case 'camel':
 				case 'kebab':
@@ -115,12 +107,10 @@ export const formatToken = (
 				}
 			}
 		}
-
 	}
 
 	if (formatted.at(-1) === '.') {
 		return formatted.slice(0, -1);
 	}
 	return formatted;
-
 };

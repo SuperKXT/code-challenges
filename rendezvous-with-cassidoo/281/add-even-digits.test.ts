@@ -1,8 +1,8 @@
 import { addEventDigits, addEventDigitsSinglePass } from './add-even-digits';
 
 interface Test {
-	input: number,
-	output: number,
+	input: number;
+	output: number;
 }
 
 const tests: Test[] = [
@@ -14,8 +14,11 @@ const tests: Test[] = [
 ];
 
 describe('testing maxSubArray', () => {
-	it.each(tests)('should return the sub array with the biggest sum', ({ input, output }) => {
-		expect(addEventDigits(input)).toStrictEqual(output);
-		expect(addEventDigitsSinglePass(input)).toStrictEqual(output);
-	});
+	it.each(tests)(
+		'should return the sub array with the biggest sum',
+		({ input, output }) => {
+			expect(addEventDigits(input)).toStrictEqual(output);
+			expect(addEventDigitsSinglePass(input)).toStrictEqual(output);
+		}
+	);
 });

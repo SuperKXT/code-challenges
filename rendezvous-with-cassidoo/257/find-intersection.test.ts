@@ -12,7 +12,6 @@ const listC = arrayToLinkedList(arrayC);
 const solutionNode = listA.head?.next;
 
 describe('arrays', () => {
-
 	it('should find intersection [1, 2]', () => {
 		const intersection = findIntersection(arrayA, arrayB);
 		expect(intersection).toStrictEqual([1, 2]);
@@ -22,7 +21,6 @@ describe('arrays', () => {
 		const intersection = findIntersection(arrayA, arrayC);
 		expect(intersection).toBeNull();
 	});
-
 });
 
 describe('linked lists', () => {

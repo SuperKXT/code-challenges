@@ -4,12 +4,10 @@ const numberOfOnes = (integer: number): number => {
 		const current = index + 1;
 		const matches = current.toString().match(/1/g);
 		if (!matches) return count;
-		return count += matches.length;
+		return (count += matches.length);
 	}, 0);
 };
 
 // console.log(numberOfOnes(14));
 
-export {
-	numberOfOnes,
-};
+export { numberOfOnes };

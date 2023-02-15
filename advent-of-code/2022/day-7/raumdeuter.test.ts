@@ -37,10 +37,7 @@ describe('testing raumdeuter', () => {
 		});
 	});
 	it('should return the correct solution for the input file', async () => {
-		const input = await readFile(
-			path.join(__dirname, 'input.txt'),
-			'utf-8'
-		);
+		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
 		expect(raumdeuter(input)).toStrictEqual({
 			smallFiles: 1086293,
 			deletedSize: 366028,

@@ -23,50 +23,42 @@ export const defaultArguments: Arguments = {
 };
 
 export const findWordle = (parameters: Arguments): string[] => {
+	const { available, unavailable, pattern, known, repeat } =
+		argumentSchema.parse(parameters);
 
-	const {
-		available,
-		unavailable,
-		pattern,
-		known,
-		repeat,
-	} = argumentSchema.parse(parameters);
-
-	const availableCharacters = (
-		unavailable
-			? available.replace(new RegExp(`[${unavailable}]`, 'gi'), '')
-			: available
-	);
+	const availableCharacters = unavailable
+		? available.replace(new RegExp(`[${unavailable}]`, 'gi'), '')
+		: available;
 
 	const regex = new RegExp(
 		pattern
-			.replace(
-				/\*/g,
-				`[${availableCharacters}]`
-			)
+			.replace(/\*/g, `[${availableCharacters}]`)
 			.replace(
 				EXCLUDE_CHARACTERS_REGEX,
-				(_, p1) => `[${availableCharacters.replace(new RegExp(`[${p1}]`, 'gi'), '')}]`
+				(_, p1) =>
+					`[${availableCharacters.replace(new RegExp(`[${p1}]`, 'gi'), '')}]`
 			),
 		'i'
 	);
 
-	const matches = wordleWords.filter(word =>
-		(repeat || !DUPLICATE_CHARACTER_REGEX.test(word))
-		&& known.split('').every(character => word.includes(character))
-		&& regex.test(word)
+	const matches = wordleWords.filter(
+		(word) =>
+			(repeat || !DUPLICATE_CHARACTER_REGEX.test(word)) &&
+			known.split('').every((character) => word.includes(character)) &&
+			regex.test(word)
 	);
 
 	if (process.env.NODE_ENV !== 'test') {
-		console.info([
-			'Found',
-			chalk.bgGreen(matches.length),
-			`Match${matches.length !== 1 ? 'es' : ''}`,
-		].join(' '));
+		console.info(
+			[
+				'Found',
+				chalk.bgGreen(matches.length),
+				`Match${matches.length !== 1 ? 'es' : ''}`,
+			].join(' ')
+		);
 		console.info(chalk.green(matches.join(', ')));
 	}
 	return matches;
-
 };
 
 const argumentSchema = z.strictObject({

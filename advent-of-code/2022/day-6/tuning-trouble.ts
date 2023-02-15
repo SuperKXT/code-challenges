@@ -1,10 +1,9 @@
 export const tuningTrouble = (
 	input: string
 ): {
-	packetMarker: number,
-	messageMarker: number,
+	packetMarker: number;
+	messageMarker: number;
 } => {
-
 	const solution = {
 		packetMarker: 0,
 		messageMarker: 0,
@@ -14,9 +13,8 @@ export const tuningTrouble = (
 		if (index <= 4) continue;
 
 		if (!solution.packetMarker) {
-			const isPacketMarker = [...new Set(
-				input.slice(index - 4, index).split('')
-			)].length === 4;
+			const isPacketMarker =
+				[...new Set(input.slice(index - 4, index).split(''))].length === 4;
 			if (isPacketMarker) {
 				solution.packetMarker = index;
 			}
@@ -25,20 +23,15 @@ export const tuningTrouble = (
 		if (index <= 14) continue;
 
 		if (!solution.messageMarker) {
-			const isMessageMarker = [...new Set(
-				input.slice(index - 14, index).split('')
-			)].length === 14;
+			const isMessageMarker =
+				[...new Set(input.slice(index - 14, index).split(''))].length === 14;
 			if (isMessageMarker) {
 				solution.messageMarker = index;
 			}
 		}
 
-		if (
-			solution.packetMarker
-			&& solution.messageMarker
-		) break;
+		if (solution.packetMarker && solution.messageMarker) break;
 	}
 
 	return solution;
-
 };

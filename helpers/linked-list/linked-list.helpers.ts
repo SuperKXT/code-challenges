@@ -1,7 +1,6 @@
 import { LinkedList, LinkedListNode } from './linked-list.types';
 
 export const arrayToLinkedList = <Type>(array: Type[]) => {
-
 	const list: LinkedList<Type> = {
 		head: null,
 	};
@@ -16,14 +15,11 @@ export const arrayToLinkedList = <Type>(array: Type[]) => {
 		if (!list.head) {
 			list.head = node;
 			lastNode = list.head;
-		}
-		else if (lastNode) {
+		} else if (lastNode) {
 			lastNode.next = node;
 			lastNode = node;
 		}
-
 	}
 
 	return list;
-
 };

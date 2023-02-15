@@ -170,10 +170,7 @@ describe('testing signalStrength', () => {
 		expect(response).toStrictEqual(solution);
 	});
 	it('should return the correct solution for the input file', async () => {
-		const input = await readFile(
-			path.join(__dirname, 'input.txt'),
-			'utf-8'
-		);
+		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
 		const solution: Solution = {
 			strength: 16060,
 			crtOutput: [

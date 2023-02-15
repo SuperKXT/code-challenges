@@ -11,9 +11,7 @@ export const areArraysEqual = <Type extends any[]>(
 	return true;
 };
 
-export const linkedListToArray = <Type>(
-	list: LinkedList<Type>
-): Type[] => {
+export const linkedListToArray = <Type>(list: LinkedList<Type>): Type[] => {
 	const array: Type[] = [];
 	let node = list.head;
 	while (node) {

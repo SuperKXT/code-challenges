@@ -1,54 +1,25 @@
-export const blackPieces = [
-	'p',
-	'r',
-	'b',
-	'n',
-	'q',
-	'k',
-] as const;
-export type BlackPiece = typeof blackPieces[number];
+export const blackPieces = ['p', 'r', 'b', 'n', 'q', 'k'] as const;
+export type BlackPiece = (typeof blackPieces)[number];
 
-export const whitePieces = [
-	'P',
-	'R',
-	'B',
-	'N',
-	'Q',
-	'K',
-] as const;
-export type WhitePiece = typeof whitePieces[number];
+export const whitePieces = ['P', 'R', 'B', 'N', 'Q', 'K'] as const;
+export type WhitePiece = (typeof whitePieces)[number];
 
-export const pieces = [
-	...blackPieces,
-	...whitePieces,
-] as const;
-export type Piece = typeof pieces[number];
+export const pieces = [...blackPieces, ...whitePieces] as const;
+export type Piece = (typeof pieces)[number];
 
-export const square = [
-	...pieces,
-	'~',
-] as const;
-export type Square = typeof square[number];
+export const square = [...pieces, '~'] as const;
+export type Square = (typeof square)[number];
 
-export const coords = [
-	0,
-	1,
-	2,
-	3,
-	4,
-	5,
-	6,
-	7,
-] as const;
+export const coords = [0, 1, 2, 3, 4, 5, 6, 7] as const;
 
-export type Coord = typeof coords[number];
+export type Coord = (typeof coords)[number];
 
 export type Position = [Coord, Coord];
 
 export interface IsValidMoveArgs {
-	board: string,
-	from: Position,
-	to: Position,
+	board: string;
+	from: Position;
+	to: Position;
 }
 
 type Row = RepeatedTuple<Piece | '~', 8>;
@@ -70,21 +41,18 @@ export enum ChessErrors {
 }
 
 interface AgnosticChessResponse {
-	isValid: boolean,
+	isValid: boolean;
 }
 
 interface ErrorChessResponse extends AgnosticChessResponse {
-	isValid: false,
-	error: ChessErrors,
+	isValid: false;
+	error: ChessErrors;
 }
 
 interface ValidChessResponse extends AgnosticChessResponse {
-	isValid: true,
-	isKill: boolean,
-	path: Position[],
+	isValid: true;
+	isKill: boolean;
+	path: Position[];
 }
 
-export type ChessResponse = (
-	ErrorChessResponse
-	| ValidChessResponse
-);
+export type ChessResponse = ErrorChessResponse | ValidChessResponse;

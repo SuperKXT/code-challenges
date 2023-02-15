@@ -1,8 +1,8 @@
 import { calculateGpa, GradePoint } from './calculate-gpa';
 
 interface Test {
-	input: GradePoint[],
-	output: number,
+	input: GradePoint[];
+	output: number;
 }
 
 const tests: Test[] = [

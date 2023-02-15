@@ -2,14 +2,16 @@ import { arrayToLinkedList } from './linked-list.helpers';
 import { LinkedList } from './linked-list.types';
 
 interface Test<Type> {
-	array: Type[],
-	list: LinkedList<Type>,
+	array: Type[];
+	list: LinkedList<Type>;
 }
 
 const tests: Test<number>[] = [
 	{
 		array: [1, 2, 3],
-		list: { head: { value: 1, next: { value: 2, next: { value: 3, next: null } } } },
+		list: {
+			head: { value: 1, next: { value: 2, next: { value: 3, next: null } } },
+		},
 	},
 	{
 		array: [],

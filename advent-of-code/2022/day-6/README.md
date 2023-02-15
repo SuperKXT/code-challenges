@@ -22,26 +22,26 @@ Specifically, it needs to report the number of characters from the beginning of 
 
 For example, suppose you receive the following datastream buffer:
 
-`mjqjpqmgbljsphdztnvjfqwrcgsmlb` /** cSpell: disable-line */
+`mjqjpqmgbljsphdztnvjfqwrcgsmlb` /\*_ cSpell: disable-line _/
 
 After the first three characters (`mjq`) have been received, there haven't been enough characters received yet to find the marker.
 The first time a marker could occur is after the fourth character is received, making the most recent four characters
-`mjqj`. /** cSpell: disable-line */
+`mjqj`. /\*_ cSpell: disable-line _/
 Because `j` is repeated, this isn't a marker.
 
 The first time a marker appears is after the **seventh** character arrives.
 Once it does, the last four characters received are
-`jpqm`, /**cSpell: disable-line */
+`jpqm`, /\*_cSpell: disable-line _/
 which are all different.
 In this case, your subroutine should report the value `7`,
 because the first start-of-packet marker is complete after 7 characters have been processed.
 
 Here are a few more examples:
 
-- `bvwbjplbgvbhsrlpgdmjqwftvncz`: first marker after character 5 /** cSpell: disable-line */
-- `nppdvjthqldpwncqszvftbrmjlhg`: first marker after character 6 /** cSpell: disable-line */
-- `nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg`: first marker after character 10 /** cSpell: disable-line */
-- `zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw`: first marker after character 11 /** cSpell: disable-line */
+- `bvwbjplbgvbhsrlpgdmjqwftvncz`: first marker after character 5 /\*_ cSpell: disable-line _/
+- `nppdvjthqldpwncqszvftbrmjlhg`: first marker after character 6 /\*_ cSpell: disable-line _/
+- `nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg`: first marker after character 10 /\*_ cSpell: disable-line _/
+- `zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw`: first marker after character 11 /\*_ cSpell: disable-line _/
 
 **How many characters need to be processed before the first start-of-packet marker is detected?**
 
@@ -55,11 +55,11 @@ except it consists of **14 distinct characters** rather than 4.
 
 Here are the first positions of start-of-message markers for all of the above examples:
 
-- `mjqjpqmgbljsphdztnvjfqwrcgsmlb`: first marker after character 19 /** cSpell: disable-line */
-- `bvwbjplbgvbhsrlpgdmjqwftvncz`: first marker after character 23 /** cSpell: disable-line */
-- `nppdvjthqldpwncqszvftbrmjlhg`: first marker after character 23 /** cSpell: disable-line */
-- `nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg`: first marker after character 29 /** cSpell: disable-line */
-- `zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw`: first marker after character 26 /** cSpell: disable-line */
+- `mjqjpqmgbljsphdztnvjfqwrcgsmlb`: first marker after character 19 /\*_ cSpell: disable-line _/
+- `bvwbjplbgvbhsrlpgdmjqwftvncz`: first marker after character 23 /\*_ cSpell: disable-line _/
+- `nppdvjthqldpwncqszvftbrmjlhg`: first marker after character 23 /\*_ cSpell: disable-line _/
+- `nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg`: first marker after character 29 /\*_ cSpell: disable-line _/
+- `zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw`: first marker after character 26 /\*_ cSpell: disable-line _/
 
 How many characters need to be processed before the first start-of-message marker is detected?
 

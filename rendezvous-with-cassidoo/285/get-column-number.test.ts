@@ -1,8 +1,8 @@
 import { getColumnNumber } from './get-column-number';
 
 interface Test {
-	input: string,
-	output: number,
+	input: string;
+	output: number;
 }
 
 const tests: Test[] = [
@@ -19,7 +19,10 @@ const tests: Test[] = [
 ];
 
 describe('testing generateArrays', () => {
-	it.each(tests)('should return the column number corresponding to the name', ({ input, output }) => {
-		expect(getColumnNumber(input)).toStrictEqual(output);
-	});
+	it.each(tests)(
+		'should return the column number corresponding to the name',
+		({ input, output }) => {
+			expect(getColumnNumber(input)).toStrictEqual(output);
+		}
+	);
 });

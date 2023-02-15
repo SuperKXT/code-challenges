@@ -1,8 +1,12 @@
-import { Errors, getFibonacciLike, isFibonacciLike } from './get-fibonacci-like';
+import {
+	Errors,
+	getFibonacciLike,
+	isFibonacciLike,
+} from './get-fibonacci-like';
 
 interface GetTest {
-	input: [number, number, number],
-	output: number[],
+	input: [number, number, number];
+	output: number[];
 }
 
 const getTests: GetTest[] = [
@@ -14,8 +18,8 @@ const getTests: GetTest[] = [
 ];
 
 interface BadGetTest {
-	input: [number, number, number],
-	error: string,
+	input: [number, number, number];
+	error: string;
 }
 
 const badGetTests: BadGetTest[] = [
@@ -26,8 +30,8 @@ const badGetTests: BadGetTest[] = [
 ];
 
 interface CheckTest {
-	input: number[],
-	output: boolean,
+	input: number[];
+	output: boolean;
 }
 
 const checkTests: CheckTest[] = [
@@ -42,20 +46,24 @@ const checkTests: CheckTest[] = [
 ];
 
 describe('testing getFibonacciLike', () => {
-	it.each(getTests)('should return fibonacci like sequence of given length', (test) => {
-		const output = getFibonacciLike(...test.input);
-		expect(output).toStrictEqual(test.output);
-	});
+	it.each(getTests)(
+		'should return fibonacci like sequence of given length',
+		(test) => {
+			const output = getFibonacciLike(...test.input);
+			expect(output).toStrictEqual(test.output);
+		}
+	);
 	it.each(badGetTests)('should throw error for incorrect length', (test) => {
-		expect(() =>
-			getFibonacciLike(...test.input)
-		).toThrow(test.error);
+		expect(() => getFibonacciLike(...test.input)).toThrow(test.error);
 	});
 });
 
 describe('testing isFibonacciLike', () => {
-	it.each(checkTests)('should indicate if sequence is a fibonacci like', (test) => {
-		const output = isFibonacciLike(test.input);
-		expect(output).toStrictEqual(test.output);
-	});
+	it.each(checkTests)(
+		'should indicate if sequence is a fibonacci like',
+		(test) => {
+			const output = isFibonacciLike(test.input);
+			expect(output).toStrictEqual(test.output);
+		}
+	);
 });

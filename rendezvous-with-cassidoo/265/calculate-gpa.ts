@@ -1,4 +1,4 @@
-export type GradePoint = (
+export type GradePoint =
 	| 'A'
 	| 'A-'
 	| 'B+'
@@ -10,8 +10,7 @@ export type GradePoint = (
 	| 'D+'
 	| 'D'
 	| 'D-'
-	| 'F'
-);
+	| 'F';
 
 export const key: Record<GradePoint, number> = {
 	A: 4,
@@ -28,11 +27,10 @@ export const key: Record<GradePoint, number> = {
 	F: 0,
 };
 
-export const calculateGpa = (
-	grades: GradePoint[]
-): number => {
-	return Number((
-		grades.reduce((sum, grade) => sum += key[grade], 0)
-		/ grades.length
-	).toFixed(1));
+export const calculateGpa = (grades: GradePoint[]): number => {
+	return Number(
+		(
+			grades.reduce((sum, grade) => (sum += key[grade]), 0) / grades.length
+		).toFixed(1)
+	);
 };

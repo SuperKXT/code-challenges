@@ -2,8 +2,8 @@ import { WordleWord } from './word-list';
 import { findWordle, Arguments, defaultArguments } from './wordle';
 
 interface Test {
-	arguments: Partial<Arguments>,
-	results: WordleWord[],
+	arguments: Partial<Arguments>;
+	results: WordleWord[];
 }
 
 const tests: Test[] = [
@@ -20,7 +20,21 @@ const tests: Test[] = [
 			known: 'crut',
 		},
 		/* cspell: disable-next-line */
-		results: ['cruet', 'eruct', 'cruft', 'curst', 'crout', 'recut', 'truck', 'cuter', 'crust', 'court', 'curat', 'truce', 'curet'],
+		results: [
+			'cruet',
+			'eruct',
+			'cruft',
+			'curst',
+			'crout',
+			'recut',
+			'truck',
+			'cuter',
+			'crust',
+			'court',
+			'curat',
+			'truce',
+			'curet',
+		],
 	},
 	{
 		arguments: {

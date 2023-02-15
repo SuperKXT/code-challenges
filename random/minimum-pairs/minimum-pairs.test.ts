@@ -1,8 +1,8 @@
 import { minimumPairs, Pair } from './minimum-pairs';
 
 interface Test {
-	input: number[],
-	solution: Pair[],
+	input: number[];
+	solution: Pair[];
 }
 
 const tests: Test[] = [
@@ -21,8 +21,11 @@ const tests: Test[] = [
 ];
 
 describe('testing minimumPairs', () => {
-	it.each(tests)('should find minimum difference pairs for the given array', (test) => {
-		const solution = minimumPairs(test.input);
-		expect(solution).toStrictEqual(test.solution);
-	});
+	it.each(tests)(
+		'should find minimum difference pairs for the given array',
+		(test) => {
+			const solution = minimumPairs(test.input);
+			expect(solution).toStrictEqual(test.solution);
+		}
+	);
 });

@@ -1,8 +1,8 @@
 import { maxSubArray } from './max-sub-array';
 
 interface Test {
-	input: [number[], number],
-	output: number[],
+	input: [number[], number];
+	output: number[];
 }
 
 const tests: Test[] = [
@@ -14,7 +14,10 @@ const tests: Test[] = [
 ];
 
 describe('testing maxSubArray', () => {
-	it.each(tests)('should return the sub array with the biggest sum', ({ input, output }) => {
-		expect(maxSubArray(...input)).toStrictEqual(output);
-	});
+	it.each(tests)(
+		'should return the sub array with the biggest sum',
+		({ input, output }) => {
+			expect(maxSubArray(...input)).toStrictEqual(output);
+		}
+	);
 });

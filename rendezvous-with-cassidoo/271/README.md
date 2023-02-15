@@ -1,6 +1,6 @@
 # Print ASCII printable characters
 
-/*cSpell:disable*/
+/_cSpell:disable_/
 
 [issue #272 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/keep-your-face-to-the-sunshine-and-you-cannot-see-1741/)
 

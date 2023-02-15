@@ -1,8 +1,8 @@
 import { fromTo } from './from-to';
 
 interface Test {
-	min: number,
-	max: number,
+	min: number;
+	max: number;
 }
 
 const tests: Test[] = [

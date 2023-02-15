@@ -39,10 +39,9 @@ describe('testing orderedPairs', () => {
 		expect(response).toStrictEqual(solution);
 	});
 	it('should return the correct solution for the input file', async () => {
-		const input = (await readFile(
-			path.join(__dirname, 'input.txt'),
-			'utf-8'
-		)).slice(0, -1);
+		const input = (
+			await readFile(path.join(__dirname, 'input.txt'), 'utf-8')
+		).slice(0, -1);
 		const solution: Solution = {
 			indicesSum: 5013,
 			part2: 25038,

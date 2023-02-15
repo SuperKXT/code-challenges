@@ -30,12 +30,12 @@ const playerRules = {
 		loses: 'A',
 	},
 } satisfies {
-		[key in PlayerMove]: {
-			score: 1 | 2 | 3,
-			wins: VersusMove,
-			loses: VersusMove,
-		}
+	[key in PlayerMove]: {
+		score: 1 | 2 | 3;
+		wins: VersusMove;
+		loses: VersusMove;
 	};
+};
 
 const versusRules = {
 	A: {
@@ -54,12 +54,12 @@ const versusRules = {
 		draws: 'Z',
 	},
 } satisfies {
-		[key in VersusMove]: {
-			wins: PlayerMove,
-			loses: PlayerMove,
-			draws: PlayerMove,
-		}
+	[key in VersusMove]: {
+		wins: PlayerMove;
+		loses: PlayerMove;
+		draws: PlayerMove;
 	};
+};
 
 const getPart1Score = (
 	versusMove: VersusMove,
@@ -67,53 +67,50 @@ const getPart1Score = (
 ): number => {
 	const { score, wins, loses } = playerRules[playerMove];
 	switch (versusMove) {
-		case wins: return score + 6;
-		case loses: return score + 0;
-		default: return score + 3;
+		case wins:
+			return score + 6;
+		case loses:
+			return score + 0;
+		default:
+			return score + 3;
 	}
 };
 
-const getPart2Score = (
-	versusMove: VersusMove,
-	result: Result
-): number => {
-
+const getPart2Score = (versusMove: VersusMove, result: Result): number => {
 	const { wins, loses, draws } = versusRules[versusMove];
 	switch (result) {
-		case 'Z': return playerRules[loses].score + 6;
-		case 'X': return playerRules[wins].score + 0;
-		default: return playerRules[draws].score + 3;
+		case 'Z':
+			return playerRules[loses].score + 6;
+		case 'X':
+			return playerRules[wins].score + 0;
+		default:
+			return playerRules[draws].score + 3;
 	}
 };
 
 export interface RockPaperScissorsSolution {
-	part1: number,
-	part2: number,
+	part1: number;
+	part2: number;
 }
 
-export const rockPaperScissors = async (): Promise<RockPaperScissorsSolution> => {
+export const rockPaperScissors =
+	async (): Promise<RockPaperScissorsSolution> => {
+		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
 
-	const input = await readFile(
-		path.join(__dirname, 'input.txt'),
-		'utf-8'
-	);
+		const score = input.split('\n').reduce(
+			({ part1, part2 }, row) => {
+				try {
+					const [versus, playerOrResult] = matchSchema.parse(row.split(' '));
+					return {
+						part1: part1 + getPart1Score(versus, playerOrResult),
+						part2: part2 + getPart2Score(versus, playerOrResult),
+					};
+				} catch (error) {
+					return { part1, part2 };
+				}
+			},
+			{ part1: 0, part2: 0 }
+		);
 
-	const score = input.split('\n').reduce(
-		({ part1, part2 }, row) => {
-			try {
-				const [versus, playerOrResult] = matchSchema.parse(row.split(' '));
-				return {
-					part1: part1 + getPart1Score(versus, playerOrResult),
-					part2: part2 + getPart2Score(versus, playerOrResult),
-				};
-			}
-			catch (error) {
-				return { part1, part2 };
-			}
-		}
-		, { part1: 0, part2: 0 }
-	);
-
-	return score;
-
-};
+		return score;
+	};
