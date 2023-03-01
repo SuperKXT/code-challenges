@@ -79,6 +79,7 @@ const config = {
 						caughtErrors: 'all',
 					},
 				],
+				'@typescript-eslint/consistent-type-exports': 'error',
 				'@typescript-eslint/consistent-type-imports': [
 					'error',
 					{
