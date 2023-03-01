@@ -4,10 +4,12 @@ import path from 'path';
 
 import { getRenameLogs, recursiveRename } from './recursive-rename';
 import {
-	RenameErrors,
-	RenameOptions,
-	RenameResult,
+	RenameErrors
 } from './recursive-rename.types';
+
+import type {
+	RenameOptions,
+	RenameResult} from './recursive-rename.types';
 
 const tempPath = path.join(tmpdir(), 'test');
 

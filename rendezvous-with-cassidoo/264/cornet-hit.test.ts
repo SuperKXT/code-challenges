@@ -1,4 +1,6 @@
-import { cornerHit, XY } from './cornet-hit';
+import { cornerHit } from './cornet-hit';
+
+import type { XY } from './cornet-hit';
 
 interface Test {
 	boxSize: XY;

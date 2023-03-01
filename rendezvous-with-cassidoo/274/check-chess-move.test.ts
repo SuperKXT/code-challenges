@@ -1,9 +1,11 @@
 import { isValidMove } from './check-chess-move';
 import {
-	ChessErrors,
-	ChessResponse,
-	IsValidMoveArgs,
+	ChessErrors
 } from './check-chess-move.types';
+
+import type {
+	ChessResponse,
+	IsValidMoveArgs} from './check-chess-move.types';
 
 interface Test {
 	input: IsValidMoveArgs;

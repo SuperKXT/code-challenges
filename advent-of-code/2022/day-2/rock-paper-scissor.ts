@@ -105,7 +105,7 @@ export const rockPaperScissors =
 						part1: part1 + getPart1Score(versus, playerOrResult),
 						part2: part2 + getPart2Score(versus, playerOrResult),
 					};
-				} catch (error) {
+				} catch {
 					return { part1, part2 };
 				}
 			},

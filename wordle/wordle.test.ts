@@ -1,5 +1,7 @@
-import { WordleWord } from './word-list';
-import { findWordle, Arguments, defaultArguments } from './wordle';
+import { findWordle, defaultArguments } from './wordle';
+
+import type { WordleWord } from './word-list';
+import type { Arguments} from './wordle';
 
 interface Test {
 	arguments: Partial<Arguments>;

@@ -6,10 +6,12 @@ import argumentParser from 'minimist-lite';
 import prompt from 'prompt';
 import { z } from 'zod';
 
+// eslint-disable-next-line no-restricted-imports
 import { formatToken } from '../helpers/string';
 
-import {
-	RenameErrors,
+import { RenameErrors } from './recursive-rename.types';
+
+import type {
 	RenameOptions,
 	RenameResult,
 	RenameResultType,

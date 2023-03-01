@@ -1,4 +1,6 @@
-import { minimumPairs, Pair } from './minimum-pairs';
+import { minimumPairs } from './minimum-pairs';
+
+import type { Pair } from './minimum-pairs';
 
 interface Test {
 	input: number[];

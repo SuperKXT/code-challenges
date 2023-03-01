@@ -1,5 +1,6 @@
 import { arrayToLinkedList } from './linked-list.helpers';
-import { LinkedList } from './linked-list.types';
+
+import type { LinkedList } from './linked-list.types';
 
 interface Test<Type> {
 	array: Type[];

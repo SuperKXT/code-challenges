@@ -5,7 +5,7 @@ import {
 	numbers,
 	upperCase,
 	wordSeparators,
-} from '../string-literals';
+} from '~/helpers/string/string-literals';
 
 export const formatStrategies = [
 	'camel',

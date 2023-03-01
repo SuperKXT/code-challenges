@@ -1,4 +1,4 @@
-import { LinkedList } from '~/helpers/linked-list';
+import type { LinkedList } from '~/helpers/linked-list';
 
 import { areArraysEqual, linkedListToArray } from './array.helpers';
 

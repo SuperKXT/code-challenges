@@ -1,17 +1,19 @@
 import {
-	BlackPiece,
 	blackPieces,
-	Board,
 	ChessErrors,
+	square,
+	whitePieces,
+	coords,
+} from './check-chess-move.types';
+
+import type {
+	BlackPiece,
+	Board,
 	ChessResponse,
 	IsValidMoveArgs,
 	Position,
 	Piece,
-	square,
-	WhitePiece,
-	whitePieces,
-	coords,
-} from './check-chess-move.types';
+	WhitePiece} from './check-chess-move.types';
 
 const assertBoard: AssertFunction<Board> = (board) => {
 	if (!Array.isArray(board) || board.length !== 8) {

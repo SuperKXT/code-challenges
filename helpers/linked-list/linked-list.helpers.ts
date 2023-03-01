@@ -1,4 +1,4 @@
-import { LinkedList, LinkedListNode } from './linked-list.types';
+import type { LinkedList, LinkedListNode } from './linked-list.types';
 
 export const arrayToLinkedList = <Type>(array: Type[]) => {
 	const list: LinkedList<Type> = {

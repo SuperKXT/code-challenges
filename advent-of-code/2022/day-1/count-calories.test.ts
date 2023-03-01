@@ -1,4 +1,6 @@
-import { countCalories, CountCaloriesSolution } from './count-calories';
+import { countCalories } from './count-calories';
+
+import type { CountCaloriesSolution } from './count-calories';
 
 describe('testing countCalories', () => {
 	it('should print the index and amount of the elf with most calories', async () => {
