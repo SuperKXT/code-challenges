@@ -30,7 +30,7 @@ export const swapLinkedListPairs = (
 ): LinkedList<number> => {
 	const swapped = { ...list };
 	let node = swapped.head;
-	while (node && node.value && node.next?.value !== undefined) {
+	while (node?.value && node.next?.value !== undefined) {
 		const current = node.next.value;
 		node.next.value = node.value;
 		node.value = current;

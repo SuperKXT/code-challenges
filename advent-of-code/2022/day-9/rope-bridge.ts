@@ -15,13 +15,13 @@ type Move = (typeof move)[number];
 const isMove = (value: any): value is Move => move.includes(value);
 
 const getUniquePositions = (array: Position[]) => {
-	return array.reduce((positions, current) => {
+	return array.reduce<Position[]>((positions, current) => {
 		const duplicate = positions.some(
 			({ row, col }) => current.row === row && current.col === col
 		);
 		if (!duplicate) positions.push(current);
 		return positions;
-	}, [] as Position[]);
+	}, []);
 };
 
 export const ropeBridge = (

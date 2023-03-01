@@ -61,7 +61,11 @@ const config = {
 				project: './tsconfig.json',
 			},
 			plugins: ['@typescript-eslint'],
-			extends: ['plugin:@typescript-eslint/recommended'],
+			extends: [
+				'plugin:@typescript-eslint/recommended',
+				// // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
+				'plugin:@typescript-eslint/strict',
+			],
 			rules: {
 				'@typescript-eslint-no-extra-semi': 'off',
 				'@typescript-eslint/no-explicit-any': 'off',
@@ -83,6 +87,7 @@ const config = {
 					},
 				],
 				'@typescript-eslint/no-unnecessary-condition': 'error',
+				'@typescript-eslint/non-nullable-type-assertion-style': 'off',
 			},
 		},
 		{
