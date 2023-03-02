@@ -1,11 +1,11 @@
 import { areArraysEqual } from '~/helpers/array';
 import type { LinkedListNode } from '~/helpers/linked-list';
 
-export type Intersection = [number, number] | LinkedListNode<number>;
+export type Intersection = LinkedListNode<number> | [number, number];
 
 const findIntersection = (
-	paramA: Intersection,
-	paramB: Intersection
+	paramA: LinkedListNode<number> | number[],
+	paramB: LinkedListNode<number> | number[]
 ): Intersection | null => {
 	if (!Array.isArray(paramA)) {
 		let nodeA = paramA;

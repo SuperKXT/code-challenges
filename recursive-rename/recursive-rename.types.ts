@@ -1,8 +1,9 @@
-export enum RenameErrors {
-	EXISTS = 'path already exists',
-	BAD_PATH = 'the given path must be a directory',
-	BAD_ARGUMENTS = 'invalid arguments provided. use -h or --help to check the correct usage',
-}
+export const RenameErrors = {
+	EXISTS: 'path already exists',
+	BAD_PATH: 'the given path must be a directory',
+	BAD_ARGUMENTS:
+		'invalid arguments provided. use -h or --help to check the correct usage',
+} as const;
 
 export const renameResultType = ['success', 'error', 'unchanged'] as const;
 
@@ -35,7 +36,7 @@ interface UnchangedResult extends AgnosticResult {
 	error?: undefined;
 }
 
-export type RenameResult = ValidResult | ErrorResult | UnchangedResult;
+export type RenameResult = ErrorResult | UnchangedResult | ValidResult;
 
 export interface RenameOptions {
 	verbose?: boolean;

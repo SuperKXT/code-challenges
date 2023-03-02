@@ -22,8 +22,11 @@ const tests: Test[] = [
 ];
 
 describe('testing truncateWords', () => {
-	it.each(tests)('should return string with truncated words', (test) => {
-		const output = truncateWords(...test.input);
-		expect(output).toStrictEqual(test.output);
-	});
+	it.each(tests)(
+		'should return string with truncated words',
+		({ input, output }) => {
+			const response = truncateWords(...input);
+			expect(response).toStrictEqual(output);
+		}
+	);
 });

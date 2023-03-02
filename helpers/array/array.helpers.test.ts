@@ -47,16 +47,19 @@ const toArrayTests: ToArrayTest<number>[] = [
 describe('array equality helper', () => {
 	it.each(equalityTests)(
 		'should calculate if the two arrays are equal',
-		(test) => {
-			const areEqual = areArraysEqual(test.first, test.second);
-			expect(areEqual).toStrictEqual(test.areEqual);
+		({ first, second, areEqual }) => {
+			const response = areArraysEqual(first, second);
+			expect(response).toStrictEqual(areEqual);
 		}
 	);
 });
 
 describe('linked list to array helper', () => {
-	it.each(toArrayTests)('should return array by given linked list', (test) => {
-		const array = linkedListToArray(test.list);
-		expect(array).toStrictEqual(test.array);
-	});
+	it.each(toArrayTests)(
+		'should return array by given linked list',
+		({ list, array }) => {
+			const response = linkedListToArray(list);
+			expect(response).toStrictEqual(array);
+		}
+	);
 });

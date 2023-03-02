@@ -1,5 +1,6 @@
 import { generateCatanBoard, assertValidCatanBoard } from './generate-catan';
 import { CatanErrors } from './generate-catan.types';
+import type { CatanError } from './generate-catan.types';
 
 const validBoards: string[] = [
 	['  B 9 A', ' 5 6 C 8', '6 4 B 5 3', ' 2 8 9 3', '  A . 4'].join('\n'),
@@ -9,7 +10,7 @@ const validBoards: string[] = [
 
 interface InvalidBoard {
 	board: string;
-	error: CatanErrors;
+	error: CatanError;
 }
 
 const invalidBoards: InvalidBoard[] = [
@@ -33,7 +34,7 @@ const invalidBoards: InvalidBoard[] = [
 
 describe('testing isValidCatanBoard', () => {
 	it.each(validBoards)('should assert the valid boards and return', (board) => {
-		expect(assertValidCatanBoard(board)).toBeUndefined();
+		expect(() => assertValidCatanBoard(board)).not.toThrow();
 	});
 	it.each(invalidBoards)(
 		'should throw the correct error for invalid boards',

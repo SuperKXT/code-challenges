@@ -1,9 +1,9 @@
 // 🤬 noUncheckedIndexedAccess: can't live with it, can't live without it
 
-export enum Errors {
-	Length = 'Sequence length must be greater than 2',
-	Undefined = 'Sequence can not have empty spots',
-}
+export const Errors = {
+	Length: 'Sequence length must be greater than 2',
+	Undefined: 'Sequence can not have empty spots',
+} as const;
 
 export const getFibonacciLike = (
 	first: number,
@@ -15,12 +15,12 @@ export const getFibonacciLike = (
 	}
 	const sequence = [first, second];
 	for (let index = 2; index < length; index++) {
-		const first = sequence[index - 1];
-		const second = sequence[index - 2];
-		if (first === undefined || second === undefined) {
+		const current = sequence[index - 1];
+		const last = sequence[index - 2];
+		if (current === undefined || last === undefined) {
 			throw new Error(Errors.Undefined);
 		}
-		sequence.push(first + second);
+		sequence.push(current + last);
 	}
 	return sequence;
 };

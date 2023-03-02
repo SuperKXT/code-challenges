@@ -15,9 +15,9 @@ const tests: Test[] = [
 describe('testing passDoors', () => {
 	it.each(tests)(
 		'should return number of open doors after given passes',
-		(test) => {
-			const output = passDoors(...test.input);
-			expect(output).toStrictEqual(test.output);
+		({ input, output }) => {
+			const response = passDoors(...input);
+			expect(response).toStrictEqual(output);
 		}
 	);
 });

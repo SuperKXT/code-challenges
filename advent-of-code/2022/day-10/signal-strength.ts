@@ -19,7 +19,7 @@ interface Clock {
 const getCrtOutput = ({
 	register,
 	cycle,
-}: Clock): '#' | '.' | '\n#' | '\n.' => {
+}: Clock): '.' | '\n.' | '\n#' | '#' => {
 	const sprite = [register - 1, register, register + 1];
 	const position = (cycle - 1) % 40;
 	const isEol = cycle > 1 && position === 0;

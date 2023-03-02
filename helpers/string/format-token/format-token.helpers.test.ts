@@ -70,16 +70,16 @@ const tests: Test[] = [
 	},
 ];
 
-describe.each(tests)('test formatString helper', (test) => {
-	it(`should return ${test.output.camel} for formatString(${test.input})`, () => {
-		const output = formatToken(test.input);
-		expect(output).toStrictEqual(test.output.camel);
+describe.each(tests)('test formatString helper', ({ input, output }) => {
+	it(`should return ${output.camel} for formatString(${input})`, () => {
+		const response = formatToken(input);
+		expect(response).toStrictEqual(output.camel);
 	});
 	it.each(formatStrategies)(
 		'should return valid formatted string by given parameters',
 		(strategy) => {
-			const output = formatToken(test.input, strategy);
-			expect(output).toStrictEqual(test.output[strategy]);
+			const response = formatToken(input, strategy);
+			expect(response).toStrictEqual(output[strategy]);
 		}
 	);
 });

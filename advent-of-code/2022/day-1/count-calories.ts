@@ -15,7 +15,7 @@ export const countCalories = async (): Promise<CountCaloriesSolution> => {
 		row
 			.split('\n')
 			.map(Number)
-			.reduce((sum, calories) => (sum += calories), 0)
+			.reduce((sum, current) => (sum += current), 0)
 	);
 	const maxCalories = Math.max(...calories);
 	const maxIndex = calories.indexOf(maxCalories);
@@ -27,7 +27,7 @@ export const countCalories = async (): Promise<CountCaloriesSolution> => {
 		number
 	];
 	const topThreeCalories = topThree.reduce(
-		(sum, calories) => (sum += calories),
+		(sum, current) => (sum += current),
 		0
 	);
 

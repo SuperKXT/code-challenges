@@ -3,14 +3,14 @@ interface Solution {
 	part2: number;
 }
 
-type Packet = (number | Packet)[];
+type Packet = (Packet | number)[];
 
 const checkPacketOrder = (
 	leftPacket: Packet,
 	rightPacket: Packet
 ): boolean | undefined => {
 	for (let index = 0; index < leftPacket.length; index++) {
-		const left = leftPacket[index] as number | Packet;
+		const left = leftPacket[index] as Packet | number;
 		const right = rightPacket[index];
 		if (right === undefined) return false;
 		else if (typeof left === 'number' && typeof right === 'number') {
@@ -38,7 +38,8 @@ export const orderedPairs = (input: string): Solution => {
 	const pairs = input
 		.split('\n\n')
 		.map(
-			(row) => row.split('\n').map((row) => JSON.parse(row)) as [Packet, Packet]
+			(row) =>
+				row.split('\n').map((curr) => JSON.parse(curr)) as [Packet, Packet]
 		);
 
 	for (const pair of pairs) {

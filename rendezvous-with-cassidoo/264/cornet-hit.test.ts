@@ -27,13 +27,13 @@ const tests: Test[] = [
 describe('testing cornerHit', () => {
 	it.each(tests)(
 		'should return if the box hits the corner for given input',
-		(test) => {
+		(testCase) => {
 			const result = cornerHit(
-				test.boxSize,
-				test.initialPosition,
-				test.screenSize
+				testCase.boxSize,
+				testCase.initialPosition,
+				testCase.screenSize
 			);
-			expect(result).toStrictEqual(test.result);
+			expect(result).toStrictEqual(testCase.result);
 		}
 	);
 });

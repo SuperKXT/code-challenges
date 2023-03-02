@@ -18,7 +18,7 @@ const isMove = (value: any): value is Move =>
 const getUniquePositions = (array: Position[]) => {
 	return array.reduce<Position[]>((positions, current) => {
 		const duplicate = positions.some(
-			({ row, col }) => current.row === row && current.col === col
+			(position) => current.row === position.row && current.col === position.col
 		);
 		if (!duplicate) positions.push(current);
 		return positions;
@@ -40,16 +40,16 @@ export const ropeBridge = (
 	const firstTail = rope.at(1) as Position[];
 	const lastTail = rope.at(-1) as Position[];
 
-	for (const row of input.split('\n')) {
-		const [move, repeat] = row.split(' ');
-		if (!isMove(move) || isNaN(Number(repeat))) {
+	for (const current of input.split('\n')) {
+		const [direction, repeat] = current.split(' ');
+		if (!isMove(direction) || isNaN(Number(repeat))) {
 			continue;
 		}
 
 		[...new Array<undefined>(Number(repeat))].forEach(() => {
 			const headPosition = { ...head.at(-1) } as Position;
 
-			switch (move) {
+			switch (direction) {
 				case 'R':
 					headPosition.col++;
 					break;
@@ -67,22 +67,20 @@ export const ropeBridge = (
 
 			for (const tail of rope.slice(1)) {
 				const index = rope.indexOf(tail);
-				const lastTail = rope.at(index - 1) as Position[];
+				const last = rope.at(index - 1) as Position[];
 
-				const lastTailPosition = lastTail.at(-1) as Position;
+				const lastTailPosition = last.at(-1) as Position;
 				const tailPosition = { ...tail.at(-1) } as Position;
 
 				const areAdjacent =
 					Math.abs(lastTailPosition.row - tailPosition.row) < 2 &&
 					Math.abs(lastTailPosition.col - tailPosition.col) < 2;
 
-				const updateKnot = (key: 'row' | 'col') => {
+				const updateKnot = (key: 'col' | 'row') => {
 					if (areAdjacent) return;
-					tailPosition[key] > lastTailPosition[key]
-						? tailPosition[key]--
-						: tailPosition[key] < lastTailPosition[key]
-						? tailPosition[key]++
-						: tailPosition[key];
+					if (tailPosition[key] > lastTailPosition[key]) tailPosition[key]--;
+					else if (tailPosition[key] < lastTailPosition[key])
+						tailPosition[key]++;
 				};
 
 				updateKnot('row');

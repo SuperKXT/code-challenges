@@ -50,22 +50,25 @@ const checkTests: CheckTest[] = [
 describe('testing getFibonacciLike', () => {
 	it.each(getTests)(
 		'should return fibonacci like sequence of given length',
-		(test) => {
-			const output = getFibonacciLike(...test.input);
-			expect(output).toStrictEqual(test.output);
+		({ input, output }) => {
+			const response = getFibonacciLike(...input);
+			expect(response).toStrictEqual(output);
 		}
 	);
-	it.each(badGetTests)('should throw error for incorrect length', (test) => {
-		expect(() => getFibonacciLike(...test.input)).toThrow(test.error);
-	});
+	it.each(badGetTests)(
+		'should throw error for incorrect length',
+		({ input, error }) => {
+			expect(() => getFibonacciLike(...input)).toThrow(error);
+		}
+	);
 });
 
 describe('testing isFibonacciLike', () => {
 	it.each(checkTests)(
 		'should indicate if sequence is a fibonacci like',
-		(test) => {
-			const output = isFibonacciLike(test.input);
-			expect(output).toStrictEqual(test.output);
+		({ input, output }) => {
+			const response = isFibonacciLike(input);
+			expect(response).toStrictEqual(output);
 		}
 	);
 });

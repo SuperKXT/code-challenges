@@ -1,15 +1,15 @@
 export type GradePoint =
-	| 'A'
 	| 'A-'
-	| 'B+'
-	| 'B'
+	| 'A'
 	| 'B-'
-	| 'C+'
-	| 'C'
+	| 'B'
+	| 'B+'
 	| 'C-'
-	| 'D+'
-	| 'D'
+	| 'C'
+	| 'C+'
 	| 'D-'
+	| 'D'
+	| 'D+'
 	| 'F';
 
 export const key: Record<GradePoint, number> = {

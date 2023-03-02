@@ -3,8 +3,8 @@ export const singlePieces = ['.', '2', 'C'] as const;
 export const doublePieces = ['3', '4', '5', '6', '8', '9', 'A', 'B'] as const;
 
 export type Cell =
-	| (typeof singlePieces)[number]
-	| (typeof doublePieces)[number];
+	| (typeof doublePieces)[number]
+	| (typeof singlePieces)[number];
 
 export type Board = [
 	RepeatedTuple<Cell, 3>,
@@ -33,8 +33,11 @@ export const BOARD_REGEX = new RegExp(
 	}).join('\n')
 );
 
-export enum CatanErrors {
-	BAD_FORMATTING = 'The board is not properly formatted',
-	BAD_PIECE_COUNT = 'Board must have two each of 3, 4, 5, 6, 8, 9, 10, 11, and one each of 2, 12, and .',
-	BAD_POSITIONING = '6 and 8 cells can not touch each other',
-}
+export const CatanErrors = {
+	BAD_FORMATTING: 'The board is not properly formatted',
+	BAD_PIECE_COUNT:
+		'Board must have two each of 3, 4, 5, 6, 8, 9, 10, 11, and one each of 2, 12, and .',
+	BAD_POSITIONING: '6 and 8 cells can not touch each other',
+} as const;
+
+export type CatanError = (typeof CatanErrors)[keyof typeof CatanErrors];

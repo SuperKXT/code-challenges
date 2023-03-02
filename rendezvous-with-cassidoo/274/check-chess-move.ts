@@ -58,7 +58,7 @@ export const isValidMove = ({
 	to: [toRow, toCol],
 }: IsValidMoveArgs): ChessResponse => {
 	try {
-		const squares = board.split('\n').map((row) => row.split(''));
+		const squares = board.split('\n').map((curr) => curr.split(''));
 
 		assertBoard(squares);
 
@@ -91,11 +91,11 @@ export const isValidMove = ({
 			const isMove =
 				(toRow === nextRow && toCol === col) ||
 				(row == start && toRow === doubleNext && toCol === col);
-			const isKill =
+			const isCurrentKill =
 				toRow === nextRow &&
 				(toCol === nextCol || toCol === prevCol) &&
 				whitePieces.includes(toSquare);
-			if (!isMove && !isKill) {
+			if (!isMove && !isCurrentKill) {
 				throw new Error(CHESS_ERRORS.BAD_PAWN);
 			}
 			path.push([row, col], [toRow, toCol]);
@@ -169,8 +169,10 @@ export const isValidMove = ({
 			while (true) {
 				path.push([currentRow, currentCol] as Position);
 				if (currentRow === toRow && currentCol === toCol) break;
-				toRow > row ? currentRow++ : toRow < row ? currentRow-- : undefined;
-				toCol > col ? currentCol++ : toCol < col ? currentCol-- : undefined;
+				if (toRow > row) currentRow++;
+				else if (toRow < row) currentRow--;
+				if (toCol > col) currentCol++;
+				else if (toCol < col) currentCol--;
 			}
 		} else {
 			const valid = [
@@ -189,7 +191,7 @@ export const isValidMove = ({
 			}
 			path.push([row, col], [toRow, toCol]);
 		}
-		7;
+
 		path.slice(1, -1).forEach(([x, y]) => {
 			if (square[x][y] !== '~') {
 				throw new Error(CHESS_ERRORS.COLLISION);

@@ -8,8 +8,11 @@ const tests = [
 ];
 
 describe('test parenthesisSubstring', () => {
-	it.each(tests)('should return longest valid string length', (test) => {
-		const solution = parenthesisSubstring(test.string);
-		expect(solution).toStrictEqual(test.solution);
-	});
+	it.each(tests)(
+		'should return longest valid string length',
+		({ string, solution }) => {
+			const response = parenthesisSubstring(string);
+			expect(response).toStrictEqual(solution);
+		}
+	);
 });

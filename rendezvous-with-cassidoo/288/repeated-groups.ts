@@ -1,6 +1,6 @@
 export const repeatedGroups = (input: number[]): number[][] => {
 	const groups: number[][] = [];
-	let current: null | number = null;
+	let current: number | null = null;
 	for (const number of input) {
 		if (number === current) {
 			groups.at(-1)?.push(number);

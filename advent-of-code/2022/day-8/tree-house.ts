@@ -23,19 +23,19 @@ export const treeHouse = (
 				trees.slice(colIndex + 1),
 				forest
 					.slice(0, rowIndex)
-					.map((row) => Number(row[colIndex]))
+					.map((curr) => Number(curr[colIndex]))
 					.reverse(),
-				forest.slice(rowIndex + 1).map((row) => Number(row[colIndex])),
+				forest.slice(rowIndex + 1).map((curr) => Number(curr[colIndex])),
 			];
-			const isVisible = attached.some((trees) =>
-				trees.every((tree) => tree < current)
+			const isVisible = attached.some((curr) =>
+				curr.every((tree) => tree < current)
 			);
 			if (isVisible) {
 				visible++;
 			}
-			const currentScenicScore = attached.reduce((sum, trees) => {
+			const currentScenicScore = attached.reduce((sum, curr) => {
 				let currentSum = 0;
-				for (const tree of trees) {
+				for (const tree of curr) {
 					currentSum++;
 					if (tree >= current) break;
 				}

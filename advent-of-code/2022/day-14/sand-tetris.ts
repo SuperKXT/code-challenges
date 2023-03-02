@@ -28,7 +28,7 @@ class Coord {
 	}
 }
 
-type MapRow = ('.' | '+' | '#' | 'o')[];
+type MapRow = ('.' | '#' | '+' | 'o')[];
 type Map = MapRow[];
 
 const source = new Coord({ row: 0, col: 500 });
@@ -38,7 +38,7 @@ const getLanding = (
 	map: Map,
 	row: number = source.row,
 	col: number = source.col
-): null | Coord => {
+): Coord | null => {
 	const mapRow = map[row];
 	if (!mapRow || mapRow[col] !== '.' || !map[row + 1]) return null;
 	const colOffset = [0, -1, 1].find(
@@ -72,14 +72,14 @@ export const sandTetris = (input: string): Solution => {
 	const start = new Coord({ row: 0, col: Infinity });
 	const end = new Coord({ row: -Infinity, col: 500 });
 
-	const rocks = paths.reduce(
-		(rocks: Coord[], path) =>
-			rocks.concat(
+	const rocks = paths.reduce<Coord[]>(
+		(current, path) =>
+			current.concat(
 				path.reduce((pathRocks: Coord[], from, index) => {
 					const to = path[index + 1];
 					if (!to) return pathRocks;
 
-					if (from.existsIn(rocks) && to.existsIn(rocks)) return pathRocks;
+					if (from.existsIn(current) && to.existsIn(current)) return pathRocks;
 
 					const direction =
 						to.row < from.row
@@ -98,7 +98,7 @@ export const sandTetris = (input: string): Solution => {
 						if (curr.col < start.col) start.col = curr.col;
 						if (curr.col > end.col) end.col = curr.col;
 
-						if (!curr.existsIn(rocks)) {
+						if (!curr.existsIn(current)) {
 							pathRocks.push(new Coord(curr));
 						}
 

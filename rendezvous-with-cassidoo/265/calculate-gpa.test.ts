@@ -31,8 +31,11 @@ const tests: Test[] = [
 ];
 
 describe('testing calculateGpa', () => {
-	it.each(tests)('should return correct gpa for the given input', (test) => {
-		const output = calculateGpa(test.input);
-		expect(output).toStrictEqual(test.output);
-	});
+	it.each(tests)(
+		'should return correct gpa for the given input',
+		({ input, output }) => {
+			const response = calculateGpa(input);
+			expect(response).toStrictEqual(output);
+		}
+	);
 });

@@ -21,8 +21,11 @@ const tests: Test<number>[] = [
 ];
 
 describe('array to linked list helper', () => {
-	it.each(tests)('should return linked list by the given array', (test) => {
-		const list = arrayToLinkedList(test.array);
-		expect(JSON.stringify(list)).toStrictEqual(JSON.stringify(test.list));
-	});
+	it.each(tests)(
+		'should return linked list by the given array',
+		({ array, list }) => {
+			const response = arrayToLinkedList(array);
+			expect(JSON.stringify(response)).toStrictEqual(JSON.stringify(list));
+		}
+	);
 });

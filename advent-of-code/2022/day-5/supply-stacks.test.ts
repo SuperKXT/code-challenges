@@ -27,8 +27,8 @@ describe('testing supplyStacks', () => {
 		expect(response).toStrictEqual(solution);
 	});
 	it('should return the correct solution for the input file', async () => {
-		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
-		const response = supplyStacks(input);
+		const file = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
+		const response = supplyStacks(file);
 		const solution: Solution = {
 			part1: 'VRWBSFZWM' /* cSpell: disable-line */,
 			part2: 'RBTWJWMCF' /* cSpell: disable-line */,

@@ -6,9 +6,9 @@ export const pluralize = (
 	...inputExpressions: (
 		| number
 		| string
+		| [number, (arg: number) => string | null]
+		| [number, string | null]
 		| [number]
-		| [number, null | string]
-		| [number, (arg: number) => null | string]
 	)[]
 ): string => {
 	const expressions = inputExpressions.map((value) => {
@@ -33,6 +33,8 @@ export const pluralize = (
 						);
 						break;
 					}
+					default:
+						break;
 				}
 				return [value[0], toShow] as const;
 			}

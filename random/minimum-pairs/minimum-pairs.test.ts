@@ -25,9 +25,9 @@ const tests: Test[] = [
 describe('testing minimumPairs', () => {
 	it.each(tests)(
 		'should find minimum difference pairs for the given array',
-		(test) => {
-			const solution = minimumPairs(test.input);
-			expect(solution).toStrictEqual(test.solution);
+		({ input, solution }) => {
+			const response = minimumPairs(input);
+			expect(response).toStrictEqual(solution);
 		}
 	);
 });

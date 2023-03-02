@@ -26,16 +26,16 @@ type _RepeatedTuple<
 
 declare global {
 	type ReadableTypeOf =
-		| 'undefined'
-		| 'boolean'
-		| 'number'
+		| 'array'
 		| 'bigint'
+		| 'boolean'
+		| 'function'
+		| 'null'
+		| 'number'
+		| 'object'
 		| 'string'
 		| 'symbol'
-		| 'function'
-		| 'array'
-		| 'null'
-		| 'object';
+		| 'undefined';
 
 	type RepeatedTuple<T, N extends number> = N extends N
 		? number extends N
@@ -61,5 +61,3 @@ declare global {
 		onlyCheckFirst?: boolean
 	) => asserts value is Type;
 }
-
-export {};

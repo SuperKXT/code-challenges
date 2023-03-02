@@ -1,27 +1,27 @@
-import { findWordle, defaultArguments } from './wordle';
+import { findWordle, defaultArgs } from './wordle';
 
 import type { WordleWord } from './word-list';
-import type { Arguments} from './wordle';
+import type { Arguments } from './wordle';
 
 interface Test {
-	arguments: Partial<Arguments>;
+	args: Partial<Arguments>;
 	results: WordleWord[];
 }
 
-const tests: Test[] = [
+const testCases: Test[] = [
 	{
-		arguments: {
+		args: {
 			pattern: 'q*e(ueq)(ueq)',
 			known: 'qul',
 		},
 		results: ['quell'],
 	},
 	{
-		arguments: {
+		args: {
 			/* cspell: disable-next-line */
 			known: 'crut',
 		},
-		/* cspell: disable-next-line */
+		/* cspell: disable */
 		results: [
 			'cruet',
 			'eruct',
@@ -37,9 +37,10 @@ const tests: Test[] = [
 			'truce',
 			'curet',
 		],
+		/* cspell: enable */
 	},
 	{
-		arguments: {
+		args: {
 			/* cspell: disable-next-line */
 			available: 'prudeaqwzxjhiu',
 			pattern: 'p*u(pu)*',
@@ -47,7 +48,7 @@ const tests: Test[] = [
 		results: ['prude'],
 	},
 	{
-		arguments: {
+		args: {
 			known: 'loc',
 			/* cspell: disable-next-line */
 			available: 'qwygjzxmloc',
@@ -56,7 +57,7 @@ const tests: Test[] = [
 		results: ['colly', 'coyly'],
 	},
 	{
-		arguments: {
+		args: {
 			known: 'loc',
 			/* cspell: disable-next-line */
 			available: 'qwygjzxmloc',
@@ -66,7 +67,7 @@ const tests: Test[] = [
 		results: [],
 	},
 	{
-		arguments: {
+		args: {
 			/* cspell: disable-next-line */
 			available: 'qwtypafghjkzxvbm',
 			repeat: false,
@@ -75,7 +76,7 @@ const tests: Test[] = [
 		results: ['bawty', 'thawy', 'pawky', 'mawky', 'gawky', 'vampy'],
 	},
 	{
-		arguments: {
+		args: {
 			/* cspell: disable-next-line */
 			unavailable: 'asduiopkbn',
 			known: 'ec',
@@ -86,8 +87,11 @@ const tests: Test[] = [
 ];
 
 describe('find wordle word', () => {
-	it.each(tests)('should find matched words by the given flags', (test) => {
-		const results = findWordle({ ...defaultArguments, ...test.arguments });
-		expect(results).toStrictEqual(test.results);
-	});
+	it.each(testCases)(
+		'should find matched words by the given flags',
+		({ args: args, results }) => {
+			const response = findWordle({ ...defaultArgs, ...args });
+			expect(response).toStrictEqual(results);
+		}
+	);
 });

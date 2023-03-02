@@ -60,7 +60,14 @@ export const getRecursiveLogs = (
 	};
 
 	for (const result of results) {
-		const { type, path, oldName, newName, error, children } = result;
+		const {
+			type,
+			path: resultPath,
+			oldName,
+			newName,
+			error,
+			children,
+		} = result;
 
 		response[type].push(result);
 
@@ -72,7 +79,7 @@ export const getRecursiveLogs = (
 				tree && '  '.repeat(depth - 1),
 				tree && chalk.dim('|_ '),
 				!tree && `${labels[type]} `,
-				!tree && `${chalk.dim(path)}/`,
+				!tree && `${chalk.dim(resultPath)}/`,
 				type === 'unchanged' ? oldName : chalk.strikethrough(oldName),
 				type !== 'unchanged' &&
 					chalk[type === 'success' ? 'green' : 'red'](` ${newName}`),
@@ -144,16 +151,16 @@ export const getRenameLogs = (
 	return logs.join('\n');
 };
 
-const getExists = async (path: string): Promise<boolean> => {
-	return access(path)
+const getExists = async (file: string): Promise<boolean> => {
+	return access(file)
 		.then(() => true)
 		.catch(() => false);
 };
 
-const getIsFolder = async (path: string): Promise<boolean> => {
-	return getExists(path)
-		.then(() => stat(path))
-		.then((stat) => stat.isDirectory())
+const getIsFolder = async (file: string): Promise<boolean> => {
+	return getExists(file)
+		.then(async () => stat(file))
+		.then((stats) => stats.isDirectory())
 		.catch(() => false);
 };
 

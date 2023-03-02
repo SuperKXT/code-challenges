@@ -10,7 +10,7 @@ const DUPLICATE_CHARACTER_REGEX = /(.).*\1/i;
 /* cspell: disable-next-line */
 const ALPHABETS = 'abcdefghijklmnopqrstuvxwyz';
 
-export const defaultArguments: Arguments = {
+export const defaultArgs: Arguments = {
 	available: ALPHABETS,
 	a: ALPHABETS,
 	unavailable: '',
@@ -21,6 +21,20 @@ export const defaultArguments: Arguments = {
 	k: '',
 	repeat: true,
 };
+
+const argumentSchema = z.strictObject({
+	_: z.string().array().length(0).optional(),
+	'--': z.string().array().length(0).optional(),
+	available: z.string().regex(/^[a-z]{0,26}$/i),
+	a: z.string().regex(/^[a-z]{0,26}$/i),
+	unavailable: z.string().regex(/^[a-z]{0,26}$/i),
+	u: z.string().regex(/^[a-z]{0,26}$/i),
+	pattern: z.string().regex(VALID_WORD_PATTERN),
+	p: z.string().regex(VALID_WORD_PATTERN),
+	known: z.string().regex(/^[a-z]{0,5}$/i),
+	k: z.string().regex(/^[a-z]{0,5}$/i),
+	repeat: z.boolean(),
+});
 
 export const findWordle = (parameters: Arguments): string[] => {
 	const { available, unavailable, pattern, known, repeat } =
@@ -61,20 +75,6 @@ export const findWordle = (parameters: Arguments): string[] => {
 	return matches;
 };
 
-const argumentSchema = z.strictObject({
-	_: z.string().array().length(0).optional(),
-	'--': z.string().array().length(0).optional(),
-	available: z.string().regex(/^[a-z]{0,26}$/i),
-	a: z.string().regex(/^[a-z]{0,26}$/i),
-	unavailable: z.string().regex(/^[a-z]{0,26}$/i),
-	u: z.string().regex(/^[a-z]{0,26}$/i),
-	pattern: z.string().regex(VALID_WORD_PATTERN),
-	p: z.string().regex(VALID_WORD_PATTERN),
-	known: z.string().regex(/^[a-z]{0,5}$/i),
-	k: z.string().regex(/^[a-z]{0,5}$/i),
-	repeat: z.boolean(),
-});
-
 export type Arguments = z.infer<typeof argumentSchema>;
 
 if (process.env.NODE_ENV !== 'test') {
@@ -85,7 +85,7 @@ if (process.env.NODE_ENV !== 'test') {
 			pattern: 'p',
 			known: 'k',
 		},
-		default: defaultArguments,
+		default: defaultArgs,
 	});
 	findWordle(args); // eslint-disable-line jest/require-hook
 }

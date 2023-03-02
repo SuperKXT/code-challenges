@@ -29,8 +29,8 @@ export const monkeyBusiness = (input: string): Solution => {
 	const monkeys = input
 		.split('\n\n')
 		.filter(Boolean)
-		.map((input) => {
-			const rows = input.split('\n');
+		.map((curr) => {
+			const rows = curr.split('\n');
 
 			const [first, op, second] =
 				rows[2]?.replace(prefix.operation, '').trim().split(/\s+/g) ?? [];
@@ -64,15 +64,15 @@ export const monkeyBusiness = (input: string): Solution => {
 		1
 	);
 
-	const executeCycle = (monkeys: Monkey[], isBig?: boolean) => {
-		for (const monkey of monkeys) {
+	const executeCycle = (list: Monkey[], isBig?: boolean) => {
+		for (const monkey of list) {
 			const { items, operation, divisor, trueIndex, falseIndex } = monkey;
 			while (items.length) {
 				const item = items.shift() as number;
 				const newValue =
 					Math.floor(operation(item) / (isBig ? 1 : 3)) % superModulo;
 				const receiver = newValue % divisor === 0 ? trueIndex : falseIndex;
-				monkeys[receiver]?.items.push(newValue);
+				list[receiver]?.items.push(newValue);
 				monkey.inspected++;
 			}
 		}
