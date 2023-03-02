@@ -1,3 +1,5 @@
+import '@total-typescript/ts-reset';
+
 type _RepeatedTuple<
 	T,
 	N extends number,

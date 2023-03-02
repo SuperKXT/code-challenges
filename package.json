@@ -11,6 +11,7 @@
 		"kebab-rename": "ts-node ./recursive-rename/recursive-rename.ts"
 	},
 	"devDependencies": {
+		"@total-typescript/ts-reset": "^0.3.7",
 		"@types/eslint": "^8.21.0",
 		"@types/jest": "^29.4.0",
 		"@types/node": "^18.11.19",
