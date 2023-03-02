@@ -63,7 +63,7 @@ const config = {
 			plugins: ['@typescript-eslint'],
 			extends: [
 				'plugin:@typescript-eslint/recommended',
-				// // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
+				'plugin:@typescript-eslint/recommended-requiring-type-checking',
 				'plugin:@typescript-eslint/strict',
 			],
 			rules: {
@@ -80,15 +80,14 @@ const config = {
 					},
 				],
 				'@typescript-eslint/consistent-type-exports': 'error',
-				'@typescript-eslint/consistent-type-imports': [
+				'@typescript-eslint/consistent-type-imports': 'error',
+				'@typescript-eslint/non-nullable-type-assertion-style': 'off',
+				'@typescript-eslint/no-unnecessary-condition': [
 					'error',
 					{
-						prefer: 'type-imports',
-						fixStyle: 'separate-type-imports',
+						allowConstantLoopConditions: true,
 					},
 				],
-				'@typescript-eslint/no-unnecessary-condition': 'error',
-				'@typescript-eslint/non-nullable-type-assertion-style': 'off',
 			},
 		},
 		{

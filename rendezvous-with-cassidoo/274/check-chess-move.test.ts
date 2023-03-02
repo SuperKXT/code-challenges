@@ -1,11 +1,7 @@
 import { isValidMove } from './check-chess-move';
-import {
-	ChessErrors
-} from './check-chess-move.types';
+import { CHESS_ERRORS } from './check-chess-move.types';
 
-import type {
-	ChessResponse,
-	IsValidMoveArgs} from './check-chess-move.types';
+import type { ChessResponse, IsValidMoveArgs } from './check-chess-move.types';
 
 interface Test {
 	input: IsValidMoveArgs;
@@ -32,7 +28,7 @@ const tests: Test[] = [
 		},
 		response: {
 			isValid: false,
-			error: ChessErrors.BAD_ROOK,
+			error: CHESS_ERRORS.BAD_ROOK,
 		},
 	},
 	{
@@ -58,7 +54,7 @@ const tests: Test[] = [
 		},
 		response: {
 			isValid: false,
-			error: ChessErrors.COLLISION,
+			error: CHESS_ERRORS.COLLISION,
 		},
 	},
 ];

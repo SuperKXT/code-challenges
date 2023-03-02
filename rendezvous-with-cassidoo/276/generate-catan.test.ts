@@ -46,7 +46,7 @@ describe('testing isValidCatanBoard', () => {
 describe('testing generateCatanBoard', () => {
 	it('should generate a 1000 valid catan board', () => {
 		expect(() => {
-			[...new Array(1000)].forEach(() => {
+			[...new Array<unknown>(1000)].forEach(() => {
 				const board = generateCatanBoard();
 				assertValidCatanBoard(board);
 			});

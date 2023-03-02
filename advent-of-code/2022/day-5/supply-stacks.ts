@@ -1,12 +1,12 @@
-export const supplyStacks = async (
+export const supplyStacks = (
 	input: string
-): Promise<{
+): {
 	part1: string;
 	part2: string;
-}> => {
+} => {
 	const parts = input.split('\n\n');
 	const stackRows = parts[0]?.split('\n').slice(0, -1) ?? [];
-	const stacks = stackRows.reduce((array: string[][], row) => {
+	const stacks = stackRows.reduce<string[][]>((array, row) => {
 		let index = 0;
 		for (let i = 1; i < row.length; i += 4) {
 			const current = row[i];
@@ -15,17 +15,17 @@ export const supplyStacks = async (
 			if (!current || current === ' ') continue;
 			array[lastIndex]?.push(current);
 		}
-		return array as any;
+		return array;
 	}, []);
 
 	const part1Stacks = structuredClone(stacks);
 	const part2Stacks = structuredClone(stacks);
 
 	const moveRows = parts[1]?.split('\n').filter(Boolean) ?? [];
-	const moves = moveRows.reduce(
-		(array: [number, number, number][], row) => [
+	const moves = moveRows.reduce<[number, number, number][]>(
+		(array, row) => [
 			...array,
-			row.match(/[0-9]+/g)?.map(Number) as any,
+			row.match(/[0-9]+/g)?.map(Number) as [number, number, number],
 		],
 		[]
 	);

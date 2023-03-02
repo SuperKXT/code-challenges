@@ -5,10 +5,7 @@ import {
 	CatanErrors,
 } from './generate-catan.types';
 
-import type {
-	Cell,
-	Board,
-	ProspectiveBoard} from './generate-catan.types';
+import type { Cell, Board, ProspectiveBoard } from './generate-catan.types';
 
 const isBadNeighbor = (
 	cell: Cell,
@@ -26,7 +23,7 @@ const isBadNeighbor = (
 		board[row - 1]?.[topLeftCol + 1],
 		board[row + 1]?.[bottomLeftCol],
 		board[row + 1]?.[bottomLeftCol + 1],
-	].filter(Boolean) as Cell[];
+	].filter(Boolean);
 	const badCell = cell === '6' ? '8' : '6';
 	return neighbors.some((current) => current === badCell);
 };
@@ -45,8 +42,8 @@ export const assertValidCatanBoard = (input: string) => {
 		row.forEach((cell, index) => {
 			counts[cell] = (counts[cell] ?? 0) + 1;
 			if (
-				(singlePieces.includes(cell as any) && (counts[cell] ?? 0) > 1) ||
-				(doublePieces.includes(cell as any) && (counts[cell] ?? 0) > 2)
+				(singlePieces.includes(cell as string) && (counts[cell] ?? 0) > 1) ||
+				(doublePieces.includes(cell as string) && (counts[cell] ?? 0) > 2)
 			)
 				throw new Error(CatanErrors.BAD_PIECE_COUNT);
 

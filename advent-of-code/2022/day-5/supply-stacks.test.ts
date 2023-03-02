@@ -18,8 +18,8 @@ const input = [
 type Solution = Awaited<ReturnType<typeof supplyStacks>>;
 
 describe('testing supplyStacks', () => {
-	it('should return the correct solution for the example input', async () => {
-		const response = await supplyStacks(input);
+	it('should return the correct solution for the example input', () => {
+		const response = supplyStacks(input);
 		const solution: Solution = {
 			part1: 'CMZ',
 			part2: 'MCD',
@@ -28,7 +28,7 @@ describe('testing supplyStacks', () => {
 	});
 	it('should return the correct solution for the input file', async () => {
 		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
-		const response = await supplyStacks(input);
+		const response = supplyStacks(input);
 		const solution: Solution = {
 			part1: 'VRWBSFZWM' /* cSpell: disable-line */,
 			part2: 'RBTWJWMCF' /* cSpell: disable-line */,

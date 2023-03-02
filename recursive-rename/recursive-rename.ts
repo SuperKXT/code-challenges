@@ -8,6 +8,8 @@ import { z } from 'zod';
 
 // eslint-disable-next-line no-restricted-imports
 import { formatToken } from '../helpers/string';
+// eslint-disable-next-line no-restricted-imports
+import { getError } from '../helpers/error';
 
 import { RenameErrors } from './recursive-rename.types';
 
@@ -198,13 +200,13 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 					newName,
 					children,
 				};
-			} catch (error: any) {
+			} catch (error) {
 				return {
 					type: 'error',
 					path: folder,
 					oldName: file,
 					newName,
-					error: error.message ?? error,
+					error: getError(error),
 					children,
 				};
 			}
@@ -228,11 +230,11 @@ const renameFiles = async (
 			if (file.type === 'success') {
 				try {
 					await rename(oldPath, newPath);
-				} catch (error: any) {
+				} catch (error) {
 					return {
 						...file,
 						type: 'error',
-						error: error.message ?? error,
+						error: getError(error),
 						children,
 					};
 				}
@@ -287,7 +289,7 @@ export const recursiveRename = async (
 
 	const results = await renameFiles(folder, files);
 
-	console.info(await getRenameLogs(results, verbose, onlyChanges, tree));
+	console.info(getRenameLogs(results, verbose, onlyChanges, tree));
 
 	return results;
 };
@@ -319,7 +321,7 @@ if (process.env.NODE_ENV !== 'test') {
 			onlyChanges,
 			tree,
 			help,
-		});
+		}).catch(console.error);
 	} catch {
 		throw new Error(RenameErrors.BAD_ARGUMENTS);
 	}

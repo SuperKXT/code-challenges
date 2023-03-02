@@ -12,7 +12,8 @@ interface Position {
 const move = ['R', 'L', 'U', 'D'] as const;
 type Move = (typeof move)[number];
 
-const isMove = (value: any): value is Move => move.includes(value);
+const isMove = (value: any): value is Move =>
+	typeof value === 'string' && move.includes(value);
 
 const getUniquePositions = (array: Position[]) => {
 	return array.reduce<Position[]>((positions, current) => {
@@ -45,7 +46,7 @@ export const ropeBridge = (
 			continue;
 		}
 
-		[...new Array(Number(repeat))].forEach(() => {
+		[...new Array<undefined>(Number(repeat))].forEach(() => {
 			const headPosition = { ...head.at(-1) } as Position;
 
 			switch (move) {

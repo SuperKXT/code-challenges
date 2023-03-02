@@ -32,7 +32,7 @@ const spin = async (
 	} else {
 		console.info(
 			chalk.red('INCORRECT!'),
-			chalk.blue(`Spin Result: ${spinResult}, Your Choice: ${choice}`)
+			chalk.blue(`Spin Result: ${spinResult}, Your Choice: ${String(choice)}`)
 		);
 		return 0;
 	}
@@ -50,5 +50,5 @@ export const doubleOrNothing = async (): Promise<number> => {
 };
 
 if (process.env.NODE_ENV !== 'test') {
-	doubleOrNothing();
+	doubleOrNothing().catch(console.error);
 }

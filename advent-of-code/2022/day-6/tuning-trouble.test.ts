@@ -57,7 +57,7 @@ describe('testing supplyStacks', () => {
 	);
 	it('should return the correct solution for the input file', async () => {
 		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
-		const response = await tuningTrouble(input);
+		const response = tuningTrouble(input);
 		const solution: Solution = {
 			packetMarker: 1210,
 			messageMarker: 3476,

@@ -26,7 +26,8 @@ const badGetTests: BadGetTest[] = [
 	{ input: [5, 10, 2], error: Errors.Length },
 	{ input: [5, 10, -5], error: Errors.Length },
 	{ input: [5, 10, 1], error: Errors.Length },
-	{ input: [5, undefined as any, 5], error: Errors.Undefined },
+	// @ts-expect-error intentional error check
+	{ input: [5, undefined, 5], error: Errors.Undefined },
 ];
 
 interface CheckTest {
@@ -42,7 +43,8 @@ const checkTests: CheckTest[] = [
 	{ input: [2], output: false },
 	{ input: [4, -1, 3, 2, 5], output: true },
 	{ input: [NaN, 1, NaN], output: true },
-	{ input: [5, undefined as any, 15], output: false },
+	// @ts-expect-error intentional error check
+	{ input: [5, undefined, 15], output: false },
 ];
 
 describe('testing getFibonacciLike', () => {

@@ -3,12 +3,12 @@ import type { LinkedListNode } from '~/helpers/linked-list';
 
 export type Intersection = [number, number] | LinkedListNode<number>;
 
-const findIntersection = <Type extends LinkedListNode<number> | number[]>(
-	paramA: Type,
-	paramB: Type
+const findIntersection = (
+	paramA: Intersection,
+	paramB: Intersection
 ): Intersection | null => {
 	if (!Array.isArray(paramA)) {
-		let nodeA = paramA as LinkedListNode<number>;
+		let nodeA = paramA;
 
 		while (nodeA) {
 			let nodeB = paramB as LinkedListNode<number>;
@@ -20,7 +20,7 @@ const findIntersection = <Type extends LinkedListNode<number> | number[]>(
 		}
 		return null;
 	} else {
-		const reversedA = [...(paramA as number[])].reverse();
+		const reversedA = [...paramA].reverse();
 		const reversedB = [...(paramB as number[])].reverse();
 
 		for (let index = 0; index < reversedA.length; index++) {

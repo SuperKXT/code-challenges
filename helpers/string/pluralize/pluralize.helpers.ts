@@ -49,7 +49,7 @@ export const pluralize = (
 		if (!value) {
 			input = input.replace(/^\s+/, '');
 		}
-		return input.replace(/\[(([^|]*\|?)+)\]/g, (_, string) => {
+		return input.replace(/\[(([^|]*\|?)+)\]/g, (_, string: string) => {
 			const matches = string.split('|');
 			return matches[number - 1] ?? matches.at(-1) ?? '';
 		});

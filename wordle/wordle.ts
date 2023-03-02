@@ -35,7 +35,7 @@ export const findWordle = (parameters: Arguments): string[] => {
 			.replace(/\*/g, `[${availableCharacters}]`)
 			.replace(
 				EXCLUDE_CHARACTERS_REGEX,
-				(_, p1) =>
+				(_, p1: string) =>
 					`[${availableCharacters.replace(new RegExp(`[${p1}]`, 'gi'), '')}]`
 			),
 		'i'

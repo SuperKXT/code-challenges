@@ -1,6 +1,6 @@
 import {
 	blackPieces,
-	ChessErrors,
+	CHESS_ERRORS,
 	square,
 	whitePieces,
 	coords,
@@ -13,36 +13,40 @@ import type {
 	IsValidMoveArgs,
 	Position,
 	Piece,
-	WhitePiece} from './check-chess-move.types';
+	WhitePiece,
+	ChessError,
+} from './check-chess-move.types';
 
-const assertBoard: AssertFunction<Board> = (board) => {
+const assertBoard: AssertFunction<Board> = (board: any) => {
 	if (!Array.isArray(board) || board.length !== 8) {
-		throw new Error(ChessErrors.BAD_ROWS);
+		throw new Error(CHESS_ERRORS.BAD_ROWS);
 	}
 	for (const row of board) {
 		if (!Array.isArray(row) || row.length !== 8) {
-			throw new Error(ChessErrors.BAD_COLUMNS);
+			throw new Error(CHESS_ERRORS.BAD_COLUMNS);
 		}
-		if (row.some((cell) => !square.includes(cell))) {
-			throw new Error(ChessErrors.BAD_SQUARE);
+		if (
+			row.some((cell) => typeof cell !== 'string' || !square.includes(cell))
+		) {
+			throw new Error(CHESS_ERRORS.BAD_SQUARE);
 		}
 	}
 };
 
 const isEnemy = <P extends Piece>(
 	piece: P,
-	toCheck: any
+	toCheck: string
 ): toCheck is P extends WhitePiece ? BlackPiece : WhitePiece => {
-	const opposite = (
-		whitePieces.includes(piece as any) ? blackPieces : whitePieces
-	) as any;
-	return opposite.includes(toCheck as any);
+	const opposite = whitePieces.includes(piece) ? blackPieces : whitePieces;
+	return opposite.includes(toCheck);
 };
 
 const isPosition = (value: any): value is Position => {
 	return (
 		Array.isArray(value) &&
 		value.length === 2 &&
+		typeof value[0] === 'number' &&
+		typeof value[1] === 'number' &&
 		coords.includes(value[0]) &&
 		coords.includes(value[1])
 	);
@@ -63,11 +67,11 @@ export const isValidMove = ({
 		const toSquare = squares[toRow][toCol];
 
 		if (piece === '~') {
-			throw new Error(ChessErrors.EMPTY_SPACE);
+			throw new Error(CHESS_ERRORS.EMPTY_SPACE);
 		}
 
 		if (toPiece !== '~' && !isEnemy(piece, toPiece)) {
-			throw new Error(ChessErrors.COLLISION);
+			throw new Error(CHESS_ERRORS.COLLISION);
 		}
 
 		const isKill = toPiece !== '~';
@@ -75,7 +79,7 @@ export const isValidMove = ({
 		const path: Position[] = [];
 
 		if (col === toCol && row === toRow) {
-			throw new Error(ChessErrors.NO_MOVE);
+			throw new Error(CHESS_ERRORS.NO_MOVE);
 		}
 
 		if (piece === 'p' || piece === 'P') {
@@ -90,16 +94,17 @@ export const isValidMove = ({
 			const isKill =
 				toRow === nextRow &&
 				(toCol === nextCol || toCol === prevCol) &&
-				whitePieces.includes(toSquare as any);
+				whitePieces.includes(toSquare);
 			if (!isMove && !isKill) {
-				throw new Error(ChessErrors.BAD_PAWN);
+				throw new Error(CHESS_ERRORS.BAD_PAWN);
 			}
 			path.push([row, col], [toRow, toCol]);
 			if (toRow === doubleNext) {
 				path.splice(1, 0, [doubleNext, col]);
 			}
 		} else if (piece === 'r' || piece === 'R') {
-			if (col !== toCol && row !== toRow) throw new Error(ChessErrors.BAD_ROOK);
+			if (col !== toCol && row !== toRow)
+				throw new Error(CHESS_ERRORS.BAD_ROOK);
 			const isHorizontal = col !== toCol;
 			const to = isHorizontal ? toCol : toRow;
 			const from = isHorizontal ? col : row;
@@ -115,7 +120,7 @@ export const isValidMove = ({
 			}
 		} else if (piece === 'b' || piece === 'B') {
 			if (Math.abs(toCol - col) !== Math.abs(toRow - row))
-				throw new Error(ChessErrors.BAD_BISHOP);
+				throw new Error(CHESS_ERRORS.BAD_BISHOP);
 			let currentRow = row;
 			let currentCol = col;
 			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -138,7 +143,7 @@ export const isValidMove = ({
 			].filter(isPosition);
 			const isValid = valid.some(([x, y]) => toRow === x && toCol === y);
 			if (!isValid) {
-				throw new Error(ChessErrors.BAD_KNIGHT);
+				throw new Error(CHESS_ERRORS.BAD_KNIGHT);
 			}
 			let currentRow = row;
 			let currentCol = col;
@@ -157,7 +162,7 @@ export const isValidMove = ({
 			const isVertical = row !== toRow && col === toCol;
 			const isDiagonal = Math.abs(toCol - col) !== Math.abs(toRow - row);
 			if (!isHorizontal && !isVertical && !isDiagonal)
-				throw new Error(ChessErrors.BAD_QUEEN);
+				throw new Error(CHESS_ERRORS.BAD_QUEEN);
 			let currentRow = row;
 			let currentCol = col;
 			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -180,14 +185,14 @@ export const isValidMove = ({
 			].filter(isPosition);
 			const isValid = valid.some(([x, y]) => toRow === x && toCol === y);
 			if (!isValid) {
-				throw new Error(ChessErrors.BAD_KING);
+				throw new Error(CHESS_ERRORS.BAD_KING);
 			}
 			path.push([row, col], [toRow, toCol]);
 		}
-
+		7;
 		path.slice(1, -1).forEach(([x, y]) => {
 			if (square[x][y] !== '~') {
-				throw new Error(ChessErrors.COLLISION);
+				throw new Error(CHESS_ERRORS.COLLISION);
 			}
 		});
 
@@ -199,7 +204,7 @@ export const isValidMove = ({
 	} catch (error: any) {
 		return {
 			isValid: false,
-			error: error.message ?? error,
+			error: error as ChessError,
 		};
 	}
 };

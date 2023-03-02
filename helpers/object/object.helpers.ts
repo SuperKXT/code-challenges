@@ -8,7 +8,7 @@ export const objectKeys = <Keys extends PropertyKey, Type>(
 
 export const objectValues = <Keys extends PropertyKey, Type>(
 	object: Record<Keys, Type>
-) => Object.values(object) as Type[];
+) => Object.values<Type>(object);
 
 export const omitKey = <Key extends string, Type extends Record<Key, unknown>>(
 	object: Type,
@@ -19,5 +19,5 @@ export const omitKey = <Key extends string, Type extends Record<Key, unknown>>(
 		if (toOmitArray.includes(key)) return object;
 		return { ...object, [key]: value };
 	}, {});
-	return clone as any;
+	return clone as Omit<Type, Key>;
 };

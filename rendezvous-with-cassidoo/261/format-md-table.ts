@@ -7,7 +7,7 @@ const formatMarkdownTable = (string: string): string => {
 
 	if (!rowStrings || !noOfColumns || !rowCells) return '';
 
-	const columnWidths = [...Array(noOfColumns)].map((_, index) =>
+	const columnWidths = [...Array<undefined>(noOfColumns)].map((_, index) =>
 		Math.max(...rowCells.map((row) => row[index]?.trim().length ?? 0))
 	);
 
@@ -15,7 +15,7 @@ const formatMarkdownTable = (string: string): string => {
 		.map(
 			(cells, row) =>
 				'| ' +
-				[...Array(noOfColumns)]
+				[...Array<undefined>(noOfColumns)]
 					.map((_, column) =>
 						(cells[column]?.trim() ?? '').padEnd(
 							columnWidths[column] ?? 0,

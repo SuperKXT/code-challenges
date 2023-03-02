@@ -126,17 +126,19 @@ export const sandTetris = (input: string): Solution => {
 		[]
 	);
 
-	const part1Map: Map = [...new Array(end.row + 1)].map(() =>
-		[...new Array(rowLength)].fill('.')
+	const part1Map: Map = [...new Array<undefined>(end.row + 1)].map<MapRow>(() =>
+		[...new Array<'.'>(rowLength)].fill('.')
 	);
 	rocks.forEach(({ row, col }) => {
 		const mapRow = part1Map[row];
 		if (mapRow) (part1Map[row] as MapRow)[col] = '#';
 	});
 	const part2Map: Map = structuredClone(part1Map);
-	part2Map.push(new Array(rowLength).fill('.'), new Array(rowLength).fill('#'));
+	part2Map.push(
+		new Array<'.'>(rowLength).fill('.'),
+		new Array<'#'>(rowLength).fill('#')
+	);
 
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 	while (true) {
 		const coord = getLanding(part1Map);
 		if (!coord) break;
@@ -145,7 +147,6 @@ export const sandTetris = (input: string): Solution => {
 		solution.part1++;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 	while (true) {
 		const coord = getLanding(part2Map);
 		if (!coord) break;
