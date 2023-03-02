@@ -1,35 +1,51 @@
 {
 	"compilerOptions": {
-		"baseUrl": "./",
-		"target": "esnext",
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
+		// type checking
 		"strict": true,
-		"forceConsistentCasingInFileNames": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
 		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals": true,
+		"strictFunctionTypes": true,
+		"strictBindCallApply": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
+		"useUnknownInCatchVariables": true,
+
+		// modules
+		"baseUrl": "./",
 		"module": "CommonJS",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"noEmit": true,
-		"checkJs": true,
-		"downlevelIteration": true,
-		"noImplicitAny": true,
-		"noImplicitThis": true,
-		"noImplicitReturns": true,
-		"noImplicitOverride": true,
-		"noUncheckedIndexedAccess": true,
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
-		"strictPropertyInitialization": true,
-		"useUnknownInCatchVariables": true,
 		"paths": {
 			"~/helpers/*": ["./helpers/*"]
-		}
+		},
+
+		// emit
+		"downlevelIteration": true,
+		"noEmit": true,
+		"importsNotUsedAsValues": "error",
+
+		// javascript support
+		"allowJs": true,
+		"checkJs": true,
+
+		// interop constraints
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"jsx": "react-jsx",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"target": "esnext",
+
+		// completeness
+		"skipLibCheck": true
 	},
-	"include": ["./"],
-	"exclude": ["coverage/"]
+	"exclude": ["node_modules/**/*", "build/**/*", "dist/**/*", "coverage/*"]
 }
