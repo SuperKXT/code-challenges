@@ -19,6 +19,7 @@ import type {
 	RenameResultType,
 } from './recursive-rename.types';
 
+/* eslint-disable id-length */
 const paramsSchema = z.strictObject({
 	_: z.tuple([z.string()]),
 	'--': z.string().array().length(0).optional(),
@@ -33,6 +34,7 @@ const paramsSchema = z.strictObject({
 	help: z.boolean().optional(),
 	h: z.boolean().optional(),
 });
+/* eslint-enable id-length */
 
 export type Params = z.infer<typeof paramsSchema>;
 
@@ -43,15 +45,25 @@ interface RecursiveLogResponse {
 	unchanged: RenameResult[];
 }
 
-export const getRecursiveLogs = (
-	results: RenameResult[],
-	labels: Record<RenameResultType, string>,
-	verbose?: boolean,
-	onlyChanges?: boolean,
-	tree?: boolean,
-	isConfirmation?: boolean,
-	depth: number = 1
-): RecursiveLogResponse => {
+interface RecursiveLogParams {
+	results: RenameResult[];
+	labels: Record<RenameResultType, string>;
+	verbose?: boolean;
+	onlyChanges?: boolean;
+	tree?: boolean;
+	isConfirmation?: boolean;
+	depth?: number;
+}
+
+export const getRecursiveLogs = ({
+	results,
+	labels,
+	verbose,
+	onlyChanges,
+	tree,
+	isConfirmation,
+	depth = 1,
+}: RecursiveLogParams): RecursiveLogResponse => {
 	const response: RecursiveLogResponse = {
 		logs: [],
 		success: [],
@@ -92,15 +104,15 @@ export const getRecursiveLogs = (
 		}
 
 		if (children) {
-			const subLogs = getRecursiveLogs(
-				children,
+			const subLogs = getRecursiveLogs({
+				results: children,
 				labels,
 				verbose,
 				onlyChanges,
 				tree,
 				isConfirmation,
-				depth + 1
-			);
+				depth: depth + 1,
+			});
 			response.logs.push(...subLogs.logs);
 			response.success.push(...subLogs.success);
 			response.error.push(...subLogs.error);
@@ -126,14 +138,14 @@ export const getRenameLogs = (
 		unchanged: chalk.bgYellowBright(' UNCHANGED '),
 	};
 
-	const { logs, success, error, unchanged } = getRecursiveLogs(
+	const { logs, success, error, unchanged } = getRecursiveLogs({
 		results,
 		labels,
 		verbose,
 		onlyChanges,
 		tree,
-		isConfirmation
-	);
+		isConfirmation,
+	});
 
 	logs.push(
 		[
@@ -166,39 +178,34 @@ const getIsFolder = async (file: string): Promise<boolean> => {
 
 const findFiles = async (folder: string): Promise<RenameResult[]> => {
 	const files = await readdir(folder);
-	files.sort((a, b) => a.localeCompare(b));
+	files.sort((first, second) => first.localeCompare(second));
 
 	return Promise.all(
 		files.map(async (file) => {
 			const oldPath = path.join(folder, file);
-			const [name = '', extension = ''] = file.split(/\.(?!.*\..*)/);
+			const [name = '', extension = ''] = file.split(/\.(?!.*\..*)/u);
 
 			const newName = `${formatToken(name, 'kebab')}${
 				extension ? '.' : ''
 			}${extension}`;
 			const newPath = newName !== file ? path.join(folder, newName) : oldPath;
-			let children: RenameResult['children'] = undefined;
+			let children: RenameResult['children'];
 
 			try {
 				const isFolder = await getIsFolder(oldPath);
-				if (isFolder) {
-					children = await findFiles(oldPath);
-				}
+				if (isFolder) children = await findFiles(oldPath);
 
-				if (newName === file) {
+				if (newName === file)
 					return {
 						type: 'unchanged',
 						path: folder,
 						oldName: file,
 						children,
 					};
-				}
 
 				const exists = await getExists(newPath);
 
-				if (exists) {
-					throw new Error(RenameErrors.EXISTS);
-				}
+				if (exists) throw new Error(RenameErrors.EXISTS);
 
 				return {
 					type: 'success',
@@ -234,7 +241,7 @@ const renameFiles = async (
 				? await renameFiles(newPath, file.children)
 				: undefined;
 
-			if (file.type === 'success') {
+			if (file.type === 'success')
 				try {
 					await rename(oldPath, newPath);
 				} catch (error) {
@@ -245,7 +252,6 @@ const renameFiles = async (
 						children,
 					};
 				}
-			}
 
 			return {
 				...file,
@@ -261,14 +267,12 @@ export const RECURSIVE_RENAME_HELP = [
 ].join('\n');
 
 export const recursiveRename = async (
-	folder: string,
+	location: string,
 	{ yes, verbose, onlyChanges, tree }: RenameOptions
 ): Promise<RenameResult[]> => {
-	folder = folder.replace(/\/+$/, '');
+	const folder = location.replace(/\/+$/u, '');
 
-	if (!(await getIsFolder(folder))) {
-		throw new Error(RenameErrors.BAD_PATH);
-	}
+	if (!(await getIsFolder(folder))) throw new Error(RenameErrors.BAD_PATH);
 
 	const files = await findFiles(folder);
 
@@ -283,15 +287,13 @@ export const recursiveRename = async (
 				confirm: {
 					description: 'Do you want to continue? [y/n]: ',
 					type: 'string',
-					pattern: /^[yn]$/i,
+					pattern: /^[yn]$/iu,
 					message: 'Please enter y for yes or n for no',
 				},
 			},
 		});
 
-		if (confirm !== 'y' && confirm !== 'Y') {
-			return [];
-		}
+		if (confirm !== 'y' && confirm !== 'Y') return [];
 	}
 
 	const results = await renameFiles(folder, files);
@@ -301,7 +303,7 @@ export const recursiveRename = async (
 	return results;
 };
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test')
 	try {
 		const args = argumentParser<Params>(process.argv.slice(2), {
 			alias: {
@@ -332,4 +334,3 @@ if (process.env.NODE_ENV !== 'test') {
 	} catch {
 		throw new Error(RenameErrors.BAD_ARGUMENTS);
 	}
-}

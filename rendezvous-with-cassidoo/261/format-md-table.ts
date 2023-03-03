@@ -1,7 +1,7 @@
-const columnMatcher = /(?<=\|)([^|\n])*(?=\|)/g;
+const columnMatcher = /(?<=\|)([^|\n])*(?=\|)/gu;
 
 const formatMarkdownTable = (string: string): string => {
-	const rowStrings = string.match(/^.+$/gm);
+	const rowStrings = string.match(/^.+$/gmu);
 	const rowCells = rowStrings?.map((row) => row.match(columnMatcher) ?? []);
 	const noOfColumns = rowCells?.[0]?.length ?? 0;
 
@@ -14,16 +14,14 @@ const formatMarkdownTable = (string: string): string => {
 	return rowCells
 		.map(
 			(cells, row) =>
-				'| ' +
-				[...Array<undefined>(noOfColumns)]
+				`| ${[...Array<undefined>(noOfColumns)]
 					.map((_, column) =>
 						(cells[column]?.trim() ?? '').padEnd(
 							columnWidths[column] ?? 0,
 							row === 1 ? '-' : ' '
 						)
 					)
-					.join(' | ') +
-				' |'
+					.join(' | ')} |`
 		)
 		.join('\n');
 };

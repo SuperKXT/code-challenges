@@ -10,16 +10,16 @@ export const getFibonacciLike = (
 	second: number,
 	length: number
 ): number[] => {
-	if (length < 3) {
+	if (length < 3) 
 		throw new Error(Errors.Length);
-	}
+	
 	const sequence = [first, second];
 	for (let index = 2; index < length; index++) {
 		const current = sequence[index - 1];
 		const last = sequence[index - 2];
-		if (current === undefined || last === undefined) {
+		if (current === undefined || last === undefined) 
 			throw new Error(Errors.Undefined);
-		}
+		
 		sequence.push(current + last);
 	}
 	return sequence;

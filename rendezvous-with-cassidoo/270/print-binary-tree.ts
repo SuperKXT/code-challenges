@@ -26,9 +26,8 @@ export const printBinaryTree = (nodes: number): string => {
 				tree += new Array((subStep - 1) * 2 + 1).join(' ');
 				tree += '\\';
 				node++;
-				if (node !== stepNodes) {
+				if (node !== stepNodes)
 					tree += new Array(spaces - subStep + 1).join(' ');
-				}
 			}
 			tree += '\n';
 		}

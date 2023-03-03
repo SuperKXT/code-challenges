@@ -41,8 +41,8 @@ export const signalStrength = (input: string): Solution => {
 	};
 
 	for (const row of input.split('\n')) {
-		const [command, x] = row.split(' ');
-		if (!isCommand(command) || (command === 'addx' && isNaN(Number(x))))
+		const [command, num] = row.split(' ');
+		if (!isCommand(command) || (command === 'addx' && isNaN(Number(num))))
 			continue;
 
 		const prevRegister = clock.register;
@@ -57,7 +57,7 @@ export const signalStrength = (input: string): Solution => {
 				solution.crtOutput += getCrtOutput(clock);
 				clock.cycle++;
 				solution.crtOutput += getCrtOutput(clock);
-				clock.register += Number(x);
+				clock.register += Number(num);
 				break;
 		}
 

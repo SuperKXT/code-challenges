@@ -33,7 +33,7 @@ export const monkeyBusiness = (input: string): Solution => {
 			const rows = curr.split('\n');
 
 			const [first, op, second] =
-				rows[2]?.replace(prefix.operation, '').trim().split(/\s+/g) ?? [];
+				rows[2]?.replace(prefix.operation, '').trim().split(/\s+/gu) ?? [];
 
 			const monkey: Monkey = {
 				items: (rows[1]?.replace(prefix.items, '').split(',') ?? []).map(
@@ -43,7 +43,7 @@ export const monkeyBusiness = (input: string): Solution => {
 					const left = parseInt(first ?? '') || item;
 					const right = parseInt(second ?? '') || item;
 					if (op === '+') return left + right;
-					else return left * right;
+					return left * right;
 				},
 				divisor: parseInt(rows[3]?.replace(prefix.divisor, '') ?? ''),
 				trueIndex: parseInt(rows[4]?.replace(prefix.trueIndex, '') ?? ''),
@@ -78,25 +78,23 @@ export const monkeyBusiness = (input: string): Solution => {
 		}
 	};
 
-	for (let cycle = 1; cycle <= 20; cycle++) {
-		executeCycle(monkeys);
-	}
+	for (let cycle = 1; cycle <= 20; cycle++) executeCycle(monkeys);
 
-	for (let cycle = 1; cycle <= 10000; cycle++) {
-		executeCycle(bigMonkeys, true);
-	}
+	for (let cycle = 1; cycle <= 10000; cycle++) executeCycle(bigMonkeys, true);
 
-	const topTwo = monkeys.sort((a, b) => b.inspected - a.inspected).slice(0, 2);
+	const topTwo = monkeys
+		.sort((first, second) => second.inspected - first.inspected)
+		.slice(0, 2);
 	solution.monkeyBusiness = topTwo.reduce(
-		(product, { inspected }) => (product *= inspected),
+		(product, { inspected }) => product * inspected,
 		1
 	);
 
 	const topTwoLong = bigMonkeys
-		.sort((a, b) => b.inspected - a.inspected)
+		.sort((first, second) => second.inspected - first.inspected)
 		.slice(0, 2);
 	solution.bigMb = topTwoLong.reduce(
-		(product, { inspected }) => (product *= inspected),
+		(product, { inspected }) => product * inspected,
 		1
 	);
 

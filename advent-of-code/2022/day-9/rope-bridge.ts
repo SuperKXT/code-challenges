@@ -42,9 +42,9 @@ export const ropeBridge = (
 
 	for (const current of input.split('\n')) {
 		const [direction, repeat] = current.split(' ');
-		if (!isMove(direction) || isNaN(Number(repeat))) {
+		if (!isMove(direction) || isNaN(Number(repeat))) 
 			continue;
-		}
+		
 
 		[...new Array<undefined>(Number(repeat))].forEach(() => {
 			const headPosition = { ...head.at(-1) } as Position;

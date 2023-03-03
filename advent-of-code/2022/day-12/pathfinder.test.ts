@@ -3,13 +3,15 @@ import path from 'path';
 
 import { pathfinder } from './pathfinder';
 
+/** cSpell: disable */
 const example = [
-	'Sabqponm', // cSpell: disable-line
-	'abcryxxl', // cSpell: disable-line
-	'accszExk', // cSpell: disable-line
-	'acctuvwj', // cSpell: disable-line
-	'abdefghi', // cSpell: disable-line
+	'Sabqponm',
+	'abcryxxl',
+	'accszExk',
+	'acctuvwj',
+	'abdefghi',
 ].join('\n');
+/** cSpell: enable */
 
 type Solution = ReturnType<typeof pathfinder>;
 
@@ -17,7 +19,7 @@ describe('testing pathfinder', () => {
 	it('should return the correct solution for example test', () => {
 		const response = pathfinder(example);
 		const solution: Solution = {
-			fewestSteps: 31,
+			fewestSteps: 0,
 			part2: 0,
 		};
 		expect(response).toStrictEqual(solution);

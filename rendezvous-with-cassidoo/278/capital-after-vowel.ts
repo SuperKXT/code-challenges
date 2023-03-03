@@ -5,7 +5,7 @@ interface Solution {
 
 const VOWELS = 'aeiou';
 const CONSONANTS = 'bcdfghjklmnpqrstvwxyz';
-const REGEX = new RegExp(`(?<=[${VOWELS}]\\s*)[${CONSONANTS}]`, 'g');
+const REGEX = new RegExp(`(?<=[${VOWELS}]\\s*)[${CONSONANTS}]`, 'gu');
 
 export const capitalAfterVowel = (input: string): Solution => {
 	return {

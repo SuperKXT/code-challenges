@@ -29,16 +29,15 @@ const isBadNeighbor = (
 };
 
 export const assertValidCatanBoard = (input: string) => {
-	if (!BOARD_REGEX.test(input)) {
-		throw new Error(CatanErrors.BAD_FORMATTING);
-	}
+	if (!BOARD_REGEX.test(input)) throw new Error(CatanErrors.BAD_FORMATTING);
+
 	const board = input
 		.split('\n')
-		.map((row) => row.split(/\s+/).filter(Boolean)) as Board;
+		.map((row) => row.split(/\s+/u).filter(Boolean)) as Board;
 
 	const counts: Partial<Record<Cell, number>> = {};
 
-	board.forEach((row, rowIndex) =>
+	board.forEach((row, rowIndex) => {
 		row.forEach((cell, index) => {
 			counts[cell] = (counts[cell] ?? 0) + 1;
 			if (
@@ -47,11 +46,10 @@ export const assertValidCatanBoard = (input: string) => {
 			)
 				throw new Error(CatanErrors.BAD_PIECE_COUNT);
 
-			if (isBadNeighbor(cell, rowIndex, index, board)) {
+			if (isBadNeighbor(cell, rowIndex, index, board))
 				throw new Error(CatanErrors.BAD_POSITIONING);
-			}
-		})
-	);
+		});
+	});
 };
 
 const generateNextCellIndex = (
@@ -64,9 +62,9 @@ const generateNextCellIndex = (
 	if (pieces.length === 1) return 0;
 	const index = Math.random() * pieces.length;
 	const cell = pieces.splice(index, 1)[0] as Cell;
-	if (isBadNeighbor(cell, row, col, board)) {
+	if (isBadNeighbor(cell, row, col, board))
 		return generateNextCellIndex(row, col, availablePieces, board, pieces);
-	}
+
 	return availablePieces.indexOf(cell);
 };
 
@@ -81,12 +79,12 @@ export const generateCatanBoard = (): string => {
 		['', '', ''],
 	];
 
-	board.forEach((boardRow, row) =>
+	board.forEach((boardRow, row) => {
 		boardRow.forEach((_cell, col) => {
 			const index = generateNextCellIndex(row, col, availablePieces, board);
 			boardRow[col] = availablePieces.splice(index, 1)[0] as Cell;
-		})
-	);
+		});
+	});
 
 	try {
 		const boardString = board

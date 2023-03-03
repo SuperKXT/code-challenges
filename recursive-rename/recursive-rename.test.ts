@@ -86,7 +86,7 @@ const tests: Test[] = [
 ];
 
 const recursiveSort = (files: RenameResult[]): RenameResult[] => {
-	files.sort((a, b) => a.oldName.localeCompare(b.oldName));
+	files.sort((first, second) => first.oldName.localeCompare(second.oldName));
 	return files.map(({ children, ...file }) => ({
 		...file,
 		children: children ? recursiveSort(children) : undefined,
@@ -97,12 +97,12 @@ const sortedTests = tests.map(recursiveSort);
 
 // eslint-disable-next-line jest/no-hooks
 beforeEach(() => {
-	if (existsSync(tempPath)) {
+	if (existsSync(tempPath))
 		rmSync(tempPath, {
 			recursive: true,
 			force: true,
 		});
-	}
+
 	mkdirSync(tempPath);
 });
 
@@ -132,14 +132,12 @@ const checkFiles = (files: Test, directory: string = tempPath) => {
 			directory,
 			type === 'success' ? newName : oldName
 		);
-		if (!existsSync(currentName)) {
+		if (!existsSync(currentName))
 			throw new Error(
 				`${currentName} expected but not found in renamed folder`
 			);
-		}
-		if (children) {
-			checkFiles(children, currentName);
-		}
+
+		if (children) checkFiles(children, currentName);
 	}
 };
 

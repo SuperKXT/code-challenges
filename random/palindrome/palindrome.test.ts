@@ -6,7 +6,8 @@ interface Test {
 }
 
 const tests: Test[] = [
-	{ string: 'aaccd', result: true }, // cSpell: disable-line
+	// cSpell: disable-next-line
+	{ string: 'aaccd', result: true },
 	{ string: 'nurses run', result: true },
 	{ string: 'madam', result: true },
 	{ string: 'madam', result: true },

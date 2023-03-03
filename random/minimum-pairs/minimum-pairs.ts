@@ -1,13 +1,13 @@
 export type Pair = `${number} ${number}`;
 
 export const minimumPairs = (numbers: number[]): Pair[] => {
-	const sorted = numbers.sort((a, b) => a - b);
+	const sorted = numbers.sort((first, second) => first - second);
 	let minimumDistance = Infinity;
 	const pairs: Pair[] = [];
 
-	for (let i = 1; i < sorted.length; i++) {
-		const current = sorted[i] as number;
-		const previous = sorted[i - 1] as number;
+	for (let index = 1; index < sorted.length; index++) {
+		const current = sorted[index] as number;
+		const previous = sorted[index - 1] as number;
 		const distance = current - previous;
 
 		if (distance > minimumDistance) continue;

@@ -7,7 +7,8 @@ interface Test {
 
 const tests: Test[] = [
 	{ input: 'hello world', output: 'heLlo WoRld' },
-	{ input: 'xaabeuekadii', output: 'xaaBeueKaDii' } /** cSpell: disable-line */,
+	/** cSpell: disable-next-line */
+	{ input: 'xaabeuekadii', output: 'xaaBeueKaDii' },
 	{ input: 'ab', output: 'aB' },
 ];
 

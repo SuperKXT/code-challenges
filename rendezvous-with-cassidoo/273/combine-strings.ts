@@ -3,9 +3,9 @@ export const invalidError = new Error(
 );
 
 export const combineStrings = (array: string[], size: number): string[] => {
-	if (array.some((string) => string.length > size)) {
+	if (array.some((string) => string.length > size)) 
 		throw invalidError;
-	}
+	
 	const combined: string[] = [];
 	let current = '';
 	for (let index = 0; index < array.length; index++) {

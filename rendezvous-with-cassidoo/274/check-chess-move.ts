@@ -18,18 +18,15 @@ import type {
 } from './check-chess-move.types';
 
 const assertBoard: AssertFunction<Board> = (board: any) => {
-	if (!Array.isArray(board) || board.length !== 8) {
+	if (!Array.isArray(board) || board.length !== 8)
 		throw new Error(CHESS_ERRORS.BAD_ROWS);
-	}
+
 	for (const row of board) {
-		if (!Array.isArray(row) || row.length !== 8) {
+		if (!Array.isArray(row) || row.length !== 8)
 			throw new Error(CHESS_ERRORS.BAD_COLUMNS);
-		}
-		if (
-			row.some((cell) => typeof cell !== 'string' || !square.includes(cell))
-		) {
+
+		if (row.some((cell) => typeof cell !== 'string' || !square.includes(cell)))
 			throw new Error(CHESS_ERRORS.BAD_SQUARE);
-		}
 	}
 };
 
@@ -66,21 +63,16 @@ export const isValidMove = ({
 		const toPiece = squares[toRow][toCol];
 		const toSquare = squares[toRow][toCol];
 
-		if (piece === '~') {
-			throw new Error(CHESS_ERRORS.EMPTY_SPACE);
-		}
+		if (piece === '~') throw new Error(CHESS_ERRORS.EMPTY_SPACE);
 
-		if (toPiece !== '~' && !isEnemy(piece, toPiece)) {
+		if (toPiece !== '~' && !isEnemy(piece, toPiece))
 			throw new Error(CHESS_ERRORS.COLLISION);
-		}
 
 		const isKill = toPiece !== '~';
 
 		const path: Position[] = [];
 
-		if (col === toCol && row === toRow) {
-			throw new Error(CHESS_ERRORS.NO_MOVE);
-		}
+		if (col === toCol && row === toRow) throw new Error(CHESS_ERRORS.NO_MOVE);
 
 		if (piece === 'p' || piece === 'P') {
 			const nextRow = piece === 'p' ? row + 1 : row - 1;
@@ -90,18 +82,15 @@ export const isValidMove = ({
 			const prevCol = col - 1;
 			const isMove =
 				(toRow === nextRow && toCol === col) ||
-				(row == start && toRow === doubleNext && toCol === col);
+				(row === start && toRow === doubleNext && toCol === col);
 			const isCurrentKill =
 				toRow === nextRow &&
 				(toCol === nextCol || toCol === prevCol) &&
 				whitePieces.includes(toSquare);
-			if (!isMove && !isCurrentKill) {
-				throw new Error(CHESS_ERRORS.BAD_PAWN);
-			}
+			if (!isMove && !isCurrentKill) throw new Error(CHESS_ERRORS.BAD_PAWN);
+
 			path.push([row, col], [toRow, toCol]);
-			if (toRow === doubleNext) {
-				path.splice(1, 0, [doubleNext, col]);
-			}
+			if (toRow === doubleNext) path.splice(1, 0, [doubleNext, col]);
 		} else if (piece === 'r' || piece === 'R') {
 			if (col !== toCol && row !== toRow)
 				throw new Error(CHESS_ERRORS.BAD_ROOK);
@@ -141,21 +130,20 @@ export const isValidMove = ({
 				[row + 2, col + 1],
 				[row + 1, col + 2],
 			].filter(isPosition);
-			const isValid = valid.some(([x, y]) => toRow === x && toCol === y);
-			if (!isValid) {
-				throw new Error(CHESS_ERRORS.BAD_KNIGHT);
-			}
+			const isValid = valid.some(
+				([currRow, currCol]) => toRow === currRow && toCol === currCol
+			);
+			if (!isValid) throw new Error(CHESS_ERRORS.BAD_KNIGHT);
+
 			let currentRow = row;
 			let currentCol = col;
 			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			while (true) {
 				path.push([currentRow, currentCol] as Position);
 				if (currentRow === toRow && currentCol === toCol) break;
-				else if (currentRow !== toRow) {
+				else if (currentRow !== toRow)
 					toRow > row ? currentRow++ : currentRow--;
-				} else {
-					toCol > col ? currentCol++ : currentCol--;
-				}
+				else toCol > col ? currentCol++ : currentCol--;
 			}
 		} else if (piece === 'q' || piece === 'Q') {
 			const isHorizontal = row === toRow && col !== toCol;
@@ -185,17 +173,17 @@ export const isValidMove = ({
 				[row + 1, col],
 				[row + 1, col + 1],
 			].filter(isPosition);
-			const isValid = valid.some(([x, y]) => toRow === x && toCol === y);
-			if (!isValid) {
-				throw new Error(CHESS_ERRORS.BAD_KING);
-			}
+			const isValid = valid.some(
+				([currRow, currCol]) => toRow === currRow && toCol === currCol
+			);
+			if (!isValid) throw new Error(CHESS_ERRORS.BAD_KING);
+
 			path.push([row, col], [toRow, toCol]);
 		}
 
-		path.slice(1, -1).forEach(([x, y]) => {
-			if (square[x][y] !== '~') {
+		path.slice(1, -1).forEach(([currRow, currCol]) => {
+			if (square[currRow][currCol] !== '~')
 				throw new Error(CHESS_ERRORS.COLLISION);
-			}
 		});
 
 		return {
@@ -206,7 +194,7 @@ export const isValidMove = ({
 	} catch (error: any) {
 		return {
 			isValid: false,
-			error: error as ChessError,
+			error: (error as Error).message as ChessError,
 		};
 	}
 };

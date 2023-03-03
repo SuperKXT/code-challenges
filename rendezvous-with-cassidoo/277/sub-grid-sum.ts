@@ -8,7 +8,7 @@ export const subGridSum = (
 		const rowCells = grid[row] as number[];
 		const cols = rowCells.reduce<number[]>(
 			(numbers, cell, col) =>
-				marks.includes(cell) ? [...numbers, col] : numbers,
+				(marks.includes(cell) ? [...numbers, col] : numbers),
 			[]
 		);
 		for (const left of cols) {

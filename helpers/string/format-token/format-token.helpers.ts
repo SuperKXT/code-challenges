@@ -43,7 +43,7 @@ export const formatToken = (
 
 		if (!alphaNumeric.includes(current)) continue;
 
-		if (!formatted) {
+		if (!formatted) 
 			switch (strategy) {
 				case 'camel':
 				case 'kebab':
@@ -57,10 +57,10 @@ export const formatToken = (
 					break;
 				}
 			}
-		} else if (
+		 else if (
 			(alphabet.includes(current) && last && wordSeparators.includes(last)) ||
 			(upperCase.includes(current) && last && lowerCase.includes(last))
-		) {
+		) 
 			switch (strategy) {
 				case 'camel': {
 					formatted += current.toUpperCase();
@@ -85,14 +85,14 @@ export const formatToken = (
 					break;
 				}
 			}
-		} else if (
+		 else if (
 			['kebab', 'snake', 'constant'].includes(strategy) &&
 			numbers.includes(current) &&
 			formatted.at(-1) &&
 			alphabet.includes(formatted.at(-1) ?? '')
-		) {
+		) 
 			formatted += `${strategy === 'kebab' ? '-' : '_'}${current}`;
-		} else {
+		 else 
 			switch (strategy) {
 				case 'camel':
 				case 'kebab':
@@ -106,11 +106,11 @@ export const formatToken = (
 					break;
 				}
 			}
-		}
+		
 	}
 
-	if (formatted.at(-1) === '.') {
+	if (formatted.at(-1) === '.') 
 		return formatted.slice(0, -1);
-	}
+	
 	return formatted;
 };

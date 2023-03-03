@@ -23,7 +23,7 @@ describe('testing sandTetris', () => {
 		).slice(0, -1);
 		const solution: Solution = {
 			part1: 692,
-			part2: 0,
+			part2: 31706,
 		};
 		expect(sandTetris(input)).toStrictEqual(solution);
 	});

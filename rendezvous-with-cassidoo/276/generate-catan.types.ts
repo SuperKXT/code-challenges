@@ -24,13 +24,14 @@ export type ProspectiveBoard = [
 
 const ROW_PIECES = [3, 4, 5, 4, 3] as const;
 
-const PIECE_REGEX = /[0-9ABC.]/;
+const PIECE_REGEX = /[0-9ABC.]/u;
 
 export const BOARD_REGEX = new RegExp(
 	Array.from({ length: 5 }, (_, index) => {
 		const pieces = ROW_PIECES[index] as number;
 		return ` {${5 - pieces}}(${PIECE_REGEX.source} ?){${pieces}}`;
-	}).join('\n')
+	}).join('\n'),
+	'u'
 );
 
 export const CatanErrors = {

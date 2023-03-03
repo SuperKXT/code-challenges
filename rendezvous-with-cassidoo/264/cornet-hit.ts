@@ -5,8 +5,8 @@ export const cornerHit = (
 	screenSize: XY
 ): boolean => {
 	const [width, height] = boxSize;
-	const [x, y] = initialPosition;
+	const [posX, posY] = initialPosition;
 	const [screenCornerX, screenCornerY] = screenSize;
-	const [logoCornerX, logoCornerY] = [x + width, y + height];
+	const [logoCornerX, logoCornerY] = [posX + width, posY + height];
 	return screenCornerX - logoCornerX === screenCornerY - logoCornerY;
 };

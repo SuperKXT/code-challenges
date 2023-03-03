@@ -1,6 +1,5 @@
 {
 	"compilerOptions": {
-		// type checking
 		"strict": true,
 		"allowUnreachableCode": false,
 		"allowUnusedLabels": false,
@@ -17,7 +16,6 @@
 		"strictPropertyInitialization": true,
 		"useUnknownInCatchVariables": true,
 
-		// modules
 		"baseUrl": "./",
 		"module": "CommonJS",
 		"moduleResolution": "node",
@@ -26,16 +24,13 @@
 			"~/helpers/*": ["./helpers/*"]
 		},
 
-		// emit
 		"downlevelIteration": true,
 		"noEmit": true,
 		"importsNotUsedAsValues": "error",
 
-		// javascript support
 		"allowJs": true,
 		"checkJs": true,
 
-		// interop constraints
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
@@ -44,7 +39,6 @@
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"target": "esnext",
 
-		// completeness
 		"skipLibCheck": true
 	},
 	"exclude": ["node_modules/**/*", "build/**/*", "dist/**/*", "coverage/*"]

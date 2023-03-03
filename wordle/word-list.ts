@@ -1,4 +1,5 @@
 /* cspell: disable */
+/* eslint-disable max-lines */
 
 export const wordleWords = [
 	'women',

@@ -16,9 +16,9 @@ const tests: Test[] = [
 describe('testing fromTo', () => {
 	it.each(tests)('generate the numbers in the given range', ({ min, max }) => {
 		const generator = fromTo(min, max);
-		for (let index = min; index <= max; index++) {
+		for (let index = min; index <= max; index++) 
 			expect(index).toBe(generator());
-		}
+		
 		expect(generator()).toBeUndefined();
 	});
 });

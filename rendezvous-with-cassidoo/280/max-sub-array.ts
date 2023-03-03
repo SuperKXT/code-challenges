@@ -12,7 +12,7 @@ export const maxSubArray = (array: number[], length: number): number[] => {
 	};
 	for (let index = 0; index <= difference; index++) {
 		const subArray = array.slice(index, index + length);
-		const sum = subArray.reduce((acc, num) => (acc += num));
+		const sum = subArray.reduce((acc, num) => acc + num);
 		if (sum > max.sum) {
 			max.subArray = subArray;
 			max.sum = sum;

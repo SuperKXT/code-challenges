@@ -31,12 +31,13 @@ export const raumdeuter = (
 		}
 
 		const size = Number(first);
-		if (currentDirs.length && !isNaN(size)) {
-			currentDirs.forEach((dir) => (dirs[dir] += size));
-		}
+		if (currentDirs.length && !isNaN(size))
+			currentDirs.forEach((dir) => {
+				dirs[dir] += size;
+			});
 	}
 
-	const sizes = objectValues(dirs).sort((a, b) => a - b);
+	const sizes = objectValues(dirs).sort((first, second) => first - second);
 	const takenSpace = sizes.at(-1) ?? 0;
 	const unusedSpace = totalSpace - takenSpace;
 	const toFree = requiredSpace - unusedSpace;

@@ -15,21 +15,20 @@ export const countCalories = async (): Promise<CountCaloriesSolution> => {
 		row
 			.split('\n')
 			.map(Number)
-			.reduce((sum, current) => (sum += current), 0)
+			.reduce((sum, current) => sum + current, 0)
 	);
 	const maxCalories = Math.max(...calories);
 	const maxIndex = calories.indexOf(maxCalories);
 
-	const topThree = [...calories].sort((a, b) => b - a).slice(0, 3);
+	const topThree = [...calories]
+		.sort((first, second) => second - first)
+		.slice(0, 3);
 	const topThreeIndexes = topThree.map((row) => calories.indexOf(row)) as [
 		number,
 		number,
 		number
 	];
-	const topThreeCalories = topThree.reduce(
-		(sum, current) => (sum += current),
-		0
-	);
+	const topThreeCalories = topThree.reduce((sum, current) => sum + current, 0);
 
 	return {
 		maxIndex,

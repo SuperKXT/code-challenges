@@ -3,7 +3,7 @@ import type { LinkedList } from '~/helpers/linked-list';
 export const swapArrayPairsWithRegex = (array: number[]): number[] =>
 	array
 		.join('')
-		.replace(/(.)(.)/g, '$2$1')
+		.replace(/(.)(.)/gu, '$2$1')
 		.split('')
 		.map(Number);
 
@@ -18,9 +18,9 @@ export const swapArrayPairsWithRecursion = (array: number[]): number[] => {
 
 export const swapArrayPairsWithLoop = (array: number[]): number[] => {
 	const swapped: number[] = [];
-	for (let i = 0; i < array.length; i += 2) {
-		swapped.push(array[i + 1] ?? (array[i] as number));
-		array[i + 1] && swapped.push(array[i] as number);
+	for (let index = 0; index < array.length; index += 2) {
+		swapped.push(array[index + 1] ?? (array[index] as number));
+		array[index + 1] && swapped.push(array[index] as number);
 	}
 	return swapped;
 };

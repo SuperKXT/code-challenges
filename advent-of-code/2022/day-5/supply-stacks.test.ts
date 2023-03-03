@@ -30,8 +30,10 @@ describe('testing supplyStacks', () => {
 		const file = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
 		const response = supplyStacks(file);
 		const solution: Solution = {
-			part1: 'VRWBSFZWM' /* cSpell: disable-line */,
-			part2: 'RBTWJWMCF' /* cSpell: disable-line */,
+			/** cSpell: disable-next-line */
+			part1: 'VRWBSFZWM',
+			/** cSpell: disable-next-line */
+			part2: 'RBTWJWMCF',
 		};
 		expect(response).toStrictEqual(solution);
 	});

@@ -24,31 +24,26 @@ const spin = async (
 	const spinResult = crypto.randomInt(0, MAX_CHOICE + 1);
 	const correct = spinResult === Number(choice);
 	if (correct) {
-		score *= multiplier;
-		console.info(chalk.green(`CORRECT! You have $${score}`));
+		const newScore = score * multiplier;
+		console.info(chalk.green(`CORRECT! You have $${newScore}`));
 		const isDouble = await confirmPrompt('Double or Nothing?');
-		if (!isDouble) return score;
-		return spin(score, 2);
-	} else {
-		console.info(
-			chalk.red('INCORRECT!'),
-			chalk.blue(`Spin Result: ${spinResult}, Your Choice: ${String(choice)}`)
-		);
-		return 0;
+		if (!isDouble) return newScore;
+		return spin(newScore, 2);
 	}
+	console.info(
+		chalk.red('INCORRECT!'),
+		chalk.blue(`Spin Result: ${spinResult}, Your Choice: ${String(choice)}`)
+	);
+	return 0;
 };
 
 export const doubleOrNothing = async (): Promise<number> => {
 	console.info(chalk.bgRed('\nWelcome to Spin The Wheel!'));
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-	while (true) {
-		const score = await spin();
-		console.info(chalk.red('\nGAME OVER! '), `You Won: $${score}\n`);
-		const replay = await confirmPrompt('Go Again?');
-		if (!replay) return score;
-	}
+	const score = await spin();
+	console.info(chalk.red('\nGAME OVER! '), `You Won: $${score}\n`);
+	const replay = await confirmPrompt('Go Again?');
+	if (replay) return doubleOrNothing();
+	return score;
 };
 
-if (process.env.NODE_ENV !== 'test') {
-	doubleOrNothing().catch(console.error);
-}
+if (process.env.NODE_ENV !== 'test') doubleOrNothing().catch(console.error);

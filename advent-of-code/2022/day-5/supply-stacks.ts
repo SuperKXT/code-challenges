@@ -8,8 +8,8 @@ export const supplyStacks = (
 	const stackRows = parts[0]?.split('\n').slice(0, -1) ?? [];
 	const stacks = stackRows.reduce<string[][]>((array, row) => {
 		let index = 0;
-		for (let i = 1; i < row.length; i += 4) {
-			const current = row[i];
+		for (let idx = 1; idx < row.length; idx += 4) {
+			const current = row[idx];
 			const lastIndex = index++;
 			if (!array[lastIndex]) array.push([]);
 			if (!current || current === ' ') continue;
@@ -25,7 +25,7 @@ export const supplyStacks = (
 	const moves = moveRows.reduce<[number, number, number][]>(
 		(array, row) => [
 			...array,
-			row.match(/[0-9]+/g)?.map(Number) as [number, number, number],
+			row.match(/[0-9]+/gu)?.map(Number) as [number, number, number],
 		],
 		[]
 	);

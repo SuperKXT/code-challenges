@@ -3,9 +3,9 @@ const numberOfOnes = (integer: number): number => {
 	return [...new Array<undefined>(integer)].reduce<number>(
 		(count, _, index) => {
 			const current = index + 1;
-			const matches = current.toString().match(/1/g);
+			const matches = current.toString().match(/1/gu);
 			if (!matches) return count;
-			return (count += matches.length);
+			return count + matches.length;
 		},
 		0
 	);

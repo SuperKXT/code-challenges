@@ -1,12 +1,14 @@
 import { rucksackReorganization } from './rucksack-reorganization';
 
 const input = [
-	'vJrwpWtwJgWrhcsFMMfFFhFp' /* cspell: disable-line */,
-	'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL' /* cspell: disable-line */,
-	'PmmdzqPrVvPwwTWBwg' /* cspell: disable-line */,
-	'wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn' /* cspell: disable-line */,
-	'ttgJtRGJQctTZtZT' /* cspell: disable-line */,
-	'CrZsJsPPZsGzwwsLwLmpwMDw' /* cspell: disable-line */,
+	/** cSpell: disable */
+	'vJrwpWtwJgWrhcsFMMfFFhFp',
+	'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL',
+	'PmmdzqPrVvPwwTWBwg',
+	'wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn',
+	'ttgJtRGJQctTZtZT',
+	'CrZsJsPPZsGzwwsLwLmpwMDw',
+	/** cSpell: enable */
 ].join('\n');
 
 type Solution = Awaited<ReturnType<typeof rucksackReorganization>>;

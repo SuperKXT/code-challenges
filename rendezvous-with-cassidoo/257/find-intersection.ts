@@ -19,7 +19,7 @@ const findIntersection = (
 			nodeA = nodeA.next;
 		}
 		return null;
-	} else {
+	} 
 		const reversedA = [...paramA].reverse();
 		const reversedB = [...(paramB as number[])].reverse();
 
@@ -27,13 +27,13 @@ const findIntersection = (
 			const subA = reversedA.slice(0, reversedA.length - index);
 			const subB = reversedB.slice(0, reversedA.length - index);
 
-			if (areArraysEqual(subA, subB)) {
+			if (areArraysEqual(subA, subB)) 
 				return [index, reversedB.length - subB.length];
-			}
+			
 		}
 
 		return null;
-	}
+	
 };
 
 export { findIntersection };

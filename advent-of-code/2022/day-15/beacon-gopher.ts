@@ -10,7 +10,8 @@ interface Sensor extends Point {
 const getDistance = (from: Point, to: Point): number =>
 	Math.abs(to.row - from.row) + Math.abs(to.col - from.col);
 
-const equal = (a: Point, b: Point) => a.row === b.row && a.col === b.col;
+const equal = (first: Point, second: Point) =>
+	first.row === second.row && first.col === second.col;
 
 export const beaconGopher1 = (input: string, row: number): number => {
 	let solution = 0;
@@ -23,8 +24,8 @@ export const beaconGopher1 = (input: string, row: number): number => {
 
 	for (const line of input.split('\n')) {
 		const [sensorCol, sensorRow, beaconCol, beaconRow] = line
-			.replace(/(Sensor at x=)|( y=)|( closest beacon is at x=)/g, '')
-			.split(/,|:/g)
+			.replace(/(Sensor at x=)|( y=)|( closest beacon is at x=)/gu, '')
+			.split(/,|:/gu)
 			.map(Number) as [number, number, number, number];
 
 		const beacon: Point = {
@@ -81,8 +82,8 @@ export const beaconGopher2 = (input: string, max: number): number => {
 
 	for (const line of input.split('\n')) {
 		const [sensorCol, sensorRow, beaconCol, beaconRow] = line
-			.replace(/(Sensor at x=)|( y=)|( closest beacon is at x=)/g, '')
-			.split(/,|:/g)
+			.replace(/(Sensor at x=)|( y=)|( closest beacon is at x=)/gu, '')
+			.split(/,|:/gu)
 			.map(Number) as [number, number, number, number];
 
 		const beacon: Point = {
@@ -112,7 +113,7 @@ export const beaconGopher2 = (input: string, max: number): number => {
 		sensors.push(sensor);
 	}
 
-	for (let row = 0; row <= max; row++) {
+	for (let row = 0; row <= max; row++)
 		for (let col = 0; col <= max; col++) {
 			const point = { row, col };
 			let isCovered = false;
@@ -128,11 +129,8 @@ export const beaconGopher2 = (input: string, max: number): number => {
 					break;
 				}
 			}
-			if (!isCovered) {
-				return col * 4000000 + row;
-			}
+			if (!isCovered) return col * 4000000 + row;
 		}
-	}
 
 	return 0;
 };

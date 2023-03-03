@@ -89,7 +89,7 @@ const testCases: Test[] = [
 describe('find wordle word', () => {
 	it.each(testCases)(
 		'should find matched words by the given flags',
-		({ args: args, results }) => {
+		({ args, results }) => {
 			const response = findWordle({ ...defaultArgs, ...args });
 			expect(response).toStrictEqual(results);
 		}

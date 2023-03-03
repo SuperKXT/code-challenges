@@ -12,35 +12,40 @@ interface Test {
 
 const tests: Test[] = [
 	{
-		input: 'mjqjpqmgbljsphdztnvjfqwrcgsmlb' /** cSpell: disable-line */,
+		/** cSpell: disable-next-line */
+		input: 'mjqjpqmgbljsphdztnvjfqwrcgsmlb',
 		output: {
 			packetMarker: 7,
 			messageMarker: 19,
 		},
 	},
 	{
-		input: 'bvwbjplbgvbhsrlpgdmjqwftvncz' /** cSpell: disable-line */,
+		/** cSpell: disable-next-line */
+		input: 'bvwbjplbgvbhsrlpgdmjqwftvncz',
 		output: {
 			packetMarker: 5,
 			messageMarker: 23,
 		},
 	},
 	{
-		input: 'nppdvjthqldpwncqszvftbrmjlhg' /** cSpell: disable-line */,
+		/** cSpell: disable-next-line */
+		input: 'nppdvjthqldpwncqszvftbrmjlhg',
 		output: {
 			packetMarker: 6,
 			messageMarker: 23,
 		},
 	},
 	{
-		input: 'nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg' /** cSpell: disable-line */,
+		/** cSpell: disable-next-line */
+		input: 'nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg',
 		output: {
 			packetMarker: 10,
 			messageMarker: 29,
 		},
 	},
 	{
-		input: 'zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw' /** cSpell: disable-line */,
+		/** cSpell: disable-next-line */
+		input: 'zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw',
 		output: {
 			packetMarker: 11,
 			messageMarker: 26,

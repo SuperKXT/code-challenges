@@ -13,6 +13,7 @@ type Result = z.infer<typeof arg2Schema>;
 
 const matchSchema = z.tuple([arg1Schema, arg2Schema]);
 
+/* eslint-disable id-length */
 const playerRules = {
 	X: {
 		score: 1,
@@ -60,6 +61,7 @@ const versusRules = {
 		draws: PlayerMove;
 	};
 };
+/* eslint-enable id-length */
 
 const getPart1Score = (
 	versusMove: VersusMove,

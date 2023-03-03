@@ -1,15 +1,16 @@
 import chalk from 'chalk';
 import argumentParser from 'minimist-lite';
-import z from 'zod';
+import { z } from 'zod';
 
 import { wordleWords } from './word-list';
 
-const EXCLUDE_CHARACTERS_REGEX = /\(([a-z]+)\)/gi;
-const VALID_WORD_PATTERN = /((\([a-z]+\))|[a-z*]){5}/i;
-const DUPLICATE_CHARACTER_REGEX = /(.).*\1/i;
+const EXCLUDE_CHARACTERS_REGEX = /\(([a-z]+)\)/giu;
+const VALID_WORD_PATTERN = /((\([a-z]+\))|[a-z*]){5}/iu;
+const DUPLICATE_CHARACTER_REGEX = /(.).*\1/iu;
 /* cspell: disable-next-line */
 const ALPHABETS = 'abcdefghijklmnopqrstuvxwyz';
 
+/* eslint-disable id-length */
 export const defaultArgs: Arguments = {
 	available: ALPHABETS,
 	a: ALPHABETS,
@@ -25,34 +26,35 @@ export const defaultArgs: Arguments = {
 const argumentSchema = z.strictObject({
 	_: z.string().array().length(0).optional(),
 	'--': z.string().array().length(0).optional(),
-	available: z.string().regex(/^[a-z]{0,26}$/i),
-	a: z.string().regex(/^[a-z]{0,26}$/i),
-	unavailable: z.string().regex(/^[a-z]{0,26}$/i),
-	u: z.string().regex(/^[a-z]{0,26}$/i),
+	available: z.string().regex(/^[a-z]{0,26}$/iu),
+	a: z.string().regex(/^[a-z]{0,26}$/iu),
+	unavailable: z.string().regex(/^[a-z]{0,26}$/iu),
+	u: z.string().regex(/^[a-z]{0,26}$/iu),
 	pattern: z.string().regex(VALID_WORD_PATTERN),
 	p: z.string().regex(VALID_WORD_PATTERN),
-	known: z.string().regex(/^[a-z]{0,5}$/i),
-	k: z.string().regex(/^[a-z]{0,5}$/i),
+	known: z.string().regex(/^[a-z]{0,5}$/iu),
+	k: z.string().regex(/^[a-z]{0,5}$/iu),
 	repeat: z.boolean(),
 });
+/* eslint-enable id-length */
 
 export const findWordle = (parameters: Arguments): string[] => {
 	const { available, unavailable, pattern, known, repeat } =
 		argumentSchema.parse(parameters);
 
 	const availableCharacters = unavailable
-		? available.replace(new RegExp(`[${unavailable}]`, 'gi'), '')
+		? available.replace(new RegExp(`[${unavailable}]`, 'giu'), '')
 		: available;
 
 	const regex = new RegExp(
 		pattern
-			.replace(/\*/g, `[${availableCharacters}]`)
+			.replace(/\*/gu, `[${availableCharacters}]`)
 			.replace(
 				EXCLUDE_CHARACTERS_REGEX,
 				(_, p1: string) =>
-					`[${availableCharacters.replace(new RegExp(`[${p1}]`, 'gi'), '')}]`
+					`[${availableCharacters.replace(new RegExp(`[${p1}]`, 'giu'), '')}]`
 			),
-		'i'
+		'iu'
 	);
 
 	const matches = wordleWords.filter(

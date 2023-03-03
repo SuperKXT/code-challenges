@@ -44,13 +44,9 @@ const getLanding = (
 	const colOffset = [0, -1, 1].find(
 		(offset) => map[row + 1]?.[col + offset] === '.'
 	);
-	if (colOffset !== undefined) {
-		row++;
-		col += colOffset;
-		return getLanding(map, row, col);
-	} else {
-		return new Coord({ row, col });
-	}
+	if (colOffset !== undefined) return getLanding(map, row + 1, col + colOffset);
+
+	return new Coord({ row, col });
 };
 
 export const sandTetris = (input: string): Solution => {
@@ -98,9 +94,7 @@ export const sandTetris = (input: string): Solution => {
 						if (curr.col < start.col) start.col = curr.col;
 						if (curr.col > end.col) end.col = curr.col;
 
-						if (!curr.existsIn(current)) {
-							pathRocks.push(new Coord(curr));
-						}
+						if (!curr.existsIn(current)) pathRocks.push(new Coord(curr));
 
 						if (curr.equals(to)) break;
 

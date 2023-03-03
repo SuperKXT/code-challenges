@@ -28,7 +28,7 @@ export const pluralize = (
 					case 'string': {
 						const array = options.split('|');
 						toShow = (array[number - 1] ?? array.at(-1) ?? '').replace(
-							/\$1/g,
+							/\$1/gu,
 							number.toString()
 						);
 						break;
@@ -48,10 +48,10 @@ export const pluralize = (
 	const replaceQuantity = (input: string): string => {
 		if (!lastQuantifier) return input;
 		const [number, value] = lastQuantifier;
-		if (!value) {
-			input = input.replace(/^\s+/, '');
-		}
-		return input.replace(/\[(([^|]*\|?)+)\]/g, (_, string: string) => {
+		let trimmed = input;
+		if (!value) trimmed = input.replace(/^\s+/u, '');
+
+		return trimmed.replace(/\[(([^|]*\|?)+)\]/gu, (_, string: string) => {
 			const matches = string.split('|');
 			return matches[number - 1] ?? matches.at(-1) ?? '';
 		});
