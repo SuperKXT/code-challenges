@@ -41,5 +41,11 @@
 
 		"skipLibCheck": true
 	},
-	"exclude": ["node_modules/**/*", "build/**/*", "dist/**/*", "coverage/*"]
+	"exclude": [
+		"node_modules/**/*",
+		"build/**/*",
+		"dist/**/*",
+		"coverage/*",
+		"public"
+	]
 }
