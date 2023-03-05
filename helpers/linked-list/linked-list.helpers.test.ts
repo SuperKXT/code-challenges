@@ -7,7 +7,7 @@ interface Test<Type> {
 	list: LinkedList<Type>;
 }
 
-const tests: Test<number>[] = [
+const TESTS: Test<number>[] = [
 	{
 		array: [1, 2, 3],
 		list: {
@@ -21,7 +21,7 @@ const tests: Test<number>[] = [
 ];
 
 describe('array to linked list helper', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return linked list by the given array',
 		({ array, list }) => {
 			const response = arrayToLinkedList(array);

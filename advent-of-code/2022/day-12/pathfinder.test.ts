@@ -4,7 +4,7 @@ import path from 'path';
 import { pathfinder } from './pathfinder';
 
 /** cSpell: disable */
-const example = [
+const EXAMPLE = [
 	'Sabqponm',
 	'abcryxxl',
 	'accszExk',
@@ -17,7 +17,7 @@ type Solution = ReturnType<typeof pathfinder>;
 
 describe('testing pathfinder', () => {
 	it('should return the correct solution for example test', () => {
-		const response = pathfinder(example);
+		const response = pathfinder(EXAMPLE);
 		const solution: Solution = {
 			fewestSteps: 0,
 			part2: 0,

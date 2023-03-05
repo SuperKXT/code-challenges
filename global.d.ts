@@ -1,10 +1,10 @@
 import '@total-typescript/ts-reset';
 
-type _RepeatedTuple<
+type IRepeatedTuple<
 	T,
 	N extends number,
 	R extends unknown[]
-> = R['length'] extends N ? R : _RepeatedTuple<T, N, [T, ...R]>;
+> = R['length'] extends N ? R : IRepeatedTuple<T, N, [T, ...R]>;
 
 type DropFirst<T extends readonly unknown[]> = T extends readonly [
 	any?,
@@ -13,16 +13,16 @@ type DropFirst<T extends readonly unknown[]> = T extends readonly [
 	? U
 	: [...T];
 
-type _RepeatedString<
+type IRepeatedString<
 	S extends string,
 	T extends unknown[]
-> = T['length'] extends 1 ? S : `${S}${_RepeatedString<S, DropFirst<T>>}`;
+> = T['length'] extends 1 ? S : `${S}${IRepeatedString<S, DropFirst<T>>}`;
 
-type _RepeatedTuple<
+type IRepeatedTuple<
 	T,
 	N extends number,
 	R extends unknown[]
-> = R['length'] extends N ? R : _RepeatedTuple<T, N, [T, ...R]>;
+> = R['length'] extends N ? R : IRepeatedTuple<T, N, [T, ...R]>;
 
 declare global {
 	type ReadableTypeOf =
@@ -40,12 +40,12 @@ declare global {
 	type RepeatedTuple<T, N extends number> = N extends N
 		? number extends N
 			? T[]
-			: _RepeatedTuple<T, N, []>
+			: IRepeatedTuple<T, N, []>
 		: never;
 
 	type DistributedArray<T> = T extends infer I ? I[] : never;
 
-	type RepeatedString<S extends string, N extends number> = _RepeatedString<
+	type RepeatedString<S extends string, N extends number> = IRepeatedString<
 		S,
 		RepeatedTuple<unknown, N>
 	>;

@@ -15,15 +15,17 @@ export const campCleanup = async (
 			if (!row) return object;
 
 			const [elfA, elfB] = row.split(',');
-			const [elfAStart = 0, elfAEnd = 0] = elfA?.split('-').map(Number) ?? [];
-			const [elfBStart = 0, elfBEnd = 0] = elfB?.split('-').map(Number) ?? [];
+			const [elfOneStart = 0, elfOneEnd = 0] =
+				elfA?.split('-').map(Number) ?? [];
+			const [elfTwoStart = 0, elfTwoEnd = 0] =
+				elfB?.split('-').map(Number) ?? [];
 
-			const isAInB = elfAStart >= elfBStart && elfAEnd <= elfBEnd;
-			const isBInA = elfBStart >= elfAStart && elfBEnd <= elfAEnd;
-			const isOverlap = elfAStart <= elfBEnd && elfBStart <= elfAEnd;
+			const isOneInTwo = elfOneStart >= elfTwoStart && elfOneEnd <= elfTwoEnd;
+			const isTwoInOne = elfTwoStart >= elfOneStart && elfTwoEnd <= elfOneEnd;
+			const isOverlap = elfOneStart <= elfTwoEnd && elfTwoStart <= elfOneEnd;
 
 			if (isOverlap) object.overlap++;
-			if (isAInB || isBInA) object.fullOverlap++;
+			if (isOneInTwo || isTwoInOne) object.fullOverlap++;
 
 			return object;
 		},

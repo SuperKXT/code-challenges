@@ -1,6 +1,6 @@
 import { campCleanup } from './camp-cleanup';
 
-const input = [
+const INPUT = [
 	'2-4,6-8',
 	'2-3,4-5',
 	'5-7,7-9',
@@ -13,7 +13,7 @@ type Solution = Awaited<ReturnType<typeof campCleanup>>;
 
 describe('testing campCleanup', () => {
 	it('should return the correct solution for the example input', async () => {
-		const response = await campCleanup(input);
+		const response = await campCleanup(INPUT);
 		const solution: Solution = {
 			fullOverlap: 2,
 			overlap: 4,

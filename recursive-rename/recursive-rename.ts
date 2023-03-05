@@ -11,7 +11,7 @@ import { formatToken } from '../helpers/string';
 // eslint-disable-next-line no-restricted-imports
 import { getError } from '../helpers/error';
 
-import { RenameErrors } from './recursive-rename.types';
+import { RENAME_ERRORS } from './recursive-rename.types';
 
 import type {
 	RenameOptions,
@@ -19,8 +19,8 @@ import type {
 	RenameResultType,
 } from './recursive-rename.types';
 
-/* eslint-disable id-length */
-const paramsSchema = z.strictObject({
+/* eslint-disable id-length, @typescript-eslint/naming-convention */
+const PARAMS_SCHEMA = z.strictObject({
 	'--': z.string().array().length(0).optional(),
 	_: z.tuple([z.string()]),
 	h: z.boolean().optional(),
@@ -34,9 +34,9 @@ const paramsSchema = z.strictObject({
 	y: z.boolean().optional(),
 	yes: z.boolean().optional(),
 });
-/* eslint-enable id-length */
+/* eslint-enable id-length, @typescript-eslint/naming-convention */
 
-export type Params = z.infer<typeof paramsSchema>;
+export type Params = z.infer<typeof PARAMS_SCHEMA>;
 
 interface RecursiveLogResponse {
 	logs: string[];
@@ -205,7 +205,7 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 
 				const exists = await getExists(newPath);
 
-				if (exists) throw new Error(RenameErrors.EXISTS);
+				if (exists) throw new Error(RENAME_ERRORS.exists);
 
 				return {
 					children,
@@ -272,7 +272,7 @@ export const recursiveRename = async (
 ): Promise<RenameResult[]> => {
 	const folder = location.replace(/\/+$/u, '');
 
-	if (!(await getIsFolder(folder))) throw new Error(RenameErrors.BAD_PATH);
+	if (!(await getIsFolder(folder))) throw new Error(RENAME_ERRORS.badPath);
 
 	const files = await findFiles(folder);
 
@@ -308,6 +308,7 @@ if (process.env.NODE_ENV !== 'test')
 		const args = argumentParser<Params>(process.argv.slice(2), {
 			alias: {
 				help: 'h',
+				// eslint-disable-next-line @typescript-eslint/naming-convention
 				'only-changes': 'o',
 				tree: 't',
 				verbose: 'v',
@@ -322,7 +323,7 @@ if (process.env.NODE_ENV !== 'test')
 			'only-changes': onlyChanges,
 			tree,
 			help,
-		} = paramsSchema.parse(args);
+		} = PARAMS_SCHEMA.parse(args);
 
 		recursiveRename(folder, {
 			help,
@@ -332,5 +333,5 @@ if (process.env.NODE_ENV !== 'test')
 			yes,
 		}).catch(console.error);
 	} catch {
-		throw new Error(RenameErrors.BAD_ARGUMENTS);
+		throw new Error(RENAME_ERRORS.badArguments);
 	}

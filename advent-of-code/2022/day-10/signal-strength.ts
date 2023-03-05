@@ -1,9 +1,9 @@
-const commands = ['addx', 'noop'] as const;
+const COMMANDS = ['addx', 'noop'] as const;
 
-type Command = (typeof commands)[number];
+type Command = (typeof COMMANDS)[number];
 
 const isCommand = (value: any): value is Command =>
-	typeof value === 'string' && commands.includes(value);
+	typeof value === 'string' && COMMANDS.includes(value);
 
 interface Solution {
 	strength: number;

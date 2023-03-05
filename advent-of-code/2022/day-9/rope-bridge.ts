@@ -1,19 +1,19 @@
-const row = [0, 1, 2, 3, 4] as const;
-type Row = (typeof row)[number];
+const ROW = [0, 1, 2, 3, 4] as const;
+type Row = (typeof ROW)[number];
 
-const col = [0, 1, 2, 3, 4, 5] as const;
-type Col = (typeof col)[number];
+const COL = [0, 1, 2, 3, 4, 5] as const;
+type Col = (typeof COL)[number];
 
 interface Position {
 	row: Row;
 	col: Col;
 }
 
-const move = ['R', 'L', 'U', 'D'] as const;
-type Move = (typeof move)[number];
+const MOVE = ['R', 'L', 'U', 'D'] as const;
+type Move = (typeof MOVE)[number];
 
 const isMove = (value: any): value is Move =>
-	typeof value === 'string' && move.includes(value);
+	typeof value === 'string' && MOVE.includes(value);
 
 const getUniquePositions = (array: Position[]) => {
 	return array.reduce<Position[]>((positions, current) => {
@@ -42,9 +42,7 @@ export const ropeBridge = (
 
 	for (const current of input.split('\n')) {
 		const [direction, repeat] = current.split(' ');
-		if (!isMove(direction) || isNaN(Number(repeat))) 
-			continue;
-		
+		if (!isMove(direction) || isNaN(Number(repeat))) continue;
 
 		[...new Array<undefined>(Number(repeat))].forEach(() => {
 			const headPosition = { ...head.at(-1) } as Position;

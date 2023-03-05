@@ -5,7 +5,7 @@ interface Test {
 	output: string;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{ input: ['never gonna give you up', 3], output: 'nev gon giv you up' },
 	{
 		input: ['*hello* darkness, my ~old_friend', 3],
@@ -22,7 +22,7 @@ const tests: Test[] = [
 ];
 
 describe('testing truncateWords', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return string with truncated words',
 		({ input, output }) => {
 			const response = truncateWords(...input);

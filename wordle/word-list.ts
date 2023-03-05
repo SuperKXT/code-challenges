@@ -1,7 +1,7 @@
 /* cspell: disable */
 /* eslint-disable max-lines */
 
-export const wordleWords = [
+export const WORDLE_WORDS = [
 	'women',
 	'nikau',
 	'swack',
@@ -12951,4 +12951,4 @@ export const wordleWords = [
 	'death',
 ] as const;
 
-export type WordleWord = (typeof wordleWords)[number];
+export type WordleWord = (typeof WORDLE_WORDS)[number];

@@ -5,7 +5,7 @@ interface Test {
 	output: string;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{ input: 'hello world', output: 'heLlo WoRld' },
 	/** cSpell: disable-next-line */
 	{ input: 'xaabeuekadii', output: 'xaaBeueKaDii' },
@@ -13,7 +13,7 @@ const tests: Test[] = [
 ];
 
 describe('testing capitalAfterVowel', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return correct both with and without RegEx',
 		({ input, output }) => {
 			expect(capitalAfterVowel(input)).toStrictEqual({

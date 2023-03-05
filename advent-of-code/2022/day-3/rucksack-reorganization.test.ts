@@ -1,6 +1,6 @@
 import { rucksackReorganization } from './rucksack-reorganization';
 
-const input = [
+const INPUT = [
 	/** cSpell: disable */
 	'vJrwpWtwJgWrhcsFMMfFFhFp',
 	'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL',
@@ -15,7 +15,7 @@ type Solution = Awaited<ReturnType<typeof rucksackReorganization>>;
 
 describe('testing rucksackReorganization', () => {
 	it('should return the correct solution for the example input', async () => {
-		const response = await rucksackReorganization(input);
+		const response = await rucksackReorganization(INPUT);
 		const solution: Solution = {
 			badgePriority: 70,
 			commonPriority: 157,

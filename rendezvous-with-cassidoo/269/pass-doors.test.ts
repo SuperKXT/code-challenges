@@ -5,7 +5,7 @@ interface Test {
 	output: number;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{ input: [7, 3], output: 4 },
 	{ input: [8, 4], output: 6 },
 	{ input: [2, 0], output: 0 },
@@ -13,7 +13,7 @@ const tests: Test[] = [
 ];
 
 describe('testing passDoors', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return number of open doors after given passes',
 		({ input, output }) => {
 			const response = passDoors(...input);

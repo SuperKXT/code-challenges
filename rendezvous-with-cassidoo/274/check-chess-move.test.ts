@@ -8,7 +8,7 @@ interface Test {
 	response: ChessResponse;
 }
 
-const board = [
+const BOARD = [
 	'~~~~~~~~',
 	'~~kb~~~~',
 	'~~K~~~~~',
@@ -19,21 +19,21 @@ const board = [
 	'~~~R~~~~',
 ].join('\n');
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{
 		input: {
-			board,
+			board: BOARD,
 			from: [7, 3],
 			to: [0, 0],
 		},
 		response: {
-			error: CHESS_ERRORS.BAD_ROOK,
+			error: CHESS_ERRORS.badRook,
 			isValid: false,
 		},
 	},
 	{
 		input: {
-			board,
+			board: BOARD,
 			from: [1, 2],
 			to: [0, 1],
 		},
@@ -48,19 +48,19 @@ const tests: Test[] = [
 	},
 	{
 		input: {
-			board,
+			board: BOARD,
 			from: [1, 2],
 			to: [1, 3],
 		},
 		response: {
-			error: CHESS_ERRORS.COLLISION,
+			error: CHESS_ERRORS.collision,
 			isValid: false,
 		},
 	},
 ];
 
 describe('testing isValidMove', () => {
-	it.each(tests)('should tell if the move is valid', ({ input, response }) => {
+	it.each(TESTS)('should tell if the move is valid', ({ input, response }) => {
 		expect(isValidMove(input)).toStrictEqual(response);
 	});
 });

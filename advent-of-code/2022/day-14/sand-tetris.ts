@@ -31,13 +31,13 @@ class Coord {
 type MapRow = ('.' | '#' | '+' | 'o')[];
 type Map = MapRow[];
 
-const source = new Coord({ col: 500, row: 0 });
-const rowLength = source.col * 2;
+const SOURCE = new Coord({ col: 500, row: 0 });
+const ROW_LENGTH = SOURCE.col * 2;
 
 const getLanding = (
 	map: Map,
-	row: number = source.row,
-	col: number = source.col
+	row: number = SOURCE.row,
+	col: number = SOURCE.col
 ): Coord | null => {
 	const mapRow = map[row];
 	if (!mapRow || mapRow[col] !== '.' || !map[row + 1]) return null;
@@ -121,7 +121,7 @@ export const sandTetris = (input: string): Solution => {
 	);
 
 	const part1Map: Map = [...new Array<undefined>(end.row + 1)].map<MapRow>(() =>
-		[...new Array<'.'>(rowLength)].fill('.')
+		[...new Array<'.'>(ROW_LENGTH)].fill('.')
 	);
 	rocks.forEach(({ row, col }) => {
 		const mapRow = part1Map[row];
@@ -129,8 +129,8 @@ export const sandTetris = (input: string): Solution => {
 	});
 	const part2Map: Map = structuredClone(part1Map);
 	part2Map.push(
-		new Array<'.'>(rowLength).fill('.'),
-		new Array<'#'>(rowLength).fill('#')
+		new Array<'.'>(ROW_LENGTH).fill('.'),
+		new Array<'#'>(ROW_LENGTH).fill('#')
 	);
 
 	while (true) {

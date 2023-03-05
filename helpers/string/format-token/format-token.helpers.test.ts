@@ -1,4 +1,4 @@
-import { formatStrategies, formatToken } from './format-token.helpers';
+import { FORMAT_STRATEGIES, formatToken } from './format-token.helpers';
 
 import type { FormatStrategy } from './format-token.helpers';
 
@@ -7,7 +7,7 @@ interface Test {
 	output: Record<FormatStrategy, string>;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{
 		input: 'thisIsSomeTestString',
 		output: {
@@ -70,12 +70,12 @@ const tests: Test[] = [
 	},
 ];
 
-describe.each(tests)('test formatString helper', ({ input, output }) => {
+describe.each(TESTS)('test formatString helper', ({ input, output }) => {
 	it(`should return ${output.camel} for formatString(${input})`, () => {
 		const response = formatToken(input);
 		expect(response).toStrictEqual(output.camel);
 	});
-	it.each(formatStrategies)(
+	it.each(FORMAT_STRATEGIES)(
 		'should return valid formatted string by given parameters',
 		(strategy) => {
 			const response = formatToken(input, strategy);

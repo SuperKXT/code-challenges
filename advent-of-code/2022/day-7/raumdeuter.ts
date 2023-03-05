@@ -1,8 +1,8 @@
 import { objectValues } from '~/helpers/object';
 
-const totalSpace = 70_000_000;
-const requiredSpace = 30_000_000;
-const smallSize = 100_000;
+const TOTAL_SPACE = 70_000_000;
+const REQUIRED_SPACE = 30_000_000;
+const SMALL_SIZE = 100_000;
 
 export const raumdeuter = (
 	input: string
@@ -39,8 +39,8 @@ export const raumdeuter = (
 
 	const sizes = objectValues(dirs).sort((first, second) => first - second);
 	const takenSpace = sizes.at(-1) ?? 0;
-	const unusedSpace = totalSpace - takenSpace;
-	const toFree = requiredSpace - unusedSpace;
+	const unusedSpace = TOTAL_SPACE - takenSpace;
+	const toFree = REQUIRED_SPACE - unusedSpace;
 
 	const solution = {
 		deletedSize: 0,
@@ -48,8 +48,8 @@ export const raumdeuter = (
 	};
 
 	for (const size of sizes) {
-		if (size <= smallSize) solution.smallFiles += size;
-		if (size > smallSize && solution.deletedSize) break;
+		if (size <= SMALL_SIZE) solution.smallFiles += size;
+		if (size > SMALL_SIZE && solution.deletedSize) break;
 		if (!solution.deletedSize && size >= toFree) solution.deletedSize = size;
 	}
 

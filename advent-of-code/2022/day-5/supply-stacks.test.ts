@@ -3,7 +3,7 @@ import path from 'path';
 
 import { supplyStacks } from './supply-stacks';
 
-const input = [
+const INPUT = [
 	'    [D]    ',
 	'[N] [C]    ',
 	'[Z] [M] [P]',
@@ -19,7 +19,7 @@ type Solution = Awaited<ReturnType<typeof supplyStacks>>;
 
 describe('testing supplyStacks', () => {
 	it('should return the correct solution for the example input', () => {
-		const response = supplyStacks(input);
+		const response = supplyStacks(INPUT);
 		const solution: Solution = {
 			part1: 'CMZ',
 			part2: 'MCD',

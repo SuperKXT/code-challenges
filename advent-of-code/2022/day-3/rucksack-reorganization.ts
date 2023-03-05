@@ -1,9 +1,9 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-const lowerCase = 'abcdefghijklmnopqrstuvwxyz' as const;
-const upperCase = lowerCase.toUpperCase() as Uppercase<typeof lowerCase>;
-const items = `${lowerCase}${upperCase}` as const;
+const LOWER_CASE = 'abcdefghijklmnopqrstuvwxyz' as const;
+const UPPER_CASE = LOWER_CASE.toUpperCase() as Uppercase<typeof LOWER_CASE>;
+const ITEMS = `${LOWER_CASE}${UPPER_CASE}` as const;
 
 export const rucksackReorganization = async (
 	override?: string
@@ -27,7 +27,7 @@ export const rucksackReorganization = async (
 			const badge = Array.from(group[0] ?? '').find((item) =>
 				group.slice().every((elf) => elf.includes(item))
 			);
-			badgePriority += items.indexOf(badge ?? ' ') + 1;
+			badgePriority += ITEMS.indexOf(badge ?? ' ') + 1;
 			group.splice(0, 3);
 		}
 
@@ -36,7 +36,7 @@ export const rucksackReorganization = async (
 		const common = Array.from(firstHalf).find((item) =>
 			secondHalf.includes(item)
 		);
-		commonPriority += items.indexOf(common ?? ' ') + 1;
+		commonPriority += ITEMS.indexOf(common ?? ' ') + 1;
 	}
 
 	return {

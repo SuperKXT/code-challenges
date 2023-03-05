@@ -5,7 +5,7 @@ interface Test {
 	output: number[];
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{ input: 1, output: [] },
 	{ input: 2, output: [] },
 	{ input: 3, output: [2] },
@@ -20,7 +20,7 @@ const tests: Test[] = [
 ];
 
 describe('testing findAntiDivisors', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return anti-divisor array for given number',
 		({ input, output }) => {
 			expect(findAntiDivisors(input)).toStrictEqual(output);

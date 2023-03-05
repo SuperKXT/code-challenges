@@ -12,7 +12,7 @@ interface Solution {
 	bigMb: number;
 }
 
-const prefix = {
+const PREFIX = {
 	divisor: 'Test: divisible by',
 	falseIndex: 'If false: throw to monkey',
 	items: 'Starting items:',
@@ -33,13 +33,13 @@ export const monkeyBusiness = (input: string): Solution => {
 			const rows = curr.split('\n');
 
 			const [first, op, second] =
-				rows[2]?.replace(prefix.operation, '').trim().split(/\s+/gu) ?? [];
+				rows[2]?.replace(PREFIX.operation, '').trim().split(/\s+/gu) ?? [];
 
 			const monkey: Monkey = {
-				divisor: parseInt(rows[3]?.replace(prefix.divisor, '') ?? ''),
-				falseIndex: parseInt(rows[5]?.replace(prefix.falseIndex, '') ?? ''),
+				divisor: parseInt(rows[3]?.replace(PREFIX.divisor, '') ?? ''),
+				falseIndex: parseInt(rows[5]?.replace(PREFIX.falseIndex, '') ?? ''),
 				inspected: 0,
-				items: (rows[1]?.replace(prefix.items, '').split(',') ?? []).map(
+				items: (rows[1]?.replace(PREFIX.items, '').split(',') ?? []).map(
 					Number
 				),
 				operation: (item: number) => {
@@ -48,7 +48,7 @@ export const monkeyBusiness = (input: string): Solution => {
 					if (op === '+') return left + right;
 					return left * right;
 				},
-				trueIndex: parseInt(rows[4]?.replace(prefix.trueIndex, '') ?? ''),
+				trueIndex: parseInt(rows[4]?.replace(PREFIX.trueIndex, '') ?? ''),
 			};
 
 			return monkey;

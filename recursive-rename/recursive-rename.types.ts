@@ -1,13 +1,13 @@
-export const RenameErrors = {
-	BAD_ARGUMENTS:
+export const RENAME_ERRORS = {
+	badArguments:
 		'invalid arguments provided. use -h or --help to check the correct usage',
-	BAD_PATH: 'the given path must be a directory',
-	EXISTS: 'path already exists',
+	badPath: 'the given path must be a directory',
+	exists: 'path already exists',
 } as const;
 
-export const renameResultType = ['success', 'error', 'unchanged'] as const;
+export const RENAME_RESULT_TYPE = ['success', 'error', 'unchanged'] as const;
 
-export type RenameResultType = (typeof renameResultType)[number];
+export type RenameResultType = (typeof RENAME_RESULT_TYPE)[number];
 
 interface AgnosticResult {
 	type: RenameResultType;

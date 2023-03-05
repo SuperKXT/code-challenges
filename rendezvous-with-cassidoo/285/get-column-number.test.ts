@@ -5,7 +5,7 @@ interface Test {
 	output: number;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{ input: 'A', output: 1 },
 	{ input: 'B', output: 2 },
 	{ input: 'C', output: 3 },
@@ -19,7 +19,7 @@ const tests: Test[] = [
 ];
 
 describe('testing generateArrays', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return the column number corresponding to the name',
 		({ input, output }) => {
 			expect(getColumnNumber(input)).toStrictEqual(output);

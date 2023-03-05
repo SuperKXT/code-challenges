@@ -1,4 +1,4 @@
-export const subGridSumError = 'No rectangle found!';
+export const SUB_GRID_SUM_ERROR = new Error('No rectangle found!');
 
 export const subGridSum = (
 	grid: number[][],
@@ -31,5 +31,5 @@ export const subGridSum = (
 		}
 	}
 
-	throw new Error(subGridSumError);
+	throw SUB_GRID_SUM_ERROR;
 };

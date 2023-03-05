@@ -1,4 +1,4 @@
-import { findWordle, defaultArgs } from './wordle';
+import { findWordle, DEFAULT_ARGS } from './wordle';
 
 import type { WordleWord } from './word-list';
 import type { Arguments } from './wordle';
@@ -8,7 +8,7 @@ interface Test {
 	results: WordleWord[];
 }
 
-const testCases: Test[] = [
+const TEST_CASES: Test[] = [
 	{
 		args: {
 			known: 'qul',
@@ -50,8 +50,8 @@ const testCases: Test[] = [
 	{
 		args: {
 			/* cspell: disable-next-line */
-available: 'qwygjzxmloc',
-			
+			available: 'qwygjzxmloc',
+
 			known: 'loc',
 			pattern: '(l)o(o)(co)*',
 		},
@@ -60,8 +60,8 @@ available: 'qwygjzxmloc',
 	{
 		args: {
 			/* cspell: disable-next-line */
-available: 'qwygjzxmloc',
-			
+			available: 'qwygjzxmloc',
+
 			known: 'loc',
 			pattern: '(l)o(o)(co)*',
 			repeat: false,
@@ -79,22 +79,24 @@ available: 'qwygjzxmloc',
 	},
 	{
 		args: {
-			
 			known: 'ec',
-			
-pattern: 'e(e)c*(ce)',
+
+			pattern: 'e(e)c*(ce)',
 			/* cspell: disable-next-line */
-unavailable: 'asduiopkbn',
+			unavailable: 'asduiopkbn',
 		},
 		results: ['excel'],
 	},
 ];
 
 describe('find wordle word', () => {
-	it.each(testCases)(
+	it.each(TEST_CASES)(
 		'should find matched words by the given flags',
 		({ args, results }) => {
-			const response = findWordle({ ...defaultArgs, ...args });
+			const response = findWordle({
+				...DEFAULT_ARGS,
+				...args,
+			} as typeof DEFAULT_ARGS);
 			expect(response).toStrictEqual(results);
 		}
 	);

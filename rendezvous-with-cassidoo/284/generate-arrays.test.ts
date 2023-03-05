@@ -5,7 +5,7 @@ interface Test {
 	output: number[][];
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{
 		input: 4,
 		output: [[1], [1, 2], [1, 2, 3], [1, 2, 3, 4]],
@@ -25,7 +25,7 @@ const tests: Test[] = [
 ];
 
 describe('testing generateArrays', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return array of arrays for given integer',
 		({ input, output }) => {
 			expect(generateArrays(input)).toStrictEqual(output);

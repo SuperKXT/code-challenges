@@ -1,13 +1,13 @@
 import {
-	alphabet,
-	alphaNumeric,
-	lowerCase,
-	numbers,
-	upperCase,
-	wordSeparators,
+	ALPHABET,
+	ALPHA_NUMERIC,
+	LOWER_CASE,
+	NUMBERS,
+	UPPER_CASE,
+	WORD_SEPARATORS,
 } from '~/helpers/string/string-literals';
 
-export const formatStrategies = [
+export const FORMAT_STRATEGIES = [
 	'camel',
 	'pascal',
 	'constant',
@@ -15,7 +15,7 @@ export const formatStrategies = [
 	'snake',
 ] as const;
 
-export type FormatStrategy = (typeof formatStrategies)[number];
+export type FormatStrategy = (typeof FORMAT_STRATEGIES)[number];
 
 /**
  * Takes a token name, and format strategy and returns the converted token name
@@ -36,14 +36,14 @@ export const formatToken = (
 		const current = string[index] as string;
 		const last = string[index - 1];
 
-		if (current === '.' && alphaNumeric.includes(formatted.at(-1) ?? '')) {
+		if (current === '.' && ALPHA_NUMERIC.includes(formatted.at(-1) ?? '')) {
 			formatted += '.';
 			continue;
 		}
 
-		if (!alphaNumeric.includes(current)) continue;
+		if (!ALPHA_NUMERIC.includes(current)) continue;
 
-		if (!formatted) 
+		if (!formatted)
 			switch (strategy) {
 				case 'camel':
 				case 'kebab':
@@ -57,10 +57,10 @@ export const formatToken = (
 					break;
 				}
 			}
-		 else if (
-			(alphabet.includes(current) && last && wordSeparators.includes(last)) ||
-			(upperCase.includes(current) && last && lowerCase.includes(last))
-		) 
+		else if (
+			(ALPHABET.includes(current) && last && WORD_SEPARATORS.includes(last)) ||
+			(UPPER_CASE.includes(current) && last && LOWER_CASE.includes(last))
+		)
 			switch (strategy) {
 				case 'camel': {
 					formatted += current.toUpperCase();
@@ -85,14 +85,14 @@ export const formatToken = (
 					break;
 				}
 			}
-		 else if (
+		else if (
 			['kebab', 'snake', 'constant'].includes(strategy) &&
-			numbers.includes(current) &&
+			NUMBERS.includes(current) &&
 			formatted.at(-1) &&
-			alphabet.includes(formatted.at(-1) ?? '')
-		) 
+			ALPHABET.includes(formatted.at(-1) ?? '')
+		)
 			formatted += `${strategy === 'kebab' ? '-' : '_'}${current}`;
-		 else 
+		else
 			switch (strategy) {
 				case 'camel':
 				case 'kebab':
@@ -106,11 +106,9 @@ export const formatToken = (
 					break;
 				}
 			}
-		
 	}
 
-	if (formatted.at(-1) === '.') 
-		return formatted.slice(0, -1);
-	
+	if (formatted.at(-1) === '.') return formatted.slice(0, -1);
+
 	return formatted;
 };

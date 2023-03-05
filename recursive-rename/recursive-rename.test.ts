@@ -3,56 +3,56 @@ import { tmpdir } from 'os';
 import path from 'path';
 
 import { getRenameLogs, recursiveRename } from './recursive-rename';
-import { RenameErrors } from './recursive-rename.types';
+import { RENAME_ERRORS } from './recursive-rename.types';
 
 import type { RenameOptions, RenameResult } from './recursive-rename.types';
 
-const tempPath = path.join(tmpdir(), 'test');
+const TEMP_PATH = path.join(tmpdir(), 'test');
 
 type Test = RenameResult[];
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	[
 		{
 			children: [
 				{
 					newName: 'folder-file-1.txt',
 					oldName: 'folderFile1.txt',
-					path: path.join(tempPath, 'folder'),
+					path: path.join(TEMP_PATH, 'folder'),
 					type: 'success',
 				},
 				{
 					newName: 'folder-file-2.js',
 					oldName: 'folder_file_2.js',
-					path: path.join(tempPath, 'folder'),
+					path: path.join(TEMP_PATH, 'folder'),
 					type: 'success',
 				},
 				{
 					newName: 'folder-file-3.ts',
 					oldName: '  folder  file 3.ts',
-					path: path.join(tempPath, 'folder'),
+					path: path.join(TEMP_PATH, 'folder'),
 					type: 'success',
 				},
 			],
 			oldName: 'folder',
-			path: tempPath,
+			path: TEMP_PATH,
 			type: 'unchanged',
 		},
 		{
 			newName: 'file-1.txt',
 			oldName: 'file   1.txt',
-			path: tempPath,
+			path: TEMP_PATH,
 			type: 'success',
 		},
 		{
 			newName: 'file-2.txt',
 			oldName: 'FILE_2.txt',
-			path: tempPath,
+			path: TEMP_PATH,
 			type: 'success',
 		},
 		{
 			oldName: 'file-3.txt',
-			path: tempPath,
+			path: TEMP_PATH,
 			type: 'unchanged',
 		},
 	],
@@ -60,26 +60,26 @@ const tests: Test[] = [
 		{
 			children: [
 				{
-					error: RenameErrors.EXISTS,
+					error: RENAME_ERRORS.exists,
 					newName: 'file-1.json',
 					oldName: 'file 1.json',
-					path: path.join(tempPath, 'folder'),
+					path: path.join(TEMP_PATH, 'folder'),
 					type: 'error',
 				},
 				{
 					oldName: 'file-1.json',
-					path: path.join(tempPath, 'folder'),
+					path: path.join(TEMP_PATH, 'folder'),
 					type: 'unchanged',
 				},
 			],
 			oldName: 'folder',
-			path: tempPath,
+			path: TEMP_PATH,
 			type: 'unchanged',
 		},
 		{
 			newName: 'file-1.yml',
 			oldName: 'file 1.yml',
-			path: tempPath,
+			path: TEMP_PATH,
 			type: 'success',
 		},
 	],
@@ -93,28 +93,28 @@ const recursiveSort = (files: RenameResult[]): RenameResult[] => {
 	}));
 };
 
-const sortedTests = tests.map(recursiveSort);
+const SORTED_TESTS = TESTS.map(recursiveSort);
 
 // eslint-disable-next-line jest/no-hooks
 beforeEach(() => {
-	if (existsSync(tempPath))
-		rmSync(tempPath, {
+	if (existsSync(TEMP_PATH))
+		rmSync(TEMP_PATH, {
 			force: true,
 			recursive: true,
 		});
 
-	mkdirSync(tempPath);
+	mkdirSync(TEMP_PATH);
 });
 
 // eslint-disable-next-line jest/no-hooks
 afterEach(() => {
-	rmSync(tempPath, {
+	rmSync(TEMP_PATH, {
 		force: true,
 		recursive: true,
 	});
 });
 
-const createFiles = (files: Test, directory: string = tempPath) => {
+const createFiles = (files: Test, directory: string = TEMP_PATH) => {
 	for (const { oldName, children } of files) {
 		const oldPath = path.join(directory, oldName);
 		if (children) {
@@ -126,7 +126,7 @@ const createFiles = (files: Test, directory: string = tempPath) => {
 	}
 };
 
-const checkFiles = (files: Test, directory: string = tempPath) => {
+const checkFiles = (files: Test, directory: string = TEMP_PATH) => {
 	for (const { type, oldName, newName, children } of files) {
 		const currentName = path.join(
 			directory,
@@ -142,7 +142,7 @@ const checkFiles = (files: Test, directory: string = tempPath) => {
 };
 
 describe('testing recursive-rename function', () => {
-	it.each(sortedTests)(
+	it.each(SORTED_TESTS)(
 		'should setup the files and rename recursively',
 		async (...files) => {
 			const logSpy = jest.spyOn(global.console, 'info').mockImplementation();
@@ -156,7 +156,7 @@ describe('testing recursive-rename function', () => {
 				yes: true,
 			};
 
-			const output = await recursiveRename(tempPath, options);
+			const output = await recursiveRename(TEMP_PATH, options);
 
 			checkFiles(files);
 
@@ -173,9 +173,9 @@ describe('testing recursive-rename function', () => {
 	it('should throw an error for invalid path', async () => {
 		await expect(
 			recursiveRename('./invalid-path', { yes: true })
-		).rejects.toThrow(RenameErrors.BAD_PATH);
+		).rejects.toThrow(RENAME_ERRORS.badPath);
 		await expect(
 			recursiveRename(path.join(__dirname, 'README.md'), { yes: true })
-		).rejects.toThrow(RenameErrors.BAD_PATH);
+		).rejects.toThrow(RENAME_ERRORS.badPath);
 	});
 });

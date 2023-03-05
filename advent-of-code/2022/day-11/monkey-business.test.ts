@@ -3,7 +3,7 @@ import path from 'path';
 
 import { monkeyBusiness } from './monkey-business';
 
-const example = `Monkey 0:
+const EXAMPLE = `Monkey 0:
   Starting items: 79, 98
   Operation: new = old * 19
   Test: divisible by 23
@@ -35,7 +35,7 @@ type Solution = ReturnType<typeof monkeyBusiness>;
 
 describe('testing monkeyBusiness', () => {
 	it('should return the correct solution for example test', () => {
-		const response = monkeyBusiness(example);
+		const response = monkeyBusiness(EXAMPLE);
 		const solution: Solution = {
 			bigMb: 2713310158,
 			monkeyBusiness: 10605,

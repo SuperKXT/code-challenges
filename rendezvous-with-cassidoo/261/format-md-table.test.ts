@@ -5,7 +5,7 @@ interface Test {
 	output: string;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{
 		input: [
 			'| Syntax | Description |',
@@ -75,7 +75,7 @@ const tests: Test[] = [
 ];
 
 describe('format markdown table string', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return correctly formatted markdown',
 		({ input, output }) => {
 			const formatted = formatMarkdownTable(input);

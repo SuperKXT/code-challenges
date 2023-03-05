@@ -1,8 +1,8 @@
-const columnMatcher = /(?<=\|)([^|\n])*(?=\|)/gu;
+const COLUMN_MATCHER = /(?<=\|)([^|\n])*(?=\|)/gu;
 
 const formatMarkdownTable = (string: string): string => {
 	const rowStrings = string.match(/^.+$/gmu);
-	const rowCells = rowStrings?.map((row) => row.match(columnMatcher) ?? []);
+	const rowCells = rowStrings?.map((row) => row.match(COLUMN_MATCHER) ?? []);
 	const noOfColumns = rowCells?.[0]?.length ?? 0;
 
 	if (!rowStrings || !noOfColumns || !rowCells) return '';

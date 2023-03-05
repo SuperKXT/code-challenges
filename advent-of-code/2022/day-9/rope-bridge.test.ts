@@ -3,11 +3,11 @@ import path from 'path';
 
 import { ropeBridge } from './rope-bridge';
 
-const example = ['R 4', 'U 4', 'L 3', 'D 1', 'R 4', 'D 1', 'L 5', 'R 2'].join(
+const EXAMPLE = ['R 4', 'U 4', 'L 3', 'D 1', 'R 4', 'D 1', 'L 5', 'R 2'].join(
 	'\n'
 );
 
-const example2 = [
+const EXAMPLE_2 = [
 	'R 5',
 	'U 8',
 	'L 8',
@@ -22,7 +22,7 @@ type Solution = ReturnType<typeof ropeBridge>;
 
 describe('testing ropeBridge', () => {
 	it('should return the correct solution for example test', () => {
-		const response = ropeBridge(example, {
+		const response = ropeBridge(EXAMPLE, {
 			col: 0,
 			row: 4,
 		});
@@ -37,7 +37,7 @@ describe('testing ropeBridge', () => {
 			firstTail: 88,
 			lastTail: 36,
 		};
-		expect(ropeBridge(example2)).toStrictEqual(solution);
+		expect(ropeBridge(EXAMPLE_2)).toStrictEqual(solution);
 	});
 	it('should return the correct solution for the input file', async () => {
 		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');

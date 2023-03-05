@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import argumentParser from 'minimist-lite';
 import { z } from 'zod';
 
-import { wordleWords } from './word-list';
+import { WORDLE_WORDS } from './word-list';
 
 const EXCLUDE_CHARACTERS_REGEX = /\(([a-z]+)\)/giu;
 const VALID_WORD_PATTERN = /((\([a-z]+\))|[a-z*]){5}/iu;
@@ -11,7 +11,7 @@ const DUPLICATE_CHARACTER_REGEX = /(.).*\1/iu;
 const ALPHABETS = 'abcdefghijklmnopqrstuvxwyz';
 
 /* eslint-disable id-length */
-export const defaultArgs: Arguments = {
+export const DEFAULT_ARGS: Arguments = {
 	a: ALPHABETS,
 	available: ALPHABETS,
 	k: '',
@@ -23,7 +23,8 @@ export const defaultArgs: Arguments = {
 	unavailable: '',
 };
 
-const argumentSchema = z.strictObject({
+const ARGUMENT_SCHEMA = z.strictObject({
+	// eslint-disable-next-line @typescript-eslint/naming-convention
 	'--': z.string().array().length(0).optional(),
 	_: z.string().array().length(0).optional(),
 	a: z.string().regex(/^[a-z]{0,26}$/iu),
@@ -40,7 +41,7 @@ const argumentSchema = z.strictObject({
 
 export const findWordle = (parameters: Arguments): string[] => {
 	const { available, unavailable, pattern, known, repeat } =
-		argumentSchema.parse(parameters);
+		ARGUMENT_SCHEMA.parse(parameters);
 
 	const availableCharacters = unavailable
 		? available.replace(new RegExp(`[${unavailable}]`, 'giu'), '')
@@ -57,7 +58,7 @@ export const findWordle = (parameters: Arguments): string[] => {
 		'iu'
 	);
 
-	const matches = wordleWords.filter(
+	const matches = WORDLE_WORDS.filter(
 		(word) =>
 			(repeat || !DUPLICATE_CHARACTER_REGEX.test(word)) &&
 			known.split('').every((character) => word.includes(character)) &&
@@ -77,7 +78,7 @@ export const findWordle = (parameters: Arguments): string[] => {
 	return matches;
 };
 
-export type Arguments = z.infer<typeof argumentSchema>;
+export type Arguments = z.infer<typeof ARGUMENT_SCHEMA>;
 
 if (process.env.NODE_ENV !== 'test') {
 	const args = argumentParser<Arguments>(process.argv.slice(2), {
@@ -87,7 +88,7 @@ if (process.env.NODE_ENV !== 'test') {
 			pattern: 'p',
 			unavailable: 'u',
 		},
-		default: defaultArgs,
+		default: DEFAULT_ARGS,
 	});
 	findWordle(args); // eslint-disable-line jest/require-hook
 }

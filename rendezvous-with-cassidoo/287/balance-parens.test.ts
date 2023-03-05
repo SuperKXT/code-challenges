@@ -5,7 +5,7 @@ interface Test {
 	output: number;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{ input: '()', output: 0 },
 	{ input: '(()', output: 1 },
 	{ input: '))()))))()', output: 6 },
@@ -13,7 +13,7 @@ const tests: Test[] = [
 ];
 
 describe('testing balanceParens', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return the number of required parens to balance string',
 		({ input, output }) => {
 			expect(balanceParens(input)).toStrictEqual(output);

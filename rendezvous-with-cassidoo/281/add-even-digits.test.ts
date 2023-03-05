@@ -5,7 +5,7 @@ interface Test {
 	output: number;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{ input: 548915381, output: 26 },
 	{ input: 10, output: 0 },
 	{ input: 1010.11, output: 1 },
@@ -14,7 +14,7 @@ const tests: Test[] = [
 ];
 
 describe('testing maxSubArray', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return the sub array with the biggest sum',
 		({ input, output }) => {
 			expect(addEventDigits(input)).toStrictEqual(output);

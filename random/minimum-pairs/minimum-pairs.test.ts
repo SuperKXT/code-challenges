@@ -7,7 +7,7 @@ interface Test {
 	solution: Pair[];
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{
 		input: [4, 3, 2, 1],
 		solution: ['1 2', '2 3', '3 4'],
@@ -23,7 +23,7 @@ const tests: Test[] = [
 ];
 
 describe('testing minimumPairs', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should find minimum difference pairs for the given array',
 		({ input, solution }) => {
 			const response = minimumPairs(input);

@@ -5,7 +5,7 @@ interface Test {
 	output: string;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{
 		input: [1, 2, 3, 4, 20, 21, 22, 23],
 		output: '[1,2,3,4,...,20,21,22,23]',
@@ -29,7 +29,7 @@ const tests: Test[] = [
 ];
 
 describe('testing missingBits', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return string with missing range bits',
 		({ input, output }) => {
 			expect(missingBits(input)).toBe(output);

@@ -1,11 +1,11 @@
-import { verticalSlashes, invalidError } from './vertical-slashes';
+import { verticalSlashes, INVALID_ERROR } from './vertical-slashes';
 
 interface Test {
 	input: string;
 	output: string;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{
 		input: String.raw`\\\//\/\\`,
 		output: ['\\', ' \\', '  \\', '  /', ' /', ' \\', ' /', ' \\', '  \\'].join(
@@ -29,11 +29,11 @@ const tests: Test[] = [
 ];
 
 describe('testing verticalSlashes', () => {
-	it.each(tests)('should return formed slash path', ({ input, output }) => {
+	it.each(TESTS)('should return formed slash path', ({ input, output }) => {
 		expect(verticalSlashes(input)).toStrictEqual(output);
 	});
 	it('should throw for invalid input', () => {
-		expect(() => verticalSlashes(String.raw`  \/`)).toThrow(invalidError);
-		expect(() => verticalSlashes('')).toThrow(invalidError);
+		expect(() => verticalSlashes(String.raw`  \/`)).toThrow(INVALID_ERROR);
+		expect(() => verticalSlashes('')).toThrow(INVALID_ERROR);
 	});
 });

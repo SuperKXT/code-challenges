@@ -1,11 +1,11 @@
-import { combineStrings, invalidError } from './combine-strings';
+import { combineStrings, INVALID_ERROR } from './combine-strings';
 
 interface Test {
 	input: [string[], number];
 	output: string[];
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{
 		input: [['a', 'b', 'c', 'd', 'e', 'f', 'g'], 5],
 		output: ['a b c', 'd e f', 'g'],
@@ -33,10 +33,12 @@ const tests: Test[] = [
 ];
 
 describe('testing combineStrings', () => {
-	it.each(tests)('should return combined string array', ({ input, output }) => {
+	it.each(TESTS)('should return combined string array', ({ input, output }) => {
 		expect(combineStrings(...input)).toStrictEqual(output);
 	});
 	it('should throw for invalid size', () => {
-		expect(() => combineStrings(['ab', 'base', 'gh'], 2)).toThrow(invalidError);
+		expect(() => combineStrings(['ab', 'base', 'gh'], 2)).toThrow(
+			INVALID_ERROR
+		);
 	});
 });

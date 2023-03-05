@@ -5,7 +5,7 @@ interface Test {
 	result: boolean;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	// cSpell: disable-next-line
 	{ result: true, string: 'aaccd' },
 	{ result: true, string: 'nurses run' },
@@ -16,7 +16,7 @@ const tests: Test[] = [
 ];
 
 describe('testing canBePalindrome', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'return if the characters can be a palindrome',
 		({ string, result }) => {
 			expect(canBePalindrome(string)).toBe(result);

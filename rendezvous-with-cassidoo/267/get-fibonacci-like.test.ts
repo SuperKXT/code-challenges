@@ -1,5 +1,5 @@
 import {
-	Errors,
+	ERRORS,
 	getFibonacciLike,
 	isFibonacciLike,
 } from './get-fibonacci-like';
@@ -9,7 +9,7 @@ interface GetTest {
 	output: number[];
 }
 
-const getTests: GetTest[] = [
+const GET_TESTS: GetTest[] = [
 	{ input: [10, 20, 5], output: [10, 20, 30, 50, 80] },
 	{ input: [3, 7, 7], output: [3, 7, 10, 17, 27, 44, 71] },
 	{ input: [5, 10, 3], output: [5, 10, 15] },
@@ -22,12 +22,12 @@ interface BadGetTest {
 	error: string;
 }
 
-const badGetTests: BadGetTest[] = [
-	{ error: Errors.Length, input: [5, 10, 2] },
-	{ error: Errors.Length, input: [5, 10, -5] },
-	{ error: Errors.Length, input: [5, 10, 1] },
+const BAD_GET_TESTS: BadGetTest[] = [
+	{ error: ERRORS.length, input: [5, 10, 2] },
+	{ error: ERRORS.length, input: [5, 10, -5] },
+	{ error: ERRORS.length, input: [5, 10, 1] },
 	// @ts-expect-error intentional error check
-	{ error: Errors.Undefined, input: [5, undefined, 5] },
+	{ error: ERRORS.undefined, input: [5, undefined, 5] },
 ];
 
 interface CheckTest {
@@ -35,7 +35,7 @@ interface CheckTest {
 	output: boolean;
 }
 
-const checkTests: CheckTest[] = [
+const CHECK_TESTS: CheckTest[] = [
 	{ input: [10, 20, 5], output: false },
 	{ input: [3, 7, 10, 17, 27], output: true },
 	{ input: [], output: false },
@@ -48,14 +48,14 @@ const checkTests: CheckTest[] = [
 ];
 
 describe('testing getFibonacciLike', () => {
-	it.each(getTests)(
+	it.each(GET_TESTS)(
 		'should return fibonacci like sequence of given length',
 		({ input, output }) => {
 			const response = getFibonacciLike(...input);
 			expect(response).toStrictEqual(output);
 		}
 	);
-	it.each(badGetTests)(
+	it.each(BAD_GET_TESTS)(
 		'should throw error for incorrect length',
 		({ input, error }) => {
 			expect(() => getFibonacciLike(...input)).toThrow(error);
@@ -64,7 +64,7 @@ describe('testing getFibonacciLike', () => {
 });
 
 describe('testing isFibonacciLike', () => {
-	it.each(checkTests)(
+	it.each(CHECK_TESTS)(
 		'should indicate if sequence is a fibonacci like',
 		({ input, output }) => {
 			const response = isFibonacciLike(input);

@@ -13,7 +13,7 @@ interface ToArrayTest<Type> {
 	list: LinkedList<Type>;
 }
 
-const equalityTests: EqualityTest[] = [
+const EQUALITY_TESTS: EqualityTest[] = [
 	{
 		areEqual: true,
 		first: [1, 2, 3, 4],
@@ -31,7 +31,7 @@ const equalityTests: EqualityTest[] = [
 	},
 ];
 
-const toArrayTests: ToArrayTest<number>[] = [
+const TO_ARRAY_TESTS: ToArrayTest<number>[] = [
 	{
 		array: [1, 2, 3],
 		list: {
@@ -45,7 +45,7 @@ const toArrayTests: ToArrayTest<number>[] = [
 ];
 
 describe('array equality helper', () => {
-	it.each(equalityTests)(
+	it.each(EQUALITY_TESTS)(
 		'should calculate if the two arrays are equal',
 		({ first, second, areEqual }) => {
 			const response = areArraysEqual(first, second);
@@ -55,7 +55,7 @@ describe('array equality helper', () => {
 });
 
 describe('linked list to array helper', () => {
-	it.each(toArrayTests)(
+	it.each(TO_ARRAY_TESTS)(
 		'should return array by given linked list',
 		({ list, array }) => {
 			const response = linkedListToArray(list);

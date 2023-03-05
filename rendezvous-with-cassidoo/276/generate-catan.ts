@@ -1,8 +1,8 @@
 import {
-	singlePieces,
-	doublePieces,
+	SINGLE_PIECES,
+	DOUBLE_PIECES,
 	BOARD_REGEX,
-	CatanErrors,
+	CATAN_ERRORS,
 } from './generate-catan.types';
 
 import type { Cell, Board, ProspectiveBoard } from './generate-catan.types';
@@ -29,7 +29,7 @@ const isBadNeighbor = (
 };
 
 export const assertValidCatanBoard = (input: string) => {
-	if (!BOARD_REGEX.test(input)) throw new Error(CatanErrors.BAD_FORMATTING);
+	if (!BOARD_REGEX.test(input)) throw new Error(CATAN_ERRORS.badFormatting);
 
 	const board = input
 		.split('\n')
@@ -41,13 +41,13 @@ export const assertValidCatanBoard = (input: string) => {
 		row.forEach((cell, index) => {
 			counts[cell] = (counts[cell] ?? 0) + 1;
 			if (
-				(singlePieces.includes(cell as string) && (counts[cell] ?? 0) > 1) ||
-				(doublePieces.includes(cell as string) && (counts[cell] ?? 0) > 2)
+				(SINGLE_PIECES.includes(cell as string) && (counts[cell] ?? 0) > 1) ||
+				(DOUBLE_PIECES.includes(cell as string) && (counts[cell] ?? 0) > 2)
 			)
-				throw new Error(CatanErrors.BAD_PIECE_COUNT);
+				throw new Error(CATAN_ERRORS.badPieceCount);
 
 			if (isBadNeighbor(cell, rowIndex, index, board))
-				throw new Error(CatanErrors.BAD_POSITIONING);
+				throw new Error(CATAN_ERRORS.badPositioning);
 		});
 	});
 };
@@ -69,7 +69,11 @@ const generateNextCellIndex = (
 };
 
 export const generateCatanBoard = (): string => {
-	const availablePieces = [...singlePieces, ...doublePieces, ...doublePieces];
+	const availablePieces = [
+		...SINGLE_PIECES,
+		...DOUBLE_PIECES,
+		...DOUBLE_PIECES,
+	];
 
 	const board: ProspectiveBoard = [
 		['', '', ''],

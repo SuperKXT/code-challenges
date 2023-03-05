@@ -1,6 +1,6 @@
 import { parenthesisSubstring } from './parenthesis-substring';
 
-const tests = [
+const TESTS = [
 	{ solution: 2, string: '(()(' },
 	{ solution: 6, string: ')()(()))' },
 	{ solution: 10, string: ')()(()(()))' },
@@ -8,7 +8,7 @@ const tests = [
 ];
 
 describe('test parenthesisSubstring', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return longest valid string length',
 		({ string, solution }) => {
 			const response = parenthesisSubstring(string);

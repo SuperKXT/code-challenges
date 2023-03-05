@@ -3,14 +3,14 @@ import path from 'path';
 
 import { sandTetris } from './sand-tetris';
 
-const example = `498,4 -> 498,6 -> 496,6
+const EXAMPLE = `498,4 -> 498,6 -> 496,6
 503,4 -> 502,4 -> 502,9 -> 494,9`;
 
 type Solution = ReturnType<typeof sandTetris>;
 
 describe('testing sandTetris', () => {
 	it('should return the correct solution for example test', () => {
-		const response = sandTetris(example);
+		const response = sandTetris(EXAMPLE);
 		const solution: Solution = {
 			part1: 24,
 			part2: 93,

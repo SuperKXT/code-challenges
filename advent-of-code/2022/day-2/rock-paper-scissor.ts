@@ -3,32 +3,32 @@ import path from 'path';
 
 import { z } from 'zod';
 
-const arg1Schema = z.enum(['A', 'B', 'C']);
-type VersusMove = z.infer<typeof arg1Schema>;
+const ARG_1_SCHEMA = z.enum(['a', 'b', 'c']);
+type VersusMove = z.infer<typeof ARG_1_SCHEMA>;
 
-const arg2Schema = z.enum(['X', 'Y', 'Z']);
-type PlayerMove = z.infer<typeof arg2Schema>;
+const ARG_2_SCHEMA = z.enum(['x', 'y', 'z']);
+type PlayerMove = z.infer<typeof ARG_2_SCHEMA>;
 
-type Result = z.infer<typeof arg2Schema>;
+type Result = z.infer<typeof ARG_2_SCHEMA>;
 
-const matchSchema = z.tuple([arg1Schema, arg2Schema]);
+const MATCH_SCHEMA = z.tuple([ARG_1_SCHEMA, ARG_2_SCHEMA]);
 
 /* eslint-disable id-length */
-const playerRules = {
-	X: {
-		loses: 'B',
+const PLAYER_RULES = {
+	x: {
+		loses: 'b',
 		score: 1,
-		wins: 'C',
+		wins: 'c',
 	},
-	Y: {
-		loses: 'C',
+	y: {
+		loses: 'c',
 		score: 2,
-		wins: 'A',
+		wins: 'a',
 	},
-	Z: {
-		loses: 'A',
+	z: {
+		loses: 'a',
 		score: 3,
-		wins: 'B',
+		wins: 'b',
 	},
 } satisfies {
 	[key in PlayerMove]: {
@@ -38,21 +38,21 @@ const playerRules = {
 	};
 };
 
-const versusRules = {
-	A: {
-		draws: 'X',
-		loses: 'Y',
-		wins: 'Z',
+const VERSUS_RULES = {
+	a: {
+		draws: 'x',
+		loses: 'y',
+		wins: 'z',
 	},
-	B: {
-		draws: 'Y',
-		loses: 'Z',
-		wins: 'X',
+	b: {
+		draws: 'y',
+		loses: 'z',
+		wins: 'x',
 	},
-	C: {
-		draws: 'Z',
-		loses: 'X',
-		wins: 'Y',
+	c: {
+		draws: 'z',
+		loses: 'x',
+		wins: 'y',
 	},
 } satisfies {
 	[key in VersusMove]: {
@@ -67,7 +67,7 @@ const getPart1Score = (
 	versusMove: VersusMove,
 	playerMove: PlayerMove
 ): number => {
-	const { score, wins, loses } = playerRules[playerMove];
+	const { score, wins, loses } = PLAYER_RULES[playerMove];
 	switch (versusMove) {
 		case wins:
 			return score + 6;
@@ -79,14 +79,14 @@ const getPart1Score = (
 };
 
 const getPart2Score = (versusMove: VersusMove, result: Result): number => {
-	const { wins, loses, draws } = versusRules[versusMove];
+	const { wins, loses, draws } = VERSUS_RULES[versusMove];
 	switch (result) {
-		case 'Z':
-			return playerRules[loses].score + 6;
-		case 'X':
-			return playerRules[wins].score + 0;
+		case 'z':
+			return PLAYER_RULES[loses].score + 6;
+		case 'x':
+			return PLAYER_RULES[wins].score + 0;
 		default:
-			return playerRules[draws].score + 3;
+			return PLAYER_RULES[draws].score + 3;
 	}
 };
 
@@ -102,7 +102,7 @@ export const rockPaperScissors =
 		const score = input.split('\n').reduce(
 			({ part1, part2 }, row) => {
 				try {
-					const [versus, playerOrResult] = matchSchema.parse(row.split(' '));
+					const [versus, playerOrResult] = MATCH_SCHEMA.parse(row.split(' '));
 					return {
 						part1: part1 + getPart1Score(versus, playerOrResult),
 						part2: part2 + getPart2Score(versus, playerOrResult),

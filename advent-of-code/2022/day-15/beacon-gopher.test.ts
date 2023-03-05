@@ -3,7 +3,7 @@
 
 import { beaconGopher1, beaconGopher2 } from './beacon-gopher';
 
-const example = `Sensor at x=2, y=18: closest beacon is at x=-2, y=15
+const EXAMPLE = `Sensor at x=2, y=18: closest beacon is at x=-2, y=15
 Sensor at x=9, y=16: closest beacon is at x=10, y=16
 Sensor at x=13, y=2: closest beacon is at x=15, y=3
 Sensor at x=12, y=14: closest beacon is at x=10, y=16
@@ -20,7 +20,7 @@ Sensor at x=20, y=1: closest beacon is at x=15, y=3`;
 
 describe('testing beaconGopher1', () => {
 	it('should return the correct solution for example test', () => {
-		const response = beaconGopher1(example, 10);
+		const response = beaconGopher1(EXAMPLE, 10);
 		expect(response).toBe(26);
 	});
 	// // it('should return the correct solution for the input file', async () => {
@@ -34,7 +34,7 @@ describe('testing beaconGopher1', () => {
 
 describe('testing beaconGopher2', () => {
 	it('should return the correct solution for example test', () => {
-		const response = beaconGopher2(example, 20);
+		const response = beaconGopher2(EXAMPLE, 20);
 		expect(response).toBe(56000011);
 	});
 	// // it('should return the correct solution for the input file', async () => {

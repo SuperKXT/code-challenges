@@ -1,18 +1,18 @@
-export const blackPieces = ['p', 'r', 'b', 'n', 'q', 'k'] as const;
-export type BlackPiece = (typeof blackPieces)[number];
+export const BLACK_PIECES = ['p', 'r', 'b', 'n', 'q', 'k'] as const;
+export type BlackPiece = (typeof BLACK_PIECES)[number];
 
-export const whitePieces = ['P', 'R', 'B', 'N', 'Q', 'K'] as const;
-export type WhitePiece = (typeof whitePieces)[number];
+export const WHITE_PIECES = ['P', 'R', 'B', 'N', 'Q', 'K'] as const;
+export type WhitePiece = (typeof WHITE_PIECES)[number];
 
-export const pieces = [...blackPieces, ...whitePieces] as const;
-export type Piece = (typeof pieces)[number];
+export const PIECES = [...BLACK_PIECES, ...WHITE_PIECES] as const;
+export type Piece = (typeof PIECES)[number];
 
-export const square = [...pieces, '~'] as const;
-export type Square = (typeof square)[number];
+export const SQUARE = [...PIECES, '~'] as const;
+export type Square = (typeof SQUARE)[number];
 
-export const coords = [0, 1, 2, 3, 4, 5, 6, 7] as const;
+export const COORDS = [0, 1, 2, 3, 4, 5, 6, 7] as const;
 
-export type Coord = (typeof coords)[number];
+export type Coord = (typeof COORDS)[number];
 
 export type Position = [Coord, Coord];
 
@@ -26,19 +26,19 @@ type Row = RepeatedTuple<Piece | '~', 8>;
 export type Board = RepeatedTuple<Row, 8>;
 
 export const CHESS_ERRORS = {
-	BAD_BISHOP: 'the bishop can only move diagonally',
-	BAD_COLUMNS: 'board must have 8 columns',
-	BAD_KING: 'the king can only move one space at a time',
-	BAD_KNIGHT: 'the knight can only move in a L shape',
-	BAD_PAWN:
+	badBishop: 'the bishop can only move diagonally',
+	badColumns: 'board must have 8 columns',
+	badKing: 'the king can only move one space at a time',
+	badKnight: 'the knight can only move in a L shape',
+	badPawn:
 		'pawn can only move forward by one (or two at the start), or take another',
-	BAD_QUEEN: 'the queen can only move horizontally, vertically, or diagonally',
-	BAD_ROOK: 'the rook can only move horizontally or vertically',
-	BAD_ROWS: 'board must have 8 rows',
-	BAD_SQUARE: 'each square must be a chess piece or an empty space',
-	COLLISION: 'the move can not be completed because a piece is in the way',
-	EMPTY_SPACE: 'no piece exists in the starting spot',
-	NO_MOVE: 'a move must change the position of a piece',
+	badQueen: 'the queen can only move horizontally, vertically, or diagonally',
+	badRook: 'the rook can only move horizontally or vertically',
+	badRows: 'board must have 8 rows',
+	badSquare: 'each square must be a chess piece or an empty space',
+	collision: 'the move can not be completed because a piece is in the way',
+	emptySpace: 'no piece exists in the starting spot',
+	noMove: 'a move must change the position of a piece',
 } as const;
 
 export type ChessError = (typeof CHESS_ERRORS)[keyof typeof CHESS_ERRORS];

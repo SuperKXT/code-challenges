@@ -3,7 +3,7 @@ import path from 'path';
 
 import { orderedPairs } from './ordered-pairs';
 
-const example = `[1,1,3,1,1]
+const EXAMPLE = `[1,1,3,1,1]
 [1,1,5,1,1]
 
 [[1],[2,3,4]]
@@ -31,7 +31,7 @@ type Solution = ReturnType<typeof orderedPairs>;
 
 describe('testing orderedPairs', () => {
 	it('should return the correct solution for example test', () => {
-		const response = orderedPairs(example);
+		const response = orderedPairs(EXAMPLE);
 		const solution: Solution = {
 			indicesSum: 13,
 			part2: 140,

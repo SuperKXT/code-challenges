@@ -9,7 +9,7 @@ interface Test {
 	result: boolean;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{
 		boxSize: [5, 5],
 		initialPosition: [0, 0],
@@ -25,7 +25,7 @@ const tests: Test[] = [
 ];
 
 describe('testing cornerHit', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return if the box hits the corner for given input',
 		(testCase) => {
 			const result = cornerHit(

@@ -3,7 +3,7 @@ import path from 'path';
 
 import { signalStrength } from './signal-strength';
 
-const example = `
+const EXAMPLE = `
 addx 15
 addx -11
 addx 6
@@ -155,7 +155,7 @@ type Solution = ReturnType<typeof signalStrength>;
 
 describe('testing signalStrength', () => {
 	it('should return the correct solution for example test', () => {
-		const response = signalStrength(example);
+		const response = signalStrength(EXAMPLE);
 		const solution: Solution = {
 			crtOutput: [
 				'##..##..##..##..##..##..##..##..##..##..',

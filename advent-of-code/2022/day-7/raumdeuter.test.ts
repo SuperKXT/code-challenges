@@ -3,7 +3,7 @@ import path from 'path';
 
 import { raumdeuter } from './raumdeuter';
 
-const example = [
+const EXAMPLE = [
 	'$ cd /',
 	'$ ls',
 	'dir a',
@@ -31,7 +31,7 @@ const example = [
 
 describe('testing raumdeuter', () => {
 	it('should return the correct solution for example test', () => {
-		expect(raumdeuter(example)).toStrictEqual({
+		expect(raumdeuter(EXAMPLE)).toStrictEqual({
 			deletedSize: 24933642,
 			smallFiles: 95437,
 		});

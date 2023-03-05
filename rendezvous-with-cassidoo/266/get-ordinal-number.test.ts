@@ -7,7 +7,7 @@ interface Test {
 	output: OrdinalNumber;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{ input: 0, output: '0th' },
 	{ input: 1, output: '1st' },
 	{ input: 2, output: '2nd' },
@@ -23,7 +23,7 @@ const tests: Test[] = [
 ];
 
 describe('testing getOrdinalNumber', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return the ordinal string for the given number',
 		({ input, output }) => {
 			const response = getOrdinalNumber(input);

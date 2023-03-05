@@ -10,7 +10,7 @@ interface Test {
 	output: Solution;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{
 		/** cSpell: disable-next-line */
 		input: 'mjqjpqmgbljsphdztnvjfqwrcgsmlb',
@@ -54,7 +54,7 @@ const tests: Test[] = [
 ];
 
 describe('testing supplyStacks', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return the correct solution for example tests',
 		({ input, output }) => {
 			expect(tuningTrouble(input)).toStrictEqual(output);

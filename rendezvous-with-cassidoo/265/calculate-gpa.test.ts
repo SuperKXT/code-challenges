@@ -7,7 +7,7 @@ interface Test {
 	output: number;
 }
 
-const tests: Test[] = [
+const TESTS: Test[] = [
 	{
 		input: ['A'],
 		output: 4,
@@ -31,7 +31,7 @@ const tests: Test[] = [
 ];
 
 describe('testing calculateGpa', () => {
-	it.each(tests)(
+	it.each(TESTS)(
 		'should return correct gpa for the given input',
 		({ input, output }) => {
 			const response = calculateGpa(input);
