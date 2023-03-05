@@ -187,14 +187,14 @@ export const isValidMove = ({
 		});
 
 		return {
+			isKill,
 			isValid: true,
 			path,
-			isKill,
 		};
 	} catch (error: any) {
 		return {
-			isValid: false,
 			error: (error as Error).message as ChessError,
+			isValid: false,
 		};
 	}
 };

@@ -31,7 +31,7 @@ class Coord {
 type MapRow = ('.' | '#' | '+' | 'o')[];
 type Map = MapRow[];
 
-const source = new Coord({ row: 0, col: 500 });
+const source = new Coord({ col: 500, row: 0 });
 const rowLength = source.col * 2;
 
 const getLanding = (
@@ -46,7 +46,7 @@ const getLanding = (
 	);
 	if (colOffset !== undefined) return getLanding(map, row + 1, col + colOffset);
 
-	return new Coord({ row, col });
+	return new Coord({ col, row });
 };
 
 export const sandTetris = (input: string): Solution => {
@@ -59,14 +59,14 @@ export const sandTetris = (input: string): Solution => {
 		row.split(' -> ').map(
 			(coords) =>
 				new Coord({
-					row: Number(coords.split(',')[1]),
 					col: Number(coords.split(',')[0]),
+					row: Number(coords.split(',')[1]),
 				})
 		)
 	);
 
-	const start = new Coord({ row: 0, col: Infinity });
-	const end = new Coord({ row: -Infinity, col: 500 });
+	const start = new Coord({ col: Infinity, row: 0 });
+	const end = new Coord({ col: 500, row: -Infinity });
 
 	const rocks = paths.reduce<Coord[]>(
 		(current, path) =>

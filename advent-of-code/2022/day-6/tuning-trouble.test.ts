@@ -15,40 +15,40 @@ const tests: Test[] = [
 		/** cSpell: disable-next-line */
 		input: 'mjqjpqmgbljsphdztnvjfqwrcgsmlb',
 		output: {
-			packetMarker: 7,
 			messageMarker: 19,
+			packetMarker: 7,
 		},
 	},
 	{
 		/** cSpell: disable-next-line */
 		input: 'bvwbjplbgvbhsrlpgdmjqwftvncz',
 		output: {
-			packetMarker: 5,
 			messageMarker: 23,
+			packetMarker: 5,
 		},
 	},
 	{
 		/** cSpell: disable-next-line */
 		input: 'nppdvjthqldpwncqszvftbrmjlhg',
 		output: {
-			packetMarker: 6,
 			messageMarker: 23,
+			packetMarker: 6,
 		},
 	},
 	{
 		/** cSpell: disable-next-line */
 		input: 'nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg',
 		output: {
-			packetMarker: 10,
 			messageMarker: 29,
+			packetMarker: 10,
 		},
 	},
 	{
 		/** cSpell: disable-next-line */
 		input: 'zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw',
 		output: {
-			packetMarker: 11,
 			messageMarker: 26,
+			packetMarker: 11,
 		},
 	},
 ];
@@ -64,8 +64,8 @@ describe('testing supplyStacks', () => {
 		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
 		const response = tuningTrouble(input);
 		const solution: Solution = {
-			packetMarker: 1210,
 			messageMarker: 3476,
+			packetMarker: 1210,
 		};
 		expect(response).toStrictEqual(solution);
 	});

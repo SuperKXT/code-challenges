@@ -8,8 +8,8 @@ export const arrayToLinkedList = <Type>(array: Type[]) => {
 
 	for (const item of array) {
 		const node: LinkedListNode<Type> = {
-			value: item,
 			next: null,
+			value: item,
 		};
 
 		if (!list.head) {

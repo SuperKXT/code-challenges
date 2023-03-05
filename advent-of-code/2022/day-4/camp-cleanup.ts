@@ -27,6 +27,6 @@ export const campCleanup = async (
 
 			return object;
 		},
-		{ overlap: 0, fullOverlap: 0 }
+		{ fullOverlap: 0, overlap: 0 }
 	);
 };

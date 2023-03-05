@@ -1,8 +1,8 @@
 export const RenameErrors = {
-	EXISTS: 'path already exists',
-	BAD_PATH: 'the given path must be a directory',
 	BAD_ARGUMENTS:
 		'invalid arguments provided. use -h or --help to check the correct usage',
+	BAD_PATH: 'the given path must be a directory',
+	EXISTS: 'path already exists',
 } as const;
 
 export const renameResultType = ['success', 'error', 'unchanged'] as const;

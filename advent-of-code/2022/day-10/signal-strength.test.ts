@@ -157,7 +157,6 @@ describe('testing signalStrength', () => {
 	it('should return the correct solution for example test', () => {
 		const response = signalStrength(example);
 		const solution: Solution = {
-			strength: 13140,
 			crtOutput: [
 				'##..##..##..##..##..##..##..##..##..##..',
 				'###...###...###...###...###...###...###.',
@@ -166,13 +165,13 @@ describe('testing signalStrength', () => {
 				'######......######......######......####',
 				'#######.......#######.......#######.....',
 			].join('\n'),
+			strength: 13140,
 		};
 		expect(response).toStrictEqual(solution);
 	});
 	it('should return the correct solution for the input file', async () => {
 		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
 		const solution: Solution = {
-			strength: 16060,
 			crtOutput: [
 				'###...##...##..####.#..#.#....#..#.####.',
 				'#..#.#..#.#..#.#....#.#..#....#..#.#....',
@@ -181,6 +180,7 @@ describe('testing signalStrength', () => {
 				'#..#.#..#.#..#.#....#.#..#....#..#.#....',
 				'###..#..#..##..####.#..#.####.#..#.#....',
 			].join('\n'),
+			strength: 16060,
 		};
 		expect(signalStrength(input)).toStrictEqual(solution);
 	});

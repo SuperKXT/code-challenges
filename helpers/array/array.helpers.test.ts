@@ -15,19 +15,19 @@ interface ToArrayTest<Type> {
 
 const equalityTests: EqualityTest[] = [
 	{
+		areEqual: true,
 		first: [1, 2, 3, 4],
 		second: [1, 2, 3, 4],
-		areEqual: true,
 	},
 	{
+		areEqual: false,
 		first: [1, 2, 3, 4],
 		second: ['1', '2', '3', '4'],
-		areEqual: false,
 	},
 	{
+		areEqual: false,
 		first: [1, 2, 3],
 		second: [1],
-		areEqual: false,
 	},
 ];
 
@@ -35,7 +35,7 @@ const toArrayTests: ToArrayTest<number>[] = [
 	{
 		array: [1, 2, 3],
 		list: {
-			head: { value: 1, next: { value: 2, next: { value: 3, next: null } } },
+			head: { next: { next: { next: null, value: 3 }, value: 2 }, value: 1 },
 		},
 	},
 	{

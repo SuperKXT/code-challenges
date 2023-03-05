@@ -5,8 +5,8 @@ export const tuningTrouble = (
 	messageMarker: number;
 } => {
 	const solution = {
-		packetMarker: 0,
 		messageMarker: 0,
+		packetMarker: 0,
 	};
 
 	for (let index = 0; index < input.length; index++) {

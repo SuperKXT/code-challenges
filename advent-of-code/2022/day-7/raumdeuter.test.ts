@@ -32,15 +32,15 @@ const example = [
 describe('testing raumdeuter', () => {
 	it('should return the correct solution for example test', () => {
 		expect(raumdeuter(example)).toStrictEqual({
-			smallFiles: 95437,
 			deletedSize: 24933642,
+			smallFiles: 95437,
 		});
 	});
 	it('should return the correct solution for the input file', async () => {
 		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
 		expect(raumdeuter(input)).toStrictEqual({
-			smallFiles: 1086293,
 			deletedSize: 366028,
+			smallFiles: 1086293,
 		});
 	});
 });

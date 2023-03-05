@@ -23,11 +23,11 @@ interface BadGetTest {
 }
 
 const badGetTests: BadGetTest[] = [
-	{ input: [5, 10, 2], error: Errors.Length },
-	{ input: [5, 10, -5], error: Errors.Length },
-	{ input: [5, 10, 1], error: Errors.Length },
+	{ error: Errors.Length, input: [5, 10, 2] },
+	{ error: Errors.Length, input: [5, 10, -5] },
+	{ error: Errors.Length, input: [5, 10, 1] },
 	// @ts-expect-error intentional error check
-	{ input: [5, undefined, 5], error: Errors.Undefined },
+	{ error: Errors.Undefined, input: [5, undefined, 5] },
 ];
 
 interface CheckTest {

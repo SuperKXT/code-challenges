@@ -45,7 +45,7 @@ export const treeHouse = (
 	}
 
 	return {
-		visible,
 		scenicScore,
+		visible,
 	};
 };

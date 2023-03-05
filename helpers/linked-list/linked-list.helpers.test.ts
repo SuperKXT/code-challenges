@@ -11,7 +11,7 @@ const tests: Test<number>[] = [
 	{
 		array: [1, 2, 3],
 		list: {
-			head: { value: 1, next: { value: 2, next: { value: 3, next: null } } },
+			head: { next: { next: { next: null, value: 3 }, value: 2 }, value: 1 },
 		},
 	},
 	{

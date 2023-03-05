@@ -21,18 +21,18 @@ import type {
 
 /* eslint-disable id-length */
 const paramsSchema = z.strictObject({
-	_: z.tuple([z.string()]),
 	'--': z.string().array().length(0).optional(),
-	yes: z.boolean().optional(),
-	y: z.boolean().optional(),
-	verbose: z.boolean().optional(),
-	v: z.boolean().optional(),
-	'only-changes': z.boolean().optional(),
-	o: z.boolean().optional(),
-	tree: z.boolean().optional(),
-	t: z.boolean().optional(),
-	help: z.boolean().optional(),
+	_: z.tuple([z.string()]),
 	h: z.boolean().optional(),
+	help: z.boolean().optional(),
+	o: z.boolean().optional(),
+	'only-changes': z.boolean().optional(),
+	t: z.boolean().optional(),
+	tree: z.boolean().optional(),
+	v: z.boolean().optional(),
+	verbose: z.boolean().optional(),
+	y: z.boolean().optional(),
+	yes: z.boolean().optional(),
 });
 /* eslint-enable id-length */
 
@@ -65,9 +65,9 @@ export const getRecursiveLogs = ({
 	depth = 1,
 }: RecursiveLogParams): RecursiveLogResponse => {
 	const response: RecursiveLogResponse = {
+		error: [],
 		logs: [],
 		success: [],
-		error: [],
 		unchanged: [],
 	};
 
@@ -105,13 +105,13 @@ export const getRecursiveLogs = ({
 
 		if (children) {
 			const subLogs = getRecursiveLogs({
-				results: children,
-				labels,
-				verbose,
-				onlyChanges,
-				tree,
-				isConfirmation,
 				depth: depth + 1,
+				isConfirmation,
+				labels,
+				onlyChanges,
+				results: children,
+				tree,
+				verbose,
 			});
 			response.logs.push(...subLogs.logs);
 			response.success.push(...subLogs.success);
@@ -131,20 +131,20 @@ export const getRenameLogs = (
 	isConfirmation?: boolean
 ): string => {
 	const labels: Record<RenameResultType, string> = {
+		error: chalk.bgRedBright(!isConfirmation ? '   ERROR   ' : '   ISSUE   '),
 		success: chalk.bgGreenBright(
 			!isConfirmation ? '  SUCCESS  ' : '  POSSIBLE '
 		),
-		error: chalk.bgRedBright(!isConfirmation ? '   ERROR   ' : '   ISSUE   '),
 		unchanged: chalk.bgYellowBright(' UNCHANGED '),
 	};
 
 	const { logs, success, error, unchanged } = getRecursiveLogs({
-		results,
-		labels,
-		verbose,
-		onlyChanges,
-		tree,
 		isConfirmation,
+		labels,
+		onlyChanges,
+		results,
+		tree,
+		verbose,
 	});
 
 	logs.push(
@@ -197,10 +197,10 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 
 				if (newName === file)
 					return {
-						type: 'unchanged',
-						path: folder,
-						oldName: file,
 						children,
+						oldName: file,
+						path: folder,
+						type: 'unchanged',
 					};
 
 				const exists = await getExists(newPath);
@@ -208,20 +208,20 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 				if (exists) throw new Error(RenameErrors.EXISTS);
 
 				return {
-					type: 'success',
-					path: folder,
-					oldName: file,
-					newName,
 					children,
+					newName,
+					oldName: file,
+					path: folder,
+					type: 'success',
 				};
 			} catch (error) {
 				return {
-					type: 'error',
-					path: folder,
-					oldName: file,
-					newName,
-					error: getError(error),
 					children,
+					error: getError(error),
+					newName,
+					oldName: file,
+					path: folder,
+					type: 'error',
 				};
 			}
 		})
@@ -247,9 +247,9 @@ const renameFiles = async (
 				} catch (error) {
 					return {
 						...file,
-						type: 'error',
-						error: getError(error),
 						children,
+						error: getError(error),
+						type: 'error',
 					};
 				}
 
@@ -286,9 +286,9 @@ export const recursiveRename = async (
 			properties: {
 				confirm: {
 					description: 'Do you want to continue? [y/n]: ',
-					type: 'string',
-					pattern: /^[yn]$/iu,
 					message: 'Please enter y for yes or n for no',
+					pattern: /^[yn]$/iu,
+					type: 'string',
 				},
 			},
 		});
@@ -307,11 +307,11 @@ if (process.env.NODE_ENV !== 'test')
 	try {
 		const args = argumentParser<Params>(process.argv.slice(2), {
 			alias: {
-				yes: 'y',
-				verbose: 'v',
+				help: 'h',
 				'only-changes': 'o',
 				tree: 't',
-				help: 'h',
+				verbose: 'v',
+				yes: 'y',
 			},
 		});
 
@@ -325,11 +325,11 @@ if (process.env.NODE_ENV !== 'test')
 		} = paramsSchema.parse(args);
 
 		recursiveRename(folder, {
-			yes,
-			verbose,
+			help,
 			onlyChanges,
 			tree,
-			help,
+			verbose,
+			yes,
 		}).catch(console.error);
 	} catch {
 		throw new Error(RenameErrors.BAD_ARGUMENTS);

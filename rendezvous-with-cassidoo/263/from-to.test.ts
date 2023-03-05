@@ -6,11 +6,11 @@ interface Test {
 }
 
 const tests: Test[] = [
-	{ min: 5, max: 7 },
-	{ min: 1, max: 10 },
-	{ min: 100, max: 150 },
-	{ min: 10_080, max: 11_000 },
-	{ min: 1, max: 0 },
+	{ max: 7, min: 5 },
+	{ max: 10, min: 1 },
+	{ max: 150, min: 100 },
+	{ max: 11_000, min: 10_080 },
+	{ max: 0, min: 1 },
 ];
 
 describe('testing fromTo', () => {

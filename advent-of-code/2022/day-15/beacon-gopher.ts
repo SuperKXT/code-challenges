@@ -29,17 +29,17 @@ export const beaconGopher1 = (input: string, row: number): number => {
 			.map(Number) as [number, number, number, number];
 
 		const beacon: Point = {
-			row: beaconRow,
 			col: beaconCol,
+			row: beaconRow,
 		};
 
-		const distance = getDistance({ row: sensorRow, col: sensorCol }, beacon);
+		const distance = getDistance({ col: sensorCol, row: sensorRow }, beacon);
 
 		const sensor: Sensor = {
-			row: sensorRow,
-			col: sensorCol,
 			beacon,
+			col: sensorCol,
 			distance,
+			row: sensorRow,
 		};
 
 		const currStartRow = sensorRow - distance;
@@ -56,7 +56,7 @@ export const beaconGopher1 = (input: string, row: number): number => {
 	}
 
 	for (let col = startCol; col <= endCol; col++) {
-		const point = { row, col };
+		const point = { col, row };
 		let isCovered = false;
 		for (const sensor of sensors) {
 			const isSensorOrBeacon =
@@ -87,17 +87,17 @@ export const beaconGopher2 = (input: string, max: number): number => {
 			.map(Number) as [number, number, number, number];
 
 		const beacon: Point = {
-			row: beaconRow,
 			col: beaconCol,
+			row: beaconRow,
 		};
 
-		const distance = getDistance({ row: sensorRow, col: sensorCol }, beacon);
+		const distance = getDistance({ col: sensorCol, row: sensorRow }, beacon);
 
 		const sensor: Sensor = {
-			row: sensorRow,
-			col: sensorCol,
 			beacon,
+			col: sensorCol,
 			distance,
+			row: sensorRow,
 		};
 
 		const currStartRow = sensorRow - distance;
@@ -115,7 +115,7 @@ export const beaconGopher2 = (input: string, max: number): number => {
 
 	for (let row = 0; row <= max; row++)
 		for (let col = 0; col <= max; col++) {
-			const point = { row, col };
+			const point = { col, row };
 			let isCovered = false;
 			for (const sensor of sensors) {
 				const isSensorOrBeacon =

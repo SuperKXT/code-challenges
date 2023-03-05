@@ -43,8 +43,8 @@ export const raumdeuter = (
 	const toFree = requiredSpace - unusedSpace;
 
 	const solution = {
-		smallFiles: 0,
 		deletedSize: 0,
+		smallFiles: 0,
 	};
 
 	for (const size of sizes) {

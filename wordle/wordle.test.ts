@@ -11,8 +11,8 @@ interface Test {
 const testCases: Test[] = [
 	{
 		args: {
-			pattern: 'q*e(ueq)(ueq)',
 			known: 'qul',
+			pattern: 'q*e(ueq)(ueq)',
 		},
 		results: ['quell'],
 	},
@@ -49,18 +49,20 @@ const testCases: Test[] = [
 	},
 	{
 		args: {
-			known: 'loc',
 			/* cspell: disable-next-line */
-			available: 'qwygjzxmloc',
+available: 'qwygjzxmloc',
+			
+			known: 'loc',
 			pattern: '(l)o(o)(co)*',
 		},
 		results: ['colly', 'coyly'],
 	},
 	{
 		args: {
-			known: 'loc',
 			/* cspell: disable-next-line */
-			available: 'qwygjzxmloc',
+available: 'qwygjzxmloc',
+			
+			known: 'loc',
 			pattern: '(l)o(o)(co)*',
 			repeat: false,
 		},
@@ -77,10 +79,12 @@ const testCases: Test[] = [
 	},
 	{
 		args: {
-			/* cspell: disable-next-line */
-			unavailable: 'asduiopkbn',
+			
 			known: 'ec',
-			pattern: 'e(e)c*(ce)',
+			
+pattern: 'e(e)c*(ce)',
+			/* cspell: disable-next-line */
+unavailable: 'asduiopkbn',
 		},
 		results: ['excel'],
 	},

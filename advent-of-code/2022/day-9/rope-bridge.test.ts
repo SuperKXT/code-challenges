@@ -23,8 +23,8 @@ type Solution = ReturnType<typeof ropeBridge>;
 describe('testing ropeBridge', () => {
 	it('should return the correct solution for example test', () => {
 		const response = ropeBridge(example, {
-			row: 4,
 			col: 0,
+			row: 4,
 		});
 		const solution: Solution = {
 			firstTail: 13,

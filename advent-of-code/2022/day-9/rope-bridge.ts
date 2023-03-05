@@ -27,7 +27,7 @@ const getUniquePositions = (array: Position[]) => {
 
 export const ropeBridge = (
 	input: string,
-	start: Position = { row: 0, col: 0 }
+	start: Position = { col: 0, row: 0 }
 ): {
 	firstTail: number;
 	lastTail: number;

@@ -36,8 +36,8 @@ export const signalStrength = (input: string): Solution => {
 	};
 
 	const solution: Solution = {
-		strength: 0,
 		crtOutput: '',
+		strength: 0,
 	};
 
 	for (const row of input.split('\n')) {

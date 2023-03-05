@@ -15,16 +15,16 @@ describe('testing campCleanup', () => {
 	it('should return the correct solution for the example input', async () => {
 		const response = await campCleanup(input);
 		const solution: Solution = {
-			overlap: 4,
 			fullOverlap: 2,
+			overlap: 4,
 		};
 		expect(response).toStrictEqual(solution);
 	});
 	it('should return the correct solution for the input file', async () => {
 		const response = await campCleanup();
 		const solution: Solution = {
-			overlap: 859,
 			fullOverlap: 498,
+			overlap: 859,
 		};
 		expect(response).toStrictEqual(solution);
 	});

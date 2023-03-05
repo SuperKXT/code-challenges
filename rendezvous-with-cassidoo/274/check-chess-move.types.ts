@@ -26,18 +26,18 @@ type Row = RepeatedTuple<Piece | '~', 8>;
 export type Board = RepeatedTuple<Row, 8>;
 
 export const CHESS_ERRORS = {
-	BAD_ROWS: 'board must have 8 rows',
+	BAD_BISHOP: 'the bishop can only move diagonally',
 	BAD_COLUMNS: 'board must have 8 columns',
-	BAD_SQUARE: 'each square must be a chess piece or an empty space',
-	EMPTY_SPACE: 'no piece exists in the starting spot',
+	BAD_KING: 'the king can only move one space at a time',
+	BAD_KNIGHT: 'the knight can only move in a L shape',
 	BAD_PAWN:
 		'pawn can only move forward by one (or two at the start), or take another',
-	BAD_ROOK: 'the rook can only move horizontally or vertically',
-	BAD_BISHOP: 'the bishop can only move diagonally',
-	BAD_KNIGHT: 'the knight can only move in a L shape',
 	BAD_QUEEN: 'the queen can only move horizontally, vertically, or diagonally',
-	BAD_KING: 'the king can only move one space at a time',
+	BAD_ROOK: 'the rook can only move horizontally or vertically',
+	BAD_ROWS: 'board must have 8 rows',
+	BAD_SQUARE: 'each square must be a chess piece or an empty space',
 	COLLISION: 'the move can not be completed because a piece is in the way',
+	EMPTY_SPACE: 'no piece exists in the starting spot',
 	NO_MOVE: 'a move must change the position of a piece',
 } as const;
 

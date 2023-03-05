@@ -16,19 +16,19 @@ const matchSchema = z.tuple([arg1Schema, arg2Schema]);
 /* eslint-disable id-length */
 const playerRules = {
 	X: {
+		loses: 'B',
 		score: 1,
 		wins: 'C',
-		loses: 'B',
 	},
 	Y: {
+		loses: 'C',
 		score: 2,
 		wins: 'A',
-		loses: 'C',
 	},
 	Z: {
+		loses: 'A',
 		score: 3,
 		wins: 'B',
-		loses: 'A',
 	},
 } satisfies {
 	[key in PlayerMove]: {
@@ -40,19 +40,19 @@ const playerRules = {
 
 const versusRules = {
 	A: {
-		wins: 'Z',
-		loses: 'Y',
 		draws: 'X',
+		loses: 'Y',
+		wins: 'Z',
 	},
 	B: {
-		wins: 'X',
-		loses: 'Z',
 		draws: 'Y',
+		loses: 'Z',
+		wins: 'X',
 	},
 	C: {
-		wins: 'Y',
-		loses: 'X',
 		draws: 'Z',
+		loses: 'X',
+		wins: 'Y',
 	},
 } satisfies {
 	[key in VersusMove]: {

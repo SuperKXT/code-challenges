@@ -13,17 +13,17 @@ interface Solution {
 }
 
 const prefix = {
+	divisor: 'Test: divisible by',
+	falseIndex: 'If false: throw to monkey',
 	items: 'Starting items:',
 	operation: 'Operation: new =',
-	divisor: 'Test: divisible by',
 	trueIndex: 'If true: throw to monkey',
-	falseIndex: 'If false: throw to monkey',
 };
 
 export const monkeyBusiness = (input: string): Solution => {
 	const solution: Solution = {
-		monkeyBusiness: 0,
 		bigMb: 0,
+		monkeyBusiness: 0,
 	};
 
 	const monkeys = input
@@ -36,6 +36,9 @@ export const monkeyBusiness = (input: string): Solution => {
 				rows[2]?.replace(prefix.operation, '').trim().split(/\s+/gu) ?? [];
 
 			const monkey: Monkey = {
+				divisor: parseInt(rows[3]?.replace(prefix.divisor, '') ?? ''),
+				falseIndex: parseInt(rows[5]?.replace(prefix.falseIndex, '') ?? ''),
+				inspected: 0,
 				items: (rows[1]?.replace(prefix.items, '').split(',') ?? []).map(
 					Number
 				),
@@ -45,10 +48,7 @@ export const monkeyBusiness = (input: string): Solution => {
 					if (op === '+') return left + right;
 					return left * right;
 				},
-				divisor: parseInt(rows[3]?.replace(prefix.divisor, '') ?? ''),
 				trueIndex: parseInt(rows[4]?.replace(prefix.trueIndex, '') ?? ''),
-				falseIndex: parseInt(rows[5]?.replace(prefix.falseIndex, '') ?? ''),
-				inspected: 0,
 			};
 
 			return monkey;

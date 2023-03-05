@@ -7,12 +7,12 @@ interface Test {
 
 const tests: Test[] = [
 	// cSpell: disable-next-line
-	{ string: 'aaccd', result: true },
-	{ string: 'nurses run', result: true },
-	{ string: 'madam', result: true },
-	{ string: 'madam', result: true },
-	{ string: 'palindrome', result: false },
-	{ string: 'tight fit', result: false },
+	{ result: true, string: 'aaccd' },
+	{ result: true, string: 'nurses run' },
+	{ result: true, string: 'madam' },
+	{ result: true, string: 'madam' },
+	{ result: false, string: 'palindrome' },
+	{ result: false, string: 'tight fit' },
 ];
 
 describe('testing canBePalindrome', () => {

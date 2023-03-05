@@ -31,9 +31,9 @@ export const countCalories = async (): Promise<CountCaloriesSolution> => {
 	const topThreeCalories = topThree.reduce((sum, current) => sum + current, 0);
 
 	return {
-		maxIndex,
 		maxCalories,
-		topThreeIndexes,
+		maxIndex,
 		topThreeCalories,
+		topThreeIndexes,
 	};
 };

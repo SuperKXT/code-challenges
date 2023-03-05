@@ -14,73 +14,73 @@ type Test = RenameResult[];
 const tests: Test[] = [
 	[
 		{
-			path: tempPath,
-			type: 'unchanged',
-			oldName: 'folder',
 			children: [
 				{
-					path: path.join(tempPath, 'folder'),
-					type: 'success',
-					oldName: 'folderFile1.txt',
 					newName: 'folder-file-1.txt',
-				},
-				{
+					oldName: 'folderFile1.txt',
 					path: path.join(tempPath, 'folder'),
 					type: 'success',
-					oldName: 'folder_file_2.js',
+				},
+				{
 					newName: 'folder-file-2.js',
-				},
-				{
+					oldName: 'folder_file_2.js',
 					path: path.join(tempPath, 'folder'),
 					type: 'success',
-					oldName: '  folder  file 3.ts',
+				},
+				{
 					newName: 'folder-file-3.ts',
+					oldName: '  folder  file 3.ts',
+					path: path.join(tempPath, 'folder'),
+					type: 'success',
 				},
 			],
-		},
-		{
-			path: tempPath,
-			type: 'success',
-			oldName: 'file   1.txt',
-			newName: 'file-1.txt',
-		},
-		{
-			path: tempPath,
-			type: 'success',
-			oldName: 'FILE_2.txt',
-			newName: 'file-2.txt',
-		},
-		{
+			oldName: 'folder',
 			path: tempPath,
 			type: 'unchanged',
+		},
+		{
+			newName: 'file-1.txt',
+			oldName: 'file   1.txt',
+			path: tempPath,
+			type: 'success',
+		},
+		{
+			newName: 'file-2.txt',
+			oldName: 'FILE_2.txt',
+			path: tempPath,
+			type: 'success',
+		},
+		{
 			oldName: 'file-3.txt',
+			path: tempPath,
+			type: 'unchanged',
 		},
 	],
 	[
 		{
-			path: tempPath,
-			type: 'unchanged',
-			oldName: 'folder',
 			children: [
 				{
+					error: RenameErrors.EXISTS,
+					newName: 'file-1.json',
+					oldName: 'file 1.json',
 					path: path.join(tempPath, 'folder'),
 					type: 'error',
-					oldName: 'file 1.json',
-					newName: 'file-1.json',
-					error: RenameErrors.EXISTS,
 				},
 				{
+					oldName: 'file-1.json',
 					path: path.join(tempPath, 'folder'),
 					type: 'unchanged',
-					oldName: 'file-1.json',
 				},
 			],
+			oldName: 'folder',
+			path: tempPath,
+			type: 'unchanged',
 		},
 		{
+			newName: 'file-1.yml',
+			oldName: 'file 1.yml',
 			path: tempPath,
 			type: 'success',
-			oldName: 'file 1.yml',
-			newName: 'file-1.yml',
 		},
 	],
 ];
@@ -99,8 +99,8 @@ const sortedTests = tests.map(recursiveSort);
 beforeEach(() => {
 	if (existsSync(tempPath))
 		rmSync(tempPath, {
-			recursive: true,
 			force: true,
+			recursive: true,
 		});
 
 	mkdirSync(tempPath);
@@ -109,8 +109,8 @@ beforeEach(() => {
 // eslint-disable-next-line jest/no-hooks
 afterEach(() => {
 	rmSync(tempPath, {
-		recursive: true,
 		force: true,
+		recursive: true,
 	});
 });
 
@@ -150,10 +150,10 @@ describe('testing recursive-rename function', () => {
 			createFiles(files);
 
 			const options: RenameOptions = {
-				yes: true,
-				verbose: true,
 				onlyChanges: false,
 				tree: false,
+				verbose: true,
+				yes: true,
 			};
 
 			const output = await recursiveRename(tempPath, options);

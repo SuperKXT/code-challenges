@@ -12,29 +12,29 @@ const ALPHABETS = 'abcdefghijklmnopqrstuvxwyz';
 
 /* eslint-disable id-length */
 export const defaultArgs: Arguments = {
-	available: ALPHABETS,
 	a: ALPHABETS,
-	unavailable: '',
-	u: '',
-	pattern: '*****',
-	p: '*****',
-	known: '',
+	available: ALPHABETS,
 	k: '',
+	known: '',
+	p: '*****',
+	pattern: '*****',
 	repeat: true,
+	u: '',
+	unavailable: '',
 };
 
 const argumentSchema = z.strictObject({
-	_: z.string().array().length(0).optional(),
 	'--': z.string().array().length(0).optional(),
-	available: z.string().regex(/^[a-z]{0,26}$/iu),
+	_: z.string().array().length(0).optional(),
 	a: z.string().regex(/^[a-z]{0,26}$/iu),
-	unavailable: z.string().regex(/^[a-z]{0,26}$/iu),
-	u: z.string().regex(/^[a-z]{0,26}$/iu),
-	pattern: z.string().regex(VALID_WORD_PATTERN),
-	p: z.string().regex(VALID_WORD_PATTERN),
-	known: z.string().regex(/^[a-z]{0,5}$/iu),
+	available: z.string().regex(/^[a-z]{0,26}$/iu),
 	k: z.string().regex(/^[a-z]{0,5}$/iu),
+	known: z.string().regex(/^[a-z]{0,5}$/iu),
+	p: z.string().regex(VALID_WORD_PATTERN),
+	pattern: z.string().regex(VALID_WORD_PATTERN),
 	repeat: z.boolean(),
+	u: z.string().regex(/^[a-z]{0,26}$/iu),
+	unavailable: z.string().regex(/^[a-z]{0,26}$/iu),
 });
 /* eslint-enable id-length */
 
@@ -83,9 +83,9 @@ if (process.env.NODE_ENV !== 'test') {
 	const args = argumentParser<Arguments>(process.argv.slice(2), {
 		alias: {
 			available: 'a',
-			unavailable: 'u',
-			pattern: 'p',
 			known: 'k',
+			pattern: 'p',
+			unavailable: 'u',
 		},
 		default: defaultArgs,
 	});

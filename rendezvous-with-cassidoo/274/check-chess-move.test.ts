@@ -27,8 +27,8 @@ const tests: Test[] = [
 			to: [0, 0],
 		},
 		response: {
-			isValid: false,
 			error: CHESS_ERRORS.BAD_ROOK,
+			isValid: false,
 		},
 	},
 	{
@@ -38,12 +38,12 @@ const tests: Test[] = [
 			to: [0, 1],
 		},
 		response: {
+			isKill: false,
 			isValid: true,
 			path: [
 				[1, 2],
 				[0, 1],
 			],
-			isKill: false,
 		},
 	},
 	{
@@ -53,8 +53,8 @@ const tests: Test[] = [
 			to: [1, 3],
 		},
 		response: {
-			isValid: false,
 			error: CHESS_ERRORS.COLLISION,
+			isValid: false,
 		},
 	},
 ];

@@ -15,11 +15,11 @@ const spin = async (
 ): Promise<number> => {
 	const { question: choice } = await prompt.get({
 		description: `\nYour pick? [0-${MAX_CHOICE}]: `,
-		type: 'integer',
-		minimum: 0,
 		maximum: MAX_CHOICE,
 		message: `Must be an integer between 0 and ${MAX_CHOICE}`,
+		minimum: 0,
 		required: true,
+		type: 'integer',
 	});
 	const spinResult = crypto.randomInt(0, MAX_CHOICE + 1);
 	const correct = spinResult === Number(choice);

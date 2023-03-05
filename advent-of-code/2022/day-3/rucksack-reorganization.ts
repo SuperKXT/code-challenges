@@ -40,7 +40,7 @@ export const rucksackReorganization = async (
 	}
 
 	return {
-		commonPriority,
 		badgePriority,
+		commonPriority,
 	};
 };

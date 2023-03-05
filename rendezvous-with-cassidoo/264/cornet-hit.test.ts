@@ -13,14 +13,14 @@ const tests: Test[] = [
 	{
 		boxSize: [5, 5],
 		initialPosition: [0, 0],
-		screenSize: [100, 100],
 		result: true,
+		screenSize: [100, 100],
 	},
 	{
 		boxSize: [5, 5],
 		initialPosition: [45, 70],
-		screenSize: [400, 200],
 		result: false,
+		screenSize: [400, 200],
 	},
 ];
 
