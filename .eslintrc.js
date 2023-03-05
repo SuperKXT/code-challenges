@@ -34,6 +34,29 @@ const config = {
 				'@typescript-eslint/consistent-type-exports': 'error',
 				'@typescript-eslint/consistent-type-imports': 'error',
 				'@typescript-eslint/default-param-last': 'warn',
+				'@typescript-eslint/naming-convention': [
+					'error',
+					{
+						format: ['strictCamelCase'],
+						leadingUnderscore: 'allow',
+						selector: 'default',
+					},
+					{
+						format: ['PascalCase'],
+						selector: 'typeLike',
+					},
+					{
+						format: ['UPPER_CASE'],
+						modifiers: ['global'],
+						selector: 'variable',
+					},
+					{
+						format: ['strictCamelCase'],
+						modifiers: ['global'],
+						selector: 'variable',
+						types: ['function'],
+					},
+				],
 				'@typescript-eslint/no-confusing-void-expression': [
 					'error',
 					{
@@ -88,6 +111,7 @@ const config = {
 				'@typescript-eslint/return-await': 'error',
 				'@typescript-eslint/sort-type-constituents': 'warn',
 				'@typescript-eslint/switch-exhaustiveness-check': 'error',
+				camelcase: 'off',
 				'no-constant-condition': 'off',
 				'no-dupe-class-members': 'off',
 				'no-unused-vars': 'off',
@@ -114,6 +138,34 @@ const config = {
 		// // 		'no-autofix/jsx-expressions/strict-logical-expressions': 'error',
 		// // 	},
 		// // },
+		// // {
+		// // 	files: ['**/*.tsx'],
+		// // 	rules: {
+		// // 		'@typescript-eslint/naming-convention': [
+		// // 			'error',
+		// // 			{
+		// // 				format: ['strictCamelCase'],
+		// // 				leadingUnderscore: 'allow',
+		// // 				selector: 'default',
+		// // 			},
+		// // 			{
+		// // 				format: ['PascalCase'],
+		// // 				selector: 'typeLike',
+		// // 			},
+		// // 			{
+		// // 				format: ['UPPER_CASE'],
+		// // 				modifiers: ['global'],
+		// // 				selector: 'variable',
+		// // 			},
+		// // 			{
+		// // 				format: ['strictCamelCase', 'PascalCase'],
+		// // 				modifiers: ['global'],
+		// // 				selector: 'variable',
+		// // 				types: ['function'],
+		// // 			},
+		// // 		],
+		// // 	},
+		// // },
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -132,6 +184,7 @@ const config = {
 	],
 	rules: {
 		'array-callback-return': ['error', { checkForEach: true }],
+		camelcase: 'error',
 		curly: ['error', 'multi', 'consistent'],
 		'default-case-last': 'error',
 		eqeqeq: 'error',
