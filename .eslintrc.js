@@ -83,14 +83,7 @@ const config = {
 						enforceForJSX: true,
 					},
 				],
-				'@typescript-eslint/no-unused-vars': [
-					'warn',
-					{
-						argsIgnorePattern: '^_',
-						caughtErrors: 'all',
-						destructuredArrayIgnorePattern: '^_',
-					},
-				],
+				'@typescript-eslint/no-unused-vars': 'off',
 				'@typescript-eslint/no-use-before-define': 'warn',
 				'@typescript-eslint/no-useless-empty-export': 'error',
 				'@typescript-eslint/non-nullable-type-assertion-style': 'off',
@@ -108,7 +101,6 @@ const config = {
 				camelcase: 'off',
 				'no-constant-condition': 'off',
 				'no-dupe-class-members': 'off',
-				'no-unused-vars': 'off',
 				'no-use-before-define': 'off',
 			},
 		},
@@ -352,7 +344,15 @@ const config = {
 		],
 		'spaced-comment': 'error',
 		'symbol-description': 'error',
-		'unused-imports/no-unused-imports': 'warn',
+		'unused-imports/no-unused-imports': 'error',
+		'unused-imports/no-unused-vars': [
+			'warn',
+			{
+				argsIgnorePattern: '^_',
+				caughtErrors: 'all',
+				destructuredArrayIgnorePattern: '^_',
+			},
+		],
 		yoda: 'error',
 	},
 	settings: {
