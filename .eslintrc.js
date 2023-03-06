@@ -6,17 +6,9 @@ const config = {
 		es2021: true,
 		jest: true,
 		node: true,
-
 		// // browser: true,
 	},
-	extends: [
-		'eslint:recommended',
-		'prettier',
-
-		// 'react-app',
-		// 'plugin:react/recommended',
-		// 'plugin:react/jsx-runtime',
-	],
+	extends: ['eslint:recommended', 'prettier'],
 	overrides: [
 		{
 			extends: [
@@ -119,7 +111,10 @@ const config = {
 			},
 		},
 		{
-			extends: ['plugin:jest/all'],
+			extends: [
+				'plugin:jest/all',
+				// // 'react-app/jest',
+			],
 			files: ['*.test.ts'],
 			parserOptions: {
 				project: ['./tsconfig.json'],
@@ -131,8 +126,13 @@ const config = {
 			},
 		},
 		// // {
+		// // 	extends: [
+		// // 		'react-app',
+		// // 		'plugin:react/recommended',
+		// // 		'plugin:react/jsx-runtime',
+		// // 	],
 		// // 	files: ['**/*.tsx', '**/*.jsx'],
-		// // 	plugins: ['jsx-expressions'],
+		// // 	plugins: ['jsx-expressions', 'no-autofix'],
 		// // 	rules: {
 		// // 		'@typescript-eslint/no-unnecessary-type-constraint': 'off',
 		// // 		'no-autofix/jsx-expressions/strict-logical-expressions': 'error',
@@ -171,17 +171,8 @@ const config = {
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
-
-		// // ecmaFeatures: {
-		// // 	jsx: true,
-		// // },
 	},
-	plugins: [
-		'import',
-		'unused-imports',
-		'sort-keys-plus',
-		// // 'no-autofix'
-	],
+	plugins: ['import', 'unused-imports', 'sort-keys-plus'],
 	rules: {
 		'array-callback-return': ['error', { checkForEach: true }],
 		camelcase: 'error',
@@ -307,10 +298,6 @@ const config = {
 		jest: {
 			version: 29,
 		},
-
-		// // react: {
-		// // 	version: 'detect',
-		// // },
 	},
 };
 
