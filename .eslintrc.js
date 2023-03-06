@@ -172,7 +172,12 @@ const config = {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 	},
-	plugins: ['import', 'unused-imports', 'sort-keys-plus'],
+	plugins: [
+		'import',
+		'unused-imports',
+		'sort-keys-plus',
+		'prefer-arrow-functions',
+	],
 	rules: {
 		'array-callback-return': ['error', { checkForEach: true }],
 		camelcase: 'error',
@@ -270,6 +275,15 @@ const config = {
 		'one-var': ['error', 'never'],
 		'operator-assignment': 'error',
 		'prefer-arrow-callback': 'error',
+		'prefer-arrow-functions/prefer-arrow-functions': [
+			'error',
+			{
+				classPropertiesAllowed: false,
+				disallowPrototype: false,
+				returnStyle: 'unchanged',
+				singleReturnOnly: false,
+			},
+		],
 		'prefer-exponentiation-operator': 'error',
 		'prefer-numeric-literals': 'error',
 		'prefer-object-has-own': 'error',
