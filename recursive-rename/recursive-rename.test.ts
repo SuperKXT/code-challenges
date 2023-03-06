@@ -4,7 +4,6 @@ import path from 'path';
 
 import { getRenameLogs, recursiveRename } from './recursive-rename';
 import { RENAME_ERRORS } from './recursive-rename.types';
-
 import type { RenameOptions, RenameResult } from './recursive-rename.types';
 
 const TEMP_PATH = path.join(tmpdir(), 'test');

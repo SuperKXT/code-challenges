@@ -244,6 +244,7 @@ const config = {
 			{ allow: ['@total-typescript/ts-reset'] },
 		],
 		'import/no-useless-path-segments': 'error',
+		'import/order': ['error', { 'newlines-between': 'always' }],
 		'import/unambiguous': 'error',
 		indent: ['off', 'tab'],
 		'logical-assignment-operators': 'error',

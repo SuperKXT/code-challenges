@@ -1,5 +1,4 @@
 import { minimumPairs } from './minimum-pairs';
-
 import type { Pair } from './minimum-pairs';
 
 interface Test {

@@ -1,5 +1,4 @@
 import { countCalories } from './count-calories';
-
 import type { CountCaloriesSolution } from './count-calories';
 
 describe('testing countCalories', () => {

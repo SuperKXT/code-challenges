@@ -12,7 +12,6 @@ import { getError } from '../helpers/error';
 /* eslint-enable no-restricted-imports */
 
 import { RENAME_ERRORS } from './recursive-rename.types';
-
 import type {
 	RenameOptions,
 	RenameResult,
