@@ -1,3 +1,4 @@
+/* eslint-disable import/no-commonjs, import/unambiguous */
 // @ts-check
 
 /** @type {import('eslint').Linter.Config} */
@@ -8,13 +9,14 @@ const config = {
 		node: true,
 		// // browser: true,
 	},
-	extends: ['eslint:recommended', 'prettier'],
+	extends: ['eslint:recommended', 'prettier', 'plugin:import/recommended'],
 	overrides: [
 		{
 			extends: [
 				'plugin:@typescript-eslint/recommended',
 				'plugin:@typescript-eslint/recommended-requiring-type-checking',
 				'plugin:@typescript-eslint/strict',
+				'plugin:import/typescript',
 			],
 			files: ['**/*.ts', '**/*.tsx'],
 			parserOptions: {
@@ -134,6 +136,7 @@ const config = {
 		// // 	files: ['**/*.tsx', '**/*.jsx'],
 		// // 	rules: {
 		// // 		'@typescript-eslint/no-unnecessary-type-constraint': 'off',
+		// // 		'import/no-nodejs-modules': 'error',
 		// // 		'react/jsx-filename-extension': 'error',
 		// // 		'react/jsx-fragments': 'error',
 		// // 		'react/jsx-handler-names': ['error', { checkLocalVariables: true }],
@@ -220,10 +223,28 @@ const config = {
 		'import/extensions': [
 			'warn',
 			'never',
-			{ helpers: 'always', styles: 'always', test: 'always' },
+			{ helpers: 'always', json: 'always', styles: 'always', test: 'always' },
 		],
+		'import/first': 'error',
+		'import/max-dependencies': 'error',
+		'import/newline-after-import': 'error',
+		'import/no-absolute-path': 'error',
+		'import/no-amd': 'error',
+		'import/no-commonjs': 'error',
+		'import/no-cycle': 'error',
 		'import/no-default-export': 'error',
-		'import/no-duplicates': 'warn',
+		'import/no-deprecated': 'error',
+		'import/no-duplicates': 'error',
+		'import/no-empty-named-blocks': 'error',
+		'import/no-extraneous-dependencies': 'error',
+		'import/no-namespace': 'error',
+		'import/no-self-import': 'error',
+		'import/no-unassigned-import': [
+			'error',
+			{ allow: ['@total-typescript/ts-reset'] },
+		],
+		'import/no-useless-path-segments': 'error',
+		'import/unambiguous': 'error',
 		indent: ['off', 'tab'],
 		'logical-assignment-operators': 'error',
 		'max-classes-per-file': 'error',
@@ -335,7 +356,8 @@ const config = {
 	},
 	settings: {
 		'import/resolver': {
-			typescript: {},
+			node: true,
+			typescript: true,
 		},
 		jest: {
 			version: 29,
