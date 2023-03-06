@@ -5,6 +5,7 @@ import {
 	WHITE_PIECES,
 	COORDS,
 } from './check-chess-move.types';
+
 import type {
 	BlackPiece,
 	Board,

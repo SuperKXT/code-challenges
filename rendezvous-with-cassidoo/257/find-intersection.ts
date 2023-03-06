@@ -1,4 +1,5 @@
 import { areArraysEqual } from '~/helpers/array';
+
 import type { LinkedListNode } from '~/helpers/linked-list';
 
 export type Intersection = LinkedListNode<number> | [number, number];

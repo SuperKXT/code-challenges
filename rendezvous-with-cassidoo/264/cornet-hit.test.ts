@@ -1,4 +1,5 @@
 import { cornerHit } from './cornet-hit';
+
 import type { XY } from './cornet-hit';
 
 interface Test {

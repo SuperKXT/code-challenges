@@ -1,4 +1,5 @@
 import { calculateGpa } from './calculate-gpa';
+
 import type { GradePoint } from './calculate-gpa';
 
 interface Test {

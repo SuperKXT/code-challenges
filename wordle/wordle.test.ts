@@ -1,4 +1,5 @@
 import { findWordle, DEFAULT_ARGS } from './wordle';
+
 import type { WordleWord } from './word-list';
 import type { Arguments } from './wordle';
 

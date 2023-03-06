@@ -1,4 +1,5 @@
 import { humanizeToken, HUMANIZE_CASES } from './humanize-token.helpers';
+
 import type { HumanizeCase } from './humanize-token.helpers';
 
 interface Test {

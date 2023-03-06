@@ -1,4 +1,5 @@
 import { getOrdinalNumber } from './get-ordinal-number';
+
 import type { OrdinalNumber } from './get-ordinal-number';
 
 interface Test {

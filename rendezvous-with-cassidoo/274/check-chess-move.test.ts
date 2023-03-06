@@ -1,5 +1,6 @@
 import { isValidMove } from './check-chess-move';
 import { CHESS_ERRORS } from './check-chess-move.types';
+
 import type { ChessResponse, IsValidMoveArgs } from './check-chess-move.types';
 
 interface Test {

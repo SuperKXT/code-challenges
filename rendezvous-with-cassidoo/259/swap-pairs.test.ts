@@ -1,12 +1,13 @@
+
+import { linkedListToArray } from '~/helpers/array';
+import { arrayToLinkedList } from '~/helpers/linked-list';
+
 import {
 	swapArrayPairsWithLoop,
 	swapArrayPairsWithRecursion,
 	swapArrayPairsWithRegex,
 	swapLinkedListPairs,
 } from './swap-pairs';
-
-import { linkedListToArray } from '~/helpers/array';
-import { arrayToLinkedList } from '~/helpers/linked-list';
 
 
 const ARRAY_1 = [1, 2, 3, 4];

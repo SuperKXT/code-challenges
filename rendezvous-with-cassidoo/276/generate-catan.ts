@@ -4,6 +4,7 @@ import {
 	BOARD_REGEX,
 	CATAN_ERRORS,
 } from './generate-catan.types';
+
 import type { Cell, Board, ProspectiveBoard } from './generate-catan.types';
 
 const isBadNeighbor = (
