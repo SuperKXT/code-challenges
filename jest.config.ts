@@ -4,8 +4,6 @@ import { compilerOptions } from './tsconfig.json';
 
 import type { JestConfigWithTsJest } from 'ts-jest';
 
-
-
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const config: JestConfigWithTsJest = {
 	clearMocks: true,
