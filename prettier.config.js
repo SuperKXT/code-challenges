@@ -4,6 +4,7 @@
 /** @type {import('prettier').Config} */
 const config = {
 	jsxSingleQuote: true,
+	singleAttributePerLine: true,
 	singleQuote: true,
 	useTabs: true,
 };
