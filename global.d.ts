@@ -56,4 +56,8 @@ declare global {
 		value: any,
 		onlyCheckFirst?: boolean
 	) => asserts value is Type;
+
+	type Prettify<T> = {
+		[K in keyof T]: T[K];
+	}
 }
