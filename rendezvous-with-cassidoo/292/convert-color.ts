@@ -13,24 +13,28 @@ const parseHex = (input: string): [number, number, number] => {
 
 const parseHsl = (input: string): [number, number, number] => {
 	if (!input.match(HSL_REGEX)) throw new Error('invalid hsl color!');
-	return (input.slice(1, -1).split(',') as RegExpExecArray).map(
-		(row, index) => {
+	return input
+		.slice(1, -1)
+		.split(',')
+		.map((row, index) => {
 			const number = Number(row);
 			if (isNaN(number) || number < 0 || number > (index === 0 ? 360 : 100))
 				throw new Error('invalid rgb color!');
 			return number;
-		}
-	) as [number, number, number];
+		}) as [number, number, number];
 };
 
 const parseRgb = (input: string): [number, number, number] => {
 	if (!input.match(RGB_REGEX)) throw new Error('invalid rgb color!');
-	return (input.slice(1, -1).split(',') as RegExpExecArray).map((row) => {
-		const number = Number(row);
-		if (isNaN(number) || number < 0 || number > 255)
-			throw new Error('invalid rgb color!');
-		return number;
-	}) as [number, number, number];
+	return input
+		.slice(1, -1)
+		.split(',')
+		.map((row) => {
+			const number = Number(row);
+			if (isNaN(number) || number < 0 || number > 255)
+				throw new Error('invalid rgb color!');
+			return number;
+		}) as [number, number, number];
 };
 
 const toHexString = (rgb: [number, number, number]): string => {
