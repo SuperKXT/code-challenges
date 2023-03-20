@@ -3,6 +3,69 @@ const HEX_REGEX = /^#[0-9A-F]{6}$/u;
 const RGB_REGEX = /^\(\d{1,3},\d{1,3},\d{1,3}\)$/u;
 const HSL_REGEX = /^\(\d{1,3},\d{1,3},\d{1,3}\)$/u;
 
+const rgbToHsl = (
+	input: [number, number, number]
+): [number, number, number] => {
+	const [red, green, blue] = input.map((row) => row / 255) as [
+		number,
+		number,
+		number
+	];
+	const min = Math.min(red, green, blue);
+	const max = Math.max(red, green, blue);
+	const range = max - min;
+	const totalLuminance = max + min;
+	const inverseTotal = 2 - totalLuminance;
+	const lightness = totalLuminance / 2;
+	const saturation =
+		lightness < 0.5
+			? range / totalLuminance
+			: inverseTotal === 0
+			? 0
+			: range / inverseTotal;
+	const redMax = range === 0 ? 0 : (green - blue) / range;
+	const greenMax = (blue - red) / range + 2;
+	const blueMax = (red - green) / range + 4;
+	let hue = (max === red ? redMax : max === green ? greenMax : blueMax) * 60;
+	if (hue < 0) hue += 360;
+	return [
+		Math.round(hue),
+		Math.round(saturation * 100),
+		Math.round(lightness * 100),
+	];
+};
+
+const hslToRgb = (
+	input: [number, number, number]
+): [number, number, number] => {
+	const hue = input[0];
+	const saturation = input[1] / 100;
+	const lightness = input[2] / 100;
+	const chroma = (1 - Math.abs(2 * lightness - 1)) * saturation;
+	const hueI = hue / 60;
+	// eslint-disable-next-line id-length
+	const x = chroma * (1 - Math.abs((hueI % 2) - 1));
+	// eslint-disable-next-line id-length
+	const m = lightness - chroma / 2;
+	const values =
+		hueI <= 1
+			? [chroma, x, 0]
+			: hueI <= 2
+			? [x, chroma, 0]
+			: hueI <= 3
+			? [0, chroma, x]
+			: hueI <= 4
+			? [0, x, chroma]
+			: hueI <= 5
+			? [x, 0, chroma]
+			: [chroma, 0, x];
+	return values.map((row) => Math.round((row + m) * 255)) as [
+		number,
+		number,
+		number
+	];
+};
+
 export const convertColor = (
 	from: Option,
 	to: Option,
@@ -12,28 +75,29 @@ export const convertColor = (
 	switch (from) {
 		case 'hex': {
 			if (!input.match(HEX_REGEX)) throw new Error('invalid hex color!');
-			const hex = (input.slice(1).match(/.{2}/gu) as RegExpExecArray).map(
+			const rgb = (input.slice(1).match(/.{2}/gu) as RegExpExecArray).map(
 				(row) => parseInt(`0x${row}`, 16)
 			) as [number, number, number];
-			switch (to) {
-				case 'hsl':
-					return input;
-				case 'rgb':
-					return `(${hex.map((row) => row.toString(10)).join(',')})`;
-				default:
-					return input;
-			}
+			if (to === 'rgb') return `(${rgb.join(',')})`;
+			const hsl = rgbToHsl(rgb);
+			return `(${hsl.join(',')})`;
 		}
 		case 'hsl': {
 			if (!input.match(HSL_REGEX)) throw new Error('invalid hsl color!');
-			switch (to) {
-				case 'hex':
-					return input;
-				case 'rgb':
-					return input;
-				default:
-					return input;
-			}
+			const hsl = (input.slice(1, -1).split(',') as RegExpExecArray).map(
+				(row, index) => {
+					const number = Number(row);
+					if (isNaN(number) || number < 0 || number > (index === 0 ? 360 : 100))
+						throw new Error('invalid rgb color!');
+					return number;
+				}
+			) as [number, number, number];
+			const rgb = hslToRgb(hsl);
+			if (to === 'rgb')
+				return `(${rgb.map((row) => row.toString(10)).join(',')})`;
+			return `#${rgb
+				.map((row) => row.toString(16).padStart(2, '0').toUpperCase())
+				.join('')}`;
 		}
 		case 'rgb': {
 			if (!input.match(RGB_REGEX)) throw new Error('invalid rgb color!');
@@ -45,16 +109,12 @@ export const convertColor = (
 					return number;
 				}
 			) as [number, number, number];
-			switch (to) {
-				case 'hex':
-					return `#${rgb
-						.map((row) => row.toString(16).padStart(2, '0').toUpperCase())
-						.join('')}`;
-				case 'hsl':
-					return input;
-				case 'rgb':
-					return input;
-			}
+			if (to === 'hex')
+				return `#${rgb
+					.map((row) => row.toString(16).padStart(2, '0').toUpperCase())
+					.join('')}`;
+			const hsl = rgbToHsl(rgb);
+			return `(${hsl.join(',')})`;
 		}
 	}
 };
