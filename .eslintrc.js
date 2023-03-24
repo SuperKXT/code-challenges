@@ -229,9 +229,12 @@ const config = {
 			},
 			extends: [
 				'plugin:jest/all',
-				// // 'react-app/jest',
+				// // 'plugin:testing-library/react',
 			],
-			plugins: ['jest'],
+			plugins: [
+				'jest',
+				// // 'testing-library'
+			],
 			rules: {
 				'jest/prefer-expect-assertions': 'off',
 				'jest/require-top-level-describe': 'off',
