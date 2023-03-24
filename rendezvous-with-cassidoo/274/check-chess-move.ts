@@ -97,7 +97,6 @@ export const isValidMove = ({
 			const to = isHorizontal ? toCol : toRow;
 			const from = isHorizontal ? col : row;
 			let current = from;
-			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			while (true) {
 				path.push([
 					isHorizontal ? toRow : current,
@@ -111,7 +110,6 @@ export const isValidMove = ({
 				throw new Error(CHESS_ERRORS.badBishop);
 			let currentRow = row;
 			let currentCol = col;
-			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			while (true) {
 				path.push([currentRow, currentCol] as Position);
 				if (currentRow === toRow && currentCol === toCol) break;
@@ -136,7 +134,6 @@ export const isValidMove = ({
 
 			let currentRow = row;
 			let currentCol = col;
-			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			while (true) {
 				path.push([currentRow, currentCol] as Position);
 				if (currentRow === toRow && currentCol === toCol) break;
@@ -152,7 +149,6 @@ export const isValidMove = ({
 				throw new Error(CHESS_ERRORS.badQueen);
 			let currentRow = row;
 			let currentCol = col;
-			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			while (true) {
 				path.push([currentRow, currentCol] as Position);
 				if (currentRow === toRow && currentCol === toCol) break;

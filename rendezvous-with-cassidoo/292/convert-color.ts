@@ -83,9 +83,7 @@ const hslToRgb = (
 	const lightness = input[2] / 100;
 	const chroma = (1 - Math.abs(2 * lightness - 1)) * saturation;
 	const hueI = hue / 60;
-	// eslint-disable-next-line id-length
 	const x = chroma * (1 - Math.abs((hueI % 2) - 1));
-	// eslint-disable-next-line id-length
 	const m = lightness - chroma / 2;
 	const values =
 		hueI <= 1

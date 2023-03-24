@@ -88,7 +88,6 @@ export const sandTetris = (input: string): Solution => {
 
 					const curr = new Coord(from);
 
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 					while (true) {
 						if (curr.row > end.row) end.row = curr.row;
 						if (curr.col < start.col) start.col = curr.col;

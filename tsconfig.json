@@ -24,8 +24,8 @@
 			"~/*": ["./*"]
 		},
 
-		"downlevelIteration": true,
 		"noEmit": true,
+		"downlevelIteration": true,
 		"importsNotUsedAsValues": "error",
 		"ignoreDeprecations": "5.0",
 
@@ -42,11 +42,5 @@
 
 		"skipLibCheck": true
 	},
-	"exclude": [
-		"node_modules/**/*",
-		"build/**/*",
-		"dist/**/*",
-		"coverage/*",
-		"public"
-	]
+	"exclude": ["node_modules", "build", "dist", "coverage", "public"]
 }

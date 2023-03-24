@@ -19,7 +19,6 @@ import type {
 	RenameResultType,
 } from './recursive-rename.types';
 
-/* eslint-disable id-length, @typescript-eslint/naming-convention */
 const PARAMS_SCHEMA = z.strictObject({
 	'--': z.string().array().length(0).optional(),
 	_: z.tuple([z.string()]),
@@ -34,7 +33,6 @@ const PARAMS_SCHEMA = z.strictObject({
 	y: z.boolean().optional(),
 	yes: z.boolean().optional(),
 });
-/* eslint-enable id-length, @typescript-eslint/naming-convention */
 
 export type Params = z.infer<typeof PARAMS_SCHEMA>;
 
@@ -308,7 +306,6 @@ if (process.env.NODE_ENV !== 'test')
 		const args = argumentParser<Params>(process.argv.slice(2), {
 			alias: {
 				help: 'h',
-				// eslint-disable-next-line @typescript-eslint/naming-convention
 				'only-changes': 'o',
 				tree: 't',
 				verbose: 'v',

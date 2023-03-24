@@ -10,7 +10,6 @@ const DUPLICATE_CHARACTER_REGEX = /(.).*\1/iu;
 /* cspell: disable-next-line */
 const ALPHABETS = 'abcdefghijklmnopqrstuvxwyz';
 
-/* eslint-disable id-length */
 export const DEFAULT_ARGS: Arguments = {
 	a: ALPHABETS,
 	available: ALPHABETS,
@@ -24,7 +23,6 @@ export const DEFAULT_ARGS: Arguments = {
 };
 
 const ARGUMENT_SCHEMA = z.strictObject({
-	// eslint-disable-next-line @typescript-eslint/naming-convention
 	'--': z.string().array().length(0).optional(),
 	_: z.string().array().length(0).optional(),
 	a: z.string().regex(/^[a-z]{0,26}$/iu),
@@ -37,7 +35,6 @@ const ARGUMENT_SCHEMA = z.strictObject({
 	u: z.string().regex(/^[a-z]{0,26}$/iu),
 	unavailable: z.string().regex(/^[a-z]{0,26}$/iu),
 });
-/* eslint-enable id-length */
 
 export const findWordle = (parameters: Arguments): string[] => {
 	const { available, unavailable, pattern, known, repeat } =
@@ -90,5 +87,5 @@ if (process.env.NODE_ENV !== 'test') {
 		},
 		default: DEFAULT_ARGS,
 	});
-	findWordle(args); // eslint-disable-line jest/require-hook
+	findWordle(args);
 }
