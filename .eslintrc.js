@@ -208,6 +208,7 @@ const config = {
 				'@typescript-eslint/no-useless-empty-export': 'warn',
 				'@typescript-eslint/non-nullable-type-assertion-style': 'off',
 				'@typescript-eslint/prefer-nullish-coalescing': 'off',
+				'@typescript-eslint/prefer-reduce-type-parameter': 'off',
 				'@typescript-eslint/no-invalid-void-type': 'off',
 				'@typescript-eslint/promise-function-async': 'warn',
 				'@typescript-eslint/require-array-sort-compare': [
