@@ -14,9 +14,8 @@ export const parenthesisSubstring = (string: string): number => {
 			currentLongest = 0;
 		}
 
-		if (index + 1 === string.length) {
+		if (index + 1 === string.length)
 			longest = Math.max(longest, currentLongest);
-		}
 	}
 
 	return longest;

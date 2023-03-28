@@ -191,9 +191,7 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 
 			try {
 				const isFolder = await getIsFolder(oldPath);
-				if (isFolder) {
-					children = await findFiles(oldPath);
-				}
+				if (isFolder) children = await findFiles(oldPath);
 
 				if (newName === file) {
 					return {
@@ -206,9 +204,7 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 
 				const exists = await getExists(newPath);
 
-				if (exists) {
-					throw new Error(RENAME_ERRORS.exists);
-				}
+				if (exists) throw new Error(RENAME_ERRORS.exists);
 
 				return {
 					children,
@@ -276,9 +272,7 @@ export const recursiveRename = async (
 ): Promise<RenameResult[]> => {
 	const folder = location.replace(/\/+$/u, '');
 
-	if (!(await getIsFolder(folder))) {
-		throw new Error(RENAME_ERRORS.badPath);
-	}
+	if (!(await getIsFolder(folder))) throw new Error(RENAME_ERRORS.badPath);
 
 	const files = await findFiles(folder);
 
@@ -299,9 +293,7 @@ export const recursiveRename = async (
 			},
 		});
 
-		if (confirm !== 'y' && confirm !== 'Y') {
-			return [];
-		}
+		if (confirm !== 'y' && confirm !== 'Y') return [];
 	}
 
 	const results = await renameFiles(folder, files);

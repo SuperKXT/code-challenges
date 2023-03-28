@@ -30,23 +30,17 @@ export const treeHouse = (
 			const isVisible = attached.some((curr) =>
 				curr.every((tree) => tree < current)
 			);
-			if (isVisible) {
-				visible++;
-			}
+			if (isVisible) visible++;
 
 			const currentScenicScore = attached.reduce((sum, curr) => {
 				let currentSum = 0;
 				for (const tree of curr) {
 					currentSum++;
-					if (tree >= current) {
-						break;
-					}
+					if (tree >= current) break;
 				}
 				return sum * currentSum;
 			}, 1);
-			if (currentScenicScore > scenicScore) {
-				scenicScore = currentScenicScore;
-			}
+			if (currentScenicScore > scenicScore) scenicScore = currentScenicScore;
 		}
 	}
 

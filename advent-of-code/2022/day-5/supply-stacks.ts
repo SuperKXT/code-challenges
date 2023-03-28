@@ -11,12 +11,10 @@ export const supplyStacks = (
 		for (let idx = 1; idx < row.length; idx += 4) {
 			const current = row[idx];
 			const lastIndex = index++;
-			if (!array[lastIndex]) {
-				array.push([]);
-			}
-			if (!current || current === ' ') {
-				continue;
-			}
+			if (!array[lastIndex]) array.push([]);
+
+			if (!current || current === ' ') continue;
+
 			array[lastIndex]?.push(current);
 		}
 		return array;

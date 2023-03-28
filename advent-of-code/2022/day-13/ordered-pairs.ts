@@ -12,25 +12,21 @@ const checkPacketOrder = (
 	for (let index = 0; index < leftPacket.length; index++) {
 		const left = leftPacket[index] as Packet | number;
 		const right = rightPacket[index];
-		if (right === undefined) {
-			return false;
-		}
+		if (right === undefined) return false;
+
 		if (typeof left === 'number' && typeof right === 'number') {
-			if (left < right) {
-				return true;
-			}
-			if (left > right) {
-				return false;
-			}
+			if (left < right) return true;
+
+			if (left > right) return false;
+
 			continue;
 		} else {
 			const listCheck = checkPacketOrder(
 				!Array.isArray(left) ? [left] : left,
 				!Array.isArray(right) ? [right] : right
 			);
-			if (listCheck === undefined) {
-				continue;
-			}
+			if (listCheck === undefined) continue;
+
 			return listCheck;
 		}
 	}
@@ -52,9 +48,7 @@ export const orderedPairs = (input: string): Solution => {
 
 	for (const pair of pairs) {
 		const index = pairs.indexOf(pair);
-		if (checkPacketOrder(...pair)) {
-			solution.indicesSum += index + 1;
-		}
+		if (checkPacketOrder(...pair)) solution.indicesSum += index + 1;
 	}
 
 	const dividers: [Packet, Packet] = [[2], [6]];

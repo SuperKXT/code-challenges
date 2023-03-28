@@ -14,9 +14,7 @@ export const raumdeuter = (
 	const currentDirs: string[] = [];
 
 	for (const row of input.split('\n')) {
-		if (!row) {
-			continue;
-		}
+		if (!row) continue;
 
 		const [first, second, third] = row.split(' ');
 
@@ -51,15 +49,11 @@ export const raumdeuter = (
 	};
 
 	for (const size of sizes) {
-		if (size <= SMALL_SIZE) {
-			solution.smallFiles += size;
-		}
-		if (size > SMALL_SIZE && solution.deletedSize) {
-			break;
-		}
-		if (!solution.deletedSize && size >= toFree) {
-			solution.deletedSize = size;
-		}
+		if (size <= SMALL_SIZE) solution.smallFiles += size;
+
+		if (size > SMALL_SIZE && solution.deletedSize) break;
+
+		if (!solution.deletedSize && size >= toFree) solution.deletedSize = size;
 	}
 
 	return solution;

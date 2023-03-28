@@ -3,9 +3,7 @@ export const INVALID_ERROR = new Error(
 );
 
 export const verticalSlashes = (slashes: string): string => {
-	if (!/^[\\/]+$/u.test(slashes)) {
-		throw INVALID_ERROR;
-	}
+	if (!/^[\\/]+$/u.test(slashes)) throw INVALID_ERROR;
 
 	let offset: number = 0;
 	return Array.from(

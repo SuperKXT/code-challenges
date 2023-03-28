@@ -19,13 +19,9 @@ export const rucksackReorganization = async (
 	const group: string[] = [];
 
 	for (const row of input.split('\n')) {
-		if (!row) {
-			continue;
-		}
+		if (!row) continue;
 
-		if (group.length < 3) {
-			group.push(row);
-		}
+		if (group.length < 3) group.push(row);
 
 		if (group.length === 3) {
 			const badge = Array.from(group[0] ?? '').find((item) =>

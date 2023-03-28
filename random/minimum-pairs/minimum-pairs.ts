@@ -10,9 +10,7 @@ export const minimumPairs = (numbers: number[]): Pair[] => {
 		const previous = sorted[index - 1] as number;
 		const distance = current - previous;
 
-		if (distance > minimumDistance) {
-			continue;
-		}
+		if (distance > minimumDistance) continue;
 
 		pairs.push(`${previous} ${current}`);
 

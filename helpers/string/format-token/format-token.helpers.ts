@@ -28,9 +28,7 @@ export const formatToken = (
 	strategy: FormatStrategy = 'camel'
 ): string => {
 	const string = input.trim();
-	if (!string) {
-		return '';
-	}
+	if (!string) return '';
 
 	let formatted = '';
 
@@ -43,9 +41,7 @@ export const formatToken = (
 			continue;
 		}
 
-		if (!ALPHA_NUMERIC.includes(current)) {
-			continue;
-		}
+		if (!ALPHA_NUMERIC.includes(current)) continue;
 
 		if (!formatted) {
 			switch (strategy) {
@@ -113,9 +109,7 @@ export const formatToken = (
 		}
 	}
 
-	if (formatted.at(-1) === '.') {
-		return formatted.slice(0, -1);
-	}
+	if (formatted.at(-1) === '.') return formatted.slice(0, -1);
 
 	return formatted;
 };

@@ -14,9 +14,8 @@ const findIntersection = (
 		while (nodeA) {
 			let nodeB = paramB as LinkedListNode<number>;
 			while (nodeB) {
-				if (JSON.stringify(nodeA) === JSON.stringify(nodeB)) {
-					return nodeA;
-				}
+				if (JSON.stringify(nodeA) === JSON.stringify(nodeB)) return nodeA;
+
 				nodeB = nodeB.next ?? null;
 			}
 			nodeA = nodeA.next;
@@ -30,9 +29,8 @@ const findIntersection = (
 		const subA = reversedA.slice(0, reversedA.length - index);
 		const subB = reversedB.slice(0, reversedA.length - index);
 
-		if (areArraysEqual(subA, subB)) {
+		if (areArraysEqual(subA, subB))
 			return [index, reversedB.length - subB.length];
-		}
 	}
 
 	return null;

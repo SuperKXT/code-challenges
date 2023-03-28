@@ -139,9 +139,7 @@ const checkFiles = (files: Test, directory: string = TEMP_PATH) => {
 			);
 		}
 
-		if (children) {
-			checkFiles(children, currentName);
-		}
+		if (children) checkFiles(children, currentName);
 	}
 };
 

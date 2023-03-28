@@ -4,13 +4,10 @@ export const areArraysEqual = <Type extends any[]>(
 	first: Type,
 	second: Type
 ): boolean => {
-	if (first.length !== second.length) {
-		return false;
-	}
+	if (first.length !== second.length) return false;
+
 	for (let index = 0; index < first.length; index++) {
-		if (first[index] !== second[index]) {
-			return false;
-		}
+		if (first[index] !== second[index]) return false;
 	}
 
 	return true;

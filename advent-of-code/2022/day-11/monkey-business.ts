@@ -45,9 +45,8 @@ export const monkeyBusiness = (input: string): Solution => {
 				operation: (item: number) => {
 					const left = parseInt(first ?? '') || item;
 					const right = parseInt(second ?? '') || item;
-					if (op === '+') {
-						return left + right;
-					}
+					if (op === '+') return left + right;
+
 					return left * right;
 				},
 				trueIndex: parseInt(rows[4]?.replace(PREFIX.trueIndex, '') ?? ''),
@@ -80,13 +79,9 @@ export const monkeyBusiness = (input: string): Solution => {
 		}
 	};
 
-	for (let cycle = 1; cycle <= 20; cycle++) {
-		executeCycle(monkeys);
-	}
+	for (let cycle = 1; cycle <= 20; cycle++) executeCycle(monkeys);
 
-	for (let cycle = 1; cycle <= 10000; cycle++) {
-		executeCycle(bigMonkeys, true);
-	}
+	for (let cycle = 1; cycle <= 10000; cycle++) executeCycle(bigMonkeys, true);
 
 	const topTwo = monkeys
 		.sort((first, second) => second.inspected - first.inspected)

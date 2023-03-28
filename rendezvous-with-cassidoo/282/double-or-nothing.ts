@@ -27,9 +27,8 @@ const spin = async (
 		const newScore = score * multiplier;
 		console.info(chalk.green(`CORRECT! You have $${newScore}`));
 		const isDouble = await confirmPrompt('Double or Nothing?');
-		if (!isDouble) {
-			return newScore;
-		}
+		if (!isDouble) return newScore;
+
 		return spin(newScore, 2);
 	}
 	console.info(
@@ -44,12 +43,9 @@ export const doubleOrNothing = async (): Promise<number> => {
 	const score = await spin();
 	console.info(chalk.red('\nGAME OVER! '), `You Won: $${score}\n`);
 	const replay = await confirmPrompt('Go Again?');
-	if (replay) {
-		return doubleOrNothing();
-	}
+	if (replay) return doubleOrNothing();
+
 	return score;
 };
 
-if (process.env.NODE_ENV !== 'test') {
-	doubleOrNothing().catch(console.error);
-}
+if (process.env.NODE_ENV !== 'test') doubleOrNothing().catch(console.error);

@@ -13,9 +13,8 @@ const isBadNeighbor = (
 	col: number,
 	board: ProspectiveBoard
 ): boolean => {
-	if (cell !== '6' && cell !== '8') {
-		return false;
-	}
+	if (cell !== '6' && cell !== '8') return false;
+
 	const topLeftCol = row <= 2 ? col - 1 : col;
 	const bottomLeftCol = row < 2 ? col : col - 1;
 	const neighbors = [
@@ -31,9 +30,7 @@ const isBadNeighbor = (
 };
 
 export const assertValidCatanBoard = (input: string) => {
-	if (!BOARD_REGEX.test(input)) {
-		throw new Error(CATAN_ERRORS.badFormatting);
-	}
+	if (!BOARD_REGEX.test(input)) throw new Error(CATAN_ERRORS.badFormatting);
 
 	const board = input
 		.split('\n')
@@ -47,13 +44,11 @@ export const assertValidCatanBoard = (input: string) => {
 			if (
 				(SINGLE_PIECES.includes(cell as string) && (counts[cell] ?? 0) > 1) ||
 				(DOUBLE_PIECES.includes(cell as string) && (counts[cell] ?? 0) > 2)
-			) {
+			)
 				throw new Error(CATAN_ERRORS.badPieceCount);
-			}
 
-			if (isBadNeighbor(cell, rowIndex, index, board)) {
+			if (isBadNeighbor(cell, rowIndex, index, board))
 				throw new Error(CATAN_ERRORS.badPositioning);
-			}
 		});
 	});
 };
@@ -65,14 +60,12 @@ const generateNextCellIndex = (
 	board: ProspectiveBoard,
 	pieces: Cell[] = structuredClone(availablePieces)
 ): number => {
-	if (pieces.length === 1) {
-		return 0;
-	}
+	if (pieces.length === 1) return 0;
+
 	const index = Math.random() * pieces.length;
 	const cell = pieces.splice(index, 1)[0] as Cell;
-	if (isBadNeighbor(cell, row, col, board)) {
+	if (isBadNeighbor(cell, row, col, board))
 		return generateNextCellIndex(row, col, availablePieces, board, pieces);
-	}
 
 	return availablePieces.indexOf(cell);
 };

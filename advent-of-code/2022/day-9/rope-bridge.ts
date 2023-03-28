@@ -20,9 +20,8 @@ const getUniquePositions = (array: Position[]) => {
 		const duplicate = positions.some(
 			(position) => current.row === position.row && current.col === position.col
 		);
-		if (!duplicate) {
-			positions.push(current);
-		}
+		if (!duplicate) positions.push(current);
+
 		return positions;
 	}, []);
 };
@@ -44,9 +43,7 @@ export const ropeBridge = (
 
 	for (const current of input.split('\n')) {
 		const [direction, repeat] = current.split(' ');
-		if (!isMove(direction) || isNaN(Number(repeat))) {
-			continue;
-		}
+		if (!isMove(direction) || isNaN(Number(repeat))) continue;
 
 		[...new Array<undefined>(Number(repeat))].forEach(() => {
 			const headPosition = { ...head.at(-1) } as Position;
@@ -79,14 +76,11 @@ export const ropeBridge = (
 					Math.abs(lastTailPosition.col - tailPosition.col) < 2;
 
 				const updateKnot = (key: 'col' | 'row') => {
-					if (areAdjacent) {
-						return;
-					}
-					if (tailPosition[key] > lastTailPosition[key]) {
-						tailPosition[key]--;
-					} else if (tailPosition[key] < lastTailPosition[key]) {
+					if (areAdjacent) return;
+
+					if (tailPosition[key] > lastTailPosition[key]) tailPosition[key]--;
+					else if (tailPosition[key] < lastTailPosition[key])
 						tailPosition[key]++;
-					}
 				};
 
 				updateKnot('row');
