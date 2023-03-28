@@ -8,7 +8,7 @@ export const subGridSum = (
 		const rowCells = grid[row] as number[];
 		const cols = rowCells.reduce<number[]>(
 			(numbers, cell, col) =>
-				(marks.includes(cell) ? [...numbers, col] : numbers),
+				marks.includes(cell) ? [...numbers, col] : numbers,
 			[]
 		);
 		for (const left of cols) {
@@ -22,7 +22,9 @@ export const subGridSum = (
 							otherTwo.includes(cells[left] as number) &&
 							otherTwo.includes(cells[right] as number)
 					);
-				if (!matched) continue;
+				if (!matched) {
+					continue;
+				}
 				return grid
 					.slice(row, grid.indexOf(matched) + 1)
 					.flatMap((curr) => curr.slice(left, right + 1))

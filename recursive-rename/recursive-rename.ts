@@ -191,19 +191,24 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 
 			try {
 				const isFolder = await getIsFolder(oldPath);
-				if (isFolder) children = await findFiles(oldPath);
+				if (isFolder) {
+					children = await findFiles(oldPath);
+				}
 
-				if (newName === file)
+				if (newName === file) {
 					return {
 						children,
 						oldName: file,
 						path: folder,
 						type: 'unchanged',
 					};
+				}
 
 				const exists = await getExists(newPath);
 
-				if (exists) throw new Error(RENAME_ERRORS.exists);
+				if (exists) {
+					throw new Error(RENAME_ERRORS.exists);
+				}
 
 				return {
 					children,
@@ -239,7 +244,7 @@ const renameFiles = async (
 				? await renameFiles(newPath, file.children)
 				: undefined;
 
-			if (file.type === 'success')
+			if (file.type === 'success') {
 				try {
 					await rename(oldPath, newPath);
 				} catch (error) {
@@ -250,6 +255,7 @@ const renameFiles = async (
 						type: 'error',
 					};
 				}
+			}
 
 			return {
 				...file,
@@ -270,7 +276,9 @@ export const recursiveRename = async (
 ): Promise<RenameResult[]> => {
 	const folder = location.replace(/\/+$/u, '');
 
-	if (!(await getIsFolder(folder))) throw new Error(RENAME_ERRORS.badPath);
+	if (!(await getIsFolder(folder))) {
+		throw new Error(RENAME_ERRORS.badPath);
+	}
 
 	const files = await findFiles(folder);
 
@@ -291,7 +299,9 @@ export const recursiveRename = async (
 			},
 		});
 
-		if (confirm !== 'y' && confirm !== 'Y') return [];
+		if (confirm !== 'y' && confirm !== 'Y') {
+			return [];
+		}
 	}
 
 	const results = await renameFiles(folder, files);
@@ -301,7 +311,7 @@ export const recursiveRename = async (
 	return results;
 };
 
-if (process.env.NODE_ENV !== 'test')
+if (process.env.NODE_ENV !== 'test') {
 	try {
 		const args = argumentParser<Params>(process.argv.slice(2), {
 			alias: {
@@ -332,3 +342,4 @@ if (process.env.NODE_ENV !== 'test')
 	} catch {
 		throw new Error(RENAME_ERRORS.badArguments);
 	}
+}

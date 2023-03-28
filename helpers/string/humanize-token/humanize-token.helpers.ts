@@ -20,7 +20,9 @@ export const humanizeToken = (
 	casing: HumanizeCase = 'title'
 ): string => {
 	const string = input.trim();
-	if (!string.trim()) return '';
+	if (!string.trim()) {
+		return '';
+	}
 
 	let formatted = '';
 
@@ -28,7 +30,9 @@ export const humanizeToken = (
 		const current = string[index] as string;
 		const last = string[index - 1] as string;
 
-		if (!ALPHABET.includes(current)) continue;
+		if (!ALPHABET.includes(current)) {
+			continue;
+		}
 
 		if (!formatted) {
 			switch (casing) {
@@ -76,8 +80,9 @@ export const humanizeToken = (
 		}
 	}
 
-	if (formatted.toLowerCase().endsWith(' id'))
+	if (formatted.toLowerCase().endsWith(' id')) {
 		formatted = formatted.slice(0, -3);
+	}
 
 	return formatted;
 };

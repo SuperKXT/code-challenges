@@ -10,27 +10,33 @@ export const tuningTrouble = (
 	};
 
 	for (let index = 0; index < input.length; index++) {
-		if (index <= 4) continue;
+		if (index <= 4) {
+			continue;
+		}
 
 		if (!solution.packetMarker) {
 			const isPacketMarker =
 				[...new Set(input.slice(index - 4, index).split(''))].length === 4;
-			if (isPacketMarker) 
+			if (isPacketMarker) {
 				solution.packetMarker = index;
-			
+			}
 		}
 
-		if (index <= 14) continue;
+		if (index <= 14) {
+			continue;
+		}
 
 		if (!solution.messageMarker) {
 			const isMessageMarker =
 				[...new Set(input.slice(index - 14, index).split(''))].length === 14;
-			if (isMessageMarker) 
+			if (isMessageMarker) {
 				solution.messageMarker = index;
-			
+			}
 		}
 
-		if (solution.packetMarker && solution.messageMarker) break;
+		if (solution.packetMarker && solution.messageMarker) {
+			break;
+		}
 	}
 
 	return solution;

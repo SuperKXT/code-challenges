@@ -24,7 +24,7 @@ const config = {
 	},
 	rules: {
 		'array-callback-return': ['warn', { checkForEach: true }],
-		curly: ['warn', 'multi', 'consistent'],
+		curly: 'warn',
 		'default-case-last': 'warn',
 		eqeqeq: 'error',
 		'func-names': ['warn', 'never'],

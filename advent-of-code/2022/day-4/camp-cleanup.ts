@@ -12,7 +12,9 @@ export const campCleanup = async (
 
 	return input.split('\n').reduce(
 		(object, row) => {
-			if (!row) return object;
+			if (!row) {
+				return object;
+			}
 
 			const [elfA, elfB] = row.split(',');
 			const [elfOneStart = 0, elfOneEnd = 0] =
@@ -24,8 +26,12 @@ export const campCleanup = async (
 			const isTwoInOne = elfTwoStart >= elfOneStart && elfTwoEnd <= elfOneEnd;
 			const isOverlap = elfOneStart <= elfTwoEnd && elfTwoStart <= elfOneEnd;
 
-			if (isOverlap) object.overlap++;
-			if (isOneInTwo || isTwoInOne) object.fullOverlap++;
+			if (isOverlap) {
+				object.overlap++;
+			}
+			if (isOneInTwo || isTwoInOne) {
+				object.fullOverlap++;
+			}
 
 			return object;
 		},

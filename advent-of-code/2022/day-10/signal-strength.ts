@@ -42,8 +42,9 @@ export const signalStrength = (input: string): Solution => {
 
 	for (const row of input.split('\n')) {
 		const [command, num] = row.split(' ');
-		if (!isCommand(command) || (command === 'addx' && isNaN(Number(num))))
+		if (!isCommand(command) || (command === 'addx' && isNaN(Number(num)))) {
 			continue;
+		}
 
 		const prevRegister = clock.register;
 
