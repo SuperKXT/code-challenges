@@ -33,6 +33,7 @@
 	},
 	"dependencies": {
 		"chalk": "v4",
+		"dayjs": "^1.11.7",
 		"minimist-lite": "^2.2.1",
 		"prompt": "^1.3.0",
 		"zod": "^3.21.4"
