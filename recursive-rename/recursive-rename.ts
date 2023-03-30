@@ -6,10 +6,8 @@ import argumentParser from 'minimist-lite';
 import prompt from 'prompt';
 import { z } from 'zod';
 
-/* eslint-disable no-restricted-imports */
-import { formatToken } from '../helpers/string';
-import { getError } from '../helpers/error';
-/* eslint-enable no-restricted-imports */
+import { formatToken } from '~/helpers/string';
+import { getError } from '~/helpers/error';
 
 import { RENAME_ERRORS } from './recursive-rename.types';
 

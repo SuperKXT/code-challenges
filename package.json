@@ -7,8 +7,8 @@
 		"lint": "eslint . --fix",
 		"format": "prettier --write .",
 		"test": "jest --runInBand --watch",
-		"wordle": "ts-node ./wordle/wordle.ts",
-		"kebab-rename": "ts-node ./recursive-rename/recursive-rename.ts"
+		"wordle": "ts-node --transpile-only --require tsconfig-paths/register ./wordle/wordle.ts",
+		"kebab-rename": "ts-node --transpile-only --require tsconfig-paths/register ./recursive-rename/recursive-rename.ts"
 	},
 	"devDependencies": {
 		"@total-typescript/ts-reset": "^0.4.2",
@@ -29,6 +29,7 @@
 		"prettier": "^2.8.5",
 		"ts-jest": "^29.0.5",
 		"ts-node": "^10.9.1",
+		"tsconfig-paths": "^4.2.0",
 		"typescript": "^5.0.2"
 	},
 	"dependencies": {
