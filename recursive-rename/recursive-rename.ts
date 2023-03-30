@@ -191,13 +191,14 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 				const isFolder = await getIsFolder(oldPath);
 				if (isFolder) children = await findFiles(oldPath);
 
-				if (newName === file)
+				if (newName === file) {
 					return {
 						children,
 						oldName: file,
 						path: folder,
 						type: 'unchanged',
 					};
+				}
 
 				const exists = await getExists(newPath);
 
@@ -237,7 +238,7 @@ const renameFiles = async (
 				? await renameFiles(newPath, file.children)
 				: undefined;
 
-			if (file.type === 'success')
+			if (file.type === 'success') {
 				try {
 					await rename(oldPath, newPath);
 				} catch (error) {
@@ -248,6 +249,7 @@ const renameFiles = async (
 						type: 'error',
 					};
 				}
+			}
 
 			return {
 				...file,
@@ -299,7 +301,7 @@ export const recursiveRename = async (
 	return results;
 };
 
-if (process.env.NODE_ENV !== 'test')
+if (process.env.NODE_ENV !== 'test') {
 	try {
 		const args = argumentParser<Params>(process.argv.slice(2), {
 			alias: {
@@ -330,3 +332,4 @@ if (process.env.NODE_ENV !== 'test')
 	} catch {
 		throw new Error(RENAME_ERRORS.badArguments);
 	}
+}

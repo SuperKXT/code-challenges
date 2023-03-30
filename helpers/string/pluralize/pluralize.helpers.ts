@@ -47,6 +47,7 @@ export const pluralize = (
 
 	const replaceQuantity = (input: string): string => {
 		if (!lastQuantifier) return input;
+
 		const [number, value] = lastQuantifier;
 		let trimmed = input;
 		if (!value) trimmed = input.replace(/^\s+/u, '');
@@ -62,6 +63,7 @@ export const pluralize = (
 
 		const lastExpression = expressions.shift();
 		if (!lastExpression) break;
+
 		result.push(
 			typeof lastExpression === 'string'
 				? replaceQuantity(lastExpression)

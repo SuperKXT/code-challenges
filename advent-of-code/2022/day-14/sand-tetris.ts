@@ -41,6 +41,7 @@ const getLanding = (
 ): Coord | null => {
 	const mapRow = map[row];
 	if (!mapRow || mapRow[col] !== '.' || !map[row + 1]) return null;
+
 	const colOffset = [0, -1, 1].find(
 		(offset) => map[row + 1]?.[col + offset] === '.'
 	);
@@ -90,7 +91,9 @@ export const sandTetris = (input: string): Solution => {
 
 					while (true) {
 						if (curr.row > end.row) end.row = curr.row;
+
 						if (curr.col < start.col) start.col = curr.col;
+
 						if (curr.col > end.col) end.col = curr.col;
 
 						if (!curr.existsIn(current)) pathRocks.push(new Coord(curr));
@@ -135,6 +138,7 @@ export const sandTetris = (input: string): Solution => {
 	while (true) {
 		const coord = getLanding(part1Map);
 		if (!coord) break;
+
 		const { row, col } = coord;
 		(part1Map[row] as MapRow)[col] = 'o';
 		solution.part1++;
@@ -143,6 +147,7 @@ export const sandTetris = (input: string): Solution => {
 	while (true) {
 		const coord = getLanding(part2Map);
 		if (!coord) break;
+
 		const { row, col } = coord;
 		(part2Map[row] as MapRow)[col] = 'o';
 		solution.part2++;

@@ -21,6 +21,7 @@ const getUniquePositions = (array: Position[]) => {
 			(position) => current.row === position.row && current.col === position.col
 		);
 		if (!duplicate) positions.push(current);
+
 		return positions;
 	}, []);
 };
@@ -76,6 +77,7 @@ export const ropeBridge = (
 
 				const updateKnot = (key: 'col' | 'row') => {
 					if (areAdjacent) return;
+
 					if (tailPosition[key] > lastTailPosition[key]) tailPosition[key]--;
 					else if (tailPosition[key] < lastTailPosition[key])
 						tailPosition[key]++;

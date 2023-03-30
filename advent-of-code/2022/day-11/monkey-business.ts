@@ -46,6 +46,7 @@ export const monkeyBusiness = (input: string): Solution => {
 					const left = parseInt(first ?? '') || item;
 					const right = parseInt(second ?? '') || item;
 					if (op === '+') return left + right;
+
 					return left * right;
 				},
 				trueIndex: parseInt(rows[4]?.replace(PREFIX.trueIndex, '') ?? ''),

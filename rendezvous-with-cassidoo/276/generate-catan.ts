@@ -14,6 +14,7 @@ const isBadNeighbor = (
 	board: ProspectiveBoard
 ): boolean => {
 	if (cell !== '6' && cell !== '8') return false;
+
 	const topLeftCol = row <= 2 ? col - 1 : col;
 	const bottomLeftCol = row < 2 ? col : col - 1;
 	const neighbors = [
@@ -60,6 +61,7 @@ const generateNextCellIndex = (
 	pieces: Cell[] = structuredClone(availablePieces)
 ): number => {
 	if (pieces.length === 1) return 0;
+
 	const index = Math.random() * pieces.length;
 	const cell = pieces.splice(index, 1)[0] as Cell;
 	if (isBadNeighbor(cell, row, col, board))

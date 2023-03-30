@@ -25,6 +25,7 @@ export const campCleanup = async (
 			const isOverlap = elfOneStart <= elfTwoEnd && elfTwoStart <= elfOneEnd;
 
 			if (isOverlap) object.overlap++;
+
 			if (isOneInTwo || isTwoInOne) object.fullOverlap++;
 
 			return object;

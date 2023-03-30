@@ -15,26 +15,25 @@ const findIntersection = (
 			let nodeB = paramB as LinkedListNode<number>;
 			while (nodeB) {
 				if (JSON.stringify(nodeA) === JSON.stringify(nodeB)) return nodeA;
+
 				nodeB = nodeB.next ?? null;
 			}
 			nodeA = nodeA.next;
 		}
 		return null;
-	} 
-		const reversedA = [...paramA].reverse();
-		const reversedB = [...(paramB as number[])].reverse();
+	}
+	const reversedA = [...paramA].reverse();
+	const reversedB = [...(paramB as number[])].reverse();
 
-		for (let index = 0; index < reversedA.length; index++) {
-			const subA = reversedA.slice(0, reversedA.length - index);
-			const subB = reversedB.slice(0, reversedA.length - index);
+	for (let index = 0; index < reversedA.length; index++) {
+		const subA = reversedA.slice(0, reversedA.length - index);
+		const subB = reversedB.slice(0, reversedA.length - index);
 
-			if (areArraysEqual(subA, subB)) 
-				return [index, reversedB.length - subB.length];
-			
-		}
+		if (areArraysEqual(subA, subB))
+			return [index, reversedB.length - subB.length];
+	}
 
-		return null;
-	
+	return null;
 };
 
 export { findIntersection };

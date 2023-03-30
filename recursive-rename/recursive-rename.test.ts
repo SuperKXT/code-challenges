@@ -97,11 +97,12 @@ const SORTED_TESTS = TESTS.map(recursiveSort);
 
 // eslint-disable-next-line jest/no-hooks
 beforeEach(() => {
-	if (existsSync(TEMP_PATH))
+	if (existsSync(TEMP_PATH)) {
 		rmSync(TEMP_PATH, {
 			force: true,
 			recursive: true,
 		});
+	}
 
 	mkdirSync(TEMP_PATH);
 });
@@ -132,10 +133,11 @@ const checkFiles = (files: Test, directory: string = TEMP_PATH) => {
 			directory,
 			type === 'success' ? newName : oldName
 		);
-		if (!existsSync(currentName))
+		if (!existsSync(currentName)) {
 			throw new Error(
 				`${currentName} expected but not found in renamed folder`
 			);
+		}
 
 		if (children) checkFiles(children, currentName);
 	}

@@ -28,6 +28,7 @@ const spin = async (
 		console.info(chalk.green(`CORRECT! You have $${newScore}`));
 		const isDouble = await confirmPrompt('Double or Nothing?');
 		if (!isDouble) return newScore;
+
 		return spin(newScore, 2);
 	}
 	console.info(
@@ -43,6 +44,7 @@ export const doubleOrNothing = async (): Promise<number> => {
 	console.info(chalk.red('\nGAME OVER! '), `You Won: $${score}\n`);
 	const replay = await confirmPrompt('Go Again?');
 	if (replay) return doubleOrNothing();
+
 	return score;
 };
 

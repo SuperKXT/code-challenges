@@ -12,7 +12,9 @@ export const supplyStacks = (
 			const current = row[idx];
 			const lastIndex = index++;
 			if (!array[lastIndex]) array.push([]);
+
 			if (!current || current === ' ') continue;
+
 			array[lastIndex]?.push(current);
 		}
 		return array;

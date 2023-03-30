@@ -2,7 +2,6 @@ import { areArraysEqual, linkedListToArray } from './array.helpers';
 
 import type { LinkedList } from '~/helpers/linked-list';
 
-
 interface EqualityTest {
 	first: any[];
 	second: any[];

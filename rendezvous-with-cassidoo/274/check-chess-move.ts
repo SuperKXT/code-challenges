@@ -93,6 +93,7 @@ export const isValidMove = ({
 			if (toRow === doubleNext) path.splice(1, 0, [doubleNext, col]);
 		} else if (piece === 'r' || piece === 'R') {
 			if (col !== toCol && row !== toRow) throw new Error(CHESS_ERRORS.badRook);
+
 			const isHorizontal = col !== toCol;
 			const to = isHorizontal ? toCol : toRow;
 			const from = isHorizontal ? col : row;
@@ -103,16 +104,19 @@ export const isValidMove = ({
 					isHorizontal ? current : toCol,
 				]);
 				if (to === from) break;
+
 				to > from ? current++ : current--;
 			}
 		} else if (piece === 'b' || piece === 'B') {
 			if (Math.abs(toCol - col) !== Math.abs(toRow - row))
 				throw new Error(CHESS_ERRORS.badBishop);
+
 			let currentRow = row;
 			let currentCol = col;
 			while (true) {
 				path.push([currentRow, currentCol] as Position);
 				if (currentRow === toRow && currentCol === toCol) break;
+
 				toRow > row ? currentRow++ : currentRow--;
 				toCol > col ? currentCol++ : currentCol--;
 			}
@@ -147,13 +151,16 @@ export const isValidMove = ({
 			const isDiagonal = Math.abs(toCol - col) !== Math.abs(toRow - row);
 			if (!isHorizontal && !isVertical && !isDiagonal)
 				throw new Error(CHESS_ERRORS.badQueen);
+
 			let currentRow = row;
 			let currentCol = col;
 			while (true) {
 				path.push([currentRow, currentCol] as Position);
 				if (currentRow === toRow && currentCol === toCol) break;
+
 				if (toRow > row) currentRow++;
 				else if (toRow < row) currentRow--;
+
 				if (toCol > col) currentCol++;
 				else if (toCol < col) currentCol--;
 			}

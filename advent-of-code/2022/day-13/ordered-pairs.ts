@@ -13,9 +13,12 @@ const checkPacketOrder = (
 		const left = leftPacket[index] as Packet | number;
 		const right = rightPacket[index];
 		if (right === undefined) return false;
+
 		if (typeof left === 'number' && typeof right === 'number') {
 			if (left < right) return true;
+
 			if (left > right) return false;
+
 			continue;
 		} else {
 			const listCheck = checkPacketOrder(
@@ -23,6 +26,7 @@ const checkPacketOrder = (
 				!Array.isArray(right) ? [right] : right
 			);
 			if (listCheck === undefined) continue;
+
 			return listCheck;
 		}
 	}

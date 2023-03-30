@@ -48,8 +48,11 @@ export const beaconGopher1 = (input: string, row: number): number => {
 		const currEndCol = Math.max(sensorCol, beaconCol, sensorCol + distance);
 
 		if (startRow > currStartRow) startRow = currStartRow;
+
 		if (endRow < currEndRow) endRow = currEndRow;
+
 		if (startCol > currStartCol) startCol = currStartCol;
+
 		if (endCol < currEndCol) endCol = currEndCol;
 
 		sensors.push(sensor);
@@ -62,6 +65,7 @@ export const beaconGopher1 = (input: string, row: number): number => {
 			const isSensorOrBeacon =
 				equal(point, sensor) || equal(point, sensor.beacon);
 			if (isSensorOrBeacon) break;
+
 			if (sensor.distance >= getDistance(point, sensor)) {
 				isCovered = true;
 				break;
@@ -106,14 +110,17 @@ export const beaconGopher2 = (input: string, max: number): number => {
 		const currEndCol = Math.max(sensorCol, beaconCol, sensorCol + distance);
 
 		if (startRow > currStartRow) startRow = currStartRow;
+
 		if (endRow < currEndRow) endRow = currEndRow;
+
 		if (startCol > currStartCol) startCol = currStartCol;
+
 		if (endCol < currEndCol) endCol = currEndCol;
 
 		sensors.push(sensor);
 	}
 
-	for (let row = 0; row <= max; row++)
+	for (let row = 0; row <= max; row++) {
 		for (let col = 0; col <= max; col++) {
 			const point = { col, row };
 			let isCovered = false;
@@ -131,6 +138,7 @@ export const beaconGopher2 = (input: string, max: number): number => {
 			}
 			if (!isCovered) return col * 4000000 + row;
 		}
+	}
 
 	return 0;
 };

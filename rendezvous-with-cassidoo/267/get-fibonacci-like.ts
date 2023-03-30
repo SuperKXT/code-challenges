@@ -26,12 +26,16 @@ export const getFibonacciLike = (
 
 export const isFibonacciLike = (sequence: number[]): boolean => {
 	if (sequence.length < 3) return false;
+
 	return sequence.every((value, index, array) => {
 		if (index < 2) return true;
+
 		const first = array[index - 1];
 		const second = array[index - 2];
 		if (first === undefined || second === undefined) return false;
+
 		if (isNaN(first + second)) return isNaN(value);
+
 		return first + second === value;
 	});
 };

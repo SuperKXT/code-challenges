@@ -6,6 +6,7 @@ interface Max {
 export const maxSubArray = (array: number[], length: number): number[] => {
 	const difference = array.length - length;
 	if (difference < 1) return array;
+
 	const max: Max = {
 		subArray: [],
 		sum: 0,

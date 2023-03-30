@@ -1,4 +1,3 @@
-
 import { linkedListToArray } from '~/helpers/array';
 import { arrayToLinkedList } from '~/helpers/linked-list';
 
@@ -8,7 +7,6 @@ import {
 	swapArrayPairsWithRegex,
 	swapLinkedListPairs,
 } from './swap-pairs';
-
 
 const ARRAY_1 = [1, 2, 3, 4];
 const ARRAY_2: number[] = [];

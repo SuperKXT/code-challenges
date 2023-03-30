@@ -17,6 +17,7 @@ export const omitKey = <Key extends string, Type extends Record<Key, unknown>>(
 	const toOmitArray = Array.isArray(toOmit) ? toOmit : [toOmit];
 	const clone = objectEntries(object).reduce((obj, [key, value]) => {
 		if (toOmitArray.includes(key)) return obj;
+
 		return { ...obj, [key]: value };
 	}, {});
 	return clone as Omit<Type, Key>;
