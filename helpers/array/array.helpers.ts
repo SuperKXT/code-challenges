@@ -6,9 +6,9 @@ export const areArraysEqual = <Type extends any[]>(
 ): boolean => {
 	if (first.length !== second.length) return false;
 
-	for (let index = 0; index < first.length; index++) {
+	for (let index = 0; index < first.length; index++) 
 		if (first[index] !== second[index]) return false;
-	}
+	
 
 	return true;
 };

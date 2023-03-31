@@ -38,7 +38,6 @@ const config = {
 		'new-cap': 'warn',
 		'no-alert': 'warn',
 		'no-bitwise': 'warn',
-		'no-confusing-arrow': 'warn',
 		'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
 		'no-constant-condition': ['warn', { checkLoops: false }],
 		'no-constructor-return': 'warn',
