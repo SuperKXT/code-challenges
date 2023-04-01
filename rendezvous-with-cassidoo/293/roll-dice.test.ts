@@ -36,11 +36,6 @@ test.each(TESTS)(
 );
 
 test('roll dice should throw an error for incorrect dice notation', () => {
-	expect(() => rollDice('bad dice notation!')).toThrow('bad dice notation!');
-	try {
-		// @ts-expect-error type error
-		rollDice('2d');
-	} catch {
-		// eslint-disable-next-line no-empty
-	}
+	// @ts-expect-error type error
+	expect(() => rollDice('2d')).toThrow('bad dice notation!');
 });
