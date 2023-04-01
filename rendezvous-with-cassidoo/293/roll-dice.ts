@@ -15,7 +15,7 @@ export type CheckNotation<T extends string> = Combine<Dice, T> extends never
 	? 'bad dice notation!'
 	: T;
 
-const diceRegex = /^([\d]+d[\d]+\+)*[\d]+d[\d]+$/u;
+const diceRegex = /^(\d+d\d+\+)*\d+d\d+$/u;
 
 export const rollDice = <T extends string>(input: CheckNotation<T>): number => {
 	if (!diceRegex.test(input)) throw new Error('bad dice notation!');
