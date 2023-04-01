@@ -45,6 +45,8 @@ declare global {
 
 	type DistributedArray<T> = T extends infer I ? I[] : never;
 
+	type GenericObject<Key extends string = string> = Record<Key, unknown>;
+
 	type RepeatedString<S extends string, N extends number> = IRepeatedString<
 		S,
 		RepeatedTuple<unknown, N>
