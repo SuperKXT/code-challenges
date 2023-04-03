@@ -4,7 +4,8 @@ import {
 	objectEntries,
 	objectKeys,
 	objectValues,
-	omitKey,
+	omit,
+	pick,
 } from './object.helpers';
 
 describe('testing objectEntries', () => {
@@ -41,7 +42,7 @@ describe('testing omitKey', () => {
 	it('should remove a single key from object', () => {
 		const omitted = { first: 1 };
 		const object = { ...omitted, second: 2 };
-		const result = omitKey(object, 'second');
+		const result = omit(object, 'second');
 		expect(result).toStrictEqual(omitted);
 		z.util.assertEqual<typeof result, typeof omitted>(true);
 		z.util.assertEqual<typeof result, typeof object>(false);
@@ -49,9 +50,28 @@ describe('testing omitKey', () => {
 	it('should remove multiple keys from the object', () => {
 		const omitted = { first: 1 };
 		const object = { ...omitted, second: 2, third: 3 };
-		const result = omitKey(object, ['second', 'third']);
+		const result = omit(object, ['second', 'third']);
 		expect(result).toStrictEqual(omitted);
 		z.util.assertEqual<typeof result, typeof omitted>(true);
+		z.util.assertEqual<typeof result, typeof object>(false);
+	});
+});
+
+describe('testing pickKey', () => {
+	it('should pick a single key from object', () => {
+		const picked = { a: 1 };
+		const object = { ...picked, b: 2 };
+		const result = pick(object, 'a');
+		expect(result).toStrictEqual(picked);
+		z.util.assertEqual<typeof result, typeof picked>(true);
+		z.util.assertEqual<typeof result, typeof object>(false);
+	});
+	it('should pick multiple keys from the object', () => {
+		const picked = { a: 1, b: 2 };
+		const object = { ...picked, c: 3 };
+		const result = pick(object, ['a', 'b']);
+		expect(result).toStrictEqual(picked);
+		z.util.assertEqual<typeof result, typeof picked>(true);
 		z.util.assertEqual<typeof result, typeof object>(false);
 	});
 });

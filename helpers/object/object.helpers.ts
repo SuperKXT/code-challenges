@@ -10,7 +10,7 @@ export const objectValues = <Keys extends PropertyKey, Type>(
 	object: Record<Keys, Type>
 ) => Object.values<Type>(object);
 
-export const omitKey = <Key extends string, Type extends Record<Key, unknown>>(
+export const omit = <Key extends string, Type extends Record<Key, unknown>>(
 	object: Type,
 	toOmit: Key | Key[]
 ): Omit<Type, Key> => {
@@ -21,4 +21,15 @@ export const omitKey = <Key extends string, Type extends Record<Key, unknown>>(
 		return { ...obj, [key]: value };
 	}, {});
 	return clone as Omit<Type, Key>;
+};
+
+export const pick = <Key extends string, Type extends Record<Key, unknown>>(
+	object: Type,
+	toOmit: Key | Key[]
+) => {
+	const toPickArray = Array.isArray(toOmit) ? toOmit : [toOmit];
+	return objectEntries(object).reduce<Pick<Type, Key>>((obj, [key, value]) => {
+		if (!toPickArray.includes(key)) return obj;
+		return { ...obj, [key]: value };
+	}, {} as Pick<Type, Key>);
 };
