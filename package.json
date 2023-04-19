@@ -9,7 +9,8 @@
 		"format": "prettier --write .",
 		"test": "jest --runInBand --watch",
 		"wordle": "tsx ./wordle/wordle.ts",
-		"kebab-rename": "tsx ./recursive-rename/recursive-rename.ts"
+		"kebab-rename": "tsx ./recursive-rename/recursive-rename.ts",
+		"mdcsv": "tsx ./md-links-to-csv/script.ts"
 	},
 	"devDependencies": {
 		"@total-typescript/ts-reset": "^0.4.2",
