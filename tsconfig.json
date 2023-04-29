@@ -40,6 +40,8 @@
 		"lib": ["esnext"],
 		"target": "esnext",
 
+		"noErrorTruncation": true,
+
 		"skipLibCheck": true
 	},
 	"exclude": ["node_modules", "build", "dist", "coverage", "public"]
