@@ -42,22 +42,17 @@ export type Constant<T extends string> =
 
 /* eslint-disable unused-imports/no-unused-vars */
 
-// @ts-expect-error something
 type A = Camel<Input>;
 //   ^?
 
-// @ts-expect-error something
 type D = Pascal<Input>;
 //   ^?
 
-// @ts-expect-error something
 type B = Snake<Input>;
 //   ^?
 
-// @ts-expect-error something
 type C = Kebab<Input>;
 //   ^?
 
-// @ts-expect-error something
 type E = Constant<Input>;
 //   ^?
