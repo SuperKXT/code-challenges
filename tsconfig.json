@@ -9,7 +9,7 @@
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
 		"noUncheckedIndexedAccess": true,
-		"noUnusedLocals": true,
+		"noUnusedLocals": false,
 		"strictFunctionTypes": true,
 		"strictBindCallApply": true,
 		"strictNullChecks": true,
