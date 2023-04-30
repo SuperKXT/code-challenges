@@ -14,7 +14,7 @@ const tests: Test[] = [
 
 test.each(tests)(
 	'should return the if the number is divisible to given array digits',
-	async ({ input, outputs }) => {
+	({ input, outputs }) => {
 		for (let idx = 0; idx < outputs.length; idx++) {
 			const response = divisibleIntegers((idx + 1) as any, input);
 			expect(response).toBe(outputs[idx]);
