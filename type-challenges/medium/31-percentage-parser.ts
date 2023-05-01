@@ -32,10 +32,8 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Sign<T extends string> = T extends `${infer U}${string}`
-	? U extends '+' | '-'
-		? U
-		: ''
+type Sign<T extends string> = T extends `${infer U extends '-' | '+'}${string}`
+	? U
 	: '';
 type Unit<T extends string> = T extends `${string}%` ? '%' : '';
 type Value<T extends string> = T extends `${Sign<T>}${infer U}${Unit<T>}`
@@ -43,6 +41,9 @@ type Value<T extends string> = T extends `${Sign<T>}${infer U}${Unit<T>}`
 	: '';
 
 type PercentageParser<T extends string> = [Sign<T>, Value<T>, Unit<T>];
+
+type _ = Sign<'-1000%'>;
+//   ^?
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

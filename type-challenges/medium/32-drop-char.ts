@@ -28,7 +28,7 @@ type DropChar<
 import type { Equal, Expect } from '@type-challenges/utils';
 
 type _cases = [
-	// @ts-expect-error invalid arguments
+	// @ts-expect-error invalid response
 	Expect<Equal<DropChar<'butter fly!', ''>, 'butterfly!'>>,
 	Expect<Equal<DropChar<'butter fly!', ' '>, 'butterfly!'>>,
 	Expect<Equal<DropChar<'butter fly!', '!'>, 'butter fly'>>,
