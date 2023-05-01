@@ -50,9 +50,6 @@ type MinusOne<T extends number> = T extends 0
 	? ParseInt<`-${ReverseString<NegativeMinusOne<ReverseString<`${U}`>>>}`>
 	: ParseInt<ReverseString<PositiveMinusOne<ReverseString<`${T}`>>>>;
 
-type _ = MinusOne<-9_007_199_254_740_991>;
-//   ^?
-
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
