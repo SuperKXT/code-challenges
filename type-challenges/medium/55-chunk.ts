@@ -22,15 +22,14 @@
 type Chunk<
 	Input extends readonly any[],
 	Size extends number,
-	Curr extends any[] = [],
-	Output extends any[] = []
-> = Input extends [infer First, ...infer Rest]
-	? Curr['length'] extends Size
-		? Chunk<Rest, Size, [First], [...Output, Curr]>
-		: Chunk<Rest, Size, [...Curr, First], Output>
+	Curr extends any[] = []
+> = Curr['length'] extends Size
+	? [Curr, ...Chunk<Input, Size>]
+	: Input extends [infer First, ...infer Rest]
+	? Chunk<Rest, Size, [...Curr, First]>
 	: Curr extends []
-	? Output
-	: [...Output, Curr];
+	? Curr
+	: [Curr];
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
