@@ -22,11 +22,7 @@ type Without<T extends any[], U extends T[number] | T[number][]> = T extends [
 	infer F,
 	...infer R
 ]
-	? U extends any[]
-		? F extends U[number]
-			? Without<R, U>
-			: [F, ...Without<R, U>]
-		: F extends U
+	? F extends (U extends any[] ? U[number] : U)
 		? Without<R, U>
 		: [F, ...Without<R, U>]
 	: T;
