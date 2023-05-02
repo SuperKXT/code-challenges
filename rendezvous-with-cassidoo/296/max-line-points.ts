@@ -1,7 +1,7 @@
 export const maxPointsOnLine = (points: [number, number][]): number => {
 	let max = 0;
 	for (const [x1, y1] of points) {
-		let lines = new Map<number, number>();
+		const lines = new Map<number, number>();
 		for (const [x2, y2] of points) {
 			if (x1 === x2 && y1 === y2) continue;
 			const slope = x2 === x1 ? Infinity : (y2 - y1) / (x2 - x1);

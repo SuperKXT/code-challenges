@@ -33,6 +33,10 @@ export const assertArray: AssertArray = (value, checker) => {
 		if (!value.length || !checker) return;
 		value.forEach(checker);
 	} catch (error: any) {
-		throw new TypeError(`Invalid array member. ${error.message}`);
+		throw new TypeError(
+			`Invalid array member. ${
+				error instanceof Error ? error.message : JSON.stringify(error)
+			}`
+		);
 	}
 };
