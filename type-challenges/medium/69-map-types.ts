@@ -49,14 +49,21 @@ type MapTypes<
 	T extends object,
 	R extends { mapFrom: unknown; mapTo: unknown }
 > = {
-	[K in keyof T]: Eq<T[K], R['mapFrom']> extends true ? R['mapTo'] : T[K];
+	[K in keyof T]: (
+		R extends R
+			? Eq<R['mapFrom'], T[K]> extends true
+				? R['mapTo']
+				: never
+			: never
+	) extends infer U extends R['mapTo']
+		? U extends never
+			? T[K]
+			: U
+		: T[K];
 };
 
-type _ = MapTypes<
-	//   ^?
-	{ name: string; date: Date },
-	{ mapFrom: string; mapTo: boolean } | { mapFrom: Date; mapTo: string }
->;
+type _ = MapTypes<{ name: string }, { mapFrom: boolean; mapTo: never }>;
+//   ^?;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
