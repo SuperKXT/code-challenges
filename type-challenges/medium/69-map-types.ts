@@ -56,14 +56,11 @@ type MapTypes<
 				: never
 			: never
 	) extends infer U extends R['mapTo']
-		? U extends never
+		? [U] extends [never]
 			? T[K]
 			: U
 		: T[K];
 };
-
-type _ = MapTypes<{ name: string }, { mapFrom: boolean; mapTo: never }>;
-//   ^?;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
