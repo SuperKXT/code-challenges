@@ -222,6 +222,13 @@ const config = {
 					'warn',
 					{ allowAny: true },
 				],
+
+				// TODO these are turned off because eslint is slow and incorrectly keeps inferring types as any
+				'@typescript-eslint/no-unsafe-argument': 'off',
+				'@typescript-eslint/no-unsafe-assignment': 'off',
+				'@typescript-eslint/no-unsafe-call': 'off',
+				'@typescript-eslint/no-unsafe-member-access': 'off',
+				'@typescript-eslint/no-unsafe-return': 'off',
 			},
 		},
 		{
