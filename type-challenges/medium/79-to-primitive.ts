@@ -46,19 +46,6 @@ type ToPrimitive<T> = T extends Function
 	? U
 	: never;
 
-type _ = ToPrimitive<{
-	name: 'Tom';
-	age: 30;
-	married: false;
-	addr: {
-		home: '123456';
-		phone: '13111111111';
-	};
-	hobbies: ['sing', 'dance'];
-	readonlyArr: readonly ['test'];
-	fn: () => any;
-}>;
-
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
