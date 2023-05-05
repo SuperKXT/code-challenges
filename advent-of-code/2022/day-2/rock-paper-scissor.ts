@@ -91,26 +91,31 @@ const getPart2Score = (versusMove: VersusMove, result: Result): number => {
 export type RockPaperScissorsSolution = {
 	part1: number;
 	part2: number;
-}
+};
 
 export const rockPaperScissors =
 	async (): Promise<RockPaperScissorsSolution> => {
 		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
 
-		const score = input.split('\n').reduce(
-			({ part1, part2 }, row) => {
-				try {
-					const [versus, playerOrResult] = MATCH_SCHEMA.parse(row.split(' '));
-					return {
-						part1: part1 + getPart1Score(versus, playerOrResult),
-						part2: part2 + getPart2Score(versus, playerOrResult),
-					};
-				} catch {
-					return { part1, part2 };
-				}
-			},
-			{ part1: 0, part2: 0 }
-		);
+		const score = input
+			.toLowerCase()
+			.split('\n')
+			.reduce(
+				({ part1, part2 }, row) => {
+					try {
+						const [versus, playerOrResult] = MATCH_SCHEMA.parse(
+							row.toLowerCase().split(' ')
+						);
+						return {
+							part1: part1 + getPart1Score(versus, playerOrResult),
+							part2: part2 + getPart2Score(versus, playerOrResult),
+						};
+					} catch {
+						return { part1, part2 };
+					}
+				},
+				{ part1: 0, part2: 0 }
+			);
 
 		return score;
 	};
