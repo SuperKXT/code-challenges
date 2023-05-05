@@ -7,7 +7,7 @@ import prompt from 'prompt';
 import { z } from 'zod';
 
 import { formatToken } from '~/helpers/string';
-import { getError } from '~/helpers/error';
+import { getCatchMessage } from '~/helpers/error';
 
 import { RENAME_ERRORS } from './recursive-rename.types';
 
@@ -39,7 +39,7 @@ type RecursiveLogResponse = {
 	success: RenameResult[];
 	error: RenameResult[];
 	unchanged: RenameResult[];
-}
+};
 
 type RecursiveLogParams = {
 	results: RenameResult[];
@@ -49,7 +49,7 @@ type RecursiveLogParams = {
 	tree?: boolean;
 	isConfirmation?: boolean;
 	depth?: number;
-}
+};
 
 export const getRecursiveLogs = ({
 	results,
@@ -214,7 +214,7 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 			} catch (error) {
 				return {
 					children,
-					error: getError(error),
+					error: getCatchMessage(error),
 					newName,
 					oldName: file,
 					path: folder,
@@ -245,7 +245,7 @@ const renameFiles = async (
 					return {
 						...file,
 						children,
-						error: getError(error),
+						error: getCatchMessage(error),
 						type: 'error',
 					};
 				}

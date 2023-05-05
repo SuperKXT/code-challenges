@@ -147,7 +147,9 @@ describe('testing recursive-rename function', () => {
 	it.each(SORTED_TESTS)(
 		'should setup the files and rename recursively',
 		async (...files) => {
-			const logSpy = jest.spyOn(global.console, 'info').mockImplementation();
+			const logSpy = vi
+				.spyOn(global.console, 'info')
+				.mockImplementation(() => false);
 
 			createFiles(files);
 
