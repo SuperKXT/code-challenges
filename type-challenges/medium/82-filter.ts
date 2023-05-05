@@ -12,14 +12,11 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Filter<T extends any[], P, A extends any[] = []> = T extends [
-	infer First,
-	...infer Rest
-]
+type Filter<T extends any[], P> = T extends [infer First, ...infer Rest]
 	? First extends P
-		? Filter<Rest, P, [...A, First]>
-		: Filter<Rest, P, A>
-	: A;
+		? [First, ...Filter<Rest, P>]
+		: Filter<Rest, P>
+	: [];
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
