@@ -12,5 +12,8 @@ export default defineConfig({
 			reporter: ['text', 'json', 'html'],
 		},
 		environment: 'node',
+		typecheck: {
+			include: ['**/*.test.{ts,tsx}'],
+		},
 	},
 });
