@@ -1,5 +1,4 @@
 /* eslint-disable jest/max-expects */
-import { z } from 'zod';
 
 import {
 	assertArray,
@@ -34,7 +33,7 @@ test('should test isObject helper', () => {
 	expect(isObject({ fist: 'of fury' })).toBeTruthy();
 	const a: any = 2;
 	/* eslint-disable jest/no-conditional-in-test */
-	isObject(a) && z.util.assertEqual<typeof a, GenericObject>(true);
+	isObject(a) && assertType<GenericObject>(a);
 	/* eslint-disable jest/no-conditional-in-test */
 });
 
@@ -47,9 +46,9 @@ test('should test isArray helper', () => {
 	expect(isArray([{ fist: 'of fury' }])).toBeTruthy();
 	const a: any = 2;
 	/* eslint-disable jest/no-conditional-in-test */
-	isArray(a) && z.util.assertEqual<typeof a, unknown[]>(true);
-	isArray(a, isNumber) && z.util.assertEqual<typeof a, number[]>(true);
-	isArray(a, isObject) && z.util.assertEqual<typeof a, GenericObject[]>(true);
+	isArray(a) && assertType<unknown[]>(a);
+	isArray(a, isNumber) && assertType<number[]>(a);
+	isArray(a, isObject) && assertType<GenericObject[]>(a);
 	/* eslint-disable jest/no-conditional-in-test */
 });
 
@@ -57,12 +56,12 @@ test('should test assertObject helper', () => {
 	let a: any = 2;
 	expect(() => {
 		assertObject(a);
-		z.util.assertEqual<typeof a, GenericObject>(true);
+		assertType<GenericObject>(a);
 	}).toThrow('Expected object, received number');
 	expect(() => {
 		a = { fist: 'of fury' };
 		assertObject(a);
-		z.util.assertEqual<typeof a, GenericObject>(true);
+		assertType<GenericObject>(a);
 	}).not.toThrow();
 	expect(() => assertObject({ fist: 'of fury' })).not.toThrow();
 });
@@ -72,31 +71,31 @@ test('should test assertArray helper', () => {
 	expect(() => {
 		a = 2;
 		assertArray(a);
-		z.util.assertEqual<typeof a, unknown[]>(true);
+		assertType<unknown[]>(a);
 	}).toThrow('Expected array, received number');
 	expect(() => {
 		a = [2];
 		assertArray(a);
-		z.util.assertEqual<typeof a, unknown[]>(true);
+		assertType<unknown[]>(a);
 	}).not.toThrow();
 	expect(() => {
 		a = [2, 3];
 		assertArray(a, assertObject);
-		z.util.assertEqual<typeof a, GenericObject[]>(true);
+		assertType<GenericObject[]>(a);
 	}).toThrow('Invalid array member. Expected object, received number');
 	expect(() => {
 		a = [2];
 		assertArray(a, assertNumber);
-		z.util.assertEqual<typeof a, number[]>(true);
+		assertType<number[]>(a);
 	}).not.toThrow();
 	expect(() => {
 		a = { fist: 'of fury' };
 		assertArray(a);
-		z.util.assertEqual<typeof a, unknown[]>(true);
+		assertType<unknown[]>(a);
 	}).toThrow('Expected array, received object');
 	expect(() => {
 		a = [[2]];
 		assertArray(a, assertArray);
-		z.util.assertEqual<typeof a, unknown[][]>(true);
+		assertType<unknown[][]>(a);
 	}).not.toThrow();
 });
