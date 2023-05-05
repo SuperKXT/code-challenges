@@ -22,6 +22,7 @@
 		"paths": {
 			"~/*": ["./*"]
 		},
+		"types": ["vitest/globals"],
 
 		"noEmit": true,
 		"downlevelIteration": true,
