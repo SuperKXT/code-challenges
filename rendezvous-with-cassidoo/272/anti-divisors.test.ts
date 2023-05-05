@@ -1,6 +1,6 @@
 import { findAntiDivisors } from './anti-divisors';
 
-interface Test {
+type Test = {
 	input: number;
 	output: number[];
 }

@@ -1,9 +1,9 @@
-interface Solution {
+type Solution = {
 	part1: number;
 	part2: number;
 }
 
-interface CoordInput {
+type CoordInput = {
 	row: number;
 	col: number;
 }

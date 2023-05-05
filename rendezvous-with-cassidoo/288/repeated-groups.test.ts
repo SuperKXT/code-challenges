@@ -1,6 +1,6 @@
 import { repeatedGroups } from './repeated-groups';
 
-interface Test {
+type Test = {
 	input: number[];
 	output: number[][];
 }

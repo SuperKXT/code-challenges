@@ -1,6 +1,6 @@
 import { truncateWords } from './truncate-words';
 
-interface Test {
+type Test = {
 	input: [string, number];
 	output: string;
 }

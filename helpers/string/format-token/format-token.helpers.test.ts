@@ -2,7 +2,7 @@ import { FORMAT_STRATEGIES, formatToken } from './format-token.helpers';
 
 import type { FormatStrategy } from './format-token.helpers';
 
-interface Test {
+type Test = {
 	input: string;
 	output: Record<FormatStrategy, string>;
 }

@@ -3,7 +3,7 @@ import { CHESS_ERRORS } from './check-chess-move.types';
 
 import type { ChessResponse, IsValidMoveArgs } from './check-chess-move.types';
 
-interface Test {
+type Test = {
 	input: IsValidMoveArgs;
 	response: ChessResponse;
 }

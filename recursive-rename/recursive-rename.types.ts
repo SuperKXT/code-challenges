@@ -9,7 +9,7 @@ export const RENAME_RESULT_TYPE = ['success', 'error', 'unchanged'] as const;
 
 export type RenameResultType = (typeof RENAME_RESULT_TYPE)[number];
 
-interface AgnosticResult {
+type AgnosticResult = {
 	type: RenameResultType;
 	path: string;
 	oldName: string;
@@ -18,27 +18,27 @@ interface AgnosticResult {
 	children?: RenameResult[];
 }
 
-interface ValidResult extends AgnosticResult {
+type ValidResult = {
 	type: 'success';
 	newName: string;
 	error?: undefined;
-}
+} & AgnosticResult
 
-interface ErrorResult extends AgnosticResult {
+type ErrorResult = {
 	type: 'error';
 	newName: string;
 	error: string;
-}
+} & AgnosticResult
 
-interface UnchangedResult extends AgnosticResult {
+type UnchangedResult = {
 	type: 'unchanged';
 	newName?: undefined;
 	error?: undefined;
-}
+} & AgnosticResult
 
 export type RenameResult = ErrorResult | UnchangedResult | ValidResult;
 
-export interface RenameOptions {
+export type RenameOptions = {
 	verbose?: boolean;
 	yes?: boolean;
 	onlyChanges?: boolean;

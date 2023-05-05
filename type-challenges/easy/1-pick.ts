@@ -46,17 +46,17 @@ type _cases = [
 	MyPick<Todo, 'title' | 'completed' | 'invalid'>
 ];
 
-interface Todo {
+type Todo = {
 	title: string;
 	description: string;
 	completed: boolean;
 }
 
-interface Expected1 {
+type Expected1 = {
 	title: string;
 }
 
-interface Expected2 {
+type Expected2 = {
 	title: string;
 	completed: boolean;
 }

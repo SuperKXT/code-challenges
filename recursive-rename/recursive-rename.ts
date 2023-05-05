@@ -34,14 +34,14 @@ const PARAMS_SCHEMA = z.strictObject({
 
 export type Params = z.infer<typeof PARAMS_SCHEMA>;
 
-interface RecursiveLogResponse {
+type RecursiveLogResponse = {
 	logs: string[];
 	success: RenameResult[];
 	error: RenameResult[];
 	unchanged: RenameResult[];
 }
 
-interface RecursiveLogParams {
+type RecursiveLogParams = {
 	results: RenameResult[];
 	labels: Record<RenameResultType, string>;
 	verbose?: boolean;

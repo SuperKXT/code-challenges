@@ -1,6 +1,6 @@
 import { maxSubArray } from './max-sub-array';
 
-interface Test {
+type Test = {
 	input: [number[], number];
 	output: number[];
 }

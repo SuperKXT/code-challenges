@@ -1,6 +1,6 @@
 import { passDoors } from './pass-doors';
 
-interface Test {
+type Test = {
 	input: [number, number];
 	output: number;
 }

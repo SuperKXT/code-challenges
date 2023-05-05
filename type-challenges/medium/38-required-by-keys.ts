@@ -41,19 +41,19 @@ type RequiredByKeys<T extends object, K extends keyof T = keyof T> = Flat<
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
 
-interface User {
+type User = {
 	name?: string;
 	age?: number;
 	address?: string;
 }
 
-interface UserRequiredName {
+type UserRequiredName = {
 	name: string;
 	age?: number;
 	address?: string;
 }
 
-interface UserRequiredNameAndAge {
+type UserRequiredNameAndAge = {
 	name: string;
 	age: number;
 	address?: string;

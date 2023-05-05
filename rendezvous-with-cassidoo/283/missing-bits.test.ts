@@ -1,6 +1,6 @@
 import { missingBits } from './missing-bits';
 
-interface Test {
+type Test = {
 	input: number[];
 	output: string;
 }

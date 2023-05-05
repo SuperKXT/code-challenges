@@ -1,4 +1,4 @@
-interface Max {
+type Max = {
 	subArray: number[];
 	sum: number;
 }

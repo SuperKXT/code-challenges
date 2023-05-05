@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-export interface CountCaloriesSolution {
+export type CountCaloriesSolution = {
 	maxIndex: number;
 	maxCalories: number;
 	topThreeIndexes: [number, number, number];

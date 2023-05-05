@@ -1,6 +1,6 @@
 import { NUMBER_UNITS, numberToWords } from './format.helpers';
 
-interface Test {
+type Test = {
 	input: number;
 	output: string;
 }

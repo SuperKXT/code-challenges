@@ -33,7 +33,7 @@ type AllCombinations<
 	? '' | I | `${I}${AllCombinations<S, Exclude<T, I>>}`
 	: '';
 
-type AllCombinations2<S extends string, T extends string = StringToUnion<S>> = [
+type _AllCombinations<S extends string, T extends string = StringToUnion<S>> = [
 	T
 ] extends [never]
 	? ''

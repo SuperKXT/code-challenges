@@ -33,7 +33,7 @@ type Mutable<T extends Readonly<object>> = {
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
 
-interface Todo1 {
+type Todo1 = {
 	title: string;
 	description: string;
 	completed: boolean;

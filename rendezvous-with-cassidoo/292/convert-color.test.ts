@@ -1,6 +1,6 @@
 import { convertColor } from './convert-color';
 
-interface Test {
+type Test = {
 	args: Parameters<typeof convertColor>;
 	output: ReturnType<typeof convertColor>[0];
 }

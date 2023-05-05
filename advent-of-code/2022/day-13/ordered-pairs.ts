@@ -1,4 +1,4 @@
-interface Solution {
+type Solution = {
 	indicesSum: number;
 	part2: number;
 }

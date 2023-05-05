@@ -2,7 +2,7 @@ import { calculateGpa } from './calculate-gpa';
 
 import type { GradePoint } from './calculate-gpa';
 
-interface Test {
+type Test = {
 	input: GradePoint[];
 	output: number;
 }

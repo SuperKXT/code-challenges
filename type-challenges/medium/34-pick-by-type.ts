@@ -31,7 +31,7 @@ type PickByType<T extends object, U> = {
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
 
-interface Model {
+type Model = {
 	name: string;
 	count: number;
 	isReadonly: boolean;

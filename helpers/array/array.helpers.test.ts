@@ -2,13 +2,13 @@ import { areArraysEqual, linkedListToArray } from './array.helpers';
 
 import type { LinkedList } from '~/helpers/linked-list';
 
-interface EqualityTest {
+type EqualityTest = {
 	first: any[];
 	second: any[];
 	areEqual: boolean;
 }
 
-interface ToArrayTest<Type> {
+type ToArrayTest<Type> = {
 	array: Type[];
 	list: LinkedList<Type>;
 }

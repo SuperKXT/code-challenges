@@ -64,7 +64,7 @@ type DeepMutable<T extends object> = T extends (...args: any[]) => any
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
 
-interface Test1 {
+type Test1 = {
 	readonly title: string;
 	readonly description: string;
 	readonly completed: boolean;
@@ -93,8 +93,8 @@ type Test2 = {
 			];
 		};
 	};
-};
-interface DeepMutableTest1 {
+}
+type DeepMutableTest1 = {
 	title: string;
 	description: string;
 	completed: boolean;
@@ -124,7 +124,7 @@ type DeepMutableTest2 = {
 			];
 		};
 	};
-};
+}
 
 type _cases = [
 	Expect<Equal<DeepMutable<Test1>, DeepMutableTest1>>,

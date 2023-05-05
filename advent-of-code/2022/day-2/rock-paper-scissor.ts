@@ -88,7 +88,7 @@ const getPart2Score = (versusMove: VersusMove, result: Result): number => {
 	}
 };
 
-export interface RockPaperScissorsSolution {
+export type RockPaperScissorsSolution = {
 	part1: number;
 	part2: number;
 }

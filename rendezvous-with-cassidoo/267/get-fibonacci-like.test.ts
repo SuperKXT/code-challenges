@@ -4,7 +4,7 @@ import {
 	isFibonacciLike,
 } from './get-fibonacci-like';
 
-interface GetTest {
+type GetTest = {
 	input: [number, number, number];
 	output: number[];
 }
@@ -17,7 +17,7 @@ const GET_TESTS: GetTest[] = [
 	{ input: [4, -1, 5], output: [4, -1, 3, 2, 5] },
 ];
 
-interface BadGetTest {
+type BadGetTest = {
 	input: [number, number, number];
 	error: string;
 }
@@ -30,7 +30,7 @@ const BAD_GET_TESTS: BadGetTest[] = [
 	{ error: ERRORS.undefined, input: [5, undefined, 5] },
 ];
 
-interface CheckTest {
+type CheckTest = {
 	input: number[];
 	output: boolean;
 }

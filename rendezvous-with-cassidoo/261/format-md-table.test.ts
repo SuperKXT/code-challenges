@@ -1,6 +1,6 @@
 import { formatMarkdownTable } from './format-md-table';
 
-interface Test {
+type Test = {
 	input: string;
 	output: string;
 }

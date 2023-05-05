@@ -1,6 +1,6 @@
 import { capitalAfterVowel } from './capital-after-vowel';
 
-interface Test {
+type Test = {
 	input: string;
 	output: string;
 }

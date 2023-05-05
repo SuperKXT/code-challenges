@@ -9,7 +9,7 @@ const VALID_BOARDS: string[] = [
 	['  6 3 8', ' 2 4 5 A', '5 9 . 6 9', ' A B 3 C', '  8 4 B'].join('\n'),
 ];
 
-interface InvalidBoard {
+type InvalidBoard = {
 	board: string;
 	error: CatanError;
 }

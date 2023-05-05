@@ -1,6 +1,6 @@
 import { verticalSlashes, INVALID_ERROR } from './vertical-slashes';
 
-interface Test {
+type Test = {
 	input: string;
 	output: string;
 }

@@ -5,7 +5,7 @@ import { tuningTrouble } from './tuning-trouble';
 
 type Solution = ReturnType<typeof tuningTrouble>;
 
-interface Test {
+type Test = {
 	input: string;
 	output: Solution;
 }

@@ -1,4 +1,4 @@
-interface Solution {
+type Solution = {
 	withRegex: string;
 	withoutRegex: string;
 }

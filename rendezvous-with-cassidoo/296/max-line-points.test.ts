@@ -1,6 +1,6 @@
 import { maxPointsOnLine } from './max-line-points';
 
-interface Test {
+type Test = {
 	input: [number, number][];
 	output: number;
 }

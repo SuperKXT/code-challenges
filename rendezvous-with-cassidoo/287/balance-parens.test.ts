@@ -1,6 +1,6 @@
 import { balanceParens } from './balance-parens';
 
-interface Test {
+type Test = {
 	input: string;
 	output: number;
 }

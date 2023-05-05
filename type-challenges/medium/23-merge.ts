@@ -45,11 +45,11 @@ import type { Equal, Expect } from '@type-challenges/utils';
 type Foo = {
 	a: number;
 	b: string;
-};
+}
 type Bar = {
 	b: number;
 	c: boolean;
-};
+}
 
 type _cases = [
 	Expect<

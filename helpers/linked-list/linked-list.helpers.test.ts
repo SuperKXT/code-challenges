@@ -2,7 +2,7 @@ import { arrayToLinkedList } from './linked-list.helpers';
 
 import type { LinkedList } from './linked-list.types';
 
-interface Test<Type> {
+type Test<Type> = {
 	array: Type[];
 	list: LinkedList<Type>;
 }

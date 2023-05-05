@@ -60,19 +60,19 @@ type _cases = [
 // @ts-expect-error invalid arguments
 type _error = MyReadonly2<Todo1, 'title' | 'invalid'>;
 
-interface Todo1 {
+type Todo1 = {
 	title: string;
 	description?: string;
 	completed: boolean;
 }
 
-interface Todo2 {
+type Todo2 = {
 	readonly title: string;
 	description?: string;
 	completed: boolean;
 }
 
-interface Expected {
+type Expected = {
 	readonly title: string;
 	readonly description?: string;
 	completed: boolean;

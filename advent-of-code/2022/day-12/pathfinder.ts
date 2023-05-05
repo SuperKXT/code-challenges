@@ -1,4 +1,4 @@
-interface Solution {
+type Solution = {
 	fewestSteps: number;
 	part2: number;
 }

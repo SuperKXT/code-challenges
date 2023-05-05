@@ -42,19 +42,19 @@ type PartialByKeys<T extends object, K extends keyof T = keyof T> = Flat<
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
 
-interface User {
+type User = {
 	name: string;
 	age: number;
 	address: string;
 }
 
-interface UserPartialName {
+type UserPartialName = {
 	name?: string;
 	age: number;
 	address: string;
 }
 
-interface UserPartialNameAndAge {
+type UserPartialNameAndAge = {
 	name?: string;
 	age?: number;
 	address: string;

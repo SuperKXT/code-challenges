@@ -32,7 +32,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-interface TreeNode {
+type TreeNode = {
 	val: number;
 	left: TreeNode | null;
 	right: TreeNode | null;

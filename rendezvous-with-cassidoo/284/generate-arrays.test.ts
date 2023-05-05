@@ -1,6 +1,6 @@
 import { generateArrays } from './generate-arrays';
 
-interface Test {
+type Test = {
 	input: number;
 	output: number[][];
 }

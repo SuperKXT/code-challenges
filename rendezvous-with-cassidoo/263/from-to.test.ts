@@ -1,6 +1,6 @@
 import { fromTo } from './from-to';
 
-interface Test {
+type Test = {
 	min: number;
 	max: number;
 }

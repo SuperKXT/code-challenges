@@ -1,4 +1,4 @@
-interface Monkey {
+type Monkey = {
 	items: number[];
 	operation: (item: number) => number;
 	divisor: number;
@@ -7,7 +7,7 @@ interface Monkey {
 	inspected: number;
 }
 
-interface Solution {
+type Solution = {
 	monkeyBusiness: number;
 	bigMb: number;
 }

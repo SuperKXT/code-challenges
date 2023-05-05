@@ -1,6 +1,6 @@
 import { addEventDigits, addEventDigitsSinglePass } from './add-even-digits';
 
-interface Test {
+type Test = {
 	input: number;
 	output: number;
 }

@@ -27,16 +27,16 @@ type RequireKeys<T extends object, K = never> = Prettify<
 	}
 >;
 
-type _enum = { enum: string[] };
-type _string = { type: 'string' };
-type _number = { type: 'number' };
-type _boolean = { type: 'boolean' };
+type _enum = { enum: string[] }
+type _string = { type: 'string' }
+type _number = { type: 'number' }
+type _boolean = { type: 'boolean' }
 type _object = {
 	type: 'object';
 	properties?: Record<string, JsonType>;
 	required?: string[];
-};
-type _array = { type: 'array'; items?: JsonType };
+}
+type _array = { type: 'array'; items?: JsonType }
 
 type JsonType =
 	| _array
@@ -124,7 +124,7 @@ type Type7 = JSONSchema2TS<{
 	type: 'object';
 	properties: {};
 }>;
-type Expected7 = {};
+type Expected7 = {}
 type Result7 = Expect<Equal<Type7, Expected7>>;
 
 type Type8 = JSONSchema2TS<{
@@ -137,7 +137,7 @@ type Type8 = JSONSchema2TS<{
 }>;
 type Expected8 = {
 	a?: string;
-};
+}
 type Result8 = Expect<Equal<Type8, Expected8>>;
 // - Object types
 
@@ -183,7 +183,7 @@ type Type12 = JSONSchema2TS<{
 type Expected12 = {
 	a?: 'a' | 'b' | 'c';
 	b?: number;
-};
+}
 type Result12 = Expect<Equal<Type12, Expected12>>;
 
 type Type13 = JSONSchema2TS<{
@@ -232,7 +232,7 @@ type Expected14 = {
 	req2: { a: number };
 	add1?: string;
 	add2?: number[];
-};
+}
 type Result14 = Expect<Equal<Type14, Expected14>>;
 // - Required fields
 

@@ -1,6 +1,6 @@
 import { removeZeroes } from './divisible-integers';
 
-interface Test {
+type Test = {
 	input: number[];
 	output: number[];
 }

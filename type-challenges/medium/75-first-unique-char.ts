@@ -12,10 +12,6 @@
 
 /* _____________ Your Code Here _____________ */
 
-type l = 'first:0,second:1,third:2';
-type _ = l extends `${infer L}fourth:${infer I}${infer R}` ? I : -1;
-//   ^?
-
 type __FirstUniqueCharIndex<
 	T extends string,
 	A extends string = '',

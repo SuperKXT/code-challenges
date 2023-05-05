@@ -2,7 +2,7 @@ import { divisibleIntegers } from './divisible-integers';
 
 import type { DivisibleIntegerN } from './divisible-integers';
 
-interface Test {
+type Test = {
 	input: number[];
 	outputs: RepeatedTuple<boolean, 9>;
 }

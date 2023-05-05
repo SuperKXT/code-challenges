@@ -5,12 +5,12 @@ type Command = (typeof COMMANDS)[number];
 const isCommand = (value: any): value is Command =>
 	typeof value === 'string' && COMMANDS.includes(value);
 
-interface Solution {
+type Solution = {
 	strength: number;
 	crtOutput: string;
 }
 
-interface Clock {
+type Clock = {
 	cycle: number;
 	register: number;
 	target: number;

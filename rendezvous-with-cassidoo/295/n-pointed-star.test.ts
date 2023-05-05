@@ -1,6 +1,6 @@
 import { getStarAngles } from './n-pointed-star';
 
-interface Test {
+type Test = {
 	input: number;
 	output: number;
 }

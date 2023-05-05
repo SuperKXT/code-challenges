@@ -48,18 +48,18 @@ type _cases = [
 // @ts-expect-error incorrect argument
 type _error = MyOmit<Todo, 'description' | 'invalid'>;
 
-interface Todo {
+type Todo = {
 	title: string;
 	description: string;
 	completed: boolean;
 }
 
-interface Expected1 {
+type Expected1 = {
 	title: string;
 	completed: boolean;
 }
 
-interface Expected2 {
+type Expected2 = {
 	title: string;
 }
 

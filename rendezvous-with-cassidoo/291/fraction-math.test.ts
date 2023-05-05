@@ -1,6 +1,6 @@
 import { fractionMath } from './fraction-math';
 
-interface Test {
+type Test = {
 	args: Parameters<typeof fractionMath>;
 	output: Parameters<typeof fractionMath>[0];
 }

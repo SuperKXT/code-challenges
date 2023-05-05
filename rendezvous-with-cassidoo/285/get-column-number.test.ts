@@ -1,6 +1,6 @@
 import { getColumnNumber } from './get-column-number';
 
-interface Test {
+type Test = {
 	input: string;
 	output: number;
 }

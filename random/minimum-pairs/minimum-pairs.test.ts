@@ -2,7 +2,7 @@ import { minimumPairs } from './minimum-pairs';
 
 import type { Pair } from './minimum-pairs';
 
-interface Test {
+type Test = {
 	input: number[];
 	solution: Pair[];
 }

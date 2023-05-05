@@ -1,11 +1,11 @@
-interface Point {
+type Point = {
 	row: number;
 	col: number;
 }
-interface Sensor extends Point {
+type Sensor = {
 	beacon: Point;
 	distance: number;
-}
+} & Point
 
 const getDistance = (from: Point, to: Point): number =>
 	Math.abs(to.row - from.row) + Math.abs(to.col - from.col);

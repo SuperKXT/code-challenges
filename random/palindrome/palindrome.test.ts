@@ -1,6 +1,6 @@
 import { canBePalindrome } from './palindrome';
 
-interface Test {
+type Test = {
 	string: string;
 	result: boolean;
 }

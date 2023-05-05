@@ -4,7 +4,7 @@ type Row = (typeof ROW)[number];
 const COL = [0, 1, 2, 3, 4, 5] as const;
 type Col = (typeof COL)[number];
 
-interface Position {
+type Position = {
 	row: Row;
 	col: Col;
 }

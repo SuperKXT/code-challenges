@@ -16,7 +16,7 @@ export type Coord = (typeof COORDS)[number];
 
 export type Position = [Coord, Coord];
 
-export interface IsValidMoveArgs {
+export type IsValidMoveArgs = {
 	board: string;
 	from: Position;
 	to: Position;
@@ -43,19 +43,19 @@ export const CHESS_ERRORS = {
 
 export type ChessError = (typeof CHESS_ERRORS)[keyof typeof CHESS_ERRORS];
 
-interface AgnosticChessResponse {
+type AgnosticChessResponse = {
 	isValid: boolean;
 }
 
-interface ErrorChessResponse extends AgnosticChessResponse {
+type ErrorChessResponse = {
 	isValid: false;
 	error: ChessError;
-}
+} & AgnosticChessResponse
 
-interface ValidChessResponse extends AgnosticChessResponse {
+type ValidChessResponse = {
 	isValid: true;
 	isKill: boolean;
 	path: Position[];
-}
+} & AgnosticChessResponse
 
 export type ChessResponse = ErrorChessResponse | ValidChessResponse;

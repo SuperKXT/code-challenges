@@ -51,7 +51,7 @@ type Chainable<T extends Record<string, unknown> = {}> = {
 		value: V
 	): Chainable<Omit<T, K> & { [Key in K]: V }>;
 	get(): Prettify<T>;
-};
+}
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
@@ -89,15 +89,15 @@ type Expected1 = {
 		value: string;
 	};
 	name: string;
-};
+}
 
 type Expected2 = {
 	name: string;
-};
+}
 
 type Expected3 = {
 	name: number;
-};
+}
 
 /* _____________ Further Steps _____________ */
 /*

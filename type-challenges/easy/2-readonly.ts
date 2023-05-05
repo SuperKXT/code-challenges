@@ -41,7 +41,7 @@ import type { Equal, Expect } from '@type-challenges/utils';
 
 type _cases = [Expect<Equal<MyReadonly<Todo1>, Readonly<Todo1>>>];
 
-interface Todo1 {
+type Todo1 = {
 	title: string;
 	description: string;
 	completed: boolean;

@@ -31,7 +31,7 @@ type ObjectEntries<T extends object, U = Required<T>> = {
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
 
-interface Model {
+type Model = {
 	name: string;
 	age: number;
 	locations: string[] | null;

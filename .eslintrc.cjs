@@ -173,7 +173,7 @@ const config = {
 			rules: {
 				'@typescript-eslint/consistent-type-exports': 'warn',
 				'@typescript-eslint/consistent-type-imports': 'warn',
-				'@typescript-eslint/consistent-type-definitions': 'off',
+				'@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
 				'@typescript-eslint/default-param-last': 'warn',
 				'no-dupe-class-members': 'off',
 				'@typescript-eslint/no-dupe-class-members': 'warn',

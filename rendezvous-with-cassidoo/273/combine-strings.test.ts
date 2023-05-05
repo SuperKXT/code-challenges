@@ -1,6 +1,6 @@
 import { combineStrings, INVALID_ERROR } from './combine-strings';
 
-interface Test {
+type Test = {
 	input: [string[], number];
 	output: string[];
 }

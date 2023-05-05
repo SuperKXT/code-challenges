@@ -1,6 +1,6 @@
 import { replaceZeros } from './replace-zeros';
 
-interface Test {
+type Test = {
 	input: string;
 	output: string;
 }
