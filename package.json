@@ -9,6 +9,7 @@
 		"format": "prettier --write .",
 		"test": "vitest watch",
 		"test-ui": "vitest --ui",
+		"typecheck": "vitest typecheck",
 		"wordle": "tsx ./wordle/wordle.ts",
 		"kebab-rename": "tsx ./recursive-rename/recursive-rename.ts",
 		"mdcsv": "tsx ./md-links-to-csv/script.ts"
