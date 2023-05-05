@@ -1,3 +1,4 @@
+// TODO Use eslint-plugin-vitest instead of eslint-plugin-jest
 /** @type {import('eslint').Linter.Config} */
 const config = {
 	env: {
