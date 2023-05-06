@@ -1,3 +1,6 @@
+/* eslint-disable new-cap */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* cSpell: disable */
 /*
   6 - Simple Vue
   -------
@@ -46,22 +49,32 @@
 
 /* _____________ Your Code Here _____________ */
 
-declare function SimpleVue<const T extends Record<string, unknown>>(
-	this: T,
+declare function SimpleVue<
+	D extends Record<string, any>,
+	C extends Record<string, any>,
+	M extends Record<string, any>
+>(
 	options: {
-		data: () => Partial<T>;
-		computed: {
-			[K in keyof T]: (this: T) => T[K];
-		};
-		methods: {
-			[K in keyof T]: (this: T, ...args: any[]) => a;
-		};
-	}
+		data: (this: void) => D;
+		computed: C;
+		methods: M;
+	} & ThisType<
+		D &
+			M & {
+				[K in keyof C as C[K] extends (...args: any[]) => any
+					? K
+					: never]: ReturnType<C[K]>;
+			}
+	>
 ): any;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
+
+const alert = (_: any) => {
+	throw new Error('Function not implemented.');
+};
 
 SimpleVue({
 	data() {
@@ -82,6 +95,9 @@ SimpleVue({
 		fullname() {
 			return `${this.firstname} ${this.lastname}`;
 		},
+		amountTwice() {
+			return this.amount * 2;
+		},
 	},
 	methods: {
 		getRandom: () => Math.random(),
@@ -92,7 +108,7 @@ SimpleVue({
 		},
 		test() {
 			const fullname = this.fullname;
-			const cases: [Expect<Equal<typeof fullname, string>>] = [] as any;
+			const _cases: [Expect<Equal<typeof fullname, string>>] = [] as any;
 		},
 	},
 });
