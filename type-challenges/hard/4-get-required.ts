@@ -18,14 +18,8 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Eq<T, U> = (<G>() => G extends T ? 1 : 2) extends <G>() => G extends U
-	? 1
-	: 2
-	? true
-	: false;
-
-type GetRequired<T extends object, R extends object = Required<T>> = {
-	[K in keyof T as Eq<T[K], R[K & keyof R]> extends true ? K : never]: T[K];
+type GetRequired<T extends object, R extends Required<T> = Required<T>> = {
+	[K in keyof T as T[K] extends R[K] ? K : never]: T[K];
 };
 
 /* _____________ Test Cases _____________ */
