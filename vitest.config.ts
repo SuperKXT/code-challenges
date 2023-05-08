@@ -9,7 +9,7 @@ export default defineConfig({
 		clearMocks: true,
 		coverage: {
 			enabled: true,
-			reporter: ['text', 'json', 'html'],
+			reporter: ['html'],
 		},
 		environment: 'node',
 		typecheck: {
