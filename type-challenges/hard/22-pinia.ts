@@ -79,8 +79,8 @@
 
 /* _____________ Your Code Here _____________ */
 
-type GetGetters<T extends Record<string, (this: any) => any>> = {
-	[K in keyof T]: ReturnType<T[K]>;
+type MapGetters<T extends Record<string, (this: any) => any>> = {
+	readonly [K in keyof T]: ReturnType<T[K]>;
 };
 
 declare function defineStore<
@@ -90,9 +90,9 @@ declare function defineStore<
 >(store: {
 	id: string;
 	state: () => S;
-	getters?: G & ThisType<Readonly<S> & GetGetters<G>>;
-	actions: A & ThisType<S & Readonly<GetGetters<G>> & A>;
-}): Readonly<S> & GetGetters<G> & A;
+	getters?: G & ThisType<Readonly<S> & MapGetters<G>>;
+	actions: A & ThisType<S & MapGetters<G> & A>;
+}): Readonly<S> & MapGetters<G> & A;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
