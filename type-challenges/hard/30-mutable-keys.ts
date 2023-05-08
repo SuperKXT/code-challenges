@@ -20,17 +20,10 @@
 
 /* _____________ Your Code Here _____________ */
 
-type NonReadonly<T> = {
-	-readonly [K in keyof T]: T[K];
-};
-
-type MutableKeys<
-	T extends Record<string, unknown>,
-	U extends NonReadonly<T> = NonReadonly<T>
-> = keyof {
-	[K in keyof T as Equal<Pick<T, K>, Pick<U, K>> extends true
-		? K
-		: never]: T[K];
+type MutableKeys<T extends Record<string, unknown>> = keyof {
+	[K in keyof T as Equal<Pick<T, K>, Readonly<Pick<T, K>>> extends true
+		? never
+		: K]: T[K];
 };
 
 /* _____________ Test Cases _____________ */
