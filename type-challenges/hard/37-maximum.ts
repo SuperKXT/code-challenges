@@ -49,12 +49,18 @@ type Max<
 	? A
 	: Max<never, never, Unshift<AT>, Unshift<BT>>;
 
-type Maximum<
+type _Maximum<
 	T extends number[],
 	Greatest extends number = T[0] extends undefined ? never : T[0]
 > = T extends [infer F extends number, ...infer R extends number[]]
-	? Maximum<R, Max<F, Greatest>>
+	? _Maximum<R, Max<F, Greatest>>
 	: Greatest;
+
+type Maximum<T extends any[], U = T[number], N extends 1[] = []> = T extends []
+	? never
+	: [U] extends [N['length']]
+	? U
+	: Maximum<T, U extends N['length'] ? never : U, [...N, 1]>;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
