@@ -10,9 +10,9 @@
 		"test": "vitest watch",
 		"test-ui": "vitest --ui",
 		"typecheck": "vitest typecheck",
-		"wordle": "tsx ./wordle/wordle.ts",
-		"kebab-rename": "tsx ./recursive-rename/recursive-rename.ts",
-		"mdcsv": "tsx ./md-links-to-csv/script.ts"
+		"wordle": "tsx ./scripts/wordle/wordle.ts",
+		"kebab-rename": "tsx ./scripts/recursive-rename/recursive-rename.ts",
+		"mdcsv": "tsx ./scripts/md-links-to-csv/script.ts"
 	},
 	"devDependencies": {
 		"@total-typescript/ts-reset": "^0.4.2",
