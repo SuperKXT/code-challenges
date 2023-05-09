@@ -1,9 +1,9 @@
-import { removeZeroes } from './divisible-integers';
+import { removeZeroes } from './remove-zeroes';
 
 type Test = {
 	input: number[];
 	output: number[];
-}
+};
 
 const tests: Test[] = [
 	{
