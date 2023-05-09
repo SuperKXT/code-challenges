@@ -61,9 +61,6 @@ type ValidDate<T extends string> =
 			: false
 		: false;
 
-type _1 = ValidDate<'0100'>;
-//   ^?
-
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
