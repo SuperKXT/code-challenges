@@ -26,37 +26,24 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Unshift<T extends any[]> = T extends [any, ...infer R] ? R : [];
-
-type ThreeTuple = [1, 1];
-type FiveTuple = [1, 1, 1, 1];
-
 type FizzBuzz<
-	T extends number,
-	A extends string[] = ['1'],
-	Count extends 1[] = [],
-	ThreeCountDown extends 1[] = ThreeTuple,
-	FiveCountDown extends 1[] = FiveTuple
-> = Count['length'] extends T
-	? Unshift<A>
-	: ThreeCountDown extends []
-	? FiveCountDown extends []
-		? FizzBuzz<T, [...A, 'FizzBuzz'], [...Count, 1]>
-		: FizzBuzz<
-				T,
-				[...A, 'Fizz'],
-				[...Count, 1],
-				ThreeTuple,
-				Unshift<FiveCountDown>
-		  >
-	: FiveCountDown extends []
-	? FizzBuzz<T, [...A, 'Buzz'], [...Count, 1], Unshift<ThreeCountDown>>
+	Size extends number,
+	Result extends string[] = [],
+	ToThree extends 1[] = [],
+	ToFive extends 1[] = []
+> = Result['length'] extends Size
+	? Result
+	: ToThree['length'] extends 2
+	? ToFive['length'] extends 4
+		? FizzBuzz<Size, [...Result, 'FizzBuzz']>
+		: FizzBuzz<Size, [...Result, 'Fizz'], [], [...ToFive, 1]>
+	: ToFive['length'] extends 4
+	? FizzBuzz<Size, [...Result, 'Buzz'], [...ToThree, 1]>
 	: FizzBuzz<
-			T,
-			[...A, `${A['length']}`],
-			[...Count, 1],
-			Unshift<ThreeCountDown>,
-			Unshift<FiveCountDown>
+			Size,
+			[...Result, `${[...Result, '0']['length'] & number}`],
+			[...ToThree, 1],
+			[...ToFive, 1]
 	  >;
 
 /* _____________ Test Cases _____________ */
