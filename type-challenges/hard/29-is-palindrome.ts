@@ -23,14 +23,23 @@ type StringToArray<T extends string> = T extends `${infer F}${infer R}`
 	? [F, ...StringToArray<R>]
 	: [];
 
-type IsPalindrome<
+type _IsPalindrome<
 	T extends string | number,
 	A = StringToArray<`${T}`>
 > = A extends [infer F, ...infer M, infer L]
 	? F extends L
-		? IsPalindrome<never, M>
+		? _IsPalindrome<never, M>
 		: false
 	: true;
+
+type IsPalindrome<T extends string | number> =
+	`${T}` extends `${infer F}${infer S}`
+		? S extends ''
+			? true
+			: `${T}` extends `${F}${infer R}${F}`
+			? IsPalindrome<R>
+			: false
+		: true;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
