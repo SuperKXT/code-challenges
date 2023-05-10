@@ -23,10 +23,10 @@
 
 type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
-type Integer<T extends number> =
+export type Integer<T extends number> =
 	`${T}` extends `${infer I extends number}.${any}` ? I : T;
 
-type UnsignedInt<T extends number | string | bigint> =
+export type UnsignedInt<T extends number | string | bigint> =
 	`${T}` extends `-${infer I extends number}`
 		? Integer<I>
 		: `${T}` extends `${infer I extends number}`
@@ -132,35 +132,40 @@ type _innerSum<
 	? R
 	: [...R, Carry];
 
-type Sum<
+export type Sum<
 	A extends string | number | bigint,
 	B extends string | number | bigint,
 	ArrayA extends Digit[] = NumberToArray<UnsignedInt<A>>,
 	ArrayB extends Digit[] = NumberToArray<UnsignedInt<B>>,
 	MaxNum extends number = Max<[ArrayA['length'], ArrayB['length']]>
-> = `${ArrayToNumber<
+> = ArrayToNumber<
 	ArrayReverse<
 		_innerSum<
 			ArrayReverse<PadLeft<ArrayA, MaxNum>>,
 			ArrayReverse<PadLeft<ArrayB, MaxNum>>
 		>
 	>
->}`;
+>;
+
+export type SumStringified<
+	A extends string | number | bigint,
+	B extends string | number | bigint
+> = `${Sum<A, B>}`;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
 
 type _cases = [
-	Expect<Equal<Sum<2, 3>, '5'>>,
-	Expect<Equal<Sum<'13', '21'>, '34'>>,
-	Expect<Equal<Sum<'328', 7>, '335'>>,
-	Expect<Equal<Sum<1_000_000_000_000n, '123'>, '1000000000123'>>,
-	Expect<Equal<Sum<9999, 1>, '10000'>>,
-	Expect<Equal<Sum<4325234, '39532'>, '4364766'>>,
-	Expect<Equal<Sum<728, 0>, '728'>>,
-	Expect<Equal<Sum<'0', 213>, '213'>>,
-	Expect<Equal<Sum<0, '0'>, '0'>>
+	Expect<Equal<SumStringified<2, 3>, '5'>>,
+	Expect<Equal<SumStringified<'13', '21'>, '34'>>,
+	Expect<Equal<SumStringified<'328', 7>, '335'>>,
+	Expect<Equal<SumStringified<1_000_000_000_000n, '123'>, '1000000000123'>>,
+	Expect<Equal<SumStringified<9999, 1>, '10000'>>,
+	Expect<Equal<SumStringified<4325234, '39532'>, '4364766'>>,
+	Expect<Equal<SumStringified<728, 0>, '728'>>,
+	Expect<Equal<SumStringified<'0', 213>, '213'>>,
+	Expect<Equal<SumStringified<0, '0'>, '0'>>
 ];
 
 /* _____________ Further Steps _____________ */
