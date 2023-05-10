@@ -128,7 +128,9 @@ type _innerSum<
 			? _innerSum<RA, RB, [...R, Sum], NewCarry>
 			: never
 		: never
-	: R;
+	: Carry extends 0
+	? R
+	: [...R, Carry];
 
 type Sum<
 	A extends string | number | bigint,
@@ -144,9 +146,6 @@ type Sum<
 		>
 	>
 >}`;
-
-type _sums = Sum<998, 1>;
-//   ^?
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
