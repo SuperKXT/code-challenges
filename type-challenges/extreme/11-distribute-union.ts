@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 /*
   869 - DistributeUnions
   -------
@@ -13,19 +14,19 @@
 
   ```ts
   type T1 = DistributeUnions<[1 | 2, 'a' | 'b']>
-  // =>   [1, 'a'] | [2, 'a'] | [1, 'b'] | [2, 'b']
+  =>   [1, 'a'] | [2, 'a'] | [1, 'b'] | [2, 'b']
 
   type T2 = DistributeUnions<{ type: 'a', value: number | string } | { type: 'b', value: boolean }>
-  //  =>  | { type 'a', value: number }
-  //      | { type 'a', value: string }
-  //      | { type 'b', value: boolean }
+  =>  | { type 'a', value: number }
+      | { type 'a', value: string }
+      | { type 'b', value: boolean }
 
   type T3 = DistributeUnions<[{ value: 'a' | 'b' },  { x: { y: 2 | 3  } }] | 17>
-  //  =>  | [{ value: 'a' },  { x: { y: 2  } }]
-  //      | [{ value: 'a' },  { x: { y: 3  } }]
-  //      | [{ value: 'b' },  { x: { y: 2  } }]
-  //      | [{ value: 'b' },  { x: { y: 3  } }]
-  //      | 17
+  =>  | [{ value: 'a' },  { x: { y: 2  } }]
+      | [{ value: 'a' },  { x: { y: 3  } }]
+      | [{ value: 'b' },  { x: { y: 2  } }]
+      | [{ value: 'b' },  { x: { y: 3  } }]
+      | 17
   ```
 
   For context, this type can be very useful if you want to exclude a case on deep data structures:
@@ -44,7 +45,12 @@
 
 /* _____________ Your Code Here _____________ */
 
-type DistributeUnions<T> = any;
+type DistributeUnions<T> = T extends infer U
+	? DistributeUnions<Exclude<T, U>>
+	: never;
+
+type _1 = DistributeUnions<[0, 1 | 2] | [3 | 4]>;
+//   ^?
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

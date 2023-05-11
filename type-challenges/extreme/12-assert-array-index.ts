@@ -101,8 +101,32 @@
 
 /* _____________ Your Code Here _____________ */
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const assertArrayIndex = (array: readonly unknown[], key: string) => {};
+type IsTuple<T extends readonly unknown[]> = number extends T['length']
+	? false
+	: true;
+
+type TemplateS = string | number | bigint | boolean | null | undefined;
+
+type TupleToString<T extends readonly unknown[]> = T extends readonly [
+	infer F,
+	...infer R
+]
+	? R extends []
+		? F
+		: `${F extends TemplateS ? F : '[object]'}, ${TupleToString<R>}`
+	: '';
+
+type CheckTuple<T extends readonly unknown[]> = IsTuple<T> extends false
+	? T
+	: `[${TupleToString<T>}] can not be used with CheckTuple`;
+
+type _1 = CheckTuple<[1, 2, 3]>;
+//   ^?
+
+const assertArrayIndex = <T extends readonly unknown[]>(
+	array: CheckTuple<T>,
+	key: string
+) => {};
 
 type Index<Array> = any;
 
@@ -112,6 +136,10 @@ const matrix = [
 	[5, 6],
 	[7, 8],
 ];
+
+const array = [1, 2, 3, 4];
+const first = array[1 as keyof typeof array & number];
+//    ^?
 
 assertArrayIndex(matrix, 'rows');
 
