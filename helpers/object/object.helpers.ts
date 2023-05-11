@@ -17,14 +17,10 @@ export const omit = <
 	object: Type,
 	keys: Key | Key[]
 ): Prettify<Omit<Type, Key>> => {
-	const keyArray = Array.isArray(keys) ? keys : [keys];
-	return objectEntries<Key, unknown>(object).reduce<Omit<Type, Key>>(
-		(obj, [key, value]) => {
-			if (keyArray.includes(key)) return obj;
-			return { ...obj, [key]: value };
-		},
-		{} as Omit<Type, Key>
-	);
+	const keyArray: PropertyKey[] = Array.isArray(keys) ? keys : [keys];
+	return Object.fromEntries(
+		Object.entries(object).filter(([key]) => !keyArray.includes(key))
+	) as Prettify<Omit<Type, Key>>;
 };
 
 export const pick = <
