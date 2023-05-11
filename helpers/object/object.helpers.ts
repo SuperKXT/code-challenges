@@ -17,9 +17,9 @@ export const omit = <
 	object: Type,
 	keys: Key | Key[]
 ): Prettify<Omit<Type, Key>> => {
-	const keyArray: PropertyKey[] = Array.isArray(keys) ? keys : [keys];
+	const keySet = new Set<PropertyKey>(Array.isArray(keys) ? keys : [keys]);
 	return Object.fromEntries(
-		Object.entries(object).filter(([key]) => !keyArray.includes(key))
+		Object.entries(object).filter(([key]) => !keySet.has(key))
 	) as Prettify<Omit<Type, Key>>;
 };
 
