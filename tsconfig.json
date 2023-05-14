@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		// type checking
 		"strict": true,
 		"allowUnreachableCode": false,
 		"allowUnusedLabels": false,
@@ -14,34 +15,42 @@
 		"strictNullChecks": true,
 		"strictPropertyInitialization": true,
 		"useUnknownInCatchVariables": true,
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
 
+		// modules
 		"baseUrl": "./",
-		"module": "ESNext",
+		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
+		"types": ["vitest/globals"],
 		"paths": {
 			"~/*": ["./*"]
 		},
-		"types": ["vitest/globals"],
 
+		// emit
 		"noEmit": true,
 		"downlevelIteration": true,
-		"importsNotUsedAsValues": "error",
-		"ignoreDeprecations": "5.0",
 
+		// javascript support
 		"allowJs": true,
 		"checkJs": true,
 
+		// interop constraints
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"isolatedModules": true,
-		"jsx": "react-jsx",
+		"verbatimModuleSyntax": true,
+
+		// language and environment
 		"lib": ["esnext"],
 		"target": "esnext",
 
+		// output formatting
 		"noErrorTruncation": true,
 
+		// completeness
 		"skipLibCheck": true
 	},
 	"exclude": ["node_modules", "build", "dist", "coverage", "public"]
