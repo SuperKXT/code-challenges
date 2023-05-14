@@ -1,11 +1,8 @@
-// TODO Use eslint-plugin-vitest instead of eslint-plugin-jest
 /** @type {import('eslint').Linter.Config} */
 const config = {
 	env: {
 		es2021: true,
-		jest: true,
 		node: true,
-		// // browser: true,
 	},
 	extends: ['eslint:recommended', 'prettier', 'plugin:import/recommended'],
 	parser: '@typescript-eslint/parser',
@@ -13,14 +10,11 @@ const config = {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 	},
-	plugins: ['import', 'unused-imports', 'prefer-arrow-functions'],
+	plugins: ['import', 'unused-imports'],
 	settings: {
 		'import/resolver': {
 			node: true,
 			typescript: true,
-		},
-		jest: {
-			version: 29,
 		},
 	},
 	rules: {
@@ -33,7 +27,7 @@ const config = {
 		'guard-for-in': 'warn',
 		indent: 'off',
 		'logical-assignment-operators': 'warn',
-		'max-depth': ['warn', { max: 6 }],
+		'max-depth': ['warn', { max: 7 }],
 		'max-lines': ['warn', 1000],
 		'max-params': ['warn', 5],
 		'new-cap': 'warn',
@@ -118,7 +112,6 @@ const config = {
 		'import/no-duplicates': 'warn',
 		'import/export': 'off',
 		'import/no-empty-named-blocks': 'warn',
-		// // 'import/no-nodejs-modules': 'error',
 		'import/no-self-import': 'warn',
 		'import/no-useless-path-segments': 'warn',
 		'import/order': [
@@ -136,17 +129,6 @@ const config = {
 				'newlines-between': 'always',
 			},
 		],
-
-		'prefer-arrow-functions/prefer-arrow-functions': [
-			'warn',
-			{
-				classPropertiesAllowed: false,
-				disallowPrototype: false,
-				returnStyle: 'unchanged',
-				singleReturnOnly: false,
-			},
-		],
-
 		'unused-imports/no-unused-imports': 'warn',
 		'unused-imports/no-unused-vars': [
 			'warn',
@@ -237,58 +219,14 @@ const config = {
 			parserOptions: {
 				project: ['./tsconfig.json'],
 			},
-			extends: [
-				'plugin:jest/all',
-				// // 'plugin:testing-library/react',
-			],
-			plugins: [
-				'jest',
-				// // 'testing-library'
-			],
+			extends: ['plugin:vitest/all'],
+			plugins: ['vitest'],
 			rules: {
-				'jest/prefer-expect-assertions': 'off',
-				'jest/require-top-level-describe': 'off',
+				'vitest/prefer-expect-assertions': 'off',
+				'vitest/require-top-level-describe': 'off',
+				'vitest/max-expects': ['error', { max: 10 }],
 			},
 		},
-		// // {
-		// // 	files: ['**/*.tsx', '**/*.jsx'],
-		// // 	extends: [
-		// // 		'react-app',
-		// // 		'plugin:react/recommended',
-		// // 		'plugin:react/jsx-runtime',
-		// // 	],
-		// // 	plugins: ['jsx-expressions'],
-		// // 	rules: {
-		// // 		'@typescript-eslint/no-unnecessary-type-constraint': 'off',
-		// // 		'react/jsx-filename-extension': [
-		// // 			'warn',
-		// // 			{ extensions: ['jsx', 'tsx'] },
-		// // 		],
-		// // 		'react/jsx-fragments': 'warn',
-		// // 		'react/jsx-max-depth': ['warn', { max: 6 }],
-		// // 		'react/jsx-no-constructed-context-values': 'warn',
-		// // 		'jsx-expressions/strict-logical-expressions': 'warn',
-		// // 		'react/jsx-no-script-url': 'warn',
-		// // 		'react/jsx-no-useless-fragment': ['warn', { allowExpressions: true }],
-		// // 		'react/jsx-sort-props': [
-		// // 			'warn',
-		// // 			{
-		// // 				noSortAlphabetically: true,
-		// // 				multiline: 'last',
-		// // 				callbacksLast: true,
-		// // 				reservedFirst: true,
-		// // 				shorthandLast: true,
-		// // 			},
-		// // 		],
-		// // 		'react/jsx-wrap-multilines': 'warn',
-		// // 		'react/no-access-state-in-setstate': 'warn',
-		// // 		'react/no-danger': 'warn',
-		// // 		'react/no-object-type-as-default-prop': 'warn',
-		// // 		'react/no-unstable-nested-components': ['warn', { allowAsProps: true }],
-		// // 		'react/self-closing-comp': 'warn',
-		// // 		'react/void-dom-elements-no-children': 'warn',
-		// // 	},
-		// // },
 	],
 };
 
