@@ -95,7 +95,7 @@ const recursiveSort = (files: RenameResult[]): RenameResult[] => {
 
 const SORTED_TESTS = TESTS.map(recursiveSort);
 
-// eslint-disable-next-line jest/no-hooks
+// eslint-disable-next-line vitest/no-hooks
 beforeEach(() => {
 	if (existsSync(TEMP_PATH)) {
 		rmSync(TEMP_PATH, {
@@ -107,7 +107,7 @@ beforeEach(() => {
 	mkdirSync(TEMP_PATH);
 });
 
-// eslint-disable-next-line jest/no-hooks
+// eslint-disable-next-line vitest/no-hooks
 afterEach(() => {
 	rmSync(TEMP_PATH, {
 		force: true,

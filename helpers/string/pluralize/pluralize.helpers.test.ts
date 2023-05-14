@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable vitest/no-conditional-in-test */
+/* eslint-disable vitest/no-conditional-tests */
 /** cSpell: disable */
 
 import { pluralize } from './pluralize.helpers';
@@ -120,7 +123,6 @@ describe('testing pluralize helper', () => {
 	});
 
 	it('should quantify strings within expressions', () => {
-		/* eslint-disable @typescript-eslint/no-unnecessary-condition, jest/no-conditional-in-test */
 		expect(
 			pluralize`I have ${1} ${true ? 'good friend[|s]' : 'bad friend[|s]'}`
 		).toBe('I have 1 good friend');
@@ -133,6 +135,5 @@ describe('testing pluralize helper', () => {
 		expect(
 			pluralize`I have ${5} ${false ? 'good friend[|s]' : 'bad friend[|s]'}`
 		).toBe('I have 5 bad friends');
-		/* eslint-enable @typescript-eslint/no-unnecessary-condition, jest/no-conditional-in-test */
 	});
 });

@@ -1,4 +1,5 @@
-/* eslint-disable jest/max-expects */
+/* eslint-disable vitest/no-conditional-in-test */
+/* eslint-disable vitest/no-conditional-tests */
 
 import {
 	assertArray,
@@ -32,9 +33,7 @@ test('should test isObject helper', () => {
 	expect(isObject(2)).toBeFalsy();
 	expect(isObject({ fist: 'of fury' })).toBeTruthy();
 	const a: any = 2;
-	/* eslint-disable jest/no-conditional-in-test */
 	isObject(a) && assertType<GenericObject>(a);
-	/* eslint-disable jest/no-conditional-in-test */
 });
 
 test('should test isArray helper', () => {
@@ -45,11 +44,9 @@ test('should test isArray helper', () => {
 	expect(isArray({ fist: 'of fury' })).toBeFalsy();
 	expect(isArray([{ fist: 'of fury' }])).toBeTruthy();
 	const a: any = 2;
-	/* eslint-disable jest/no-conditional-in-test */
 	isArray(a) && assertType<unknown[]>(a);
 	isArray(a, isNumber) && assertType<number[]>(a);
 	isArray(a, isObject) && assertType<GenericObject[]>(a);
-	/* eslint-disable jest/no-conditional-in-test */
 });
 
 test('should test assertObject helper', () => {
