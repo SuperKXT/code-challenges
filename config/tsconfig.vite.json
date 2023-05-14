@@ -1,0 +1,55 @@
+{
+	"compilerOptions": {
+		// type checking
+		"strict": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUncheckedIndexedAccess": true,
+		"strictFunctionTypes": true,
+		"strictBindCallApply": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
+		"useUnknownInCatchVariables": true,
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
+
+		// modules
+		"baseUrl": "./src",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"types": ["vitest/globals"],
+
+		// emit
+		"downlevelIteration": true,
+		"noEmit": true,
+
+		// javascript support
+		"allowJs": true,
+		"checkJs": true,
+
+		// interop constraints
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+
+		// language and environment
+		"jsx": "react-jsx",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"target": "esnext",
+
+		// output formatting
+		"noErrorTruncation": true,
+
+		// completeness
+		"skipLibCheck": true
+	},
+	"exclude": ["node_modules", "dist", "build", "public"]
+}

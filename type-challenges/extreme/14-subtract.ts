@@ -24,7 +24,8 @@
 
 /* _____________ Your Code Here _____________ */
 
-// M => minuend, S => subtrahend
+type SubtractDigit<T extends number, U extends number> = T extends 0
+
 type Subtract<M extends number, S extends number> = any;
 
 /* _____________ Test Cases _____________ */
