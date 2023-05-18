@@ -27,9 +27,7 @@ type InclusiveRange<
 	Higher extends number,
 	Idx extends 1[] = Tuple<Lower>,
 	Result extends number[] = []
-> = 0 extends 1
-	? never
-	: Idx[Higher] extends undefined
+> = Idx[Higher] extends undefined
 	? InclusiveRange<Lower, Higher, [...Idx, 1], [...Result, Idx['length']]>
 	: Result;
 
