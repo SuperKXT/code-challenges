@@ -171,8 +171,19 @@ type Subtract<
 		: Subtract<A, B, RestA, RestB, [SubtractDigit<LastA, LastB>, ...Result]>
 	: ArrToNumber<Result>;
 
-type _sub = Subtract<1000, 999>;
-//   ^?
+// BETTER!
+type Tuple<T, Res extends 1[] = []> = 0 extends 1
+	? never
+	: Res['length'] extends T
+	? Res
+	: Tuple<T, [...Res, 1]>;
+
+type _Subtract<M extends number, S extends number> = Tuple<M> extends [
+	...Tuple<S>,
+	...infer Rest
+]
+	? Rest['length']
+	: never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
