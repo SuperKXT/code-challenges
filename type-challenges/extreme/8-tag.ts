@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
@@ -94,43 +95,160 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Eq<T, U> = (<G>() => G extends T ? 1 : 0) extends <G>() => G extends U
-	? 1
-	: 0
+declare const KEY: unique symbol;
+
+type Tuple = readonly string[];
+
+interface Tagged {
+	readonly [KEY]?: unknown;
+}
+
+/**
+ * Shift<["foo", "bar", "baz"]> = ["bar", "baz"].
+ */
+type Shift<T extends Tuple> = T extends [infer Head, ...infer Tail] ? Tail : [];
+
+/**
+ * StartWith<[], ["foo"]> = true.
+ * StartWith<["foo"], ["foo", "bar"]> = true.
+ * StartWith<["foo", "baz"], ["foo", "bar"]> = false.
+ * StartWith<["foo", "bar"], ["foo", "bar", "qux"]> = true.
+ */
+type StartWith<S extends Tuple, T extends Tuple> = S extends []
 	? true
-	: false;
+	: Equal<S[0], T[0]> extends false
+	? false
+	: StartWith<Shift<S>, Shift<T>>;
 
-type GetTags<B> = B extends {} & Tag<any, infer T> ? T : never;
+/**
+ * Includes<["foo", "bar"], ["quux", "foo", "bar", "qux"]> = true.
+ * Includes<["foo"], ["bar", "qux"]> = false.
+ */
+type Includes<S extends Tuple, T extends Tuple> = S extends []
+	? true
+	: T extends []
+	? false
+	: Equal<S[0], T[0]> extends true
+	? StartWith<S, T>
+	: Includes<S, Shift<T>>;
 
-declare const TAG: unique symbol;
+/**
+ * GetStringProps<{ 0: 0; x?: 3 }> = 3.
+ */
+type GetStringProps<T> = Exclude<
+	{
+		[K in keyof T & string]: T[K];
+	}[keyof T & string],
+	undefined
+>;
 
-type Tag<B, T extends string> =
-	| B
-	| ({} & (B extends { __tag: infer U }
-			? { __tag: U extends any[] ? [...U, T] : [U, T] }
-			: { __tag: T }));
+/**
+ * GetStringKeys<{ 0: 0; x?: 3 }> = "x".
+ */
+type GetStringKeys<T> = Exclude<
+	{
+		[K in keyof T & string]: K;
+	}[keyof T & string],
+	undefined
+>;
 
-type UnTag<B> = Exclude<B, {} & { __tag: any }>;
+/**
+ * GetTagsKey<null> = "".
+ * GetTagsKey<Tag<string, "foo">> = "0foo".
+ * GetTagsKey<Tag<Tag<string, "foo">, "bar">> = "0foo1bar"
+ */
+type GetTagsKey<
+	V,
+	TagsOrUndefined = [V] extends [Tagged] ? V[typeof KEY] : undefined,
+	TagsKeyOrNever = GetStringKeys<Exclude<TagsOrUndefined, undefined>>
+> = Equal<TagsKeyOrNever, never> extends true
+	? ''
+	: Equal<TagsKeyOrNever, string> extends true
+	? ''
+	: TagsKeyOrNever;
 
-type HasTag<B, T extends string> = B extends Tag<any, infer U>
-	? U extends T
-		? true
-		: false
-	: false;
+/**
+ * GetTags<null> = [].
+ * GetTags<any> = [].
+ * GetTags<Tag<string, "foo">> = ["foo"].
+ * GetTags<Tag<Tag<string, "foo">, "bar">> = ["foo", "bar"].
+ * GetTags<Tag<Tag<Tag<{}, "foo">, "bar">, "baz">> = ["foo", "bar", "baz"].
+ */
+export type GetTags<
+	V,
+	TagsOrUndefined = [V] extends [Tagged] ? V[typeof KEY] : undefined,
+	TagsOrNever = GetStringProps<Exclude<TagsOrUndefined, undefined>>
+> = Equal<V, any> extends true
+	? []
+	: Equal<TagsOrNever, never> extends true
+	? []
+	: TagsOrNever extends Tuple
+	? TagsOrNever
+	: [];
 
-type HasTags<
-	B,
-	T extends readonly string[],
-	K extends string = T[number]
-> = B extends Tag<any, any>
-	? (K extends K ? HasTag<B, K> : false) extends true
-		? true
-		: false
-	: false;
+/**
+ * Tag<number, "foo"> = number with tag "foo".
+ * Tag<{ x: 0 }, "foo"> = { x: 0 } with tag "foo".
+ * Tag<Tag<V, "foo">, "bar"> = V with tags "foo" and "bar".
+ */
+export type Tag<
+	V,
+	T extends string,
+	Tags extends Tuple = GetTags<V>,
+	TagsKey extends string = GetTagsKey<V>
+> = Equal<V, null> extends true
+	? null
+	: Equal<V, undefined> extends true
+	? undefined
+	: (typeof KEY extends keyof V ? Omit<V, typeof KEY> : V) & {
+			readonly [KEY]?: { 0: 0 } & {
+				[K in `${TagsKey}${Tags['length']}${T}`]?: [...Tags, T];
+			};
+	  };
 
-type HasExactTags<B, T extends readonly string[]> = B extends Tag<any, infer U>
-	? Eq<T, U>
-	: false;
+/**
+ * UnTag<null> = null.
+ * UnTag<undefined> = undefined.
+ * UnTag<Tag<{}, "foo">> = {}.
+ * UnTag<Tag<Tag<{ x: 0 }, "foo">, "bar">> = { x: 0 }.
+ */
+export type UnTag<V> = typeof KEY extends keyof V ? Omit<V, typeof KEY> : V;
+
+/**
+ * HasTag<null, "foo"> = false.
+ * HasTag<Tag<{}, "foo">, "foo"> = true.
+ * HasTag<Tag<any, "foo">, "foo"> = true.
+ * HasTag<Tag<Tag<{}, "foo">, "bar">, "foo"> = true.
+ * HasTag<Tag<Tag<symbol, "bar">, "foo">, "foo"> = true.
+ * HasTag<Tag<Tag<{}, "bar">, "baz">, "foo"> = false.
+ */
+export type HasTag<V, T extends string> = Includes<[T], GetTags<V>>;
+
+/**
+ * HasTags<null, ["foo"]> = false.
+ * HasTags<Tag<{}, "bar">, ["foo"]> = false.
+ * HasTags<Tag<any, "bar">, ["foo"]> = false.
+ * HasTags<Tag<{}, "foo">, ["foo"]> = true.
+ * HasTags<Tag<any, "foo">, ["foo"]> = true.
+ * HasTags<Tag<Tag<string, "foo">, "bar">, ["foo", "bar"]> = true.
+ * HasTags<Tag<Tag<{}, "bar">, "foo">, ["foo", "bar"]> = false.
+ * HasTags<Tag<Tag<Tag<{}, "baz">, "foo">, "bar">, ["foo", "bar"]> = true.
+ * HasTags<Tag<Tag<Tag<{}, "foo">, "bar">, "baz">, ["foo", "bar"]> = true.
+ * HasTags<Tag<Tag<Tag<{}, "foo">, "baz">, "bar">, ["foo", "bar"]> = false.
+ */
+export type HasTags<V, T extends Tuple> = Includes<T, GetTags<V>>;
+
+/**
+ * HasExactTags<0, []> = true.
+ * HasExactTags<Tag<number, "foo">, ["foo"]> = true.
+ * HasExactTags<Tag<{}, "foo">, ["bar"]> = false.
+ * HasExactTags<Tag<Tag<any, "foo">, "bar">, ["foo", "bar"]> = true.
+ * HasExactTags<Tag<Tag<Tag<{}, "foo">, "bar">, "baz">, ["foo", "bar"]> = false.
+ * HasExactTags<Tag<Tag<Tag<{}, "foo">, "bar">, "baz">, ["foo", "bar", "baz"]> = true.
+ */
+export type HasExactTags<V, T extends Tuple> = Equal<GetTags<V>, T>;
+
+// todo RETRY
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect, IsTrue } from '@type-challenges/utils';

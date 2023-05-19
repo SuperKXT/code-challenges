@@ -61,7 +61,7 @@ type DeepPick<
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
 
-type Obj = {
+type TObj = {
 	a: number;
 	b: string;
 	c: boolean;
@@ -83,15 +83,15 @@ type Obj = {
 };
 
 type _cases = [
-	Expect<Equal<DeepPick<Obj, ''>, unknown>>,
-	Expect<Equal<DeepPick<Obj, 'a'>, { a: number }>>,
-	Expect<Equal<DeepPick<Obj, 'a' | ''>, { a: number } & unknown>>,
+	Expect<Equal<DeepPick<TObj, ''>, unknown>>,
+	Expect<Equal<DeepPick<TObj, 'a'>, { a: number }>>,
+	Expect<Equal<DeepPick<TObj, 'a' | ''>, { a: number } & unknown>>,
 	Expect<
-		Equal<DeepPick<Obj, 'a' | 'obj.e'>, { a: number } & { obj: { e: string } }>
+		Equal<DeepPick<TObj, 'a' | 'obj.e'>, { a: number } & { obj: { e: string } }>
 	>,
 	Expect<
 		Equal<
-			DeepPick<Obj, 'a' | 'obj.e' | 'obj.obj2.i'>,
+			DeepPick<TObj, 'a' | 'obj.e' | 'obj.obj2.i'>,
 			{ a: number } & { obj: { e: string } } & { obj: { obj2: { i: boolean } } }
 		>
 	>

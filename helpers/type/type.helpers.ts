@@ -5,10 +5,10 @@ export const readableTypeOf = (value: any) => {
 	return 'object';
 };
 
-export const isObject = (value: any): value is GenericObject =>
+export const isObject = (value: any): value is Obj =>
 	readableTypeOf(value) === 'object';
 
-export const assertObject: AssertFunction<GenericObject> = (value) => {
+export const assertObject: AssertFunction<Obj> = (value) => {
 	const type = readableTypeOf(value);
 	if (type !== 'object')
 		throw new TypeError(`Expected object, received ${type}`);

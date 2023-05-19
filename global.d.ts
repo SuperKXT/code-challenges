@@ -25,18 +25,6 @@ type IRepeatedTuple<
 > = R['length'] extends N ? R : IRepeatedTuple<T, N, [T, ...R]>;
 
 declare global {
-	type ReadableTypeOf =
-		| 'array'
-		| 'bigint'
-		| 'boolean'
-		| 'function'
-		| 'null'
-		| 'number'
-		| 'object'
-		| 'string'
-		| 'symbol'
-		| 'undefined';
-
 	type RepeatedTuple<T, N extends number> = N extends N
 		? number extends N
 			? T[]
@@ -45,7 +33,7 @@ declare global {
 
 	type DistributedArray<T> = T extends infer I ? I[] : never;
 
-	type GenericObject<Key extends string = string> = Record<Key, unknown>;
+	type Obj<Key extends string = string> = Record<Key, unknown>;
 
 	type RepeatedString<S extends string, N extends number> = IRepeatedString<
 		S,
