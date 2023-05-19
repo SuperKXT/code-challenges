@@ -6,9 +6,9 @@ export const pluralize = (
 	...inputExpressions: (
 		| number
 		| string
-		| [number, (arg: number) => string | null]
-		| [number, string | null]
 		| [number]
+		| [number, null | string]
+		| [number, (arg: number) => null | string]
 	)[]
 ): string => {
 	const expressions = inputExpressions.map((value) => {
@@ -48,11 +48,11 @@ export const pluralize = (
 	const replaceQuantity = (input: string): string => {
 		if (!lastQuantifier) return input;
 
+		let replaced = input;
 		const [number, value] = lastQuantifier;
-		let trimmed = input;
-		if (!value) trimmed = input.replace(/^\s+/u, '');
+		if (!value) replaced = input.replace(/^\s+/u, '');
 
-		return trimmed.replace(/\[(([^|]*\|?)+)\]/gu, (_, string: string) => {
+		return replaced.replace(/\[(([^|]*\|?)+)\]/gu, (_, string: string) => {
 			const matches = string.split('|');
 			return matches[number - 1] ?? matches.at(-1) ?? '';
 		});

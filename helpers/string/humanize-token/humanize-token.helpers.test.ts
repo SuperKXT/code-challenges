@@ -1,13 +1,13 @@
-import { humanizeToken, HUMANIZE_CASES } from './humanize-token.helpers';
+import { humanizeToken, humanizeCases } from './humanize-token.helpers';
 
 import type { HumanizeCase } from './humanize-token.helpers';
 
 type Test = {
 	input: string;
 	output: Record<HumanizeCase, string>;
-}
+};
 
-const TESTS: Test[] = [
+const tests: Test[] = [
 	{
 		input: 'thisIsSomeTestString',
 		output: {
@@ -37,12 +37,12 @@ const TESTS: Test[] = [
 	},
 ];
 
-describe.each(TESTS)('test humanizeToken helper', ({ input, output }) => {
+describe.each(tests)('test humanizeToken helper', ({ input, output }) => {
 	it(`should return ${output.title} for humanizeToken(${input})`, () => {
 		const response = humanizeToken(input);
 		expect(response).toStrictEqual(output.title);
 	});
-	it.each(HUMANIZE_CASES)(
+	it.each(humanizeCases)(
 		'should return humanized string by the given casing',
 		(casing) => {
 			const response = humanizeToken(input, casing);
