@@ -1,3 +1,5 @@
+/* eslint-disable unused-imports/no-unused-vars */
+/* eslint-disable @typescript-eslint/prefer-for-of */
 /*
   925 - Assert Array Index
   -------
@@ -101,34 +103,81 @@
 
 /* _____________ Your Code Here _____________ */
 
-type IsTuple<T extends readonly unknown[]> = number extends T['length']
-	? false
+type HashMapHelper<
+	T extends number,
+	R extends unknown[] = []
+> = R['length'] extends T ? R : HashMapHelper<T, [...R, unknown]>;
+
+type HashMap = {
+	'0': HashMapHelper<0>;
+	'1': HashMapHelper<1>;
+	'2': HashMapHelper<2>;
+	'3': HashMapHelper<3>;
+	'4': HashMapHelper<4>;
+	'5': HashMapHelper<5>;
+	'6': HashMapHelper<6>;
+	'7': HashMapHelper<7>;
+	'8': HashMapHelper<8>;
+	'9': HashMapHelper<9>;
+	a: HashMapHelper<1>;
+	b: HashMapHelper<2>;
+	c: HashMapHelper<3>;
+	d: HashMapHelper<4>;
+	e: HashMapHelper<5>;
+	f: HashMapHelper<6>;
+	g: HashMapHelper<7>;
+	h: HashMapHelper<8>;
+	i: HashMapHelper<9>;
+	j: HashMapHelper<10>;
+	k: HashMapHelper<11>;
+	l: HashMapHelper<12>;
+	m: HashMapHelper<13>;
+	n: HashMapHelper<14>;
+	o: HashMapHelper<15>;
+	p: HashMapHelper<16>;
+	q: HashMapHelper<17>;
+	r: HashMapHelper<18>;
+	s: HashMapHelper<19>;
+	t: HashMapHelper<20>;
+	u: HashMapHelper<21>;
+	v: HashMapHelper<22>;
+	w: HashMapHelper<23>;
+	x: HashMapHelper<24>;
+	y: HashMapHelper<25>;
+	z: HashMapHelper<26>;
+};
+
+type Hash<
+	T extends string,
+	RR extends unknown[] = []
+> = T extends `${infer L}${infer R}`
+	? Hash<R, [...RR, ...HashMap[keyof HashMap & L]]>
+	: RR['length'];
+
+type IsKeyHelper<K extends string> = K extends `${infer L}${infer R}`
+	? L extends keyof HashMap
+		? IsKeyHelper<R>
+		: false
 	: true;
 
-type TemplateS = string | number | bigint | boolean | null | undefined;
+type IsKey<K extends string> = K extends '' ? false : IsKeyHelper<K>;
 
-type TupleToString<T extends readonly unknown[]> = T extends readonly [
-	infer F,
-	...infer R
-]
-	? R extends []
-		? F
-		: `${F extends TemplateS ? F : '[object]'}, ${TupleToString<R>}`
-	: '';
+declare const KEY: unique symbol;
 
-type CheckTuple<T extends readonly unknown[]> = IsTuple<T> extends false
-	? T
-	: `[${TupleToString<T>}] can not be used with CheckTuple`;
+// eslint-disable-next-line func-style
+function assertArrayIndex<A extends readonly unknown[], K extends string>(
+	array: number extends A['length'] ? A : never,
+	key: IsKey<K> extends true ? K : never
+): asserts array is number extends A['length']
+	? A & { readonly [KEY]: Hash<K> } & {
+			readonly [key in Hash<K>]: A[number];
+	  }
+	: never {
+	return undefined;
+}
 
-type _1 = CheckTuple<[1, 2, 3]>;
-//   ^?
-
-const assertArrayIndex = <T extends readonly unknown[]>(
-	array: CheckTuple<T>,
-	key: string
-) => {};
-
-type Index<Array> = any;
+// todo RETRY
+type Index<Arr extends { readonly [KEY]: number }> = Arr[typeof KEY];
 
 /* _____________ Test Cases _____________ */
 const matrix = [
