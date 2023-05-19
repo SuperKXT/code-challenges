@@ -1,17 +1,10 @@
 import { areArraysEqual, linkedListToArray } from './array.helpers';
 
-import type { LinkedList } from '~/helpers/linked-list';
-
 type EqualityTest = {
 	first: any[];
 	second: any[];
 	areEqual: boolean;
-}
-
-type ToArrayTest<Type> = {
-	array: Type[];
-	list: LinkedList<Type>;
-}
+};
 
 const EQUALITY_TESTS: EqualityTest[] = [
 	{
@@ -31,35 +24,28 @@ const EQUALITY_TESTS: EqualityTest[] = [
 	},
 ];
 
-const TO_ARRAY_TESTS: ToArrayTest<number>[] = [
-	{
-		array: [1, 2, 3],
-		list: {
+test.each(EQUALITY_TESTS)(
+	'testing areArraysEqual helper',
+	({ first, second, areEqual }) => {
+		const response = areArraysEqual(first, second);
+		expect(response).toStrictEqual(areEqual);
+	}
+);
+
+test('testing linkedListToArray helper', () => {
+	const test1 = {
+		response: linkedListToArray({
 			head: { next: { next: { next: null, value: 3 }, value: 2 }, value: 1 },
-		},
-	},
-	{
-		array: [],
-		list: { head: null },
-	},
-];
+		}),
+		expected: [1, 2, 3] as const,
+	};
+	expect(test1.response).toStrictEqual(test1.expected);
+	assertType<(typeof test1)['expected']>(test1.response);
 
-describe('array equality helper', () => {
-	it.each(EQUALITY_TESTS)(
-		'should calculate if the two arrays are equal',
-		({ first, second, areEqual }) => {
-			const response = areArraysEqual(first, second);
-			expect(response).toStrictEqual(areEqual);
-		}
-	);
-});
-
-describe('linked list to array helper', () => {
-	it.each(TO_ARRAY_TESTS)(
-		'should return array by given linked list',
-		({ list, array }) => {
-			const response = linkedListToArray(list);
-			expect(response).toStrictEqual(array);
-		}
-	);
+	const test2 = {
+		response: linkedListToArray({ head: null }),
+		expected: [] as const,
+	};
+	expect(test2.response).toStrictEqual(test2.expected);
+	assertType<(typeof test2)['expected']>(test2.response);
 });
