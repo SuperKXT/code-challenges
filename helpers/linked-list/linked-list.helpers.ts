@@ -20,7 +20,6 @@ type InsertNode<List extends LinkedList<any>, Val> = Prettify<{
 		: { value: Val; next: null };
 }>;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 type ArrayToLinkedList<
 	Type extends readonly any[],
 	Result extends LinkedList<any> = { head: null }
@@ -54,4 +53,21 @@ export const arrayToLinkedList = <const Arr extends readonly any[]>(
 	}
 
 	return list as ArrayToLinkedList<Arr>;
+};
+
+export const insertToLinkedList = <List extends LinkedList<unknown>, const Val>(
+	list: List,
+	value: Val
+): InsertNode<List, Val> => {
+	const newNode = { value, next: null };
+	if (!list.head) {
+		list.head = newNode;
+	} else {
+		const insertNode = (node: NonNullable<LinkedListNode>) => {
+			if (node.next) insertNode(node.next);
+			else node.next = newNode;
+		};
+		insertNode(list.head);
+	}
+	return list as InsertNode<List, Val>;
 };
