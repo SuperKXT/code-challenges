@@ -45,10 +45,33 @@
 
 /* _____________ Your Code Here _____________ */
 
-type DistributeUnions<T> = T extends infer U
-	? DistributeUnions<Exclude<T, U>>
+type Merge<O> = { [K in keyof O]: O[K] };
+
+type ArrHelper<H, T extends unknown[]> = H extends H
+	? [H, ...DistributeArray<T>]
 	: never;
 
+type DistributeArray<A extends unknown[]> = A extends [infer H, ...infer T]
+	? ArrHelper<DistributeUnions<H>, T>
+	: [];
+
+type ObjHelper<K, V> = V extends V ? { [k in K & string]: V } : never;
+
+type DistributeObject<O extends object, K extends keyof O = keyof O> = [
+	K
+] extends [never]
+	? {}
+	: K extends K
+	? ObjHelper<K, DistributeUnions<O[K]>> & DistributeObject<Omit<O, K>>
+	: never;
+
+type DistributeUnions<T> = T extends unknown[]
+	? DistributeArray<T>
+	: T extends object
+	? Merge<DistributeObject<T>>
+	: T;
+
+// TODO retry
 type _1 = DistributeUnions<[0, 1 | 2] | [3 | 4]>;
 //   ^?
 
