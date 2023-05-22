@@ -45,9 +45,101 @@ export const NUMBER_UNITS = [
 	'nineteen',
 ] as const;
 
-export const numberToWords = (number: number): string => {
+type Periods = typeof NUMBER_PERIODS;
+type Tens = typeof NUMBER_TENS;
+type Units = typeof NUMBER_UNITS;
+
+type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+
+type Join<
+	T extends readonly string[],
+	Separator extends string = ',',
+	Result extends string = ''
+> = T extends [infer First extends string, ...infer Rest extends string[]]
+	? Join<
+			Rest,
+			Separator,
+			Result extends '' ? First : `${Result}${Separator}${First}`
+	  >
+	: Result;
+
+type HundredsTuple = Digit | [Digit, Digit] | [Digit, Digit, Digit];
+
+type HundredsToWords<
+	Type extends HundredsTuple,
+	Result extends string[] = []
+> = Type extends [
+	infer Hundred extends Exclude<Digit, '0'>,
+	...infer Rest extends [Digit, Digit]
+]
+	? HundredsToWords<Rest, Hundred extends 0 ? [] : [Units[Hundred], 'hundred']>
+	: Type extends [infer Ten extends Digit, infer Unit extends Digit]
+	? `${Ten}${Unit}` extends `${infer I extends number}`
+		? Join<
+				[
+					...Result,
+					...(Units[I] extends Exclude<Units[number], ''>
+						? [Units[I]]
+						: [Tens[Ten], Units[Unit]])
+				],
+				' '
+		  >
+		: never
+	: Type extends [infer Unit extends Digit]
+	? Join<[...Result, Units[Unit]], ' '>
+	: never;
+
+type NumberToDigits<
+	T extends number,
+	Str extends string = `${T}`,
+	Result extends Digit[] = []
+> = Str extends `${infer First extends Digit}${infer Rest}`
+	? NumberToDigits<never, Rest, [...Result, First]>
+	: Result;
+
+type GroupTuple<
+	T extends unknown[],
+	Size extends number,
+	Curr extends unknown[] = [],
+	Groups extends unknown[][] = []
+> = T extends [...infer Rest, infer Last]
+	? [Last, ...Curr]['length'] extends Size
+		? GroupTuple<Rest, Size, [], [[Last, ...Curr], ...Groups]>
+		: GroupTuple<Rest, Size, [Last, ...Curr], Groups>
+	: Curr extends []
+	? Groups
+	: [Curr, ...Groups];
+
+type NumberToWords<
+	T extends number,
+	Groups extends HundredsTuple[] = GroupTuple<NumberToDigits<T>, 3>,
+	Result extends string[] = [],
+	Postfix extends string = ['', ...Periods][Groups['length']]
+> = number extends T
+	? string
+	: T extends 0
+	? 'zero'
+	: Groups extends [
+			infer First extends HundredsTuple,
+			...infer Rest extends HundredsTuple[]
+	  ]
+	? NumberToWords<
+			never,
+			Rest,
+			[
+				...Result,
+				Postfix extends ''
+					? HundredsToWords<First>
+					: `${HundredsToWords<First>} ${Postfix}`
+			]
+	  >
+	: Join<Result, ', '>;
+
+export const numberToWords = <T extends number>(
+	number: T
+): NumberToWords<T> => {
 	if (isNaN(number)) throw new Error('invalid number!');
-	if (number === 0) return 'zero';
+	if (number === 0) return 'zero' as NumberToWords<T>;
 	const string = Math.abs(number).toString();
 
 	const groups = Array.from(
@@ -77,8 +169,6 @@ export const numberToWords = (number: number): string => {
 		pieces.push(postFix);
 		return pieces.filter(Boolean).join(' ');
 	});
-	return (
-		(number < 0 ? 'minus ' : '') +
-		groupWords.reverse().filter(Boolean).join(', ')
-	);
+	const stringified = groupWords.reverse().filter(Boolean).join(', ');
+	return ((number < 0 ? 'minus ' : '') + stringified) as NumberToWords<T>;
 };
