@@ -122,6 +122,23 @@ type GroupTuple<
 	? Groups
 	: [Curr, ...Groups];
 
+type FractionalToWords<
+	T extends number,
+	Digits extends Digit[] = NumberToDigits<T>,
+	Result extends string[] = []
+> = Digits extends [infer First extends Digit, ...infer Rest extends Digit[]]
+	? FractionalToWords<never, Rest, [...Result, Units[First]]>
+	: ` point ${Join<Result, ' '>}`;
+
+type JoinNumberChunks<
+	T extends number,
+	Result extends string[],
+	Sign extends string = `${T}` extends `-${any}` ? 'minus ' : '',
+	Fraction extends string = `${T}` extends `${any}.${infer F extends number}`
+		? FractionalToWords<F>
+		: ''
+> = `${Sign}${Join<Result, ', '>}${Fraction}`;
+
 type NumberToWords<
 	T extends number,
 	Groups extends HundredsTuple[] = GroupTuple<
@@ -148,11 +165,9 @@ type NumberToWords<
 					: `${HundredsToWords<First>} ${Postfix}`
 			]
 	  >
-	: `${T}` extends `-${any}`
-	? `minus ${Join<Result, ', '>}`
-	: Join<Result, ', '>;
+	: JoinNumberChunks<T, Result>;
 
-type _ = NumberToWords<-1_234_567_890>;
+type _ = NumberToWords<-1_234_567_890.234>;
 //   ^?
 
 export const numberToWords = <T extends number>(
@@ -189,6 +204,16 @@ export const numberToWords = <T extends number>(
 		pieces.push(postFix);
 		return pieces.filter(Boolean).join(' ');
 	});
+
+	const fraction = String(number)
+		.split('.')[1]
+		?.split('')
+		.map((num) => NUMBER_UNITS[Number(num)])
+		.filter(Boolean)
+		.join(' ');
+
 	const stringified = groupWords.reverse().filter(Boolean).join(', ');
-	return ((number < 0 ? 'minus ' : '') + stringified) as NumberToWords<T>;
+	return ((number < 0 ? 'minus ' : '') +
+		stringified +
+		(fraction ? ` point ${fraction}` : '')) as NumberToWords<T>;
 };

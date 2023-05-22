@@ -180,8 +180,9 @@ test('should test numberToWords', () => {
 	assertType<(typeof test25)['response']>(test25.expected);
 
 	const test26 = {
-		response: numberToWords(10.2),
-		expected: 'ten',
+		response: numberToWords(10_423.2978),
+		expected:
+			'ten thousand, four hundred twenty three point two nine seven eight',
 	} as const;
 	expect(test26.response).toStrictEqual(test26.expected);
 	assertType<(typeof test26)['response']>(test26.expected);
