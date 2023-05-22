@@ -59,11 +59,23 @@ type Join<
 	? Join<
 			Rest,
 			Separator,
-			Result extends '' ? First : `${Result}${Separator}${First}`
+			First extends ''
+				? Result
+				: Result extends ''
+				? First
+				: `${Result}${Separator}${First}`
 	  >
 	: Result;
 
-type HundredsTuple = Digit | [Digit, Digit] | [Digit, Digit, Digit];
+type Int<T extends number> = `${T}` extends `${infer I extends number}.${any}`
+	? I
+	: T;
+
+type Unsigned<T extends number> = `${T}` extends `-${infer I extends number}`
+	? I
+	: T;
+
+type HundredsTuple = [Digit] | [Digit, Digit] | [Digit, Digit, Digit];
 
 type HundredsToWords<
 	Type extends HundredsTuple,
@@ -91,7 +103,7 @@ type HundredsToWords<
 
 type NumberToDigits<
 	T extends number,
-	Str extends string = `${T}`,
+	Str extends string = `${T}` extends `-${infer I}` ? I : `${T}`,
 	Result extends Digit[] = []
 > = Str extends `${infer First extends Digit}${infer Rest}`
 	? NumberToDigits<never, Rest, [...Result, First]>
@@ -112,7 +124,10 @@ type GroupTuple<
 
 type NumberToWords<
 	T extends number,
-	Groups extends HundredsTuple[] = GroupTuple<NumberToDigits<T>, 3>,
+	Groups extends HundredsTuple[] = GroupTuple<
+		NumberToDigits<Unsigned<Int<T>>>,
+		3
+	>,
 	Result extends string[] = [],
 	Postfix extends string = ['', ...Periods][Groups['length']]
 > = number extends T
@@ -124,7 +139,7 @@ type NumberToWords<
 			...infer Rest extends HundredsTuple[]
 	  ]
 	? NumberToWords<
-			never,
+			T,
 			Rest,
 			[
 				...Result,
@@ -133,14 +148,19 @@ type NumberToWords<
 					: `${HundredsToWords<First>} ${Postfix}`
 			]
 	  >
+	: `${T}` extends `-${any}`
+	? `minus ${Join<Result, ', '>}`
 	: Join<Result, ', '>;
+
+type _ = NumberToWords<-1_234_567_890>;
+//   ^?
 
 export const numberToWords = <T extends number>(
 	number: T
 ): NumberToWords<T> => {
 	if (isNaN(number)) throw new Error('invalid number!');
 	if (number === 0) return 'zero' as NumberToWords<T>;
-	const string = Math.abs(number).toString();
+	const string = Math.trunc(Math.abs(number)).toString();
 
 	const groups = Array.from(
 		{ length: Math.ceil(string.length / 3) },
