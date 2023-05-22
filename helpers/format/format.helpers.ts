@@ -46,6 +46,7 @@ export const NUMBER_UNITS = [
 ] as const;
 
 export const numberToWords = (number: number): string => {
+	if (isNaN(number)) throw new Error('invalid number!');
 	if (number === 0) return 'zero';
 	const string = Math.abs(number).toString();
 
@@ -56,25 +57,28 @@ export const numberToWords = (number: number): string => {
 			const end = start + 3 || undefined;
 			return string.slice(start, end);
 		}
-	).reverse();
-	const groupPeriods = NUMBER_PERIODS.slice(0, groups.length).reverse();
+	);
 	const groupWords = groups.map((group, index) => {
-		const postFix = groupPeriods[index] as string;
-		const hundredNum = Math.floor(Number(group) / 100);
-		const tenNum = Number(group) % 100;
-		const unitNum = tenNum % 10;
-		const tensCount = Math.floor(tenNum / 10);
-		const pieces: string[] = [NUMBER_UNITS[hundredNum] as string];
-		if (pieces[0]) pieces.push('hundred');
-		const unit = NUMBER_UNITS[tenNum];
+		const postFix = NUMBER_PERIODS[index];
+		const digits = group.padStart(3, '0');
+		const hundreds = NUMBER_UNITS[Number(digits[0])];
+		const pieces = new Array<string | undefined>();
+		pieces.push(hundreds);
+		if (hundreds) pieces.push('hundred');
+		const unit = NUMBER_UNITS[Number(digits.slice(1))];
 		if (unit) {
 			pieces.push(unit);
 		} else {
-			pieces.push(NUMBER_TENS[tensCount] as string);
-			pieces.push(NUMBER_UNITS[unitNum] as string);
+			const tens = NUMBER_TENS[Number(digits[1])];
+			const units = NUMBER_UNITS[Number(digits[2])];
+			pieces.push(tens);
+			pieces.push(units);
 		}
 		pieces.push(postFix);
 		return pieces.filter(Boolean).join(' ');
 	});
-	return (number < 0 ? 'minus ' : '') + groupWords.filter(Boolean).join(', ');
+	return (
+		(number < 0 ? 'minus ' : '') +
+		groupWords.reverse().filter(Boolean).join(', ')
+	);
 };
