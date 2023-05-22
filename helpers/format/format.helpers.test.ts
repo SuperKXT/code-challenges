@@ -193,4 +193,12 @@ test('should test numberToWords', () => {
 	} as const;
 	expect(test27.response).toStrictEqual(test27.expected);
 	assertType<(typeof test27)['response']>(test27.expected);
+
+	const test28 = {
+		response: numberToWords(-1_234_567_890_123_456),
+		expected:
+			'minus one quadrillion, two hundred thirty four trillion, five hundred sixty seven billion, eight hundred ninety million, one hundred twenty three thousand, four hundred fifty six',
+	} as const;
+	expect(test28.response).toStrictEqual(test28.expected);
+	assertType<(typeof test28)['response']>(test28.expected);
 });
