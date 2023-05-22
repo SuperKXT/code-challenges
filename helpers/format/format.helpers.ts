@@ -167,9 +167,6 @@ type NumberToWords<
 	  >
 	: JoinNumberChunks<T, Result>;
 
-type _ = NumberToWords<-1_234_567_890.234>;
-//   ^?
-
 export const numberToWords = <T extends number>(
 	number: T
 ): NumberToWords<T> => {
