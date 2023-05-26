@@ -3,8 +3,7 @@ import crypto from 'crypto';
 import chalk from 'chalk';
 import prompt from 'prompt';
 
-// eslint-disable-next-line no-restricted-imports
-import { confirmPrompt } from '../../helpers/prompt';
+import { confirmPrompt } from '~/helpers/prompt';
 
 const MAX_CHOICE = 5;
 const PRIZE = 10;

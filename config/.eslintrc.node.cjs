@@ -227,8 +227,13 @@ const config = {
 				'vitest/max-expects': ['error', { max: 10 }],
 			},
 		},
+		{
+			files: ['**/*.cjs'],
+			rules: {
+				'import/no-commonjs': 'off',
+			},
+		},
 	],
 };
 
-// eslint-disable-next-line import/no-commonjs
 module.exports = config;

@@ -277,8 +277,13 @@ const config = {
 				'testing-library/prefer-wait-for': 'warn',
 			},
 		},
+		{
+			files: ['**/*.cjs'],
+			rules: {
+				'import/no-commonjs': 'off',
+			},
+		},
 	],
 };
 
-// eslint-disable-next-line import/no-commonjs
 module.exports = config;
