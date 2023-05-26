@@ -61,7 +61,7 @@ type PersonInfo = {
 	hobbies: ['sing', 'dance'];
 	readonlyArr: readonly ['test'];
 	fn: () => any;
-}
+};
 
 type ExpectedResult = {
 	name: string;
@@ -74,7 +74,7 @@ type ExpectedResult = {
 	hobbies: [string, string];
 	readonlyArr: readonly [string];
 	fn: Function;
-}
+};
 
 type _cases = [Expect<Equal<ToPrimitive<PersonInfo>, ExpectedResult>>];
 

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-redundant-type-constituents */
-/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 /* eslint-disable no-multi-assign */

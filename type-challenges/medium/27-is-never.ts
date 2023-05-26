@@ -37,7 +37,6 @@ type _cases = [
 	Expect<Equal<IsNever<undefined>, false>>,
 	Expect<Equal<IsNever<null>, false>>,
 	Expect<Equal<IsNever<[]>, false>>,
-	// eslint-disable-next-line @typescript-eslint/ban-types
 	Expect<Equal<IsNever<{}>, false>>
 ];
 

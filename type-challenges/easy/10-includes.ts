@@ -39,7 +39,6 @@ type _cases = [
 	Expect<Equal<Includes<[1, 2, 3, 5, 6, 7], 4>, false>>,
 	Expect<Equal<Includes<[1, 2, 3], 2>, true>>,
 	Expect<Equal<Includes<[1, 2, 3], 1>, true>>,
-	// eslint-disable-next-line @typescript-eslint/ban-types
 	Expect<Equal<Includes<[{}], { a: 'A' }>, false>>,
 	Expect<Equal<Includes<[boolean, 2, 3, 5, 6, 7], false>, false>>,
 	Expect<Equal<Includes<[true, 2, 3, 5, 6, 7], boolean>, false>>,

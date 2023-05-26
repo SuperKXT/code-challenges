@@ -207,6 +207,15 @@ const config = {
 					'warn',
 					{ allowAny: true },
 				],
+				'@typescript-eslint/ban-types': [
+					'warn',
+					{
+						types: {
+							'{}': false,
+							extendDefaults: true,
+						},
+					},
+				],
 
 				// TODO these are turned off because eslint is slow and incorrectly keeps inferring types as any
 				'@typescript-eslint/no-unsafe-argument': 'off',
