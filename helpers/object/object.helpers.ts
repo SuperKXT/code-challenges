@@ -30,12 +30,8 @@ export const pick = <
 	object: Type,
 	keys: Key | Key[]
 ): Prettify<Pick<Type, Key>> => {
-	const keyArray = Array.isArray(keys) ? keys : [keys];
-	return objectEntries<Key, unknown>(object).reduce<Pick<Type, Key>>(
-		(obj, [key, value]) => {
-			if (!keyArray.includes(key)) return obj;
-			return { ...obj, [key]: value };
-		},
-		{} as Pick<Type, Key>
-	);
+	const keySet = new Set<PropertyKey>(Array.isArray(keys) ? keys : [keys]);
+	return Object.fromEntries(
+		Object.entries(object).filter(([key]) => keySet.has(key))
+	) as Prettify<Pick<Type, Key>>;
 };

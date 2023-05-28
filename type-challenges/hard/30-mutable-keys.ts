@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 /*
   5181 - Mutable Keys
   -------

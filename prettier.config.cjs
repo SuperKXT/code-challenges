@@ -6,5 +6,4 @@ const config = {
 	singleAttributePerLine: true,
 };
 
-// eslint-disable-next-line import/no-commonjs
 module.exports = config;

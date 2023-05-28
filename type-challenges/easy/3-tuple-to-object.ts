@@ -54,7 +54,6 @@ type _cases = [
 ];
 
 // @ts-expect-error error on incorrect tuple
-// eslint-disable-next-line @typescript-eslint/ban-types
 type _error = TupleToObject<[[1, 2], {}]>;
 
 /* _____________ Further Steps _____________ */

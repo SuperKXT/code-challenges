@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 /*
   472 - Tuple to Enum Object
   -------

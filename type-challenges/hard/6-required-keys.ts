@@ -45,7 +45,6 @@ type _cases = [
 			'a' | 'c' | 'd'
 		>
 	>,
-	// eslint-disable-next-line @typescript-eslint/ban-types
 	Expect<Equal<RequiredKeys<{}>, never>>
 ];
 

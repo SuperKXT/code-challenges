@@ -36,7 +36,7 @@ describe('testing objectValues', () => {
 	});
 });
 
-describe('testing omitKey', () => {
+describe('testing omit', () => {
 	it('should remove a single key from object', () => {
 		const omitted = { first: 1 };
 		const object = { ...omitted, second: 2 };
@@ -53,7 +53,7 @@ describe('testing omitKey', () => {
 	});
 });
 
-describe('testing pickKey', () => {
+describe('testing pick', () => {
 	it('should pick a single key from object', () => {
 		const picked = { a: 1 };
 		const object = { ...picked, b: 2 };

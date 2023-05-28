@@ -15,20 +15,74 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Pure<T> = {
-	[P in keyof T]: T[P] extends object ? Pure<T[P]> : T[P];
-};
+type Merge<T> = { [P in keyof T]: T[P] };
 
-type SetProperty<T, K extends PropertyKey, V> = {
-	[P in keyof T | K]: P extends K ? V : P extends keyof T ? T[P] : never;
-};
+type Escapes = ' ' | '\n' | '\t';
+type EscapeMap = { r: '\r'; n: '\n'; b: '\b'; f: '\f' };
 
-type Token = any;
-type ParseResult<T, K extends Token[]> = [T, K];
-type Tokenize<T extends string, S extends Token[] = []> = Token[];
-type ParseLiteral<T extends Token[]> = ParseResult<any, T>;
+type Parse<T extends string> = Eval<T> extends [infer V, any] ? V : never;
 
-type Parse<T extends string> = Pure<ParseLiteral<Tokenize<T>>[0]>;
+type Eval<T> = T extends `${Escapes}${infer U}`
+	? Eval<U>
+	: T extends `true${infer U}`
+	? [true, U]
+	: T extends `false${infer U}`
+	? [false, U]
+	: T extends `null${infer U}`
+	? [null, U]
+	: T extends `"${infer U}`
+	? EvalString<U>
+	: T extends `${'['}${infer U}`
+	? EvalArray<U>
+	: T extends `${'{'}${infer U}`
+	? EvalObject<U>
+	: false;
+
+type EvalString<T, S extends string = ''> = T extends `"${infer U}`
+	? [S, U]
+	: (
+			T extends `\\${infer C}${infer U}`
+				? C extends keyof EscapeMap
+					? [EscapeMap[C], U]
+					: false
+				: false
+	  ) extends [infer C extends string, infer U]
+	? EvalString<U, `${S}${C}`>
+	: T extends `${infer C}${infer U}`
+	? EvalString<U, `${S}${C}`>
+	: false;
+
+type EvalArray<T, A extends any[] = []> = T extends `${Escapes}${infer U}`
+	? EvalArray<U, A>
+	: T extends `]${infer U}`
+	? [A, U]
+	: T extends `,${infer U}`
+	? EvalArray<U, A>
+	: Eval<T> extends [infer V, infer U]
+	? EvalArray<U, [...A, V]>
+	: false;
+
+type EvalObject<
+	T,
+	K extends string = '',
+	O = {}
+> = T extends `${Escapes}${infer U}`
+	? EvalObject<U, K, O>
+	: T extends `}${infer U}`
+	? [O, U]
+	: T extends `,${infer U}`
+	? EvalObject<U, K, O>
+	: T extends `"${infer U}`
+	? Eval<`"${U}`> extends [`${infer KK}`, infer UU]
+		? EvalObject<UU, KK, O>
+		: false
+	: T extends `:${infer U}`
+	? Eval<U> extends [infer V, infer UU]
+		? EvalObject<UU, '', Merge<{ [P in K]: V } & O>>
+		: false
+	: false;
+
+// TODO retry
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

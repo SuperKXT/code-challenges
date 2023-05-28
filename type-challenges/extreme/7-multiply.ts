@@ -26,19 +26,75 @@
 
 /* _____________ Your Code Here _____________ */
 
+type Reverse<A extends string | number | bigint> =
+	`${A}` extends `${infer AH}${infer AT extends string | number | bigint}`
+		? `${Reverse<AT>}${AH}`
+		: `${A}`;
+
+type DigsNext = {
+	0: 1;
+	1: 2;
+	2: 3;
+	3: 4;
+	4: 5;
+	5: 6;
+	6: 7;
+	7: 8;
+	8: 9;
+};
+
+type DigsPrev = { [K in keyof DigsNext as DigsNext[K]]: K };
+
+type AddOne<A extends string> =
+	A extends `${infer AH extends number}${infer AT}`
+		? AH extends 9
+			? `0${AddOne<AT>}`
+			: AH extends keyof DigsNext
+			? `${DigsNext[AH]}${AT}`
+			: never
+		: `1`;
+
+type SubOne<A> = A extends `${infer AH extends number}${infer AT}`
+	? AH extends 0
+		? `9${SubOne<AT>}`
+		: AH extends keyof DigsPrev
+		? `${DigsPrev[AH]}${AT}`
+		: never
+	: never;
+
+type Add<
+	A extends string,
+	B extends string
+> = A extends `${infer AH}${infer AT}`
+	? B extends `${infer BH}${infer BT}`
+		? BH extends '0'
+			? `${AH}${Add<AT, BT>}`
+			: Add<AddOne<A>, SubOne<B>>
+		: A
+	: B;
+
+type Mul<
+	A extends string,
+	B extends string,
+	R extends string = '0'
+> = A extends '0'
+	? R
+	: B extends '0'
+	? R
+	: A extends `${infer AH}${infer AT}`
+	? AH extends '0'
+		? Mul<AT, `0${B}`, R>
+		: Mul<SubOne<A>, B, Add<R, B>>
+	: R;
+
+// todo RETRY
 type Multiply<
 	A extends string | number | bigint,
-	B extends string | number | bigint,
-	Times extends number = UnsignedInt<B>,
-	Idx extends 1[] = [],
-	Result extends number = 0
-> = Idx['length'] extends Times
-	? `${Result}`
-	: Multiply<A, B, Times, [...Idx, 1], Sum<Result, A>>;
+	B extends string | number | bigint
+> = Reverse<Mul<Reverse<A>, Reverse<B>>>;
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils';
-import type { Sum, UnsignedInt } from './6-sum';
 
 type _cases = [
 	Expect<Equal<Multiply<2, 3>, '6'>>,

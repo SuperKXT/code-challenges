@@ -1,31 +1,44 @@
-import { arrayToLinkedList } from './linked-list.helpers';
+import { arrayToLinkedList, insertToLinkedList } from './linked-list.helpers';
 
-import type { LinkedList } from './linked-list.types';
+test('testing arrayToLinkedList helper', () => {
+	const test1 = {
+		response: arrayToLinkedList([1, 2, 3]),
+		expected: {
+			head: { value: 1, next: { value: 2, next: { value: 3, next: null } } },
+		} as const,
+	};
+	expect(test1.response).toStrictEqual(test1.expected);
+	assertType<(typeof test1)['response']>(test1.expected);
 
-type Test<Type> = {
-	array: Type[];
-	list: LinkedList<Type>;
-}
+	const test2 = {
+		response: arrayToLinkedList([]),
+		expected: { head: null } as const,
+	};
+	expect(test2.response).toStrictEqual(test2.expected);
+	assertType<(typeof test2)['response']>(test2.expected);
+});
 
-const TESTS: Test<number>[] = [
-	{
-		array: [1, 2, 3],
+test('testing insertToLinkedList helper', () => {
+	const test1 = {
 		list: {
-			head: { next: { next: { next: null, value: 3 }, value: 2 }, value: 1 },
-		},
-	},
-	{
-		array: [],
-		list: { head: null },
-	},
-];
+			head: { value: 1, next: { value: 2, next: { value: 3, next: null } } },
+		} as const,
+		expected: {
+			head: {
+				value: 1,
+				next: { value: 2, next: { value: 3, next: { value: 4, next: null } } },
+			},
+		} as const,
+	};
+	const response1 = insertToLinkedList(test1.list, 4);
+	expect(response1).toStrictEqual(test1.expected);
+	assertType<typeof response1>(test1.expected);
 
-describe('array to linked list helper', () => {
-	it.each(TESTS)(
-		'should return linked list by the given array',
-		({ array, list }) => {
-			const response = arrayToLinkedList(array);
-			expect(JSON.stringify(response)).toStrictEqual(JSON.stringify(list));
-		}
-	);
+	const test2 = {
+		list: { head: null } as const,
+		expected: { head: { value: 1, next: null } } as const,
+	};
+	const response2 = insertToLinkedList(test2.list, 1);
+	expect(response2).toStrictEqual(test2.expected);
+	assertType<typeof response2>(test2.expected);
 });

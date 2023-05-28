@@ -18,7 +18,18 @@
 
 /* _____________ Your Code Here _____________ */
 
-type InclusiveRange<Lower extends number, Higher extends number> = any;
+type Tuple<T extends number, R extends 1[] = []> = R['length'] extends T
+	? R
+	: Tuple<T, [...R, 1]>;
+
+type InclusiveRange<
+	Lower extends number,
+	Higher extends number,
+	Idx extends 1[] = Tuple<Lower>,
+	Result extends number[] = []
+> = Idx[Higher] extends undefined
+	? InclusiveRange<Lower, Higher, [...Idx, 1], [...Result, Idx['length']]>
+	: Result;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

@@ -33,7 +33,7 @@ test('should test isObject helper', () => {
 	expect(isObject(2)).toBeFalsy();
 	expect(isObject({ fist: 'of fury' })).toBeTruthy();
 	const a: any = 2;
-	isObject(a) && assertType<GenericObject>(a);
+	isObject(a) && assertType<Obj>(a);
 });
 
 test('should test isArray helper', () => {
@@ -46,19 +46,19 @@ test('should test isArray helper', () => {
 	const a: any = 2;
 	isArray(a) && assertType<unknown[]>(a);
 	isArray(a, isNumber) && assertType<number[]>(a);
-	isArray(a, isObject) && assertType<GenericObject[]>(a);
+	isArray(a, isObject) && assertType<Obj[]>(a);
 });
 
 test('should test assertObject helper', () => {
 	let a: any = 2;
 	expect(() => {
 		assertObject(a);
-		assertType<GenericObject>(a);
+		assertType<Obj>(a);
 	}).toThrow('Expected object, received number');
 	expect(() => {
 		a = { fist: 'of fury' };
 		assertObject(a);
-		assertType<GenericObject>(a);
+		assertType<Obj>(a);
 	}).not.toThrow();
 	expect(() => assertObject({ fist: 'of fury' })).not.toThrow();
 });
@@ -78,7 +78,7 @@ test('should test assertArray helper', () => {
 	expect(() => {
 		a = [2, 3];
 		assertArray(a, assertObject);
-		assertType<GenericObject[]>(a);
+		assertType<Obj[]>(a);
 	}).toThrow('Invalid array member. Expected object, received number');
 	expect(() => {
 		a = [2];
