@@ -56,4 +56,11 @@ export namespace Utils {
 	>() => G extends U ? 1 : 2
 		? true
 		: false;
+
+	/** takes a union of types and converts it into intersection of the types */
+	export type unionToIntersection<T> = (
+		T extends any ? (x: T) => any : never
+	) extends (x: infer U) => any
+		? U
+		: never;
 }
