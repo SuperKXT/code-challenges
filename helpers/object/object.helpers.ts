@@ -1,3 +1,5 @@
+import type { Utils } from '~/types/utils';
+
 export const objectEntries = <Keys extends PropertyKey, Type>(
 	object: Record<Keys, Type>
 ) => Object.entries(object) as [Keys, Type][];
@@ -16,11 +18,11 @@ export const omit = <
 >(
 	object: Type,
 	keys: Key | Key[]
-): Prettify<Omit<Type, Key>> => {
+): Utils.prettify<Omit<Type, Key>> => {
 	const keySet = new Set<PropertyKey>(Array.isArray(keys) ? keys : [keys]);
 	return Object.fromEntries(
 		Object.entries(object).filter(([key]) => !keySet.has(key))
-	) as Prettify<Omit<Type, Key>>;
+	) as Utils.prettify<Omit<Type, Key>>;
 };
 
 export const pick = <
@@ -29,9 +31,9 @@ export const pick = <
 >(
 	object: Type,
 	keys: Key | Key[]
-): Prettify<Pick<Type, Key>> => {
+): Utils.prettify<Pick<Type, Key>> => {
 	const keySet = new Set<PropertyKey>(Array.isArray(keys) ? keys : [keys]);
 	return Object.fromEntries(
 		Object.entries(object).filter(([key]) => keySet.has(key))
-	) as Prettify<Pick<Type, Key>>;
+	) as Utils.prettify<Pick<Type, Key>>;
 };

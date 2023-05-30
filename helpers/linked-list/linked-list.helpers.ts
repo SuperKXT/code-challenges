@@ -1,3 +1,5 @@
+import type { Utils } from '~/types/utils';
+
 export type LinkedListNode<Type = unknown> = {
 	value: Type;
 	next: LinkedListNode<Type>;
@@ -7,14 +9,17 @@ export type LinkedList<Type> = {
 	head: LinkedListNode<Type>;
 };
 
-type InsertToNode<Node extends NonNullable<LinkedListNode>, Val> = Prettify<{
+type InsertToNode<
+	Node extends NonNullable<LinkedListNode>,
+	Val
+> = Utils.prettify<{
 	value: Node['value'];
 	next: Node['next'] extends NonNullable<LinkedListNode>
 		? InsertToNode<Node['next'], Val>
 		: { value: Val; next: null };
 }>;
 
-type InsertNode<List extends LinkedList<any>, Val> = Prettify<{
+type InsertNode<List extends LinkedList<any>, Val> = Utils.prettify<{
 	head: List['head'] extends NonNullable<LinkedListNode>
 		? InsertToNode<List['head'], Val>
 		: { value: Val; next: null };

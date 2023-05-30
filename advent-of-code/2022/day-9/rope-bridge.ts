@@ -1,3 +1,5 @@
+import type { Utils } from '~/types/utils';
+
 const ROW = [0, 1, 2, 3, 4] as const;
 type Row = (typeof ROW)[number];
 
@@ -7,7 +9,7 @@ type Col = (typeof COL)[number];
 type Position = {
 	row: Row;
 	col: Col;
-}
+};
 
 const MOVE = ['R', 'L', 'U', 'D'] as const;
 type Move = (typeof MOVE)[number];
@@ -35,7 +37,7 @@ export const ropeBridge = (
 } => {
 	const rope = Array.from({ length: 10 }, () => [
 		{ ...start },
-	]) as RepeatedTuple<Position[], 9>;
+	]) as Utils.repeatedTuple<Position[], 9>;
 
 	const head = rope.at(0) as Position[];
 	const firstTail = rope.at(1) as Position[];

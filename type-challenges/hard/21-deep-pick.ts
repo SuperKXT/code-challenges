@@ -1,3 +1,4 @@
+/* eslint-disable import/first */
 /* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 /*
   956 - DeepPick
@@ -52,14 +53,14 @@ type DeepPick<
 		? Pick<T, U>
 		: U extends `${infer F extends keyof T & string}.${infer R}`
 		? T[F] extends Record<string, unknown>
-			? Prettify<{ [K in F]: DeepPick<T[F], R> }>
+			? Utils.prettify<{ [K in F]: DeepPick<T[F], R> }>
 			: Pick<T, F>
 		: never
 >;
 
 /* _____________ Test Cases _____________ */
-// eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
+import type { Utils } from '~/types/utils';
 
 type TObj = {
 	a: number;

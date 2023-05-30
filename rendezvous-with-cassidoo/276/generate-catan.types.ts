@@ -1,3 +1,5 @@
+import type { Utils } from '~/types/utils';
+
 export const SINGLE_PIECES = ['.', '2', 'C'] as const;
 
 export const DOUBLE_PIECES = ['3', '4', '5', '6', '8', '9', 'A', 'B'] as const;
@@ -7,19 +9,19 @@ export type Cell =
 	| (typeof SINGLE_PIECES)[number];
 
 export type Board = [
-	RepeatedTuple<Cell, 3>,
-	RepeatedTuple<Cell, 4>,
-	RepeatedTuple<Cell, 5>,
-	RepeatedTuple<Cell, 4>,
-	RepeatedTuple<Cell, 3>
+	Utils.repeatedTuple<Cell, 3>,
+	Utils.repeatedTuple<Cell, 4>,
+	Utils.repeatedTuple<Cell, 5>,
+	Utils.repeatedTuple<Cell, 4>,
+	Utils.repeatedTuple<Cell, 3>
 ];
 
 export type ProspectiveBoard = [
-	RepeatedTuple<Cell | '', 3>,
-	RepeatedTuple<Cell | '', 4>,
-	RepeatedTuple<Cell | '', 5>,
-	RepeatedTuple<Cell | '', 4>,
-	RepeatedTuple<Cell | '', 3>
+	Utils.repeatedTuple<Cell | '', 3>,
+	Utils.repeatedTuple<Cell | '', 4>,
+	Utils.repeatedTuple<Cell | '', 5>,
+	Utils.repeatedTuple<Cell | '', 4>,
+	Utils.repeatedTuple<Cell | '', 3>
 ];
 
 const ROW_PIECES = [3, 4, 5, 4, 3] as const;

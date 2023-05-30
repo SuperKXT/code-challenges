@@ -1,3 +1,4 @@
+/* eslint-disable import/first */
 /*
   151 - Query String Parser
   -------
@@ -19,7 +20,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type CombineObj<K extends string, V, O extends object> = Prettify<
+type CombineObj<K extends string, V, O extends object> = Utils.prettify<
 	{
 		[key in K]: key extends keyof O
 			? O[key] extends any[]
@@ -47,8 +48,8 @@ type ParseQueryString<T extends string, O extends object = {}> = T extends ''
 	: ParseQueryString<'', QueryObject<T, O>>;
 
 /* _____________ Test Cases _____________ */
-// eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
+import type { Utils } from '~/types/utils';
 
 type _cases = [
 	Expect<Equal<ParseQueryString<''>, {}>>,

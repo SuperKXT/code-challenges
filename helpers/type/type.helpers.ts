@@ -1,3 +1,5 @@
+import type { Utils } from '~/types/utils';
+
 export const readableTypeOf = (value: any) => {
 	if (typeof value !== 'object') return typeof value;
 	if (value === null) return 'null';
@@ -8,7 +10,7 @@ export const readableTypeOf = (value: any) => {
 export const isObject = (value: any): value is Obj =>
 	readableTypeOf(value) === 'object';
 
-export const assertObject: AssertFunction<Obj> = (value) => {
+export const assertObject: Utils.assertFunction<Obj> = (value) => {
 	const type = readableTypeOf(value);
 	if (type !== 'object')
 		throw new TypeError(`Expected object, received ${type}`);
@@ -23,7 +25,7 @@ export const isArray = <Type = unknown>(
 
 type AssertArray = <Type = unknown>(
 	value: any,
-	checker?: AssertFunction<Type>
+	checker?: Utils.assertFunction<Type>
 ) => asserts value is Type[];
 
 export const assertArray: AssertArray = (value, checker) => {

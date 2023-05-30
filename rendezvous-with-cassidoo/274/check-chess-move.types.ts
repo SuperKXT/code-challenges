@@ -1,3 +1,5 @@
+import type { Utils } from '~/types/utils';
+
 export const BLACK_PIECES = ['p', 'r', 'b', 'n', 'q', 'k'] as const;
 export type BlackPiece = (typeof BLACK_PIECES)[number];
 
@@ -20,10 +22,10 @@ export type IsValidMoveArgs = {
 	board: string;
 	from: Position;
 	to: Position;
-}
+};
 
-type Row = RepeatedTuple<Piece | '~', 8>;
-export type Board = RepeatedTuple<Row, 8>;
+type Row = Utils.repeatedTuple<Piece | '~', 8>;
+export type Board = Utils.repeatedTuple<Row, 8>;
 
 export const CHESS_ERRORS = {
 	badBishop: 'the bishop can only move diagonally',
@@ -45,17 +47,17 @@ export type ChessError = (typeof CHESS_ERRORS)[keyof typeof CHESS_ERRORS];
 
 type AgnosticChessResponse = {
 	isValid: boolean;
-}
+};
 
 type ErrorChessResponse = {
 	isValid: false;
 	error: ChessError;
-} & AgnosticChessResponse
+} & AgnosticChessResponse;
 
 type ValidChessResponse = {
 	isValid: true;
 	isKill: boolean;
 	path: Position[];
-} & AgnosticChessResponse
+} & AgnosticChessResponse;
 
 export type ChessResponse = ErrorChessResponse | ValidChessResponse;

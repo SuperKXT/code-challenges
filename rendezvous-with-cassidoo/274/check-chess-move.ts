@@ -6,6 +6,7 @@ import {
 	COORDS,
 } from './check-chess-move.types';
 
+import type { Utils } from '~/types/utils';
 import type {
 	BlackPiece,
 	Board,
@@ -17,7 +18,7 @@ import type {
 	ChessError,
 } from './check-chess-move.types';
 
-const assertBoard: AssertFunction<Board> = (board: any) => {
+const assertBoard: Utils.assertFunction<Board> = (board: any) => {
 	if (!Array.isArray(board) || board.length !== 8)
 		throw new Error(CHESS_ERRORS.badRows);
 

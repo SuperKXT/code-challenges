@@ -1,11 +1,12 @@
 import { divisibleIntegers } from './divisible-integers';
 
+import type { Utils } from '~/types/utils';
 import type { DivisibleIntegerN } from './divisible-integers';
 
 type Test = {
 	input: number[];
-	outputs: RepeatedTuple<boolean, 9>;
-}
+	outputs: Utils.repeatedTuple<boolean, 9>;
+};
 
 const tests: Test[] = [
 	{

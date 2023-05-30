@@ -1,4 +1,5 @@
 import type { Equal, Expect } from '@type-challenges/utils';
+import type { Utils } from '~/types/utils';
 
 /**
  * Type that takes a union and adds missing properties to all branches
@@ -6,7 +7,7 @@ import type { Equal, Expect } from '@type-challenges/utils';
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 
-type Cover<T, U = T> = Prettify<
+type Cover<T, U = T> = Utils.prettify<
 	U extends U
 		? {
 				[K in keyof U]: U[K];

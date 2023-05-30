@@ -1,3 +1,4 @@
+/* eslint-disable import/first */
 /* eslint-disable unused-imports/no-unused-vars */
 /*
   26401 - JSON Schema to TypeScript
@@ -18,7 +19,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type RequireKeys<T extends object, K = never> = Prettify<
+type RequireKeys<T extends object, K = never> = Utils.prettify<
 	{
 		[key in keyof T as key extends K ? key : never]-?: T[key];
 	} & {
@@ -73,8 +74,8 @@ type JSONSchema2TS<T extends JsonType> = T extends {
 	: never;
 
 /* _____________ Test Cases _____________ */
-// eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
+import type { Utils } from '~/types/utils';
 
 // + Primitive types
 type Type1 = JSONSchema2TS<{
