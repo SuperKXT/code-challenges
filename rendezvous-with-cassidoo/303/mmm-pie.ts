@@ -26,15 +26,6 @@ type MmmPie<
 	? Result['length']
 	: [...Result, 1]['length'];
 
-const _people = [
-	{ name: 'Joe', num: 9 },
-	{ name: 'Cami', num: 3 },
-	{ name: 'Cassidy', num: 4 },
-] as const;
-
-type _ = MmmPie<typeof _people, 8>;
-//   ^?;
-
 export const mmmPie = <
 	const People extends readonly person[],
 	Pieces extends number
