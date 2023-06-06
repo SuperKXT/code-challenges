@@ -1,6 +1,6 @@
 # Find if the binary of a number is a palindrome
 
-[issue #300 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/if-you-really-want-something-you-can-figure-out/)
+[issue #301 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/if-you-really-want-something-you-can-figure-out/)
 
 ## Description
 
