@@ -237,7 +237,7 @@ const config = {
 			},
 		},
 		{
-			files: ['**/*.cjs'],
+			files: ['**/*.cjs', '**/*.js'],
 			rules: {
 				'import/no-commonjs': 'off',
 			},
