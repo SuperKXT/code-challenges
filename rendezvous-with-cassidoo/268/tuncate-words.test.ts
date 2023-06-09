@@ -3,7 +3,7 @@ import { truncateWords } from './truncate-words';
 type Test = {
 	input: [string, number];
 	output: string;
-}
+};
 
 const TESTS: Test[] = [
 	{ input: ['never gonna give you up', 3], output: 'nev gon giv you up' },
@@ -21,12 +21,7 @@ const TESTS: Test[] = [
 	},
 ];
 
-describe('testing truncateWords', () => {
-	it.each(TESTS)(
-		'should return string with truncated words',
-		({ input, output }) => {
-			const response = truncateWords(...input);
-			expect(response).toStrictEqual(output);
-		}
-	);
+test.each(TESTS)('testing truncateWords', ({ input, output }) => {
+	const response = truncateWords(...input);
+	expect(response).toStrictEqual(output);
 });

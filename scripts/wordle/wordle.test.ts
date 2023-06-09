@@ -6,7 +6,7 @@ import type { Arguments } from './wordle';
 type Test = {
 	args: Partial<Arguments>;
 	results: WordleWord[];
-}
+};
 
 const TEST_CASES: Test[] = [
 	{
@@ -89,15 +89,10 @@ const TEST_CASES: Test[] = [
 	},
 ];
 
-describe('find wordle word', () => {
-	it.each(TEST_CASES)(
-		'should find matched words by the given flags',
-		({ args, results }) => {
-			const response = findWordle({
-				...DEFAULT_ARGS,
-				...args,
-			} as typeof DEFAULT_ARGS);
-			expect(response).toStrictEqual(results);
-		}
-	);
+test.each(TEST_CASES)('testing findWordle', ({ args, results }) => {
+	const response = findWordle({
+		...DEFAULT_ARGS,
+		...args,
+	} as typeof DEFAULT_ARGS);
+	expect(response).toStrictEqual(results);
 });

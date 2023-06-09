@@ -29,18 +29,17 @@ const EXAMPLE = [
 	'7214296 k',
 ].join('\n');
 
-describe('testing raumdeuter', () => {
-	it('should return the correct solution for example test', () => {
-		expect(raumdeuter(EXAMPLE)).toStrictEqual({
-			deletedSize: 24933642,
-			smallFiles: 95437,
-		});
+test('testing raumdeuter against example input', () => {
+	expect(raumdeuter(EXAMPLE)).toStrictEqual({
+		deletedSize: 24933642,
+		smallFiles: 95437,
 	});
-	it('should return the correct solution for the input file', async () => {
-		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
-		expect(raumdeuter(input)).toStrictEqual({
-			deletedSize: 366028,
-			smallFiles: 1086293,
-		});
+});
+
+test('testing raumdeuter against real input', async () => {
+	const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
+	expect(raumdeuter(input)).toStrictEqual({
+		deletedSize: 366028,
+		smallFiles: 1086293,
 	});
 });

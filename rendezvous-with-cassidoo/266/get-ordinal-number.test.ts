@@ -5,7 +5,7 @@ import type { OrdinalNumber } from './get-ordinal-number';
 type Test = {
 	input: number;
 	output: OrdinalNumber;
-}
+};
 
 const TESTS: Test[] = [
 	{ input: 0, output: '0th' },
@@ -22,12 +22,7 @@ const TESTS: Test[] = [
 	{ input: 1049, output: '1049th' },
 ];
 
-describe('testing getOrdinalNumber', () => {
-	it.each(TESTS)(
-		'should return the ordinal string for the given number',
-		({ input, output }) => {
-			const response = getOrdinalNumber(input);
-			expect(response).toStrictEqual(output);
-		}
-	);
+test.each(TESTS)('testing getOrdinalNumber', ({ input, output }) => {
+	const response = getOrdinalNumber(input);
+	expect(response).toStrictEqual(output);
 });

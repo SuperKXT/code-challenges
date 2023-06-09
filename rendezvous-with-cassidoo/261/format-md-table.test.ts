@@ -3,7 +3,7 @@ import { formatMarkdownTable } from './format-md-table';
 type Test = {
 	input: string;
 	output: string;
-}
+};
 
 const TESTS: Test[] = [
 	{
@@ -74,12 +74,7 @@ const TESTS: Test[] = [
 	},
 ];
 
-describe('format markdown table string', () => {
-	it.each(TESTS)(
-		'should return correctly formatted markdown',
-		({ input, output }) => {
-			const formatted = formatMarkdownTable(input);
-			expect(formatted).toStrictEqual(output);
-		}
-	);
+test.each(TESTS)('testing formatMarkdownTable', ({ input, output }) => {
+	const formatted = formatMarkdownTable(input);
+	expect(formatted).toStrictEqual(output);
 });

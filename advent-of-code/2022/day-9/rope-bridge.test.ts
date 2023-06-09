@@ -20,31 +20,31 @@ const EXAMPLE_2 = [
 
 type Solution = ReturnType<typeof ropeBridge>;
 
-describe('testing ropeBridge', () => {
-	it('should return the correct solution for example test', () => {
-		const response = ropeBridge(EXAMPLE, {
-			col: 0,
-			row: 4,
-		});
-		const solution: Solution = {
-			firstTail: 13,
-			lastTail: 1,
-		};
-		expect(response).toStrictEqual(solution);
+test('testing ropeBridge against example input', () => {
+	const response = ropeBridge(EXAMPLE, {
+		col: 0,
+		row: 4,
 	});
-	it('should return the correct solution for the 2nd example test', () => {
-		const solution: Solution = {
-			firstTail: 88,
-			lastTail: 36,
-		};
-		expect(ropeBridge(EXAMPLE_2)).toStrictEqual(solution);
-	});
-	it('should return the correct solution for the input file', async () => {
-		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
-		const solution: Solution = {
-			firstTail: 5902,
-			lastTail: 2445,
-		};
-		expect(ropeBridge(input)).toStrictEqual(solution);
-	});
+	const solution: Solution = {
+		firstTail: 13,
+		lastTail: 1,
+	};
+	expect(response).toStrictEqual(solution);
+});
+
+test('testing ropeBridge against 2nd example input', () => {
+	const solution: Solution = {
+		firstTail: 88,
+		lastTail: 36,
+	};
+	expect(ropeBridge(EXAMPLE_2)).toStrictEqual(solution);
+});
+
+test('testing ropeBridge against real input', async () => {
+	const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
+	const solution: Solution = {
+		firstTail: 5902,
+		lastTail: 2445,
+	};
+	expect(ropeBridge(input)).toStrictEqual(solution);
 });

@@ -29,23 +29,22 @@ const EXAMPLE = `[1,1,3,1,1]
 
 type Solution = ReturnType<typeof orderedPairs>;
 
-describe('testing orderedPairs', () => {
-	it('should return the correct solution for example test', () => {
-		const response = orderedPairs(EXAMPLE);
-		const solution: Solution = {
-			indicesSum: 13,
-			part2: 140,
-		};
-		expect(response).toStrictEqual(solution);
-	});
-	it('should return the correct solution for the input file', async () => {
-		const input = (
-			await readFile(path.join(__dirname, 'input.txt'), 'utf-8')
-		).slice(0, -1);
-		const solution: Solution = {
-			indicesSum: 5013,
-			part2: 25038,
-		};
-		expect(orderedPairs(input)).toStrictEqual(solution);
-	});
+test('testing orderedPairs against example input', () => {
+	const response = orderedPairs(EXAMPLE);
+	const solution: Solution = {
+		indicesSum: 13,
+		part2: 140,
+	};
+	expect(response).toStrictEqual(solution);
+});
+
+test('testing orderedPairs against real input', async () => {
+	const input = (
+		await readFile(path.join(__dirname, 'input.txt'), 'utf-8')
+	).slice(0, -1);
+	const solution: Solution = {
+		indicesSum: 5013,
+		part2: 25038,
+	};
+	expect(orderedPairs(input)).toStrictEqual(solution);
 });

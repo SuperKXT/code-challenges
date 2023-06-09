@@ -7,7 +7,7 @@ type Test = {
 	initialPosition: XY;
 	screenSize: XY;
 	result: boolean;
-}
+};
 
 const TESTS: Test[] = [
 	{
@@ -24,16 +24,11 @@ const TESTS: Test[] = [
 	},
 ];
 
-describe('testing cornerHit', () => {
-	it.each(TESTS)(
-		'should return if the box hits the corner for given input',
-		(testCase) => {
-			const result = cornerHit(
-				testCase.boxSize,
-				testCase.initialPosition,
-				testCase.screenSize
-			);
-			expect(result).toStrictEqual(testCase.result);
-		}
+test.each(TESTS)('testing cornerHit', (testCase) => {
+	const result = cornerHit(
+		testCase.boxSize,
+		testCase.initialPosition,
+		testCase.screenSize
 	);
+	expect(result).toStrictEqual(testCase.result);
 });

@@ -3,7 +3,7 @@ import { combineStrings, INVALID_ERROR } from './combine-strings';
 type Test = {
 	input: [string[], number];
 	output: string[];
-}
+};
 
 const TESTS: Test[] = [
 	{
@@ -32,13 +32,13 @@ const TESTS: Test[] = [
 	},
 ];
 
-describe('testing combineStrings', () => {
-	it.each(TESTS)('should return combined string array', ({ input, output }) => {
+test.each(TESTS)(
+	'testing combineStrings for valid inputs',
+	({ input, output }) => {
 		expect(combineStrings(...input)).toStrictEqual(output);
-	});
-	it('should throw for invalid size', () => {
-		expect(() => combineStrings(['ab', 'base', 'gh'], 2)).toThrow(
-			INVALID_ERROR
-		);
-	});
+	}
+);
+
+test('testing combineStrings for invalid inputs', () => {
+	expect(() => combineStrings(['ab', 'base', 'gh'], 2)).toThrow(INVALID_ERROR);
 });

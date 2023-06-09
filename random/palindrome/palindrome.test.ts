@@ -3,7 +3,7 @@ import { canBePalindrome } from './palindrome';
 type Test = {
 	string: string;
 	result: boolean;
-}
+};
 
 const TESTS: Test[] = [
 	// cSpell: disable-next-line
@@ -15,11 +15,6 @@ const TESTS: Test[] = [
 	{ result: false, string: 'tight fit' },
 ];
 
-describe('testing canBePalindrome', () => {
-	it.each(TESTS)(
-		'return if the characters can be a palindrome',
-		({ string, result }) => {
-			expect(canBePalindrome(string)).toBe(result);
-		}
-	);
+test.each(TESTS)('testing canBePalindrome', ({ string, result }) => {
+	expect(canBePalindrome(string)).toBe(result);
 });

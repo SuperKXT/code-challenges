@@ -5,7 +5,7 @@ import type { Pair } from './minimum-pairs';
 type Test = {
 	input: number[];
 	solution: Pair[];
-}
+};
 
 const TESTS: Test[] = [
 	{
@@ -22,12 +22,7 @@ const TESTS: Test[] = [
 	},
 ];
 
-describe('testing minimumPairs', () => {
-	it.each(TESTS)(
-		'should find minimum difference pairs for the given array',
-		({ input, solution }) => {
-			const response = minimumPairs(input);
-			expect(response).toStrictEqual(solution);
-		}
-	);
+test.each(TESTS)('testing minimumPairs', ({ input, solution }) => {
+	const response = minimumPairs(input);
+	expect(response).toStrictEqual(solution);
 });

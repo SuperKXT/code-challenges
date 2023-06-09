@@ -6,7 +6,7 @@ import type { ChessResponse, IsValidMoveArgs } from './check-chess-move.types';
 type Test = {
 	input: IsValidMoveArgs;
 	response: ChessResponse;
-}
+};
 
 const BOARD = [
 	'~~~~~~~~',
@@ -59,8 +59,6 @@ const TESTS: Test[] = [
 	},
 ];
 
-describe('testing isValidMove', () => {
-	it.each(TESTS)('should tell if the move is valid', ({ input, response }) => {
-		expect(isValidMove(input)).toStrictEqual(response);
-	});
+test.each(TESTS)('testing isValidMove', ({ input, response }) => {
+	expect(isValidMove(input)).toStrictEqual(response);
 });

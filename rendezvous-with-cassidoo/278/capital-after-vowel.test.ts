@@ -3,7 +3,7 @@ import { capitalAfterVowel } from './capital-after-vowel';
 type Test = {
 	input: string;
 	output: string;
-}
+};
 
 const TESTS: Test[] = [
 	{ input: 'hello world', output: 'heLlo WoRld' },
@@ -12,14 +12,9 @@ const TESTS: Test[] = [
 	{ input: 'ab', output: 'aB' },
 ];
 
-describe('testing capitalAfterVowel', () => {
-	it.each(TESTS)(
-		'should return correct both with and without RegEx',
-		({ input, output }) => {
-			expect(capitalAfterVowel(input)).toStrictEqual({
-				withRegex: output,
-				withoutRegex: output,
-			});
-		}
-	);
+test.each(TESTS)('testing capitalAfterVowel', ({ input, output }) => {
+	expect(capitalAfterVowel(input)).toStrictEqual({
+		withRegex: output,
+		withoutRegex: output,
+	});
 });

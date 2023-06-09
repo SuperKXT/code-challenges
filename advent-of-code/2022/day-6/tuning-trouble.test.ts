@@ -8,7 +8,7 @@ type Solution = ReturnType<typeof tuningTrouble>;
 type Test = {
 	input: string;
 	output: Solution;
-}
+};
 
 const TESTS: Test[] = [
 	{
@@ -53,20 +53,19 @@ const TESTS: Test[] = [
 	},
 ];
 
-describe('testing supplyStacks', () => {
-	it.each(TESTS)(
-		'should return the correct solution for example tests',
-		({ input, output }) => {
-			expect(tuningTrouble(input)).toStrictEqual(output);
-		}
-	);
-	it('should return the correct solution for the input file', async () => {
-		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
-		const response = tuningTrouble(input);
-		const solution: Solution = {
-			messageMarker: 3476,
-			packetMarker: 1210,
-		};
-		expect(response).toStrictEqual(solution);
-	});
+test.each(TESTS)(
+	'testing turningTrouble against example input',
+	({ input, output }) => {
+		expect(tuningTrouble(input)).toStrictEqual(output);
+	}
+);
+
+test('testing turningTrouble against real input', async () => {
+	const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
+	const response = tuningTrouble(input);
+	const solution: Solution = {
+		messageMarker: 3476,
+		packetMarker: 1210,
+	};
+	expect(response).toStrictEqual(solution);
 });

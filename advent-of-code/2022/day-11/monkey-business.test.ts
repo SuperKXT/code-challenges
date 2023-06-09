@@ -33,21 +33,20 @@ Monkey 3:
 
 type Solution = ReturnType<typeof monkeyBusiness>;
 
-describe('testing monkeyBusiness', () => {
-	it('should return the correct solution for example test', () => {
-		const response = monkeyBusiness(EXAMPLE);
-		const solution: Solution = {
-			bigMb: 2713310158,
-			monkeyBusiness: 10605,
-		};
-		expect(response).toStrictEqual(solution);
-	});
-	it('should return the correct solution for the input file', async () => {
-		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
-		const solution: Solution = {
-			bigMb: 21816744824,
-			monkeyBusiness: 120056,
-		};
-		expect(monkeyBusiness(input)).toStrictEqual(solution);
-	});
+test('testing monkeyBusiness against example input', () => {
+	const response = monkeyBusiness(EXAMPLE);
+	const solution: Solution = {
+		bigMb: 2713310158,
+		monkeyBusiness: 10605,
+	};
+	expect(response).toStrictEqual(solution);
+});
+
+test('testing monkeyBusiness against real input', async () => {
+	const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
+	const solution: Solution = {
+		bigMb: 21816744824,
+		monkeyBusiness: 120056,
+	};
+	expect(monkeyBusiness(input)).toStrictEqual(solution);
 });

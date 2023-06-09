@@ -3,7 +3,7 @@ import { balanceParens } from './balance-parens';
 type Test = {
 	input: string;
 	output: number;
-}
+};
 
 const TESTS: Test[] = [
 	{ input: '()', output: 0 },
@@ -12,11 +12,6 @@ const TESTS: Test[] = [
 	{ input: ')))))', output: 5 },
 ];
 
-describe('testing balanceParens', () => {
-	it.each(TESTS)(
-		'should return the number of required parens to balance string',
-		({ input, output }) => {
-			expect(balanceParens(input)).toStrictEqual(output);
-		}
-	);
+test.each(TESTS)('testing balanceParens', ({ input, output }) => {
+	expect(balanceParens(input)).toStrictEqual(output);
 });

@@ -11,31 +11,27 @@ const LIST_B = arrayToLinkedList(ARRAY_B);
 const LIST_C = arrayToLinkedList(ARRAY_C);
 const SOLUTION_NODE = LIST_A.head?.next;
 
-describe('arrays', () => {
-	it('should find intersection [1, 2]', () => {
-		const intersection = findIntersection(ARRAY_A, ARRAY_B);
-		expect(intersection).toStrictEqual([1, 2]);
-	});
-
-	it('should not find any intersection', () => {
-		const intersection = findIntersection(ARRAY_A, ARRAY_C);
-		expect(intersection).toBeNull();
-	});
+test('array test case 1 for findIntersection', () => {
+	const intersection = findIntersection(ARRAY_A, ARRAY_B);
+	expect(intersection).toStrictEqual([1, 2]);
 });
 
-describe('linked lists', () => {
-	it('should find intersection', () => {
-		const node = findIntersection(LIST_A.head, LIST_B.head);
-		expect(node).toBe(SOLUTION_NODE);
-	});
+test('array test case 2 for findIntersection', () => {
+	const intersection = findIntersection(ARRAY_A, ARRAY_C);
+	expect(intersection).toBeNull();
+});
 
-	it('should not find any intersection for non-intersecting lists', () => {
-		const node = findIntersection(LIST_A.head, LIST_C.head);
-		expect(node).toBeNull();
-	});
+test('linked list test 1 for findIntersection', () => {
+	const node = findIntersection(LIST_A.head, LIST_B.head);
+	expect(node).toBe(SOLUTION_NODE);
+});
 
-	it('should not find any intersection with node', () => {
-		const node = findIntersection(LIST_A.head, null);
-		expect(node).toBeNull();
-	});
+test('linked list test 2 for findIntersection', () => {
+	const node = findIntersection(LIST_A.head, LIST_C.head);
+	expect(node).toBeNull();
+});
+
+test('linked list test 3 for findIntersection', () => {
+	const node = findIntersection(LIST_A.head, null);
+	expect(node).toBeNull();
 });

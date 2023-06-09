@@ -7,7 +7,7 @@ import {
 type GetTest = {
 	input: [number, number, number];
 	output: number[];
-}
+};
 
 const GET_TESTS: GetTest[] = [
 	{ input: [10, 20, 5], output: [10, 20, 30, 50, 80] },
@@ -20,7 +20,7 @@ const GET_TESTS: GetTest[] = [
 type BadGetTest = {
 	input: [number, number, number];
 	error: string;
-}
+};
 
 const BAD_GET_TESTS: BadGetTest[] = [
 	{ error: ERRORS.length, input: [5, 10, 2] },
@@ -33,7 +33,7 @@ const BAD_GET_TESTS: BadGetTest[] = [
 type CheckTest = {
 	input: number[];
 	output: boolean;
-}
+};
 
 const CHECK_TESTS: CheckTest[] = [
 	{ input: [10, 20, 5], output: false },
@@ -47,28 +47,21 @@ const CHECK_TESTS: CheckTest[] = [
 	{ input: [5, undefined, 15], output: false },
 ];
 
-describe('testing getFibonacciLike', () => {
-	it.each(GET_TESTS)(
-		'should return fibonacci like sequence of given length',
-		({ input, output }) => {
-			const response = getFibonacciLike(...input);
-			expect(response).toStrictEqual(output);
-		}
-	);
-	it.each(BAD_GET_TESTS)(
-		'should throw error for incorrect length',
-		({ input, error }) => {
-			expect(() => getFibonacciLike(...input)).toThrow(error);
-		}
-	);
-});
+test.each(GET_TESTS)(
+	'testing getFibonacciLike for good input',
+	({ input, output }) => {
+		const response = getFibonacciLike(...input);
+		expect(response).toStrictEqual(output);
+	}
+);
+test.each(BAD_GET_TESTS)(
+	'testing getFibonacciLike for bad input',
+	({ input, error }) => {
+		expect(() => getFibonacciLike(...input)).toThrow(error);
+	}
+);
 
-describe('testing isFibonacciLike', () => {
-	it.each(CHECK_TESTS)(
-		'should indicate if sequence is a fibonacci like',
-		({ input, output }) => {
-			const response = isFibonacciLike(input);
-			expect(response).toStrictEqual(output);
-		}
-	);
+test.each(CHECK_TESTS)('testing isFibonacciLike', ({ input, output }) => {
+	const response = isFibonacciLike(input);
+	expect(response).toStrictEqual(output);
 });

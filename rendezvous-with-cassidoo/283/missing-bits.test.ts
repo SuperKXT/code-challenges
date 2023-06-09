@@ -3,7 +3,7 @@ import { missingBits } from './missing-bits';
 type Test = {
 	input: number[];
 	output: string;
-}
+};
 
 const TESTS: Test[] = [
 	{
@@ -28,11 +28,6 @@ const TESTS: Test[] = [
 	},
 ];
 
-describe('testing missingBits', () => {
-	it.each(TESTS)(
-		'should return string with missing range bits',
-		({ input, output }) => {
-			expect(missingBits(input)).toBe(output);
-		}
-	);
+test.each(TESTS)('testing missingBits', ({ input, output }) => {
+	expect(missingBits(input)).toBe(output);
 });

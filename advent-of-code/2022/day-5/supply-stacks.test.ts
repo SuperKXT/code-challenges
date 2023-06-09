@@ -17,24 +17,23 @@ const INPUT = [
 
 type Solution = Awaited<ReturnType<typeof supplyStacks>>;
 
-describe('testing supplyStacks', () => {
-	it('should return the correct solution for the example input', () => {
-		const response = supplyStacks(INPUT);
-		const solution: Solution = {
-			part1: 'CMZ',
-			part2: 'MCD',
-		};
-		expect(response).toStrictEqual(solution);
-	});
-	it('should return the correct solution for the input file', async () => {
-		const file = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
-		const response = supplyStacks(file);
-		const solution: Solution = {
-			/** cSpell: disable-next-line */
-			part1: 'VRWBSFZWM',
-			/** cSpell: disable-next-line */
-			part2: 'RBTWJWMCF',
-		};
-		expect(response).toStrictEqual(solution);
-	});
+test('testing supplyStacks against example input', () => {
+	const response = supplyStacks(INPUT);
+	const solution: Solution = {
+		part1: 'CMZ',
+		part2: 'MCD',
+	};
+	expect(response).toStrictEqual(solution);
+});
+
+test('testing supplyStacks against real input', async () => {
+	const file = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
+	const response = supplyStacks(file);
+	const solution: Solution = {
+		/** cSpell: disable-next-line */
+		part1: 'VRWBSFZWM',
+		/** cSpell: disable-next-line */
+		part2: 'RBTWJWMCF',
+	};
+	expect(response).toStrictEqual(solution);
 });

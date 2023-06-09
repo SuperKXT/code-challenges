@@ -7,12 +7,7 @@ const TESTS = [
 	{ solution: 4, string: '())(())' },
 ];
 
-describe('test parenthesisSubstring', () => {
-	it.each(TESTS)(
-		'should return longest valid string length',
-		({ string, solution }) => {
-			const response = parenthesisSubstring(string);
-			expect(response).toStrictEqual(solution);
-		}
-	);
+test.each(TESTS)('testing parenthesisSubstring', ({ string, solution }) => {
+	const response = parenthesisSubstring(string);
+	expect(response).toStrictEqual(solution);
 });

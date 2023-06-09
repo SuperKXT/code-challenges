@@ -12,7 +12,7 @@ const VALID_BOARDS: string[] = [
 type InvalidBoard = {
 	board: string;
 	error: CatanError;
-}
+};
 
 const INVALID_BOARDS: InvalidBoard[] = [
 	{
@@ -33,28 +33,22 @@ const INVALID_BOARDS: InvalidBoard[] = [
 	},
 ];
 
-describe('testing isValidCatanBoard', () => {
-	it.each(VALID_BOARDS)(
-		'should assert the valid boards and return',
-		(board) => {
-			expect(() => assertValidCatanBoard(board)).not.toThrow();
-		}
-	);
-	it.each(INVALID_BOARDS)(
-		'should throw the correct error for invalid boards',
-		({ board, error }) => {
-			expect(() => assertValidCatanBoard(board)).toThrow(error);
-		}
-	);
+test.each(VALID_BOARDS)('assertValidCatanBoard for valid input', (board) => {
+	expect(() => assertValidCatanBoard(board)).not.toThrow();
 });
 
-describe('testing generateCatanBoard', () => {
-	it('should generate a 1000 valid catan board', () => {
-		expect(() => {
-			[...new Array<unknown>(1000)].forEach(() => {
-				const board = generateCatanBoard();
-				assertValidCatanBoard(board);
-			});
-		}).not.toThrow();
-	});
+test.each(INVALID_BOARDS)(
+	'testing assertValidCatanBoard for invalid input',
+	({ board, error }) => {
+		expect(() => assertValidCatanBoard(board)).toThrow(error);
+	}
+);
+
+test('testing generateCatanBoard', () => {
+	expect(() => {
+		[...new Array<unknown>(1000)].forEach(() => {
+			const board = generateCatanBoard();
+			assertValidCatanBoard(board);
+		});
+	}).not.toThrow();
 });

@@ -5,7 +5,7 @@ import type { GradePoint } from './calculate-gpa';
 type Test = {
 	input: GradePoint[];
 	output: number;
-}
+};
 
 const TESTS: Test[] = [
 	{
@@ -30,12 +30,7 @@ const TESTS: Test[] = [
 	},
 ];
 
-describe('testing calculateGpa', () => {
-	it.each(TESTS)(
-		'should return correct gpa for the given input',
-		({ input, output }) => {
-			const response = calculateGpa(input);
-			expect(response).toStrictEqual(output);
-		}
-	);
+test.each(TESTS)('testing calculateGpa', ({ input, output }) => {
+	const response = calculateGpa(input);
+	expect(response).toStrictEqual(output);
 });

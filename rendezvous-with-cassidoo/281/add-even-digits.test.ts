@@ -3,7 +3,7 @@ import { addEventDigits, addEventDigitsSinglePass } from './add-even-digits';
 type Test = {
 	input: number;
 	output: number;
-}
+};
 
 const TESTS: Test[] = [
 	{ input: 548915381, output: 26 },
@@ -13,12 +13,7 @@ const TESTS: Test[] = [
 	{ input: -123.456, output: 12 },
 ];
 
-describe('testing maxSubArray', () => {
-	it.each(TESTS)(
-		'should return the sub array with the biggest sum',
-		({ input, output }) => {
-			expect(addEventDigits(input)).toStrictEqual(output);
-			expect(addEventDigitsSinglePass(input)).toStrictEqual(output);
-		}
-	);
+test.each(TESTS)('testing maxSubArray', ({ input, output }) => {
+	expect(addEventDigits(input)).toStrictEqual(output);
+	expect(addEventDigitsSinglePass(input)).toStrictEqual(output);
 });

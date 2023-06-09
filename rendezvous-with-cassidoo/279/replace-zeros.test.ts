@@ -3,7 +3,7 @@ import { replaceZeros } from './replace-zeros';
 type Test = {
 	input: string;
 	output: string;
-}
+};
 
 const TESTS: Test[] = [
 	{ input: '1234500362000440', output: '1234523623441' },
@@ -14,11 +14,6 @@ const TESTS: Test[] = [
 	{ input: '33032420000', output: '33132424' },
 ];
 
-describe('testing replaceZeros', () => {
-	it.each(TESTS)(
-		'should return the correct string response',
-		({ input, output }) => {
-			expect(replaceZeros(input)).toStrictEqual(output);
-		}
-	);
+test.each(TESTS)('testing replaceZeros', ({ input, output }) => {
+	expect(replaceZeros(input)).toStrictEqual(output);
 });

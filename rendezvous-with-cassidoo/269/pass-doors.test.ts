@@ -3,7 +3,7 @@ import { passDoors } from './pass-doors';
 type Test = {
 	input: [number, number];
 	output: number;
-}
+};
 
 const TESTS: Test[] = [
 	{ input: [7, 3], output: 4 },
@@ -12,12 +12,7 @@ const TESTS: Test[] = [
 	{ input: [3, 1], output: 3 },
 ];
 
-describe('testing passDoors', () => {
-	it.each(TESTS)(
-		'should return number of open doors after given passes',
-		({ input, output }) => {
-			const response = passDoors(...input);
-			expect(response).toStrictEqual(output);
-		}
-	);
+test.each(TESTS)('testing passDoors', ({ input, output }) => {
+	const response = passDoors(...input);
+	expect(response).toStrictEqual(output);
 });

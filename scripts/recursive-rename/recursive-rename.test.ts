@@ -143,43 +143,41 @@ const checkFiles = (files: Test, directory: string = TEMP_PATH) => {
 	}
 };
 
-describe('testing recursive-rename function', () => {
-	it.each(SORTED_TESTS)(
-		'should setup the files and rename recursively',
-		async (...files) => {
-			const logSpy = vi
-				.spyOn(global.console, 'info')
-				.mockImplementation(() => false);
+test.each(SORTED_TESTS)(
+	'testing recursiveRename for valid response',
+	async (...files) => {
+		const logSpy = vi
+			.spyOn(global.console, 'info')
+			.mockImplementation(() => false);
 
-			createFiles(files);
+		createFiles(files);
 
-			const options: RenameOptions = {
-				onlyChanges: false,
-				tree: false,
-				verbose: true,
-				yes: true,
-			};
+		const options: RenameOptions = {
+			onlyChanges: false,
+			tree: false,
+			verbose: true,
+			yes: true,
+		};
 
-			const output = await recursiveRename(TEMP_PATH, options);
+		const output = await recursiveRename(TEMP_PATH, options);
 
-			checkFiles(files);
+		checkFiles(files);
 
-			expect(output).toStrictEqual(files);
-			expect(logSpy).toHaveBeenCalledTimes(1);
-			expect(logSpy).toHaveBeenCalledWith(
-				getRenameLogs(files, options.verbose, options.onlyChanges, options.tree)
-			);
+		expect(output).toStrictEqual(files);
+		expect(logSpy).toHaveBeenCalledTimes(1);
+		expect(logSpy).toHaveBeenCalledWith(
+			getRenameLogs(files, options.verbose, options.onlyChanges, options.tree)
+		);
 
-			logSpy.mockRestore();
-		}
-	);
+		logSpy.mockRestore();
+	}
+);
 
-	it('should throw an error for invalid path', async () => {
-		await expect(
-			recursiveRename('./invalid-path', { yes: true })
-		).rejects.toThrow(RENAME_ERRORS.badPath);
-		await expect(
-			recursiveRename(path.join(__dirname, 'README.md'), { yes: true })
-		).rejects.toThrow(RENAME_ERRORS.badPath);
-	});
+test('testing recursiveRename for invalid path', async () => {
+	await expect(
+		recursiveRename('./invalid-path', { yes: true })
+	).rejects.toThrow(RENAME_ERRORS.badPath);
+	await expect(
+		recursiveRename(path.join(__dirname, 'README.md'), { yes: true })
+	).rejects.toThrow(RENAME_ERRORS.badPath);
 });

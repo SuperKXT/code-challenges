@@ -3,7 +3,7 @@ import { getColumnNumber } from './get-column-number';
 type Test = {
 	input: string;
 	output: number;
-}
+};
 
 const TESTS: Test[] = [
 	{ input: 'A', output: 1 },
@@ -18,11 +18,6 @@ const TESTS: Test[] = [
 	{ input: 'AAA', output: 703 },
 ];
 
-describe('testing generateArrays', () => {
-	it.each(TESTS)(
-		'should return the column number corresponding to the name',
-		({ input, output }) => {
-			expect(getColumnNumber(input)).toStrictEqual(output);
-		}
-	);
+test.each(TESTS)('testing generateArrays', ({ input, output }) => {
+	expect(getColumnNumber(input)).toStrictEqual(output);
 });

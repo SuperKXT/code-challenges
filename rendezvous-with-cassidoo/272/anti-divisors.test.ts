@@ -3,7 +3,7 @@ import { findAntiDivisors } from './anti-divisors';
 type Test = {
 	input: number;
 	output: number[];
-}
+};
 
 const TESTS: Test[] = [
 	{ input: 1, output: [] },
@@ -19,11 +19,6 @@ const TESTS: Test[] = [
 	{ input: 234, output: [4, 7, 12, 36, 52, 67, 156] },
 ];
 
-describe('testing findAntiDivisors', () => {
-	it.each(TESTS)(
-		'should return anti-divisor array for given number',
-		({ input, output }) => {
-			expect(findAntiDivisors(input)).toStrictEqual(output);
-		}
-	);
+test.each(TESTS)('testing findAntiDivisors', ({ input, output }) => {
+	expect(findAntiDivisors(input)).toStrictEqual(output);
 });

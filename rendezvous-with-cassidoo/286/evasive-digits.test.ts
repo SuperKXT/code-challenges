@@ -1,8 +1,6 @@
 import { evasiveDigits } from './evasive-digits';
 
-describe('testing evasiveDigits', () => {
-	it('should return array of 0-100 integers', () => {
-		const result = Array.from({ length: 101 }, (_, index) => index);
-		expect(evasiveDigits()).toStrictEqual(result);
-	});
+test('testing evasiveDigits', () => {
+	const result = Array.from({ length: 101 }, (_, index) => index);
+	expect(evasiveDigits()).toStrictEqual(result);
 });

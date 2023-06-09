@@ -153,35 +153,34 @@ noop`;
 
 type Solution = ReturnType<typeof signalStrength>;
 
-describe('testing signalStrength', () => {
-	it('should return the correct solution for example test', () => {
-		const response = signalStrength(EXAMPLE);
-		const solution: Solution = {
-			crtOutput: [
-				'##..##..##..##..##..##..##..##..##..##..',
-				'###...###...###...###...###...###...###.',
-				'####....####....####....####....####....',
-				'#####.....#####.....#####.....#####.....',
-				'######......######......######......####',
-				'#######.......#######.......#######.....',
-			].join('\n'),
-			strength: 13140,
-		};
-		expect(response).toStrictEqual(solution);
-	});
-	it('should return the correct solution for the input file', async () => {
-		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
-		const solution: Solution = {
-			crtOutput: [
-				'###...##...##..####.#..#.#....#..#.####.',
-				'#..#.#..#.#..#.#....#.#..#....#..#.#....',
-				'###..#..#.#....###..##...#....####.###..',
-				'#..#.####.#....#....#.#..#....#..#.#....',
-				'#..#.#..#.#..#.#....#.#..#....#..#.#....',
-				'###..#..#..##..####.#..#.####.#..#.#....',
-			].join('\n'),
-			strength: 16060,
-		};
-		expect(signalStrength(input)).toStrictEqual(solution);
-	});
+test('testing signalStrength against example input', () => {
+	const response = signalStrength(EXAMPLE);
+	const solution: Solution = {
+		crtOutput: [
+			'##..##..##..##..##..##..##..##..##..##..',
+			'###...###...###...###...###...###...###.',
+			'####....####....####....####....####....',
+			'#####.....#####.....#####.....#####.....',
+			'######......######......######......####',
+			'#######.......#######.......#######.....',
+		].join('\n'),
+		strength: 13140,
+	};
+	expect(response).toStrictEqual(solution);
+});
+
+test('testing signalStrength against real input', async () => {
+	const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
+	const solution: Solution = {
+		crtOutput: [
+			'###...##...##..####.#..#.#....#..#.####.',
+			'#..#.#..#.#..#.#....#.#..#....#..#.#....',
+			'###..#..#.#....###..##...#....####.###..',
+			'#..#.####.#....#....#.#..#....#..#.#....',
+			'#..#.#..#.#..#.#....#.#..#....#..#.#....',
+			'###..#..#..##..####.#..#.####.#..#.#....',
+		].join('\n'),
+		strength: 16060,
+	};
+	expect(signalStrength(input)).toStrictEqual(solution);
 });

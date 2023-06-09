@@ -37,12 +37,12 @@ const tests: Test[] = [
 	},
 ];
 
-describe.each(tests)('test humanizeToken helper', ({ input, output }) => {
-	it(`should return ${output.title} for humanizeToken(${input})`, () => {
+test.each(tests)('test humanizeToken helper', ({ input, output }) => {
+	test(`should return ${output.title} for humanizeToken(${input})`, () => {
 		const response = humanizeToken(input);
 		expect(response).toStrictEqual(output.title);
 	});
-	it.each(humanizeCases)(
+	test.each(humanizeCases)(
 		'should return humanized string by the given casing',
 		(casing) => {
 			const response = humanizeToken(input, casing);

@@ -18,30 +18,28 @@ Sensor at x=16, y=7: closest beacon is at x=15, y=3
 Sensor at x=14, y=3: closest beacon is at x=15, y=3
 Sensor at x=20, y=1: closest beacon is at x=15, y=3`;
 
-describe('testing beaconGopher1', () => {
-	it('should return the correct solution for example test', () => {
-		const response = beaconGopher1(EXAMPLE, 10);
-		expect(response).toBe(26);
-	});
-	// // it('should return the correct solution for the input file', async () => {
-	// // 	const input = (await readFile(
-	// // 		path.join(__dirname, 'input.txt'),
-	// // 		'utf-8'
-	// // 	)).slice(0, -1);
-	// // 	expect(beaconGopher1(input, 2000000)).toBe(5176944);
-	// // });
+test('testing beaconGopher1 against example input', () => {
+	const response = beaconGopher1(EXAMPLE, 10);
+	expect(response).toBe(26);
 });
 
-describe('testing beaconGopher2', () => {
-	it('should return the correct solution for example test', () => {
-		const response = beaconGopher2(EXAMPLE, 20);
-		expect(response).toBe(56000011);
-	});
-	// // it('should return the correct solution for the input file', async () => {
-	// // 	const input = (await readFile(
-	// // 		path.join(__dirname, 'input.txt'),
-	// // 		'utf-8'
-	// // 	)).slice(0, -1);
-	// // 	expect(beaconGopher2(input, 4000000)).toBe(0);
-	// // });
+// // test('testing beaconGopher1 against real input', async () => {
+// // 	const input = (await readFile(
+// // 		path.join(__dirname, 'input.txt'),
+// // 		'utf-8'
+// // 	)).slice(0, -1);
+// // 	expect(beaconGopher1(input, 2000000)).toBe(5176944);
+// // });
+
+test('testing beaconGopher2 against example input', () => {
+	const response = beaconGopher2(EXAMPLE, 20);
+	expect(response).toBe(56000011);
 });
+
+// // test('testing beaconGopher2 against real input', async () => {
+// // 	const input = (await readFile(
+// // 		path.join(__dirname, 'input.txt'),
+// // 		'utf-8'
+// // 	)).slice(0, -1);
+// // 	expect(beaconGopher2(input, 4000000)).toBe(0);
+// // });

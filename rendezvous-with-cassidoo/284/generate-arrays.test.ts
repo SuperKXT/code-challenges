@@ -3,7 +3,7 @@ import { generateArrays } from './generate-arrays';
 type Test = {
 	input: number;
 	output: number[][];
-}
+};
 
 const TESTS: Test[] = [
 	{
@@ -24,11 +24,6 @@ const TESTS: Test[] = [
 	},
 ];
 
-describe('testing generateArrays', () => {
-	it.each(TESTS)(
-		'should return array of arrays for given integer',
-		({ input, output }) => {
-			expect(generateArrays(input)).toStrictEqual(output);
-		}
-	);
+test.each(TESTS)('testing generateArrays', ({ input, output }) => {
+	expect(generateArrays(input)).toStrictEqual(output);
 });

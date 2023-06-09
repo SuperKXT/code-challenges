@@ -11,21 +11,19 @@ const INPUT = [
 
 type Solution = Awaited<ReturnType<typeof campCleanup>>;
 
-describe('testing campCleanup', () => {
-	it('should return the correct solution for the example input', async () => {
-		const response = await campCleanup(INPUT);
-		const solution: Solution = {
-			fullOverlap: 2,
-			overlap: 4,
-		};
-		expect(response).toStrictEqual(solution);
-	});
-	it('should return the correct solution for the input file', async () => {
-		const response = await campCleanup();
-		const solution: Solution = {
-			fullOverlap: 498,
-			overlap: 859,
-		};
-		expect(response).toStrictEqual(solution);
-	});
+test('testing campCleanup against example input', async () => {
+	const response = await campCleanup(INPUT);
+	const solution: Solution = {
+		fullOverlap: 2,
+		overlap: 4,
+	};
+	expect(response).toStrictEqual(solution);
+});
+test('testing campCleanup against real input', async () => {
+	const response = await campCleanup();
+	const solution: Solution = {
+		fullOverlap: 498,
+		overlap: 859,
+	};
+	expect(response).toStrictEqual(solution);
 });
