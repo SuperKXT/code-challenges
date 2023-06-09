@@ -263,6 +263,7 @@ const config = {
 				'react/no-unstable-nested-components': ['warn', { allowAsProps: true }],
 				'react/self-closing-comp': 'warn',
 				'react/void-dom-elements-no-children': 'warn',
+				'react/prop-types': 'off',
 			},
 		},
 		{
