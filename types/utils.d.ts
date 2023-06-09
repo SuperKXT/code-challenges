@@ -63,4 +63,15 @@ export namespace Utils {
 	) extends (x: infer U) => any
 		? U
 		: never;
+
+	/** merge two objects together. the second object has priority */
+	export type deepMerge<T extends Obj, U extends Obj> = Utils.prettify<{
+		[k in keyof T | keyof U]: k extends keyof U
+			? [T[k], U[k]] extends [Obj, Obj]
+				? deepMerge<T[k], U[k]>
+				: U[k]
+			: k extends keyof T
+			? T[k]
+			: never;
+	}>;
 }
