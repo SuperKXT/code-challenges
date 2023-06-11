@@ -16,7 +16,7 @@
 - `@typescript-eslint/parser`
 
 ```bash
-	pnpm add -D eslint @types/eslint eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prefer-arrow-functions eslint-plugin-unused-imports eslint-plugin-vitest @typescript-eslint/eslint-plugin @typescript-eslint/parser
+pnpm add -D eslint @types/eslint eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prefer-arrow-functions eslint-plugin-unused-imports eslint-plugin-vitest @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
 ---
@@ -41,7 +41,7 @@
 - `eslint-plugin-jsx-expressions`
 
 ```bash
-	pnpm add -D eslint @types/eslint eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prefer-arrow-functions eslint-plugin-unused-imports eslint-plugin-vitest @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-react eslint-plugin-testing-library eslint-config-react-app eslint-plugin-jsx-expressions
+pnpm add -D eslint @types/eslint eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prefer-arrow-functions eslint-plugin-unused-imports eslint-plugin-vitest @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-react eslint-plugin-testing-library eslint-config-react-app eslint-plugin-jsx-expressions
 ```
 
 ### Showing lint errors and warnings in Vite
