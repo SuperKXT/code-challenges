@@ -5,7 +5,7 @@ import {
 	numeric,
 	upperAlphabet,
 	wordSeparators,
-} from '~/helpers/string';
+} from '~/helpers/string/string-literals';
 
 import type {
 	Alphabet,
@@ -14,7 +14,7 @@ import type {
 	Numeric,
 	UpperAlphabet,
 	WordSeparators,
-} from '~/helpers/string';
+} from '~/helpers/string/string-literals';
 
 const formatStrategies = [
 	'camel',
