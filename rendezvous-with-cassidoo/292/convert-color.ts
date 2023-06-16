@@ -1,8 +1,8 @@
 type Option = 'hex' | 'hsl' | 'rgb';
 
 const HEX_REGEX = /^#[0-9A-F]{6}$/u;
-const RGB_REGEX = /^\(\d{1,3},\d{1,3},\d{1,3}\)$/u;
-const HSL_REGEX = /^\(\d{1,3},\d{1,3},\d{1,3}\)$/u;
+const RGB_REGEX = /^rgb\(\d{1,3},\d{1,3},\d{1,3}\)$/u;
+const HSL_REGEX = /^hsl\(\d{1,3},\d{1,3},\d{1,3}\)$/u;
 
 const parseHex = (input: string): [number, number, number] => {
 	if (!input.match(HEX_REGEX)) throw new Error('invalid hex color!');
@@ -16,7 +16,7 @@ const parseHsl = (input: string): [number, number, number] => {
 	if (!input.match(HSL_REGEX)) throw new Error('invalid hsl color!');
 
 	return input
-		.slice(1, -1)
+		.slice(4, -1)
 		.split(',')
 		.map((row, index) => {
 			const number = Number(row);
@@ -31,7 +31,7 @@ const parseRgb = (input: string): [number, number, number] => {
 	if (!input.match(RGB_REGEX)) throw new Error('invalid rgb color!');
 
 	return input
-		.slice(1, -1)
+		.slice(4, -1)
 		.split(',')
 		.map((row) => {
 			const number = Number(row);
@@ -110,32 +110,29 @@ const hslToRgb = (
 	];
 };
 
-export const convertColor = (
-	from: Option,
-	to: Option,
+export const convertColor = <T extends Option>(
+	from: T,
+	to: Exclude<Option, T>,
 	input: string
 ): string => {
-	if (from === to) return input;
-
 	switch (from) {
 		case 'hex': {
 			const rgb = parseHex(input);
-			if (to === 'rgb') return `(${rgb.join(',')})`;
-
+			if (to === 'rgb') return `rgb(${rgb.join(',')})`;
 			return `(${rgbToHsl(rgb).join(',')})`;
 		}
 		case 'hsl': {
 			const hsl = parseHsl(input);
 			const rgb = hslToRgb(hsl);
-			if (to === 'rgb') return `(${rgb.join(',')})`;
-
+			if (to === 'rgb') return `rgb(${rgb.join(',')})`;
 			return toHexString(rgb);
 		}
 		case 'rgb': {
 			const rgb = parseRgb(input);
 			if (to === 'hex') return toHexString(rgb);
-
-			return `(${rgbToHsl(rgb).join(',')})`;
+			return `hsl(${rgbToHsl(rgb).join(',')})`;
 		}
+		default:
+			throw new Error('invalid option!');
 	}
 };
