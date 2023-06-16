@@ -76,8 +76,8 @@ const rgbToHsl = (
 
 	return [
 		Math.round(hue),
-		Math.round(saturation * 100),
-		Math.round(lightness * 100),
+		Math.round(saturation * 100) || 0,
+		Math.round(lightness * 100) || 0,
 	];
 };
 
@@ -119,7 +119,7 @@ export const convertColor = <T extends Option>(
 		case 'hex': {
 			const rgb = parseHex(input);
 			if (to === 'rgb') return `rgb(${rgb.join(', ')})`;
-			return `hsl(${rgbToHsl(rgb).join(', ')})`;
+			return `(${rgbToHsl(rgb).join(', ')})`;
 		}
 		case 'hsl': {
 			const hsl = parseHsl(input);
