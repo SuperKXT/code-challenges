@@ -105,4 +105,18 @@ export namespace Utils {
 	export type unionToTuple<T, U = Utils.lastInUnion<T>> = [U] extends [never]
 		? []
 		: [...unionToTuple<Exclude<T, U>>, U];
+
+	type allUnionKeys<T> = T extends infer U ? keyof U : never;
+
+	/** returns a uniformed union of objects by adding missing keys in each union */
+	export type includeUnionKeys<
+		T extends Record<string, unknown>,
+		U = T
+	> = U extends U
+		? Utils.prettify<
+				{
+					[K in keyof U]: U[K];
+				} & { [k in Exclude<allUnionKeys<T>, keyof U>]?: never }
+		  >
+		: never;
 }
