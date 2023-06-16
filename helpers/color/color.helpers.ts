@@ -119,7 +119,7 @@ export const convertColor = <T extends Option>(
 		case 'hex': {
 			const rgb = parseHex(input);
 			if (to === 'rgb') return `rgb(${rgb.join(', ')})`;
-			return `(${rgbToHsl(rgb).join(', ')})`;
+			return `hsl(${rgbToHsl(rgb).join(', ')})`;
 		}
 		case 'hsl': {
 			const hsl = parseHsl(input);
