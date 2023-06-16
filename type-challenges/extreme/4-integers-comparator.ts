@@ -21,7 +21,7 @@
 //   ^?
 
 /* _____________ Test Cases _____________ */
-// eslint-disable-next-line import/first
+ 
 import type { Equal, Expect } from '@type-challenges/utils';
 
 // eslint-disable-next-line no-restricted-syntax

@@ -25,7 +25,7 @@
 /* _____________ Your Code Here _____________ */
 
 /* _____________ Test Cases _____________ */
-// eslint-disable-next-line import/first
+ 
 import type { Equal, Expect } from '@type-challenges/utils';
 
 type KebabCase<T extends string> = T extends `${infer U}${infer V}`
