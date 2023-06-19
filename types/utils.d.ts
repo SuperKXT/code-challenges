@@ -1,13 +1,11 @@
-type _repeatedString<
+type _repeatString<
 	S extends string,
 	T extends unknown[]
-> = T['length'] extends 1 ? S : `${S}${_repeatedString<S, dropFirst<T>>}`;
+> = T['length'] extends 1 ? S : `${S}${_repeatString<S, dropFirst<T>>}`;
 
-type _repeatedTuple<
-	T,
-	N extends number,
-	R extends unknown[]
-> = R['length'] extends N ? R : _repeatedTuple<T, N, [T, ...R]>;
+type _tuple<N extends number, T, R extends readonly T[]> = R['length'] extends N
+	? R
+	: _tuple<N, T, [T, ...R]>;
 
 export namespace Utils {
 	export type dropFirst<T extends readonly unknown[]> = T extends readonly [
@@ -18,17 +16,17 @@ export namespace Utils {
 		: [...T];
 
 	/** global type helper to repeat a type `N` times in a tuple */
-	export type repeatedTuple<T, N extends number> = N extends N
+	export type tuple<N extends number, T = 1> = N extends N
 		? number extends N
 			? T[]
-			: _repeatedTuple<T, N, []>
+			: _tuple<N, T, []>
 		: never;
 
 	/** global type helper to repeat a string `N` times in a string literal type */
-	export type repeatedString<
-		S extends string,
-		N extends number
-	> = _repeatedString<S, repeatedTuple<unknown, N>>;
+	export type repeatString<S extends string, N extends number> = _repeatString<
+		S,
+		tuple<N, unknown>
+	>;
 
 	export type filteredKeys<T, U> = {
 		[P in keyof T]: T[P] extends U ? P : never;

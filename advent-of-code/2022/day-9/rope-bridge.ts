@@ -35,9 +35,10 @@ export const ropeBridge = (
 	firstTail: number;
 	lastTail: number;
 } => {
-	const rope = Array.from({ length: 10 }, () => [
-		{ ...start },
-	]) as Utils.repeatedTuple<Position[], 9>;
+	const rope = Array.from({ length: 10 }, () => [{ ...start }]) as Utils.tuple<
+		Position[],
+		9
+	>;
 
 	const head = rope.at(0) as Position[];
 	const firstTail = rope.at(1) as Position[];

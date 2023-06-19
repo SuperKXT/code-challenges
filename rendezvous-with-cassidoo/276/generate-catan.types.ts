@@ -9,19 +9,19 @@ export type Cell =
 	| (typeof SINGLE_PIECES)[number];
 
 export type Board = [
-	Utils.repeatedTuple<Cell, 3>,
-	Utils.repeatedTuple<Cell, 4>,
-	Utils.repeatedTuple<Cell, 5>,
-	Utils.repeatedTuple<Cell, 4>,
-	Utils.repeatedTuple<Cell, 3>
+	Utils.tuple<Cell, 3>,
+	Utils.tuple<Cell, 4>,
+	Utils.tuple<Cell, 5>,
+	Utils.tuple<Cell, 4>,
+	Utils.tuple<Cell, 3>
 ];
 
 export type ProspectiveBoard = [
-	Utils.repeatedTuple<Cell | '', 3>,
-	Utils.repeatedTuple<Cell | '', 4>,
-	Utils.repeatedTuple<Cell | '', 5>,
-	Utils.repeatedTuple<Cell | '', 4>,
-	Utils.repeatedTuple<Cell | '', 3>
+	Utils.tuple<Cell | '', 3>,
+	Utils.tuple<Cell | '', 4>,
+	Utils.tuple<Cell | '', 5>,
+	Utils.tuple<Cell | '', 4>,
+	Utils.tuple<Cell | '', 3>
 ];
 
 const ROW_PIECES = [3, 4, 5, 4, 3] as const;
