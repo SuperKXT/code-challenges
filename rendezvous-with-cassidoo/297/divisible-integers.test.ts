@@ -5,7 +5,7 @@ import type { DivisibleIntegerN } from './divisible-integers';
 
 type Test = {
 	input: number[];
-	outputs: Utils.tuple<boolean, 9>;
+	outputs: Utils.tuple<9, boolean>;
 };
 
 const tests: Test[] = [

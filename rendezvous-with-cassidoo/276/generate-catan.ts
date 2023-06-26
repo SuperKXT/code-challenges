@@ -40,7 +40,7 @@ export const assertValidCatanBoard = (input: string) => {
 
 	board.forEach((row, rowIndex) => {
 		row.forEach((cell, index) => {
-			counts[cell] = (counts[cell] ?? 0) + 1;
+			counts[cell] = Number(counts[cell] ?? 0) + 1;
 			if (
 				(SINGLE_PIECES.includes(cell as string) && (counts[cell] ?? 0) > 1) ||
 				(DOUBLE_PIECES.includes(cell as string) && (counts[cell] ?? 0) > 2)

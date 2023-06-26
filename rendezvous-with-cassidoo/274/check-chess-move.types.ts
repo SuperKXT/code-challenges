@@ -24,8 +24,8 @@ export type IsValidMoveArgs = {
 	to: Position;
 };
 
-type Row = Utils.tuple<Piece | '~', 8>;
-export type Board = Utils.tuple<Row, 8>;
+type Row = Utils.tuple<8, Piece | '~'>;
+export type Board = Utils.tuple<8, Row>;
 
 export const CHESS_ERRORS = {
 	badBishop: 'the bishop can only move diagonally',
