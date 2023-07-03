@@ -1,17 +1,25 @@
 import { reversedSquare } from './reversed-squares';
 
 test('testing reversedSquares against test 1', () => {
-	expect(reversedSquare(9)).toBeTruthy();
+	const result = reversedSquare(9);
+	expect(result).toBeTruthy();
+	assertType<true>(result);
 });
 
 test('testing reversedSquares against test 2', () => {
-	expect(reversedSquare(10)).toBeFalsy();
+	const result = reversedSquare(10);
+	expect(result).toBeFalsy();
+	assertType<false>(result);
 });
 
 test('testing reversedSquares against test 3', () => {
-	expect(reversedSquare(441)).toBeTruthy();
+	const result = reversedSquare(441);
+	expect(result).toBeTruthy();
+	assertType<true>(result);
 });
 
 test('testing reversedSquares against test 4', () => {
-	expect(reversedSquare(25)).toBeFalsy();
+	const result = reversedSquare(25);
+	expect(result).toBeFalsy();
+	assertType<false>(result);
 });
