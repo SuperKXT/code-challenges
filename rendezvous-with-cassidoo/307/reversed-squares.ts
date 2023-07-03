@@ -14,13 +14,17 @@ type multiply<
 	idx extends 1[] = [],
 	result extends 1[] = []
 > = idx['length'] extends U
-	? result['length']
+	? result
 	: multiply<T, U, [...idx, 1], [...result, ...tuple<T>]>;
 
-type sqrt<T extends number, idx extends 1[] = []> = idx['length'] extends T
-	? never
-	: multiply<idx['length'], idx['length']> extends T
+type sqrt<
+	T extends number,
+	idx extends 1[] = [],
+	square extends 1[] = multiply<idx['length'], idx['length']>
+> = square['length'] extends T
 	? idx['length']
+	: square[T] extends 1
+	? never
 	: sqrt<T, [...idx, 1]>;
 
 type reverse<T extends string> = T extends `${infer F}${infer R}`
