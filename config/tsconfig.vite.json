@@ -19,11 +19,13 @@
 		"noUnusedParameters": false,
 
 		// modules
-		"baseUrl": "./src",
 		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"types": ["vitest/globals"],
+		"paths": {
+			"~/*": ["./src/*"]
+		},
 
 		// emit
 		"downlevelIteration": true,
