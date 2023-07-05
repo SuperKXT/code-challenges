@@ -53,7 +53,8 @@ type Max<
 export type DepthJson<
 	T,
 	Depth extends number = 0,
-	NextDepth extends number = [...Utils.tuple<Depth>, 1]['length']
+	Tup extends any[] = Utils.tuple<Depth>,
+	NextDepth extends number = [...Tup, 1]['length']
 > = T extends object
 	? Max<
 			| NextDepth

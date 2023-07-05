@@ -19,7 +19,6 @@
 		"noUnusedParameters": false,
 
 		// modules
-		"baseUrl": "./",
 		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
@@ -53,5 +52,6 @@
 		// completeness
 		"skipLibCheck": true
 	},
+	"include": ["**/*", "./.*.cjs"],
 	"exclude": ["node_modules", "build", "dist", "coverage", "public"]
 }
