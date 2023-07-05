@@ -24,12 +24,12 @@
 		"resolveJsonModule": true,
 		"types": ["vitest/globals"],
 		"paths": {
-			"~/*": ["./*"]
+			"~/*": ["./src/*"]
 		},
 
 		// emit
-		"noEmit": true,
 		"downlevelIteration": true,
+		"noEmit": true,
 
 		// javascript support
 		"allowJs": true,
@@ -43,7 +43,8 @@
 		"verbatimModuleSyntax": true,
 
 		// language and environment
-		"lib": ["esnext"],
+		"jsx": "react-jsx",
+		"lib": ["dom", "dom.iterable", "esnext"],
 		"target": "esnext",
 
 		// output formatting
