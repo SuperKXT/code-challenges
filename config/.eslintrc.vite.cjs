@@ -293,6 +293,12 @@ const config = {
 				'import/no-commonjs': 'off',
 			},
 		},
+		{
+			files: ['scripts/**/*'],
+			rules: {
+				'import/no-nodejs-modules': 'off',
+			},
+		},
 	],
 };
 
