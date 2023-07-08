@@ -1,4 +1,2 @@
-export declare global {
-	/** global type alias for a generic object type */
-	type Obj = Record<string, unknown>;
-}
+/** global type alias for a generic object type */
+type Obj = Record<string, unknown>;

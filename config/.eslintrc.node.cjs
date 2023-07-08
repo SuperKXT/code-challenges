@@ -214,6 +214,10 @@ const config = {
 						},
 					},
 				],
+				'@typescript-eslint/no-namespace': [
+					'warn',
+					{ allowDeclarations: true },
+				],
 
 				// TODO these are turned off because eslint is slow and incorrectly keeps inferring types as any
 				'@typescript-eslint/no-unsafe-argument': 'off',
