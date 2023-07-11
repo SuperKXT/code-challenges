@@ -101,7 +101,7 @@ type justifyLine<
 	  >}`
 	: '';
 
-type justifyText<
+type JustifyText<
 	T extends readonly string[],
 	maxWidth extends number,
 	lineTup extends readonly (readonly string[])[] = lines<T, maxWidth>
@@ -111,14 +111,9 @@ type justifyText<
 ]
 	? readonly [
 			justifyLine<first, maxWidth>,
-			...justifyText<never, maxWidth, rest>
+			...JustifyText<never, maxWidth, rest>
 	  ]
 	: readonly [];
-
-type _ = justifyText<
-	['This', 'is', 'an', 'example', 'of', 'text', 'justification.'],
-	16
->;
 
 export const justifyText = <
 	const words extends readonly string[],
@@ -126,7 +121,7 @@ export const justifyText = <
 >(
 	words: words,
 	maxWidth: maxWidth
-): justifyText<words, maxWidth> => {
+): JustifyText<words, maxWidth> => {
 	const lines: string[][] = [];
 	const currLine: string[] = [];
 	for (const word of words) {
