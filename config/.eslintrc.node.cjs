@@ -187,6 +187,10 @@ const config = {
 		'@typescript-eslint/prefer-reduce-type-parameter': 'off',
 		'@typescript-eslint/no-invalid-void-type': 'off',
 		'@typescript-eslint/promise-function-async': 'warn',
+		'@typescript-eslint/require-array-sort-compare': [
+			'warn',
+			{ ignoreStringArrays: true },
+		],
 		'@typescript-eslint/return-await': 'warn',
 		'@typescript-eslint/switch-exhaustiveness-check': 'warn',
 		'@typescript-eslint/restrict-template-expressions': [
