@@ -125,8 +125,10 @@ VueBasicProps({
 		// @ts-expect-error not available here
 		this.firstname;
 		// @ts-expect-error not available here
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		this.getRandom();
 		// @ts-expect-error not available here
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		this.data();
 
 		return {

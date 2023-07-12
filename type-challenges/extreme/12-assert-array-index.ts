@@ -268,6 +268,7 @@ for (let p = 0 as Index<typeof d>; p < d.length; p += 1) {
 }
 
 // @ts-expect-error: push does not exist on readonly
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 d.push(3);
 
 const e: [number] = [0];

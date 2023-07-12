@@ -81,8 +81,10 @@ SimpleVue({
 		// @ts-expect-error this not available here
 		this.firstname;
 		// @ts-expect-error this not available here
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		this.getRandom();
 		// @ts-expect-error this not available here
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		this.data();
 
 		return {
@@ -108,7 +110,7 @@ SimpleVue({
 		},
 		test() {
 			const fullname = this.fullname;
-			const _cases: [Expect<Equal<typeof fullname, string>>] = [] as any;
+			const _cases: [Expect<Equal<typeof fullname, string>>] = [] as never;
 		},
 	},
 });
