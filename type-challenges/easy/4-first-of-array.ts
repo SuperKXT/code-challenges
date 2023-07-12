@@ -32,14 +32,14 @@ type _cases = [
 	Expect<Equal<First<[3, 2, 1]>, 3>>,
 	Expect<Equal<First<[() => 123, { a: string }]>, () => 123>>,
 	Expect<Equal<First<[]>, never>>,
-	Expect<Equal<First<[undefined]>, undefined>>
+	Expect<Equal<First<[undefined]>, undefined>>,
 ];
 
 type _errors = [
 	// @ts-expect-error incorrect argument
 	First<'notArray'>,
 	// @ts-expect-error incorrect argument
-	First<{ 0: 'arrayLike' }>
+	First<{ 0: 'arrayLike' }>,
 ];
 
 /* _____________ Further Steps _____________ */

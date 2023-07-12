@@ -37,7 +37,7 @@ type _cases = [
 	Expect<Equal<IsNever<undefined>, false>>,
 	Expect<Equal<IsNever<null>, false>>,
 	Expect<Equal<IsNever<[]>, false>>,
-	Expect<Equal<IsNever<{}>, false>>
+	Expect<Equal<IsNever<{}>, false>>,
 ];
 
 /* _____________ Further Steps _____________ */

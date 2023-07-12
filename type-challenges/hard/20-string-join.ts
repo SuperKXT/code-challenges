@@ -34,7 +34,7 @@
 
 type Join<T extends string[], D extends string> = T extends [
 	infer F extends string,
-	...infer R extends string[]
+	...infer R extends string[],
 ]
 	? R extends []
 		? F
@@ -42,7 +42,7 @@ type Join<T extends string[], D extends string> = T extends [
 	: '';
 
 declare function join<D extends string>(
-	delimiter: D
+	delimiter: D,
 ): <T extends string[]>(...parts: T) => Join<T, D>;
 
 /* _____________ Test Cases _____________ */
@@ -67,7 +67,7 @@ type _cases = [
 	Expect<Equal<typeof twoCharOutput, 'a-b'>>,
 	Expect<Equal<typeof hyphenOutput, 'a-b-c'>>,
 	Expect<Equal<typeof hashOutput, 'a#b#c'>>,
-	Expect<Equal<typeof longOutput, 'a-b-c-d-e-f-g-h'>>
+	Expect<Equal<typeof longOutput, 'a-b-c-d-e-f-g-h'>>,
 ];
 
 /* _____________ Further Steps _____________ */

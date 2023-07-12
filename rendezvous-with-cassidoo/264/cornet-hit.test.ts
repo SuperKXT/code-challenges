@@ -28,7 +28,7 @@ test.each(TESTS)('testing cornerHit', (testCase) => {
 	const result = cornerHit(
 		testCase.boxSize,
 		testCase.initialPosition,
-		testCase.screenSize
+		testCase.screenSize,
 	);
 	expect(result).toStrictEqual(testCase.result);
 });

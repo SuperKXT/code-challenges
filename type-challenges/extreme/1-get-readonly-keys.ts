@@ -36,7 +36,7 @@ import type { Equal, Expect } from '@type-challenges/utils';
 
 type _cases = [
 	Expect<Equal<'title', GetReadonlyKeys<Todo1>>>,
-	Expect<Equal<'title' | 'description', GetReadonlyKeys<Todo2>>>
+	Expect<Equal<'title' | 'description', GetReadonlyKeys<Todo2>>>,
 ];
 
 type Todo1 = {

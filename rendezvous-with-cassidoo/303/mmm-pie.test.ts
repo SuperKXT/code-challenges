@@ -8,7 +8,7 @@ test('should test mmmPie', () => {
 			{ name: 'Cami', num: 3 },
 			{ name: 'Cassidy', num: 4 },
 		],
-		8
+		8,
 	);
 	expect(response).toBe(2);
 	assertType<2>(response);

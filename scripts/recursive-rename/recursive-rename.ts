@@ -124,12 +124,12 @@ export const getRenameLogs = (
 	verbose?: boolean,
 	onlyChanges?: boolean,
 	tree?: boolean,
-	isConfirmation?: boolean
+	isConfirmation?: boolean,
 ): string => {
 	const labels: Record<RenameResultType, string> = {
 		error: chalk.bgRedBright(!isConfirmation ? '   ERROR   ' : '   ISSUE   '),
 		success: chalk.bgGreenBright(
-			!isConfirmation ? '  SUCCESS  ' : '  POSSIBLE '
+			!isConfirmation ? '  SUCCESS  ' : '  POSSIBLE ',
 		),
 		unchanged: chalk.bgYellowBright(' UNCHANGED '),
 	};
@@ -153,7 +153,7 @@ export const getRenameLogs = (
 			labels.unchanged,
 			chalk.bold.yellow(` ${unchanged.length} `),
 			'\n',
-		].join('')
+		].join(''),
 	);
 
 	return logs.join('\n');
@@ -221,13 +221,13 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 					type: 'error',
 				};
 			}
-		})
+		}),
 	);
 };
 
 const renameFiles = async (
 	folder: string,
-	files: RenameResult[]
+	files: RenameResult[],
 ): Promise<RenameResult[]> => {
 	return Promise.all(
 		files.map(async (file) => {
@@ -255,7 +255,7 @@ const renameFiles = async (
 				...file,
 				children,
 			};
-		})
+		}),
 	);
 };
 
@@ -266,7 +266,7 @@ export const RECURSIVE_RENAME_HELP = [
 
 export const recursiveRename = async (
 	location: string,
-	{ yes, verbose, onlyChanges, tree }: RenameOptions
+	{ yes, verbose, onlyChanges, tree }: RenameOptions,
 ): Promise<RenameResult[]> => {
 	const folder = location.replace(/\/+$/u, '');
 

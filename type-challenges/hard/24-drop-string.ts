@@ -20,7 +20,7 @@
 
 type DropString<
 	S extends string,
-	R extends string
+	R extends string,
 > = S extends `${infer F}${infer L}`
 	? R extends `${any}${F}${any}`
 		? DropString<L, R>
@@ -49,7 +49,9 @@ type _cases = [
 	Expect<
 		Equal<DropString<' b u t t e r f l y ! ', 'b'>, '  u t t e r f l y ! '>
 	>,
-	Expect<Equal<DropString<' b u t t e r f l y ! ', 't'>, ' b u   e r f l y ! '>>
+	Expect<
+		Equal<DropString<' b u t t e r f l y ! ', 't'>, ' b u   e r f l y ! '>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

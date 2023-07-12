@@ -37,7 +37,7 @@ const baz = (): void => undefined;
 type _cases = [
 	Expect<Equal<MyParameters<typeof foo>, [string, number]>>,
 	Expect<Equal<MyParameters<typeof bar>, [boolean, { a: 'A' }]>>,
-	Expect<Equal<MyParameters<typeof baz>, []>>
+	Expect<Equal<MyParameters<typeof baz>, []>>,
 ];
 
 /* _____________ Further Steps _____________ */

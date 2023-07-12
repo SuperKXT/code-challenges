@@ -15,7 +15,7 @@
 type __FirstUniqueCharIndex<
 	T extends string,
 	A extends string = '',
-	Idx extends 1[] = []
+	Idx extends 1[] = [],
 > = T extends `${infer F}${infer O}`
 	? __FirstUniqueCharIndex<
 			O,
@@ -30,7 +30,7 @@ type __FirstUniqueCharIndex<
 
 type FirstUniqueCharIndex<
 	T extends string,
-	Idx extends string[] = []
+	Idx extends string[] = [],
 > = T extends `${infer F}${infer R}`
 	? F extends Idx[number]
 		? FirstUniqueCharIndex<R, [...Idx, F]>
@@ -48,7 +48,7 @@ type _cases = [
 	Expect<Equal<FirstUniqueCharIndex<'loveleetcode'>, 2>>,
 	Expect<Equal<FirstUniqueCharIndex<'aabb'>, -1>>,
 	Expect<Equal<FirstUniqueCharIndex<''>, -1>>,
-	Expect<Equal<FirstUniqueCharIndex<'aaa'>, -1>>
+	Expect<Equal<FirstUniqueCharIndex<'aaa'>, -1>>,
 ];
 
 /* _____________ Further Steps _____________ */

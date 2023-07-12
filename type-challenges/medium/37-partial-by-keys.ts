@@ -46,26 +46,26 @@ type User = {
 	name: string;
 	age: number;
 	address: string;
-}
+};
 
 type UserPartialName = {
 	name?: string;
 	age: number;
 	address: string;
-}
+};
 
 type UserPartialNameAndAge = {
 	name?: string;
 	age?: number;
 	address: string;
-}
+};
 
 type _cases = [
 	Expect<Equal<PartialByKeys<User, 'name'>, UserPartialName>>,
 	Expect<Equal<PartialByKeys<User, 'name' | 'age'>, UserPartialNameAndAge>>,
 	Expect<Equal<PartialByKeys<User>, Partial<User>>>,
 	// @ts-expect-error invalid params
-	Expect<Equal<PartialByKeys<User, 'name' | 'unknown'>, UserPartialName>>
+	Expect<Equal<PartialByKeys<User, 'name' | 'unknown'>, UserPartialName>>,
 ];
 
 /* _____________ Further Steps _____________ */

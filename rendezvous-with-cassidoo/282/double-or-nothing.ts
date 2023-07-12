@@ -10,7 +10,7 @@ const PRIZE = 10;
 
 const spin = async (
 	score: number = PRIZE,
-	multiplier: 1 | 2 = 1
+	multiplier: 1 | 2 = 1,
 ): Promise<number> => {
 	const { question: choice } = await prompt.get({
 		description: `\nYour pick? [0-${MAX_CHOICE}]: `,
@@ -32,7 +32,7 @@ const spin = async (
 	}
 	console.info(
 		chalk.red('INCORRECT!'),
-		chalk.blue(`Spin Result: ${spinResult}, Your Choice: ${String(choice)}`)
+		chalk.blue(`Spin Result: ${spinResult}, Your Choice: ${String(choice)}`),
 	);
 	return 0;
 };

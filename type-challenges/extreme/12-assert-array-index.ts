@@ -105,7 +105,7 @@
 
 type HashMapHelper<
 	T extends number,
-	R extends unknown[] = []
+	R extends unknown[] = [],
 > = R['length'] extends T ? R : HashMapHelper<T, [...R, unknown]>;
 
 type HashMap = {
@@ -149,7 +149,7 @@ type HashMap = {
 
 type Hash<
 	T extends string,
-	RR extends unknown[] = []
+	RR extends unknown[] = [],
 > = T extends `${infer L}${infer R}`
 	? Hash<R, [...RR, ...HashMap[keyof HashMap & L]]>
 	: RR['length'];
@@ -167,7 +167,7 @@ declare const KEY: unique symbol;
 // eslint-disable-next-line func-style
 function assertArrayIndex<A extends readonly unknown[], K extends string>(
 	array: number extends A['length'] ? A : never,
-	key: IsKey<K> extends true ? K : never
+	key: IsKey<K> extends true ? K : never,
 ): asserts array is number extends A['length']
 	? A & { readonly [KEY]: Hash<K> } & {
 			readonly [key in Hash<K>]: A[number];

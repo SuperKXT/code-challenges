@@ -1,7 +1,7 @@
 type Max = {
 	subArray: number[];
 	sum: number;
-}
+};
 
 export const maxSubArray = (array: number[], length: number): number[] => {
 	const difference = array.length - length;

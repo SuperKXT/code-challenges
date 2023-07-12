@@ -20,7 +20,7 @@
 
 type Without<T extends any[], U extends T[number] | T[number][]> = T extends [
 	infer F,
-	...infer R
+	...infer R,
 ]
 	? F extends (U extends any[] ? U[number] : U)
 		? Without<R, U>
@@ -34,7 +34,7 @@ import type { Equal, Expect } from '@type-challenges/utils';
 type _cases = [
 	Expect<Equal<Without<[1, 2], 1>, [2]>>,
 	Expect<Equal<Without<[1, 2, 4, 1, 5], [1, 2]>, [4, 5]>>,
-	Expect<Equal<Without<[2, 3, 2, 3, 2, 3, 2, 3], [2, 3]>, []>>
+	Expect<Equal<Without<[2, 3, 2, 3, 2, 3, 2, 3], [2, 3]>, []>>,
 ];
 
 /* _____________ Further Steps _____________ */

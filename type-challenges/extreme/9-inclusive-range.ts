@@ -26,7 +26,7 @@ type InclusiveRange<
 	Lower extends number,
 	Higher extends number,
 	Idx extends 1[] = Tuple<Lower>,
-	Result extends number[] = []
+	Result extends number[] = [],
 > = Idx[Higher] extends undefined
 	? InclusiveRange<Lower, Higher, [...Idx, 1], [...Result, Idx['length']]>
 	: Result;
@@ -243,7 +243,7 @@ type _cases = [
 				197,
 				198,
 				199,
-				200
+				200,
 			]
 		>
 	>,
@@ -375,10 +375,10 @@ type _cases = [
 				143,
 				144,
 				145,
-				146
+				146,
 			]
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

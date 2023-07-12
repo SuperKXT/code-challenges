@@ -29,7 +29,7 @@ type _Fill<
 	N,
 	Start extends number = 0,
 	End extends number = T['length'],
-	Output extends unknown[] = []
+	Output extends unknown[] = [],
 > = Output['length'] extends T['length']
 	? Output
 	: _Fill<
@@ -43,7 +43,7 @@ type _Fill<
 					? [...Output, 1][End] extends undefined
 						? N
 						: T[Output['length']]
-					: T[Output['length']]
+					: T[Output['length']],
 			]
 	  >;
 
@@ -53,7 +53,7 @@ type Fill<
 	Start extends number = 0,
 	End extends number = T['length'],
 	Count extends unknown[] = [],
-	Flag extends boolean = Count['length'] extends Start ? true : false
+	Flag extends boolean = Count['length'] extends Start ? true : false,
 > = Count['length'] extends End
 	? T
 	: T extends [infer First, ...infer Rest]
@@ -77,7 +77,7 @@ type _cases = [
 	Expect<Equal<Fill<[1, 2, 3], true, 1, 3>, [1, true, true]>>,
 	Expect<Equal<Fill<[1, 2, 3], true, 10, 0>, [1, 2, 3]>>,
 	Expect<Equal<Fill<[1, 2, 3], true, 10, 20>, [1, 2, 3]>>,
-	Expect<Equal<Fill<[1, 2, 3], true, 0, 10>, [true, true, true]>>
+	Expect<Equal<Fill<[1, 2, 3], true, 0, 10>, [true, true, true]>>,
 ];
 
 /* _____________ Further Steps _____________ */

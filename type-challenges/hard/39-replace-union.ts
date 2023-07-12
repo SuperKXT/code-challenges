@@ -15,7 +15,7 @@
 
 type UnionReplace<T, U extends readonly [any, any][]> = U extends [
 	infer F extends [any, any],
-	...infer Rest extends [any, any][]
+	...infer Rest extends [any, any][],
 ]
 	? UnionReplace<F[0] extends T ? Exclude<T, F[0]> | F[1] : T, Rest>
 	: T;
@@ -37,7 +37,7 @@ type _cases = [
 			>,
 			undefined | string | object
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

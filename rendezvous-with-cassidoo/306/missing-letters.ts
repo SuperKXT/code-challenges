@@ -35,7 +35,7 @@ export type MissingLetters<
 	T extends readonly Alphabet[],
 	A extends readonly any[] = AlphabetArray,
 	Flag extends boolean = false,
-	Gaps extends readonly Alphabet[] = []
+	Gaps extends readonly Alphabet[] = [],
 > = A extends readonly [infer F extends Alphabet, ...infer R]
 	? F extends [0, ...T][T['length']]
 		? Gaps
@@ -45,7 +45,7 @@ export type MissingLetters<
 	: Gaps;
 
 export const missingLetters = <const T extends readonly Alphabet[]>(
-	array: T
+	array: T,
 ): MissingLetters<T> => {
 	const missing: string[] = [];
 	for (let i = 1; i < array.length; i++) {

@@ -8,7 +8,7 @@ export const ERRORS = {
 export const getFibonacciLike = (
 	first: number,
 	second: number,
-	length: number
+	length: number,
 ): number[] => {
 	if (length < 3) throw new Error(ERRORS.length);
 

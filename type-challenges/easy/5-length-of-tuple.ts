@@ -43,7 +43,7 @@ type _cases = [
 	// @ts-expect-error incorrect argument
 	Length<5>,
 	// @ts-expect-error incorrect argument
-	Length<'hello world'>
+	Length<'hello world'>,
 ];
 
 /* _____________ Further Steps _____________ */

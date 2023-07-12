@@ -25,7 +25,7 @@
 /* _____________ Your Code Here _____________ */
 
 /* _____________ Test Cases _____________ */
- 
+
 import type { Equal, Expect } from '@type-challenges/utils';
 
 type KebabCase<T extends string> = T extends `${infer U}${infer V}`
@@ -43,7 +43,7 @@ type _cases = [
 	Expect<Equal<KebabCase<'ABC'>, 'a-b-c'>>,
 	Expect<Equal<KebabCase<'-'>, '-'>>,
 	Expect<Equal<KebabCase<''>, ''>>,
-	Expect<Equal<KebabCase<'😎'>, '😎'>>
+	Expect<Equal<KebabCase<'😎'>, '😎'>>,
 ];
 
 /* _____________ Further Steps _____________ */

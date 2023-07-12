@@ -25,7 +25,7 @@ const permutations = (digits: number[]) => {
 
 export const divisibleIntegers = (
 	n: DivisibleIntegerN,
-	array: number[]
+	array: number[],
 ): boolean => {
 	const digits = array.map((row) => String(row).split('').map(Number)).flat();
 	switch (n) {
@@ -52,7 +52,7 @@ export const divisibleIntegers = (
 				(digit, idx, arr) =>
 					2 * digit -
 						(arr.splice(idx, 1).reduce((acc, curr) => acc + curr) % 7) ===
-					0
+					0,
 			);
 		case 8:
 			return permutations(digits).some((digit) => (digit % 1000) % 8 === 0);

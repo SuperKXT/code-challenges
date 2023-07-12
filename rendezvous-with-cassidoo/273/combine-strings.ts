@@ -1,5 +1,5 @@
 export const INVALID_ERROR = new Error(
-	'the given size must be greater than all array members'
+	'the given size must be greater than all array members',
 );
 
 export const combineStrings = (array: string[], size: number): string[] => {

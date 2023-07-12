@@ -45,14 +45,14 @@ type DigsNext = {
 
 type DigsPrev = { [K in keyof DigsNext as DigsNext[K]]: K };
 
-type AddOne<A extends string> =
-	A extends `${infer AH extends number}${infer AT}`
-		? AH extends 9
-			? `0${AddOne<AT>}`
-			: AH extends keyof DigsNext
-			? `${DigsNext[AH]}${AT}`
-			: never
-		: `1`;
+type AddOne<A extends string> = A extends `${infer AH extends
+	number}${infer AT}`
+	? AH extends 9
+		? `0${AddOne<AT>}`
+		: AH extends keyof DigsNext
+		? `${DigsNext[AH]}${AT}`
+		: never
+	: `1`;
 
 type SubOne<A> = A extends `${infer AH extends number}${infer AT}`
 	? AH extends 0
@@ -64,7 +64,7 @@ type SubOne<A> = A extends `${infer AH extends number}${infer AT}`
 
 type Add<
 	A extends string,
-	B extends string
+	B extends string,
 > = A extends `${infer AH}${infer AT}`
 	? B extends `${infer BH}${infer BT}`
 		? BH extends '0'
@@ -76,7 +76,7 @@ type Add<
 type Mul<
 	A extends string,
 	B extends string,
-	R extends string = '0'
+	R extends string = '0',
 > = A extends '0'
 	? R
 	: B extends '0'
@@ -90,7 +90,7 @@ type Mul<
 // todo RETRY
 type Multiply<
 	A extends string | number | bigint,
-	B extends string | number | bigint
+	B extends string | number | bigint,
 > = Reverse<Mul<Reverse<A>, Reverse<B>>>;
 
 /* _____________ Test Cases _____________ */
@@ -112,7 +112,7 @@ type _cases = [
 	Expect<Equal<Multiply<11n, 13n>, '143'>>,
 	Expect<Equal<Multiply<728, 0>, '0'>>,
 	Expect<Equal<Multiply<'0', 213>, '0'>>,
-	Expect<Equal<Multiply<0, '0'>, '0'>>
+	Expect<Equal<Multiply<0, '0'>, '0'>>,
 ];
 
 /* _____________ Further Steps _____________ */

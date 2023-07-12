@@ -36,7 +36,7 @@ type Shift<T extends number[]> = T extends [any, ...infer R extends number[]]
 type NumberToArray<
 	T extends number,
 	R extends string = `${T}`,
-	A extends number[] = []
+	A extends number[] = [],
 > = R extends `${infer F extends number}${infer L}`
 	? NumberToArray<T, L, [...A, F]>
 	: A;
@@ -45,7 +45,7 @@ type GreaterThanDigits<
 	T extends number[],
 	U extends number[],
 	TF extends number[] = Fill<T[0]>,
-	UF extends number[] = Fill<U[0]>
+	UF extends number[] = Fill<U[0]>,
 > = T['length'] extends 0
 	? false
 	: T[0] extends U[0]
@@ -58,7 +58,7 @@ type GreaterThan<
 	T extends number,
 	U extends number,
 	TA extends number[] = NumberToArray<T>,
-	UA extends number[] = NumberToArray<U>
+	UA extends number[] = NumberToArray<U>,
 > = T extends U
 	? false
 	: TA['length'] extends UA['length']
@@ -80,7 +80,7 @@ type _cases = [
 	Expect<Equal<GreaterThan<20, 20>, false>>,
 	Expect<Equal<GreaterThan<10, 100>, false>>,
 	Expect<Equal<GreaterThan<111, 11>, true>>,
-	Expect<Equal<GreaterThan<1234567891011, 1234567891010>, true>>
+	Expect<Equal<GreaterThan<1234567891011, 1234567891010>, true>>,
 ];
 
 /* _____________ Further Steps _____________ */

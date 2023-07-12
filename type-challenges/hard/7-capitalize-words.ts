@@ -20,7 +20,7 @@
 
 type CapitalizeWords<
 	S extends string,
-	A extends string = ''
+	A extends string = '',
 > = S extends `${infer U}${infer V}`
 	? CapitalizeWords<
 			`${Uppercase<U> extends Lowercase<U> ? Capitalize<V> : V}`,
@@ -44,7 +44,7 @@ type _cases = [
 			'Aa!Bb@Cc#Dd$Ee%Ff^Gg&Hh*Ii(Jj)Kk_Ll+Mm{Nn}Oo|Pp🤣Qq'
 		>
 	>,
-	Expect<Equal<CapitalizeWords<''>, ''>>
+	Expect<Equal<CapitalizeWords<''>, ''>>,
 ];
 
 /* _____________ Further Steps _____________ */

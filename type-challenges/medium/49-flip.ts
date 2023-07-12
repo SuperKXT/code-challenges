@@ -24,7 +24,7 @@ type Flip<
 	T extends Record<
 		PropertyKey,
 		string | number | bigint | boolean | null | undefined
-	>
+	>,
 > = {
 	[K in keyof T as `${T[K]}`]: K;
 };
@@ -45,7 +45,7 @@ type _cases = [
 			{ null: 'val2'; undefined: 'val'; 134: 'val3' },
 			Flip<{ val2: null; val: undefined; val3: 134n }>
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

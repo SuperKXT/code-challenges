@@ -52,7 +52,7 @@
 declare function SimpleVue<
 	D extends Record<string, any>,
 	C extends Record<string, any>,
-	M extends Record<string, any>
+	M extends Record<string, any>,
 >(
 	options: {
 		data: (this: void) => D;
@@ -65,7 +65,7 @@ declare function SimpleVue<
 					? K
 					: never]: ReturnType<C[K]>;
 			}
-	>
+	>,
 ): any;
 
 /* _____________ Test Cases _____________ */

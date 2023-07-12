@@ -71,7 +71,7 @@ type Test1 = {
 	readonly meta: {
 		readonly author: string;
 	};
-}
+};
 type Test2 = {
 	readonly a: () => 1;
 	readonly b: string;
@@ -89,11 +89,11 @@ type Test2 = {
 				'hi',
 				{
 					readonly m: readonly ['hey'];
-				}
+				},
 			];
 		};
 	};
-}
+};
 type DeepMutableTest1 = {
 	title: string;
 	description: string;
@@ -101,7 +101,7 @@ type DeepMutableTest1 = {
 	meta: {
 		author: string;
 	};
-}
+};
 
 type DeepMutableTest2 = {
 	a: () => 1;
@@ -120,22 +120,22 @@ type DeepMutableTest2 = {
 				'hi',
 				{
 					m: ['hey'];
-				}
+				},
 			];
 		};
 	};
-}
+};
 
 type _cases = [
 	Expect<Equal<DeepMutable<Test1>, DeepMutableTest1>>,
-	Expect<Equal<DeepMutable<Test2>, DeepMutableTest2>>
+	Expect<Equal<DeepMutable<Test2>, DeepMutableTest2>>,
 ];
 
 type _errors = [
 	// @ts-expect-error invalid argument
 	DeepMutable<'string'>,
 	// @ts-expect-error invalid argument
-	DeepMutable<0>
+	DeepMutable<0>,
 ];
 
 /* _____________ Further Steps _____________ */

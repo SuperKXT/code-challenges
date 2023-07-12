@@ -44,7 +44,7 @@ type ControlsMap = {
 
 type ParsePrintFormat<
 	T extends string,
-	A extends any[] = []
+	A extends any[] = [],
 > = T extends `${string}%${infer K}${infer R}`
 	? K extends keyof ControlsMap
 		? ParsePrintFormat<R, [...A, ControlsMap[K]]>
@@ -65,7 +65,7 @@ type _cases = [
 	Expect<Equal<ParsePrintFormat<'The result is %h.'>, ['hex']>>,
 	Expect<Equal<ParsePrintFormat<'The result is %q.'>, []>>,
 	Expect<Equal<ParsePrintFormat<'Hello %s: score is %d.'>, ['string', 'dec']>>,
-	Expect<Equal<ParsePrintFormat<'The result is %'>, []>>
+	Expect<Equal<ParsePrintFormat<'The result is %'>, []>>,
 ];
 
 /* _____________ Further Steps _____________ */

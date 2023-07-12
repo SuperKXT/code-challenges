@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable prefer-arrow-functions/prefer-arrow-functions */
 /** cSpell: disable */
 /*
   213 - Vue Basic Props
@@ -72,7 +71,7 @@ declare function VueBasicProps<
 	P extends PropsType,
 	D extends Record<string, any>,
 	C extends Record<string, any>,
-	M extends Record<string, any>
+	M extends Record<string, any>,
 >(
 	options: {
 		props: P;
@@ -87,7 +86,7 @@ declare function VueBasicProps<
 					? K
 					: never]: ReturnType<C[K]>;
 			}
-	>
+	>,
 ): any;
 
 /* _____________ Test Cases _____________ */
@@ -98,8 +97,10 @@ const alert = (_: any) => {
 	throw new Error('Function not implemented.');
 };
 
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 class ClassA {}
 
+// eslint-disable-next-line new-cap
 VueBasicProps({
 	props: {
 		propA: {},
@@ -110,6 +111,7 @@ VueBasicProps({
 		propF: RegExp,
 	},
 	data(this) {
+		// eslint-disable-next-line @typescript-eslint/no-shadow
 		type PropsType = Debug<typeof this>;
 		type _cases = [
 			Expect<IsAny<PropsType['propA']>>,
@@ -117,7 +119,7 @@ VueBasicProps({
 			Expect<Equal<PropsType['propC'], boolean>>,
 			Expect<Equal<PropsType['propD'], ClassA>>,
 			Expect<Equal<PropsType['propE'], string | number>>,
-			Expect<Equal<PropsType['propF'], RegExp>>
+			Expect<Equal<PropsType['propF'], RegExp>>,
 		];
 
 		// @ts-expect-error not available here
@@ -151,7 +153,7 @@ VueBasicProps({
 			const propE = this.propE;
 			type _cases = [
 				Expect<Equal<typeof fullname, string>>,
-				Expect<Equal<typeof propE, string | number>>
+				Expect<Equal<typeof propE, string | number>>,
 			];
 		},
 	},

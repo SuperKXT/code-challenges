@@ -20,8 +20,8 @@ const generateTable = async () => {
 		csv.push(
 			`"${(match[1] as string).replace(
 				/\\"/gu,
-				'`'
-			)}","Not Started","${tag}","${match[2] as string}"`
+				'`',
+			)}","Not Started","${tag}","${match[2] as string}"`,
 		);
 	}
 	writeFile(path.join(__dirname, 'output.csv'), csv.join('\n'));

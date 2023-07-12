@@ -56,7 +56,7 @@ type _cases = [
 				array: [
 					{ snake_case: string },
 					{ another_element: { yet_another_prop: string } },
-					{ yet_another_element: string }
+					{ yet_another_element: string },
 				];
 			}>,
 			{
@@ -65,11 +65,11 @@ type _cases = [
 				array: [
 					{ snakeCase: string },
 					{ anotherElement: { yetAnotherProp: string } },
-					{ yetAnotherElement: string }
+					{ yetAnotherElement: string },
 				];
 			}
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

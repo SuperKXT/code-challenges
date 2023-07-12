@@ -1,11 +1,11 @@
 type Point = {
 	row: number;
 	col: number;
-}
+};
 type Sensor = {
 	beacon: Point;
 	distance: number;
-} & Point
+} & Point;
 
 const getDistance = (from: Point, to: Point): number =>
 	Math.abs(to.row - from.row) + Math.abs(to.col - from.col);

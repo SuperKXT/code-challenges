@@ -51,7 +51,7 @@ type _cases = [
 		>
 	>,
 	Expect<Equal<Permutation<boolean>, [false, true] | [true, false]>>,
-	Expect<Equal<Permutation<never>, []>>
+	Expect<Equal<Permutation<never>, []>>,
 ];
 
 /* _____________ Further Steps _____________ */

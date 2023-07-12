@@ -33,7 +33,7 @@
 
 type GetIndex<
 	T extends readonly any[],
-	V extends T[number]
+	V extends T[number],
 > = T extends readonly [...infer Rest, infer Curr]
 	? Equal<Curr, V> extends true
 		? Rest['length']
@@ -48,7 +48,7 @@ type __Enum<T extends readonly string[], N extends boolean = false> = {
 
 type TupleIndexes<T extends readonly any[]> = T extends readonly [
 	any,
-	...infer R
+	...infer R,
 ]
 	? TupleIndexes<R> | R['length']
 	: never;
@@ -56,7 +56,7 @@ type TupleIndexes<T extends readonly any[]> = T extends readonly [
 type Enum<
 	T extends readonly string[],
 	N extends boolean = false,
-	I extends TupleIndexes<T> = TupleIndexes<T>
+	I extends TupleIndexes<T> = TupleIndexes<T>,
 > = {
 	readonly [K in I as Capitalize<T[K]>]: N extends true ? K : T[K];
 };
@@ -134,7 +134,7 @@ type _cases = [
 				readonly Shift: 9;
 			}
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

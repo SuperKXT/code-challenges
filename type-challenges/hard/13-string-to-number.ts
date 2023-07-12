@@ -28,7 +28,7 @@ type _cases = [
 	Expect<Equal<ToNumber<'12'>, 12>>,
 	Expect<Equal<ToNumber<'27'>, 27>>,
 	Expect<Equal<ToNumber<'18@7_$%'>, never>>,
-	Expect<Equal<ToNumber<'12.5'>, 12>>
+	Expect<Equal<ToNumber<'12.5'>, 12>>,
 ];
 
 /* _____________ Further Steps _____________ */

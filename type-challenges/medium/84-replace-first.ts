@@ -14,7 +14,7 @@
 
 type ReplaceFirst<T extends readonly unknown[], S, R> = T extends [
 	infer First,
-	...infer Rest
+	...infer Rest,
 ]
 	? First extends S
 		? [R, ...Rest]
@@ -43,7 +43,7 @@ type _cases = [
 			ReplaceFirst<['six', 'eight', 'ten'], 'eleven', 'twelve'>,
 			['six', 'eight', 'ten']
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

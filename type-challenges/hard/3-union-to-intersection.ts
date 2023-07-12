@@ -20,7 +20,7 @@
 
 // TODO RETRY
 type UnionToIntersection<U> = (U extends U ? (arg: U) => any : never) extends (
-	arg: infer I
+	arg: infer I,
 ) => void
 	? I
 	: never;
@@ -36,7 +36,7 @@ type _cases = [
 			UnionToIntersection<(() => 'foo') | ((i: 42) => true)>,
 			(() => 'foo') & ((i: 42) => true)
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -49,7 +49,7 @@ type _cases = [
 	Expect<Equal<IsNegativeNumber<-100_000_000>, true>>,
 	Expect<Equal<IsNegativeNumber<1>, false>>,
 	Expect<Equal<IsNegativeNumber<1.9>, false>>,
-	Expect<Equal<IsNegativeNumber<100_000_000>, false>>
+	Expect<Equal<IsNegativeNumber<100_000_000>, false>>,
 ];
 
 /* _____________ Further Steps _____________ */

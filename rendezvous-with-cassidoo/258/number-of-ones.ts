@@ -9,7 +9,7 @@ const numberOfOnes = (integer: number): number => {
 
 			return count + matches.length;
 		},
-		0
+		0,
 	);
 };
 

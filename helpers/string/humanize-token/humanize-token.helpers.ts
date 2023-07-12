@@ -17,7 +17,7 @@ export type HumanizeCase = (typeof humanizeCases)[number];
  */
 export const humanizeToken = (
 	input: string,
-	casing: HumanizeCase = 'title'
+	casing: HumanizeCase = 'title',
 ): string => {
 	const string = input.trim();
 	if (!string.trim()) return '';

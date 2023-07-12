@@ -2,7 +2,7 @@ import type { LinkedList, LinkedListNode } from '~/helpers/linked-list';
 
 export const areArraysEqual = <Type extends any[]>(
 	first: Type,
-	second: Type
+	second: Type,
 ): boolean => {
 	if (first.length !== second.length) return false;
 
@@ -23,7 +23,7 @@ type LinkedListToArray<T extends LinkedList<any>> =
 		: [];
 
 export const linkedListToArray = <const List extends LinkedList<any>>(
-	list: List
+	list: List,
 ): LinkedListToArray<List> => {
 	const array = [];
 	let node = list.head;

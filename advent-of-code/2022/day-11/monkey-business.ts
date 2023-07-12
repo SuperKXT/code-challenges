@@ -5,12 +5,12 @@ type Monkey = {
 	trueIndex: number;
 	falseIndex: number;
 	inspected: number;
-}
+};
 
 type Solution = {
 	monkeyBusiness: number;
 	bigMb: number;
-}
+};
 
 const PREFIX = {
 	divisor: 'Test: divisible by',
@@ -40,7 +40,7 @@ export const monkeyBusiness = (input: string): Solution => {
 				falseIndex: parseInt(rows[5]?.replace(PREFIX.falseIndex, '') ?? ''),
 				inspected: 0,
 				items: (rows[1]?.replace(PREFIX.items, '').split(',') ?? []).map(
-					Number
+					Number,
 				),
 				operation: (item: number) => {
 					const left = parseInt(first ?? '') || item;
@@ -62,7 +62,7 @@ export const monkeyBusiness = (input: string): Solution => {
 
 	const superModulo = bigMonkeys.reduce(
 		(product, { divisor }) => product * divisor,
-		1
+		1,
 	);
 
 	const executeCycle = (list: Monkey[], isBig?: boolean) => {
@@ -88,7 +88,7 @@ export const monkeyBusiness = (input: string): Solution => {
 		.slice(0, 2);
 	solution.monkeyBusiness = topTwo.reduce(
 		(product, { inspected }) => product * inspected,
-		1
+		1,
 	);
 
 	const topTwoLong = bigMonkeys
@@ -96,7 +96,7 @@ export const monkeyBusiness = (input: string): Solution => {
 		.slice(0, 2);
 	solution.bigMb = topTwoLong.reduce(
 		(product, { inspected }) => product * inspected,
-		1
+		1,
 	);
 
 	return solution;

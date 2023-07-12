@@ -54,7 +54,7 @@ type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 type Join<
 	T extends readonly string[],
 	Separator extends string = ',',
-	Result extends string = ''
+	Result extends string = '',
 > = T extends [infer First extends string, ...infer Rest extends string[]]
 	? Join<
 			Rest,
@@ -79,10 +79,10 @@ type HundredsTuple = [Digit] | [Digit, Digit] | [Digit, Digit, Digit];
 
 type HundredsToWords<
 	Type extends HundredsTuple,
-	Result extends string[] = []
+	Result extends string[] = [],
 > = Type extends [
 	infer Hundred extends Exclude<Digit, '0'>,
-	...infer Rest extends [Digit, Digit]
+	...infer Rest extends [Digit, Digit],
 ]
 	? HundredsToWords<Rest, Hundred extends 0 ? [] : [Units[Hundred], 'hundred']>
 	: Type extends [infer Ten extends Digit, infer Unit extends Digit]
@@ -92,7 +92,7 @@ type HundredsToWords<
 					...Result,
 					...(Units[I] extends Exclude<Units[number], ''>
 						? [Units[I]]
-						: [Tens[Ten], Units[Unit]])
+						: [Tens[Ten], Units[Unit]]),
 				],
 				' '
 		  >
@@ -104,7 +104,7 @@ type HundredsToWords<
 type NumberToDigits<
 	T extends number,
 	Str extends string = `${T}` extends `-${infer I}` ? I : `${T}`,
-	Result extends Digit[] = []
+	Result extends Digit[] = [],
 > = Str extends `${infer First extends Digit}${infer Rest}`
 	? NumberToDigits<never, Rest, [...Result, First]>
 	: Result;
@@ -113,7 +113,7 @@ type GroupTuple<
 	T extends unknown[],
 	Size extends number,
 	Curr extends unknown[] = [],
-	Groups extends unknown[][] = []
+	Groups extends unknown[][] = [],
 > = T extends [...infer Rest, infer Last]
 	? [Last, ...Curr]['length'] extends Size
 		? GroupTuple<Rest, Size, [], [[Last, ...Curr], ...Groups]>
@@ -125,7 +125,7 @@ type GroupTuple<
 type FractionalToWords<
 	T extends number,
 	Digits extends Digit[] = NumberToDigits<T>,
-	Result extends string[] = []
+	Result extends string[] = [],
 > = Digits extends [infer First extends Digit, ...infer Rest extends Digit[]]
 	? FractionalToWords<never, Rest, [...Result, Units[First]]>
 	: ` point ${Join<Result, ' '>}`;
@@ -136,7 +136,7 @@ type JoinNumberChunks<
 	Sign extends string = `${T}` extends `-${any}` ? 'minus ' : '',
 	Fraction extends string = `${T}` extends `${any}.${infer F extends number}`
 		? FractionalToWords<F>
-		: ''
+		: '',
 > = `${Sign}${Join<Result, ', '>}${Fraction}`;
 
 type NumberToWords<
@@ -146,14 +146,14 @@ type NumberToWords<
 		3
 	>,
 	Result extends string[] = [],
-	Postfix extends string = ['', ...Periods][Groups['length']]
+	Postfix extends string = ['', ...Periods][Groups['length']],
 > = number extends T
 	? string
 	: T extends 0
 	? 'zero'
 	: Groups extends [
 			infer First extends HundredsTuple,
-			...infer Rest extends HundredsTuple[]
+			...infer Rest extends HundredsTuple[],
 	  ]
 	? NumberToWords<
 			T,
@@ -162,13 +162,13 @@ type NumberToWords<
 				...Result,
 				Postfix extends ''
 					? HundredsToWords<First>
-					: `${HundredsToWords<First>} ${Postfix}`
+					: `${HundredsToWords<First>} ${Postfix}`,
 			]
 	  >
 	: JoinNumberChunks<T, Result>;
 
 export const numberToWords = <T extends number>(
-	number: T
+	number: T,
 ): NumberToWords<T> => {
 	if (isNaN(number)) throw new Error('invalid number!');
 	if (number === 0) return 'zero' as NumberToWords<T>;
@@ -180,7 +180,7 @@ export const numberToWords = <T extends number>(
 			const start = (index + 1) * -3;
 			const end = start + 3 || undefined;
 			return string.slice(start, end);
-		}
+		},
 	);
 	const groupWords = groups.map((group, index) => {
 		const postFix = NUMBER_PERIODS[index];

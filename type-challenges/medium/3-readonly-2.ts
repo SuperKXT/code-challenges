@@ -35,7 +35,7 @@
 /* _____________ Your Code Here _____________ */
 
 type MyReadonly2<T extends object, K extends keyof T = never> = [K] extends [
-	never
+	never,
 ]
 	? {
 			readonly [Key in keyof T]: T[Key];
@@ -54,7 +54,7 @@ type _cases = [
 	Expect<Alike<MyReadonly2<Todo1>, Readonly<Todo1>>>,
 	Expect<Alike<MyReadonly2<Todo1, 'title' | 'description'>, Expected>>,
 	Expect<Alike<MyReadonly2<Todo2, 'title' | 'description'>, Expected>>,
-	Expect<Alike<MyReadonly2<Todo2, 'description'>, Expected>>
+	Expect<Alike<MyReadonly2<Todo2, 'description'>, Expected>>,
 ];
 
 // @ts-expect-error invalid arguments
@@ -64,19 +64,19 @@ type Todo1 = {
 	title: string;
 	description?: string;
 	completed: boolean;
-}
+};
 
 type Todo2 = {
 	readonly title: string;
 	description?: string;
 	completed: boolean;
-}
+};
 
 type Expected = {
 	readonly title: string;
 	readonly description?: string;
 	completed: boolean;
-}
+};
 
 /* _____________ Further Steps _____________ */
 /*

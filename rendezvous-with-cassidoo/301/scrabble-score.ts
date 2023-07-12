@@ -1,7 +1,7 @@
 /** cSpell: disable */
 type Tuple<
 	T extends number,
-	Result extends 1[] = []
+	Result extends 1[] = [],
 > = Result['length'] extends T ? Result : Tuple<T, [...Result, 1]>;
 
 type ScrabbleKey = {
@@ -16,7 +16,7 @@ type ScrabbleKey = {
 
 type ScrabbleKeyScore<
 	T extends string,
-	Keys extends keyof ScrabbleKey = keyof ScrabbleKey
+	Keys extends keyof ScrabbleKey = keyof ScrabbleKey,
 > = Keys extends Keys
 	? Keys extends `${any}${T}${any}`
 		? ScrabbleKey[Keys]
@@ -25,7 +25,7 @@ type ScrabbleKeyScore<
 
 type Scrabble<
 	T extends string,
-	Score extends any[] = []
+	Score extends any[] = [],
 > = T extends `${infer First}${infer Rest}`
 	? ScrabbleKeyScore<First> extends infer N extends number
 		? [N] extends [never]

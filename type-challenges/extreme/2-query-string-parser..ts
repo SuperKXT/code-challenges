@@ -36,7 +36,7 @@ type CombineObj<K extends string, V, O extends object> = Utils.prettify<
 
 type QueryObject<
 	T extends string,
-	O extends object = {}
+	O extends object = {},
 > = T extends `${infer F}=${infer R}`
 	? CombineObj<F, R, O>
 	: CombineObj<T, true, O>;
@@ -78,7 +78,7 @@ type _cases = [
 		>
 	>,
 	Expect<Equal<ParseQueryString<'k1=v1&k1'>, { k1: ['v1', true] }>>,
-	Expect<Equal<ParseQueryString<'k1&k1=v1'>, { k1: [true, 'v1'] }>>
+	Expect<Equal<ParseQueryString<'k1&k1=v1'>, { k1: [true, 'v1'] }>>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -36,7 +36,7 @@ type _cases = [
 			Flatten<[{ foo: 'bar'; 2: 10 }, 'foobar']>,
 			[{ foo: 'bar'; 2: 10 }, 'foobar']
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

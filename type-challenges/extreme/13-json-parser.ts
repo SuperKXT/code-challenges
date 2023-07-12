@@ -65,7 +65,7 @@ type EvalArray<T, A extends any[] = []> = T extends `${Escapes}${infer U}`
 type EvalObject<
 	T,
 	K extends string = '',
-	O = {}
+	O = {},
 > = T extends `${Escapes}${infer U}`
 	? EvalObject<U, K, O>
 	: T extends `}${infer U}`
@@ -111,7 +111,7 @@ type _cases = [
 					{
 						a: 'b';
 						b: false;
-					}
+					},
 				];
 				b: false;
 				a: 'b';
@@ -151,7 +151,7 @@ type _cases = [
   world": 123 }`>,
 			never
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

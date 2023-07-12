@@ -50,16 +50,16 @@ export const findWordle = (parameters: Arguments): string[] => {
 			.replace(
 				EXCLUDE_CHARACTERS_REGEX,
 				(_, p1: string) =>
-					`[${availableCharacters.replace(new RegExp(`[${p1}]`, 'giu'), '')}]`
+					`[${availableCharacters.replace(new RegExp(`[${p1}]`, 'giu'), '')}]`,
 			),
-		'iu'
+		'iu',
 	);
 
 	const matches = WORDLE_WORDS.filter(
 		(word) =>
 			(repeat || !DUPLICATE_CHARACTER_REGEX.test(word)) &&
 			known.split('').every((character) => word.includes(character)) &&
-			regex.test(word)
+			regex.test(word),
 	);
 
 	if (process.env.NODE_ENV !== 'test') {
@@ -68,7 +68,7 @@ export const findWordle = (parameters: Arguments): string[] => {
 				'Found',
 				chalk.bgGreen(matches.length),
 				`Match${matches.length !== 1 ? 'es' : ''}`,
-			].join(' ')
+			].join(' '),
 		);
 		console.info(chalk.green(matches.join(', ')));
 	}

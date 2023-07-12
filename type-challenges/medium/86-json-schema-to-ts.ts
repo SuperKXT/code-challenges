@@ -38,14 +38,7 @@ type _object = {
 };
 type _array = { type: 'array'; items?: JsonType };
 
-type JsonType =
-	| _array
-	| _enum
-	| _string
-	| _number
-	| _boolean
-	| _object
-	| _array;
+type JsonType = _array | _enum | _string | _number | _boolean | _object;
 
 type JSONSchema2TS<T extends JsonType> = T extends {
 	enum: infer E extends any[];

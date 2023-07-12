@@ -1,4 +1,3 @@
- 
 /*
   7561 - Subtract
   -------
@@ -61,21 +60,21 @@ type Fill<T extends number, R extends 1[] = []> = T extends R['length']
 
 type PadLeft<S extends number, T extends Digit[]> = [
 	...T,
-	1
+	1,
 ][S] extends undefined
 	? PadLeft<S, [0, ...T]>
 	: T;
 
 type NumberToArr<
 	T extends number,
-	S extends string = `${T}`
+	S extends string = `${T}`,
 > = S extends `${infer F extends Digit}${infer R}`
 	? [F, ...NumberToArr<never, R>]
 	: [];
 
 type ArrToString<T extends number[]> = T extends [
 	infer F extends number,
-	...infer R extends number[]
+	...infer R extends number[],
 ]
 	? `${F}${ArrToString<R>}`
 	: '';
@@ -96,7 +95,7 @@ type LesserThan<
 	A extends number,
 	B extends number,
 	ArrA extends Digit[] = NumberToArr<A>,
-	ArrB extends Digit[] = NumberToArr<B>
+	ArrB extends Digit[] = NumberToArr<B>,
 > = A extends B
 	? false
 	: [...ArrA, 1][ArrB['length']] extends undefined
@@ -105,7 +104,7 @@ type LesserThan<
 	? false
 	: [ArrA, ArrB] extends [
 			[...infer RestA extends Digit[], infer LastA extends Digit],
-			[...infer RestB extends Digit[], infer LastB extends Digit]
+			[...infer RestB extends Digit[], infer LastB extends Digit],
 	  ]
 	? LesserThanDigit<LastA, LastB> extends true
 		? true
@@ -119,7 +118,7 @@ type SubtractDigit<
 	U extends SubNum,
 	Lesser extends SubNum = LesserThanDigit<T, U> extends true ? T : U,
 	S extends 1[] = Fill<Lesser>,
-	R extends 1[] = []
+	R extends 1[] = [],
 > = T extends U
 	? 0
 	: [...R, ...S]['length'] extends Exclude<T | U, Lesser>
@@ -129,7 +128,7 @@ type SubtractDigit<
 type GetCarry<T extends Digit[], R extends SubNum[] = []> = T extends [
 	...infer F extends Digit[],
 	infer SL extends Digit,
-	infer L extends Digit
+	infer L extends Digit,
 ]
 	? SL extends 0
 		? GetCarry<
@@ -146,19 +145,19 @@ type Subtract<
 	B extends number,
 	ArrA extends Digit[] = NumberToArr<A>,
 	ArrB extends Digit[] = PadLeft<A, NumberToArr<B>>,
-	Result extends Digit[] = []
+	Result extends Digit[] = [],
 > = A extends B
 	? 0
 	: LesserThan<A, B> extends true
 	? never
 	: [ArrA, ArrB] extends [
 			[...infer RestA extends Digit[], infer LastA extends Digit],
-			[...infer RestB extends Digit[], infer LastB extends Digit]
+			[...infer RestB extends Digit[], infer LastB extends Digit],
 	  ]
 	? LesserThan<LastA, LastB> extends true
 		? GetCarry<ArrA> extends [
 				...infer CarryRestA extends Digit[],
-				infer CarryRestB extends SubNum
+				infer CarryRestB extends SubNum,
 		  ]
 			? Subtract<
 					A,
@@ -180,7 +179,7 @@ type Tuple<T, Res extends 1[] = []> = 0 extends 1
 
 type _Subtract<M extends number, S extends number> = Tuple<M> extends [
 	...Tuple<S>,
-	...infer Rest
+	...infer Rest,
 ]
 	? Rest['length']
 	: never;
@@ -193,7 +192,7 @@ type _cases = [
 	Expect<Equal<Subtract<1, 1>, 0>>,
 	Expect<Equal<Subtract<2, 1>, 1>>,
 	Expect<Equal<Subtract<1, 2>, never>>,
-	Expect<Equal<Subtract<1000, 999>, 1>>
+	Expect<Equal<Subtract<1000, 999>, 1>>,
 ];
 
 /* _____________ Further Steps _____________ */

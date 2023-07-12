@@ -1,5 +1,5 @@
 export const treeHouse = (
-	input: string
+	input: string,
 ): {
 	visible: number;
 	scenicScore: number;
@@ -28,7 +28,7 @@ export const treeHouse = (
 				forest.slice(rowIndex + 1).map((curr) => Number(curr[colIndex])),
 			];
 			const isVisible = attached.some((curr) =>
-				curr.every((tree) => tree < current)
+				curr.every((tree) => tree < current),
 			);
 			if (isVisible) visible++;
 

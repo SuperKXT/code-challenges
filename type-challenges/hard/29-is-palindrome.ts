@@ -25,7 +25,7 @@ type StringToArray<T extends string> = T extends `${infer F}${infer R}`
 
 type _IsPalindrome<
 	T extends string | number,
-	A = StringToArray<`${T}`>
+	A = StringToArray<`${T}`>,
 > = A extends [infer F, ...infer M, infer L]
 	? F extends L
 		? _IsPalindrome<never, M>
@@ -51,7 +51,7 @@ type _cases = [
 	Expect<Equal<IsPalindrome<'abca'>, false>>,
 	Expect<Equal<IsPalindrome<'abcba'>, true>>,
 	Expect<Equal<IsPalindrome<121>, true>>,
-	Expect<Equal<IsPalindrome<19260817>, false>>
+	Expect<Equal<IsPalindrome<19260817>, false>>,
 ];
 
 /* _____________ Further Steps _____________ */

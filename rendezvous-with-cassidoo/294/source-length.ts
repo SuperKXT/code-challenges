@@ -57,7 +57,7 @@ export const numberToWords = (number: number): string => {
 			const start = (index + 1) * -3;
 			const end = start + 3 || undefined;
 			return string.slice(start, end);
-		}
+		},
 	).reverse();
 	const groupPeriods = NUMBER_PERIODS.slice(0, groups.length).reverse();
 	const groupWords = groups.map((group, index) => {

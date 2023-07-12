@@ -22,7 +22,7 @@
 
 type SnakeCase<
 	T extends string,
-	S extends string = ''
+	S extends string = '',
 > = T extends `${infer F}${infer R}`
 	? F extends Lowercase<F>
 		? SnakeCase<R, `${S}${F}`>
@@ -42,7 +42,7 @@ type _cases = [
 			SnakeCase<'getElementById' | 'getElementByClassNames'>,
 			'get_element_by_id' | 'get_element_by_class_names'
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

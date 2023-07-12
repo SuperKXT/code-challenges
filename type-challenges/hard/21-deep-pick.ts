@@ -40,14 +40,14 @@
 /* _____________ Your Code Here _____________ */
 
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
-	k: infer R
+	k: infer R,
 ) => void
 	? R
 	: never;
 
 type DeepPick<
 	T extends Record<string, unknown>,
-	U extends string
+	U extends string,
 > = UnionToIntersection<
 	U extends keyof T
 		? Pick<T, U>
@@ -95,7 +95,7 @@ type _cases = [
 			DeepPick<TObj, 'a' | 'obj.e' | 'obj.obj2.i'>,
 			{ a: number } & { obj: { e: string } } & { obj: { obj2: { i: boolean } } }
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

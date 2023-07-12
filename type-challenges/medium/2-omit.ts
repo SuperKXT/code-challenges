@@ -42,7 +42,7 @@ import type { Equal, Expect } from '@type-challenges/utils';
 
 type _cases = [
 	Expect<Equal<Expected1, MyOmit<Todo, 'description'>>>,
-	Expect<Equal<Expected2, MyOmit<Todo, 'description' | 'completed'>>>
+	Expect<Equal<Expected2, MyOmit<Todo, 'description' | 'completed'>>>,
 ];
 
 // @ts-expect-error incorrect argument
@@ -52,16 +52,16 @@ type Todo = {
 	title: string;
 	description: string;
 	completed: boolean;
-}
+};
 
 type Expected1 = {
 	title: string;
 	completed: boolean;
-}
+};
 
 type Expected2 = {
 	title: string;
-}
+};
 
 /* _____________ Further Steps _____________ */
 /*

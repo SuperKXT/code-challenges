@@ -57,7 +57,7 @@ test.each(TESTS)(
 	'testing turningTrouble against example input',
 	({ input, output }) => {
 		expect(tuningTrouble(input)).toStrictEqual(output);
-	}
+	},
 );
 
 test('testing turningTrouble against real input', async () => {

@@ -33,7 +33,7 @@ const assertBoard: Utils.assertFunction<Board> = (board: any) => {
 
 const isEnemy = <P extends Piece>(
 	piece: P,
-	toCheck: string
+	toCheck: string,
 ): toCheck is P extends WhitePiece ? BlackPiece : WhitePiece => {
 	const opposite = WHITE_PIECES.includes(piece) ? BLACK_PIECES : WHITE_PIECES;
 	return opposite.includes(toCheck);
@@ -133,7 +133,7 @@ export const isValidMove = ({
 				[row + 1, col + 2],
 			].filter(isPosition);
 			const isValid = valid.some(
-				([currRow, currCol]) => toRow === currRow && toCol === currCol
+				([currRow, currCol]) => toRow === currRow && toCol === currCol,
 			);
 			if (!isValid) throw new Error(CHESS_ERRORS.badKnight);
 
@@ -177,7 +177,7 @@ export const isValidMove = ({
 				[row + 1, col + 1],
 			].filter(isPosition);
 			const isValid = valid.some(
-				([currRow, currCol]) => toRow === currRow && toCol === currCol
+				([currRow, currCol]) => toRow === currRow && toCol === currCol,
 			);
 			if (!isValid) throw new Error(CHESS_ERRORS.badKing);
 

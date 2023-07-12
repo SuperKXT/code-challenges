@@ -3,7 +3,7 @@ type Fraction = `${number}/${number}`;
 export const fractionMath = (
 	fractionA: Fraction,
 	operation: 'add' | 'divide' | 'multiply' | 'subtract',
-	fractionB: Fraction
+	fractionB: Fraction,
 ): Fraction => {
 	const parsedA = fractionA.split('/').map(Number) as [number, number];
 	const parsedB = fractionB.split('/').map(Number) as [number, number];

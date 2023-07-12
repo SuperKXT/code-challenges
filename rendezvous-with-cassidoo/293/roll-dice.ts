@@ -1,6 +1,6 @@
 type Combine<
 	T extends string,
-	Str extends string
+	Str extends string,
 > = Str extends `${infer U}+${infer V}`
 	? U extends T
 		? `${T}+${Combine<T, V>}`

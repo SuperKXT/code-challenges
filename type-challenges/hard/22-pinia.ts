@@ -86,7 +86,7 @@ type MapGetters<T extends Record<string, (this: any) => any>> = {
 declare function defineStore<
 	S extends Record<string, unknown>,
 	G extends Record<string, () => any> = any,
-	A extends Record<string, (...args: any[]) => any> = any
+	A extends Record<string, (...args: any[]) => any> = any,
 >(store: {
 	id: string;
 	state: () => S;
@@ -160,7 +160,7 @@ type _tests = [
 	Expect<Equal<typeof store.str, string>>,
 	Expect<Equal<typeof store.stringifiedNum, string>>,
 	Expect<Equal<typeof store.parsedNum, number>>,
-	Expect<Equal<typeof r, true>>
+	Expect<Equal<typeof r, true>>,
 ];
 
 /* _____________ Further Steps _____________ */

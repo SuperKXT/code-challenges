@@ -1,18 +1,18 @@
 [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)
 
--   GTK theming
+- GTK theming
 
 [Gtk-Theming-Guide/creating_icon_theme.md at master · surajmandalcell/Gtk-Theming-Guide](https://github.com/surajmandalcell/Gtk-Theming-Guide/blob/master/creating_icon_theme.md)
 
 ---
 
--   Code Formatting
+- Code Formatting
 
 [Software Programming](https://www.youtube.com/playlist?list=PLUxszVpqZTNShoypLQW9a4dEcffsoZT4k)
 
 ---
 
--   Frontend Testing
+- Frontend Testing
 
 [Microsoft Build - Join us May 24-26 2022](https://mybuild.microsoft.com/en-US/sessions/80fa0592-32bd-4b6a-90f6-bb7d92f30f90/?ocid=aid3046724&utm_issue=202208&utm_position=YFC05&utm_topic=Application-Development&utm_content=Video&utm_section=Learning-resources&utm_cta=Watchnow&utm_description=TestmodernwebappswithPlaywright)
 
@@ -32,7 +32,7 @@
 
 ---
 
--   API Testing
+- API Testing
 
 [Postman Beginner's Course - API Testing](https://www.youtube.com/watch?v=VywxIQ2ZXw4)
 
@@ -40,7 +40,7 @@
 
 ---
 
--   Regular Expression
+- Regular Expression
 
 [RegExr: Learn, Build, & Test RegEx](https://regexr.com/)
 
@@ -52,7 +52,7 @@
 
 ---
 
--   Web Accessibility
+- Web Accessibility
 
 [Learn Accessibility](https://web.dev/learn/accessibility/)
 
@@ -72,7 +72,7 @@
 
 ---
 
--   React
+- React
 
 [React Security Fundamentals](https://courses.reactsecurity.io/react-security-fundamentals)
 
@@ -86,25 +86,25 @@
 
 ---
 
--   Redux
+- Redux
 
 [Understanding Redux: The World's Easiest Guide to Beginning Redux](https://www.freecodecamp.org/news/understanding-redux-the-worlds-easiest-guide-to-beginning-redux-c695f45546f6/)
 
 ---
 
--   APIs with Nest, PostGres
+- APIs with Nest, PostGres
 
 [How to Build Web APIs with NestJS, Postgres, and Sequelize - A Beginner's Guide](https://www.freecodecamp.org/news/build-web-apis-with-nestjs-beginners-guide/)
 
 ---
 
--   Material-UI
+- Material-UI
 
 [Learn MUI - MUI](https://material-ui.com/getting-started/learn/)
 
 ---
 
--   Custom Elements
+- Custom Elements
 
 [Creating a Custom Element from Scratch](https://css-tricks.com/creating-a-custom-element-from-scratch/)
 
@@ -112,7 +112,7 @@
 
 ---
 
--   D3
+- D3
 
 [Learning D3 Part 1 - Basic Selections](https://www.youtube.com/watch?v=fFY3E0PmIxM&list=PLillGF-RfqbY8Vy_G5WxXwhZx4eXI6Oea)
 
@@ -122,7 +122,7 @@
 
 ---
 
--   Figma
+- Figma
 
 [What is Figma? A Design Crash Course [2021 Tutorial]](https://www.freecodecamp.org/news/figma-crash-course/)
 
@@ -130,7 +130,7 @@
 
 ---
 
--   Databases
+- Databases
 
 [Course introduction — MySQL for Developers — PlanetScale](https://planetscale.com/courses/mysql-for-developers)
 
@@ -142,19 +142,19 @@
 
 ---
 
--   Svelte, Prisma, Vercel, Postgres
+- Svelte, Prisma, Vercel, Postgres
 
 [Become a Full Stack Developer with Svelte, Postgres, Vercel, and Gitpod](https://www.freecodecamp.org/news/become-a-full-stack-developer-with-svelte/)
 
 ---
 
--   Github Actions
+- Github Actions
 
 [Learn GitHub Actions - GitHub Docs](https://docs.github.com/en/actions/learn-github-actions)
 
 ---
 
--   Web
+- Web
 
 [Easy SVG Customization And Animation: A Practical Guide - Smashing Magazine](https://www.smashingmagazine.com/2023/01/svg-customization-animation-practical-guide/)
 
@@ -176,19 +176,19 @@
 
 ---
 
--   Bash Scripting
+- Bash Scripting
 
 [https://github.com/yousefvand/shellman-ebook](https://github.com/yousefvand/shellman-ebook)
 
 ---
 
--   Git
+- Git
 
 [Book](https://git-scm.com/book/en/v2)
 
 ---
 
--   CSS
+- CSS
 
 [“Modern Layouts: Getting Out of Our Ruts” by Jen Simmons – An Event Apart Austin 2015](https://www.youtube.com/watch?v=jreccgYLfx8)
 
@@ -208,13 +208,13 @@
 
 ---
 
--   Markdown
+- Markdown
 
 [Markdown Cheat Sheet - How to Write in Markdown with Examples](https://www.freecodecamp.org/news/markdown-cheat-sheet/)
 
 ---
 
--   JavaScript
+- JavaScript
 
 [A Complete Visual Guide to Understanding the Node.js Event Loop](https://www.builder.io/blog/visual-guide-to-nodejs-event-loop?ck_subscriber_id=1663713556)
 
@@ -234,7 +234,7 @@
 
 ---
 
--   TypeScript
+- TypeScript
 
 [Handbook - The TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 
@@ -252,13 +252,13 @@
 
 ---
 
--   Browser Extension
+- Browser Extension
 
 [Build a Chrome Extension - Course for Beginners](https://www.youtube.com/watch?v=0n809nd4Zu4)
 
 ---
 
--   CORS
+- CORS
 
 [✋🏼🔥 CS Visualized: CORS](https://dev.to/lydiahallie/cs-visualized-cors-5b8h)
 
@@ -268,13 +268,13 @@
 
 ---
 
--   Three.js
+- Three.js
 
 [Code a Minecraft Clone Using React and Three.js](https://www.freecodecamp.org/news/code-a-minecraft-clone-using-react-and-three-js/)
 
 ---
 
--   Frontend Performance
+- Frontend Performance
 
 [Front-End Performance Checklist 2021 (PDF, Apple Pages, MS Word) - Smashing Magazine](https://www.smashingmagazine.com/2021/01/front-end-performance-2021-free-pdf-checklist/)
 
@@ -286,7 +286,7 @@
 
 ---
 
--   Remix
+- Remix
 
 [Up and Running with Remix](https://egghead.io/courses/up-and-running-with-remix-b82b6bb6)
 

@@ -25,7 +25,7 @@ type Fibonacci<
 	T extends number,
 	Idx extends any[] = [1],
 	Prev extends any[] = [],
-	Curr extends any[] = [1]
+	Curr extends any[] = [1],
 > = Idx['length'] extends T
 	? Curr['length']
 	: Fibonacci<T, [...Idx, 1], Curr, [...Prev, ...Curr]>;
@@ -38,7 +38,7 @@ type _cases = [
 	Expect<Equal<Fibonacci<1>, 1>>,
 	Expect<Equal<Fibonacci<2>, 1>>,
 	Expect<Equal<Fibonacci<3>, 2>>,
-	Expect<Equal<Fibonacci<8>, 21>>
+	Expect<Equal<Fibonacci<8>, 21>>,
 ];
 
 /* _____________ Further Steps _____________ */

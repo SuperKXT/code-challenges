@@ -36,7 +36,7 @@ type Model = {
 	count: number;
 	isReadonly: boolean;
 	isEnable: boolean;
-}
+};
 
 type _cases = [
 	Expect<Equal<OmitByType<Model, boolean>, { name: string; count: number }>>,
@@ -51,7 +51,7 @@ type _cases = [
 			OmitByType<Model, number>,
 			{ name: string; isReadonly: boolean; isEnable: boolean }
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

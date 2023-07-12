@@ -47,6 +47,6 @@ test.each(tests)('test humanizeToken helper', ({ input, output }) => {
 		(casing) => {
 			const response = humanizeToken(input, casing);
 			expect(response).toStrictEqual(output[casing]);
-		}
+		},
 	);
 });

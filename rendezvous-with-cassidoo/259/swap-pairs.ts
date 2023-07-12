@@ -26,7 +26,7 @@ export const swapArrayPairsWithLoop = (array: number[]): number[] => {
 };
 
 export const swapLinkedListPairs = (
-	list: LinkedList<number>
+	list: LinkedList<number>,
 ): LinkedList<number> => {
 	const swapped = { ...list };
 	let node = swapped.head;

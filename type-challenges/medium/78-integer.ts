@@ -36,7 +36,7 @@ type _cases = [
 	Expect<Equal<Integer<1.0>, 1>>,
 	Expect<Equal<Integer<1.0>, 1>>,
 	Expect<Equal<Integer<typeof x>, never>>,
-	Expect<Equal<Integer<typeof y>, 1>>
+	Expect<Equal<Integer<typeof y>, 1>>,
 ];
 
 /* _____________ Further Steps _____________ */

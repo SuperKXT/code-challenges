@@ -1,5 +1,5 @@
 export const supplyStacks = (
-	input: string
+	input: string,
 ): {
 	part1: string;
 	part2: string;
@@ -29,7 +29,7 @@ export const supplyStacks = (
 			...array,
 			row.match(/[0-9]+/gu)?.map(Number) as [number, number, number],
 		],
-		[]
+		[],
 	);
 
 	for (const [amount, from, to] of moves) {

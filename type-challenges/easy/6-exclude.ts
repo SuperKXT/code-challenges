@@ -32,7 +32,7 @@ type _cases = [
 	Expect<
 		// eslint-disable-next-line @typescript-eslint/ban-types
 		Equal<MyExclude<string | number | (() => void), Function>, string | number>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

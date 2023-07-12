@@ -1,7 +1,7 @@
 type tuple<
 	size extends number,
 	T = 1,
-	result extends readonly T[] = []
+	result extends readonly T[] = [],
 > = result['length'] extends size ? result : tuple<size, T, [...result, T]>;
 
 type stringToTuple<T extends string> = T extends `${infer first}${infer rest}`
@@ -10,10 +10,10 @@ type stringToTuple<T extends string> = T extends `${infer first}${infer rest}`
 
 type join<
 	T extends readonly string[],
-	joiner extends string = ''
+	joiner extends string = '',
 > = T extends readonly [
 	infer first extends string,
-	...infer rest extends readonly string[]
+	...infer rest extends readonly string[],
 ]
 	? rest extends []
 		? first
@@ -25,10 +25,10 @@ type lines<
 	len extends number,
 	lenTup extends 1[] = tuple<len>,
 	result extends readonly (readonly string[])[] = [],
-	currLine extends readonly string[] = []
+	currLine extends readonly string[] = [],
 > = T extends readonly [
 	infer first extends string,
-	...infer rest extends readonly string[]
+	...infer rest extends readonly string[],
 ]
 	? stringToTuple<
 			join<[...currLine, first], ' '>
@@ -43,10 +43,10 @@ type lines<
 
 type spacesRequired<
 	T extends readonly string[],
-	maxWidth extends number
+	maxWidth extends number,
 > = tuple<maxWidth, ' '> extends readonly [
 	...tuple<stringToTuple<join<T>>['length'], ' '>,
-	...infer spaces extends ' '[]
+	...infer spaces extends ' '[],
 ]
 	? spaces
 	: [];
@@ -54,7 +54,7 @@ type spacesRequired<
 type divide<
 	T extends any[],
 	U extends any[],
-	result extends 1[] = []
+	result extends 1[] = [],
 > = T extends [...U, ...infer rest]
 	? divide<rest, U, [...result, 1]>
 	: T extends []
@@ -63,7 +63,7 @@ type divide<
 
 type spacesPerWordRequired<
 	spaces extends ' '[],
-	line extends readonly string[]
+	line extends readonly string[],
 > = line extends readonly [any, ...infer rest]
 	? rest extends []
 		? spaces['length']
@@ -73,7 +73,7 @@ type spacesPerWordRequired<
 type divideSpaces<
 	spaces extends ' '[],
 	spacesPerWord extends number,
-	current extends ' '[] = []
+	current extends ' '[] = [],
 > = current['length'] extends spacesPerWord
 	? { left: spaces; current: current }
 	: spaces extends [infer first extends ' ', ...infer rest extends ' '[]]
@@ -88,12 +88,12 @@ type justifyLine<
 	divided extends { left: ' '[]; current: ' '[] } = divideSpaces<
 		spaces,
 		spacesPerWord
-	>
+	>,
 > = line extends readonly [
 	infer first extends string,
-	...infer rest extends readonly string[]
+	...infer rest extends readonly string[],
 ]
-	? `${first}${join<tuple<divided['current']['length'], ' '>>}${justifyLine<
+	? `${first}${join<divided['current']>}${justifyLine<
 			rest,
 			maxWidth,
 			divided['left'],
@@ -104,23 +104,23 @@ type justifyLine<
 type JustifyText<
 	T extends readonly string[],
 	maxWidth extends number,
-	lineTup extends readonly (readonly string[])[] = lines<T, maxWidth>
+	lineTup extends readonly (readonly string[])[] = lines<T, maxWidth>,
 > = lineTup extends readonly [
 	infer first extends readonly string[],
-	...infer rest extends readonly (readonly string[])[]
+	...infer rest extends readonly (readonly string[])[],
 ]
 	? readonly [
 			justifyLine<first, maxWidth>,
-			...JustifyText<never, maxWidth, rest>
+			...JustifyText<never, maxWidth, rest>,
 	  ]
 	: readonly [];
 
 export const justifyText = <
 	const words extends readonly string[],
-	maxWidth extends number
+	maxWidth extends number,
 >(
 	words: words,
-	maxWidth: maxWidth
+	maxWidth: maxWidth,
 ): JustifyText<words, maxWidth> => {
 	const lines: string[][] = [];
 	const currLine: string[] = [];
@@ -137,10 +137,10 @@ export const justifyText = <
 	const justified: string[] = [];
 	for (const line of lines) {
 		const spaces = Array<string>(
-			Math.max(maxWidth - line.join(' ').length, 0)
+			Math.max(maxWidth - line.join(' ').length, 0),
 		).fill(' ');
 		const spacePerWord = Math.ceil(
-			spaces.length / Math.max(line.length - 1, 1)
+			spaces.length / Math.max(line.length - 1, 1),
 		);
 		justified.push(
 			line
@@ -148,9 +148,9 @@ export const justifyText = <
 					(word, idx) =>
 						word +
 						spaces.splice(0, spacePerWord).join('') +
-						(line[idx + 1] ? ' ' : '')
+						(line[idx + 1] ? ' ' : ''),
 				)
-				.join('')
+				.join(''),
 		);
 	}
 	return justified as never;

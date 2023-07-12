@@ -3,7 +3,7 @@ import { justifyText } from './justify-text';
 test('testing reversedSquares against test 1', () => {
 	const result = justifyText(
 		['This', 'is', 'an', 'example', 'of', 'text', 'justification.'],
-		16
+		16,
 	);
 	const expected = [
 		'This    is    an',

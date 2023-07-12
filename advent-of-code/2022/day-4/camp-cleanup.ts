@@ -2,7 +2,7 @@ import { readFile } from 'fs/promises';
 import path from 'path';
 
 export const campCleanup = async (
-	override?: string
+	override?: string,
 ): Promise<{
 	overlap: number;
 	fullOverlap: number;
@@ -30,6 +30,6 @@ export const campCleanup = async (
 
 			return object;
 		},
-		{ fullOverlap: 0, overlap: 0 }
+		{ fullOverlap: 0, overlap: 0 },
 	);
 };

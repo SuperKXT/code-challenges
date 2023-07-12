@@ -29,7 +29,7 @@
 
 type Merge<
 	F extends Record<string, unknown>,
-	S extends Record<string, unknown>
+	S extends Record<string, unknown>,
 > = {
 	[K in keyof F | keyof S]: K extends keyof S
 		? S[K]
@@ -45,11 +45,11 @@ import type { Equal, Expect } from '@type-challenges/utils';
 type Foo = {
 	a: number;
 	b: string;
-}
+};
 type Bar = {
 	b: number;
 	c: boolean;
-}
+};
 
 type _cases = [
 	Expect<
@@ -61,7 +61,7 @@ type _cases = [
 				c: boolean;
 			}
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

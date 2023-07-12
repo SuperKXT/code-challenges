@@ -16,25 +16,25 @@ type AgnosticResult = {
 	newName?: string;
 	error?: string;
 	children?: RenameResult[];
-}
+};
 
 type ValidResult = {
 	type: 'success';
 	newName: string;
 	error?: undefined;
-} & AgnosticResult
+} & AgnosticResult;
 
 type ErrorResult = {
 	type: 'error';
 	newName: string;
 	error: string;
-} & AgnosticResult
+} & AgnosticResult;
 
 type UnchangedResult = {
 	type: 'unchanged';
 	newName?: undefined;
 	error?: undefined;
-} & AgnosticResult
+} & AgnosticResult;
 
 export type RenameResult = ErrorResult | UnchangedResult | ValidResult;
 
@@ -44,4 +44,4 @@ export type RenameOptions = {
 	onlyChanges?: boolean;
 	tree?: boolean;
 	help?: boolean;
-}
+};

@@ -5,7 +5,7 @@ const REQUIRED_SPACE = 30_000_000;
 const SMALL_SIZE = 100_000;
 
 export const raumdeuter = (
-	input: string
+	input: string,
 ): {
 	smallFiles: number;
 	deletedSize: number;

@@ -21,7 +21,7 @@
 
 type RequiredKeys<
 	T extends object,
-	R extends Required<T> = Required<T>
+	R extends Required<T> = Required<T>,
 > = keyof {
 	[K in keyof T as T[K] extends R[K] ? K : never]: T[K];
 };
@@ -29,7 +29,7 @@ type RequiredKeys<
 type _RequiredKeys<
 	T extends object,
 	R extends Required<T> = Required<T>,
-	K extends keyof T = keyof T
+	K extends keyof T = keyof T,
 > = K extends K ? (T[K] extends R[K] ? K : never) : never;
 
 /* _____________ Test Cases _____________ */
@@ -45,7 +45,7 @@ type _cases = [
 			'a' | 'c' | 'd'
 		>
 	>,
-	Expect<Equal<RequiredKeys<{}>, never>>
+	Expect<Equal<RequiredKeys<{}>, never>>,
 ];
 
 /* _____________ Further Steps _____________ */

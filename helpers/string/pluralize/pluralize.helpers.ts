@@ -29,7 +29,7 @@ export const pluralize = (
 						const array = options.split('|');
 						toShow = (array[number - 1] ?? array.at(-1) ?? '').replace(
 							/\$1/gu,
-							number.toString()
+							number.toString(),
 						);
 						break;
 					}
@@ -67,7 +67,7 @@ export const pluralize = (
 		result.push(
 			typeof lastExpression === 'string'
 				? replaceQuantity(lastExpression)
-				: lastExpression[1]
+				: lastExpression[1],
 		);
 		lastQuantifier = quantifiers.shift() ?? lastQuantifier;
 	}

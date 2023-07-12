@@ -42,7 +42,7 @@
 
 type Combinations<T extends any[], Result extends any[] = never> = T extends [
 	...infer Rest,
-	any
+	any,
 ]
 	? Combinations<Rest, Result | T>
 	: Result;
@@ -50,7 +50,7 @@ type Combinations<T extends any[], Result extends any[] = never> = T extends [
 type UnshiftBy<
 	T extends any[],
 	U extends number,
-	Idx extends 1[] = []
+	Idx extends 1[] = [],
 > = Idx['length'] extends U
 	? T
 	: T extends [any, ...infer R]
@@ -62,7 +62,7 @@ type Curry<Params extends any[], Return> = <T extends Combinations<Params>>(
 ) => T extends Params ? Return : Curry<UnshiftBy<Params, T['length']>, Return>;
 
 declare function DynamicParamsCurrying<Params extends any[], Return>(
-	fn: (...args: Params) => Return
+	fn: (...args: Params) => Return,
 ): Curry<Params, Return>;
 
 /* _____________ Test Cases _____________ */
@@ -70,7 +70,7 @@ declare function DynamicParamsCurrying<Params extends any[], Return>(
 import type { Equal, Expect } from '@type-challenges/utils';
 
 const curried1 = DynamicParamsCurrying(
-	(_a: string, _b: number, _c: boolean) => true
+	(_a: string, _b: number, _c: boolean) => true,
 );
 const curried2 = DynamicParamsCurrying(
 	(
@@ -80,8 +80,8 @@ const curried2 = DynamicParamsCurrying(
 		_d: boolean,
 		_e: boolean,
 		_f: string,
-		_g: boolean
-	) => true
+		_g: boolean,
+	) => true,
 );
 
 const curried1Return1 = curried1('123')(123)(true);
@@ -113,7 +113,7 @@ type _cases = [
 	Expect<Equal<typeof curried2Return7, boolean>>,
 	Expect<Equal<typeof curried2Return8, boolean>>,
 	Expect<Equal<typeof curried2Return9, boolean>>,
-	Expect<Equal<typeof curried2Return10, boolean>>
+	Expect<Equal<typeof curried2Return10, boolean>>,
 ];
 
 /* _____________ Further Steps _____________ */

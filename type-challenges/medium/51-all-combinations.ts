@@ -26,7 +26,7 @@ type StringToUnion<T extends string> = T extends `${infer F}${infer R}`
 type AllCombinations<
 	S extends string,
 	T extends string = StringToUnion<S>,
-	I extends string = T
+	I extends string = T,
 > = S extends ''
 	? ''
 	: I extends I
@@ -34,7 +34,7 @@ type AllCombinations<
 	: '';
 
 type _AllCombinations<S extends string, T extends string = StringToUnion<S>> = [
-	T
+	T,
 ] extends [never]
 	? ''
 	:
@@ -141,7 +141,7 @@ type _cases = [
 			| 'DCAB'
 			| 'DCBA'
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

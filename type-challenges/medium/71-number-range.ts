@@ -20,7 +20,7 @@ type NumberRange<
 	L extends number,
 	H extends number,
 	Idx extends any[] = [],
-	A extends any[] = []
+	A extends any[] = [],
 > = Idx['length'] extends H
 	? L | A[number] | H
 	: Idx[L] extends undefined
@@ -179,7 +179,7 @@ type Result3 =
 type _cases = [
 	Expect<Equal<NumberRange<2, 9>, Result1>>,
 	Expect<Equal<NumberRange<0, 2>, Result2>>,
-	Expect<Equal<NumberRange<0, 140>, Result3>>
+	Expect<Equal<NumberRange<0, 140>, Result3>>,
 ];
 
 /* _____________ Further Steps _____________ */
