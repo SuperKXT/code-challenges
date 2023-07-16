@@ -7,7 +7,6 @@
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitAny": true,
 		"noImplicitOverride": true,
-		"noImplicitReturns": true,
 		"noImplicitThis": true,
 		"noUncheckedIndexedAccess": true,
 		"strictFunctionTypes": true,
