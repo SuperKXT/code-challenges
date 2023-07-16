@@ -64,9 +64,6 @@ devDependencies:
   eslint-plugin-import:
     specifier: ^2.27.5
     version: 2.27.5(@typescript-eslint/parser@5.61.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.44.0)
-  eslint-plugin-prefer-arrow-functions:
-    specifier: ^3.1.4
-    version: 3.1.4(eslint@8.44.0)
   eslint-plugin-unused-imports:
     specifier: ^2.0.0
     version: 2.0.0(@typescript-eslint/eslint-plugin@5.61.0)(eslint@8.44.0)
@@ -1532,14 +1529,6 @@ packages:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
       - supports-color
-    dev: true
-
-  /eslint-plugin-prefer-arrow-functions@3.1.4(eslint@8.44.0):
-    resolution: {integrity: sha512-LSO8VibqBKqzelr+L21mEIfachavCon+1SEumCJ6U8Ze2q0pntyojmomcVwd9RZBjrP+HV6k1Osz0B3Xwdq8WA==}
-    peerDependencies:
-      eslint: '>=5.0.0'
-    dependencies:
-      eslint: 8.44.0
     dev: true
 
   /eslint-plugin-unused-imports@2.0.0(@typescript-eslint/eslint-plugin@5.61.0)(eslint@8.44.0):
