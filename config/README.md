@@ -6,17 +6,16 @@
 
 - `eslint`
 - `@types/eslint`
+- `@typescript-eslint/parser`
+- `@typescript-eslint/eslint-plugin`
 - `eslint-config-prettier`
 - `eslint-import-resolver-typescript`
 - `eslint-plugin-import`
-- `eslint-plugin-prefer-arrow-functions`
 - `eslint-plugin-unused-imports`
 - `eslint-plugin-vitest`
-- `@typescript-eslint/eslint-plugin`
-- `@typescript-eslint/parser`
 
 ```bash
-pnpm add -D eslint @types/eslint eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prefer-arrow-functions eslint-plugin-unused-imports eslint-plugin-vitest @typescript-eslint/eslint-plugin @typescript-eslint/parser
+pnpm add -D eslint @types/eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-unused-imports eslint-plugin-vitest
 ```
 
 ---
@@ -27,21 +26,22 @@ pnpm add -D eslint @types/eslint eslint-config-prettier eslint-import-resolver-t
 
 - `eslint`
 - `@types/eslint`
+- `@typescript-eslint/parser`
+- `@typescript-eslint/eslint-plugin`
 - `eslint-config-prettier`
 - `eslint-import-resolver-typescript`
 - `eslint-plugin-import`
-- `eslint-plugin-prefer-arrow-functions`
+- `eslint-plugin-jsx-a11y`
+- `eslint-plugin-jsx-expressions`
+- `eslint-plugin-react`
+- `eslint-plugin-react-hooks`
+- `eslint-plugin-testing-library`
 - `eslint-plugin-unused-imports`
 - `eslint-plugin-vitest`
-- `@typescript-eslint/eslint-plugin`
-- `@typescript-eslint/parser`
-- `eslint-plugin-react`
-- `eslint-plugin-testing-library`
-- `eslint-config-react-app`
-- `eslint-plugin-jsx-expressions`
+- `happy-dom`
 
 ```bash
-pnpm add -D eslint @types/eslint eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prefer-arrow-functions eslint-plugin-unused-imports eslint-plugin-vitest @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-react eslint-plugin-testing-library eslint-config-react-app eslint-plugin-jsx-expressions
+pnpm add -D eslint @types/eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-jsx-expressions eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-testing-library eslint-plugin-unused-imports eslint-plugin-vitest happy-dom
 ```
 
 ### Showing lint errors and warnings in Vite
