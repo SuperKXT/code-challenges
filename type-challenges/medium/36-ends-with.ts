@@ -34,7 +34,7 @@ type _cases = [
 	Expect<Equal<EndsWith<'abc', 'd'>, false>>,
 	Expect<Equal<EndsWith<'abc', 'ac'>, false>>,
 	Expect<Equal<EndsWith<'abc', ''>, true>>,
-	Expect<Equal<EndsWith<'abc', ' '>, false>>
+	Expect<Equal<EndsWith<'abc', ' '>, false>>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -6,7 +6,7 @@ export type Intersection = LinkedListNode<number> | [number, number];
 
 const findIntersection = (
 	paramA: LinkedListNode<number> | number[],
-	paramB: LinkedListNode<number> | number[]
+	paramB: LinkedListNode<number> | number[],
 ): Intersection | null => {
 	if (!Array.isArray(paramA)) {
 		let nodeA = paramA;

@@ -75,7 +75,7 @@ type _cases = [
 			['bar'] | ['baz'] | ['bar', 'a'] | ['baz', 'b'] | ['baz', 'c']
 		>
 	>,
-	ExpectFalse<ExpectExtends<Path<(typeof example)['foo']['bar']>, ['z']>>
+	ExpectFalse<ExpectExtends<Path<(typeof example)['foo']['bar']>, ['z']>>,
 ];
 
 /* _____________ Further Steps _____________ */

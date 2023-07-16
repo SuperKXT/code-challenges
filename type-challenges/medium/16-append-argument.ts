@@ -43,7 +43,7 @@ type _cases = [
 	Expect<Equal<Case1, Result1>>,
 	Expect<Equal<Case2, Result2>>,
 	// @ts-expect-error invalid params
-	AppendArgument<unknown, undefined>
+	AppendArgument<unknown, undefined>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -6,7 +6,7 @@ const UPPER_CASE = LOWER_CASE.toUpperCase() as Uppercase<typeof LOWER_CASE>;
 const ITEMS = `${LOWER_CASE}${UPPER_CASE}` as const;
 
 export const rucksackReorganization = async (
-	override?: string
+	override?: string,
 ): Promise<{
 	commonPriority: number;
 	badgePriority: number;
@@ -25,7 +25,7 @@ export const rucksackReorganization = async (
 
 		if (group.length === 3) {
 			const badge = Array.from(group[0] ?? '').find((item) =>
-				group.slice().every((elf) => elf.includes(item))
+				group.slice().every((elf) => elf.includes(item)),
 			);
 			badgePriority += ITEMS.indexOf(badge ?? ' ') + 1;
 			group.splice(0, 3);
@@ -34,7 +34,7 @@ export const rucksackReorganization = async (
 		const firstHalf = row.slice(0, row.length / 2);
 		const secondHalf = row.slice(row.length / 2);
 		const common = Array.from(firstHalf).find((item) =>
-			secondHalf.includes(item)
+			secondHalf.includes(item),
 		);
 		commonPriority += ITEMS.indexOf(common ?? ' ') + 1;
 	}

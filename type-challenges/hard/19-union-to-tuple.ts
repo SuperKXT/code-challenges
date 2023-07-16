@@ -43,7 +43,7 @@
 // TODO Retry
 
 type UnionToIntersection<U> = (U extends U ? (arg: U) => any : never) extends (
-	arg: infer I
+	arg: infer I,
 ) => void
 	? I
 	: never;
@@ -91,7 +91,7 @@ type _cases = [
 			>,
 			'f' | 'e' | 1 | 2 | 'g' | 'c' | 'd' | 'a' | 'b'
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

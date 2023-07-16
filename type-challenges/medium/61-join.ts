@@ -21,7 +21,7 @@
 
 type Join<T extends string[], U extends string | number> = T extends [
 	infer F extends string,
-	...infer R extends string[]
+	...infer R extends string[],
 ]
 	? R extends []
 		? F
@@ -36,7 +36,7 @@ type _cases = [
 	Expect<Equal<Join<['a', 'p', 'p', 'l', 'e'], '-'>, 'a-p-p-l-e'>>,
 	Expect<Equal<Join<['Hello', 'World'], ' '>, 'Hello World'>>,
 	Expect<Equal<Join<['2', '2', '2'], 1>, '21212'>>,
-	Expect<Equal<Join<['o'], 'u'>, 'o'>>
+	Expect<Equal<Join<['o'], 'u'>, 'o'>>,
 ];
 
 /* _____________ Further Steps _____________ */

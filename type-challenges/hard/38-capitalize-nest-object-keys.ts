@@ -16,7 +16,7 @@ type CapitalizeNestObjectKeys<T extends object> = T extends any[]
 	? T extends [infer F, ...infer R]
 		? [
 				F extends object ? CapitalizeNestObjectKeys<F> : F,
-				...CapitalizeNestObjectKeys<R>
+				...CapitalizeNestObjectKeys<R>,
 		  ]
 		: T
 	: {
@@ -39,7 +39,7 @@ type Foo = {
 	Bars: [
 		{
 			Foo: string;
-		}
+		},
 	];
 };
 

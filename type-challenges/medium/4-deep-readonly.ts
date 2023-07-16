@@ -50,7 +50,7 @@ import type { Equal, Expect } from '@type-challenges/utils';
 
 type _cases = [
 	Expect<Equal<DeepReadonly<X1>, Expected1>>,
-	Expect<Equal<DeepReadonly<X2>, Expected2>>
+	Expect<Equal<DeepReadonly<X2>, Expected2>>,
 ];
 
 type X1 = {
@@ -70,11 +70,11 @@ type X1 = {
 				'hi',
 				{
 					m: ['hey'];
-				}
+				},
 			];
 		};
 	};
-}
+};
 
 type X2 = { a: string } | { b: number };
 
@@ -95,11 +95,11 @@ type Expected1 = {
 				'hi',
 				{
 					readonly m: readonly ['hey'];
-				}
+				},
 			];
 		};
 	};
-}
+};
 
 type Expected2 = { readonly a: string } | { readonly b: number };
 

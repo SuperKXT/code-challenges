@@ -28,7 +28,7 @@ type KeyPath<K extends string | number, R extends boolean> =
 type ObjectKeyPaths<
 	T extends object,
 	R extends boolean = true,
-	K extends keyof T = keyof T
+	K extends keyof T = keyof T,
 > = K extends string | number
 	?
 			| KeyPath<K, R>
@@ -95,7 +95,7 @@ type _cases = [
 			ExpectExtends<ObjectKeyPaths<typeof ref>, 'person.pets.[0]type'>,
 			false
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

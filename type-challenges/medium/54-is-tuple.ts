@@ -50,7 +50,7 @@ type _cases = [
 	Expect<Equal<IsTuple<readonly [1]>, true>>,
 	Expect<Equal<IsTuple<{ length: 1 }>, false>>,
 	Expect<Equal<IsTuple<number[]>, false>>,
-	Expect<Equal<IsTuple<never>, false>>
+	Expect<Equal<IsTuple<never>, false>>,
 ];
 
 /* _____________ Further Steps _____________ */

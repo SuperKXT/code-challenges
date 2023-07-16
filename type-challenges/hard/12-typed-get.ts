@@ -35,7 +35,7 @@
 
 type Get<
 	T extends Record<string, unknown>,
-	K extends string
+	K extends string,
 > = K extends keyof T
 	? T[K]
 	: K extends `${infer U}.${infer V}`
@@ -56,7 +56,7 @@ type _cases = [
 	Expect<Equal<Get<Data, 'foo.bar'>, { value: 'foobar'; count: 6 }>>,
 	Expect<Equal<Get<Data, 'foo.baz'>, false>>,
 
-	Expect<Equal<Get<Data, 'no.existed'>, never>>
+	Expect<Equal<Get<Data, 'no.existed'>, never>>,
 ];
 
 type Data = {

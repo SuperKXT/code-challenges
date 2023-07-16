@@ -16,7 +16,7 @@
 type AppearOnlyOnce<
 	T extends any[],
 	Skip = never,
-	Out extends any[] = []
+	Out extends any[] = [],
 > = T extends [infer F, ...infer R]
 	? F extends R[number] | Skip
 		? AppearOnlyOnce<R, Skip | F, Out>
@@ -29,7 +29,7 @@ import type { Equal, Expect } from '@type-challenges/utils';
 type _cases = [
 	Expect<Equal<AppearOnlyOnce<[1, 2, 2, 3, 3, 4, 5, 6, 6, 6]>, [1, 4, 5]>>,
 	Expect<Equal<AppearOnlyOnce<[2, 2, 3, 3, 6, 6, 6]>, []>>,
-	Expect<Equal<AppearOnlyOnce<[1, 2, 3]>, [1, 2, 3]>>
+	Expect<Equal<AppearOnlyOnce<[1, 2, 3]>, [1, 2, 3]>>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -54,13 +54,13 @@ type _cases = [
 				'y',
 				'o',
 				'u',
-				'?'
+				'?',
 			]
 		>
 	>,
 	Expect<Equal<Split<'', ''>, []>>,
 	Expect<Equal<Split<'', 'z'>, ['']>>,
-	Expect<Equal<Split<string, 'whatever'>, string[]>>
+	Expect<Equal<Split<string, 'whatever'>, string[]>>,
 ];
 
 /* _____________ Further Steps _____________ */

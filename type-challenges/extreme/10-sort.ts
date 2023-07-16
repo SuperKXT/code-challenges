@@ -41,7 +41,7 @@ type Shift<T extends number[]> = T extends [any, ...infer R extends number[]]
 type NumberToArray<
 	T extends number,
 	R extends string = `${T}`,
-	A extends number[] = []
+	A extends number[] = [],
 > = R extends `${infer F extends number}${infer L}`
 	? NumberToArray<T, L, [...A, F]>
 	: A;
@@ -50,7 +50,7 @@ type CompareDigitDigits<
 	T extends number[],
 	U extends number[],
 	TF extends number[] = Fill<T[0]>,
-	UF extends number[] = Fill<U[0]>
+	UF extends number[] = Fill<U[0]>,
 > = T['length'] extends 0
 	? 'same'
 	: T[0] extends U[0]
@@ -63,7 +63,7 @@ export type CompareNum<
 	T extends number,
 	U extends number,
 	TA extends number[] = NumberToArray<T>,
-	UA extends number[] = NumberToArray<U>
+	UA extends number[] = NumberToArray<U>,
 > = T extends U
 	? 'equal'
 	: TA['length'] extends UA['length']
@@ -75,7 +75,7 @@ export type CompareNum<
 type SmallestOrGreatest<
 	Union extends number,
 	IsGreatest extends boolean,
-	V extends number = Union
+	V extends number = Union,
 > = Union extends Union
 	? [
 			V extends V
@@ -84,7 +84,7 @@ type SmallestOrGreatest<
 				  )
 					? V
 					: never
-				: never
+				: never,
 	  ] extends [never]
 		? Union
 		: never
@@ -92,7 +92,7 @@ type SmallestOrGreatest<
 
 type Without<T extends number[], U extends number> = T extends [
 	infer F extends number,
-	...infer R extends number[]
+	...infer R extends number[],
 ]
 	? F extends U
 		? R
@@ -104,7 +104,7 @@ type Sort<
 	Desc extends boolean = false,
 	Sorted extends number[] = [],
 	Union extends number = T[number],
-	Current extends number = SmallestOrGreatest<Union, Desc>
+	Current extends number = SmallestOrGreatest<Union, Desc>,
 > = [Union] extends [never]
 	? Sorted
 	: Sort<Without<T, Current>, Desc, [...Sorted, Current]>;
@@ -134,7 +134,7 @@ type _cases = [
 	Expect<Equal<Sort<[3, 2, 0, 1, 0, 0, 0], true>, [3, 2, 1, 0, 0, 0, 0]>>,
 	Expect<
 		Equal<Sort<[2, 4, 7, 6, 6, 6, 5, 8, 9], true>, [9, 8, 7, 6, 6, 6, 5, 4, 2]>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

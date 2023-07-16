@@ -29,7 +29,7 @@ test.each(EQUALITY_TESTS)(
 	({ first, second, areEqual }) => {
 		const response = areArraysEqual(first, second);
 		expect(response).toStrictEqual(areEqual);
-	}
+	},
 );
 
 test('testing linkedListToArray helper', () => {

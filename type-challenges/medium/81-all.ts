@@ -48,7 +48,7 @@ type _cases = [
 	Expect<Equal<All<[any], any>, true>>,
 	Expect<Equal<All<[unknown], unknown>, true>>,
 	Expect<Equal<All<[any], unknown>, false>>,
-	Expect<Equal<All<[unknown], any>, false>>
+	Expect<Equal<All<[unknown], any>, false>>,
 ];
 
 /* _____________ Further Steps _____________ */

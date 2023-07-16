@@ -52,7 +52,7 @@
 declare function SimpleVue<
 	D extends Record<string, any>,
 	C extends Record<string, any>,
-	M extends Record<string, any>
+	M extends Record<string, any>,
 >(
 	options: {
 		data: (this: void) => D;
@@ -65,7 +65,7 @@ declare function SimpleVue<
 					? K
 					: never]: ReturnType<C[K]>;
 			}
-	>
+	>,
 ): any;
 
 /* _____________ Test Cases _____________ */
@@ -81,8 +81,10 @@ SimpleVue({
 		// @ts-expect-error this not available here
 		this.firstname;
 		// @ts-expect-error this not available here
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		this.getRandom();
 		// @ts-expect-error this not available here
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		this.data();
 
 		return {
@@ -108,7 +110,7 @@ SimpleVue({
 		},
 		test() {
 			const fullname = this.fullname;
-			const _cases: [Expect<Equal<typeof fullname, string>>] = [] as any;
+			const _cases: [Expect<Equal<typeof fullname, string>>] = [] as never;
 		},
 	},
 });

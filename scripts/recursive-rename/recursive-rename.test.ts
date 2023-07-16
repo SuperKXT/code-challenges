@@ -131,11 +131,11 @@ const checkFiles = (files: Test, directory: string = TEMP_PATH) => {
 	for (const { type, oldName, newName, children } of files) {
 		const currentName = path.join(
 			directory,
-			type === 'success' ? newName : oldName
+			type === 'success' ? newName : oldName,
 		);
 		if (!existsSync(currentName)) {
 			throw new Error(
-				`${currentName} expected but not found in renamed folder`
+				`${currentName} expected but not found in renamed folder`,
 			);
 		}
 
@@ -166,18 +166,18 @@ test.each(SORTED_TESTS)(
 		expect(output).toStrictEqual(files);
 		expect(logSpy).toHaveBeenCalledTimes(1);
 		expect(logSpy).toHaveBeenCalledWith(
-			getRenameLogs(files, options.verbose, options.onlyChanges, options.tree)
+			getRenameLogs(files, options.verbose, options.onlyChanges, options.tree),
 		);
 
 		logSpy.mockRestore();
-	}
+	},
 );
 
 test('testing recursiveRename for invalid path', async () => {
 	await expect(
-		recursiveRename('./invalid-path', { yes: true })
+		recursiveRename('./invalid-path', { yes: true }),
 	).rejects.toThrow(RENAME_ERRORS.badPath);
 	await expect(
-		recursiveRename(path.join(__dirname, 'README.md'), { yes: true })
+		recursiveRename(path.join(__dirname, 'README.md'), { yes: true }),
 	).rejects.toThrow(RENAME_ERRORS.badPath);
 });

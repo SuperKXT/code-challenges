@@ -22,7 +22,7 @@
 type Combination<
 	T extends string[],
 	All = T[number],
-	Item = All
+	Item = All,
 > = Item extends string
 	? Item | `${Item} ${Combination<never, Exclude<All, Item>>}`
 	: never;
@@ -51,7 +51,7 @@ type _cases = [
 			| 'baz bar'
 			| 'baz bar foo'
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

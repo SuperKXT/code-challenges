@@ -21,27 +21,31 @@ const INVALID_BOARDS: InvalidBoard[] = [
 	},
 	{
 		board: ['  6 3 8', ' 2 4 5 A', '2 9 . 6 9', ' A B 3 C', '  8 4 B'].join(
-			'\n'
+			'\n',
 		),
 		error: CATAN_ERRORS.badPieceCount,
 	},
 	{
 		board: ['  6 3 A', ' 2 4 5 A', '5 9 . 8 9', ' 8 B 3 C', '  6 4 B'].join(
-			'\n'
+			'\n',
 		),
 		error: CATAN_ERRORS.badPositioning,
 	},
 ];
 
 test.each(VALID_BOARDS)('assertValidCatanBoard for valid input', (board) => {
-	expect(() => assertValidCatanBoard(board)).not.toThrow();
+	expect(() => {
+		assertValidCatanBoard(board);
+	}).not.toThrow();
 });
 
 test.each(INVALID_BOARDS)(
 	'testing assertValidCatanBoard for invalid input',
 	({ board, error }) => {
-		expect(() => assertValidCatanBoard(board)).toThrow(error);
-	}
+		expect(() => {
+			assertValidCatanBoard(board);
+		}).toThrow(error);
+	},
 );
 
 test('testing generateCatanBoard', () => {

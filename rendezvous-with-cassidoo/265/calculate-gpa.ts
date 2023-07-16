@@ -31,6 +31,6 @@ export const calculateGpa = (grades: GradePoint[]): number => {
 	return Number(
 		(
 			grades.reduce((sum, grade) => sum + key[grade], 0) / grades.length
-		).toFixed(1)
+		).toFixed(1),
 	);
 };

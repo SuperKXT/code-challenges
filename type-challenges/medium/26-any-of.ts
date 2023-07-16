@@ -45,7 +45,7 @@ type _cases = [
 		Equal<AnyOf<[0, '', false, [], { name: 'test' }, { 1: 'test' }]>, true>
 	>,
 	Expect<Equal<AnyOf<[0, '', false, [], {}, undefined, null]>, false>>,
-	Expect<Equal<AnyOf<[]>, false>>
+	Expect<Equal<AnyOf<[]>, false>>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -1,5 +1,5 @@
 export const INVALID_ERROR = new Error(
-	'the given string must be non-empty and can only contain `/` or `\\`'
+	'the given string must be non-empty and can only contain `/` or `\\`',
 );
 
 export const verticalSlashes = (slashes: string): string => {
@@ -10,6 +10,6 @@ export const verticalSlashes = (slashes: string): string => {
 		slashes,
 		(character) =>
 			' '.repeat(character === '/' ? (offset ? --offset : 0) : offset++) +
-			character
+			character,
 	).join('\n');
 };

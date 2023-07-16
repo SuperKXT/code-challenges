@@ -50,7 +50,7 @@ type _cases = [
 	Expect<Equal<TupleToObject<typeof tupleNumber>, { 1: 1; 2: 2; 3: 3; 4: 4 }>>,
 	Expect<
 		Equal<TupleToObject<typeof tupleMix>, { 1: 1; '2': '2'; 3: 3; '4': '4' }>
-	>
+	>,
 ];
 
 // @ts-expect-error error on incorrect tuple

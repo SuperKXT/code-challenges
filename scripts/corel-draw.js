@@ -25,7 +25,7 @@ host.ActiveDocument.InsertPagesEx(
 	false,
 	host.ActiveDocument.Pages.Item(2).Index,
 	3.41333464566929,
-	3.41333464566929
+	3.41333464566929,
 );
 
 for (let i = 1; i <= numberOfObjects; i++) {

@@ -28,8 +28,8 @@
 		},
 
 		// emit
-		"noEmit": true,
 		"downlevelIteration": true,
+		"noEmit": true,
 
 		// javascript support
 		"allowJs": true,
@@ -52,6 +52,6 @@
 		// completeness
 		"skipLibCheck": true
 	},
-	"include": ["**/*", "./.*.cjs"],
+	"include": ["**/*", "**/*.*.cjs"],
 	"exclude": ["node_modules", "build", "dist", "coverage", "public"]
 }

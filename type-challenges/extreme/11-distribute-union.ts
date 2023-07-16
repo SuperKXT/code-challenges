@@ -57,7 +57,7 @@ type DistributeArray<A extends unknown[]> = A extends [infer H, ...infer T]
 type ObjHelper<K, V> = V extends V ? { [k in K & string]: V } : never;
 
 type DistributeObject<O extends object, K extends keyof O = keyof O> = [
-	K
+	K,
 ] extends [never]
 	? {}
 	: K extends K
@@ -173,7 +173,7 @@ type _cases = [
 			| [{ value: 'b' }, { x: { y: 2 } }]
 			| [{ value: 'b' }, { x: { y: 3 } }]
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

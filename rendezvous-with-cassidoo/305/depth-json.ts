@@ -11,7 +11,7 @@ type Shift<T extends number[]> = T extends [any, ...infer R extends number[]]
 type NumberToArray<
 	T extends number,
 	R extends string = `${T}`,
-	A extends number[] = []
+	A extends number[] = [],
 > = R extends `${infer F extends number}${infer L}`
 	? NumberToArray<T, L, [...A, F]>
 	: A;
@@ -20,7 +20,7 @@ type GreaterThanDigits<
 	T extends number[],
 	U extends number[],
 	TF extends number[] = Fill<T[0]>,
-	UF extends number[] = Fill<U[0]>
+	UF extends number[] = Fill<U[0]>,
 > = T['length'] extends 0
 	? false
 	: T[0] extends U[0]
@@ -33,7 +33,7 @@ type GreaterThan<
 	T extends number,
 	U extends number,
 	TA extends number[] = NumberToArray<T>,
-	UA extends number[] = NumberToArray<U>
+	UA extends number[] = NumberToArray<U>,
 > = T extends U
 	? false
 	: TA['length'] extends UA['length']
@@ -45,7 +45,7 @@ type GreaterThan<
 type Max<
 	T extends number,
 	M extends number = 0,
-	last extends number = Utils.lastInUnion<T> & number
+	last extends number = Utils.lastInUnion<T> & number,
 > = [T] extends [never]
 	? M
 	: Max<Exclude<T, last>, GreaterThan<last, M> extends true ? last : M>;
@@ -54,7 +54,7 @@ export type DepthJson<
 	T,
 	Depth extends number = 0,
 	Tup extends any[] = Utils.tuple<Depth>,
-	NextDepth extends number = [...Tup, 1]['length']
+	NextDepth extends number = [...Tup, 1]['length'],
 > = T extends object
 	? Max<
 			| NextDepth

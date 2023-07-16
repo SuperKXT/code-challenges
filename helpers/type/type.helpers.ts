@@ -18,14 +18,14 @@ export const assertObject: Utils.assertFunction<Obj> = (value) => {
 
 export const isArray = <Type = unknown>(
 	value: any,
-	checker?: (value: any) => value is Type
+	checker?: (value: any) => value is Type,
 ): value is Type[] => {
 	return Array.isArray(value) && (!checker || value.every(checker));
 };
 
 type AssertArray = <Type = unknown>(
 	value: any,
-	checker?: Utils.assertFunction<Type>
+	checker?: Utils.assertFunction<Type>,
 ) => asserts value is Type[];
 
 export const assertArray: AssertArray = (value, checker) => {
@@ -38,7 +38,7 @@ export const assertArray: AssertArray = (value, checker) => {
 		throw new TypeError(
 			`Invalid array member. ${
 				error instanceof Error ? error.message : JSON.stringify(error)
-			}`
+			}`,
 		);
 	}
 };

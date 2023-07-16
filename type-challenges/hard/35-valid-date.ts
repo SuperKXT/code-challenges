@@ -43,23 +43,24 @@ type MonthDayMap = {
 type LessThan<
 	T extends number,
 	U extends number,
-	A extends 1[] = []
+	A extends 1[] = [],
 > = A['length'] extends T
 	? true
 	: A['length'] extends U
 	? false
 	: LessThan<T, U, [...A, 1]>;
 
-type ValidDate<T extends string> =
-	T extends `${infer M1 extends number}${infer M2 extends number}${infer D1 extends number}${infer D2 extends number}`
-		? `${D1}${D2}` extends `${infer D extends number}`
-			? `${D1}${D2}` extends '00'
-				? false
-				: `${M1}${M2}` extends keyof MonthDayMap
-				? LessThan<D, MonthDayMap[`${M1}${M2}`]>
-				: false
+type ValidDate<T extends string> = T extends `${infer M1 extends
+	number}${infer M2 extends number}${infer D1 extends number}${infer D2 extends
+	number}`
+	? `${D1}${D2}` extends `${infer D extends number}`
+		? `${D1}${D2}` extends '00'
+			? false
+			: `${M1}${M2}` extends keyof MonthDayMap
+			? LessThan<D, MonthDayMap[`${M1}${M2}`]>
 			: false
-		: false;
+		: false
+	: false;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
@@ -75,7 +76,7 @@ type _cases = [
 	Expect<Equal<ValidDate<'1301'>, false>>,
 	Expect<Equal<ValidDate<'0123'>, true>>,
 	Expect<Equal<ValidDate<'01234'>, false>>,
-	Expect<Equal<ValidDate<''>, false>>
+	Expect<Equal<ValidDate<''>, false>>,
 ];
 
 /* _____________ Further Steps _____________ */

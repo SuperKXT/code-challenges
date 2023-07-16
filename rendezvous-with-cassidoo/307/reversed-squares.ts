@@ -12,7 +12,7 @@ type multiply<
 	T extends number,
 	U extends number,
 	idx extends 1[] = [],
-	result extends 1[] = []
+	result extends 1[] = [],
 > = idx['length'] extends U
 	? result
 	: multiply<T, U, [...idx, 1], [...result, ...tuple<T>]>;
@@ -20,7 +20,7 @@ type multiply<
 type sqrt<
 	T extends number,
 	idx extends 1[] = [],
-	square extends 1[] = multiply<idx['length'], idx['length']>
+	square extends 1[] = multiply<idx['length'], idx['length']>,
 > = square['length'] extends T
 	? idx['length']
 	: square[T] extends 1

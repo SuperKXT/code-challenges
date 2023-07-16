@@ -48,7 +48,7 @@ type NextLoop<
 	C extends string,
 	S extends Strategy,
 	R extends string,
-	F extends string
+	F extends string,
 > = R extends `${infer U}${infer V}` ? _InnerFormatToken<U, S, V, C, F> : F;
 
 type _others<C extends string, S extends Strategy> = S extends 'constant'
@@ -57,14 +57,14 @@ type _others<C extends string, S extends Strategy> = S extends 'constant'
 
 type _separate<
 	C extends string,
-	S extends Strategy
+	S extends Strategy,
 > = `${SeparatorMap[S]}${S extends 'kebab' | 'snake' | 'human'
 	? Lowercase<C>
 	: Uppercase<C>}`;
 
 type _separated<C extends string, S extends Strategy, L extends string = ''> = [
 	C,
-	L
+	L,
 ] extends [Alphabet, WordSeparators]
 	? _separate<C, S>
 	: [C, L] extends [UpperAlphabet, LowerAlphabet]
@@ -77,7 +77,7 @@ type _first<
 	C extends string,
 	S extends Strategy,
 	L extends string = '',
-	F extends string = ''
+	F extends string = '',
 > = [L, F] extends ['', string] | [string, '']
 	? S extends 'pascal' | 'constant'
 		? Uppercase<C>
@@ -88,7 +88,7 @@ type _alphaNum<
 	C extends string,
 	S extends Strategy,
 	L extends string = '',
-	F extends string = ''
+	F extends string = '',
 > = C extends AlphaNumeric ? _first<C, S, L, F> : '';
 
 type _InnerFormatToken<
@@ -96,7 +96,7 @@ type _InnerFormatToken<
 	S extends Strategy,
 	R extends string,
 	L extends string = '',
-	F extends string = ''
+	F extends string = '',
 > = NextLoop<C, S, R, `${F}${_alphaNum<C, S, L, F>}`>;
 
 export type FormatToken<T extends string, S extends Strategy> = {
@@ -116,10 +116,10 @@ export type FormatToken<T extends string, S extends Strategy> = {
 export const formatToken = <
 	T extends string,
 	S extends Strategy,
-	Return = FormatToken<T, S>
+	Return = FormatToken<T, S>,
 >(
 	input: T,
-	strategy: S
+	strategy: S,
 ): Return => {
 	const string = input.trim();
 	if (!string) return '' as Return;

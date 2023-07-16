@@ -1,7 +1,7 @@
 type Solution = {
 	withRegex: string;
 	withoutRegex: string;
-}
+};
 
 const VOWELS = 'aeiou';
 const CONSONANTS = 'bcdfghjklmnpqrstvwxyz';

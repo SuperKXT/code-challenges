@@ -47,7 +47,7 @@ type ReplaceKeys<
 	U extends Record<string, unknown>,
 	T extends string,
 	Y extends Record<string, unknown>,
-	X extends U = U
+	X extends U = U,
 > = X extends X
 	? { [K in keyof X]: K extends T ? (K extends keyof Y ? Y[K] : never) : X[K] }
 	: never;
@@ -60,49 +60,49 @@ type NodeA = {
 	type: 'A';
 	name: string;
 	flag: number;
-}
+};
 
 type NodeB = {
 	type: 'B';
 	id: number;
 	flag: number;
-}
+};
 
 type NodeC = {
 	type: 'C';
 	name: string;
 	flag: number;
-}
+};
 
 type ReplacedNodeA = {
 	type: 'A';
 	name: number;
 	flag: string;
-}
+};
 
 type ReplacedNodeB = {
 	type: 'B';
 	id: number;
 	flag: string;
-}
+};
 
 type ReplacedNodeC = {
 	type: 'C';
 	name: number;
 	flag: string;
-}
+};
 
 type NoNameNodeA = {
 	type: 'A';
 	flag: number;
 	name: never;
-}
+};
 
 type NoNameNodeC = {
 	type: 'C';
 	flag: number;
 	name: never;
-}
+};
 
 type Nodes = NodeA | NodeB | NodeC;
 type ReplacedNodes = ReplacedNodeA | ReplacedNodeB | ReplacedNodeC;
@@ -115,7 +115,7 @@ type _cases = [
 			ReplacedNodes
 		>
 	>,
-	Expect<Equal<ReplaceKeys<Nodes, 'name', { aa: number }>, NodesNoName>>
+	Expect<Equal<ReplaceKeys<Nodes, 'name', { aa: number }>, NodesNoName>>,
 ];
 
 /* _____________ Further Steps _____________ */

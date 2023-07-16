@@ -62,7 +62,7 @@
 
 type Assign<T extends Record<string, unknown>, U extends any[]> = U extends [
 	infer F,
-	...infer R
+	...infer R,
 ]
 	? F extends Record<string, unknown>
 		? Assign<
@@ -175,7 +175,7 @@ type _cases = [
 	>,
 	Expect<Equal<Assign<Case2Target, [Case2Origin1, Case2Origin2]>, Case2Answer>>,
 	Expect<Equal<Assign<Case3Target, [Case3Origin1, Case3Origin2]>, Case3Answer>>,
-	Expect<Equal<Assign<Case4Target, ['', 0]>, Case4Answer>>
+	Expect<Equal<Assign<Case4Target, ['', 0]>, Case4Answer>>,
 ];
 
 /* _____________ Further Steps _____________ */

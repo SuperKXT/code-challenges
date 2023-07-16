@@ -46,7 +46,7 @@ type _cases = [
 			[() => string, () => number]
 		>
 	>,
-	Expect<Equal<GetMiddleElement<[never]>, [never]>>
+	Expect<Equal<GetMiddleElement<[never]>, [never]>>,
 ];
 // @ts-expect-error invalid argument
 type _error = GetMiddleElement<1, 2, 3>;

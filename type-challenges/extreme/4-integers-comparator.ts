@@ -21,7 +21,7 @@
 //   ^?
 
 /* _____________ Test Cases _____________ */
- 
+
 import type { Equal, Expect } from '@type-challenges/utils';
 
 // eslint-disable-next-line no-restricted-syntax
@@ -33,7 +33,7 @@ enum Comparison {
 
 type CreateTuple<
 	T extends number,
-	Arr extends 1[] = []
+	Arr extends 1[] = [],
 > = Arr['length'] extends T ? Arr : CreateTuple<T, [...Arr, 1]>;
 
 type Unshift<T extends any[]> = T extends [any, ...infer Rest] ? Rest : never;
@@ -41,7 +41,7 @@ type Unshift<T extends any[]> = T extends [any, ...infer Rest] ? Rest : never;
 type NumberToTuple<
 	T extends number,
 	S extends string = `${T}` extends `-${infer I}` ? I : `${T}`,
-	Output extends number[] = []
+	Output extends number[] = [],
 > = S extends `${infer F extends number}${infer R}`
 	? NumberToTuple<never, R, [...Output, F]>
 	: Output;
@@ -52,7 +52,7 @@ type DigitComparator<A extends any[], B extends any[]> = A[0] extends B[0]
 
 type CompareTups<
 	A extends any[],
-	B extends any[]
+	B extends any[],
 > = A['length'] extends B['length']
 	? DigitComparator<A, B>
 	: A[B['length']] extends undefined
@@ -63,7 +63,7 @@ type CheckNegative<
 	A extends number,
 	B extends number,
 	TupA extends any[] = NumberToTuple<A>,
-	TupB extends any[] = NumberToTuple<B>
+	TupB extends any[] = NumberToTuple<B>,
 > = `${A}` extends `-${number}`
 	? `${B}` extends `-${number}`
 		? CompareTups<TupB, TupA>
@@ -120,7 +120,7 @@ type _cases = [
 	>,
 	Expect<
 		Equal<Comparator<-9007199254740991, -9007199254740992>, Comparison.Greater>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

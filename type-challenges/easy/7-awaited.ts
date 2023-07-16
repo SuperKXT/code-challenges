@@ -24,7 +24,7 @@
 
 type Thenable<T> = {
 	then: (onfulfilled: (arg: T) => any) => any;
-}
+};
 
 type MyAwaited<T extends Promise<any> | Thenable<any>> = T extends Promise<
 	infer U
@@ -44,14 +44,14 @@ type X = Promise<string>;
 type Y = Promise<{ field: number }>;
 type Z = Promise<Promise<string | number>>;
 type Z1 = Promise<Promise<Promise<string | boolean>>>;
-type T = { then: (onfulfilled: (arg: number) => any) => any }
+type T = { then: (onfulfilled: (arg: number) => any) => any };
 
 type _cases = [
 	Expect<Equal<MyAwaited<X>, string>>,
 	Expect<Equal<MyAwaited<Y>, { field: number }>>,
 	Expect<Equal<MyAwaited<Z>, string | number>>,
 	Expect<Equal<MyAwaited<Z1>, string | boolean>>,
-	Expect<Equal<MyAwaited<T>, number>>
+	Expect<Equal<MyAwaited<T>, number>>,
 ];
 
 // @ts-expect-error incorrect argument

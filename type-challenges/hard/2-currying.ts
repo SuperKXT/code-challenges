@@ -51,9 +51,9 @@ const curried2 = Currying(
 		d: boolean,
 		e: boolean,
 		f: string,
-		g: boolean
+		g: boolean,
 		// eslint-disable-next-line max-params
-	) => true
+	) => true,
 );
 const curried3 = Currying(() => true);
 
@@ -65,15 +65,15 @@ type _cases = [
 		Equal<
 			typeof curried2,
 			(
-				a: string
+				a: string,
 			) => (
-				b: number
+				b: number,
 			) => (
-				c: boolean
+				c: boolean,
 			) => (d: boolean) => (e: boolean) => (f: string) => (g: boolean) => true
 		>
 	>,
-	Expect<Equal<typeof curried3, () => true>>
+	Expect<Equal<typeof curried3, () => true>>,
 ];
 
 /* _____________ Further Steps _____________ */

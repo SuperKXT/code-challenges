@@ -8,13 +8,13 @@ const isCommand = (value: any): value is Command =>
 type Solution = {
 	strength: number;
 	crtOutput: string;
-}
+};
 
 type Clock = {
 	cycle: number;
 	register: number;
 	target: number;
-}
+};
 
 const getCrtOutput = ({
 	register,

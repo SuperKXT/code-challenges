@@ -6,7 +6,7 @@ export type CountCaloriesSolution = {
 	maxCalories: number;
 	topThreeIndexes: [number, number, number];
 	topThreeCalories: number;
-}
+};
 
 export const countCalories = async (): Promise<CountCaloriesSolution> => {
 	const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
@@ -15,7 +15,7 @@ export const countCalories = async (): Promise<CountCaloriesSolution> => {
 		row
 			.split('\n')
 			.map(Number)
-			.reduce((sum, current) => sum + current, 0)
+			.reduce((sum, current) => sum + current, 0),
 	);
 	const maxCalories = Math.max(...calories);
 	const maxIndex = calories.indexOf(maxCalories);
@@ -26,7 +26,7 @@ export const countCalories = async (): Promise<CountCaloriesSolution> => {
 	const topThreeIndexes = topThree.map((row) => calories.indexOf(row)) as [
 		number,
 		number,
-		number
+		number,
 	];
 	const topThreeCalories = topThree.reduce((sum, current) => sum + current, 0);
 

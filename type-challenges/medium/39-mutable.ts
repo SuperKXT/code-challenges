@@ -40,20 +40,20 @@ type Todo1 = {
 	meta: {
 		author: string;
 	};
-}
+};
 
 type List = [1, 2, 3];
 
 type _cases = [
 	Expect<Equal<Mutable<Readonly<Todo1>>, Todo1>>,
-	Expect<Equal<Mutable<Readonly<List>>, List>>
+	Expect<Equal<Mutable<Readonly<List>>, List>>,
 ];
 
 type _errors = [
 	// @ts-expect-error invalid argument
 	Mutable<'string'>,
 	// @ts-expect-error invalid argument
-	Mutable<0>
+	Mutable<0>,
 ];
 
 /* _____________ Further Steps _____________ */

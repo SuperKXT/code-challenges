@@ -46,7 +46,7 @@ type Prettify<T> = {
 type Chainable<T extends Record<string, unknown> = {}> = {
 	option<K extends string, V>(
 		key: K extends keyof T ? never : K,
-		value: V
+		value: V,
 	): Chainable<Omit<T, K> & { [Key in K]: V }>;
 	get(): Prettify<T>;
 };
@@ -78,7 +78,7 @@ const result3 = a
 type _cases = [
 	Expect<Alike<typeof result1, Expected1>>,
 	Expect<Alike<typeof result2, Expected2>>,
-	Expect<Alike<typeof result3, Expected3>>
+	Expect<Alike<typeof result3, Expected3>>,
 ];
 
 type Expected1 = {

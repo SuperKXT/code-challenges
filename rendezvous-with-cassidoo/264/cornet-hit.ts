@@ -2,7 +2,7 @@ export type XY = [number, number];
 export const cornerHit = (
 	boxSize: XY,
 	initialPosition: XY,
-	screenSize: XY
+	screenSize: XY,
 ): boolean => {
 	const [width, height] = boxSize;
 	const [posX, posY] = initialPosition;

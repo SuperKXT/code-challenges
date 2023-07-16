@@ -22,5 +22,5 @@ test.each(tests)(
 			const response = divisibleIntegers((idx + 1) as DivisibleIntegerN, input);
 			expect(response).toBe(outputs[idx]);
 		}
-	}
+	},
 );

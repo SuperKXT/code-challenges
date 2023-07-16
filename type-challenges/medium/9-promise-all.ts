@@ -26,7 +26,7 @@
 type MyAwaited<T> = T extends Promise<infer R> ? R : T;
 
 declare function promiseAll<T extends any[]>(
-	values: readonly [...T]
+	values: readonly [...T],
 ): Promise<{
 	[K in keyof T]: MyAwaited<T[K]>;
 }>;
@@ -49,7 +49,7 @@ type _cases = [
 	Expect<Equal<typeof promiseAllTest1, Promise<[1, 2, 3]>>>,
 	Expect<Equal<typeof promiseAllTest2, Promise<[1, 2, number]>>>,
 	Expect<Equal<typeof promiseAllTest3, Promise<[number, number, number]>>>,
-	Expect<Equal<typeof promiseAllTest4, Promise<number[]>>>
+	Expect<Equal<typeof promiseAllTest4, Promise<number[]>>>,
 ];
 
 /* _____________ Further Steps _____________ */

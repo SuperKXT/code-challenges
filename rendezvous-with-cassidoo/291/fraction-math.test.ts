@@ -3,7 +3,7 @@ import { fractionMath } from './fraction-math';
 type Test = {
 	args: Parameters<typeof fractionMath>;
 	output: Parameters<typeof fractionMath>[0];
-}
+};
 
 const TESTS: Test[] = [
 	{
@@ -45,5 +45,5 @@ test.each(TESTS)(
 	({ args, output }) => {
 		const response = fractionMath(...args);
 		expect(response).toStrictEqual(output);
-	}
+	},
 );

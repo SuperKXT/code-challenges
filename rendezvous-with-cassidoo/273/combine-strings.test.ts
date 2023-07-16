@@ -36,7 +36,7 @@ test.each(TESTS)(
 	'testing combineStrings for valid inputs',
 	({ input, output }) => {
 		expect(combineStrings(...input)).toStrictEqual(output);
-	}
+	},
 );
 
 test('testing combineStrings for invalid inputs', () => {

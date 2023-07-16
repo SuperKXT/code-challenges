@@ -20,7 +20,8 @@ const isMove = (value: any): value is Move =>
 const getUniquePositions = (array: Position[]) => {
 	return array.reduce<Position[]>((positions, current) => {
 		const duplicate = positions.some(
-			(position) => current.row === position.row && current.col === position.col
+			(position) =>
+				current.row === position.row && current.col === position.col,
 		);
 		if (!duplicate) positions.push(current);
 
@@ -30,7 +31,7 @@ const getUniquePositions = (array: Position[]) => {
 
 export const ropeBridge = (
 	input: string,
-	start: Position = { col: 0, row: 0 }
+	start: Position = { col: 0, row: 0 },
 ): {
 	firstTail: number;
 	lastTail: number;

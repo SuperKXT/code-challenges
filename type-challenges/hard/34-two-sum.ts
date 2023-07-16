@@ -25,7 +25,7 @@ type CreateTuple<T extends number, R extends 1[] = []> = R['length'] extends T
 
 type AddCheck<F extends number, S extends number, U extends number> = [
 	...CreateTuple<F>,
-	...CreateTuple<S>
+	...CreateTuple<S>,
 ]['length'] extends U
 	? true
 	: false;
@@ -33,7 +33,7 @@ type AddCheck<F extends number, S extends number, U extends number> = [
 type TwoSum<T extends number[], U extends number> = T extends [
 	infer F extends number,
 	infer S extends number,
-	...infer R extends number[]
+	...infer R extends number[],
 ]
 	? AddCheck<F, S, U> extends true
 		? true
@@ -58,7 +58,7 @@ type _cases = [
 	Expect<Equal<TwoSum<[1, 2, 3], 4>, true>>,
 	Expect<Equal<TwoSum<[1, 2, 3], 5>, true>>,
 	Expect<Equal<TwoSum<[1, 2, 3], 6>, false>>,
-	Expect<Equal<TwoSum<[3, 2, 0], 2>, true>>
+	Expect<Equal<TwoSum<[3, 2, 0], 2>, true>>,
 ];
 
 /* _____________ Further Steps _____________ */

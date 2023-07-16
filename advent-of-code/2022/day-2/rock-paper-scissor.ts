@@ -63,7 +63,7 @@ const VERSUS_RULES = {
 
 const getPart1Score = (
 	versusMove: VersusMove,
-	playerMove: PlayerMove
+	playerMove: PlayerMove,
 ): number => {
 	const { score, wins, loses } = PLAYER_RULES[playerMove];
 	switch (versusMove) {
@@ -104,7 +104,7 @@ export const rockPaperScissors =
 				({ part1, part2 }, row) => {
 					try {
 						const [versus, playerOrResult] = MATCH_SCHEMA.parse(
-							row.toLowerCase().split(' ')
+							row.toLowerCase().split(' '),
 						);
 						return {
 							part1: part1 + getPart1Score(versus, playerOrResult),
@@ -114,7 +114,7 @@ export const rockPaperScissors =
 						return { part1, part2 };
 					}
 				},
-				{ part1: 0, part2: 0 }
+				{ part1: 0, part2: 0 },
 			);
 
 		return score;

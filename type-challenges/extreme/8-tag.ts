@@ -159,7 +159,7 @@ type GetStringKeys<T> = Exclude<
 type GetTagsKey<
 	V,
 	TagsOrUndefined = [V] extends [Tagged] ? V[typeof KEY] : undefined,
-	TagsKeyOrNever = GetStringKeys<Exclude<TagsOrUndefined, undefined>>
+	TagsKeyOrNever = GetStringKeys<Exclude<TagsOrUndefined, undefined>>,
 > = Equal<TagsKeyOrNever, never> extends true
 	? ''
 	: Equal<TagsKeyOrNever, string> extends true
@@ -176,7 +176,7 @@ type GetTagsKey<
 export type GetTags<
 	V,
 	TagsOrUndefined = [V] extends [Tagged] ? V[typeof KEY] : undefined,
-	TagsOrNever = GetStringProps<Exclude<TagsOrUndefined, undefined>>
+	TagsOrNever = GetStringProps<Exclude<TagsOrUndefined, undefined>>,
 > = Equal<V, any> extends true
 	? []
 	: Equal<TagsOrNever, never> extends true
@@ -194,7 +194,7 @@ export type Tag<
 	V,
 	T extends string,
 	Tags extends Tuple = GetTags<V>,
-	TagsKey extends string = GetTagsKey<V>
+	TagsKey extends string = GetTagsKey<V>,
 > = Equal<V, null> extends true
 	? null
 	: Equal<V, undefined> extends true
@@ -444,7 +444,7 @@ type _cases = [
 	>,
 	Expect<
 		Equal<HasExactTags<Tag<Tag<void, 'foo'>, 'bar'>, ['foo', 'bar']>, true>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

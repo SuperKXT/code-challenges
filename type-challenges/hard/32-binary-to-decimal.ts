@@ -20,21 +20,21 @@
 
 type ReverseString<
 	T extends string,
-	R extends string = ''
+	R extends string = '',
 > = T extends `${infer F}${infer L}` ? ReverseString<L, `${F}${R}`> : R;
 
 type BinaryToDecimal<
 	S extends string,
 	RS extends string = ReverseString<S>,
 	B extends 1[] = [1],
-	R extends 1[] = []
+	R extends 1[] = [],
 > = RS extends `${infer F}${infer L}`
 	? BinaryToDecimal<never, L, [...B, ...B], F extends '1' ? [...R, ...B] : R>
 	: R['length'];
 
 type _BinaryToDecimal<
 	S extends string,
-	R extends any[] = []
+	R extends any[] = [],
 > = S extends `${infer F}${infer L}`
 	? F extends '0'
 		? _BinaryToDecimal<L, [...R, ...R]>
@@ -50,7 +50,7 @@ type _cases = [
 	Expect<Equal<BinaryToDecimal<'0011'>, 3>>,
 	Expect<Equal<BinaryToDecimal<'00000000'>, 0>>,
 	Expect<Equal<BinaryToDecimal<'11111111'>, 255>>,
-	Expect<Equal<BinaryToDecimal<'10101010'>, 170>>
+	Expect<Equal<BinaryToDecimal<'10101010'>, 170>>,
 ];
 
 /* _____________ Further Steps _____________ */

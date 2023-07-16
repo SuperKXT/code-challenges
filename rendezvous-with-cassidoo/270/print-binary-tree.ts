@@ -13,7 +13,7 @@ export const printBinaryTree = (nodes: number): string => {
 		const availableNodes = Math.min(2 ** (step - 1), nodes) * 2;
 		const stepNodes = Math.min(
 			availableNodes,
-			Math.ceil(nodes / 2 ** (steps - step))
+			Math.ceil(nodes / 2 ** (steps - step)),
 		);
 		const subSteps = Math.max(2 ** (steps - step - 1), 1);
 		const spaces = 2 ** (steps - step);

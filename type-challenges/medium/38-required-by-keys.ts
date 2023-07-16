@@ -45,26 +45,26 @@ type User = {
 	name?: string;
 	age?: number;
 	address?: string;
-}
+};
 
 type UserRequiredName = {
 	name: string;
 	age?: number;
 	address?: string;
-}
+};
 
 type UserRequiredNameAndAge = {
 	name: string;
 	age: number;
 	address?: string;
-}
+};
 
 type _cases = [
 	Expect<Equal<RequiredByKeys<User, 'name'>, UserRequiredName>>,
 	Expect<Equal<RequiredByKeys<User, 'name' | 'age'>, UserRequiredNameAndAge>>,
 	Expect<Equal<RequiredByKeys<User>, Required<User>>>,
 	// @ts-expect-error invalid keys
-	Expect<Equal<RequiredByKeys<User, 'name' | 'unknown'>, UserRequiredName>>
+	Expect<Equal<RequiredByKeys<User, 'name' | 'unknown'>, UserRequiredName>>,
 ];
 
 /* _____________ Further Steps _____________ */

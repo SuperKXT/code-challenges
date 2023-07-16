@@ -1,6 +1,6 @@
 type _repeatString<
 	S extends string,
-	T extends unknown[]
+	T extends unknown[],
 > = T['length'] extends 1 ? S : `${S}${_repeatString<S, Utils.dropFirst<T>>}`;
 
 type _tuple<N extends number, T, R extends readonly T[]> = R['length'] extends N
@@ -10,7 +10,7 @@ type _tuple<N extends number, T, R extends readonly T[]> = R['length'] extends N
 export declare namespace Utils {
 	type dropFirst<T extends readonly unknown[]> = T extends readonly [
 		any?,
-		...infer U
+		...infer U,
 	]
 		? U
 		: [...T];

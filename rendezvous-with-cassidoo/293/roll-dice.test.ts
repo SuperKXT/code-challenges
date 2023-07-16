@@ -32,7 +32,7 @@ test.each(TESTS)(
 			expect(response).toBeGreaterThanOrEqual(min);
 			expect(response).toBeLessThanOrEqual(max);
 		}
-	}
+	},
 );
 
 test('roll dice should throw an error for incorrect dice notation', () => {

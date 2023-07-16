@@ -1,5 +1,5 @@
 export const tuningTrouble = (
-	input: string
+	input: string,
 ): {
 	packetMarker: number;
 	messageMarker: number;

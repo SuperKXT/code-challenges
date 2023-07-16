@@ -47,7 +47,7 @@ type Eq<T, U> = (<G>() => G extends T ? 1 : 2) extends <G>() => G extends U
 
 type MapTypes<
 	T extends object,
-	R extends { mapFrom: unknown; mapTo: unknown }
+	R extends { mapFrom: unknown; mapTo: unknown },
 > = {
 	[K in keyof T]: (
 		R extends R
@@ -126,7 +126,7 @@ type _cases = [
 			>,
 			{ name: boolean; date: string }
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

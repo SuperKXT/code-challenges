@@ -36,7 +36,7 @@ type Model = {
 	count: number;
 	isReadonly: boolean;
 	isEnable: boolean;
-}
+};
 
 type _cases = [
 	Expect<
@@ -46,7 +46,7 @@ type _cases = [
 		>
 	>,
 	Expect<Equal<PickByType<Model, string>, { name: string }>>,
-	Expect<Equal<PickByType<Model, number>, { count: number }>>
+	Expect<Equal<PickByType<Model, number>, { count: number }>>,
 ];
 
 /* _____________ Further Steps _____________ */

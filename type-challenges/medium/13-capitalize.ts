@@ -56,7 +56,7 @@ type _cases = [
 	Expect<Equal<MyCapitalize<'w'>, 'W'>>,
 	Expect<Equal<MyCapitalize<'x'>, 'X'>>,
 	Expect<Equal<MyCapitalize<'y'>, 'Y'>>,
-	Expect<Equal<MyCapitalize<'z'>, 'Z'>>
+	Expect<Equal<MyCapitalize<'z'>, 'Z'>>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -23,8 +23,10 @@
 
 type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
-export type Integer<T extends number> =
-	`${T}` extends `${infer I extends number}.${any}` ? I : T;
+export type Integer<T extends number> = `${T}` extends `${infer I extends
+	number}.${any}`
+	? I
+	: T;
 
 export type UnsignedInt<T extends number | string | bigint> =
 	`${T}` extends `-${infer I extends number}`
@@ -35,7 +37,7 @@ export type UnsignedInt<T extends number | string | bigint> =
 
 type ArrayReverse<T extends Digit[], Out extends Digit[] = []> = T extends [
 	...infer Rest extends Digit[],
-	infer L extends Digit
+	infer L extends Digit,
 ]
 	? ArrayReverse<Rest, [...Out, L]>
 	: Out;
@@ -51,14 +53,14 @@ type Shift<T extends number[]> = T extends [any, ...infer R extends number[]]
 type NumberToArray<
 	T extends number,
 	R extends string = `${T}`,
-	A extends Digit[] = []
+	A extends Digit[] = [],
 > = R extends `${infer F extends Digit}${infer L}`
 	? NumberToArray<T, L, [...A, F]>
 	: A;
 
 type ArrayToNumber<T extends Digit[], R extends string = ''> = T extends [
 	infer F extends Digit,
-	...infer Rest extends Digit[]
+	...infer Rest extends Digit[],
 ]
 	? ArrayToNumber<Rest, `${R}${F}`>
 	: `${R}` extends `${infer I extends number}`
@@ -69,7 +71,7 @@ type GreaterThanDigits<
 	T extends number[],
 	U extends number[],
 	TF extends number[] = Fill<T[0]>,
-	UF extends number[] = Fill<U[0]>
+	UF extends number[] = Fill<U[0]>,
 > = T['length'] extends 0
 	? false
 	: T[0] extends U[0]
@@ -82,7 +84,7 @@ type GreaterThan<
 	T extends number,
 	U extends number,
 	TA extends number[] = NumberToArray<T>,
-	UA extends number[] = NumberToArray<U>
+	UA extends number[] = NumberToArray<U>,
 > = T extends U
 	? false
 	: TA['length'] extends UA['length']
@@ -93,7 +95,7 @@ type GreaterThan<
 
 type Max<T extends number[], M extends number = never> = T extends [
 	infer F extends number,
-	...infer R extends number[]
+	...infer R extends number[],
 ]
 	? GreaterThan<F, M> extends true
 		? Max<R, F>
@@ -102,14 +104,14 @@ type Max<T extends number[], M extends number = never> = T extends [
 
 type PadLeft<T extends Digit[], Size extends number> = [
 	0,
-	...T
+	...T,
 ][Size] extends Digit
 	? T
 	: PadLeft<[0, ...T], Size>;
 
 type AddDigits<T extends Digit[], R extends any[] = []> = T extends [
 	infer F extends Digit,
-	...infer Rest extends Digit[]
+	...infer Rest extends Digit[],
 ]
 	? AddDigits<Rest, [...R, ...Fill<F>]>
 	: PadLeft<NumberToArray<R['length']>, 2>;
@@ -118,12 +120,12 @@ type _innerSum<
 	A extends Digit[],
 	B extends Digit[],
 	R extends Digit[] = [],
-	Carry extends Digit = 0
+	Carry extends Digit = 0,
 > = A extends [infer FA extends Digit, ...infer RA extends Digit[]]
 	? B extends [infer FB extends Digit, ...infer RB extends Digit[]]
 		? AddDigits<[FA, FB, Carry]> extends [
 				infer NewCarry extends Digit,
-				infer Sum extends Digit
+				infer Sum extends Digit,
 		  ]
 			? _innerSum<RA, RB, [...R, Sum], NewCarry>
 			: never
@@ -137,7 +139,7 @@ export type Sum<
 	B extends string | number | bigint,
 	ArrayA extends Digit[] = NumberToArray<UnsignedInt<A>>,
 	ArrayB extends Digit[] = NumberToArray<UnsignedInt<B>>,
-	MaxNum extends number = Max<[ArrayA['length'], ArrayB['length']]>
+	MaxNum extends number = Max<[ArrayA['length'], ArrayB['length']]>,
 > = ArrayToNumber<
 	ArrayReverse<
 		_innerSum<
@@ -149,7 +151,7 @@ export type Sum<
 
 export type SumStringified<
 	A extends string | number | bigint,
-	B extends string | number | bigint
+	B extends string | number | bigint,
 > = `${Sum<A, B>}`;
 
 /* _____________ Test Cases _____________ */
@@ -165,7 +167,7 @@ type _cases = [
 	Expect<Equal<SumStringified<4325234, '39532'>, '4364766'>>,
 	Expect<Equal<SumStringified<728, 0>, '728'>>,
 	Expect<Equal<SumStringified<'0', 213>, '213'>>,
-	Expect<Equal<SumStringified<0, '0'>, '0'>>
+	Expect<Equal<SumStringified<0, '0'>, '0'>>,
 ];
 
 /* _____________ Further Steps _____________ */

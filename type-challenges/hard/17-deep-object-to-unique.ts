@@ -72,7 +72,7 @@ type _cases = [
 	IsFalse<Equal<UniqFoo['bar'], UniqFoo['baz']>>,
 	IsFalse<Equal<UniqBar['baz'], UniqFoo['baz']>>,
 	IsTrue<Equal<keyof UniqBar['baz'], keyof UniqFoo['baz']>>,
-	IsTrue<Equal<keyof Foo, keyof UniqFoo & string>>
+	IsTrue<Equal<keyof Foo, keyof UniqFoo & string>>,
 ];
 
 /* _____________ Further Steps _____________ */

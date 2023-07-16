@@ -40,7 +40,7 @@ type Max<
 	A extends number,
 	B extends number,
 	AT extends 1[] = CreateTuple<A>,
-	BT extends 1[] = CreateTuple<B>
+	BT extends 1[] = CreateTuple<B>,
 > = B extends A
 	? B
 	: AT[BT['length']] extends undefined
@@ -51,7 +51,7 @@ type Max<
 
 type _Maximum<
 	T extends number[],
-	Greatest extends number = T[0] extends undefined ? never : T[0]
+	Greatest extends number = T[0] extends undefined ? never : T[0],
 > = T extends [infer F extends number, ...infer R extends number[]]
 	? _Maximum<R, Max<F, Greatest>>
 	: Greatest;
@@ -69,7 +69,7 @@ import type { Equal, Expect } from '@type-challenges/utils';
 type _cases = [
 	Expect<Equal<Maximum<[]>, never>>,
 	Expect<Equal<Maximum<[0, 2, 1]>, 2>>,
-	Expect<Equal<Maximum<[1, 20, 200, 150]>, 200>>
+	Expect<Equal<Maximum<[1, 20, 200, 150]>, 200>>,
 ];
 
 /* _____________ Further Steps _____________ */

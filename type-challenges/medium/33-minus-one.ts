@@ -30,19 +30,19 @@ type ReverseString<T extends string> = T extends `${infer L}${infer R}`
 	? `${ReverseString<R>}${L}`
 	: '';
 
-type PositiveMinusOne<T extends string> =
-	T extends `${infer D extends number}${infer R}`
-		? D extends 0
-			? `9${PositiveMinusOne<R>}`
-			: `${[9, 0, 1, 2, 3, 4, 5, 6, 7, 8][D]}${R}`
-		: never;
+type PositiveMinusOne<T extends string> = T extends `${infer D extends
+	number}${infer R}`
+	? D extends 0
+		? `9${PositiveMinusOne<R>}`
+		: `${[9, 0, 1, 2, 3, 4, 5, 6, 7, 8][D]}${R}`
+	: never;
 
-type NegativeMinusOne<T extends string> =
-	T extends `${infer D extends number}${infer R}`
-		? D extends 9
-			? `0${NegativeMinusOne<R>}`
-			: `${[1, 2, 3, 4, 5, 6, 7, 8, 9][D]}${R}`
-		: never;
+type NegativeMinusOne<T extends string> = T extends `${infer D extends
+	number}${infer R}`
+	? D extends 9
+		? `0${NegativeMinusOne<R>}`
+		: `${[1, 2, 3, 4, 5, 6, 7, 8, 9][D]}${R}`
+	: never;
 
 type MinusOne<T extends number> = T extends 0
 	? -1
@@ -67,7 +67,7 @@ type _cases = [
 	Expect<Equal<MinusOne<-3>, -4>>,
 	Expect<Equal<MinusOne<-100>, -101>>,
 	Expect<Equal<MinusOne<-1101>, -1102>>,
-	Expect<Equal<MinusOne<-9_007_199_254_740_991>, -9_007_199_254_740_992>>
+	Expect<Equal<MinusOne<-9_007_199_254_740_991>, -9_007_199_254_740_992>>,
 ];
 
 /* _____________ Further Steps _____________ */

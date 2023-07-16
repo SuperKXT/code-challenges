@@ -17,7 +17,7 @@ type ModifierKeys = ['cmd', 'ctrl', 'opt', 'fn'];
 
 type CombinationKeyType<T extends string[]> = T extends [
 	infer F extends string,
-	...infer R extends string[]
+	...infer R extends string[],
 ]
 	? `${F} ${R[number]}` | CombinationKeyType<R>
 	: never;

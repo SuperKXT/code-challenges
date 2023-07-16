@@ -281,7 +281,12 @@ const config = {
 			},
 		},
 		{
-			files: ['scripts/**/*'],
+			files: ['**/*'],
+			excludedFiles: ['src/**/*'],
+			env: {
+				es2021: true,
+				node: true,
+			},
 			rules: {
 				'import/no-nodejs-modules': 'off',
 			},

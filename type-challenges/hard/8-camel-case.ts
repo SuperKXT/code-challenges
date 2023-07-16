@@ -42,7 +42,7 @@ type _cases = [
 	Expect<Equal<CamelCase<'HELLO_WORLD_WITH_TYPES'>, 'helloWorldWithTypes'>>,
 	Expect<Equal<CamelCase<'-'>, '-'>>,
 	Expect<Equal<CamelCase<''>, ''>>,
-	Expect<Equal<CamelCase<'😎'>, '😎'>>
+	Expect<Equal<CamelCase<'😎'>, '😎'>>,
 ];
 
 /* _____________ Further Steps _____________ */

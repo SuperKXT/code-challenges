@@ -26,7 +26,7 @@ type AbsoluteNo<T extends number> = `${T}` extends `-${infer I extends number}`
 type AbsoluteIndex<
 	T extends number,
 	Arr extends any[],
-	Idx extends 1[] = []
+	Idx extends 1[] = [],
 > = AbsoluteNo<T> extends T
 	? T
 	: AbsoluteNo<T> extends Idx['length']
@@ -42,7 +42,7 @@ type Slice<
 	AbsStart extends number = AbsoluteIndex<Start, Arr>,
 	AbsEnd extends number = AbsoluteIndex<End, Arr>,
 	Idx extends 1[] = [],
-	Output extends any[] = []
+	Output extends any[] = [],
 > = Arr extends [infer First, ...infer Rest extends any[]]
 	? Idx['length'] extends AbsEnd
 		? Output
@@ -94,7 +94,7 @@ type _cases = [
 	// invalid
 	Expect<Equal<Slice<Arr, 10>, []>>,
 	Expect<Equal<Slice<Arr, 1, 0>, []>>,
-	Expect<Equal<Slice<Arr, 10, 20>, []>>
+	Expect<Equal<Slice<Arr, 10, 20>, []>>,
 ];
 
 /* _____________ Further Steps _____________ */

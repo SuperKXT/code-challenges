@@ -3,7 +3,7 @@ import { maxPointsOnLine } from './max-line-points';
 type Test = {
 	input: [number, number][];
 	output: number;
-}
+};
 
 const tests: Test[] = [
 	{
@@ -42,5 +42,5 @@ test.each(tests)(
 	({ input, output }) => {
 		const response = maxPointsOnLine(input);
 		expect(response).toBe(output);
-	}
+	},
 );

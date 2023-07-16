@@ -62,7 +62,9 @@ test('should test assertObject helper', () => {
 		assertObject(a);
 		assertType<Obj>(a);
 	}).not.toThrow();
-	expect(() => assertObject({ fist: 'of fury' })).not.toThrow();
+	expect(() => {
+		assertObject({ fist: 'of fury' });
+	}).not.toThrow();
 });
 
 test('should test assertArray helper', () => {

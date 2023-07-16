@@ -26,7 +26,7 @@ type Eq<T, U> = (<G>() => G extends T ? 1 : 0) extends <G>() => G extends U
 
 type IndexOf<T extends any[], U, Idx extends any[] = []> = T extends [
 	infer F,
-	...infer R
+	...infer R,
 ]
 	? Eq<U, F> extends true
 		? Idx['length']
@@ -44,7 +44,7 @@ type _cases = [
 	Expect<Equal<IndexOf<[string, 1, number, 'a'], number>, 2>>,
 	Expect<Equal<IndexOf<[string, 1, number, 'a', any], any>, 4>>,
 	Expect<Equal<IndexOf<[string, 'a'], 'a'>, 1>>,
-	Expect<Equal<IndexOf<[any, 1], 1>, 1>>
+	Expect<Equal<IndexOf<[any, 1], 1>, 1>>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -30,5 +30,5 @@ export const getDateOrNull = (value: any): null | Date => {
 
 export const compareDate = (
 	first: string | Date,
-	second: string | Date
+	second: string | Date,
 ): number => new Date(first).getTime() - new Date(second).getTime();

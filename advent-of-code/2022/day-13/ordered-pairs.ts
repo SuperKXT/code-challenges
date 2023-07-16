@@ -1,13 +1,13 @@
 type Solution = {
 	indicesSum: number;
 	part2: number;
-}
+};
 
 type Packet = (Packet | number)[];
 
 const checkPacketOrder = (
 	leftPacket: Packet,
-	rightPacket: Packet
+	rightPacket: Packet,
 ): boolean | undefined => {
 	for (let index = 0; index < leftPacket.length; index++) {
 		const left = leftPacket[index] as Packet | number;
@@ -23,7 +23,7 @@ const checkPacketOrder = (
 		} else {
 			const listCheck = checkPacketOrder(
 				!Array.isArray(left) ? [left] : left,
-				!Array.isArray(right) ? [right] : right
+				!Array.isArray(right) ? [right] : right,
 			);
 			if (listCheck === undefined) continue;
 
@@ -43,7 +43,7 @@ export const orderedPairs = (input: string): Solution => {
 		.split('\n\n')
 		.map(
 			(row) =>
-				row.split('\n').map((curr) => JSON.parse(curr)) as [Packet, Packet]
+				row.split('\n').map((curr) => JSON.parse(curr)) as [Packet, Packet],
 		);
 
 	for (const pair of pairs) {

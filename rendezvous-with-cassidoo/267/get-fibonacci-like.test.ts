@@ -52,13 +52,13 @@ test.each(GET_TESTS)(
 	({ input, output }) => {
 		const response = getFibonacciLike(...input);
 		expect(response).toStrictEqual(output);
-	}
+	},
 );
 test.each(BAD_GET_TESTS)(
 	'testing getFibonacciLike for bad input',
 	({ input, error }) => {
 		expect(() => getFibonacciLike(...input)).toThrow(error);
-	}
+	},
 );
 
 test.each(CHECK_TESTS)('testing isFibonacciLike', ({ input, output }) => {

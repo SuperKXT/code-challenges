@@ -74,7 +74,7 @@ type _cases = [
 	Expect<Equal<PercentageParser<'-1'>, Case8>>,
 	Expect<Equal<PercentageParser<'%'>, Case9>>,
 	Expect<Equal<PercentageParser<'1'>, Case10>>,
-	Expect<Equal<PercentageParser<'100'>, Case11>>
+	Expect<Equal<PercentageParser<'100'>, Case11>>,
 ];
 
 /* _____________ Further Steps _____________ */

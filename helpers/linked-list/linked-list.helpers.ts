@@ -11,7 +11,7 @@ export type LinkedList<Type> = {
 
 type InsertToNode<
 	Node extends NonNullable<LinkedListNode>,
-	Val
+	Val,
 > = Utils.prettify<{
 	value: Node['value'];
 	next: Node['next'] extends NonNullable<LinkedListNode>
@@ -27,7 +27,7 @@ type InsertNode<List extends LinkedList<any>, Val> = Utils.prettify<{
 
 type ArrayToLinkedList<
 	Type extends readonly any[],
-	Result extends LinkedList<any> = { head: null }
+	Result extends LinkedList<any> = { head: null },
 > = number extends Type['length']
 	? LinkedList<Type[number]>
 	: Type extends readonly [infer First, ...infer Rest]
@@ -35,7 +35,7 @@ type ArrayToLinkedList<
 	: Result;
 
 export const arrayToLinkedList = <const Arr extends readonly any[]>(
-	array: Arr
+	array: Arr,
 ): ArrayToLinkedList<Arr> => {
 	const list: LinkedList<unknown> = {
 		head: null,
@@ -62,7 +62,7 @@ export const arrayToLinkedList = <const Arr extends readonly any[]>(
 
 export const insertToLinkedList = <List extends LinkedList<unknown>, const Val>(
 	list: List,
-	value: Val
+	value: Val,
 ): InsertNode<List, Val> => {
 	const newNode = { value, next: null };
 	if (!list.head) {

@@ -11,7 +11,7 @@ const isBadNeighbor = (
 	cell: Cell,
 	row: number,
 	col: number,
-	board: ProspectiveBoard
+	board: ProspectiveBoard,
 ): boolean => {
 	if (cell !== '6' && cell !== '8') return false;
 
@@ -58,7 +58,7 @@ const generateNextCellIndex = (
 	col: number,
 	availablePieces: Cell[],
 	board: ProspectiveBoard,
-	pieces: Cell[] = structuredClone(availablePieces)
+	pieces: Cell[] = structuredClone(availablePieces),
 ): number => {
 	if (pieces.length === 1) return 0;
 

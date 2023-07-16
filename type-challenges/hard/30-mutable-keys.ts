@@ -38,7 +38,7 @@ type _cases = [
 			'a' | 'c' | 'd'
 		>
 	>,
-	Expect<Equal<MutableKeys<{}>, never>>
+	Expect<Equal<MutableKeys<{}>, never>>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -23,7 +23,7 @@
 // TODO RETRY
 type Subsequence<T extends any[], Prefix extends any[] = []> = T extends [
 	infer F,
-	...infer R
+	...infer R,
 ]
 	? Subsequence<R, Prefix | [...Prefix, F]>
 	: Prefix;
@@ -39,7 +39,7 @@ type _cases = [
 			Subsequence<[1, 2, 3]>,
 			[] | [1] | [2] | [1, 2] | [3] | [1, 3] | [2, 3] | [1, 2, 3]
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

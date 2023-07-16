@@ -3,7 +3,7 @@ import { getStarAngles } from './n-pointed-star';
 type Test = {
 	input: number;
 	output: number;
-}
+};
 
 const tests: Test[] = [
 	{ input: 3, output: 180 },
@@ -20,7 +20,7 @@ test.each(tests)(
 	({ input, output }) => {
 		const response = getStarAngles(input);
 		expect(response).toBe(output);
-	}
+	},
 );
 
 test('should fail for less then 3 sides', () => {

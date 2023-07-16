@@ -33,7 +33,7 @@ type _cases = [
 			Concat<['1', 2, '3'], [false, boolean, '4']>,
 			['1', 2, '3', false, boolean, '4']
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

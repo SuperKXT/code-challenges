@@ -21,7 +21,7 @@
 // TODO RETRY
 type Transpose<
 	T extends number[][],
-	First extends number[] = T['length'] extends 0 ? [] : T[0]
+	First extends number[] = T['length'] extends 0 ? [] : T[0],
 > = {
 	[K in keyof First]: {
 		[K2 in keyof T]: K extends keyof T[K2] ? T[K2][K] : never;
@@ -44,7 +44,7 @@ type _cases = [
 			Transpose<[[1, 2, 3], [4, 5, 6], [7, 8, 9]]>,
 			[[1, 4, 7], [2, 5, 8], [3, 6, 9]]
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -33,5 +33,5 @@ test.each(tests)(
 	({ input, output }) => {
 		const response = oddSquareNumbers(input);
 		expect(response).toStrictEqual(output);
-	}
+	},
 );

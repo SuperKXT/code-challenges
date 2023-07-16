@@ -13,7 +13,7 @@ export type Board = [
 	Utils.tuple<4, Cell>,
 	Utils.tuple<5, Cell>,
 	Utils.tuple<4, Cell>,
-	Utils.tuple<3, Cell>
+	Utils.tuple<3, Cell>,
 ];
 
 export type ProspectiveBoard = [
@@ -21,7 +21,7 @@ export type ProspectiveBoard = [
 	Utils.tuple<4, Cell | ''>,
 	Utils.tuple<5, Cell | ''>,
 	Utils.tuple<4, Cell | ''>,
-	Utils.tuple<3, Cell | ''>
+	Utils.tuple<3, Cell | ''>,
 ];
 
 const ROW_PIECES = [3, 4, 5, 4, 3] as const;
@@ -33,7 +33,7 @@ export const BOARD_REGEX = new RegExp(
 		const pieces = ROW_PIECES[index] as number;
 		return ` {${5 - pieces}}(${PIECE_REGEX.source} ?){${pieces}}`;
 	}).join('\n'),
-	'u'
+	'u',
 );
 
 export const CATAN_ERRORS = {

@@ -8,7 +8,7 @@ const parseHex = (input: string): [number, number, number] => {
 	if (!input.match(HEX_REGEX)) throw new Error('invalid hex color!');
 
 	return (input.slice(1).match(/.{2}/gu) as RegExpExecArray).map((row) =>
-		parseInt(`0x${row}`, 16)
+		parseInt(`0x${row}`, 16),
 	) as [number, number, number];
 };
 
@@ -49,12 +49,12 @@ const toHexString = (rgb: [number, number, number]): string => {
 };
 
 const rgbToHsl = (
-	input: [number, number, number]
+	input: [number, number, number],
 ): [number, number, number] => {
 	const [red, green, blue] = input.map((row) => row / 255) as [
 		number,
 		number,
-		number
+		number,
 	];
 	const min = Math.min(red, green, blue);
 	const max = Math.max(red, green, blue);
@@ -82,7 +82,7 @@ const rgbToHsl = (
 };
 
 const hslToRgb = (
-	input: [number, number, number]
+	input: [number, number, number],
 ): [number, number, number] => {
 	const hue = input[0];
 	const saturation = input[1] / 100;
@@ -106,14 +106,14 @@ const hslToRgb = (
 	return values.map((row) => Math.round((row + m) * 255)) as [
 		number,
 		number,
-		number
+		number,
 	];
 };
 
 export const convertColor = <T extends Option>(
 	from: T,
 	to: Exclude<Option, T>,
-	input: string
+	input: string,
 ): string => {
 	switch (from) {
 		case 'hex': {

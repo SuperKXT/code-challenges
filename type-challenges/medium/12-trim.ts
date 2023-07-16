@@ -37,7 +37,7 @@ type _cases = [
 	Expect<Equal<Trim<'     str     '>, 'str'>>,
 	Expect<Equal<Trim<'   \n\t foo bar \t'>, 'foo bar'>>,
 	Expect<Equal<Trim<''>, ''>>,
-	Expect<Equal<Trim<' \n\t '>, ''>>
+	Expect<Equal<Trim<' \n\t '>, ''>>,
 ];
 
 /* _____________ Further Steps _____________ */

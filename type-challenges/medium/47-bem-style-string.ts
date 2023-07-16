@@ -19,7 +19,7 @@
 type BEM<
 	B extends string,
 	E extends string[],
-	M extends string[]
+	M extends string[],
 > = `${B}${E extends [] ? '' : `__${E[number]}`}${M extends []
 	? ''
 	: `--${M[number]}`}`;
@@ -44,7 +44,7 @@ type _cases = [
 			BEM<'btn', [], ['small', 'medium', 'large']>,
 			'btn--small' | 'btn--medium' | 'btn--large'
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

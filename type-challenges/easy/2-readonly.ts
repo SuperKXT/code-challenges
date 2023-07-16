@@ -48,7 +48,7 @@ type Todo1 = {
 	meta: {
 		author: string;
 	};
-}
+};
 
 /* _____________ Further Steps _____________ */
 /*

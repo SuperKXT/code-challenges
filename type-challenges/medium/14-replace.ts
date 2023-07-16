@@ -21,7 +21,7 @@
 type Replace<
 	S extends string,
 	From extends string,
-	To extends string
+	To extends string,
 > = From extends ''
 	? S
 	: S extends `${infer U}${From}${infer V}`
@@ -38,7 +38,7 @@ type _cases = [
 	Expect<Equal<Replace<'foobarbar', '', 'foo'>, 'foobarbar'>>,
 	Expect<Equal<Replace<'foobarbar', 'bar', ''>, 'foobar'>>,
 	Expect<Equal<Replace<'foobarbar', 'bra', 'foo'>, 'foobarbar'>>,
-	Expect<Equal<Replace<'', '', ''>, ''>>
+	Expect<Equal<Replace<'', '', ''>, ''>>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -27,7 +27,7 @@ import type { Equal, Expect } from '@type-challenges/utils';
 
 type _cases = [
 	Expect<Equal<If<true, 'a', 'b'>, 'a'>>,
-	Expect<Equal<If<false, 'a', 2>, 2>>
+	Expect<Equal<If<false, 'a', 2>, 2>>,
 ];
 
 // @ts-expect-error incorrect argument

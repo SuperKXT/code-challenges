@@ -20,7 +20,7 @@
 
 type TupleToNestedObject<T extends readonly string[], U> = T extends [
 	infer F extends string,
-	...infer R extends string[]
+	...infer R extends string[],
 ]
 	? {
 			[K in F]: TupleToNestedObject<R, U>;
@@ -42,7 +42,7 @@ type _cases = [
 			{ a: { b: { c: boolean } } }
 		>
 	>,
-	Expect<Equal<TupleToNestedObject<[], boolean>, boolean>>
+	Expect<Equal<TupleToNestedObject<[], boolean>, boolean>>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -43,7 +43,7 @@ type _cases = [
 			FlipArguments<(arg0: string, arg1: number, arg2: boolean) => void>,
 			(arg0: boolean, arg1: number, arg2: string) => void
 		>
-	>
+	>,
 ];
 
 type _errors = [
@@ -54,7 +54,7 @@ type _errors = [
 	// @ts-expect-error invalid arugment
 	FlipArguments<['apple', 'banana', 100, { a: 1 }]>,
 	// @ts-expect-error invalid argument
-	FlipArguments<null | undefined>
+	FlipArguments<null | undefined>,
 ];
 
 /* _____________ Further Steps _____________ */

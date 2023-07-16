@@ -30,7 +30,7 @@ type FizzBuzz<
 	Size extends number,
 	Result extends string[] = [],
 	ToThree extends 1[] = [],
-	ToFive extends 1[] = []
+	ToFive extends 1[] = [],
 > = Result['length'] extends Size
 	? Result
 	: ToThree['length'] extends 2
@@ -76,7 +76,7 @@ type _cases = [
 				'17',
 				'Fizz',
 				'19',
-				'Buzz'
+				'Buzz',
 			]
 		>
 	>,
@@ -183,10 +183,10 @@ type _cases = [
 				'97',
 				'98',
 				'Fizz',
-				'Buzz'
+				'Buzz',
 			]
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

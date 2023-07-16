@@ -24,13 +24,13 @@
 type FlattenDepth<
 	T extends any[],
 	D extends number = 1,
-	U extends number[] = []
+	U extends number[] = [],
 > = U['length'] extends D
 	? T
 	: T extends [infer F, ...infer R]
 	? [
 			...(F extends any[] ? FlattenDepth<F, D, [...U, 0]> : [F]),
-			...FlattenDepth<R, D, U>
+			...FlattenDepth<R, D, U>,
 	  ]
 	: T extends []
 	? T
@@ -49,7 +49,7 @@ type _cases = [
 	Expect<Equal<FlattenDepth<[1, [2, [3, [4, [5]]]]], 3>, [1, 2, 3, 4, [5]]>>,
 	Expect<
 		Equal<FlattenDepth<[1, [2, [3, [4, [5]]]]], 19260817>, [1, 2, 3, 4, 5]>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */

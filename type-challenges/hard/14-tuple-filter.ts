@@ -47,7 +47,7 @@ type _cases = [
 			FilterOut<[number | null | undefined, never], never | null | undefined>,
 			[number | null | undefined]
 		>
-	>
+	>,
 ];
 
 /* _____________ Further Steps _____________ */
