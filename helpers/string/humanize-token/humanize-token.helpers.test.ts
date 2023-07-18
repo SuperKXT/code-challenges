@@ -1,4 +1,4 @@
-import { humanizeToken, humanizeCases } from './humanize-token.helpers';
+import { humanizeCases, humanizeToken } from './humanize-token.helpers';
 
 import type { HumanizeCase } from './humanize-token.helpers';
 

@@ -1,11 +1,11 @@
 import {
-	SINGLE_PIECES,
-	DOUBLE_PIECES,
 	BOARD_REGEX,
 	CATAN_ERRORS,
+	DOUBLE_PIECES,
+	SINGLE_PIECES,
 } from './generate-catan.types';
 
-import type { Cell, Board, ProspectiveBoard } from './generate-catan.types';
+import type { Board, Cell, ProspectiveBoard } from './generate-catan.types';
 
 const isBadNeighbor = (
 	cell: Cell,

@@ -1,4 +1,4 @@
-import { generateCatanBoard, assertValidCatanBoard } from './generate-catan';
+import { assertValidCatanBoard, generateCatanBoard } from './generate-catan';
 import { CATAN_ERRORS } from './generate-catan.types';
 
 import type { CatanError } from './generate-catan.types';
