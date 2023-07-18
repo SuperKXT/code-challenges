@@ -1,4 +1,4 @@
-import { access, readdir, stat, rename } from 'fs/promises';
+import { access, readdir, rename, stat } from 'fs/promises';
 import path from 'path';
 
 import chalk from 'chalk';
