@@ -61,7 +61,7 @@ const config = {
 		'no-param-reassign': 'warn',
 		'no-promise-executor-return': 'warn',
 		'no-restricted-imports': [
-			'warn',
+			'error',
 			{
 				patterns: [
 					{
@@ -72,7 +72,7 @@ const config = {
 			},
 		],
 		'no-restricted-syntax': [
-			'warn',
+			'error',
 			{
 				message: "Don't declare enums. Use POJO with as const instead",
 				selector: 'TSEnumDeclaration',
