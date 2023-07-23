@@ -1,4 +1,4 @@
-import { access, readdir, stat, rename } from 'fs/promises';
+import { access, readdir, rename, stat } from 'fs/promises';
 import path from 'path';
 
 import chalk from 'chalk';
@@ -6,8 +6,8 @@ import argumentParser from 'minimist-lite';
 import prompt from 'prompt';
 import { z } from 'zod';
 
-import { formatToken } from '~/helpers/string';
 import { getCatchMessage } from '~/helpers/error';
+import { formatToken } from '~/helpers/string';
 
 import { RENAME_ERRORS } from './recursive-rename.types';
 

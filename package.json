@@ -5,7 +5,7 @@
 	"author": "Saad Khan",
 	"type": "module",
 	"scripts": {
-		"lint": "eslint . --fix --report-unused-disable-directives",
+		"lint": "eslint . --fix --report-unused-disable-directives && pnpm format",
 		"format": "prettier --write .",
 		"test": "vitest watch",
 		"test-ui": "vitest --ui",

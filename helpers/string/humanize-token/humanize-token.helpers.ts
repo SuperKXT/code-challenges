@@ -1,8 +1,8 @@
 import {
 	alphabet,
 	lowerAlphabet,
-	wordSeparators,
 	upperAlphabet,
+	wordSeparators,
 } from '~/helpers/string/string-literals';
 
 export const humanizeCases = ['lower', 'sentence', 'title', 'upper'] as const;

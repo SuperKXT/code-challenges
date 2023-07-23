@@ -61,7 +61,7 @@ const config = {
 		'no-param-reassign': 'warn',
 		'no-promise-executor-return': 'warn',
 		'no-restricted-imports': [
-			'warn',
+			'error',
 			{
 				patterns: [
 					{
@@ -72,7 +72,7 @@ const config = {
 			},
 		],
 		'no-restricted-syntax': [
-			'warn',
+			'error',
 			{
 				message: "Don't declare enums. Use POJO with as const instead",
 				selector: 'TSEnumDeclaration',
@@ -129,9 +129,9 @@ const config = {
 					'builtin',
 					'external',
 					'internal',
-					'parent',
 					'sibling',
 					'index',
+					'parent',
 					'type',
 				],
 				'newlines-between': 'always',
@@ -278,17 +278,6 @@ const config = {
 			files: ['**/*.cjs', '**/*.js'],
 			rules: {
 				'import/no-commonjs': 'off',
-			},
-		},
-		{
-			files: ['**/*'],
-			excludedFiles: ['src/**/*'],
-			env: {
-				es2021: true,
-				node: true,
-			},
-			rules: {
-				'import/no-nodejs-modules': 'off',
 			},
 		},
 		{

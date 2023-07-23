@@ -1,21 +1,21 @@
 import {
 	BLACK_PIECES,
 	CHESS_ERRORS,
+	COORDS,
 	SQUARE,
 	WHITE_PIECES,
-	COORDS,
 } from './check-chess-move.types';
 
 import type { Utils } from '~/types/utils';
 import type {
 	BlackPiece,
 	Board,
+	ChessError,
 	ChessResponse,
 	IsValidMoveArgs,
-	Position,
 	Piece,
+	Position,
 	WhitePiece,
-	ChessError,
 } from './check-chess-move.types';
 
 const assertBoard: Utils.assertFunction<Board> = (board: any) => {
