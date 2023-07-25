@@ -291,6 +291,12 @@ const config = {
 				'import/no-nodejs-modules': 'off',
 			},
 		},
+		{
+			files: ['**/*.d.ts'],
+			rules: {
+				'@typescript-eslint/consistent-type-definitions': 'off',
+			},
+		},
 	],
 };
 
