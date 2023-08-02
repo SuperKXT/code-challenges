@@ -20,12 +20,12 @@
 		"@type-challenges/utils": "^0.1.1",
 		"@types/eslint": "^8.44.1",
 		"@types/node": "^20.4.5",
-		"@types/prettier": "^2.7.3",
+		"@types/prettier": "^3.0.0",
 		"@types/prompt": "^1.1.5",
-		"@typescript-eslint/eslint-plugin": "^6.2.0",
-		"@typescript-eslint/parser": "^6.2.0",
-		"@vitest/coverage-v8": "^0.33.0",
-		"@vitest/ui": "^0.33.0",
+		"@typescript-eslint/eslint-plugin": "^6.2.1",
+		"@typescript-eslint/parser": "^6.2.1",
+		"@vitest/coverage-v8": "^0.34.1",
+		"@vitest/ui": "^0.34.1",
 		"eslint": "^8.46.0",
 		"eslint-config-prettier": "^8.9.0",
 		"eslint-import-resolver-typescript": "^3.5.5",
@@ -36,7 +36,7 @@
 		"tsx": "^3.12.7",
 		"typescript": "^5.1.6",
 		"vite-tsconfig-paths": "^4.2.0",
-		"vitest": "^0.33.0"
+		"vitest": "^0.34.1"
 	},
 	"dependencies": {
 		"chalk": "^5.3.0",
