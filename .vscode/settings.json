@@ -10,5 +10,5 @@
 		".vscode-insiders",
 		"./advent-of-code/**/**/input.txt"
 	],
-	"cSpell.words": ["addx", "antfu", "Catan", "datastream"]
+	"cSpell.words": ["addx", "antfu", "Catan", "datastream", "luhn"]
 }
