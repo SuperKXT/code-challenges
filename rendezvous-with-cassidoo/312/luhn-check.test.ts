@@ -1,15 +1,15 @@
 import { luhnCheck } from './luh-check';
 
-test('testing isAnagram against test 1', () => {
+test('testing luhnCheck against test 1', () => {
 	const result = luhnCheck(123456789);
-	const expected = false;
+	const expected = { valid: false } as const;
 	expect(result).toStrictEqual(expected);
 	assertType<typeof result>(expected);
 });
 
-test('testing isAnagram against test 2', () => {
+test('testing luhnCheck against test 2', () => {
 	const result = luhnCheck(5555555555554444);
-	const expected = true;
+	const expected = { valid: true, brand: 'Mastercard' } as const;
 	expect(result).toStrictEqual(expected);
 	assertType<typeof result>(expected);
 });
