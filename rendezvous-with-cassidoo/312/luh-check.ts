@@ -1,7 +1,5 @@
 import { objectKeys } from '~/helpers/object';
 
-import type { tuple } from 'zod';
-
 const cardIdMap = {
 	Mastercard: [51, 52, 53, 54, 55],
 	Visa: [4],
@@ -9,18 +7,10 @@ const cardIdMap = {
 
 type CardIdMap = typeof cardIdMap;
 
-type LuhnResult =
-	| { valid: false }
-	| { valid: true; brand: keyof typeof cardIdMap | 'Other' };
-
 type tuple<
 	T extends number,
 	result extends 1[] = [],
 > = result['length'] extends T ? result : tuple<T, [...result, 1]>;
-
-type stringToTuple<T extends string> = T extends `${infer first}${infer last}`
-	? [first, ...stringToTuple<last>]
-	: [];
 
 type numberToTuple<
 	T extends number,
@@ -116,17 +106,18 @@ type LuhnCheck<T extends number> = verifyLuhn<T> extends true
 	: { valid: false };
 
 export const luhnCheck = <T extends number>(number: T): LuhnCheck<T> => {
-	const digits = String(number).split('');
-	const payload = digits.slice(0, -1);
-	const check = digits.at(-1) as string;
-	const sum = payload.reduceRight((acc, curr, i) => {
-		const value = Number(curr) * ((payload.length - i) % 2 === 0 ? 1 : 2);
-		const digitSum = String(value)
-			.split('')
-			.reduce((acc2, digit) => acc2 + Number(digit), 0);
-		return acc + digitSum;
-	}, 0);
-	const valid = 10 - (sum % 10 || 10) === Number(check);
+	const sum = String(Math.floor(number / 10))
+		.split('')
+		.reverse()
+		.reduce((acc, curr, i) => {
+			const value = Number(curr) * ((i + 1) % 2 === 0 ? 1 : 2);
+			const digitSum = String(value)
+				.split('')
+				.reduce((acc2, digit) => acc2 + Number(digit), 0);
+			return acc + digitSum;
+		}, 0);
+	const check = number % 10;
+	const valid = 10 - (sum % 10 || 10) === check;
 	if (!valid) return { valid: false } as never;
 	const brand =
 		objectKeys(cardIdMap).find((key) =>
