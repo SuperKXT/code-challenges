@@ -8,9 +8,9 @@ const config = {
 		'eslint:recommended',
 		'plugin:@typescript-eslint/strict-type-checked',
 		'plugin:@typescript-eslint/stylistic-type-checked',
-		'prettier',
 		'plugin:import/recommended',
 		'plugin:import/typescript',
+		'prettier',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
