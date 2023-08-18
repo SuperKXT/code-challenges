@@ -52,6 +52,6 @@
 		// completeness
 		"skipLibCheck": true
 	},
-	"include": ["**/*", "./.*.cjs"],
+	"include": ["**/*", "./.*.cjs", ".production/*.cjs"],
 	"exclude": ["node_modules", "build", "dist", "coverage", "public"]
 }
