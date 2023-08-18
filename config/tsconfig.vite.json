@@ -52,6 +52,6 @@
 		// completeness
 		"skipLibCheck": true
 	},
-	"include": ["**/*", "./.*.cjs", ".production/*.cjs"],
+	"include": ["**/*", "./.*.cjs", ".pm2/pm2.config.cjs"],
 	"exclude": ["node_modules", "build", "dist", "coverage", "public"]
 }
