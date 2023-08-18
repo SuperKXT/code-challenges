@@ -256,6 +256,12 @@ const config = {
 			},
 		},
 		{
+			files: ['src/contexts/**/*'],
+			rules: {
+				'react-refresh/only-export-components': 'off',
+			},
+		},
+		{
 			files: ['*.test.ts'],
 			extends: ['plugin:vitest/all', 'plugin:testing-library/react'],
 			plugins: ['vitest', 'testing-library'],
