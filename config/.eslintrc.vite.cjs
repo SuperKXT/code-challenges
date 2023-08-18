@@ -217,11 +217,9 @@ const config = {
 				'plugin:react-hooks/recommended',
 				'plugin:jsx-a11y/recommended',
 			],
-			plugins: ['jsx-expressions'],
+			plugins: ['jsx-expressions', 'react-refresh'],
 			settings: {
-				react: {
-					version: 'detect',
-				},
+				react: { version: 'detect' },
 			},
 			rules: {
 				'@typescript-eslint/no-unnecessary-type-constraint': 'off',
@@ -254,6 +252,7 @@ const config = {
 				'react/void-dom-elements-no-children': 'warn',
 				'react/prop-types': 'off',
 				'jsx-expressions/strict-logical-expressions': 'warn',
+				'react-refresh/only-export-components': 'warn',
 			},
 		},
 		{
