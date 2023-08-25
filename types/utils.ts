@@ -9,7 +9,7 @@ type _tuple<N extends number, T, R extends readonly T[]> = R['length'] extends N
 
 export declare namespace Utils {
 	type dropFirst<T extends readonly unknown[]> = T extends readonly [
-		any?,
+		unknown?,
 		...infer U,
 	]
 		? U
@@ -57,8 +57,8 @@ export declare namespace Utils {
 
 	/** takes a union of types and converts it into intersection of the types */
 	type unionToIntersection<T> = (
-		T extends any ? (x: T) => any : never
-	) extends (x: infer U) => any
+		T extends unknown ? (x: T) => unknown : never
+	) extends (x: infer U) => unknown
 		? U
 		: never;
 
@@ -78,7 +78,9 @@ export declare namespace Utils {
 	}>;
 
 	/** creates a union of the given object or an object where all the keys of the object are undefined */
-	type allOrNone<T extends Obj> = T | { [k in keyof T]?: never };
+	type allOrNone<T extends Obj> = Utils.prettify<
+		T | { [k in keyof T]?: never }
+	>;
 
 	/** make keys that can be undefined optional in the object */
 	type makeUndefinedOptional<T extends Obj> = Utils.prettify<
