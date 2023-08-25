@@ -32,7 +32,7 @@ type CreateTuple<T extends number, A extends 1[] = []> = A['length'] extends T
 	? A
 	: CreateTuple<T, [...A, 1]>;
 
-type Unshift<T extends 1[]> = T extends [any, ...infer R extends 1[]]
+type Unshift<T extends 1[]> = T extends [unknown, ...infer R extends 1[]]
 	? R
 	: never;
 

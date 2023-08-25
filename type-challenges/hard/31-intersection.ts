@@ -21,8 +21,11 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Intersection<T extends readonly any[]> = T extends [infer F, ...infer R]
-	? (F extends any[] ? F[number] : F) & Intersection<R>
+type Intersection<T extends readonly unknown[]> = T extends [
+	infer F,
+	...infer R,
+]
+	? (F extends unknown[] ? F[number] : F) & Intersection<R>
 	: unknown;
 
 /* _____________ Test Cases _____________ */

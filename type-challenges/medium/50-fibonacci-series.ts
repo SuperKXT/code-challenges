@@ -23,9 +23,9 @@
 
 type Fibonacci<
 	T extends number,
-	Idx extends any[] = [1],
-	Prev extends any[] = [],
-	Curr extends any[] = [1],
+	Idx extends unknown[] = [1],
+	Prev extends unknown[] = [],
+	Curr extends unknown[] = [1],
 > = Idx['length'] extends T
 	? Curr['length']
 	: Fibonacci<T, [...Idx, 1], Curr, [...Prev, ...Curr]>;

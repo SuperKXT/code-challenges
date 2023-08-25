@@ -20,7 +20,10 @@
 
 /* _____________ Your Code Here _____________ */
 
-type TupleToUnion<T extends readonly any[]> = T extends [infer U, ...infer V]
+type TupleToUnion<T extends readonly unknown[]> = T extends [
+	infer U,
+	...infer V,
+]
 	? U | TupleToUnion<V>
 	: T extends []
 	? never

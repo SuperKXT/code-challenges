@@ -42,9 +42,9 @@
 
 // TODO Retry
 
-type UnionToIntersection<U> = (U extends U ? (arg: U) => any : never) extends (
-	arg: infer I,
-) => void
+type UnionToIntersection<U> = (
+	U extends U ? (arg: U) => unknown : never
+) extends (arg: infer I) => void
 	? I
 	: never;
 
@@ -68,11 +68,13 @@ type _cases = [
 	Expect<Equal<UnionToTuple<'a' | 'b'>['length'], 2>>,
 	Expect<Equal<ExtractValuesOfTuple<UnionToTuple<'a' | 'b'>>, 'a' | 'b'>>,
 	Expect<Equal<ExtractValuesOfTuple<UnionToTuple<'a'>>, 'a'>>,
-	Expect<Equal<ExtractValuesOfTuple<UnionToTuple<any>>, any>>,
+	Expect<Equal<ExtractValuesOfTuple<UnionToTuple<unknown>>, unknown>>,
 	Expect<
 		Equal<ExtractValuesOfTuple<UnionToTuple<undefined | void | 1>>, void | 1>
 	>,
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	Expect<Equal<ExtractValuesOfTuple<UnionToTuple<any | 1>>, any | 1>>,
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	Expect<Equal<ExtractValuesOfTuple<UnionToTuple<any | 1>>, any>>,
 	Expect<
 		Equal<

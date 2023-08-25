@@ -25,8 +25,8 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyReturnType<T extends (...args: any) => any> = T extends (
-	...args: any
+type MyReturnType<T extends (...args: any[]) => unknown> = T extends (
+	...args: any[]
 ) => infer U
 	? U
 	: never;

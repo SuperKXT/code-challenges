@@ -14,9 +14,9 @@
 /* _____________ Your Code Here _____________ */
 
 type AppearOnlyOnce<
-	T extends any[],
+	T extends unknown[],
 	Skip = never,
-	Out extends any[] = [],
+	Out extends unknown[] = [],
 > = T extends [infer F, ...infer R]
 	? F extends R[number] | Skip
 		? AppearOnlyOnce<R, Skip | F, Out>

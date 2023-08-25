@@ -22,9 +22,9 @@
 
 /* _____________ Your Code Here _____________ */
 
-type GetMiddleElement<T extends any[]> = T['length'] extends 2
+type GetMiddleElement<T extends unknown[]> = T['length'] extends 2
 	? T
-	: T extends [any, ...infer R, any]
+	: T extends [unknown, ...infer R, unknown]
 	? GetMiddleElement<R>
 	: T;
 

@@ -60,10 +60,10 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Assign<T extends Record<string, unknown>, U extends any[]> = U extends [
-	infer F,
-	...infer R,
-]
+type Assign<
+	T extends Record<string, unknown>,
+	U extends unknown[],
+> = U extends [infer F, ...infer R]
 	? F extends Record<string, unknown>
 		? Assign<
 				{

@@ -12,7 +12,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type CapitalizeNestObjectKeys<T extends object> = T extends any[]
+type CapitalizeNestObjectKeys<T extends object> = T extends unknown[]
 	? T extends [infer F, ...infer R]
 		? [
 				F extends object ? CapitalizeNestObjectKeys<F> : F,

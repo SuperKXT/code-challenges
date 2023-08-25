@@ -18,11 +18,11 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Without<T extends any[], U extends T[number] | T[number][]> = T extends [
-	infer F,
-	...infer R,
-]
-	? F extends (U extends any[] ? U[number] : U)
+type Without<
+	T extends unknown[],
+	U extends T[number] | T[number][],
+> = T extends [infer F, ...infer R]
+	? F extends (U extends unknown[] ? U[number] : U)
 		? Without<R, U>
 		: [F, ...Without<R, U>]
 	: T;

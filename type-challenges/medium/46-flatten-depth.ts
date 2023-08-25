@@ -22,14 +22,14 @@
 /* _____________ Your Code Here _____________ */
 
 type FlattenDepth<
-	T extends any[],
+	T extends unknown[],
 	D extends number = 1,
 	U extends number[] = [],
 > = U['length'] extends D
 	? T
 	: T extends [infer F, ...infer R]
 	? [
-			...(F extends any[] ? FlattenDepth<F, D, [...U, 0]> : [F]),
+			...(F extends unknown[] ? FlattenDepth<F, D, [...U, 0]> : [F]),
 			...FlattenDepth<R, D, U>,
 	  ]
 	: T extends []

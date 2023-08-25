@@ -34,7 +34,7 @@ type BinaryToDecimal<
 
 type _BinaryToDecimal<
 	S extends string,
-	R extends any[] = [],
+	R extends unknown[] = [],
 > = S extends `${infer F}${infer L}`
 	? F extends '0'
 		? _BinaryToDecimal<L, [...R, ...R]>

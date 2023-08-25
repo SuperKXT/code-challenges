@@ -45,19 +45,19 @@ type RemoveIndexSignature<T extends Record<string, unknown>> = {
 import type { Equal, Expect } from '@type-challenges/utils';
 
 type Foo = {
-	[key: string]: any;
+	[key: string]: unknown;
 	foo(): void;
 };
 
 type Bar = {
-	[key: number]: any;
+	[key: number]: unknown;
 	bar(): void;
 	0: string;
 };
 
 const foobar = Symbol('foobar');
 type FooBar = {
-	[key: symbol]: any;
+	[key: symbol]: unknown;
 	[foobar](): void;
 };
 

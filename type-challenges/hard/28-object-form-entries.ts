@@ -26,7 +26,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type ObjectFromEntries<T extends [string, any]> = {
+type ObjectFromEntries<T extends [string, unknown]> = {
 	[K in T as K[0]]: K[1];
 };
 

@@ -26,7 +26,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Pop<T extends any[]> = T extends [...infer U, any]
+type Pop<T extends unknown[]> = T extends [...infer U, unknown]
 	? U
 	: T extends []
 	? T

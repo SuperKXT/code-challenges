@@ -38,7 +38,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Path<T extends Record<string, unknown>, R extends any[] = []> = {
+type Path<T extends Record<string, unknown>, R extends unknown[] = []> = {
 	[K in keyof T]:
 		| [...R, K]
 		| (T[K] extends Record<string, unknown> ? Path<T[K], [...R, K]> : []);

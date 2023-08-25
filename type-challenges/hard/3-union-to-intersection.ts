@@ -19,9 +19,9 @@
 /* _____________ Your Code Here _____________ */
 
 // TODO RETRY
-type UnionToIntersection<U> = (U extends U ? (arg: U) => any : never) extends (
-	arg: infer I,
-) => void
+type UnionToIntersection<U> = (
+	U extends U ? (arg: U) => unknown : never
+) extends (arg: infer I) => void
 	? I
 	: never;
 

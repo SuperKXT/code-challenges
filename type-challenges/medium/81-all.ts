@@ -28,7 +28,7 @@ type Eq<T, U> = (<G>() => G extends T ? 1 : 2) extends <G>() => G extends U
 	? true
 	: false;
 
-type All<T extends any[], U> = Eq<T[number], U>;
+type All<T extends unknown[], U> = Eq<T[number], U>;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

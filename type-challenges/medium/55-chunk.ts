@@ -20,9 +20,9 @@
 /* _____________ Your Code Here _____________ */
 
 type Chunk<
-	Input extends readonly any[],
+	Input extends readonly unknown[],
 	Size extends number,
-	Curr extends any[] = [],
+	Curr extends unknown[] = [],
 > = Curr['length'] extends Size
 	? [Curr, ...Chunk<Input, Size>]
 	: Input extends [infer First, ...infer Rest]

@@ -37,7 +37,7 @@
 /* _____________ Your Code Here _____________ */
 
 type DeepReadonly<T extends object> = {
-	readonly [K in keyof T]: T[K] extends any[]
+	readonly [K in keyof T]: T[K] extends unknown[]
 		? DeepReadonly<T[K]>
 		: T[K] extends Record<string, unknown>
 		? DeepReadonly<T[K]>

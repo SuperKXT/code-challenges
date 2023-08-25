@@ -44,7 +44,7 @@ type ControlsMap = {
 
 type ParsePrintFormat<
 	T extends string,
-	A extends any[] = [],
+	A extends unknown[] = [],
 > = T extends `${string}%${infer K}${infer R}`
 	? K extends keyof ControlsMap
 		? ParsePrintFormat<R, [...A, ControlsMap[K]]>

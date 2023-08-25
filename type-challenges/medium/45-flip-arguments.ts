@@ -21,11 +21,11 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Reverse<T extends any[]> = T extends [infer F, ...infer R]
+type Reverse<T extends unknown[]> = T extends [infer F, ...infer R]
 	? [...Reverse<R>, F]
 	: T;
 
-type FlipArguments<T extends (...args: any[]) => any> = (
+type FlipArguments<T extends (...args: any[]) => unknown> = (
 	...args: Reverse<Parameters<T>>
 ) => ReturnType<T>;
 

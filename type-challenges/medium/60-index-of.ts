@@ -24,7 +24,7 @@ type Eq<T, U> = (<G>() => G extends T ? 1 : 0) extends <G>() => G extends U
 	? true
 	: false;
 
-type IndexOf<T extends any[], U, Idx extends any[] = []> = T extends [
+type IndexOf<T extends unknown[], U, Idx extends unknown[] = []> = T extends [
 	infer F,
 	...infer R,
 ]
@@ -42,8 +42,10 @@ type _cases = [
 	Expect<Equal<IndexOf<[2, 6, 3, 8, 4, 1, 7, 3, 9], 3>, 2>>,
 	Expect<Equal<IndexOf<[0, 0, 0], 2>, -1>>,
 	Expect<Equal<IndexOf<[string, 1, number, 'a'], number>, 2>>,
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	Expect<Equal<IndexOf<[string, 1, number, 'a', any], any>, 4>>,
 	Expect<Equal<IndexOf<[string, 'a'], 'a'>, 1>>,
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	Expect<Equal<IndexOf<[any, 1], 1>, 1>>,
 ];
 

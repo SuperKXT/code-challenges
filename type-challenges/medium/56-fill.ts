@@ -19,7 +19,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Pop<T extends any[]> = T extends [...infer L, any] ? L : [];
+type Pop<T extends unknown[]> = T extends [...infer L, unknown] ? L : [];
 
 type _ = Pop<[]>;
 //   ^?

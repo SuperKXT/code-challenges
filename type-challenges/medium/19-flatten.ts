@@ -18,8 +18,8 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Flatten<T extends any[]> = T extends [infer U, ...infer V]
-	? [...(U extends any[] ? Flatten<U> : [U]), ...Flatten<V>]
+type Flatten<T extends unknown[]> = T extends [infer U, ...infer V]
+	? [...(U extends unknown[] ? Flatten<U> : [U]), ...Flatten<V>]
 	: T;
 
 /* _____________ Test Cases _____________ */

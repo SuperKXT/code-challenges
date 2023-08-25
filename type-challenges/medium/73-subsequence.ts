@@ -21,10 +21,10 @@
 /* _____________ Your Code Here _____________ */
 
 // TODO RETRY
-type Subsequence<T extends any[], Prefix extends any[] = []> = T extends [
-	infer F,
-	...infer R,
-]
+type Subsequence<
+	T extends unknown[],
+	Prefix extends unknown[] = [],
+> = T extends [infer F, ...infer R]
 	? Subsequence<R, Prefix | [...Prefix, F]>
 	: Prefix;
 

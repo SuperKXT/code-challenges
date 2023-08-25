@@ -12,7 +12,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Filter<T extends any[], P> = T extends [infer First, ...infer Rest]
+type Filter<T extends unknown[], P> = T extends [infer First, ...infer Rest]
 	? First extends P
 		? [First, ...Filter<Rest, P>]
 		: Filter<Rest, P>

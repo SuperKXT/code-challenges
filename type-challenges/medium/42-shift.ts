@@ -18,7 +18,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Shift<T extends readonly any[]> = T extends [any, ...infer R]
+type Shift<T extends readonly unknown[]> = T extends [unknown, ...infer R]
 	? R
 	: T extends []
 	? []

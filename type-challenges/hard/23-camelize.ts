@@ -31,7 +31,7 @@ type CamelCase<T extends string> = T extends `${infer F}_${infer R}`
 	? `${F}${Capitalize<CamelCase<R>>}`
 	: T;
 
-type Camelize<T> = T extends any[]
+type Camelize<T> = T extends unknown[]
 	? T extends [infer F, ...infer R]
 		? [Camelize<F>, ...Camelize<R>]
 		: []

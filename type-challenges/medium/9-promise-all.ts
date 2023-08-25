@@ -25,7 +25,7 @@
 
 type MyAwaited<T> = T extends Promise<infer R> ? R : T;
 
-declare function promiseAll<T extends any[]>(
+declare function promiseAll<T extends unknown[]>(
 	values: readonly [...T],
 ): Promise<{
 	[K in keyof T]: MyAwaited<T[K]>;

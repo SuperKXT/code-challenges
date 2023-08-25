@@ -42,6 +42,7 @@ type _cases = [
 	// Cases where T resolves to a non-union type.
 	Expect<Equal<IsUnion<string | never>, false>>,
 	Expect<Equal<IsUnion<string | unknown>, false>>,
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	Expect<Equal<IsUnion<string | any>, false>>,
 	Expect<Equal<IsUnion<string | 'a'>, false>>,
 	Expect<Equal<IsUnion<never>, false>>,

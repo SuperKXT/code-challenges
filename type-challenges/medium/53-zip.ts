@@ -15,7 +15,10 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Zip<T extends any[], U extends any[]> = T extends [infer F, ...infer R]
+type Zip<T extends unknown[], U extends unknown[]> = T extends [
+	infer F,
+	...infer R,
+]
 	? U extends [infer G, ...infer S]
 		? [[F, G], ...Zip<R, S>]
 		: []

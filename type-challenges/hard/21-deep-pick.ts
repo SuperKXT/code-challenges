@@ -39,9 +39,9 @@
 
 /* _____________ Your Code Here _____________ */
 
-type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
-	k: infer R,
-) => void
+type UnionToIntersection<U> = (
+	U extends unknown ? (k: U) => void : never
+) extends (k: infer R) => void
 	? R
 	: never;
 

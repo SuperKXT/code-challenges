@@ -21,7 +21,7 @@
 
 type False = 0 | '' | false | [] | Record<string, never> | null | undefined;
 
-type AnyOf<T extends readonly any[]> = T extends [infer U, ...infer V]
+type AnyOf<T extends readonly unknown[]> = T extends [infer U, ...infer V]
 	? U extends False
 		? AnyOf<V>
 		: true

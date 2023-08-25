@@ -19,8 +19,8 @@
 type NumberRange<
 	L extends number,
 	H extends number,
-	Idx extends any[] = [],
-	A extends any[] = [],
+	Idx extends unknown[] = [],
+	A extends unknown[] = [],
 > = Idx['length'] extends H
 	? L | A[number] | H
 	: Idx[L] extends undefined

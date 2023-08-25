@@ -23,7 +23,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type AppendArgument<Fn extends (...args: any[]) => any, A> = Fn extends (
+type AppendArgument<Fn extends (...args: any[]) => unknown, A> = Fn extends (
 	...args: infer P
 ) => infer R
 	? (...args: [...P, A]) => R

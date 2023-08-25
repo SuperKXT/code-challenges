@@ -24,15 +24,15 @@ type _IsTuple<T> = [T] extends [never]
 	? false
 	: T extends []
 	? true
-	: T extends [any, ...any]
+	: T extends [unknown, ...unknown[]]
 	? true
-	: T extends readonly [any, ...any]
+	: T extends readonly [unknown, ...unknown[]]
 	? true
 	: false;
 
 type IsTuple<T> = [T] extends [never]
 	? false
-	: T extends readonly any[]
+	: T extends readonly unknown[]
 	? number extends T['length']
 		? false
 		: true

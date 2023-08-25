@@ -26,13 +26,13 @@ type Eq<T, U> = (<G>() => G extends T ? 1 : 2) extends <G>() => G extends U
 	? true
 	: false;
 
-type Includes<T extends any[], U> = T extends [infer L, ...infer R]
+type Includes<T extends unknown[], U> = T extends [infer L, ...infer R]
 	? Eq<L, U> extends true
 		? true
 		: Includes<R, U>
 	: false;
 
-type Unique<T extends any[]> = T extends [...infer R, infer L]
+type Unique<T extends unknown[]> = T extends [...infer R, infer L]
 	? Includes<R, L> extends true
 		? Unique<R>
 		: [...Unique<R>, L]
@@ -54,7 +54,9 @@ type _cases = [
 	>,
 	Expect<
 		Equal<
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			Unique<[unknown, unknown, any, any, never, never]>,
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			[unknown, any, never]
 		>
 	>,

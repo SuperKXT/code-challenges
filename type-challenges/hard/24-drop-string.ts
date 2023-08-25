@@ -22,7 +22,7 @@ type DropString<
 	S extends string,
 	R extends string,
 > = S extends `${infer F}${infer L}`
-	? R extends `${any}${F}${any}`
+	? R extends `${string}${F}${string}`
 		? DropString<L, R>
 		: `${F}${DropString<L, R>}`
 	: S;

@@ -60,7 +60,7 @@ type PersonInfo = {
 	};
 	hobbies: ['sing', 'dance'];
 	readonlyArr: readonly ['test'];
-	fn: () => any;
+	fn: () => unknown;
 };
 
 type ExpectedResult = {

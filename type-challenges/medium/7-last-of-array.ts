@@ -24,7 +24,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Last<T extends any[]> = T extends [...any[], infer V] ? V : never;
+type Last<T extends unknown[]> = T extends [...unknown[], infer V] ? V : never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
