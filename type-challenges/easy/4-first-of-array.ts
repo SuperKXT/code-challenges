@@ -22,7 +22,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type First<T extends any[]> = T extends [infer U, ...any[]] ? U : never;
+type First<T extends unknown[]> = T extends [infer U, ...unknown[]] ? U : never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

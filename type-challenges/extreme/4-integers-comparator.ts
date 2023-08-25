@@ -36,7 +36,12 @@ type CreateTuple<
 	Arr extends 1[] = [],
 > = Arr['length'] extends T ? Arr : CreateTuple<T, [...Arr, 1]>;
 
-type Unshift<T extends any[]> = T extends [any, ...infer Rest] ? Rest : never;
+type Unshift<T extends number[]> = T extends [
+	number,
+	...infer Rest extends number[],
+]
+	? Rest
+	: never;
 
 type NumberToTuple<
 	T extends number,
@@ -46,13 +51,13 @@ type NumberToTuple<
 	? NumberToTuple<never, R, [...Output, F]>
 	: Output;
 
-type DigitComparator<A extends any[], B extends any[]> = A[0] extends B[0]
+type DigitComparator<A extends number[], B extends number[]> = A[0] extends B[0]
 	? DigitComparator<Unshift<A>, Unshift<B>>
 	: CompareTups<CreateTuple<A[0]>, CreateTuple<B[0]>>;
 
 type CompareTups<
-	A extends any[],
-	B extends any[],
+	A extends number[],
+	B extends number[],
 > = A['length'] extends B['length']
 	? DigitComparator<A, B>
 	: A[B['length']] extends undefined
@@ -62,8 +67,8 @@ type CompareTups<
 type CheckNegative<
 	A extends number,
 	B extends number,
-	TupA extends any[] = NumberToTuple<A>,
-	TupB extends any[] = NumberToTuple<B>,
+	TupA extends number[] = NumberToTuple<A>,
+	TupB extends number[] = NumberToTuple<B>,
 > = `${A}` extends `-${number}`
 	? `${B}` extends `-${number}`
 		? CompareTups<TupB, TupA>

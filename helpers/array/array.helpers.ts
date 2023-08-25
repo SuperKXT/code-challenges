@@ -1,6 +1,6 @@
 import type { LinkedList, LinkedListNode } from '~/helpers/linked-list';
 
-export const areArraysEqual = <Type extends any[]>(
+export const areArraysEqual = <Type extends unknown[]>(
 	first: Type,
 	second: Type,
 ): boolean => {
@@ -17,12 +17,12 @@ type _LinkedListToArray<T extends NonNullable<LinkedListNode>> =
 		? [T['value'], ..._LinkedListToArray<T['next']>]
 		: [T['value']];
 
-type LinkedListToArray<T extends LinkedList<any>> =
+type LinkedListToArray<T extends LinkedList<unknown>> =
 	T['head'] extends NonNullable<LinkedListNode>
 		? _LinkedListToArray<T['head']>
 		: [];
 
-export const linkedListToArray = <const List extends LinkedList<any>>(
+export const linkedListToArray = <const List extends LinkedList<unknown>>(
 	list: List,
 ): LinkedListToArray<List> => {
 	const array = [];

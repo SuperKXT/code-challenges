@@ -18,7 +18,7 @@ import type {
 	WhitePiece,
 } from './check-chess-move.types';
 
-const assertBoard: Utils.assertFunction<Board> = (board: any) => {
+const assertBoard: Utils.assertFunction<Board> = (board: unknown) => {
 	if (!Array.isArray(board) || board.length !== 8)
 		throw new Error(CHESS_ERRORS.badRows);
 
@@ -39,7 +39,7 @@ const isEnemy = <P extends Piece>(
 	return opposite.includes(toCheck);
 };
 
-const isPosition = (value: any): value is Position => {
+const isPosition = (value: unknown): value is Position => {
 	return (
 		Array.isArray(value) &&
 		value.length === 2 &&
@@ -194,7 +194,7 @@ export const isValidMove = ({
 			isValid: true,
 			path,
 		};
-	} catch (error: any) {
+	} catch (error: unknown) {
 		return {
 			error: (error as Error).message as ChessError,
 			isValid: false,

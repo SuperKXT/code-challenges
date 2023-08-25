@@ -62,7 +62,7 @@ type UnionToTuple<T, U = LastInUnion<T>> = [U] extends [never]
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
 
-type ExtractValuesOfTuple<T extends any[]> = T[keyof T & number];
+type ExtractValuesOfTuple<T extends unknown[]> = T[keyof T & number];
 
 type _cases = [
 	Expect<Equal<UnionToTuple<'a' | 'b'>['length'], 2>>,

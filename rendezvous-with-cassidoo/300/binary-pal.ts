@@ -9,27 +9,31 @@ type BinaryPal<T extends number> = IsPalindrome<NumberToBinary<T>>;
 
 type NumberToBinary<
 	T extends number,
-	Arr extends any[] = NumberToArray<Unsigned<T>>,
-	Binary extends any[] = [],
-> = Halve<Arr> extends [infer Halved extends any[], infer Remainder]
+	Arr extends unknown[] = NumberToArray<Unsigned<T>>,
+	Binary extends unknown[] = [],
+> = Halve<Arr> extends [infer Halved extends unknown[], infer Remainder]
 	? Halved extends []
 		? [Remainder, ...Binary]
 		: NumberToBinary<T, Halved, [Remainder, ...Binary]>
 	: never;
 
-type IsPalindrome<T extends any[]> = T extends [infer F, ...infer R, infer L]
+type IsPalindrome<T extends unknown[]> = T extends [
+	infer F,
+	...infer R,
+	infer L,
+]
 	? [F] extends [L]
 		? IsPalindrome<R>
 		: false
 	: true;
 
-type Halve<T extends any[], L extends any[] = []> = T extends [
+type Halve<T extends unknown[], L extends unknown[] = []> = T extends [
 	infer F,
-	any,
+	unknown,
 	...infer R,
 ]
 	? Halve<R, [...L, F]>
-	: [L, T extends [any] ? 1 : 0];
+	: [L, T extends [unknown] ? 1 : 0];
 
 type Unsigned<T extends number> = `${T}` extends `-${infer U extends number}`
 	? U

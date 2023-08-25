@@ -25,25 +25,25 @@ type AbsoluteNo<T extends number> = `${T}` extends `-${infer I extends number}`
 
 type AbsoluteIndex<
 	T extends number,
-	Arr extends any[],
+	Arr extends unknown[],
 	Idx extends 1[] = [],
 > = AbsoluteNo<T> extends T
 	? T
 	: AbsoluteNo<T> extends Idx['length']
 	? Arr['length']
-	: Arr extends [...infer Rest, any]
+	: Arr extends [...infer Rest, unknown]
 	? AbsoluteIndex<T, Rest, [...Idx, 1]>
 	: 0;
 
 type Slice<
-	Arr extends any[],
+	Arr extends unknown[],
 	Start extends number = 0,
 	End extends number = Arr['length'],
 	AbsStart extends number = AbsoluteIndex<Start, Arr>,
 	AbsEnd extends number = AbsoluteIndex<End, Arr>,
 	Idx extends 1[] = [],
-	Output extends any[] = [],
-> = Arr extends [infer First, ...infer Rest extends any[]]
+	Output extends unknown[] = [],
+> = Arr extends [infer First, ...infer Rest extends unknown[]]
 	? Idx['length'] extends AbsEnd
 		? Output
 		: Idx['length'] extends AbsStart

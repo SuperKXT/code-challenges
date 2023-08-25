@@ -27,7 +27,7 @@
 type GetReadonlyKeys<T extends object> = keyof {
 	[K in keyof T as Equal<Pick<T, K>, Readonly<Pick<T, K>>> extends true
 		? K
-		: never]: any;
+		: never]: unknown;
 };
 
 /* _____________ Test Cases _____________ */

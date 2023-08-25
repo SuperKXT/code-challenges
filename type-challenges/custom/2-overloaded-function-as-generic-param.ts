@@ -18,7 +18,7 @@ type OverloadUnionRecursive<
 				| ((...args: TArgs) => TReturn)
 	: never;
 
-type OverloadUnion<TOverload extends (...args: any[]) => any> = Exclude<
+type OverloadUnion<TOverload extends (...args: any[]) => unknown> = Exclude<
 	OverloadUnionRecursive<
 		// The "() => never" signature must be hoisted to the "front" of the
 		// intersection, for two reasons: a) because recursion stops when it is
@@ -31,17 +31,17 @@ type OverloadUnion<TOverload extends (...args: any[]) => any> = Exclude<
 >;
 
 // Inferring a union of parameter tuples or return types is now possible.
-type OverloadParameters<T extends (...args: any[]) => any> = Parameters<
+type OverloadParameters<T extends (...args: any[]) => unknown> = Parameters<
 	OverloadUnion<T>
 >;
-type OverloadReturnType<T extends (...args: any[]) => any> = ReturnType<
+type OverloadReturnType<T extends (...args: any[]) => unknown> = ReturnType<
 	OverloadUnion<T>
 >;
 
 type OverloadParamAndReturnTuple<
-	T extends (...args: any[]) => any,
-	Overloads extends (...args: any[]) => any = OverloadUnion<T>,
-> = Overloads extends any
+	T extends (...args: any[]) => unknown,
+	Overloads extends (...args: any[]) => unknown = OverloadUnion<T>,
+> = Overloads extends unknown
 	? [Parameters<Overloads>, ReturnType<Overloads>]
 	: never;
 
@@ -67,7 +67,7 @@ const wrap = <
 	// eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
 	return fn(...args) as Extract<
 		OverloadParamAndReturnTuple<Fn>,
-		[Args, any]
+		[Args, unknown]
 	> extends [Args, infer Ret]
 		? Ret
 		: never;

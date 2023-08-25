@@ -67,7 +67,8 @@ type Join<
 	  >
 	: Result;
 
-type Int<T extends number> = `${T}` extends `${infer I extends number}.${any}`
+type Int<T extends number> = `${T}` extends `${infer I extends
+	number}.${string}`
 	? I
 	: T;
 
@@ -133,8 +134,8 @@ type FractionalToWords<
 type JoinNumberChunks<
 	T extends number,
 	Result extends string[],
-	Sign extends string = `${T}` extends `-${any}` ? 'minus ' : '',
-	Fraction extends string = `${T}` extends `${any}.${infer F extends number}`
+	Sign extends string = `${T}` extends `-${string}` ? 'minus ' : '',
+	Fraction extends string = `${T}` extends `${string}.${infer F extends number}`
 		? FractionalToWords<F>
 		: '',
 > = `${Sign}${Join<Result, ', '>}${Fraction}`;

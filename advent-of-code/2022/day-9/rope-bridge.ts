@@ -14,7 +14,7 @@ type Position = {
 const MOVE = ['R', 'L', 'U', 'D'] as const;
 type Move = (typeof MOVE)[number];
 
-const isMove = (value: any): value is Move =>
+const isMove = (value: unknown): value is Move =>
 	typeof value === 'string' && MOVE.includes(value);
 
 const getUniquePositions = (array: Position[]) => {

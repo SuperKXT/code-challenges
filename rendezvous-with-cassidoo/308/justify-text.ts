@@ -52,8 +52,8 @@ type spacesRequired<
 	: [];
 
 type divide<
-	T extends any[],
-	U extends any[],
+	T extends unknown[],
+	U extends unknown[],
 	result extends 1[] = [],
 > = T extends [...U, ...infer rest]
 	? divide<rest, U, [...result, 1]>
@@ -64,7 +64,7 @@ type divide<
 type spacesPerWordRequired<
 	spaces extends ' '[],
 	line extends readonly string[],
-> = line extends readonly [any, ...infer rest]
+> = line extends readonly [unknown, ...infer rest]
 	? rest extends []
 		? spaces['length']
 		: divide<tuple<spaces['length']>, tuple<rest['length']>>

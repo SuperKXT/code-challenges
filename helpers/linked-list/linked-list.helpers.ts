@@ -19,22 +19,22 @@ type InsertToNode<
 		: { value: Val; next: null };
 }>;
 
-type InsertNode<List extends LinkedList<any>, Val> = Utils.prettify<{
+type InsertNode<List extends LinkedList<unknown>, Val> = Utils.prettify<{
 	head: List['head'] extends NonNullable<LinkedListNode>
 		? InsertToNode<List['head'], Val>
 		: { value: Val; next: null };
 }>;
 
 type ArrayToLinkedList<
-	Type extends readonly any[],
-	Result extends LinkedList<any> = { head: null },
+	Type extends readonly unknown[],
+	Result extends LinkedList<unknown> = { head: null },
 > = number extends Type['length']
 	? LinkedList<Type[number]>
 	: Type extends readonly [infer First, ...infer Rest]
 	? ArrayToLinkedList<Rest, InsertNode<Result, First>>
 	: Result;
 
-export const arrayToLinkedList = <const Arr extends readonly any[]>(
+export const arrayToLinkedList = <const Arr extends readonly unknown[]>(
 	array: Arr,
 ): ArrayToLinkedList<Arr> => {
 	const list: LinkedList<unknown> = {

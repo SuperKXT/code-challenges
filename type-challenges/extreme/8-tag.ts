@@ -177,7 +177,7 @@ export type GetTags<
 	V,
 	TagsOrUndefined = [V] extends [Tagged] ? V[typeof KEY] : undefined,
 	TagsOrNever = GetStringProps<Exclude<TagsOrUndefined, undefined>>,
-> = Equal<V, any> extends true
+> = Equal<V, unknown> extends true
 	? []
 	: Equal<TagsOrNever, never> extends true
 	? []
@@ -330,9 +330,9 @@ type _cases = [
 	 * GetTags.
 	 */
 	IsTrue<Equal<GetTags<null>, []>>,
-	IsTrue<Equal<GetTags<any>, []>>,
+	IsTrue<Equal<GetTags<unknown>, []>>,
 	IsTrue<Equal<GetTags<undefined>, []>>,
-	IsTrue<Equal<GetTags<Tag<any, 'foo'>>, ['foo']>>,
+	IsTrue<Equal<GetTags<Tag<unknown, 'foo'>>, ['foo']>>,
 	IsTrue<Equal<GetTags<Tag<null | 1, 'foo'>>, ['foo']>>,
 	IsTrue<Equal<GetTags<Tag<0, 'foo'> | 1>, []>>,
 	IsTrue<Equal<GetTags<Tag<{}, 'foo'> | Tag<1, 'foo'>>, ['foo']>>,
@@ -360,7 +360,7 @@ type _cases = [
 	 */
 	Expect<Equal<HasTag<null, 'foo'>, false>>,
 	Expect<Equal<HasTag<undefined, 'foo'>, false>>,
-	Expect<Equal<HasTag<Tag<any, 'foo'>, 'foo'>, true>>,
+	Expect<Equal<HasTag<Tag<unknown, 'foo'>, 'foo'>, true>>,
 	Expect<Equal<HasTag<Tag<1, 'foo'> | {}, 'foo'>, false>>,
 	Expect<Equal<HasTag<Tag<{}, 'foo'>, 'foo'>, true>>,
 	Expect<Equal<HasTag<Tag<0, 'foo'> | Tag<1, 'foo'>, 'foo'>, true>>,
@@ -382,10 +382,10 @@ type _cases = [
 	 */
 	Expect<Equal<HasTags<null, ['foo']>, false>>,
 	Expect<Equal<HasTags<undefined, ['foo']>, false>>,
-	Expect<Equal<HasTags<Tag<any, 'bar'>, ['foo']>, false>>,
+	Expect<Equal<HasTags<Tag<unknown, 'bar'>, ['foo']>, false>>,
 	Expect<Equal<HasTags<Tag<{}, 'bar'>, ['foo']>, false>>,
 	Expect<Equal<HasTags<Tag<{}, 'foo'>, ['foo']>, true>>,
-	Expect<Equal<HasTags<Tag<any, 'foo'>, ['foo']>, true>>,
+	Expect<Equal<HasTags<Tag<unknown, 'foo'>, ['foo']>, true>>,
 	Expect<Equal<HasTags<Tag<{} | undefined, 'foo'>, ['foo']>, true>>,
 	Expect<Equal<HasTags<Tag<Tag<string, 'foo'>, 'bar'>, ['foo', 'bar']>, true>>,
 	Expect<Equal<HasTags<Tag<Tag<3n, 'foo'>, 'bar'>, ['foo', 'bar']>, true>>,
@@ -420,9 +420,9 @@ type _cases = [
 	Expect<Equal<HasExactTags<null, []>, true>>,
 	Expect<Equal<HasExactTags<undefined, []>, true>>,
 	Expect<Equal<HasExactTags<Tag<number, 'foo'>, ['foo']>, true>>,
-	Expect<Equal<HasExactTags<Tag<any, 'foo'>, ['bar']>, false>>,
+	Expect<Equal<HasExactTags<Tag<unknown, 'foo'>, ['bar']>, false>>,
 	Expect<
-		Equal<HasExactTags<Tag<Tag<any, 'foo'>, 'bar'>, ['foo', 'bar']>, true>
+		Equal<HasExactTags<Tag<Tag<unknown, 'foo'>, 'bar'>, ['foo', 'bar']>, true>
 	>,
 	Expect<Equal<HasExactTags<Tag<'', 'foo'>, ['foo']>, true>>,
 	Expect<Equal<HasExactTags<Tag<US, 'foo'>, ['foo']>, true>>,

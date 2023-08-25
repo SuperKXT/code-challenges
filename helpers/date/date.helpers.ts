@@ -5,7 +5,7 @@ dayjs.extend(utc);
 
 export const dayjsUtc = dayjs;
 
-export const isDate = (value: any): value is string | Date => {
+export const isDate = (value: unknown): value is string | Date => {
 	if (
 		typeof value !== 'string' &&
 		typeof value !== 'number' &&
@@ -16,7 +16,7 @@ export const isDate = (value: any): value is string | Date => {
 	return !isNaN(date.getTime());
 };
 
-export const getDateOrNull = (value: any): null | Date => {
+export const getDateOrNull = (value: unknown): null | Date => {
 	if (
 		typeof value !== 'string' &&
 		typeof value !== 'number' &&

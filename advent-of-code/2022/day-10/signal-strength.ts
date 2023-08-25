@@ -2,7 +2,7 @@ const COMMANDS = ['addx', 'noop'] as const;
 
 type Command = (typeof COMMANDS)[number];
 
-const isCommand = (value: any): value is Command =>
+const isCommand = (value: unknown): value is Command =>
 	typeof value === 'string' && COMMANDS.includes(value);
 
 type Solution = {

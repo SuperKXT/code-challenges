@@ -34,7 +34,10 @@ type Fill<T extends number, A extends number[] = []> = A['length'] extends T
 	? A
 	: Fill<T, [...A, 1]>;
 
-type Shift<T extends number[]> = T extends [any, ...infer R extends number[]]
+type Shift<T extends number[]> = T extends [
+	unknown,
+	...infer R extends number[],
+]
 	? R
 	: never;
 

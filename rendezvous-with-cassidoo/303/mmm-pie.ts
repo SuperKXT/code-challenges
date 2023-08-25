@@ -9,7 +9,7 @@ type tuple<T extends number, R extends 1[] = []> = R['length'] extends T
 
 type requiredPieces<
 	T extends readonly person[],
-	result extends any[] = [],
+	result extends unknown[] = [],
 > = T extends readonly [infer F extends person, ...infer R extends person[]]
 	? requiredPieces<R, [...result, ...tuple<F['num']>]>
 	: result;
@@ -17,9 +17,9 @@ type requiredPieces<
 type MmmPie<
 	People extends readonly Readonly<person>[],
 	Pieces extends number,
-	PiecesTuple extends any[] = tuple<Pieces>,
-	RequiredTuple extends any[] = requiredPieces<People>,
-	Result extends any[] = [],
+	PiecesTuple extends unknown[] = tuple<Pieces>,
+	RequiredTuple extends unknown[] = requiredPieces<People>,
+	Result extends unknown[] = [],
 > = RequiredTuple extends [...PiecesTuple, ...infer R]
 	? MmmPie<never, never, PiecesTuple, R, [...Result, 1]>
 	: RequiredTuple extends []

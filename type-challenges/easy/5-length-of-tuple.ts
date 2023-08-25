@@ -22,7 +22,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Length<T extends readonly any[]> = T['length'];
+type Length<T extends readonly unknown[]> = T['length'];
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

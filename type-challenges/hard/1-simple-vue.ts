@@ -50,9 +50,9 @@
 /* _____________ Your Code Here _____________ */
 
 declare function SimpleVue<
-	D extends Record<string, any>,
-	C extends Record<string, any>,
-	M extends Record<string, any>,
+	D extends Record<string, unknown>,
+	C extends Record<string, unknown>,
+	M extends Record<string, unknown>,
 >(
 	options: {
 		data: (this: void) => D;
@@ -61,18 +61,20 @@ declare function SimpleVue<
 	} & ThisType<
 		D &
 			M & {
-				[K in keyof C as C[K] extends (...args: any[]) => any
+				[K in keyof C as C[K] extends (...args: any[]) => unknown
 					? K
-					: never]: ReturnType<C[K]>;
+					: never]: C[K] extends (...args: any[]) => unknown
+					? ReturnType<C[K]>
+					: never;
 			}
 	>,
-): any;
+): unknown;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
 import type { Equal, Expect } from '@type-challenges/utils';
 
-const alert = (_: any) => {
+const alert = (_: unknown) => {
 	throw new Error('Function not implemented.');
 };
 

@@ -20,7 +20,7 @@ type Merge<T> = { [P in keyof T]: T[P] };
 type Escapes = ' ' | '\n' | '\t';
 type EscapeMap = { r: '\r'; n: '\n'; b: '\b'; f: '\f' };
 
-type Parse<T extends string> = Eval<T> extends [infer V, any] ? V : never;
+type Parse<T extends string> = Eval<T> extends [infer V, unknown] ? V : never;
 
 type Eval<T> = T extends `${Escapes}${infer U}`
 	? Eval<U>
@@ -52,7 +52,7 @@ type EvalString<T, S extends string = ''> = T extends `"${infer U}`
 	? EvalString<U, `${S}${C}`>
 	: false;
 
-type EvalArray<T, A extends any[] = []> = T extends `${Escapes}${infer U}`
+type EvalArray<T, A extends unknown[] = []> = T extends `${Escapes}${infer U}`
 	? EvalArray<U, A>
 	: T extends `]${infer U}`
 	? [A, U]

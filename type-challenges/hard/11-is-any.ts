@@ -21,8 +21,8 @@ type IsAny<T> = 0 extends 1 & T ? true : false;
 import type { Equal, Expect } from '@type-challenges/utils';
 
 type _cases = [
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	Expect<Equal<IsAny<any>, true>>,
-
 	Expect<Equal<IsAny<undefined>, false>>,
 	Expect<Equal<IsAny<unknown>, false>>,
 	Expect<Equal<IsAny<never>, false>>,

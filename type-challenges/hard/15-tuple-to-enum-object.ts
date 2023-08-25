@@ -32,7 +32,7 @@
 /* _____________ Your Code Here _____________ */
 
 type GetIndex<
-	T extends readonly any[],
+	T extends readonly unknown[],
 	V extends T[number],
 > = T extends readonly [...infer Rest, infer Curr]
 	? Equal<Curr, V> extends true
@@ -46,8 +46,8 @@ type __Enum<T extends readonly string[], N extends boolean = false> = {
 		: K;
 };
 
-type TupleIndexes<T extends readonly any[]> = T extends readonly [
-	any,
+type TupleIndexes<T extends readonly unknown[]> = T extends readonly [
+	unknown,
 	...infer R,
 ]
 	? TupleIndexes<R> | R['length']

@@ -11,7 +11,7 @@ import {
 
 import type { Utils } from '~/types/utils';
 
-const isNumber = (value: any): value is number => typeof value === 'number';
+const isNumber = (value: unknown): value is number => typeof value === 'number';
 
 const assertNumber: Utils.assertFunction<number> = (value) => {
 	const type = readableTypeOf(value);
@@ -34,7 +34,7 @@ test('should test readableTypeof helper', () => {
 test('should test isObject helper', () => {
 	expect(isObject(2)).toBeFalsy();
 	expect(isObject({ fist: 'of fury' })).toBeTruthy();
-	const a: any = 2;
+	const a: unknown = 2;
 	isObject(a) && assertType<Obj>(a);
 });
 
@@ -45,14 +45,14 @@ test('should test isArray helper', () => {
 	expect(isArray([2], isNumber)).toBeTruthy();
 	expect(isArray({ fist: 'of fury' })).toBeFalsy();
 	expect(isArray([{ fist: 'of fury' }])).toBeTruthy();
-	const a: any = 2;
+	const a: unknown = 2;
 	isArray(a) && assertType<unknown[]>(a);
 	isArray(a, isNumber) && assertType<number[]>(a);
 	isArray(a, isObject) && assertType<Obj[]>(a);
 });
 
 test('should test assertObject helper', () => {
-	let a: any = 2;
+	let a: unknown = 2;
 	expect(() => {
 		assertObject(a);
 		assertType<Obj>(a);
@@ -68,7 +68,7 @@ test('should test assertObject helper', () => {
 });
 
 test('should test assertArray helper', () => {
-	let a: any = 2;
+	let a: unknown = 2;
 	expect(() => {
 		a = 2;
 		assertArray(a);

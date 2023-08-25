@@ -23,18 +23,17 @@
 /* _____________ Your Code Here _____________ */
 
 type Thenable<T> = {
-	then: (onfulfilled: (arg: T) => any) => any;
+	then: (onfulfilled: (arg: T) => unknown) => unknown;
 };
 
-type MyAwaited<T extends Promise<any> | Thenable<any>> = T extends Promise<
-	infer U
->
-	? U extends Promise<any>
-		? MyAwaited<U>
-		: U
-	: T extends Thenable<infer U>
-	? U
-	: never;
+type MyAwaited<T extends Promise<unknown> | Thenable<unknown>> =
+	T extends Promise<infer U>
+		? U extends Promise<unknown>
+			? MyAwaited<U>
+			: U
+		: T extends Thenable<infer U>
+		? U
+		: never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
@@ -44,7 +43,7 @@ type X = Promise<string>;
 type Y = Promise<{ field: number }>;
 type Z = Promise<Promise<string | number>>;
 type Z1 = Promise<Promise<Promise<string | boolean>>>;
-type T = { then: (onfulfilled: (arg: number) => any) => any };
+type T = { then: (onfulfilled: (arg: number) => unknown) => unknown };
 
 type _cases = [
 	Expect<Equal<MyAwaited<X>, string>>,

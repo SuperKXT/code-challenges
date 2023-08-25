@@ -4,7 +4,10 @@ type Fill<T extends number, A extends number[] = []> = A['length'] extends T
 	? A
 	: Fill<T, [...A, 1]>;
 
-type Shift<T extends number[]> = T extends [any, ...infer R extends number[]]
+type Shift<T extends number[]> = T extends [
+	unknown,
+	...infer R extends number[],
+]
 	? R
 	: never;
 
@@ -53,14 +56,14 @@ type Max<
 export type DepthJson<
 	T,
 	Depth extends number = 0,
-	Tup extends any[] = Utils.tuple<Depth>,
+	Tup extends unknown[] = Utils.tuple<Depth>,
 	NextDepth extends number = [...Tup, 1]['length'],
 > = T extends object
 	? Max<
 			| NextDepth
 			| {
-					[k in Exclude<keyof T, keyof any[]>]: DepthJson<T[k], NextDepth>;
-			  }[Exclude<keyof T, keyof any[]>]
+					[k in Exclude<keyof T, keyof unknown[]>]: DepthJson<T[k], NextDepth>;
+			  }[Exclude<keyof T, keyof unknown[]>]
 	  >
 	: Depth;
 

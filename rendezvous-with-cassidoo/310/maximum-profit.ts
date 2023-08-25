@@ -16,7 +16,7 @@ type numberToTuple<
 
 type compareDigit<T extends digit, U extends digit> = T extends U
 	? 'equal'
-	: tuple<U> extends [...tuple<T>, ...any[]]
+	: tuple<U> extends [...tuple<T>, ...unknown[]]
 	? 'less'
 	: 'greater';
 

@@ -33,7 +33,7 @@ type Alphabet = AlphabetArray[number];
 
 export type MissingLetters<
 	T extends readonly Alphabet[],
-	A extends readonly any[] = AlphabetArray,
+	A extends readonly unknown[] = AlphabetArray,
 	Flag extends boolean = false,
 	Gaps extends readonly Alphabet[] = [],
 > = A extends readonly [infer F extends Alphabet, ...infer R]

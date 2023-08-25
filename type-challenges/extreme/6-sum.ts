@@ -24,7 +24,7 @@
 type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 export type Integer<T extends number> = `${T}` extends `${infer I extends
-	number}.${any}`
+	number}.${string}`
 	? I
 	: T;
 
@@ -46,7 +46,10 @@ type Fill<T extends number, A extends number[] = []> = A['length'] extends T
 	? A
 	: Fill<T, [...A, 1]>;
 
-type Shift<T extends number[]> = T extends [any, ...infer R extends number[]]
+type Shift<T extends number[]> = T extends [
+	unknown,
+	...infer R extends number[],
+]
 	? R
 	: never;
 
@@ -109,7 +112,7 @@ type PadLeft<T extends Digit[], Size extends number> = [
 	? T
 	: PadLeft<[0, ...T], Size>;
 
-type AddDigits<T extends Digit[], R extends any[] = []> = T extends [
+type AddDigits<T extends Digit[], R extends unknown[] = []> = T extends [
 	infer F extends Digit,
 	...infer Rest extends Digit[],
 ]

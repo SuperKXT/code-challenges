@@ -1,8 +1,8 @@
 import { areArraysEqual, linkedListToArray } from './array.helpers';
 
 type EqualityTest = {
-	first: any[];
-	second: any[];
+	first: unknown[];
+	second: unknown[];
 	areEqual: boolean;
 };
 

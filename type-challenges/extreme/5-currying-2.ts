@@ -40,28 +40,28 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Combinations<T extends any[], Result extends any[] = never> = T extends [
-	...infer Rest,
-	any,
-]
+type Combinations<
+	T extends unknown[],
+	Result extends unknown[] = never,
+> = T extends [...infer Rest, unknown]
 	? Combinations<Rest, Result | T>
 	: Result;
 
 type UnshiftBy<
-	T extends any[],
+	T extends unknown[],
 	U extends number,
 	Idx extends 1[] = [],
 > = Idx['length'] extends U
 	? T
-	: T extends [any, ...infer R]
+	: T extends [unknown, ...infer R]
 	? UnshiftBy<R, U, [...Idx, 1]>
 	: [];
 
-type Curry<Params extends any[], Return> = <T extends Combinations<Params>>(
+type Curry<Params extends unknown[], Return> = <T extends Combinations<Params>>(
 	...args: T
 ) => T extends Params ? Return : Curry<UnshiftBy<Params, T['length']>, Return>;
 
-declare function DynamicParamsCurrying<Params extends any[], Return>(
+declare function DynamicParamsCurrying<Params extends unknown[], Return>(
 	fn: (...args: Params) => Return,
 ): Curry<Params, Return>;
 

@@ -18,9 +18,9 @@
 
 /* _____________ Your Code Here _____________ */
 
-type _2 = boolean extends any[] ? true : false;
+type _2 = boolean extends unknown[] ? true : false;
 //   ^?
-type Push<T extends any[], U> = [...T, U];
+type Push<T extends unknown[], U> = [...T, U];
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

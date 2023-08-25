@@ -18,7 +18,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Includes<T extends readonly any[], U> = T extends [infer V, ...infer W]
+type Includes<T extends readonly unknown[], U> = T extends [infer V, ...infer W]
 	? Equal<V, U> extends true
 		? true
 		: Includes<W, U>

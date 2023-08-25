@@ -28,7 +28,7 @@ type ControlsMap = {
 	o: number;
 	h: number;
 	f: number;
-	p: any;
+	p: unknown;
 };
 
 type Format<T extends string> = T extends `${string}%${infer R}${infer S}`

@@ -45,9 +45,12 @@ type _cases = [
 	Expect<Equal<All<[[1], [1], [1]], [1]>, true>>,
 	Expect<Equal<All<[{}, {}, {}], {}>, true>>,
 	Expect<Equal<All<[never], never>, true>>,
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	Expect<Equal<All<[any], any>, true>>,
 	Expect<Equal<All<[unknown], unknown>, true>>,
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	Expect<Equal<All<[any], unknown>, false>>,
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	Expect<Equal<All<[unknown], any>, false>>,
 ];
 

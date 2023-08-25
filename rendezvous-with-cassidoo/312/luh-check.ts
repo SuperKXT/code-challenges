@@ -75,7 +75,7 @@ type verifyLuhn<T extends number> = numberToTuple<T> extends [
 		: false
 	: false;
 
-type startsWith<T extends string, S extends string> = T extends `${S}${any}`
+type startsWith<T extends string, S extends string> = T extends `${S}${string}`
 	? true
 	: false;
 

@@ -18,7 +18,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Unshift<T extends any[], U> = [U, ...T];
+type Unshift<T extends unknown[], U> = [U, ...T];
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

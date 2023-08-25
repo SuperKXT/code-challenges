@@ -13,7 +13,7 @@
 /* _____________ Your Code Here _____________ */
 
 type ToNumber<S extends string> = `${S}` extends `${infer F extends number}`
-	? `${F}` extends `${infer I extends number}.${any}`
+	? `${F}` extends `${infer I extends number}.${string}`
 		? I
 		: F
 	: never;

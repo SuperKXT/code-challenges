@@ -18,14 +18,14 @@ type ScrabbleKeyScore<
 	T extends string,
 	Keys extends keyof ScrabbleKey = keyof ScrabbleKey,
 > = Keys extends Keys
-	? Keys extends `${any}${T}${any}`
+	? Keys extends `${string}${T}${string}`
 		? ScrabbleKey[Keys]
 		: never
 	: never;
 
 type Scrabble<
 	T extends string,
-	Score extends any[] = [],
+	Score extends unknown[] = [],
 > = T extends `${infer First}${infer Rest}`
 	? ScrabbleKeyScore<First> extends infer N extends number
 		? [N] extends [never]

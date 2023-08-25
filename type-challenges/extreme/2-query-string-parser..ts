@@ -23,7 +23,7 @@
 type CombineObj<K extends string, V, O extends object> = Utils.prettify<
 	{
 		[key in K]: key extends keyof O
-			? O[key] extends any[]
+			? O[key] extends unknown[]
 				? V extends O[key][keyof O[key]]
 					? O[key]
 					: [...O[key], V]

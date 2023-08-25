@@ -46,7 +46,7 @@ type _LengthOfString<
 	S extends string,
 	C extends Node = { curr: 0 },
 	L extends Node = C,
-> = S extends `${any}${infer R}`
+> = S extends `${string}${infer R}`
 	? _LengthOfString<R, Increment<L>>
 	: NodeToNumber<L>;
 
@@ -54,9 +54,9 @@ type _LengthOfString<
 type LengthOfString<
 	S extends string,
 	R extends number[] = [],
-> = S extends `${any}${any}${any}${any}${any}${any}${any}${any}${any}${infer Rest}`
+> = S extends `${string}${string}${string}${string}${string}${string}${string}${string}${string}${infer Rest}`
 	? LengthOfString<Rest, [...R, 1, 1, 1, 1, 1, 1, 1, 1, 1]>
-	: S extends `${any}${infer Rest}`
+	: S extends `${string}${infer Rest}`
 	? LengthOfString<Rest, [...R, 1]>
 	: R['length'];
 

@@ -1,13 +1,13 @@
 import type { Utils } from '~/types/utils';
 
-export const readableTypeOf = (value: any) => {
+export const readableTypeOf = (value: unknown) => {
 	if (typeof value !== 'object') return typeof value;
 	if (value === null) return 'null';
 	if (Array.isArray(value)) return 'array';
 	return 'object';
 };
 
-export const isObject = (value: any): value is Obj =>
+export const isObject = (value: unknown): value is Obj =>
 	readableTypeOf(value) === 'object';
 
 export const assertObject: Utils.assertFunction<Obj> = (value) => {
@@ -17,14 +17,14 @@ export const assertObject: Utils.assertFunction<Obj> = (value) => {
 };
 
 export const isArray = <Type = unknown>(
-	value: any,
-	checker?: (value: any) => value is Type,
+	value: unknown,
+	checker?: (value: unknown) => value is Type,
 ): value is Type[] => {
 	return Array.isArray(value) && (!checker || value.every(checker));
 };
 
 type AssertArray = <Type = unknown>(
-	value: any,
+	value: unknown,
 	checker?: Utils.assertFunction<Type>,
 ) => asserts value is Type[];
 
@@ -34,7 +34,7 @@ export const assertArray: AssertArray = (value, checker) => {
 	try {
 		if (!value.length || !checker) return;
 		value.forEach(checker);
-	} catch (error: any) {
+	} catch (error: unknown) {
 		throw new TypeError(
 			`Invalid array member. ${
 				error instanceof Error ? error.message : JSON.stringify(error)

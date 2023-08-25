@@ -56,7 +56,11 @@ type _Maximum<
 	? _Maximum<R, Max<F, Greatest>>
 	: Greatest;
 
-type Maximum<T extends any[], U = T[number], N extends 1[] = []> = T extends []
+type Maximum<
+	T extends unknown[],
+	U = T[number],
+	N extends 1[] = [],
+> = T extends []
 	? never
 	: [U] extends [N['length']]
 	? U

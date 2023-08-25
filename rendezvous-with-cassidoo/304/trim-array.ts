@@ -1,6 +1,6 @@
-type tuple<T extends number, R extends any[] = []> = R['length'] extends T
+type tuple<T extends number, R extends unknown[] = []> = R['length'] extends T
 	? R
-	: tuple<T, [...R, any]>;
+	: tuple<T, [...R, unknown]>;
 
 type TrimArray<
 	Arr extends readonly number[],

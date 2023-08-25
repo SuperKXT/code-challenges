@@ -18,7 +18,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type FilterOut<T extends any[], F> = T extends [infer C, ...infer R]
+type FilterOut<T extends unknown[], F> = T extends [infer C, ...infer R]
 	? [C] extends [F]
 		? FilterOut<R, F>
 		: [C, ...FilterOut<R, F>]

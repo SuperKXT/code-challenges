@@ -52,7 +52,7 @@ type ComplexObject = {
 };
 
 const fn = (v: boolean) => (v ? 1 : 2);
-const fn1 = (v: boolean, _: any) => (v ? 1 : 2);
+const fn1 = (v: boolean, _: unknown) => (v ? 1 : 2);
 
 /* _____________ Further Steps _____________ */
 /*
