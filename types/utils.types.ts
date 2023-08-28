@@ -134,4 +134,7 @@ export declare namespace Utils {
 			? never
 			: k]: T[k];
 	};
+
+	/** makes sure the wrapped type does not take part in inference in a generic function */
+	type noInfer<T> = [T][T extends T ? 0 : never];
 }
