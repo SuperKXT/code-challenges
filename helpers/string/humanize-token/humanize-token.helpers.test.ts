@@ -21,8 +21,8 @@ const tests: Test[] = [
 		input: 'this is a VERY     badly   -----formatted.......## STRING.',
 		output: {
 			lower: 'this is a very badly formatted string',
-			sentence: 'This is a very badly formatted string',
-			title: 'This Is A Very Badly Formatted String',
+			sentence: 'This is a VERY badly formatted STRING',
+			title: 'This Is A VERY Badly Formatted STRING',
 			upper: 'THIS IS A VERY BADLY FORMATTED STRING',
 		},
 	},
@@ -33,6 +33,15 @@ const tests: Test[] = [
 			sentence: 'Sale order',
 			title: 'Sale Order',
 			upper: 'SALE ORDER',
+		},
+	},
+	{
+		input: 'someSMV else',
+		output: {
+			lower: 'some smv else',
+			sentence: 'Some SMV else',
+			title: 'Some SMV Else',
+			upper: 'SOME SMV ELSE',
 		},
 	},
 ];

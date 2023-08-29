@@ -22,62 +22,39 @@ export const humanizeToken = (
 	const string = input.trim();
 	if (!string.trim()) return '';
 
-	let formatted = '';
+	let result: string = '';
+	let currentWord: string = '';
 
 	for (let index = 0; index < string.length; index++) {
 		const current = string[index] as string;
-		const last = string[index - 1] as string;
+		const next = string[index + 1];
 
-		if (!alphabet.includes(current)) continue;
+		if (!alphabet.includes(current)) {
+			if (casing === 'upper') return (currentWord += current.toUpperCase());
+			if (casing === 'lower') return (currentWord += current.toLowerCase());
+			if (!currentWord && (casing === 'title' || !result))
+				return current.toUpperCase();
+			if (currentWord && currentWord.toUpperCase() === currentWord)
+				return current;
+			return current.toLowerCase();
+		}
 
-		if (!formatted) {
-			switch (casing) {
-				case 'lower': {
-					formatted += current.toLowerCase();
-					break;
-				}
-				case 'sentence':
-				case 'title':
-				case 'upper': {
-					formatted += current.toUpperCase();
-					break;
-				}
-			}
-		} else if (
-			(alphabet.includes(current) && wordSeparators.includes(last)) ||
-			(upperAlphabet.includes(current) && lowerAlphabet.includes(last))
-		) {
-			formatted += ' ';
-			switch (casing) {
-				case 'lower':
-				case 'sentence': {
-					formatted += current.toLowerCase();
-					break;
-				}
-				case 'title':
-				case 'upper': {
-					formatted += current.toUpperCase();
-					break;
-				}
-			}
-		} else {
-			switch (casing) {
-				case 'lower':
-				case 'sentence':
-				case 'title': {
-					formatted += current.toLowerCase();
-					break;
-				}
-				case 'upper': {
-					formatted += current.toUpperCase();
-					break;
-				}
-			}
+		const isWordEnd =
+			!next ||
+			(alphabet.includes(current) && wordSeparators.includes(next)) ||
+			(lowerAlphabet.includes(current) && upperAlphabet.includes(next)) ||
+			(upperAlphabet.includes(current) &&
+				lowerAlphabet.includes(next) &&
+				current.length > 1);
+
+		const isLastId = next !== undefined || currentWord.toLowerCase() !== 'id';
+
+		if (isWordEnd) {
+			currentWord = '';
+			if (!isLastId) continue;
+			result += ` ${currentWord}`;
 		}
 	}
 
-	if (formatted.toLowerCase().endsWith(' id'))
-		formatted = formatted.slice(0, -3);
-
-	return formatted;
+	return result;
 };
