@@ -29,15 +29,7 @@ export const humanizeToken = (
 		const current = string[index] as string;
 		const next = string[index + 1];
 
-		if (!alphabet.includes(current)) {
-			if (casing === 'upper') return (currentWord += current.toUpperCase());
-			if (casing === 'lower') return (currentWord += current.toLowerCase());
-			if (!currentWord && (casing === 'title' || !result))
-				return current.toUpperCase();
-			if (currentWord && currentWord.toUpperCase() === currentWord)
-				return current;
-			return current.toLowerCase();
-		}
+		if (alphabet.includes(current)) currentWord += current;
 
 		const isWordEnd =
 			!next ||
@@ -45,15 +37,25 @@ export const humanizeToken = (
 			(lowerAlphabet.includes(current) && upperAlphabet.includes(next)) ||
 			(upperAlphabet.includes(current) &&
 				lowerAlphabet.includes(next) &&
-				current.length > 1);
+				currentWord.length > 1);
 
-		const isLastId = next !== undefined || currentWord.toLowerCase() !== 'id';
+		if (!isWordEnd) continue;
 
-		if (isWordEnd) {
-			currentWord = '';
-			if (!isLastId) continue;
-			result += ` ${currentWord}`;
+		const first = currentWord[0];
+		if (first) {
+			const formatted =
+				casing === 'lower'
+					? currentWord.toLowerCase()
+					: casing === 'upper'
+					? currentWord.toUpperCase()
+					: currentWord.toUpperCase() === currentWord
+					? currentWord
+					: casing === 'title' || !result
+					? `${first.toUpperCase()}${currentWord.slice(1).toLowerCase()}`
+					: currentWord.toLowerCase();
+			result += `${result.length ? ' ' : ''}${formatted}`;
 		}
+		currentWord = '';
 	}
 
 	return result;

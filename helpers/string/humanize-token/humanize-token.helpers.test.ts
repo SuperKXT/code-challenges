@@ -29,14 +29,15 @@ const tests: Test[] = [
 	{
 		input: '----SaleOrderID-----',
 		output: {
-			lower: 'sale order',
-			sentence: 'Sale order',
-			title: 'Sale Order',
-			upper: 'SALE ORDER',
+			lower: 'sale order id',
+			sentence: 'Sale order ID',
+			title: 'Sale Order ID',
+			upper: 'SALE ORDER ID',
 		},
 	},
 	{
-		input: 'someSMV else',
+		/* cSpell: disable-next-line  */
+		input: 'someSMVelse',
 		output: {
 			lower: 'some smv else',
 			sentence: 'Some SMV else',
@@ -46,12 +47,12 @@ const tests: Test[] = [
 	},
 ];
 
-test.each(tests)('test humanizeToken helper', ({ input, output }) => {
-	test(`should return ${output.title} for humanizeToken(${input})`, () => {
+describe.each(tests)('test humanizeToken helper', ({ input, output }) => {
+	it(`should return ${output.title} for humanizeToken(${input})`, () => {
 		const response = humanizeToken(input);
 		expect(response).toStrictEqual(output.title);
 	});
-	test.each(humanizeCases)(
+	it.each(humanizeCases)(
 		'should return humanized string by the given casing',
 		(casing) => {
 			const response = humanizeToken(input, casing);
