@@ -1,4 +1,4 @@
-# countAndSay
+# minSubs
 
 [issue #316 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/your-self-worth-is-determined-by-you-beyonce/)
 
