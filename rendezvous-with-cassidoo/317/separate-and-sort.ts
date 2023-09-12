@@ -56,7 +56,7 @@ type deepReadonly<T extends object> = Readonly<{
 type SeparateAndSort<
 	T extends readonly number[],
 	sorted extends number[] = sort<unReadonly<T>>,
-	res extends readonly [readonly number[], readonly number[]] = [[], []],
+	res extends [number[], number[]] = [[], []],
 > = sorted extends [infer first extends number, ...infer rest extends number[]]
 	? SeparateAndSort<
 			never,
