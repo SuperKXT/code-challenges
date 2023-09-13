@@ -6,8 +6,8 @@ import argumentParser from 'minimist-lite';
 import prompt from 'prompt';
 import { z } from 'zod';
 
-import { getCatchMessage } from '~/helpers/error';
-import { formatToken } from '~/helpers/string';
+import { getCatchMessage } from '~/helpers/error.helpers';
+import { formatToken } from '~/helpers/format-token.helpers';
 
 import { RENAME_ERRORS } from './recursive-rename.types';
 

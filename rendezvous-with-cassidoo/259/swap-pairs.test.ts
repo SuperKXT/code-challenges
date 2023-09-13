@@ -1,5 +1,5 @@
-import { linkedListToArray } from '~/helpers/array';
-import { arrayToLinkedList } from '~/helpers/linked-list';
+import { linkedListToArray } from '~/helpers/array.helpers';
+import { arrayToLinkedList } from '~/helpers/linked-list.helpers';
 
 import {
 	swapArrayPairsWithLoop,

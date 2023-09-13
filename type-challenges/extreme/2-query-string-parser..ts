@@ -49,7 +49,7 @@ type ParseQueryString<T extends string, O extends object = {}> = T extends ''
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils';
-import type { Utils } from '~/types/utils';
+import type { Utils } from '~/types/utils.types';
 
 type _cases = [
 	Expect<Equal<ParseQueryString<''>, {}>>,

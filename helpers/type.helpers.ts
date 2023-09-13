@@ -1,4 +1,4 @@
-import type { Utils } from '~/types/utils';
+import type { Utils } from '~/types/utils.types';
 
 export const readableTypeOf = (value: unknown) => {
 	if (typeof value !== 'object') return typeof value;
@@ -34,11 +34,27 @@ export const assertArray: AssertArray = (value, checker) => {
 	try {
 		if (!value.length || !checker) return;
 		value.forEach(checker);
-	} catch (error: unknown) {
+	} catch (error) {
 		throw new TypeError(
 			`Invalid array member. ${
 				error instanceof Error ? error.message : JSON.stringify(error)
 			}`,
 		);
 	}
+};
+
+export const excludeString = <
+	const T extends string | undefined,
+	const U extends string,
+>(
+	input: T,
+	excludeList: U | Readonly<U[]>,
+) => {
+	return (
+		(Array.isArray(excludeList) &&
+			excludeList.includes(input as unknown as U)) ||
+		(excludeList as string) === input
+			? undefined
+			: input
+	) as T extends U ? Exclude<T, U> | undefined : T;
 };

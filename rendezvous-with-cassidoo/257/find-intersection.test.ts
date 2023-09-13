@@ -1,4 +1,4 @@
-import { arrayToLinkedList } from '~/helpers/linked-list';
+import { arrayToLinkedList } from '~/helpers/linked-list.helpers';
 
 import { findIntersection } from './find-intersection';
 

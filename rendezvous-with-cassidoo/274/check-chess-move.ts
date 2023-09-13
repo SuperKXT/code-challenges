@@ -6,7 +6,7 @@ import {
 	WHITE_PIECES,
 } from './check-chess-move.types';
 
-import type { Utils } from '~/types/utils';
+import type { Utils } from '~/types/utils.types';
 import type {
 	BlackPiece,
 	Board,

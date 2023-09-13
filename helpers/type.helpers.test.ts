@@ -1,6 +1,5 @@
 /* eslint-disable vitest/no-conditional-in-test */
 /* eslint-disable vitest/no-conditional-tests */
-
 import {
 	assertArray,
 	assertObject,
@@ -9,7 +8,7 @@ import {
 	readableTypeOf,
 } from './type.helpers';
 
-import type { Utils } from '~/types/utils';
+import type { Utils } from '~/types/utils.types';
 
 const isNumber = (value: unknown): value is number => typeof value === 'number';
 
