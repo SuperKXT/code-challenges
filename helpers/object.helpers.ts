@@ -1,6 +1,6 @@
-import { isObject } from '~/helpers/type';
+import { isObject } from '~/helpers/type.helpers';
 
-import type { Utils } from '~/types/utils';
+import type { Utils } from '~/types/utils.types';
 
 export const objectEntries = <T extends Obj>(
 	object: T,
@@ -21,10 +21,12 @@ export const omit = <Type extends Obj, ToOmit extends keyof Type>(
 	keys: ToOmit | ToOmit[],
 ): Utils.prettify<Omit<Type, ToOmit>> => {
 	const keyArray = Array.isArray(keys) ? keys : [keys];
-	return objectEntries(object).reduce((obj, [key, value]) => {
-		if (keyArray.includes(key as never)) return obj;
-		return { ...obj, [key]: value };
-	}, {}) as never;
+	const omitted = {} as Record<string, unknown>;
+	for (const key in object) {
+		if (!Object.hasOwn(object, key) || keyArray.includes(key)) continue;
+		omitted[key] = object[key];
+	}
+	return omitted as Utils.prettify<Omit<Type, ToOmit>>;
 };
 
 export const pick = <Type extends Obj, ToPick extends keyof Type>(
@@ -32,10 +34,9 @@ export const pick = <Type extends Obj, ToPick extends keyof Type>(
 	keys: ToPick | ToPick[],
 ): Utils.prettify<Pick<Type, ToPick>> => {
 	const keyArray = Array.isArray(keys) ? keys : [keys];
-	return objectEntries(object).reduce((obj, [key, value]) => {
-		if (!keyArray.includes(key as never)) return obj;
-		return { ...obj, [key]: value };
-	}, {}) as never;
+	const obj = {} as Utils.prettify<Pick<Type, ToPick>>;
+	for (const key of keyArray) if (key in object) obj[key] = object[key];
+	return obj;
 };
 
 export const deepMerge = <T extends Obj, U extends Obj>(

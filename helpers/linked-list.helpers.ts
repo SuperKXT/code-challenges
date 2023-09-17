@@ -1,4 +1,4 @@
-import type { Utils } from '~/types/utils';
+import type { Utils } from '~/types/utils.types';
 
 export type LinkedListNode<Type = unknown> = {
 	value: Type;

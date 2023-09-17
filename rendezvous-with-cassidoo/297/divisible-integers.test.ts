@@ -1,6 +1,6 @@
 import { divisibleIntegers } from './divisible-integers';
 
-import type { Utils } from '~/types/utils';
+import type { Utils } from '~/types/utils.types';
 import type { DivisibleIntegerN } from './divisible-integers';
 
 type Test = {

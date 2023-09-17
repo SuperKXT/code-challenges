@@ -1,4 +1,4 @@
-import type { Utils } from '~/types/utils';
+import type { Utils } from '~/types/utils.types';
 
 type Fill<T extends number, A extends number[] = []> = A['length'] extends T
 	? A

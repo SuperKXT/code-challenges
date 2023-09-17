@@ -60,7 +60,7 @@ type DeepPick<
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils';
-import type { Utils } from '~/types/utils';
+import type { Utils } from '~/types/utils.types';
 
 type TObj = {
 	a: number;

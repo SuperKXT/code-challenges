@@ -1,6 +1,6 @@
-import { areArraysEqual } from '~/helpers/array';
+import { areArraysEqual } from '~/helpers/array.helpers';
 
-import type { LinkedListNode } from '~/helpers/linked-list';
+import type { LinkedListNode } from '~/helpers/linked-list.helpers';
 
 export type Intersection = LinkedListNode<number> | [number, number];
 

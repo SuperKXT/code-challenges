@@ -134,4 +134,12 @@ export declare namespace Utils {
 			? never
 			: k]: T[k];
 	};
+
+	/** makes sure the wrapped type does not take part in inference in a generic function */
+	type noInfer<T> = [T][T extends T ? 0 : never];
+
+	/** return the keys of the object that match a certain type */
+	type keysOfType<T extends Obj, Match> = keyof {
+		[k in keyof T as T[k] extends Match ? k : never]: true;
+	};
 }

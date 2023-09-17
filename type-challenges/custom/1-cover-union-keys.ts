@@ -1,5 +1,5 @@
 import type { Equal, Expect } from '@type-challenges/utils';
-import type { Utils } from '~/types/utils';
+import type { Utils } from '~/types/utils.types';
 
 /**
  * Type that takes a union and adds missing properties to all branches
