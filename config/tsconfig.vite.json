@@ -19,7 +19,7 @@
 
 		// modules
 		"module": "esnext",
-		"moduleResolution": "node",
+		"moduleResolution": "Bundler",
 		"resolveJsonModule": true,
 		"types": ["vitest/globals"],
 		"paths": {
@@ -45,6 +45,7 @@
 		"jsx": "react-jsx",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"target": "esnext",
+		"moduleDetection": "force",
 
 		// output formatting
 		"noErrorTruncation": true,
