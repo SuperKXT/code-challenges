@@ -1,6 +1,6 @@
-import { calculateGpa } from './calculate-gpa';
+import { calculateGpa } from './calculate-gpa.js';
 
-import type { GradePoint } from './calculate-gpa';
+import type { GradePoint } from './calculate-gpa.js';
 
 type Test = {
 	input: GradePoint[];

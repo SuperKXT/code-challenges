@@ -1,5 +1,5 @@
 /** cSpell: disable */
-import { mmmPie } from './mmm-pie';
+import { mmmPie } from './mmm-pie.js';
 
 test('should test mmmPie', () => {
 	const response = mmmPie(

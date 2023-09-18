@@ -1,6 +1,6 @@
-import { minimumPairs } from './minimum-pairs';
+import { minimumPairs } from './minimum-pairs.js';
 
-import type { Pair } from './minimum-pairs';
+import type { Pair } from './minimum-pairs.js';
 
 type Test = {
 	input: number[];

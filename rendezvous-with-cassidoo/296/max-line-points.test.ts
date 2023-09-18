@@ -1,4 +1,4 @@
-import { maxPointsOnLine } from './max-line-points';
+import { maxPointsOnLine } from './max-line-points.js';
 
 type Test = {
 	input: [number, number][];

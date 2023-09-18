@@ -1,4 +1,4 @@
-import { missingBits } from './missing-bits';
+import { missingBits } from './missing-bits.js';
 
 type Test = {
 	input: number[];

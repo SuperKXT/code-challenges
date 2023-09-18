@@ -1,4 +1,4 @@
-import { truncateWords } from './truncate-words';
+import { truncateWords } from './truncate-words.js';
 
 type Test = {
 	input: [string, number];

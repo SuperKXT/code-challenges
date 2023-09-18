@@ -1,4 +1,4 @@
-import { passDoors } from './pass-doors';
+import { passDoors } from './pass-doors.js';
 
 type Test = {
 	input: [number, number];

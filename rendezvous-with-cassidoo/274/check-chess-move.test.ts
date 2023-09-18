@@ -1,7 +1,10 @@
-import { isValidMove } from './check-chess-move';
-import { CHESS_ERRORS } from './check-chess-move.types';
+import { isValidMove } from './check-chess-move.js';
+import { CHESS_ERRORS } from './check-chess-move.types.js';
 
-import type { ChessResponse, IsValidMoveArgs } from './check-chess-move.types';
+import type {
+	ChessResponse,
+	IsValidMoveArgs,
+} from './check-chess-move.types.js';
 
 type Test = {
 	input: IsValidMoveArgs;

@@ -1,4 +1,4 @@
-import { balanceParens } from './balance-parens';
+import { balanceParens } from './balance-parens.js';
 
 type Test = {
 	input: string;

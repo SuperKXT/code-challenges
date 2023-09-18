@@ -1,4 +1,4 @@
-import { getStarAngles } from './n-pointed-star';
+import { getStarAngles } from './n-pointed-star.js';
 
 type Test = {
 	input: number;

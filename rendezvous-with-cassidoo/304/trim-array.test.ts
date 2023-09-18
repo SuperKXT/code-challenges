@@ -1,5 +1,5 @@
 /** cSpell: disable */
-import { trimArray } from './trim-array';
+import { trimArray } from './trim-array.js';
 
 test('testing trimArray against test 1', () => {
 	const response = trimArray([1, 2, 3, 4, 5, 6], 2, 1);

@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { raumdeuter } from './raumdeuter';
+import { raumdeuter } from './raumdeuter.js';
 
 const EXAMPLE = [
 	'$ cd /',

@@ -1,12 +1,12 @@
-import { linkedListToArray } from '~/helpers/array.helpers';
-import { arrayToLinkedList } from '~/helpers/linked-list.helpers';
+import { linkedListToArray } from '~/helpers/array.helpers.js';
+import { arrayToLinkedList } from '~/helpers/linked-list.helpers.js';
 
 import {
 	swapArrayPairsWithLoop,
 	swapArrayPairsWithRecursion,
 	swapArrayPairsWithRegex,
 	swapLinkedListPairs,
-} from './swap-pairs';
+} from './swap-pairs.js';
 
 const ARRAY_1 = [1, 2, 3, 4];
 const ARRAY_2: number[] = [];

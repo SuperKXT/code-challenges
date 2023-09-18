@@ -1,4 +1,4 @@
-import { capitalAfterVowel } from './capital-after-vowel';
+import { capitalAfterVowel } from './capital-after-vowel.js';
 
 type Test = {
 	input: string;

@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { tuningTrouble } from './tuning-trouble';
+import { tuningTrouble } from './tuning-trouble.js';
 
 type Solution = ReturnType<typeof tuningTrouble>;
 

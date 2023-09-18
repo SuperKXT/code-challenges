@@ -1,4 +1,4 @@
-import { objectValues } from '~/helpers/object.helpers';
+import { objectValues } from '~/helpers/object.helpers.js';
 
 const TOTAL_SPACE = 70_000_000;
 const REQUIRED_SPACE = 30_000_000;

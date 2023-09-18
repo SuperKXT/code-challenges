@@ -1,4 +1,4 @@
-import { INVALID_ERROR, verticalSlashes } from './vertical-slashes';
+import { INVALID_ERROR, verticalSlashes } from './vertical-slashes.js';
 
 type Test = {
 	input: string;

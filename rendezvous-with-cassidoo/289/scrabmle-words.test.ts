@@ -1,4 +1,4 @@
-import { scrambleWords } from './scramble-words';
+import { scrambleWords } from './scramble-words.js';
 
 const TESTS: string[] = [
 	'A quick brown fox jumped over the lazy dog.',

@@ -1,4 +1,4 @@
-import { separateAndSort } from './separate-and-sort';
+import { separateAndSort } from './separate-and-sort.js';
 
 test('testing separateAndSort against test 1', () => {
 	const result = separateAndSort([4, 3, 2, 1, 5, 7, 8, 9]);

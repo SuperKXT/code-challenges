@@ -1,4 +1,4 @@
-import { fromTo } from './from-to';
+import { fromTo } from './from-to.js';
 
 type Test = {
 	min: number;

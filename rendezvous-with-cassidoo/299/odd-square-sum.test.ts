@@ -1,4 +1,4 @@
-import { oddSquareNumbers } from './odd-square-sum';
+import { oddSquareNumbers } from './odd-square-sum.js';
 
 type Test = {
 	input: number;

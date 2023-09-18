@@ -1,4 +1,4 @@
-import { campCleanup } from './camp-cleanup';
+import { campCleanup } from './camp-cleanup.js';
 
 const INPUT = [
 	'2-4,6-8',

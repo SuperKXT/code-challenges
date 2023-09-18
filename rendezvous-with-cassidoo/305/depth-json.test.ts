@@ -1,4 +1,4 @@
-import { depthJson } from './depth-json';
+import { depthJson } from './depth-json.js';
 
 test('testing depthJson against test 1', () => {
 	const response = depthJson([]);

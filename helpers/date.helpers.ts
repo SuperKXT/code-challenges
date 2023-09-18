@@ -1,5 +1,5 @@
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
+import dayjs from 'dayjs/esm';
+import utc from 'dayjs/esm/plugin/utc';
 
 dayjs.extend(utc);
 

@@ -1,4 +1,4 @@
-import { minSubs } from './min-subs';
+import { minSubs } from './min-subs.js';
 
 test('testing minSubs against test 1', () => {
 	const result = minSubs([1, 3, 20, 4, 8, 9, 11], 3);

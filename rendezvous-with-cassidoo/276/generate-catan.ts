@@ -3,9 +3,9 @@ import {
 	CATAN_ERRORS,
 	DOUBLE_PIECES,
 	SINGLE_PIECES,
-} from './generate-catan.types';
+} from './generate-catan.types.js';
 
-import type { Board, Cell, ProspectiveBoard } from './generate-catan.types';
+import type { Board, Cell, ProspectiveBoard } from './generate-catan.types.js';
 
 const isBadNeighbor = (
 	cell: Cell,

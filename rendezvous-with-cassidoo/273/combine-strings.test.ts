@@ -1,4 +1,4 @@
-import { combineStrings, INVALID_ERROR } from './combine-strings';
+import { combineStrings, INVALID_ERROR } from './combine-strings.js';
 
 type Test = {
 	input: [string[], number];

@@ -1,5 +1,5 @@
 /* eslint-disable vitest/max-expects */
-import { numberToWords } from './format.helpers';
+import { numberToWords } from './format.helpers.js';
 
 test('should test numberToWords', () => {
 	const test1 = {

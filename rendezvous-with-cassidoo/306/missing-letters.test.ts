@@ -1,4 +1,4 @@
-import { missingLetters } from './missing-letters';
+import { missingLetters } from './missing-letters.js';
 
 test('testing missingLetters against test 1', () => {
 	const response = missingLetters(['a', 'b', 'c', 'd', 'f']);

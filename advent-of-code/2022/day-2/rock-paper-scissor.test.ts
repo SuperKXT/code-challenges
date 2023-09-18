@@ -1,4 +1,4 @@
-import { rockPaperScissors } from './rock-paper-scissor';
+import { rockPaperScissors } from './rock-paper-scissor.js';
 
 test('testing rockPaperScissors', async () => {
 	const response = await rockPaperScissors();

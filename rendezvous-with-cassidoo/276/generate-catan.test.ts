@@ -1,7 +1,7 @@
-import { assertValidCatanBoard, generateCatanBoard } from './generate-catan';
-import { CATAN_ERRORS } from './generate-catan.types';
+import { assertValidCatanBoard, generateCatanBoard } from './generate-catan.js';
+import { CATAN_ERRORS } from './generate-catan.types.js';
 
-import type { CatanError } from './generate-catan.types';
+import type { CatanError } from './generate-catan.types.js';
 
 const VALID_BOARDS: string[] = [
 	['  B 9 A', ' 5 6 C 8', '6 4 B 5 3', ' 2 8 9 3', '  A . 4'].join('\n'),

@@ -1,6 +1,6 @@
-import { cornerHit } from './cornet-hit';
+import { cornerHit } from './cornet-hit.js';
 
-import type { XY } from './cornet-hit';
+import type { XY } from './cornet-hit.js';
 
 type Test = {
 	boxSize: XY;

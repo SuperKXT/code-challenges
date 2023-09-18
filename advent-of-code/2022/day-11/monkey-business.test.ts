@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { monkeyBusiness } from './monkey-business';
+import { monkeyBusiness } from './monkey-business.js';
 
 const EXAMPLE = `Monkey 0:
   Starting items: 79, 98

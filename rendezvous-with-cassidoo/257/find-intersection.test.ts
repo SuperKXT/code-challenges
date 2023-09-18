@@ -1,6 +1,6 @@
-import { arrayToLinkedList } from '~/helpers/linked-list.helpers';
+import { arrayToLinkedList } from '~/helpers/linked-list.helpers.js';
 
-import { findIntersection } from './find-intersection';
+import { findIntersection } from './find-intersection.js';
 
 const ARRAY_A = [1, 4, 5, 6];
 const ARRAY_B = [2, 3, 4, 5, 6];

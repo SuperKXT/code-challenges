@@ -6,16 +6,16 @@ import argumentParser from 'minimist-lite';
 import prompt from 'prompt';
 import { z } from 'zod';
 
-import { getCatchMessage } from '~/helpers/error.helpers';
-import { formatToken } from '~/helpers/format-token.helpers';
+import { getCatchMessage } from '~/helpers/error.helpers.js';
+import { formatToken } from '~/helpers/format-token.helpers.js';
 
-import { RENAME_ERRORS } from './recursive-rename.types';
+import { RENAME_ERRORS } from './recursive-rename.types.js';
 
 import type {
 	RenameOptions,
 	RenameResult,
 	RenameResultType,
-} from './recursive-rename.types';
+} from './recursive-rename.types.js';
 
 const PARAMS_SCHEMA = z.strictObject({
 	'--': z.string().array().length(0).optional(),

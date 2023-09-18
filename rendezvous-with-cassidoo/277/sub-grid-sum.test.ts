@@ -1,4 +1,4 @@
-import { SUB_GRID_SUM_ERROR, subGridSum } from './sub-grid-sum';
+import { SUB_GRID_SUM_ERROR, subGridSum } from './sub-grid-sum.js';
 
 const GRID = [
 	[6, 9, -7, 3],

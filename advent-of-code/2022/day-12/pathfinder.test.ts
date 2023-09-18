@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { pathfinder } from './pathfinder';
+import { pathfinder } from './pathfinder.js';
 
 /** cSpell: disable */
 const EXAMPLE = [

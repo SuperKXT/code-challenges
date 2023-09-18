@@ -1,4 +1,4 @@
-import { printBinaryTree } from './print-binary-tree';
+import { printBinaryTree } from './print-binary-tree.js';
 
 test('testing printBinaryTree for invalid input', () => {
 	expect(printBinaryTree(-10)).toBe('');

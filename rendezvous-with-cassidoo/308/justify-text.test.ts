@@ -1,4 +1,4 @@
-import { justifyText } from './justify-text';
+import { justifyText } from './justify-text.js';
 
 test('testing reversedSquares against test 1', () => {
 	const result = justifyText(

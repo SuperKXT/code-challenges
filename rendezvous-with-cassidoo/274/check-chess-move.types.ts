@@ -1,4 +1,4 @@
-import type { Utils } from '~/types/utils.types';
+import type { Utils } from '~/types/utils.types.js';
 
 export const BLACK_PIECES = ['p', 'r', 'b', 'n', 'q', 'k'] as const;
 export type BlackPiece = (typeof BLACK_PIECES)[number];

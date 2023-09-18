@@ -4,9 +4,9 @@ import {
 	COORDS,
 	SQUARE,
 	WHITE_PIECES,
-} from './check-chess-move.types';
+} from './check-chess-move.types.js';
 
-import type { Utils } from '~/types/utils.types';
+import type { Utils } from '~/types/utils.types.js';
 import type {
 	BlackPiece,
 	Board,
@@ -16,7 +16,7 @@ import type {
 	Piece,
 	Position,
 	WhitePiece,
-} from './check-chess-move.types';
+} from './check-chess-move.types.js';
 
 const assertBoard: Utils.assertFunction<Board> = (board: unknown) => {
 	if (!Array.isArray(board) || board.length !== 8)

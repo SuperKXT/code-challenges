@@ -1,4 +1,4 @@
-import { isAnagram } from './is-anagram';
+import { isAnagram } from './is-anagram.js';
 
 test('testing isAnagram against test 1', () => {
 	const result = isAnagram('barbie', 'oppenheimer');

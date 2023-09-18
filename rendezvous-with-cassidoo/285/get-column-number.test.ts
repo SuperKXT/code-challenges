@@ -1,4 +1,4 @@
-import { getColumnNumber } from './get-column-number';
+import { getColumnNumber } from './get-column-number.js';
 
 type Test = {
 	input: string;

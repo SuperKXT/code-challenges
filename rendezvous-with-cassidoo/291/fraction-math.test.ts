@@ -1,4 +1,4 @@
-import { fractionMath } from './fraction-math';
+import { fractionMath } from './fraction-math.js';
 
 type Test = {
 	args: Parameters<typeof fractionMath>;

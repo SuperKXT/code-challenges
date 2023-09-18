@@ -1,4 +1,4 @@
-import { explodeString } from './explode-string';
+import { explodeString } from './explode-string.js';
 
 test('testing explodeString against test 1', () => {
 	const result = explodeString('Ahh, abracadabra!');

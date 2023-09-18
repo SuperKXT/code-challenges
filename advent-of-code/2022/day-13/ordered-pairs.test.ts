@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { orderedPairs } from './ordered-pairs';
+import { orderedPairs } from './ordered-pairs.js';
 
 const EXAMPLE = `[1,1,3,1,1]
 [1,1,5,1,1]

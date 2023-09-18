@@ -1,4 +1,4 @@
-import { printAscii } from './ascii-characters';
+import { printAscii } from './ascii-characters.js';
 
 test('testing printAscii', () => {
 	expect(printAscii()).toBe(

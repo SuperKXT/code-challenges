@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { signalStrength } from './signal-strength';
+import { signalStrength } from './signal-strength.js';
 
 const EXAMPLE = `
 addx 15

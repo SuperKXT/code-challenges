@@ -1,7 +1,7 @@
-import { DEFAULT_ARGS, findWordle } from './wordle';
+import { DEFAULT_ARGS, findWordle } from './wordle.js';
 
-import type { WordleWord } from './word-list';
-import type { Arguments } from './wordle';
+import type { WordleWord } from './word-list.js';
+import type { Arguments } from './wordle.js';
 
 type Test = {
 	args: Partial<Arguments>;

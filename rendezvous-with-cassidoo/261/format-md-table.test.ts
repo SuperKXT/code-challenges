@@ -1,4 +1,4 @@
-import { formatMarkdownTable } from './format-md-table';
+import { formatMarkdownTable } from './format-md-table.js';
 
 type Test = {
 	input: string;

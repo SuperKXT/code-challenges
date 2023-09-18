@@ -1,4 +1,4 @@
-import type { LinkedList } from '~/helpers/linked-list.helpers';
+import type { LinkedList } from '~/helpers/linked-list.helpers.js';
 
 export const swapArrayPairsWithRegex = (array: number[]): number[] =>
 	array

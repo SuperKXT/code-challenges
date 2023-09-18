@@ -1,4 +1,4 @@
-import { generateArrays } from './generate-arrays';
+import { generateArrays } from './generate-arrays.js';
 
 type Test = {
 	input: number;

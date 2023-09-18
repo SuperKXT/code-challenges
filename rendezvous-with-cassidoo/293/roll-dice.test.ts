@@ -1,4 +1,4 @@
-import { rollDice } from './roll-dice';
+import { rollDice } from './roll-dice.js';
 
 const TESTS = [
 	{

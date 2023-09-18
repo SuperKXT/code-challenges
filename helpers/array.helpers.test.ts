@@ -1,4 +1,4 @@
-import { areArraysEqual, linkedListToArray } from './array.helpers';
+import { areArraysEqual, linkedListToArray } from './array.helpers.js';
 
 type EqualityTest = {
 	first: unknown[];

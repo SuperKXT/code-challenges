@@ -1,4 +1,4 @@
-import { canBePalindrome } from './palindrome';
+import { canBePalindrome } from './palindrome.js';
 
 type Test = {
 	string: string;

@@ -1,4 +1,4 @@
-import { maximumProfit } from './maximum-profit';
+import { maximumProfit } from './maximum-profit.js';
 
 test('testing maximumProfit against test 1', () => {
 	const result = maximumProfit([7, 1, 5, 3, 6, 4]);

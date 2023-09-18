@@ -1,4 +1,4 @@
-import { repeatedGroups } from './repeated-groups';
+import { repeatedGroups } from './repeated-groups.js';
 
 type Test = {
 	input: number[];

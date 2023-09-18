@@ -1,4 +1,4 @@
-import { faultyVowels } from './faulty-vowels';
+import { faultyVowels } from './faulty-vowels.js';
 
 test('testing faultyVowels against test 1', () => {
 	const result = faultyVowels('string');

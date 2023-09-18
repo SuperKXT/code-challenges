@@ -1,4 +1,4 @@
-import { addEventDigits, addEventDigitsSinglePass } from './add-even-digits';
+import { addEventDigits, addEventDigitsSinglePass } from './add-even-digits.js';
 
 type Test = {
 	input: number;

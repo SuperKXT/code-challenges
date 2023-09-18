@@ -1,6 +1,6 @@
-import { getOrdinalNumber } from './get-ordinal-number';
+import { getOrdinalNumber } from './get-ordinal-number.js';
 
-import type { OrdinalNumber } from './get-ordinal-number';
+import type { OrdinalNumber } from './get-ordinal-number.js';
 
 type Test = {
 	input: number;

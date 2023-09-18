@@ -1,4 +1,4 @@
-import { rucksackReorganization } from './rucksack-reorganization';
+import { rucksackReorganization } from './rucksack-reorganization.js';
 
 const INPUT = [
 	/** cSpell: disable */

@@ -1,7 +1,7 @@
-import { divisibleIntegers } from './divisible-integers';
+import { divisibleIntegers } from './divisible-integers.js';
 
-import type { Utils } from '~/types/utils.types';
-import type { DivisibleIntegerN } from './divisible-integers';
+import type { Utils } from '~/types/utils.types.js';
+import type { DivisibleIntegerN } from './divisible-integers.js';
 
 type Test = {
 	input: number[];

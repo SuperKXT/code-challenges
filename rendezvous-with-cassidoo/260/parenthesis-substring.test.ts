@@ -1,4 +1,4 @@
-import { parenthesisSubstring } from './parenthesis-substring';
+import { parenthesisSubstring } from './parenthesis-substring.js';
 
 const TESTS = [
 	{ solution: 2, string: '(()(' },

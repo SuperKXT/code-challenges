@@ -1,4 +1,4 @@
-import { findAntiDivisors } from './anti-divisors';
+import { findAntiDivisors } from './anti-divisors.js';
 
 type Test = {
 	input: number;

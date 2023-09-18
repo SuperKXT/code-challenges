@@ -1,4 +1,4 @@
-import { convertColor } from './convert-color';
+import { convertColor } from './convert-color.js';
 
 test('convertColor: test # 1', () => {
 	const response = convertColor('rgb', 'hex', 'rgb(255,0,0)');

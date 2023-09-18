@@ -1,4 +1,4 @@
-import { removeZeroes } from './remove-zeroes';
+import { removeZeroes } from './remove-zeroes.js';
 
 type Test = {
 	input: number[];

@@ -1,4 +1,4 @@
-import { replaceZeros } from './replace-zeros';
+import { replaceZeros } from './replace-zeros.js';
 
 type Test = {
 	input: string;

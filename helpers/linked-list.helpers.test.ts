@@ -1,4 +1,7 @@
-import { arrayToLinkedList, insertToLinkedList } from './linked-list.helpers';
+import {
+	arrayToLinkedList,
+	insertToLinkedList,
+} from './linked-list.helpers.js';
 
 test('testing arrayToLinkedList helper', () => {
 	const test1 = {

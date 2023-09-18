@@ -2,7 +2,7 @@ import {
 	ERRORS,
 	getFibonacciLike,
 	isFibonacciLike,
-} from './get-fibonacci-like';
+} from './get-fibonacci-like.js';
 
 type GetTest = {
 	input: [number, number, number];

@@ -1,5 +1,5 @@
 /** cSpell: disable */
-import { scrabbleScore } from './scrabble-score';
+import { scrabbleScore } from './scrabble-score.js';
 
 test('should test scrabbleScore', () => {
 	const response1 = scrabbleScore('FIZZBUZZ');

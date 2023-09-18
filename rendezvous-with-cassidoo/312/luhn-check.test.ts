@@ -1,4 +1,4 @@
-import { luhnCheck } from './luh-check';
+import { luhnCheck } from './luh-check.js';
 
 test('testing luhnCheck against test 1', () => {
 	const result = luhnCheck(123456789);

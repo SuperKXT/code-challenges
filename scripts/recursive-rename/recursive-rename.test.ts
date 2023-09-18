@@ -2,10 +2,10 @@ import { appendFileSync, existsSync, mkdirSync, rmSync } from 'fs';
 import { tmpdir } from 'os';
 import path from 'path';
 
-import { getRenameLogs, recursiveRename } from './recursive-rename';
-import { RENAME_ERRORS } from './recursive-rename.types';
+import { getRenameLogs, recursiveRename } from './recursive-rename.js';
+import { RENAME_ERRORS } from './recursive-rename.types.js';
 
-import type { RenameOptions, RenameResult } from './recursive-rename.types';
+import type { RenameOptions, RenameResult } from './recursive-rename.types.js';
 
 const TEMP_PATH = path.join(tmpdir(), 'test');
 

@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { supplyStacks } from './supply-stacks';
+import { supplyStacks } from './supply-stacks.js';
 
 const INPUT = [
 	'    [D]    ',

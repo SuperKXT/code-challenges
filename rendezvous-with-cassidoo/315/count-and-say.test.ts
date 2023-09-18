@@ -1,4 +1,4 @@
-import { countAndSay } from './count-and-say';
+import { countAndSay } from './count-and-say.js';
 
 test('testing countAndSay against test 1', () => {
 	const result = countAndSay(112222555);

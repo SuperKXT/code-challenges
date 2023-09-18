@@ -1,4 +1,7 @@
-import type { LinkedList, LinkedListNode } from '~/helpers/linked-list.helpers';
+import type {
+	LinkedList,
+	LinkedListNode,
+} from '~/helpers/linked-list.helpers.js';
 
 export const areArraysEqual = <Type extends unknown[]>(
 	first: Type,

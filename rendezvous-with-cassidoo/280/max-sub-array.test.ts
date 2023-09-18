@@ -1,4 +1,4 @@
-import { maxSubArray } from './max-sub-array';
+import { maxSubArray } from './max-sub-array.js';
 
 type Test = {
 	input: [number[], number];

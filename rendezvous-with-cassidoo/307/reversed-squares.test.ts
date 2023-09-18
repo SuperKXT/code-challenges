@@ -1,4 +1,4 @@
-import { reversedSquare } from './reversed-squares';
+import { reversedSquare } from './reversed-squares.js';
 
 test('testing reversedSquares against test 1', () => {
 	const result = reversedSquare(9);
