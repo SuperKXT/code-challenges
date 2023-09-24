@@ -9,6 +9,7 @@
 Example:
 
 ```ts
+/_ cSpell: disable-next-line _/
 > arr = [{ name: 'Joe', num: 9 }, { name: 'Cami', num: 3 }, { name: 'Cassidy', num: 4 }]
 > mmmPie(arr, 8)
 > 2 // 16 pieces needed, pies can be cut into 8 pieces, so 2 pies should be bought

@@ -8,7 +8,7 @@ First, determine whether there is enough tree cover here to keep a tree house **
 To do this, you need to count the number of trees that are
 **visible from outside the grid** when looking directly along a row or column.
 
-The Elves have already launched a **quadcopter** to generate a map with
+The Elves have already launched a **quadcopter** to generate a map with /_ cSpell: disable-line _/
 the height of each tree (your puzzle input). For example:
 
 ```plaintext

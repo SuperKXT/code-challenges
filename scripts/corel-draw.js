@@ -1,4 +1,5 @@
 /* eslint-disable */
+/* cSpell: disable */
 // @ts-nocheck
 // This scripts checks the number of selected objects and adds the same number of new pages.
 'use strict';
