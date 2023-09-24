@@ -1,0 +1,31 @@
+{
+	"words": [
+		"addx",
+		"antfu",
+		"cassidoo",
+		"Catan",
+		"datastream",
+		"fastify",
+		"luhn",
+		"parens",
+		"quordle",
+		"raumdeuter",
+		"Saad",
+		"Tetris",
+		"typecheck",
+		"wordle"
+	],
+	"ignorePaths": [
+		"package-lock.json",
+		"pnpm-lock.yaml",
+		"node_modules",
+		"vscode-extension",
+		".git/objects",
+		".vscode",
+		".vscode-insiders",
+		"./advent-of-code/**/**/input.txt",
+		"coverage",
+		"./type-challenges",
+		"./scripts/md-links-to-csv/*.{md,csv}"
+	]
+}
