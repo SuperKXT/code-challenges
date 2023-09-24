@@ -25,6 +25,7 @@
 		".vscode-insiders",
 		"./advent-of-code/**/**/input.txt",
 		"coverage",
+		"trace",
 		"./type-challenges",
 		"./scripts/md-links-to-csv/*.{md,csv}"
 	]
