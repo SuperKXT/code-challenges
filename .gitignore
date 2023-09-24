@@ -36,3 +36,5 @@ yarn-error.log*
 !.vscode
 
 tsconfig.vitest-temp.json
+
+trace
