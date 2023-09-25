@@ -1,6 +1,8 @@
 /** @type {import('eslint').Linter.Config} */
 const config = {
-	env: { es2021: true, node: true },
+	// TODO Remove `browser` from here and `dom` from `tsconfig` after @types/node adds types for fetch
+	// https://github.com/DefinitelyTyped/DefinitelyTyped/issues/60924
+	env: { es2021: true, node: true, browser: true },
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/strict-type-checked',
