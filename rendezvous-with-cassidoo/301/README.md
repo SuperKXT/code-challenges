@@ -19,6 +19,7 @@ Scoring and example:
 8 points: J, X
 10 points: Q, Z
 
+/* cSpell: disable-next-line */
 > scrabbleScore('FIZZBUZZ')
 > 49
 ```

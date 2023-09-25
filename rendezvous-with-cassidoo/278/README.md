@@ -13,6 +13,8 @@ Example:
 > capitalAfterVowel("hello world")
 > "heLlo WoRld"
 
+/_ cSpell: disable-next-line _/
 > capitalAfterVowel("xaabeuekadii")
+/_ cSpell: disable-next-line _/
 > "xaaBeueKaDii"
 ```

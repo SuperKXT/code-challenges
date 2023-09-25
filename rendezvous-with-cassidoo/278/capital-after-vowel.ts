@@ -3,8 +3,8 @@ type Solution = {
 	withoutRegex: string;
 };
 
-const VOWELS = 'aeiou';
-const CONSONANTS = 'bcdfghjklmnpqrstvwxyz';
+const VOWELS = 'aeiou'; // cSpell: disable-line
+const CONSONANTS = 'bcdfghjklmnpqrstvwxyz'; // cSpell: disable-line
 const REGEX = new RegExp(`(?<=[${VOWELS}]\\s*)[${CONSONANTS}]`, 'gu');
 
 export const capitalAfterVowel = (input: string): Solution => {

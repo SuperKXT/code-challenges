@@ -10,6 +10,8 @@ Given a string, return what will be on the screen after typing with your faulty 
 
 Example:
 
+/_ cSpell: disable _/
+
 ```ts
 > faultyVowels('string')
 > 'rtsng'
