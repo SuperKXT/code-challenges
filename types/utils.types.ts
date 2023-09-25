@@ -29,7 +29,7 @@ export declare namespace Utils {
 	>;
 
 	type filteredKeys<T, U> = {
-		[P in keyof T]: T[P] extends U ? P : never;
+		[k in keyof T]: T[k] extends U ? k : never;
 	}[keyof T];
 
 	/** global type helper to create a union array type from a union type */
@@ -49,9 +49,9 @@ export declare namespace Utils {
 		: never;
 
 	/** checks if the two given types are the same */
-	type equal<T, U> = (<G>() => G extends T ? 1 : 2) extends <G>() => G extends U
-		? 1
-		: 2
+	type equal<T, U> = (<G>() => G extends prettify<T> ? 1 : 2) extends <
+		G,
+	>() => G extends prettify<U> ? 1 : 2
 		? true
 		: false;
 
@@ -63,7 +63,7 @@ export declare namespace Utils {
 		: never;
 
 	/** merge two objects together. the second object has priority */
-	type deepMerge<T extends Obj, U extends Obj> = Utils.prettify<{
+	type deepMerge<T extends Obj, U extends Obj> = prettify<{
 		[k in keyof T | keyof U]: k extends keyof U
 			? k extends keyof T
 				? T[k] extends Obj
@@ -81,7 +81,7 @@ export declare namespace Utils {
 	type allOrNone<T extends Obj> = T | { [k in keyof T]?: never };
 
 	/** make keys that can be undefined optional in the object */
-	type makeUndefinedOptional<T extends Obj> = Utils.prettify<
+	type makeUndefinedOptional<T extends Obj> = prettify<
 		{
 			[k in keyof T as undefined extends T[k] ? k : never]?: T[k];
 		} & {
@@ -97,14 +97,14 @@ export declare namespace Utils {
 		: [];
 
 	/** get the last element of a union */
-	type lastInUnion<T> = Utils.unionToIntersection<
+	type lastInUnion<T> = unionToIntersection<
 		T extends unknown ? (x: T) => 0 : never
 	> extends (x: infer U) => 0
 		? U
 		: never;
 
 	/** convert a given union to a tuple of all the elements. order not guaranteed */
-	type unionToTuple<T, U = Utils.lastInUnion<T>> = [U] extends [never]
+	type unionToTuple<T, U = lastInUnion<T>> = [U] extends [never]
 		? []
 		: [...unionToTuple<Exclude<T, U>>, U];
 
@@ -112,7 +112,7 @@ export declare namespace Utils {
 
 	/** returns a uniformed union of objects by adding missing keys in each union */
 	type includeUnionKeys<T extends Record<string, unknown>, U = T> = U extends U
-		? Utils.prettify<
+		? prettify<
 				{
 					[K in keyof U]: U[K];
 				} & { [k in Exclude<allUnionKeys<T>, keyof U>]?: never }
