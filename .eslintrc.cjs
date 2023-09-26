@@ -93,6 +93,11 @@ const config = {
 		'prefer-template': 'warn',
 		'require-unicode-regexp': 'warn',
 		yoda: 'warn',
+		'no-restricted-globals': [
+			'warn',
+			{ name: '__dirname', message: 'Not available in ESM' },
+			{ name: '__filename', message: 'Not available in ESM' },
+		],
 
 		'import/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
 		'import/extensions': [
@@ -206,8 +211,9 @@ const config = {
 			},
 		},
 		{
-			files: ['**/*.cjs', '**/*.js'],
+			files: ['**/*.cjs'],
 			rules: {
+				'no-restricted-globals': 'off',
 				'import/no-commonjs': 'off',
 			},
 		},
