@@ -42,7 +42,7 @@
 		"verbatimModuleSyntax": true,
 
 		// language and environment
-		"lib": ["esnext"],
+		"lib": ["esnext", "dom"],
 		"target": "esnext",
 		"moduleDetection": "force",
 
