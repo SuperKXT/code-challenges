@@ -32,6 +32,12 @@ type GreaterThanDigits<
 	? true
 	: false;
 
+type lastInUnion<T> = Utils.unionToIntersection<
+	T extends unknown ? (x: T) => 0 : never
+> extends (x: infer U) => 0
+	? U
+	: never;
+
 type GreaterThan<
 	T extends number,
 	U extends number,
@@ -48,7 +54,7 @@ type GreaterThan<
 type Max<
 	T extends number,
 	M extends number = 0,
-	last extends number = Utils.lastInUnion<T> & number,
+	last extends number = lastInUnion<T> & number,
 > = [T] extends [never]
 	? M
 	: Max<Exclude<T, last>, GreaterThan<last, M> extends true ? last : M>;
