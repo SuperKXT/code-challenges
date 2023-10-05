@@ -6,7 +6,7 @@ import argumentParser from 'minimist-lite';
 import prompt from 'prompt';
 import { z } from 'zod';
 
-import { getCatchMessage } from '~/helpers/error.helpers.js';
+import { stringifyError } from '~/helpers/error.helpers.js';
 import { formatToken } from '~/helpers/format-token.helpers.js';
 
 import { RENAME_ERRORS } from './recursive-rename.types.js';
@@ -214,7 +214,7 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 			} catch (error) {
 				return {
 					children,
-					error: getCatchMessage(error),
+					error: stringifyError(error),
 					newName,
 					oldName: file,
 					path: folder,
@@ -245,7 +245,7 @@ const renameFiles = async (
 					return {
 						...file,
 						children,
-						error: getCatchMessage(error),
+						error: stringifyError(error),
 						type: 'error',
 					};
 				}
