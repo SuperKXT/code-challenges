@@ -96,18 +96,6 @@ export declare namespace Utils {
 		? [U, ...unionToTuples<Exclude<T, U>>]
 		: [];
 
-	/** get the last element of a union */
-	type lastInUnion<T> = unionToIntersection<
-		T extends unknown ? (x: T) => 0 : never
-	> extends (x: infer U) => 0
-		? U
-		: never;
-
-	/** convert a given union to a tuple of all the elements. order not guaranteed */
-	type unionToTuple<T, U = lastInUnion<T>> = [U] extends [never]
-		? []
-		: [...unionToTuple<Exclude<T, U>>, U];
-
 	type allUnionKeys<T> = T extends infer U ? keyof U : never;
 
 	/** returns a uniformed union of objects by adding missing keys in each union */

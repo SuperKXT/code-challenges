@@ -178,28 +178,6 @@ test('test unionToTuples type util', () => {
 	assertType<tests>(true);
 });
 
-test('test lastInUnion type util', () => {
-	type tests = trueTuple<
-		[
-			Utils.equal<Utils.lastInUnion<never>, never>,
-			Utils.equal<Utils.lastInUnion<1 | 2 | 3>, 3>,
-			Utils.equal<Utils.lastInUnion<1>, 1>,
-		]
-	>;
-	assertType<tests>(true);
-});
-
-test('test lastInUnion type util', () => {
-	type tests = trueTuple<
-		[
-			Utils.equal<Utils.unionToTuple<never>, []>,
-			Utils.equal<Utils.unionToTuple<1 | 2 | 3>, [1, 2, 3]>,
-			Utils.equal<Utils.unionToTuple<1>, [1]>,
-		]
-	>;
-	assertType<tests>(true);
-});
-
 test('test allUnionKeys type util', () => {
 	type tests = trueTuple<
 		[
