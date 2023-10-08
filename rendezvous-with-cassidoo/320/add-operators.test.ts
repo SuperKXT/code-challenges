@@ -13,3 +13,10 @@ test('testing addOperators against test 2', () => {
 	expect(result).toStrictEqual(expected);
 	assertType<typeof result>(expected);
 });
+
+test('testing addOperators against test 3', () => {
+	const result = addOperators(121, 2);
+	const expected: string[] = ['1+2-1', '1*2*1', '1*2/1'];
+	expect(result).toStrictEqual(expected);
+	assertType<typeof result>(expected);
+});

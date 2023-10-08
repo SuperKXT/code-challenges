@@ -9,32 +9,37 @@ export type AddOperators<
 
 type Result = { string: string; amount: number };
 
-const digitOperate = (digits: string) => {
+const digitOperate = (
+	[first, ...rest]: string[],
+	string: string = '',
+	amount?: number,
+): Result[] => {
 	const results: Result[] = [];
-
-	for (const operator of operators) {
-		const result: Result = {
-			string: '',
-			amount: operator === '+' || operator === '-' ? 0 : 1,
-		};
-		for (const digit of digits) {
-			result.string += (result.string ? operator : '') + digit;
+	if (!first) return [];
+	if (amount === undefined) {
+		results.push(...digitOperate(rest, first, Number(first)));
+	} else {
+		for (const operator of operators) {
+			let nextAmount = amount;
+			const nextString = string + (string ? operator : '') + first;
 			switch (operator) {
 				case '+':
-					result.amount += Number(digit);
+					nextAmount += Number(first);
 					break;
 				case '-':
-					result.amount -= Number(digit);
+					nextAmount -= Number(first);
 					break;
 				case '*':
-					result.amount *= Number(digit);
+					nextAmount *= Number(first);
 					break;
 				case '/':
-					result.amount /= Number(digit);
+					nextAmount /= Number(first);
 					break;
 			}
+			if (rest.length)
+				results.push(...digitOperate(rest, nextString, nextAmount));
+			else results.push({ string: nextString, amount: nextAmount });
 		}
-		results.push(result);
 	}
 
 	return results;
@@ -44,7 +49,7 @@ export const addOperators = <Source extends number, Target extends number>(
 	source: Source,
 	target: Target,
 ): AddOperators<Source, Target> => {
-	const results = digitOperate(source.toString());
+	const results = digitOperate(Array.from(source.toString()));
 	return results
 		.filter((row) => row.amount === target)
 		.map((row) => row.string);
