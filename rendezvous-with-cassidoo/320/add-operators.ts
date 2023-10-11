@@ -1,12 +1,5 @@
 const operators = ['+', '-', '*', '/'] as const;
 
-type Operator = (typeof operators)[number];
-
-export type AddOperators<
-	Source extends number,
-	Target extends number,
-> = string[];
-
 type Result = { string: string; amount: number };
 
 const digitOperate = (
@@ -45,10 +38,7 @@ const digitOperate = (
 	return results;
 };
 
-export const addOperators = <Source extends number, Target extends number>(
-	source: Source,
-	target: Target,
-): AddOperators<Source, Target> => {
+export const addOperators = (source: number, target: number) => {
 	const results = digitOperate(Array.from(source.toString()));
 	return results
 		.filter((row) => row.amount === target)
