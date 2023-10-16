@@ -6,7 +6,7 @@ export type IsIsomorphic<
 	? U extends `${infer mapped}${infer uRest}`
 		? map[first] extends string
 			? map[first] extends mapped
-				? IsIsomorphic<tRest, uRest, map & { [x in first]: mapped }>
+				? IsIsomorphic<tRest, uRest, map>
 				: false
 			: IsIsomorphic<tRest, uRest, map & { [x in first]: mapped }>
 		: false

@@ -15,6 +15,6 @@ Example:
 > isIsomorphic('cassidy', '1234567')
 > false // 's' cannot have a mapping to both '3' and '4'
 
-> isIsomorphic('cass', '1233')
+> isIsomorphic('cass', '1233') // cSpell: disable-line
 > true
 ```

@@ -15,7 +15,7 @@ test('testing isIsomorphic against test 2', () => {
 });
 
 test('testing isIsomorphic against test 3', () => {
-	const result = isIsomorphic('cass', '1233');
+	const result = isIsomorphic('cass', '1233'); // cSpell: disable-line
 	const expected = true;
 	expect(result).toStrictEqual(expected);
 	assertType<typeof result>(expected);
