@@ -7,7 +7,9 @@ type stringToTuple<T extends string> = T extends `${infer first}${infer rest}`
 	? [first, ...stringToTuple<rest>]
 	: [];
 
-type removeOne<T extends any[]> = T extends [any, ...infer rest] ? rest : [];
+type removeOne<T extends unknown[]> = T extends [unknown, ...infer rest]
+	? rest
+	: [];
 
 export type KPal<
 	Str extends string,
