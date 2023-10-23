@@ -12,20 +12,20 @@ type removeOne<T extends unknown[]> = T extends [unknown, ...infer rest]
 	: [];
 
 export type KPal<
-	Str extends string,
-	CanRemove extends number,
-	strTup extends string[] = stringToTuple<Str>,
-	RemoveTup extends 1[] = tuple<CanRemove>,
+	str extends string,
+	canRemove extends number,
+	strTup extends string[] = stringToTuple<str>,
+	removeTup extends 1[] = tuple<canRemove>,
 > = strTup extends [
 	infer first extends string,
 	...infer rest extends string[],
 	infer last extends string,
 ]
 	? first extends last
-		? KPal<never, never, rest, RemoveTup>
-		: RemoveTup['length'] extends 0
+		? KPal<never, never, rest, removeTup>
+		: removeTup['length'] extends 0
 		? false
-		: KPal<Str, CanRemove, [...rest, last], removeOne<RemoveTup>>
+		: KPal<str, canRemove, [...rest, last], removeOne<removeTup>>
 	: true;
 
 export const kPal = <Str extends string, CanRemove extends number>(
