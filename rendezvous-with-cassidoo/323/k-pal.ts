@@ -1,18 +1,44 @@
-export type KPal<T extends string> = boolean;
+/* eslint-disable no-param-reassign */
+type tuple<Len extends number, tup extends 1[] = []> = tup['length'] extends Len
+	? tup
+	: tuple<Len, [...tup, 1]>;
 
-export const isPalindrome = (string: string): boolean => {
-	return string === string.split('').reverse().join('');
-};
+type stringToTuple<T extends string> = T extends `${infer first}${infer rest}`
+	? [first, ...stringToTuple<rest>]
+	: [];
 
-export const kPal = <Str extends string, CanRemove extends number>(str: Str, canRemove: CanRemove): KPal<Str> => {
+type removeOne<T extends any[]> = T extends [any, ...infer rest] ? rest : [];
+
+export type KPal<
+	Str extends string,
+	CanRemove extends number,
+	strTup extends string[] = stringToTuple<Str>,
+	RemoveTup extends 1[] = tuple<CanRemove>,
+> = strTup extends [
+	infer first extends string,
+	...infer rest extends string[],
+	infer last extends string,
+]
+	? first extends last
+		? KPal<never, never, rest, RemoveTup>
+		: RemoveTup['length'] extends 0
+		? false
+		: KPal<Str, CanRemove, [...rest, last], removeOne<RemoveTup>>
+	: true;
+
+export const kPal = <Str extends string, CanRemove extends number>(
+	str: Str,
+	canRemove: CanRemove,
+): KPal<Str, CanRemove> => {
 	while (str.length > 1) {
 		const first = str.at(0) as string;
 		const last = str.at(-1) as string;
 		if (first === last) {
 			str = str.substring(1, str.length - 1) as Str;
 			continue;
+		} else if (!canRemove) {
+			return false as never;
 		}
-		else if (!canRemove) return false as never;
 		canRemove--;
 		str = str.substring(1) as Str;
 	}
