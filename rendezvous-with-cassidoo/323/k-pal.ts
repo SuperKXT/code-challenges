@@ -25,7 +25,7 @@ export type KPal<
 		? KPal<never, never, rest, removeTup>
 		: removeTup['length'] extends 0
 		? false
-		: KPal<str, canRemove, [...rest, last], removeOne<removeTup>>
+		: KPal<never, never, [...rest, last], removeOne<removeTup>>
 	: true;
 
 export const kPal = <Str extends string, CanRemove extends number>(
