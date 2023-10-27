@@ -24,7 +24,7 @@ const config = {
 		'array-callback-return': ['warn', { checkForEach: true }],
 		curly: ['warn', 'multi-or-nest', 'consistent'],
 		'default-case-last': 'warn',
-		eqeqeq: 'error',
+		eqeqeq: 'warn',
 		'func-names': ['warn', 'never'],
 		'func-style': 'warn',
 		'guard-for-in': 'warn',
@@ -62,7 +62,7 @@ const config = {
 			},
 		],
 		'no-restricted-syntax': [
-			'error',
+			'warn',
 			{
 				message: "Don't declare enums. Use POJO with as const instead",
 				selector: 'TSEnumDeclaration',
@@ -160,7 +160,7 @@ const config = {
 			{ allowConstantLoopConditions: true },
 		],
 		'@typescript-eslint/no-unused-expressions': [
-			'error',
+			'warn',
 			{
 				allowShortCircuit: true,
 				allowTernary: true,
@@ -191,6 +191,7 @@ const config = {
 			},
 		],
 		'@typescript-eslint/no-namespace': ['warn', { allowDeclarations: true }],
+		'@typescript-eslint/array-type': 'off',
 	},
 	overrides: [
 		{
@@ -227,8 +228,8 @@ const config = {
 						shorthandLast: true,
 					},
 				],
-				'react/jsx-wrap-multilines': 'warn',
-				'react/no-access-state-in-setstate': 'warn',
+				'react/jsx-wrap-multilines': 'warn', // cSpell: disable-line
+				'react/no-access-state-in-setstate': 'warn', // cSpell: disable-line
 				'react/no-danger': 'warn',
 				'react/no-object-type-as-default-prop': 'warn',
 				'react/no-unstable-nested-components': ['warn', { allowAsProps: true }],
@@ -240,7 +241,7 @@ const config = {
 			},
 		},
 		{
-			files: ['src/contexts/**/*'],
+			files: ['src/contexts/**/*', 'src/hooks/**/*'],
 			rules: {
 				'react-refresh/only-export-components': 'off',
 			},
@@ -252,9 +253,9 @@ const config = {
 			rules: {
 				'vitest/prefer-expect-assertions': 'off',
 				'vitest/require-top-level-describe': 'off',
-				'vitest/max-expects': ['error', { max: 10 }],
+				'vitest/max-expects': ['warn', { max: 10 }],
 				'testing-library/prefer-explicit-assert': [
-					'error',
+					'warn',
 					{ assertion: 'toBeInTheDocument' },
 				],
 				'testing-library/prefer-user-event': 'warn',
