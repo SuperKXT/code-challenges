@@ -28,7 +28,7 @@ type shift<T extends number[]> = T extends [
 	? R
 	: never;
 
-type greaterThanDigits<
+type lessThanDigits<
 	T extends number[],
 	U extends number[],
 	TF extends number[] = tuple<T[0]>,
@@ -36,7 +36,7 @@ type greaterThanDigits<
 > = T['length'] extends 0
 	? false
 	: T[0] extends U[0]
-	? greaterThanDigits<shift<T>, shift<U>>
+	? lessThanDigits<shift<T>, shift<U>>
 	: TF[UF['length']] extends undefined
 	? true
 	: false;
@@ -49,7 +49,7 @@ type lessThan<
 > = T extends U
 	? false
 	: TA['length'] extends UA['length']
-	? greaterThanDigits<TA, UA>
+	? lessThanDigits<TA, UA>
 	: TA[UA['length']] extends undefined
 	? true
 	: false;
