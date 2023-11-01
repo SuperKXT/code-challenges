@@ -1,4 +1,4 @@
-import { default as dayjs, isDayjs } from 'dayjs/esm';
+import { default as dayjs } from 'dayjs/esm';
 import utc from 'dayjs/esm/plugin/utc';
 import { z } from 'zod';
 
@@ -15,7 +15,7 @@ export const dayjsSchema = z.instanceof(
 export type ZodDayjs = typeof dayjsSchema;
 
 export const datetimeSchema = z.preprocess((value) => {
-	if (isDayjs(value)) return value;
+	if (dayjsUtc.isDayjs(value)) return value;
 	if (value === undefined || value === null) return null;
 	const parsed = dayjsUtc.utc(value as never);
 	return parsed.isValid() ? parsed : null;
@@ -55,17 +55,134 @@ export const dayNames = [
 	'Saturday',
 ] as const;
 
-export type DateRange = { start: Dayjs; end: Dayjs };
+export class DateRange<
+	Start extends string,
+	End extends string,
+	Range extends { [k in Start]: Dayjs } & { [k in End]: Dayjs },
+> {
+	private EOD = 1440;
 
-export const hasOverlap = (...ranges: DateRange[]) => {
-	for (let i = 0; i < ranges.length; i++) {
-		for (let j = 0; j < ranges.length; j++) {
-			if (i === j) continue;
-			const a = ranges[i] as DateRange;
-			const b = ranges[j] as DateRange;
-			const overlap = a.end.isAfter(b.start) && a.start.isBefore(b.end);
-			if (overlap) return true;
-		}
+	constructor(
+		private start: Start,
+		private end: End,
+		private includeEdgesInOverlap: boolean = false,
+	) {}
+
+	hasRange<T extends Obj>(
+		input: T,
+	): input is {
+		[k in keyof T]: k extends Start | End ? T[k] & Dayjs : T[k];
+	} {
+		const start = input[this.start];
+		const end = input[this.end];
+		return (
+			dayjsUtc.isDayjs(start) &&
+			start.isValid() &&
+			dayjsUtc.isDayjs(end) &&
+			end.isValid()
+		);
 	}
-	return false;
-};
+
+	hasRangeArray<T extends Obj>(
+		input: T[],
+	): input is {
+		[k in keyof T]: k extends Start | End ? T[k] & Dayjs : T[k];
+	}[] {
+		return input.every((row) => this.hasRange(row));
+	}
+
+	hasDateRangeOverlap(...ranges: Range[]) {
+		for (let i = 0; i < ranges.length; i++) {
+			for (let j = 0; j < ranges.length; j++) {
+				if (i === j) continue;
+				const a = ranges[i] as Range;
+				const b = ranges[j] as Range;
+				const overlap = this.includeEdgesInOverlap
+					? !a[this.end].isBefore(b[this.end]) &&
+					  !a[this.start].isAfter(b[this.end])
+					: a[this.end].isAfter(b[this.start]) &&
+					  a[this.start].isBefore(b[this.end]);
+				if (overlap) return true;
+			}
+		}
+		return false;
+	}
+
+	createMinuteArray(range: Range) {
+		const [startMins, endMins] = this.asMinutes(range);
+		const minuteArr = [];
+		let idx = startMins;
+		while (true) {
+			if (idx === this.EOD) idx = 0;
+			minuteArr.push(idx);
+			if (idx === endMins) break;
+			idx++;
+		}
+		return minuteArr;
+	}
+
+	getMinutes(range: Range) {
+		const [startMins, endMins] = this.asMinutes(range);
+		return (
+			(endMins < startMins ? this.EOD : endMins) -
+			startMins +
+			(endMins < startMins ? endMins : 0)
+		);
+	}
+
+	createMinuteMap(range: Range) {
+		const [startMins, endMins] = this.asMinutes(range);
+		const map = new Map<number, true>();
+		let idx = startMins;
+		while (true) {
+			if (idx === this.EOD) idx = 0;
+			map.set(idx, true);
+			if (idx === endMins) break;
+			idx++;
+		}
+		return map;
+	}
+
+	doMinutesOverlap = (...ranges: Range[]) => {
+		const map = new Map<number, true>();
+		for (const range of ranges) {
+			const [startMins, endMins] = this.asMinutes(range);
+			let idx = startMins;
+			while (true) {
+				if (idx === this.EOD) idx = 0;
+				if (
+					map.get(idx) &&
+					(this.includeEdgesInOverlap || (idx !== startMins && idx !== endMins))
+				)
+					return true;
+				map.set(idx, true);
+				if (idx === endMins) break;
+				idx++;
+			}
+		}
+		return false;
+	};
+
+	areMinutesContained = (parent: Range, ...ranges: Range[]) => {
+		if (!ranges.length) return true;
+		const map = this.createMinuteMap(parent);
+		for (const range of ranges) {
+			const [startMins, endMins] = this.asMinutes(range);
+			let idx = startMins;
+			while (true) {
+				if (idx === this.EOD) idx = 0;
+				if (!map.has(idx)) return false;
+
+				if (idx === endMins) break;
+				idx++;
+			}
+		}
+		return true;
+	};
+
+	private asMinutes(inp: Range) {
+		const startMins = inp[this.start].hour() * 60 + inp[this.start].minute();
+		const endMins = inp[this.end].hour() * 60 + inp[this.end].minute();
+		return [startMins, endMins] as const;
+	}
+}
