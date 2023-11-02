@@ -9,6 +9,7 @@ const config = {
 		'plugin:@typescript-eslint/stylistic-type-checked',
 		'plugin:import/recommended',
 		'plugin:import/typescript',
+		'plugin:n/recommended',
 		'prettier',
 	],
 	parser: '@typescript-eslint/parser',
@@ -20,7 +21,10 @@ const config = {
 	},
 	plugins: ['import', 'unused-imports', '@typescript-eslint'],
 	settings: {
-		'import/resolver': { node: true, typescript: true },
+		'import/resolver': {
+			node: true,
+			typescript: true,
+		},
 	},
 	rules: {
 		'array-callback-return': ['warn', { checkForEach: true }],
@@ -28,7 +32,6 @@ const config = {
 		'default-case-last': 'warn',
 		eqeqeq: 'error',
 		'func-names': ['warn', 'never'],
-		'func-style': 'warn',
 		'guard-for-in': 'warn',
 		indent: 'off',
 		'logical-assignment-operators': 'warn',
@@ -58,9 +61,12 @@ const config = {
 		'no-param-reassign': 'warn',
 		'no-promise-executor-return': 'warn',
 		'no-restricted-imports': [
-			'error',
+			'warn',
 			{
-				patterns: [{ group: ['../*'], message: 'Do not use parent imports' }],
+				paths: [
+					{ name: 'buffer', message: 'Use Uint8Array instead.' },
+					{ name: 'node:buffer', message: 'Use Uint8Array instead.' },
+				],
 			},
 		],
 		'no-restricted-syntax': [
@@ -90,23 +96,24 @@ const config = {
 		'prefer-numeric-literals': 'warn',
 		'prefer-object-has-own': 'warn',
 		'prefer-object-spread': 'warn',
+		'prefer-const': 'warn',
 		'prefer-promise-reject-errors': 'warn',
 		'prefer-regex-literals': ['warn', { disallowRedundantWrapping: true }],
 		'prefer-template': 'warn',
 		'require-unicode-regexp': 'warn',
 		yoda: 'warn',
+		strict: ['error', 'global'],
 		'no-restricted-globals': [
 			'warn',
-			{ name: '__dirname', message: 'Not available in ESM' },
-			{ name: '__filename', message: 'Not available in ESM' },
+			{ name: '__dirname', message: 'Import __dirname from config instead' },
+			{ name: '__filename', message: 'Import __filename from config instead' },
+			{ name: 'Buffer', message: 'Use Uint8Array instead.' },
 		],
+		'n/no-process-env': 'warn',
+		'n/no-unpublished-import': 'off',
+		'n/no-missing-import': 'off',
 
 		'import/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
-		'import/extensions': [
-			'warn',
-			'never',
-			{ helpers: 'always', json: 'always', styles: 'always', test: 'always' },
-		],
 		'import/first': 'warn',
 		'import/newline-after-import': 'warn',
 		'import/no-commonjs': 'warn',
@@ -146,7 +153,7 @@ const config = {
 
 		'@typescript-eslint/consistent-type-exports': 'warn',
 		'@typescript-eslint/consistent-type-imports': 'warn',
-		'@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
+		'@typescript-eslint/consistent-type-definitions': 'off',
 		'@typescript-eslint/default-param-last': 'warn',
 		'no-dupe-class-members': 'off',
 		'@typescript-eslint/no-dupe-class-members': 'warn',
@@ -187,12 +194,20 @@ const config = {
 		],
 		'@typescript-eslint/return-await': 'warn',
 		'@typescript-eslint/switch-exhaustiveness-check': 'warn',
+		'@typescript-eslint/restrict-template-expressions': [
+			'warn',
+			{ allowAny: true },
+		],
 		'@typescript-eslint/ban-types': [
 			'warn',
 			{
 				types: {
 					'{}': false,
 					extendDefaults: true,
+					Buffer: {
+						message: 'Use Uint8Array instead.',
+						suggest: ['Uint8Array'],
+					},
 				},
 			},
 		],
@@ -215,14 +230,14 @@ const config = {
 		{
 			files: ['**/*.cjs'],
 			rules: {
-				'no-restricted-globals': 'off',
 				'import/no-commonjs': 'off',
+				'no-restricted-globals': 'off',
 			},
 		},
 		{
-			files: ['**/*.d.ts'],
+			files: ['type-challenges/**/*'],
 			rules: {
-				'@typescript-eslint/consistent-type-definitions': 'off',
+				'@typescript-eslint/no-explicit-any': 'off',
 			},
 		},
 	],

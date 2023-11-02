@@ -11,12 +11,13 @@
 - `eslint-config-prettier`
 - `eslint-import-resolver-typescript`
 - `eslint-plugin-import`
+- `eslint-plugin-n`
 - `eslint-plugin-unused-imports`
 - `eslint-plugin-vitest`
 - `cspell`
 
 ```bash
-pnpm add -D eslint @types/eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-unused-imports eslint-plugin-vitest cspell
+pnpm add -D eslint @types/eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-n eslint-plugin-unused-imports eslint-plugin-vitest cspell
 ```
 
 ---
