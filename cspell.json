@@ -29,6 +29,7 @@
 		"coverage",
 		"trace",
 		"./type-challenges",
-		"./scripts/md-links-to-csv/*.{md,csv}"
+		"./scripts/md-links-to-csv/*.{md,csv}",
+		"tsconfig.vitest-temp.json"
 	]
 }
