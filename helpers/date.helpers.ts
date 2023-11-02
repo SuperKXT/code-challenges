@@ -55,6 +55,8 @@ export const dayNames = [
 	'Saturday',
 ] as const;
 
+export type DayName = (typeof dayNames)[number];
+
 export class DateRange<
 	Start extends string,
 	End extends string,
