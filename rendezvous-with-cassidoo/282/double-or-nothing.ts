@@ -3,8 +3,8 @@ import crypto from 'crypto';
 import chalk from 'chalk';
 import prompt from 'prompt';
 
-import { config } from '~/config.js';
-import { confirmPrompt } from '~/helpers/prompt.helpers.js';
+import { config } from '../../config.js';
+import { confirmPrompt } from '../../helpers/prompt.helpers.js';
 
 const MAX_CHOICE = 5;
 const PRIZE = 10;

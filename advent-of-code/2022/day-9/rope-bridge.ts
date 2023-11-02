@@ -1,4 +1,4 @@
-import type { Utils } from '~/types/utils.types.js';
+import type { Utils } from '../../../types/utils.types.js';
 
 const ROW = [0, 1, 2, 3, 4] as const;
 type Row = (typeof ROW)[number];

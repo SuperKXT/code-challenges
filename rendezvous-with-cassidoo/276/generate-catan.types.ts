@@ -1,4 +1,4 @@
-import type { Utils } from '~/types/utils.types.js';
+import type { Utils } from '../../types/utils.types.js';
 
 export const SINGLE_PIECES = ['.', '2', 'C'] as const;
 

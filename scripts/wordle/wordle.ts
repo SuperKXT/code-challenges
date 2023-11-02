@@ -2,9 +2,9 @@ import chalk from 'chalk';
 import argumentParser from 'minimist-lite';
 import { z } from 'zod';
 
-import { config } from '~/config.js';
-
 import { WORDLE_WORDS } from './word-list.js';
+
+import { config } from '../../config.js';
 
 const EXCLUDE_CHARACTERS_REGEX = /\(([a-z]+)\)/giu;
 const VALID_WORD_PATTERN = /((\([a-z]+\))|[a-z*]){5}/iu;

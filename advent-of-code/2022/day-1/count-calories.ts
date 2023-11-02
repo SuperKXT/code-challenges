@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { config } from '~/config.js';
+import { config } from '../../../config.js';
 
 export type CountCaloriesSolution = {
 	maxIndex: number;

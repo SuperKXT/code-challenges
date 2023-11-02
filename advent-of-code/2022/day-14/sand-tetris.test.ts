@@ -1,9 +1,9 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { config } from '~/config.js';
-
 import { sandTetris } from './sand-tetris.js';
+
+import { config } from '../../../config.js';
 
 const EXAMPLE = `498,4 -> 498,6 -> 496,6
 503,4 -> 502,4 -> 502,9 -> 494,9`;

@@ -3,7 +3,7 @@ import path from 'path';
 
 import { z } from 'zod';
 
-import { config } from '~/config.js';
+import { config } from '../../../config.js';
 
 const ARG_1_SCHEMA = z.enum(['a', 'b', 'c']);
 type VersusMove = z.infer<typeof ARG_1_SCHEMA>;

@@ -2,10 +2,10 @@ import { appendFileSync, existsSync, mkdirSync, rmSync } from 'fs';
 import { tmpdir } from 'os';
 import path from 'path';
 
-import { config } from '~/config.js';
-
 import { getRenameLogs, recursiveRename } from './recursive-rename.js';
 import { RENAME_ERRORS } from './recursive-rename.types.js';
+
+import { config } from '../../config.js';
 
 import type { RenameOptions, RenameResult } from './recursive-rename.types.js';
 

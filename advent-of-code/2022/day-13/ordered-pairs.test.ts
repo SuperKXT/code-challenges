@@ -1,9 +1,9 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { config } from '~/config.js';
-
 import { orderedPairs } from './ordered-pairs.js';
+
+import { config } from '../../../config.js';
 
 const EXAMPLE = `[1,1,3,1,1]
 [1,1,5,1,1]

@@ -1,9 +1,9 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { config } from '~/config.js';
-
 import { treeHouse } from './tree-house.js';
+
+import { config } from '../../../config.js';
 
 const EXAMPLE = ['30373', '25512', '65332', '33549', '35390'].join('\n');
 

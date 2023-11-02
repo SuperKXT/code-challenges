@@ -1,9 +1,9 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { config } from '~/config.js';
-
 import { tuningTrouble } from './tuning-trouble.js';
+
+import { config } from '../../../config.js';
 
 type Solution = ReturnType<typeof tuningTrouble>;
 

@@ -1,9 +1,9 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { config } from '~/config.js';
-
 import { raumdeuter } from './raumdeuter.js';
+
+import { config } from '../../../config.js';
 
 const EXAMPLE = [
 	'$ cd /',

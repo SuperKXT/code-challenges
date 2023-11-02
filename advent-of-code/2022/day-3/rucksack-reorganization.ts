@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { config } from '~/config.js';
+import { config } from '../../../config.js';
 
 const LOWER_CASE = 'abcdefghijklmnopqrstuvwxyz' as const;
 const UPPER_CASE = LOWER_CASE.toUpperCase() as Uppercase<typeof LOWER_CASE>;

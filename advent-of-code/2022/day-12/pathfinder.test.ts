@@ -1,9 +1,9 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { config } from '~/config.js';
-
 import { pathfinder } from './pathfinder.js';
+
+import { config } from '../../../config.js';
 
 /** cSpell: disable */
 const EXAMPLE = [
