@@ -3,6 +3,8 @@ import path from 'path';
 
 import { z } from 'zod';
 
+import { config } from '~/config.js';
+
 const ARG_1_SCHEMA = z.enum(['a', 'b', 'c']);
 type VersusMove = z.infer<typeof ARG_1_SCHEMA>;
 
@@ -95,7 +97,10 @@ export type RockPaperScissorsSolution = {
 
 export const rockPaperScissors =
 	async (): Promise<RockPaperScissorsSolution> => {
-		const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
+		const input = await readFile(
+			path.join(config.dirname, 'input.txt'),
+			'utf-8',
+		);
 
 		const score = input
 			.toLowerCase()

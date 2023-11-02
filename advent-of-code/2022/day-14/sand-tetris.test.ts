@@ -1,6 +1,8 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
+import { config } from '~/config.js';
+
 import { sandTetris } from './sand-tetris.js';
 
 const EXAMPLE = `498,4 -> 498,6 -> 496,6
@@ -19,7 +21,7 @@ test('testing sandTetris against example input', () => {
 
 test('testing sandTetris against real input', async () => {
 	const input = (
-		await readFile(path.join(__dirname, 'input.txt'), 'utf-8')
+		await readFile(path.join(config.dirname, 'input.txt'), 'utf-8')
 	).slice(0, -1);
 	const solution: Solution = {
 		part1: 692,

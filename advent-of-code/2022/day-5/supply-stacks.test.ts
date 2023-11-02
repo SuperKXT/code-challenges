@@ -1,6 +1,8 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
+import { config } from '~/config.js';
+
 import { supplyStacks } from './supply-stacks.js';
 
 const INPUT = [
@@ -27,7 +29,7 @@ test('testing supplyStacks against example input', () => {
 });
 
 test('testing supplyStacks against real input', async () => {
-	const file = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
+	const file = await readFile(path.join(config.dirname, 'input.txt'), 'utf-8');
 	const response = supplyStacks(file);
 	const solution: Solution = {
 		/** cSpell: disable-next-line */

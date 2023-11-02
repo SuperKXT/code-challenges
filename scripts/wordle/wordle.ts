@@ -2,6 +2,8 @@ import chalk from 'chalk';
 import argumentParser from 'minimist-lite';
 import { z } from 'zod';
 
+import { config } from '~/config.js';
+
 import { WORDLE_WORDS } from './word-list.js';
 
 const EXCLUDE_CHARACTERS_REGEX = /\(([a-z]+)\)/giu;
@@ -62,7 +64,7 @@ export const findWordle = (parameters: Arguments): string[] => {
 			regex.test(word),
 	);
 
-	if (process.env.NODE_ENV !== 'test') {
+	if (config.isTest) {
 		console.info(
 			[
 				'Found',
@@ -77,7 +79,7 @@ export const findWordle = (parameters: Arguments): string[] => {
 
 export type Arguments = z.infer<typeof ARGUMENT_SCHEMA>;
 
-if (process.env.NODE_ENV !== 'test') {
+if (config.isTest) {
 	const args = argumentParser<Arguments>(process.argv.slice(2), {
 		alias: {
 			available: 'a',

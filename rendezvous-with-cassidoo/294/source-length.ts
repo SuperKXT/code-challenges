@@ -1,5 +1,7 @@
 import { readFile } from 'fs/promises';
 
+import { config } from '~/config.js';
+
 export const NUMBER_PERIODS = [
 	'',
 	'thousand',
@@ -82,6 +84,6 @@ export const numberToWords = (number: number): string => {
 };
 
 export const getSourceLength = async (): Promise<string> => {
-	const length = (await readFile(__filename, 'utf-8')).length;
+	const length = (await readFile(config.dirname, 'utf-8')).length;
 	return numberToWords(length);
 };

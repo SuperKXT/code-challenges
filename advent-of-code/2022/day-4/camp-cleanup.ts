@@ -1,6 +1,8 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
+import { config } from '~/config.js';
+
 export const campCleanup = async (
 	override?: string,
 ): Promise<{
@@ -8,7 +10,8 @@ export const campCleanup = async (
 	fullOverlap: number;
 }> => {
 	const input =
-		override ?? (await readFile(path.join(__dirname, 'input.txt'), 'utf-8'));
+		override ??
+		(await readFile(path.join(config.dirname, 'input.txt'), 'utf-8'));
 
 	return input.split('\n').reduce(
 		(object, row) => {

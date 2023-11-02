@@ -164,7 +164,6 @@ type IsKey<K extends string> = K extends '' ? false : IsKeyHelper<K>;
 
 declare const KEY: unique symbol;
 
-// eslint-disable-next-line func-style
 function assertArrayIndex<A extends readonly unknown[], K extends string>(
 	array: number extends A['length'] ? A : never,
 	key: IsKey<K> extends true ? K : never,

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 /* eslint-disable unused-imports/no-unused-vars */
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
+
 /* eslint-disable no-multi-assign */
 /* eslint-disable import/first */
 /* eslint-disable @typescript-eslint/ban-ts-comment */

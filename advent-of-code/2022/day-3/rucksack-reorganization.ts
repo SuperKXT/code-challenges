@@ -1,6 +1,8 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
+import { config } from '~/config.js';
+
 const LOWER_CASE = 'abcdefghijklmnopqrstuvwxyz' as const;
 const UPPER_CASE = LOWER_CASE.toUpperCase() as Uppercase<typeof LOWER_CASE>;
 const ITEMS = `${LOWER_CASE}${UPPER_CASE}` as const;
@@ -12,7 +14,8 @@ export const rucksackReorganization = async (
 	badgePriority: number;
 }> => {
 	const input =
-		override ?? (await readFile(path.join(__dirname, 'input.txt'), 'utf-8'));
+		override ??
+		(await readFile(path.join(config.dirname, 'input.txt'), 'utf-8'));
 
 	let commonPriority = 0;
 	let badgePriority = 0;

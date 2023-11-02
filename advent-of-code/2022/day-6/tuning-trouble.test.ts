@@ -1,6 +1,8 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
+import { config } from '~/config.js';
+
 import { tuningTrouble } from './tuning-trouble.js';
 
 type Solution = ReturnType<typeof tuningTrouble>;
@@ -61,7 +63,7 @@ test.each(TESTS)(
 );
 
 test('testing turningTrouble against real input', async () => {
-	const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
+	const input = await readFile(path.join(config.dirname, 'input.txt'), 'utf-8');
 	const response = tuningTrouble(input);
 	const solution: Solution = {
 		messageMarker: 3476,

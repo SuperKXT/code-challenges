@@ -1,6 +1,8 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
+import { config } from '~/config.js';
+
 import { pathfinder } from './pathfinder.js';
 
 /** cSpell: disable */
@@ -25,7 +27,7 @@ test('testing pathFinder against example input', () => {
 });
 
 test('testing pathFinder against real input', async () => {
-	const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
+	const input = await readFile(path.join(config.dirname, 'input.txt'), 'utf-8');
 	const solution: Solution = {
 		fewestSteps: 0,
 		part2: 0,

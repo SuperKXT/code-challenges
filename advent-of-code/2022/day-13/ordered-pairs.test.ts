@@ -1,6 +1,8 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
+import { config } from '~/config.js';
+
 import { orderedPairs } from './ordered-pairs.js';
 
 const EXAMPLE = `[1,1,3,1,1]
@@ -40,7 +42,7 @@ test('testing orderedPairs against example input', () => {
 
 test('testing orderedPairs against real input', async () => {
 	const input = (
-		await readFile(path.join(__dirname, 'input.txt'), 'utf-8')
+		await readFile(path.join(config.dirname, 'input.txt'), 'utf-8')
 	).slice(0, -1);
 	const solution: Solution = {
 		indicesSum: 5013,

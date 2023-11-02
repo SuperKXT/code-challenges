@@ -54,9 +54,7 @@ type _cases = [
 	>,
 	Expect<
 		Equal<
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			Unique<[unknown, unknown, any, any, never, never]>,
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			[unknown, any, never]
 		>
 	>,

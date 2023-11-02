@@ -2,6 +2,8 @@ import { appendFileSync, existsSync, mkdirSync, rmSync } from 'fs';
 import { tmpdir } from 'os';
 import path from 'path';
 
+import { config } from '~/config.js';
+
 import { getRenameLogs, recursiveRename } from './recursive-rename.js';
 import { RENAME_ERRORS } from './recursive-rename.types.js';
 
@@ -178,6 +180,6 @@ test('testing recursiveRename for invalid path', async () => {
 		recursiveRename('./invalid-path', { yes: true }),
 	).rejects.toThrow(RENAME_ERRORS.badPath);
 	await expect(
-		recursiveRename(path.join(__dirname, 'README.md'), { yes: true }),
+		recursiveRename(path.join(config.dirname, 'README.md'), { yes: true }),
 	).rejects.toThrow(RENAME_ERRORS.badPath);
 });

@@ -1,6 +1,8 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
+import { config } from '~/config.js';
+
 import { ropeBridge } from './rope-bridge.js';
 
 const EXAMPLE = ['R 4', 'U 4', 'L 3', 'D 1', 'R 4', 'D 1', 'L 5', 'R 2'].join(
@@ -41,7 +43,7 @@ test('testing ropeBridge against 2nd example input', () => {
 });
 
 test('testing ropeBridge against real input', async () => {
-	const input = await readFile(path.join(__dirname, 'input.txt'), 'utf-8');
+	const input = await readFile(path.join(config.dirname, 'input.txt'), 'utf-8');
 	const solution: Solution = {
 		firstTail: 5902,
 		lastTail: 2445,

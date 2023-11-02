@@ -6,6 +6,7 @@ import argumentParser from 'minimist-lite';
 import prompt from 'prompt';
 import { z } from 'zod';
 
+import { config } from '~/config.js';
 import { stringifyError } from '~/helpers/error.helpers.js';
 import { formatToken } from '~/helpers/format-token.helpers.js';
 
@@ -301,7 +302,7 @@ export const recursiveRename = async (
 	return results;
 };
 
-if (process.env.NODE_ENV !== 'test') {
+if (config.isTest) {
 	try {
 		const args = argumentParser<Params>(process.argv.slice(2), {
 			alias: {

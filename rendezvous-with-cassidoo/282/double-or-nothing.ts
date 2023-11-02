@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import chalk from 'chalk';
 import prompt from 'prompt';
 
+import { config } from '~/config.js';
 import { confirmPrompt } from '~/helpers/prompt.helpers.js';
 
 const MAX_CHOICE = 5;
@@ -47,4 +48,4 @@ export const doubleOrNothing = async (): Promise<number> => {
 	return score;
 };
 
-if (process.env.NODE_ENV !== 'test') doubleOrNothing().catch(console.error);
+if (config.isTest) doubleOrNothing().catch(console.error);
