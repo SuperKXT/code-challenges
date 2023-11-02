@@ -10,4 +10,4 @@ const hashPassword = (password: string) => {
 	return hash;
 };
 
-console.info(hashPassword('admin@irfan'));
+console.info(hashPassword('admin@user'));
