@@ -42,7 +42,7 @@ test('testing omit with a single key', () => {
 test('testing omit with multiple keys', () => {
 	const omitted = { first: 1 };
 	const object = { ...omitted, second: 2, third: 3 };
-	const result = omit(object, ['second', 'third']);
+	const result = omit(object, 'second', 'third');
 	expect(result).toStrictEqual(omitted);
 	assertType<typeof omitted>(result);
 });
@@ -58,7 +58,7 @@ test('testing pick with a single key', () => {
 test('testing pick with multiple keys', () => {
 	const picked = { a: 1, b: 2 };
 	const object = { ...picked, c: 3 };
-	const result = pick(object, ['a', 'b']);
+	const result = pick(object, 'a', 'b');
 	expect(result).toStrictEqual(picked);
 	assertType<typeof picked>(result);
 });

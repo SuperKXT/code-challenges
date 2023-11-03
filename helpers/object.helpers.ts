@@ -17,26 +17,24 @@ export const objectValues = <T extends Obj>(object: T): T[keyof T][] => {
 };
 
 export const omit = <Type extends Obj, ToOmit extends keyof Type>(
-	object: Type,
-	keys: ToOmit | ToOmit[],
+	obj: Type,
+	...keys: ToOmit[]
 ): Utils.prettify<Omit<Type, ToOmit>> => {
-	const keyArray = Array.isArray(keys) ? keys : [keys];
 	const omitted = {} as Record<string, unknown>;
-	for (const key in object) {
-		if (!Object.hasOwn(object, key) || keyArray.includes(key)) continue;
-		omitted[key] = object[key];
+	for (const key in obj) {
+		if (!Object.hasOwn(obj, key) || keys.includes(key)) continue;
+		omitted[key] = obj[key];
 	}
 	return omitted as Utils.prettify<Omit<Type, ToOmit>>;
 };
 
 export const pick = <Type extends Obj, ToPick extends keyof Type>(
-	object: Type,
-	keys: ToPick | ToPick[],
+	obj: Type,
+	...keys: ToPick[]
 ): Utils.prettify<Pick<Type, ToPick>> => {
-	const keyArray = Array.isArray(keys) ? keys : [keys];
-	const obj = {} as Utils.prettify<Pick<Type, ToPick>>;
-	for (const key of keyArray) if (key in object) obj[key] = object[key];
-	return obj;
+	const picked = {} as Utils.prettify<Pick<Type, ToPick>>;
+	for (const key of keys) if (key in obj) picked[key] = obj[key];
+	return picked;
 };
 
 export const deepMerge = <T extends Obj, U extends Obj>(
