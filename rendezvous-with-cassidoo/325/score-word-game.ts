@@ -1,25 +1,7 @@
-type prettify<T> = { [k in keyof T]: T[k] } & {};
-
 type tuple<
 	size extends number,
 	tup extends 1[] = [],
 > = tup['length'] extends size ? tup : tuple<size, [...tup, 1]>;
-
-const alphabet = 'abcdefghijklmnopqrstuvwxyz' as const;
-
-type offset = tuple<98>;
-
-export type LetterScores<
-	tup extends string = typeof alphabet,
-	map extends Record<string, number> = {},
-	idx extends 1[] = [],
-> = tup extends `${infer first}${infer rest}`
-	? LetterScores<
-			rest,
-			map & { [k in first]: [...offset, ...idx]['length'] },
-			[...idx, 1]
-	  >
-	: prettify<map>;
 
 type shift<T extends number[]> = T extends [
 	unknown,
@@ -135,3 +117,21 @@ export const scoreWordGame = <
 	}
 	return winner.word as never;
 };
+
+type prettify<T> = { [k in keyof T]: T[k] } & {};
+
+const alphabet = 'abcdefghijklmnopqrstuvwxyz' as const;
+
+type offset = tuple<98>;
+
+export type LetterScores<
+	tup extends string = typeof alphabet,
+	map extends Record<string, number> = {},
+	idx extends 1[] = [],
+> = tup extends `${infer first}${infer rest}`
+	? LetterScores<
+			rest,
+			map & { [k in first]: [...offset, ...idx]['length'] },
+			[...idx, 1]
+	  >
+	: prettify<map>;
