@@ -45,6 +45,22 @@ test('test equal type util', () => {
 	assertType<[trueTests, falseTests]>([true, true]);
 });
 
+test('test satisfies type util', () => {
+	type _tests = [
+		Utils.satisfies<1, 1>,
+		Utils.satisfies<1 | 2 | 3, number>,
+		Utils.satisfies<[1, 2, 3], unknown[]>,
+		Utils.satisfies<{ x: 1; y: 2; z: 3 }, { x: 1; y: 2 }>,
+		Utils.satisfies<(val: string) => void, (...args: any[]) => unknown>,
+		// @ts-expect-error does not satisfies
+		Utils.satisfies<1 | 2, string>,
+		// @ts-expect-error does not satisfies
+		Utils.satisfies<{ x: 1 }, { x: 1; y: 2 }>,
+		// @ts-expect-error does not satisfies
+		Utils.satisfies<[1, 2, '3'], number[]>,
+	];
+});
+
 test('test dropFirst type util', () => {
 	type tests = trueTuple<
 		[
