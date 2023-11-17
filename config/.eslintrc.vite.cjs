@@ -26,7 +26,6 @@ const config = {
 		'default-case-last': 'warn',
 		eqeqeq: 'warn',
 		'func-names': ['warn', 'never'],
-		'func-style': 'warn',
 		'guard-for-in': 'warn',
 		indent: 'off',
 		'logical-assignment-operators': 'warn',
@@ -58,7 +57,13 @@ const config = {
 		'no-restricted-imports': [
 			'error',
 			{
-				patterns: [{ group: ['../*'], message: 'Do not use parent imports' }],
+				paths: [
+					{
+						name: 'dayjs',
+						importNames: ['default'],
+						message: 'Please import dayjsUtc helper from `~/helpers/date`.',
+					},
+				],
 			},
 		],
 		'no-restricted-syntax': [
@@ -95,11 +100,7 @@ const config = {
 		yoda: 'warn',
 
 		'import/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
-		'import/extensions': [
-			'warn',
-			'never',
-			{ helpers: 'always', json: 'always', styles: 'always', test: 'always' },
-		],
+		'import/extensions': ['warn', 'ignorePackages'],
 		'import/first': 'warn',
 		'import/newline-after-import': 'warn',
 		'import/no-commonjs': 'warn',
@@ -140,7 +141,7 @@ const config = {
 
 		'@typescript-eslint/consistent-type-exports': 'warn',
 		'@typescript-eslint/consistent-type-imports': 'warn',
-		'@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
+		'@typescript-eslint/consistent-type-definitions': 'off',
 		'@typescript-eslint/default-param-last': 'warn',
 		'no-dupe-class-members': 'off',
 		'@typescript-eslint/no-dupe-class-members': 'warn',
@@ -273,12 +274,6 @@ const config = {
 			env: { es2021: true, node: true },
 			rules: {
 				'import/no-nodejs-modules': 'off',
-			},
-		},
-		{
-			files: ['**/*.d.ts'],
-			rules: {
-				'@typescript-eslint/consistent-type-definitions': 'off',
 			},
 		},
 	],

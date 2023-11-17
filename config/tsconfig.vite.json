@@ -20,11 +20,9 @@
 		// modules
 		"module": "esnext",
 		"moduleResolution": "Bundler",
+		"allowImportingTsExtensions": true,
 		"resolveJsonModule": true,
 		"types": ["vitest/globals"],
-		"paths": {
-			"~/*": ["./src/*"]
-		},
 
 		// emit
 		"downlevelIteration": true,
@@ -53,6 +51,6 @@
 		// completeness
 		"skipLibCheck": true
 	},
-	"include": ["**/*", "./.*.cjs", ".pm2/pm2.config.cjs"],
+	"include": ["**/*", "./.*.cjs", "pm2/pm2.config.cjs"],
 	"exclude": ["node_modules", "build", "dist", "coverage", "public"]
 }
