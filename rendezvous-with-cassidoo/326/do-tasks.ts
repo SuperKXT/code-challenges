@@ -21,8 +21,8 @@ type removeFromTuple<
 > = idx['length'] extends toRemove
 	? tup
 	: tup extends [unknown, ...infer rest]
-	? removeFromTuple<rest, toRemove, [...idx, 1]>
-	: [];
+	  ? removeFromTuple<rest, toRemove, [...idx, 1]>
+	  : [];
 
 type greaterThanDigits<
 	T extends number[],
@@ -32,10 +32,10 @@ type greaterThanDigits<
 > = T['length'] extends 0
 	? false
 	: T[0] extends U[0]
-	? greaterThanDigits<removeFromTuple<T, 1>, removeFromTuple<U, 1>>
-	: UF[TF['length']] extends undefined
-	? true
-	: false;
+	  ? greaterThanDigits<removeFromTuple<T, 1>, removeFromTuple<U, 1>>
+	  : UF[TF['length']] extends undefined
+	    ? true
+	    : false;
 
 type greaterThan<
 	T extends number,
@@ -45,10 +45,10 @@ type greaterThan<
 > = T extends U
 	? false
 	: TA['length'] extends UA['length']
-	? greaterThanDigits<TA, UA>
-	: UA[TA['length']] extends undefined
-	? true
-	: false;
+	  ? greaterThanDigits<TA, UA>
+	  : UA[TA['length']] extends undefined
+	    ? true
+	    : false;
 
 type includes<tup extends unknown[], val> = tup extends [
 	infer first,
@@ -101,13 +101,13 @@ type DoWork<
 > = timeTup extends []
 	? sortNames<tasks, names>
 	: minTask extends Task
-	? DoWork<
-			tasks,
-			time,
-			removeFromTuple<timeTup, minTask['duration']>,
-			[...names, minTask['name']]
-	  >
-	: sortNames<tasks, names>;
+	  ? DoWork<
+				tasks,
+				time,
+				removeFromTuple<timeTup, minTask['duration']>,
+				[...names, minTask['name']]
+	    >
+	  : sortNames<tasks, names>;
 
 export const doWork = <
 	const Tasks extends readonly Task[],

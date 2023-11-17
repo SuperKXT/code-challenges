@@ -47,8 +47,8 @@ type NegativeMinusOne<T extends string> = T extends `${infer D extends
 type MinusOne<T extends number> = T extends 0
 	? -1
 	: `${T}` extends `-${infer U extends number}`
-	? ParseInt<`-${ReverseString<NegativeMinusOne<ReverseString<`${U}`>>>}`>
-	: ParseInt<ReverseString<PositiveMinusOne<ReverseString<`${T}`>>>>;
+	  ? ParseInt<`-${ReverseString<NegativeMinusOne<ReverseString<`${U}`>>>}`>
+	  : ParseInt<ReverseString<PositiveMinusOne<ReverseString<`${T}`>>>>;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

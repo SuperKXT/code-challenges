@@ -32,8 +32,8 @@ export type UnsignedInt<T extends number | string | bigint> =
 	`${T}` extends `-${infer I extends number}`
 		? Integer<I>
 		: `${T}` extends `${infer I extends number}`
-		? Integer<I>
-		: never;
+		  ? Integer<I>
+		  : never;
 
 type ArrayReverse<T extends Digit[], Out extends Digit[] = []> = T extends [
 	...infer Rest extends Digit[],
@@ -67,8 +67,8 @@ type ArrayToNumber<T extends Digit[], R extends string = ''> = T extends [
 ]
 	? ArrayToNumber<Rest, `${R}${F}`>
 	: `${R}` extends `${infer I extends number}`
-	? I
-	: never;
+	  ? I
+	  : never;
 
 type GreaterThanDigits<
 	T extends number[],
@@ -78,10 +78,10 @@ type GreaterThanDigits<
 > = T['length'] extends 0
 	? false
 	: T[0] extends U[0]
-	? GreaterThanDigits<Shift<T>, Shift<U>>
-	: UF[TF['length']] extends undefined
-	? true
-	: false;
+	  ? GreaterThanDigits<Shift<T>, Shift<U>>
+	  : UF[TF['length']] extends undefined
+	    ? true
+	    : false;
 
 type GreaterThan<
 	T extends number,
@@ -91,10 +91,10 @@ type GreaterThan<
 > = T extends U
 	? false
 	: TA['length'] extends UA['length']
-	? GreaterThanDigits<TA, UA>
-	: UA[TA['length']] extends undefined
-	? true
-	: false;
+	  ? GreaterThanDigits<TA, UA>
+	  : UA[TA['length']] extends undefined
+	    ? true
+	    : false;
 
 type Max<T extends number[], M extends number = never> = T extends [
 	infer F extends number,
@@ -134,8 +134,8 @@ type _innerSum<
 			: never
 		: never
 	: Carry extends 0
-	? R
-	: [...R, Carry];
+	  ? R
+	  : [...R, Carry];
 
 export type Sum<
 	A extends string | number | bigint,

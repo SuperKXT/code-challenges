@@ -23,8 +23,8 @@ type MmmPie<
 > = RequiredTuple extends [...PiecesTuple, ...infer R]
 	? MmmPie<never, never, PiecesTuple, R, [...Result, 1]>
 	: RequiredTuple extends []
-	? Result['length']
-	: [...Result, 1]['length'];
+	  ? Result['length']
+	  : [...Result, 1]['length'];
 
 export const mmmPie = <
 	const People extends readonly person[],

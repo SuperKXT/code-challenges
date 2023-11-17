@@ -30,10 +30,10 @@ type AbsoluteIndex<
 > = AbsoluteNo<T> extends T
 	? T
 	: AbsoluteNo<T> extends Idx['length']
-	? Arr['length']
-	: Arr extends [...infer Rest, unknown]
-	? AbsoluteIndex<T, Rest, [...Idx, 1]>
-	: 0;
+	  ? Arr['length']
+	  : Arr extends [...infer Rest, unknown]
+	    ? AbsoluteIndex<T, Rest, [...Idx, 1]>
+	    : 0;
 
 type Slice<
 	Arr extends unknown[],
@@ -47,26 +47,26 @@ type Slice<
 	? Idx['length'] extends AbsEnd
 		? Output
 		: Idx['length'] extends AbsStart
-		? Slice<
-				Rest,
-				never,
-				never,
-				AbsStart,
-				AbsEnd,
-				[...Idx, 1],
-				[...Output, First]
-		  >
-		: Output['length'] extends 0
-		? Slice<Rest, never, never, AbsStart, AbsEnd, [...Idx, 1], Output>
-		: Slice<
-				Rest,
-				never,
-				never,
-				AbsStart,
-				AbsEnd,
-				[...Idx, 1],
-				[...Output, First]
-		  >
+		  ? Slice<
+					Rest,
+					never,
+					never,
+					AbsStart,
+					AbsEnd,
+					[...Idx, 1],
+					[...Output, First]
+		    >
+		  : Output['length'] extends 0
+		    ? Slice<Rest, never, never, AbsStart, AbsEnd, [...Idx, 1], Output>
+		    : Slice<
+						Rest,
+						never,
+						never,
+						AbsStart,
+						AbsEnd,
+						[...Idx, 1],
+						[...Output, First]
+		      >
 	: Output;
 
 /* _____________ Test Cases _____________ */

@@ -6,8 +6,8 @@ type Combine<
 		? `${T}+${Combine<T, V>}`
 		: never
 	: Str extends T
-	? T
-	: never;
+	  ? T
+	  : never;
 
 type Dice = `${number}d${number}`;
 

@@ -57,10 +57,10 @@ type Fill<
 > = Count['length'] extends End
 	? T
 	: T extends [infer First, ...infer Rest]
-	? Flag extends false
-		? [First, ...Fill<Rest, N, Start, End, [...Count, 1]>]
-		: [N, ...Fill<Rest, N, Start, End, [...Count, 1], true>]
-	: T;
+	  ? Flag extends false
+			? [First, ...Fill<Rest, N, Start, End, [...Count, 1]>]
+			: [N, ...Fill<Rest, N, Start, End, [...Count, 1], true>]
+	  : T;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

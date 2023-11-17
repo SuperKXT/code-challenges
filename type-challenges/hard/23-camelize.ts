@@ -36,12 +36,12 @@ type Camelize<T> = T extends unknown[]
 		? [Camelize<F>, ...Camelize<R>]
 		: []
 	: T extends Record<string, unknown>
-	? {
-			[K in keyof T as CamelCase<K & string>]: T[K] extends object
-				? Camelize<T[K]>
-				: T[K];
-	  }
-	: T;
+	  ? {
+				[K in keyof T as CamelCase<K & string>]: T[K] extends object
+					? Camelize<T[K]>
+					: T[K];
+	    }
+	  : T;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

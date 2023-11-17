@@ -40,8 +40,8 @@ type DeepReadonly<T extends object> = {
 	readonly [K in keyof T]: T[K] extends unknown[]
 		? DeepReadonly<T[K]>
 		: T[K] extends Record<string, unknown>
-		? DeepReadonly<T[K]>
-		: T[K];
+		  ? DeepReadonly<T[K]>
+		  : T[K];
 };
 
 /* _____________ Test Cases _____________ */

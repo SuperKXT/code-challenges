@@ -25,8 +25,8 @@ type Replace<
 > = From extends ''
 	? S
 	: S extends `${infer U}${From}${infer V}`
-	? `${U}${To}${V}`
-	: S;
+	  ? `${U}${To}${V}`
+	  : S;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

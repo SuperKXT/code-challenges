@@ -24,8 +24,8 @@ type NumberRange<
 > = Idx['length'] extends H
 	? L | A[number] | H
 	: Idx[L] extends undefined
-	? NumberRange<L, H, [...Idx, 1], A>
-	: NumberRange<L, H, [...Idx, 1], [...A, Idx['length']]>;
+	  ? NumberRange<L, H, [...Idx, 1], A>
+	  : NumberRange<L, H, [...Idx, 1], [...A, Idx['length']]>;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

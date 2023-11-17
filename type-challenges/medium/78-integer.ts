@@ -15,8 +15,8 @@
 type Integer<T extends number> = number extends T
 	? never
 	: `${T}` extends `${number}.${number}`
-	? never
-	: T;
+	  ? never
+	  : T;
 
 type _Integer<T extends number> = `${T}` extends `${bigint}` ? T : never;
 type __Integer<T extends number> = T extends T & 1 ? T : never;

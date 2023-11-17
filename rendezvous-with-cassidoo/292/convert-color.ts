@@ -66,8 +66,8 @@ const rgbToHsl = (
 		lightness < 0.5
 			? range / totalLuminance
 			: inverseTotal === 0
-			? 0
-			: range / inverseTotal;
+			  ? 0
+			  : range / inverseTotal;
 	const redMax = range === 0 ? 0 : (green - blue) / range;
 	const greenMax = (blue - red) / range + 2;
 	const blueMax = (red - green) / range + 4;
@@ -95,14 +95,14 @@ const hslToRgb = (
 		hueI <= 1
 			? [chroma, x, 0]
 			: hueI <= 2
-			? [x, chroma, 0]
-			: hueI <= 3
-			? [0, chroma, x]
-			: hueI <= 4
-			? [0, x, chroma]
-			: hueI <= 5
-			? [x, 0, chroma]
-			: [chroma, 0, x];
+			  ? [x, chroma, 0]
+			  : hueI <= 3
+			    ? [0, chroma, x]
+			    : hueI <= 4
+			      ? [0, x, chroma]
+			      : hueI <= 5
+			        ? [x, 0, chroma]
+			        : [chroma, 0, x];
 	return values.map((row) => Math.round((row + m) * 255)) as [
 		number,
 		number,

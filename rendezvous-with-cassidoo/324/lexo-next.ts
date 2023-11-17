@@ -9,8 +9,8 @@ type numToTuple<num extends number> = `${num}` extends `${infer first extends
 	digit}${infer rest extends number}`
 	? [first, ...numToTuple<rest>]
 	: num extends digit
-	? [num]
-	: [];
+	  ? [num]
+	  : [];
 
 type tupleToString<T extends digit[]> = T extends [
 	infer first extends digit,
@@ -36,10 +36,10 @@ type lessThanDigits<
 > = T['length'] extends 0
 	? false
 	: T[0] extends U[0]
-	? lessThanDigits<shift<T>, shift<U>>
-	: TF[UF['length']] extends undefined
-	? true
-	: false;
+	  ? lessThanDigits<shift<T>, shift<U>>
+	  : TF[UF['length']] extends undefined
+	    ? true
+	    : false;
 
 type lessThan<
 	T extends number,
@@ -49,10 +49,10 @@ type lessThan<
 > = T extends U
 	? false
 	: TA['length'] extends UA['length']
-	? lessThanDigits<TA, UA>
-	: TA[UA['length']] extends undefined
-	? true
-	: false;
+	  ? lessThanDigits<TA, UA>
+	  : TA[UA['length']] extends undefined
+	    ? true
+	    : false;
 
 export type LexoNext<
 	num extends number,

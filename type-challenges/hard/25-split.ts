@@ -21,12 +21,12 @@
 type Split<S extends string, SEP extends string> = string extends S
 	? string[]
 	: S extends `${infer F}${SEP}${infer L}`
-	? L extends ''
-		? [F]
-		: [F, ...Split<L, SEP>]
-	: SEP extends ''
-	? []
-	: [S];
+	  ? L extends ''
+			? [F]
+			: [F, ...Split<L, SEP>]
+	  : SEP extends ''
+	    ? []
+	    : [S];
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

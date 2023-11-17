@@ -11,8 +11,8 @@ type smallest<T extends number[], curr extends 1[] = []> = T extends [
 			curr extends []
 				? tuple<first>
 				: curr extends [...tuple<first>, ...number[]]
-				? tuple<first>
-				: curr
+				  ? tuple<first>
+				  : curr
 	  >
 	: curr['length'];
 
@@ -40,8 +40,8 @@ type isEven<
 > = tup extends [...idx, ...idx]
 	? true
 	: tup extends [...idx, ...idx, 1]
-	? false
-	: isEven<never, tup, [...idx, 1]>;
+	  ? false
+	  : isEven<never, tup, [...idx, 1]>;
 
 type unReadonly<T extends readonly unknown[]> = T extends readonly [
 	...infer arr,
@@ -64,8 +64,8 @@ type SeparateAndSort<
 			first extends 0
 				? res
 				: isEven<first> extends true
-				? [[...res[0], first], res[1]]
-				: [res[0], [...res[1], first]]
+				  ? [[...res[0], first], res[1]]
+				  : [res[0], [...res[1], first]]
 	  >
 	: deepReadonly<res>;
 

@@ -82,10 +82,10 @@ export const sandTetris = (input: string): Solution => {
 						to.row < from.row
 							? 'left'
 							: to.row > from.row
-							? 'right'
-							: to.col < from.col
-							? 'up'
-							: 'down';
+							  ? 'right'
+							  : to.col < from.col
+							    ? 'up'
+							    : 'down';
 
 					const curr = new Coord(from);
 

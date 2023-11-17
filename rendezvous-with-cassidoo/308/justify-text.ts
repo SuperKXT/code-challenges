@@ -38,8 +38,8 @@ type lines<
 			: lines<rest, len, lenTup, [...result, currLine], [first]>
 		: lines<rest, len, lenTup, result, [...currLine, first]>
 	: currLine extends []
-	? result
-	: [...result, currLine];
+	  ? result
+	  : [...result, currLine];
 
 type spacesRequired<
 	T extends readonly string[],
@@ -58,8 +58,8 @@ type divide<
 > = T extends [...U, ...infer rest]
 	? divide<rest, U, [...result, 1]>
 	: T extends []
-	? result['length']
-	: [...result, 1]['length'];
+	  ? result['length']
+	  : [...result, 1]['length'];
 
 type spacesPerWordRequired<
 	spaces extends ' '[],
@@ -77,8 +77,8 @@ type divideSpaces<
 > = current['length'] extends spacesPerWord
 	? { left: spaces; current: current }
 	: spaces extends [infer first extends ' ', ...infer rest extends ' '[]]
-	? divideSpaces<rest, spacesPerWord, [...current, first]>
-	: { left: spaces; current: current };
+	  ? divideSpaces<rest, spacesPerWord, [...current, first]>
+	  : { left: spaces; current: current };
 
 type justifyLine<
 	line extends readonly string[],

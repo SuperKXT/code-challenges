@@ -21,8 +21,8 @@
 type Shift<T extends readonly unknown[]> = T extends [unknown, ...infer R]
 	? R
 	: T extends []
-	? []
-	: T;
+	  ? []
+	  : T;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

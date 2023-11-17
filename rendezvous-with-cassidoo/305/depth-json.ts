@@ -27,10 +27,10 @@ type GreaterThanDigits<
 > = T['length'] extends 0
 	? false
 	: T[0] extends U[0]
-	? GreaterThanDigits<Shift<T>, Shift<U>>
-	: UF[TF['length']] extends undefined
-	? true
-	: false;
+	  ? GreaterThanDigits<Shift<T>, Shift<U>>
+	  : UF[TF['length']] extends undefined
+	    ? true
+	    : false;
 
 type lastInUnion<T> = Utils.unionToIntersection<
 	T extends unknown ? (x: T) => 0 : never
@@ -46,10 +46,10 @@ type GreaterThan<
 > = T extends U
 	? false
 	: TA['length'] extends UA['length']
-	? GreaterThanDigits<TA, UA>
-	: UA[TA['length']] extends undefined
-	? true
-	: false;
+	  ? GreaterThanDigits<TA, UA>
+	  : UA[TA['length']] extends undefined
+	    ? true
+	    : false;
 
 type Max<
 	T extends number,

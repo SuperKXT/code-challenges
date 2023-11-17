@@ -41,10 +41,10 @@
 type ToPrimitive<T> = T extends Function
 	? Function
 	: T extends object
-	? { [K in keyof T]: ToPrimitive<T[K]> }
-	: T extends { valueOf: (...args: any[]) => infer U }
-	? U
-	: never;
+	  ? { [K in keyof T]: ToPrimitive<T[K]> }
+	  : T extends { valueOf: (...args: any[]) => infer U }
+	    ? U
+	    : never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

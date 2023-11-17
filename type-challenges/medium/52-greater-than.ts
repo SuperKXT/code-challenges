@@ -52,10 +52,10 @@ type GreaterThanDigits<
 > = T['length'] extends 0
 	? false
 	: T[0] extends U[0]
-	? GreaterThanDigits<Shift<T>, Shift<U>>
-	: UF[TF['length']] extends undefined
-	? true
-	: false;
+	  ? GreaterThanDigits<Shift<T>, Shift<U>>
+	  : UF[TF['length']] extends undefined
+	    ? true
+	    : false;
 
 type GreaterThan<
 	T extends number,
@@ -65,10 +65,10 @@ type GreaterThan<
 > = T extends U
 	? false
 	: TA['length'] extends UA['length']
-	? GreaterThanDigits<TA, UA>
-	: UA[TA['length']] extends undefined
-	? true
-	: false;
+	  ? GreaterThanDigits<TA, UA>
+	  : UA[TA['length']] extends undefined
+	    ? true
+	    : false;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

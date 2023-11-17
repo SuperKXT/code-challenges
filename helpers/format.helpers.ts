@@ -62,8 +62,8 @@ type Join<
 			First extends ''
 				? Result
 				: Result extends ''
-				? First
-				: `${Result}${Separator}${First}`
+				  ? First
+				  : `${Result}${Separator}${First}`
 	  >
 	: Result;
 
@@ -87,20 +87,20 @@ type HundredsToWords<
 ]
 	? HundredsToWords<Rest, Hundred extends 0 ? [] : [Units[Hundred], 'hundred']>
 	: Type extends [infer Ten extends Digit, infer Unit extends Digit]
-	? `${Ten}${Unit}` extends `${infer I extends number}`
-		? Join<
-				[
-					...Result,
-					...(Units[I] extends Exclude<Units[number], ''>
-						? [Units[I]]
-						: [Tens[Ten], Units[Unit]]),
-				],
-				' '
-		  >
-		: never
-	: Type extends [infer Unit extends Digit]
-	? Join<[...Result, Units[Unit]], ' '>
-	: never;
+	  ? `${Ten}${Unit}` extends `${infer I extends number}`
+			? Join<
+					[
+						...Result,
+						...(Units[I] extends Exclude<Units[number], ''>
+							? [Units[I]]
+							: [Tens[Ten], Units[Unit]]),
+					],
+					' '
+			  >
+			: never
+	  : Type extends [infer Unit extends Digit]
+	    ? Join<[...Result, Units[Unit]], ' '>
+	    : never;
 
 type NumberToDigits<
 	T extends number,
@@ -120,8 +120,8 @@ type GroupTuple<
 		? GroupTuple<Rest, Size, [], [[Last, ...Curr], ...Groups]>
 		: GroupTuple<Rest, Size, [Last, ...Curr], Groups>
 	: Curr extends []
-	? Groups
-	: [Curr, ...Groups];
+	  ? Groups
+	  : [Curr, ...Groups];
 
 type FractionalToWords<
 	T extends number,
@@ -151,22 +151,22 @@ type NumberToWords<
 > = number extends T
 	? string
 	: T extends 0
-	? 'zero'
-	: Groups extends [
-			infer First extends HundredsTuple,
-			...infer Rest extends HundredsTuple[],
-	  ]
-	? NumberToWords<
-			T,
-			Rest,
-			[
-				...Result,
-				Postfix extends ''
-					? HundredsToWords<First>
-					: `${HundredsToWords<First>} ${Postfix}`,
-			]
-	  >
-	: JoinNumberChunks<T, Result>;
+	  ? 'zero'
+	  : Groups extends [
+					infer First extends HundredsTuple,
+					...infer Rest extends HundredsTuple[],
+	      ]
+	    ? NumberToWords<
+					T,
+					Rest,
+					[
+						...Result,
+						Postfix extends ''
+							? HundredsToWords<First>
+							: `${HundredsToWords<First>} ${Postfix}`,
+					]
+	      >
+	    : JoinNumberChunks<T, Result>;
 
 export const numberToWords = <T extends number>(
 	number: T,

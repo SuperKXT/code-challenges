@@ -28,8 +28,8 @@ type CombineObj<K extends string, V, O extends object> = Utils.prettify<
 					? O[key]
 					: [...O[key], V]
 				: V extends O[key]
-				? V
-				: [O[key], V]
+				  ? V
+				  : [O[key], V]
 			: V;
 	} & Omit<O, K>
 >;
@@ -44,8 +44,8 @@ type QueryObject<
 type ParseQueryString<T extends string, O extends object = {}> = T extends ''
 	? O
 	: T extends `${infer F}&${infer R}`
-	? ParseQueryString<R, QueryObject<F, O>>
-	: ParseQueryString<'', QueryObject<T, O>>;
+	  ? ParseQueryString<R, QueryObject<F, O>>
+	  : ParseQueryString<'', QueryObject<T, O>>;
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils';

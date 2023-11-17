@@ -30,8 +30,8 @@ export declare namespace Utils {
 	type dropFirst<T extends readonly unknown[]> = number extends T['length']
 		? T
 		: T extends readonly [unknown, ...infer U]
-		? U
-		: [];
+		  ? U
+		  : [];
 
 	/** global type helper to repeat a type `N` times in a tuple */
 	type tuple<N extends number, T = 1> = N extends N
@@ -95,10 +95,10 @@ export declare namespace Utils {
 		[k in keyof T as string extends k
 			? never
 			: number extends k
-			? never
-			: symbol extends k
-			? never
-			: k]: T[k];
+			  ? never
+			  : symbol extends k
+			    ? never
+			    : k]: T[k];
 	};
 
 	/** takes a string literal as input and returns the union of all the characters */
@@ -124,14 +124,14 @@ export declare namespace Utils {
 					: U[k]
 				: U[k]
 			: k extends keyof T
-			? T[k]
-			: never;
+			  ? T[k]
+			  : never;
 	}>;
 
 	/** convert a given union to a union of permutation of tuples */
 	type unionToTuples<T, U = T> = [T] extends [never]
 		? []
 		: U extends U
-		? [U, ...unionToTuples<Exclude<T, U>>]
-		: [];
+		  ? [U, ...unionToTuples<Exclude<T, U>>]
+		  : [];
 }

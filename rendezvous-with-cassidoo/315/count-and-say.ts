@@ -41,8 +41,8 @@ type CountAndSay<
 		? CountAndSay<`${next}${rest}`, str, [...count, 1]>
 		: CountAndSay<`${next}${rest}`, [...str, say<first, count>]>
 	: T extends `${infer first}${string}`
-	? CountAndSay<'', [...str, say<first, count>]>
-	: joinWords<str>;
+	  ? CountAndSay<'', [...str, say<first, count>]>
+	  : joinWords<str>;
 
 export const countAndSay = <const T extends number>(
 	input: T,

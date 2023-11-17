@@ -30,8 +30,8 @@ type NodeToNumber<
 > = T['next'] extends Node
 	? NodeToNumber<T['next'], `${T['curr']}${Curr}`>
 	: `${T['curr']}${Curr}` extends `${infer N extends number}`
-	? N
-	: 0;
+	  ? N
+	  : 0;
 
 type Increment<T extends Node> = T['curr'] extends 9
 	? {
@@ -39,8 +39,8 @@ type Increment<T extends Node> = T['curr'] extends 9
 			next: T['next'] extends Node ? Increment<T['next']> : { curr: 1 };
 	  }
 	: T['next'] extends Node
-	? { curr: Next[T['curr']]; next: T['next'] }
-	: { curr: Next[T['curr']] };
+	  ? { curr: Next[T['curr']]; next: T['next'] }
+	  : { curr: Next[T['curr']] };
 
 type _LengthOfString<
 	S extends string,
@@ -57,8 +57,8 @@ type LengthOfString<
 > = S extends `${string}${string}${string}${string}${string}${string}${string}${string}${string}${infer Rest}`
 	? LengthOfString<Rest, [...R, 1, 1, 1, 1, 1, 1, 1, 1, 1]>
 	: S extends `${string}${infer Rest}`
-	? LengthOfString<Rest, [...R, 1]>
-	: R['length'];
+	  ? LengthOfString<Rest, [...R, 1]>
+	  : R['length'];
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

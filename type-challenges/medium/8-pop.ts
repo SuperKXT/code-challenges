@@ -29,8 +29,8 @@
 type Pop<T extends unknown[]> = T extends [...infer U, unknown]
 	? U
 	: T extends []
-	? T
-	: never;
+	  ? T
+	  : never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

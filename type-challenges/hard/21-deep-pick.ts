@@ -52,10 +52,10 @@ type DeepPick<
 	U extends keyof T
 		? Pick<T, U>
 		: U extends `${infer F extends keyof T & string}.${infer R}`
-		? T[F] extends Record<string, unknown>
-			? Utils.prettify<{ [K in F]: DeepPick<T[F], R> }>
-			: Pick<T, F>
-		: never
+		  ? T[F] extends Record<string, unknown>
+				? Utils.prettify<{ [K in F]: DeepPick<T[F], R> }>
+				: Pick<T, F>
+		  : never
 >;
 
 /* _____________ Test Cases _____________ */

@@ -25,8 +25,8 @@ type ReplaceAll<
 > = From extends ''
 	? S
 	: S extends `${infer U}${From}${infer V}`
-	? `${U}${To}${ReplaceAll<V, From, To>}`
-	: S;
+	  ? `${U}${To}${ReplaceAll<V, From, To>}`
+	  : S;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

@@ -68,10 +68,10 @@ type _separated<C extends string, S extends Strategy, L extends string = ''> = [
 ] extends [Alphabet, WordSeparators]
 	? _separate<C, S>
 	: [C, L] extends [UpperAlphabet, LowerAlphabet]
-	? _separate<C, S>
-	: [C, Not<L, Numeric>] extends [Numeric, true]
-	? _separate<C, S>
-	: _others<C, S>;
+	  ? _separate<C, S>
+	  : [C, Not<L, Numeric>] extends [Numeric, true]
+	    ? _separate<C, S>
+	    : _others<C, S>;
 
 type _first<
 	C extends string,
@@ -103,8 +103,8 @@ export type FormatToken<T extends string, S extends Strategy> = {
 	[K in T]: Trim<K> extends ''
 		? Trim<K>
 		: Trim<K> extends `${infer U}${infer V}`
-		? _InnerFormatToken<U, S, V>
-		: Trim<K>;
+		  ? _InnerFormatToken<U, S, V>
+		  : Trim<K>;
 }[T];
 
 /**

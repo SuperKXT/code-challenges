@@ -44,10 +44,10 @@ type Max<
 > = B extends A
 	? B
 	: AT[BT['length']] extends undefined
-	? B
-	: BT[AT['length']] extends undefined
-	? A
-	: Max<never, never, Unshift<AT>, Unshift<BT>>;
+	  ? B
+	  : BT[AT['length']] extends undefined
+	    ? A
+	    : Max<never, never, Unshift<AT>, Unshift<BT>>;
 
 type _Maximum<
 	T extends number[],
@@ -63,8 +63,8 @@ type Maximum<
 > = T extends []
 	? never
 	: [U] extends [N['length']]
-	? U
-	: Maximum<T, U extends N['length'] ? never : U, [...N, 1]>;
+	  ? U
+	  : Maximum<T, U extends N['length'] ? never : U, [...N, 1]>;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

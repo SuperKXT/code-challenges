@@ -40,8 +40,8 @@ export type MissingLetters<
 	? F extends [0, ...T][T['length']]
 		? Gaps
 		: Flag extends false
-		? MissingLetters<T, R, F extends T[0] ? true : false>
-		: MissingLetters<T, R, true, F extends T[number] ? Gaps : [...Gaps, F]>
+		  ? MissingLetters<T, R, F extends T[0] ? true : false>
+		  : MissingLetters<T, R, true, F extends T[number] ? Gaps : [...Gaps, F]>
 	: Gaps;
 
 export const missingLetters = <const T extends readonly Alphabet[]>(
