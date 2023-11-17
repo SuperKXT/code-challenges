@@ -36,7 +36,8 @@ const config = {
 		'max-depth': ['warn', { max: 7 }],
 		'max-lines': ['warn', 1000],
 		'max-params': ['warn', 5],
-		'new-cap': 'warn',
+		// TODO turn this rule off after migrating from typebox to zod
+		'new-cap': 'off',
 		'no-alert': 'warn',
 		'no-bitwise': 'warn',
 		'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
@@ -112,6 +113,7 @@ const config = {
 		'n/no-missing-import': 'off',
 
 		'import/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
+		'import/extensions': ['warn', 'ignorePackages'],
 		'import/first': 'warn',
 		'import/newline-after-import': 'warn',
 		'import/no-commonjs': 'warn',
@@ -161,7 +163,9 @@ const config = {
 		'@typescript-eslint/no-loop-func': 'warn',
 		'@typescript-eslint/no-misused-promises': [
 			'warn',
-			{ checksVoidReturn: false },
+			{
+				checksVoidReturn: false,
+			},
 		],
 		'@typescript-eslint/no-redundant-type-constituents': 'warn',
 		'@typescript-eslint/no-shadow': 'warn',

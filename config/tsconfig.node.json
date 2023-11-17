@@ -18,16 +18,15 @@
 		"noUnusedParameters": false,
 
 		// modules
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"allowImportingTsExtensions": true,
 		"resolveJsonModule": true,
 		"types": ["vitest/globals"],
-		"paths": {
-			"~/*": ["./*"]
-		},
 
 		// emit
 		"downlevelIteration": true,
+		"noEmit": true,
 
 		// javascript support
 		"allowJs": true,
@@ -41,8 +40,8 @@
 		"verbatimModuleSyntax": true,
 
 		// language and environment
-		"lib": ["esnext"],
-		"target": "esnext",
+		"lib": ["ES2022"],
+		"target": "ES2022",
 		"moduleDetection": "force",
 
 		// output formatting
