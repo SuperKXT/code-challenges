@@ -18,9 +18,8 @@
 		"noUnusedParameters": false,
 
 		// modules
-		"module": "esnext",
-		"moduleResolution": "Bundler",
-		"allowImportingTsExtensions": true,
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
 		"resolveJsonModule": true,
 		"types": ["vitest/globals"],
 

@@ -100,7 +100,6 @@ const config = {
 		yoda: 'warn',
 
 		'import/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
-		'import/extensions': ['warn', 'ignorePackages'],
 		'import/first': 'warn',
 		'import/newline-after-import': 'warn',
 		'import/no-commonjs': 'warn',
