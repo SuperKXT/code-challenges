@@ -9,6 +9,7 @@
 		"fastify",
 		"lexo",
 		"luhn",
+		"Nums",
 		"parens",
 		"quordle",
 		"raumdeuter",
