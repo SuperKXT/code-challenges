@@ -8,6 +8,12 @@ type _tuple<N extends number, T, R extends readonly T[]> = R['length'] extends N
 	? R
 	: _tuple<N, T, [T, ...R]>;
 
+type _equal<T, U> = (<G>() => G extends T ? 1 : 2) extends <G>() => G extends U
+	? 1
+	: 2
+	? true
+	: false;
+
 export declare namespace Utils {
 	/** type helper to prettify complex object types */
 	type prettify<T> = {
@@ -15,11 +21,9 @@ export declare namespace Utils {
 	} & {};
 
 	/** checks if the two given types are the same */
-	type equal<T, U> = (<G>() => G extends T ? 1 : 2) extends <G>() => G extends U
-		? 1
-		: 2
-		? true
-		: false;
+	type equal<T, U> = [T, U] extends [object, object]
+		? _equal<prettify<T>, prettify<U>>
+		: _equal<T, U>;
 
 	/** checks if the first type satisfies the second */
 	type satisfies<T extends U, U> = T;

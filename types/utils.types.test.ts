@@ -16,12 +16,23 @@ test('test prettify type util', () => {
 });
 
 test('test equal type util', () => {
+	interface Int1 {
+		x: 1;
+	}
+	interface Int2 extends Int1 {
+		y: 2;
+	}
 	type trueTests = trueTuple<
 		[
 			Utils.equal<1, 1>,
 			Utils.equal<1 | 2 | 3, 1 | 2 | 3>,
 			Utils.equal<[1, 2, 3], [1, 2, 3]>,
-			Utils.equal<Utils.prettify<{ x: 1 } & { y: 2 }>, { x: 1; y: 2 }>,
+			Utils.equal<[2] | [1, 2, 3], [1, 2, 3] | [2]>,
+			Utils.equal<{ x: 1 } | { y: 2 }, { y: 2 } | { x: 1 }>,
+			Utils.equal<{ x: 1 } & { y: 2 }, { x: 1; y: 2 }>,
+			Utils.equal<Int2, { x: 1; y: 2 }>,
+			Utils.equal<Int2[] | Int2, { x: 1; y: 2 }[] | { x: 1; y: 2 }>,
+			Utils.equal<Record<string, unknown>, Record<string, unknown>>,
 		]
 	>;
 	type falseTests = falseTuple<
@@ -39,7 +50,8 @@ test('test equal type util', () => {
 			Utils.equal<1, 1 | 2 | 3>,
 			Utils.equal<[1], [1 | 2 | 3]>,
 			Utils.equal<{ foo: 1 }, { foo: 2 }>,
-			Utils.equal<{ x: 1 } & { y: 2 }, { x: 1; y: 2 }>,
+			Utils.equal<{ x: 1 }, Record<string, unknown>>,
+			Utils.equal<object, Record<string, unknown>>,
 		]
 	>;
 	assertType<[trueTests, falseTests]>([true, true]);
