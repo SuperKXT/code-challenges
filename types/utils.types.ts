@@ -14,6 +14,10 @@ type _equal<T, U> = (<G>() => G extends T ? 1 : 2) extends <G>() => G extends U
 	? true
 	: false;
 
+type _recursivePrettify<T> = {
+	[k in keyof T]: T[k] extends object ? _recursivePrettify<T[k]> : T[k];
+} & {};
+
 export declare namespace Utils {
 	/** type helper to prettify complex object types */
 	type prettify<T> = {
@@ -22,7 +26,7 @@ export declare namespace Utils {
 
 	/** checks if the two given types are the same */
 	type equal<T, U> = [T, U] extends [object, object]
-		? _equal<prettify<T>, prettify<U>>
+		? _equal<_recursivePrettify<T>, _recursivePrettify<U>>
 		: _equal<T, U>;
 
 	/** checks if the first type satisfies the second */

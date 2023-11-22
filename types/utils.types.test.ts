@@ -31,6 +31,10 @@ test('test equal type util', () => {
 			Utils.equal<{ x: 1 } | { y: 2 }, { y: 2 } | { x: 1 }>,
 			Utils.equal<{ x: 1 } & { y: 2 }, { x: 1; y: 2 }>,
 			Utils.equal<Int2, { x: 1; y: 2 }>,
+			Utils.equal<
+				Int2 & { z: { a: 3; b: 4 } },
+				{ x: 1; y: 2; z: { a: 3 } & { b: 4 } }
+			>,
 			Utils.equal<Int2[] | Int2, { x: 1; y: 2 }[] | { x: 1; y: 2 }>,
 			Utils.equal<Record<string, unknown>, Record<string, unknown>>,
 		]
