@@ -113,7 +113,6 @@ const config = {
 		'n/no-missing-import': 'off',
 
 		'import/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
-		'import/extensions': ['warn', 'ignorePackages'],
 		'import/first': 'warn',
 		'import/newline-after-import': 'warn',
 		'import/no-commonjs': 'warn',
@@ -182,7 +181,7 @@ const config = {
 				enforceForJSX: true,
 			},
 		],
-		'@typescript-eslint/no-unused-vars': 'warn',
+		'@typescript-eslint/no-unused-vars': 'off',
 		'@typescript-eslint/no-use-before-define': 'warn',
 		'@typescript-eslint/no-useless-empty-export': 'warn',
 		'@typescript-eslint/no-var-requires': 'off',

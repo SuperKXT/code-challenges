@@ -208,7 +208,6 @@ const config = {
 			},
 			rules: {
 				'@typescript-eslint/no-unnecessary-type-constraint': 'off',
-				'@typescript-eslint/no-unused-vars': 'off',
 				'react/jsx-filename-extension': [
 					'warn',
 					{ extensions: ['jsx', 'tsx'] },
