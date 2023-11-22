@@ -250,6 +250,18 @@ test('test removeIndexSignature type util', () => {
 	assertType<tests>(true);
 });
 
+test('test distributiveOmit type util', () => {
+	type tests = trueTuple<
+		[
+			Utils.equal<
+				Utils.distributiveOmit<{ x: 1; y: 2 } | { z: 3 }, 'y'>,
+				{ x: 1 } | { z: 3 }
+			>,
+		]
+	>;
+	assertType<tests>(true);
+});
+
 test('test stringToUnion type util', () => {
 	type tests = trueTuple<
 		[

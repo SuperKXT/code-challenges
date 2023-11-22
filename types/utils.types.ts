@@ -109,6 +109,11 @@ export declare namespace Utils {
 			    : k]: T[k];
 	};
 
+	/** omit utility that distributes over the union */
+	type distributiveOmit<T, K extends PropertyKey> = T extends T
+		? Omit<T, K>
+		: never;
+
 	/** takes a string literal as input and returns the union of all the characters */
 	type stringToUnion<T extends string> = T extends `${infer U}${infer V}`
 		? U | stringToUnion<V>
