@@ -3,6 +3,7 @@ import utc from 'dayjs/esm/plugin/utc';
 import { z } from 'zod';
 
 import type { Dayjs } from 'dayjs/esm';
+import type { Utils } from '../types/utils.types.js';
 
 dayjs.extend(utc);
 
@@ -10,6 +11,7 @@ export const dayjsUtc = dayjs;
 
 export const dayjsSchema = z.instanceof(
 	dayjsUtc as unknown as typeof dayjsUtc.Dayjs,
+	{ message: 'Invalid Date' },
 );
 
 export type ZodDayjs = typeof dayjsSchema;
@@ -24,6 +26,8 @@ export const datetimeSchema = z.preprocess((value) => {
 export type ZodDatetime = typeof datetimeSchema;
 
 export type DateLike = string | number | Dayjs | Date;
+
+export const dayMinutesSchema = z.number().int().min(0).max(1440);
 
 export const isDate = (value: unknown): value is DateLike => {
 	return datetimeSchema.safeParse(value).success;
@@ -43,21 +47,65 @@ export const dayjsFormatPatterns = {
 	date: 'YYYY-MM-DD',
 	time: 'h:mm:ss A',
 	datetime: 'YYYY-MM-DD h:mm A',
-};
+} as const;
 
 export const dayNames = [
-	'Sunday',
-	'Monday',
-	'Tuesday',
-	'Wednesday',
-	'Thursday',
-	'Friday',
-	'Saturday',
+	'sunday',
+	'monday',
+	'tuesday',
+	'wednesday',
+	'thursday',
+	'friday',
+	'saturday',
 ] as const;
 
 export type DayName = (typeof dayNames)[number];
 
 export class DateRange<
+	Start extends string = 'start',
+	End extends string = 'end',
+	Range extends Utils.prettify<
+		{ [k in Start]: Dayjs } & { [k in End]: Dayjs }
+	> = Utils.prettify<{ [k in Start]: Dayjs } & { [k in End]: Dayjs }>,
+> {
+	constructor(
+		private start: Start = 'start' as Start,
+		private end: End = 'end' as End,
+		private includeEdges: boolean = true,
+	) {}
+
+	forEach(range: Range, callback: (date: Dayjs) => void) {
+		const { start, end } = this.validate(range);
+		for (let d = start; !d.isAfter(end); d = d.add(1, 'day')) callback(d);
+	}
+
+	map<Return>(range: Range, callback: (date: Dayjs) => Return) {
+		const data: Return[] = [];
+		const { start, end } = this.validate(range);
+		for (let d = start; !d.isAfter(end); d = d.add(1, 'day'))
+			data.push(callback(d));
+		return data;
+	}
+
+	dates(range: Range) {
+		return this.map(range, (d) => d);
+	}
+
+	private validate(range: Obj): { start: Dayjs; end: Dayjs } {
+		const s = range[this.start];
+		const e = range[this.end];
+		if (!dayjsUtc.isDayjs(s) || !dayjsUtc.isDayjs(e))
+			throw new Error('invalid date range');
+		if (!s.isValid()) throw new Error('invalid start date');
+		if (!e.isValid()) throw new Error('invalid end date');
+		return {
+			start: this.includeEdges ? s : s.add(1, 'day'),
+			end: this.includeEdges ? e : e.add(1, 'day'),
+		};
+	}
+}
+
+export class TimeRange<
 	Start extends string,
 	End extends string,
 	Range extends { [k in Start]: Dayjs } & { [k in End]: Dayjs },
@@ -67,7 +115,7 @@ export class DateRange<
 	constructor(
 		private start: Start,
 		private end: End,
-		private includeEdgesInOverlap: boolean = false,
+		private includeEdges: boolean = false,
 	) {}
 
 	hasRange<T extends Obj>(
@@ -91,23 +139,6 @@ export class DateRange<
 		[k in keyof T]: k extends Start | End ? T[k] & Dayjs : T[k];
 	}[] {
 		return input.every((row) => this.hasRange(row));
-	}
-
-	hasDateRangeOverlap(...ranges: Range[]) {
-		for (let i = 0; i < ranges.length; i++) {
-			for (let j = 0; j < ranges.length; j++) {
-				if (i === j) continue;
-				const a = ranges[i] as Range;
-				const b = ranges[j] as Range;
-				const overlap = this.includeEdgesInOverlap
-					? !a[this.end].isBefore(b[this.end]) &&
-					  !a[this.start].isAfter(b[this.end])
-					: a[this.end].isAfter(b[this.start]) &&
-					  a[this.start].isBefore(b[this.end]);
-				if (overlap) return true;
-			}
-		}
-		return false;
 	}
 
 	createMinuteArray(range: Range) {
@@ -149,12 +180,13 @@ export class DateRange<
 		const map = new Map<number, true>();
 		for (const range of ranges) {
 			const [startMins, endMins] = this.asMinutes(range);
+			if (startMins === 0 && endMins === 0) continue;
 			let idx = startMins;
 			while (true) {
 				if (idx === this.EOD) idx = 0;
 				if (
 					map.get(idx) &&
-					(this.includeEdgesInOverlap || (idx !== startMins && idx !== endMins))
+					(this.includeEdges || (idx !== startMins && idx !== endMins))
 				)
 					return true;
 				map.set(idx, true);
