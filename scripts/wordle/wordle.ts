@@ -64,7 +64,7 @@ export const findWordle = (parameters: Arguments): string[] => {
 			regex.test(word),
 	);
 
-	if (config.isTest) {
+	if (!config.isTest) {
 		console.info(
 			[
 				'Found',
@@ -79,7 +79,7 @@ export const findWordle = (parameters: Arguments): string[] => {
 
 export type Arguments = z.infer<typeof ARGUMENT_SCHEMA>;
 
-if (config.isTest) {
+if (!config.isTest) {
 	const args = argumentParser<Arguments>(process.argv.slice(2), {
 		alias: {
 			available: 'a',
