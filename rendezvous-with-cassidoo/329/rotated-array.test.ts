@@ -1,7 +1,6 @@
 import { rotatedArray } from './rotated-array.js';
 
 test('testing rotatedArray against test 1', () => {
-	console.log('reached');
 	const result = rotatedArray([4, 0, 1, 2, 3]);
 	const expected = 1;
 	expect(result).toStrictEqual(expected);
