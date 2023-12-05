@@ -43,6 +43,7 @@ type greaterThan<
 	  : UA[TA['length']] extends undefined
 	    ? true
 	    : false;
+
 type RotatedArray<
 	input extends number[],
 	idx extends 1[] = [],

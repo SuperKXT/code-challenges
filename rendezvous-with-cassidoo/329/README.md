@@ -18,3 +18,5 @@ Example:
 > rotatedArray([7, 7, 314, 1337, 7])
 > 4
 ```
+
+Solution: https://tsplay.dev/WPM6ew
