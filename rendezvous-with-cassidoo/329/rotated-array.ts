@@ -48,21 +48,13 @@ type RotatedArray<
 	input extends number[],
 	idx extends 1[] = [],
 	rotated extends 1[] = [],
-> = input['length'] extends 1
-	? 0
-	: [...idx, 1]['length'] extends input['length']
-	  ? rotated['length']
-	  : greaterThan<
-					input[idx['length']],
-					input[[...idx, 1]['length']]
-	      > extends true
-	    ? input extends [
-					infer first extends number,
-					...infer rest extends number[],
-	      ]
-				? RotatedArray<[...rest, first], [], [...rotated, 1]>
-				: never
-	    : RotatedArray<input, [...idx, 1], rotated>;
+> = [...idx, 1]['length'] extends input['length']
+	? rotated['length']
+	: greaterThan<input[idx['length']], input[[...idx, 1]['length']]> extends true
+	  ? input extends [infer first extends number, ...infer rest extends number[]]
+			? RotatedArray<[...rest, first], [], [...rotated, 1]>
+			: never
+	  : RotatedArray<input, [...idx, 1], rotated>;
 
 export const rotatedArray = <const Input extends number[]>(
 	input: Input,

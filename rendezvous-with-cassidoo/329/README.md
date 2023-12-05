@@ -19,4 +19,4 @@ Example:
 > 4
 ```
 
-Solution: https://tsplay.dev/WPM6ew
+Solution: https://tsplay.dev/w8Qj0N
