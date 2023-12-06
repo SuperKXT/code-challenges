@@ -18,11 +18,19 @@ type _recursivePrettify<T> = {
 	[k in keyof T]: T[k] extends object ? _recursivePrettify<T[k]> : T[k];
 } & {};
 
+type _unionToSingleTuple<
+	union,
+	remaining extends union = union,
+	curr extends remaining = remaining,
+> = [remaining] extends [never]
+	? []
+	: curr extends curr
+	  ? [union, ..._unionToSingleTuple<union, Exclude<remaining, curr>>]
+	  : never;
+
 export declare namespace Utils {
 	/** type helper to prettify complex object types */
-	type prettify<T> = {
-		[K in keyof T]: T[K];
-	} & {};
+	type prettify<T> = { [k in keyof T]: T[k] } & {};
 
 	/** checks if the two given types are the same */
 	type equal<T, U> = [T, U] extends [object, object]
@@ -125,6 +133,9 @@ export declare namespace Utils {
 	) extends (x: infer U) => unknown
 		? U
 		: never;
+
+	/** converts a union to a single tuple where each member is of union type */
+	type unionToSingleTuple<union> = _unionToSingleTuple<union>;
 
 	/** merge two objects together. the second object has priority */
 	type deepMerge<T extends Obj, U extends Obj> = prettify<{

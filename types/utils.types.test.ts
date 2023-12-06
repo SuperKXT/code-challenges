@@ -292,6 +292,22 @@ test('test unionToIntersection type util', () => {
 	assertType<tests>(true);
 });
 
+test('test unionToSingleTuple type util', () => {
+	type tests = trueTuple<
+		[
+			Utils.equal<
+				Utils.unionToSingleTuple<'foo' | 42 | true>,
+				['foo' | 42 | true, 'foo' | 42 | true, 'foo' | 42 | true]
+			>,
+			Utils.equal<
+				Utils.unionToSingleTuple<(() => 'foo') | ((i: 42) => true)>,
+				[(() => 'foo') | ((i: 42) => true), (() => 'foo') | ((i: 42) => true)]
+			>,
+		]
+	>;
+	assertType<tests>(true);
+});
+
 test('test deepMerge type util', () => {
 	type tests = trueTuple<
 		[
