@@ -144,7 +144,10 @@ const config = {
 		'@typescript-eslint/default-param-last': 'warn',
 		'no-dupe-class-members': 'off',
 		'@typescript-eslint/no-dupe-class-members': 'warn',
-		'@typescript-eslint/no-explicit-any': ['warn', { ignoreRestArgs: true }],
+		'@typescript-eslint/no-explicit-any': [
+			'warn',
+			{ ignoreRestArgs: true, fixToUnknown: true },
+		],
 		'@typescript-eslint/no-floating-promises': 'off',
 		'@typescript-eslint/no-inferrable-types': 'off',
 		'@typescript-eslint/no-loop-func': 'warn',
