@@ -18,4 +18,6 @@ Example:
 > "No majority"
 ```
 
-Solution: https://tsplay.dev/w8Qj0N
+---
+
+[Solution Playground](https://tsplay.dev/N7GgqN)
