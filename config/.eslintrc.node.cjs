@@ -65,6 +65,11 @@ const config = {
 				paths: [
 					{ name: 'buffer', message: 'Use Uint8Array instead.' },
 					{ name: 'node:buffer', message: 'Use Uint8Array instead.' },
+					{
+						name: 'dayjs',
+						importNames: ['default'],
+						message: 'Please import dayjsUtc helper from `~/helpers/date`.',
+					},
 				],
 			},
 		],
