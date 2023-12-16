@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-imports
 import { default as dayjs } from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
 import { z } from 'zod';
