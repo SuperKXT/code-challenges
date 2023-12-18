@@ -35,7 +35,14 @@ test('testing isBitonic against test 5', () => {
 	assertType<Readonly<typeof result>>(expected);
 });
 
-test('testing isBitonic against test 4', () => {
+test('testing isBitonic against test 6', () => {
+	const result = isBitonic([2, 2]);
+	const expected = false;
+	expect(result).toStrictEqual(expected);
+	assertType<Readonly<typeof result>>(expected);
+});
+
+test('testing isBitonic against test 6', () => {
 	const result = isBitonic([1, 2, 3, 2, 3]);
 	const expected = false;
 	expect(result).toStrictEqual(expected);
