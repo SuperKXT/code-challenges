@@ -1,8 +1,9 @@
-import { default as dayjs } from 'dayjs/esm';
-import utc from 'dayjs/esm/plugin/utc';
+// eslint-disable-next-line no-restricted-imports
+import { default as dayjs } from 'dayjs';
+import utc from 'dayjs/plugin/utc.js';
 import { z } from 'zod';
 
-import type { Dayjs } from 'dayjs/esm';
+import type { Dayjs } from 'dayjs';
 import type { Utils } from '../types/utils.types.js';
 
 dayjs.extend(utc);
