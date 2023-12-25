@@ -12,6 +12,7 @@ const monthMap = {
 	10: 'Nov',
 	11: 'Dec',
 } as const;
+
 export const returnGift = <const Input extends string>(
 	input: Input,
 ): string => {
