@@ -302,7 +302,7 @@ export const recursiveRename = async (
 	return results;
 };
 
-if (config.isTest) {
+if (!config.isTest) {
 	try {
 		const args = argumentParser<Params>(process.argv.slice(2), {
 			alias: {
