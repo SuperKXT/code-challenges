@@ -63,6 +63,10 @@ const config = {
 						importNames: ['default'],
 						message: 'Please import dayjsUtc helper from `~/helpers/date`.',
 					},
+					{
+						name: '@mui/system',
+						message: 'Import from @mui/material instead',
+					},
 				],
 			},
 		],
@@ -275,6 +279,13 @@ const config = {
 			env: { es2021: true, node: true },
 			rules: {
 				'import/no-nodejs-modules': 'off',
+			},
+		},
+		{
+			files: ['src/content/**/*'],
+			plugins: ['sort-keys-plus'],
+			rules: {
+				'sort-keys-plus/sort-keys': 'warn',
 			},
 		},
 	],
