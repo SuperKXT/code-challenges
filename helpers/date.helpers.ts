@@ -44,7 +44,7 @@ export const compareDate = (first: DateLike, second: DateLike): number => {
 	return dayjsUtc.utc(first).diff(second);
 };
 
-export const dayjsFormatPatterns = {
+export const dateFormats = {
 	date: 'YYYY-MM-DD',
 	time: 'h:mm:ss A',
 	datetime: 'YYYY-MM-DD h:mm A',
