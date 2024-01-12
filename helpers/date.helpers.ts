@@ -51,13 +51,13 @@ export const dateFormats = {
 } as const;
 
 export const dayNames = [
-	'sunday',
 	'monday',
 	'tuesday',
 	'wednesday',
 	'thursday',
 	'friday',
 	'saturday',
+	'sunday',
 ] as const;
 
 export type DayName = (typeof dayNames)[number];
