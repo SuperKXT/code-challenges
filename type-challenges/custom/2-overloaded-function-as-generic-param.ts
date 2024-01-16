@@ -5,8 +5,8 @@ type OverloadUnionRecursive<
 	TPartialOverload = unknown,
 > = TOverload extends (...args: infer TArgs) => infer TReturn
 	? // Prevent infinite recursion by stopping recursion when TPartialOverload
-	  // has accumulated all of the TOverload signatures.
-	  TPartialOverload extends TOverload
+		// has accumulated all of the TOverload signatures.
+		TPartialOverload extends TOverload
 		? never
 		:
 				| OverloadUnionRecursive<

@@ -11,14 +11,14 @@ type numberToTuple<
 > = str extends `${infer first extends digit}${infer rest}`
 	? [first, ...numberToTuple<never, rest>]
 	: str extends `${infer first extends digit}`
-	  ? [first]
-	  : [];
+		? [first]
+		: [];
 
 type compareDigit<T extends digit, U extends digit> = T extends U
 	? 'equal'
 	: tuple<U> extends [...tuple<T>, ...unknown[]]
-	  ? 'less'
-	  : 'greater';
+		? 'less'
+		: 'greater';
 
 type compareNumInner<tTuple extends digit[], uTuple extends digit[]> = [
 	tTuple,
@@ -30,8 +30,8 @@ type compareNumInner<tTuple extends digit[], uTuple extends digit[]> = [
 	? compareDigit<tFirst, uFirst> extends 'less'
 		? 'less'
 		: compareDigit<tFirst, uFirst> extends 'greater'
-		  ? 'greater'
-		  : compareNumInner<tRest, uRest>
+			? 'greater'
+			: compareNumInner<tRest, uRest>
 	: 'equal';
 
 type compareNum<
@@ -42,10 +42,10 @@ type compareNum<
 > = T extends U
 	? 'equal'
 	: tTuple[uTuple['length']] extends digit
-	  ? 'greater'
-	  : uTuple[tTuple['length']] extends digit
-	    ? 'less'
-	    : compareNumInner<tTuple, uTuple>;
+		? 'greater'
+		: uTuple[tTuple['length']] extends digit
+			? 'less'
+			: compareNumInner<tTuple, uTuple>;
 
 type min<
 	T extends readonly number[],
@@ -59,12 +59,12 @@ type min<
 			[val] extends [never]
 				? first
 				: compareNum<first, val> extends 'less'
-				  ? first
-				  : val
-	  >
+					? first
+					: val
+		>
 	: [val] extends [never]
-	  ? 0
-	  : val;
+		? 0
+		: val;
 
 type max<
 	T extends readonly number[],
@@ -78,12 +78,12 @@ type max<
 			[val] extends [never]
 				? first
 				: compareNum<first, val> extends 'greater'
-				  ? first
-				  : val
-	  >
+					? first
+					: val
+		>
 	: [val] extends [never]
-	  ? 0
-	  : val;
+		? 0
+		: val;
 
 type subtract<T extends number, U extends number> = tuple<T> extends [
 	...tuple<U>,

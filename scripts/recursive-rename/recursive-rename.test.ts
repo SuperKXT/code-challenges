@@ -111,7 +111,7 @@ beforeEach(() => {
 
 // eslint-disable-next-line vitest/no-hooks
 afterEach(() => {
-	rmSync(TEMP_PATH, {force: true,recursive: true,});
+	rmSync(TEMP_PATH, { force: true, recursive: true });
 });
 
 const createFiles = (files: Test, directory: string = TEMP_PATH) => {

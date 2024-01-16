@@ -62,9 +62,9 @@ type Join<
 			First extends ''
 				? Result
 				: Result extends ''
-				  ? First
-				  : `${Result}${Separator}${First}`
-	  >
+					? First
+					: `${Result}${Separator}${First}`
+		>
 	: Result;
 
 type Int<T extends number> = `${T}` extends `${infer I extends
@@ -87,7 +87,7 @@ type HundredsToWords<
 ]
 	? HundredsToWords<Rest, Hundred extends 0 ? [] : [Units[Hundred], 'hundred']>
 	: Type extends [infer Ten extends Digit, infer Unit extends Digit]
-	  ? `${Ten}${Unit}` extends `${infer I extends number}`
+		? `${Ten}${Unit}` extends `${infer I extends number}`
 			? Join<
 					[
 						...Result,
@@ -96,11 +96,11 @@ type HundredsToWords<
 							: [Tens[Ten], Units[Unit]]),
 					],
 					' '
-			  >
+				>
 			: never
-	  : Type extends [infer Unit extends Digit]
-	    ? Join<[...Result, Units[Unit]], ' '>
-	    : never;
+		: Type extends [infer Unit extends Digit]
+			? Join<[...Result, Units[Unit]], ' '>
+			: never;
 
 type NumberToDigits<
 	T extends number,
@@ -120,8 +120,8 @@ type GroupTuple<
 		? GroupTuple<Rest, Size, [], [[Last, ...Curr], ...Groups]>
 		: GroupTuple<Rest, Size, [Last, ...Curr], Groups>
 	: Curr extends []
-	  ? Groups
-	  : [Curr, ...Groups];
+		? Groups
+		: [Curr, ...Groups];
 
 type FractionalToWords<
 	T extends number,
@@ -151,12 +151,12 @@ type NumberToWords<
 > = number extends T
 	? string
 	: T extends 0
-	  ? 'zero'
-	  : Groups extends [
+		? 'zero'
+		: Groups extends [
 					infer First extends HundredsTuple,
 					...infer Rest extends HundredsTuple[],
-	      ]
-	    ? NumberToWords<
+			  ]
+			? NumberToWords<
 					T,
 					Rest,
 					[
@@ -165,8 +165,8 @@ type NumberToWords<
 							? HundredsToWords<First>
 							: `${HundredsToWords<First>} ${Postfix}`,
 					]
-	      >
-	    : JoinNumberChunks<T, Result>;
+				>
+			: JoinNumberChunks<T, Result>;
 
 export const numberToWords = <T extends number>(
 	number: T,

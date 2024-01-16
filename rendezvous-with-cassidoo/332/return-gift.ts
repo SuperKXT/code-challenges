@@ -19,5 +19,7 @@ export const returnGift = <const Input extends string>(
 	const date = new Date(input);
 	if (isNaN(date.getTime())) throw new Error('Invalid date');
 	date.setDate(date.getDate() + (date.getMonth() === 11 ? 90 : 30) - 1);
-	return `${monthMap[date.getMonth() as keyof typeof monthMap]} ${date.getDate()}, ${date.getFullYear()}`
+	return `${
+		monthMap[date.getMonth() as keyof typeof monthMap]
+	} ${date.getDate()}, ${date.getFullYear()}`;
 };

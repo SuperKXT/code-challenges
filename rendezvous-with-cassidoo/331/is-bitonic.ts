@@ -25,10 +25,10 @@ type greaterThanDigits<
 > = T['length'] extends 0
 	? false
 	: T[0] extends U[0]
-	  ? greaterThanDigits<shift<T>, shift<U>>
-	  : UF[TF['length']] extends undefined
-	    ? true
-	    : false;
+		? greaterThanDigits<shift<T>, shift<U>>
+		: UF[TF['length']] extends undefined
+			? true
+			: false;
 
 type greaterThan<
 	T extends number,
@@ -38,16 +38,16 @@ type greaterThan<
 > = T extends U
 	? false
 	: TA['length'] extends UA['length']
-	  ? greaterThanDigits<TA, UA>
-	  : UA[TA['length']] extends undefined
-	    ? true
-	    : false;
+		? greaterThanDigits<TA, UA>
+		: UA[TA['length']] extends undefined
+			? true
+			: false;
 
 type lessThan<T extends number, U extends number> = T extends U
 	? false
 	: greaterThan<T, U> extends true
-	  ? false
-	  : true;
+		? false
+		: true;
 
 type IsBitonic<
 	input extends number[],
@@ -60,22 +60,22 @@ type IsBitonic<
 	? [peak] extends [never]
 		? false
 		: increased extends false
-		  ? false
-		  : peak
+			? false
+			: peak
 	: greaterThan<curr, next> extends true
-	  ? increased extends false
+		? increased extends false
 			? false
 			: IsBitonic<
 					input,
 					increased,
 					[peak] extends [never] ? curr : peak,
 					[...idx, 1]
-			  >
-	  : lessThan<curr, next> extends true
-	    ? [peak] extends [never]
+				>
+		: lessThan<curr, next> extends true
+			? [peak] extends [never]
 				? IsBitonic<input, true, peak, [...idx, 1]>
 				: false
-	    : IsBitonic<input, increased, peak, [...idx, 1]>;
+			: IsBitonic<input, increased, peak, [...idx, 1]>;
 
 export const isBitonic = <const Input extends number[]>(
 	input: Input,

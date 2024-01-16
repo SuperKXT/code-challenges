@@ -170,7 +170,7 @@ function assertArrayIndex<A extends readonly unknown[], K extends string>(
 ): asserts array is number extends A['length']
 	? A & { readonly [KEY]: Hash<K> } & {
 			readonly [key in Hash<K>]: A[number];
-	  }
+		}
 	: never {
 	return undefined;
 }

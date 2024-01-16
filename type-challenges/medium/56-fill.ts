@@ -45,7 +45,7 @@ type _Fill<
 						: T[Output['length']]
 					: T[Output['length']],
 			]
-	  >;
+		>;
 
 type Fill<
 	T extends unknown[],
@@ -57,10 +57,10 @@ type Fill<
 > = Count['length'] extends End
 	? T
 	: T extends [infer First, ...infer Rest]
-	  ? Flag extends false
+		? Flag extends false
 			? [First, ...Fill<Rest, N, Start, End, [...Count, 1]>]
 			: [N, ...Fill<Rest, N, Start, End, [...Count, 1], true>]
-	  : T;
+		: T;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

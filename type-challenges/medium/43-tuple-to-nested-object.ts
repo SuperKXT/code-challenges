@@ -24,10 +24,10 @@ type TupleToNestedObject<T extends readonly string[], U> = T extends [
 ]
 	? {
 			[K in F]: TupleToNestedObject<R, U>;
-	  }
+		}
 	: T extends []
-	  ? U
-	  : never;
+		? U
+		: never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

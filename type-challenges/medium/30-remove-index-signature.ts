@@ -29,10 +29,10 @@ type RemoveIndexSignature<T extends Record<string, unknown>> = {
 	[key in keyof T as string extends key
 		? never
 		: number extends key
-		  ? never
-		  : symbol extends key
-		    ? never
-		    : key]: T[key];
+			? never
+			: symbol extends key
+				? never
+				: key]: T[key];
 };
 
 // Alternative Solution, probably better

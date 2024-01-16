@@ -47,8 +47,8 @@ type LessThan<
 > = A['length'] extends T
 	? true
 	: A['length'] extends U
-	  ? false
-	  : LessThan<T, U, [...A, 1]>;
+		? false
+		: LessThan<T, U, [...A, 1]>;
 
 type ValidDate<T extends string> = T extends `${infer M1 extends
 	number}${infer M2 extends number}${infer D1 extends number}${infer D2 extends
@@ -57,8 +57,8 @@ type ValidDate<T extends string> = T extends `${infer M1 extends
 		? `${D1}${D2}` extends '00'
 			? false
 			: `${M1}${M2}` extends keyof MonthDayMap
-			  ? LessThan<D, MonthDayMap[`${M1}${M2}`]>
-			  : false
+				? LessThan<D, MonthDayMap[`${M1}${M2}`]>
+				: false
 		: false
 	: false;
 

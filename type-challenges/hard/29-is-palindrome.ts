@@ -37,8 +37,8 @@ type IsPalindrome<T extends string | number> =
 		? S extends ''
 			? true
 			: `${T}` extends `${F}${infer R}${F}`
-			  ? IsPalindrome<R>
-			  : false
+				? IsPalindrome<R>
+				: false
 		: true;
 
 /* _____________ Test Cases _____________ */

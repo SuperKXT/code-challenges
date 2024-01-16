@@ -11,9 +11,9 @@ type Cover<T, U = T> = Utils.prettify<
 	U extends U
 		? {
 				[K in keyof U]: U[K];
-		  } & {
+			} & {
 				[K in KeysOfUnion<T> as K extends keyof U ? never : K]?: never;
-		  }
+			}
 		: never
 >;
 

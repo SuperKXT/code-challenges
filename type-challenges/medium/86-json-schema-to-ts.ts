@@ -48,23 +48,23 @@ type JSONSchema2TS<T extends JsonType> = T extends {
 				type: 'object';
 				properties?: infer P;
 				required?: infer R;
-	    }
-	  ? P extends Record<string, JsonType>
+		  }
+		? P extends Record<string, JsonType>
 			? R extends string[]
 				? RequireKeys<{ [K in keyof P]?: JSONSchema2TS<P[K]> }, R[number]>
 				: { [K in keyof P]?: JSONSchema2TS<P[K]> }
 			: Record<string, unknown>
-	  : T extends { type: 'array'; items?: infer I }
-	    ? I extends JsonType
+		: T extends { type: 'array'; items?: infer I }
+			? I extends JsonType
 				? JSONSchema2TS<I>[]
 				: unknown[]
-	    : T extends { type: 'string' }
-	      ? string
-	      : T extends { type: 'number' }
-	        ? number
-	        : T extends { type: 'boolean' }
-	          ? boolean
-	          : never;
+			: T extends { type: 'string' }
+				? string
+				: T extends { type: 'number' }
+					? number
+					: T extends { type: 'boolean' }
+						? boolean
+						: never;
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils';

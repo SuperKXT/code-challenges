@@ -61,14 +61,14 @@ type DistributeObject<O extends object, K extends keyof O = keyof O> = [
 ] extends [never]
 	? {}
 	: K extends K
-	  ? ObjHelper<K, DistributeUnions<O[K]>> & DistributeObject<Omit<O, K>>
-	  : never;
+		? ObjHelper<K, DistributeUnions<O[K]>> & DistributeObject<Omit<O, K>>
+		: never;
 
 type DistributeUnions<T> = T extends unknown[]
 	? DistributeArray<T>
 	: T extends object
-	  ? Merge<DistributeObject<T>>
-	  : T;
+		? Merge<DistributeObject<T>>
+		: T;
 
 // TODO retry
 type _1 = DistributeUnions<[0, 1 | 2] | [3 | 4]>;

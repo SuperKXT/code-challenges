@@ -47,12 +47,12 @@ export const humanizeToken = (
 				casing === 'lower'
 					? currentWord.toLowerCase()
 					: casing === 'upper'
-					  ? currentWord.toUpperCase()
-					  : currentWord.toUpperCase() === currentWord
-					    ? currentWord
-					    : casing === 'title' || !result
-					      ? `${first.toUpperCase()}${currentWord.slice(1).toLowerCase()}`
-					      : currentWord.toLowerCase();
+						? currentWord.toUpperCase()
+						: currentWord.toUpperCase() === currentWord
+							? currentWord
+							: casing === 'title' || !result
+								? `${first.toUpperCase()}${currentWord.slice(1).toLowerCase()}`
+								: currentWord.toLowerCase();
 			result += `${result.length ? ' ' : ''}${formatted}`;
 		}
 		currentWord = '';

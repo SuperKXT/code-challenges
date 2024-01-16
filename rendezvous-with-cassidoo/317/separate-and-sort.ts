@@ -11,9 +11,9 @@ type smallest<T extends number[], curr extends 1[] = []> = T extends [
 			curr extends []
 				? tuple<first>
 				: curr extends [...tuple<first>, ...number[]]
-				  ? tuple<first>
-				  : curr
-	  >
+					? tuple<first>
+					: curr
+		>
 	: curr['length'];
 
 type without<
@@ -40,8 +40,8 @@ type isEven<
 > = tup extends [...idx, ...idx]
 	? true
 	: tup extends [...idx, ...idx, 1]
-	  ? false
-	  : isEven<never, tup, [...idx, 1]>;
+		? false
+		: isEven<never, tup, [...idx, 1]>;
 
 type unReadonly<T extends readonly unknown[]> = T extends readonly [
 	...infer arr,
@@ -64,16 +64,16 @@ type SeparateAndSort<
 			first extends 0
 				? res
 				: isEven<first> extends true
-				  ? [[...res[0], first], res[1]]
-				  : [res[0], [...res[1], first]]
-	  >
+					? [[...res[0], first], res[1]]
+					: [res[0], [...res[1], first]]
+		>
 	: deepReadonly<res>;
 
 export const separateAndSort = <const T extends readonly number[]>(
 	input: T,
 ): SeparateAndSort<T> => {
 	const result: [number[], number[]] = [[], []];
-	for (const num of input.toSorted()) {
+	for (const num of input.toSorted((a, b) => a - b)) {
 		if (!num) continue;
 		const mod = (num % 2) as 0 | 1;
 		result[mod].push(num);

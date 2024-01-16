@@ -19,8 +19,8 @@
 type Permutation<T, K = T> = [T] extends [never]
 	? []
 	: K extends K
-	  ? [K, ...Permutation<Exclude<T, K>>]
-	  : never;
+		? [K, ...Permutation<Exclude<T, K>>]
+		: never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

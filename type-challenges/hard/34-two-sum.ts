@@ -38,8 +38,8 @@ type TwoSum<T extends number[], U extends number> = T extends [
 	? AddCheck<F, S, U> extends true
 		? true
 		: TwoSum<[F, ...R], U> extends true
-		  ? true
-		  : TwoSum<[S, ...R], U>
+			? true
+			: TwoSum<[S, ...R], U>
 	: false;
 
 /* _____________ Test Cases _____________ */

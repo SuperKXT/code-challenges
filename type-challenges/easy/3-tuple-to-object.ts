@@ -24,7 +24,7 @@ type TupleToObject<T extends readonly PropertyKey[]> =
 	T extends readonly (infer U)[]
 		? {
 				[K in U & PropertyKey]: K;
-		  }
+			}
 		: T;
 
 /* _____________ Test Cases _____________ */

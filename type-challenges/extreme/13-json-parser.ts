@@ -25,18 +25,18 @@ type Parse<T extends string> = Eval<T> extends [infer V, unknown] ? V : never;
 type Eval<T> = T extends `${Escapes}${infer U}`
 	? Eval<U>
 	: T extends `true${infer U}`
-	  ? [true, U]
-	  : T extends `false${infer U}`
-	    ? [false, U]
-	    : T extends `null${infer U}`
-	      ? [null, U]
-	      : T extends `"${infer U}`
-	        ? EvalString<U>
-	        : T extends `${'['}${infer U}`
-	          ? EvalArray<U>
-	          : T extends `${'{'}${infer U}`
-	            ? EvalObject<U>
-	            : false;
+		? [true, U]
+		: T extends `false${infer U}`
+			? [false, U]
+			: T extends `null${infer U}`
+				? [null, U]
+				: T extends `"${infer U}`
+					? EvalString<U>
+					: T extends `${'['}${infer U}`
+						? EvalArray<U>
+						: T extends `${'{'}${infer U}`
+							? EvalObject<U>
+							: false;
 
 type EvalString<T, S extends string = ''> = T extends `"${infer U}`
 	? [S, U]
@@ -46,21 +46,21 @@ type EvalString<T, S extends string = ''> = T extends `"${infer U}`
 						? [EscapeMap[C], U]
 						: false
 					: false
-	    ) extends [infer C extends string, infer U]
-	  ? EvalString<U, `${S}${C}`>
-	  : T extends `${infer C}${infer U}`
-	    ? EvalString<U, `${S}${C}`>
-	    : false;
+		  ) extends [infer C extends string, infer U]
+		? EvalString<U, `${S}${C}`>
+		: T extends `${infer C}${infer U}`
+			? EvalString<U, `${S}${C}`>
+			: false;
 
 type EvalArray<T, A extends unknown[] = []> = T extends `${Escapes}${infer U}`
 	? EvalArray<U, A>
 	: T extends `]${infer U}`
-	  ? [A, U]
-	  : T extends `,${infer U}`
-	    ? EvalArray<U, A>
-	    : Eval<T> extends [infer V, infer U]
-	      ? EvalArray<U, [...A, V]>
-	      : false;
+		? [A, U]
+		: T extends `,${infer U}`
+			? EvalArray<U, A>
+			: Eval<T> extends [infer V, infer U]
+				? EvalArray<U, [...A, V]>
+				: false;
 
 type EvalObject<
 	T,
@@ -69,18 +69,18 @@ type EvalObject<
 > = T extends `${Escapes}${infer U}`
 	? EvalObject<U, K, O>
 	: T extends `}${infer U}`
-	  ? [O, U]
-	  : T extends `,${infer U}`
-	    ? EvalObject<U, K, O>
-	    : T extends `"${infer U}`
-	      ? Eval<`"${U}`> extends [`${infer KK}`, infer UU]
+		? [O, U]
+		: T extends `,${infer U}`
+			? EvalObject<U, K, O>
+			: T extends `"${infer U}`
+				? Eval<`"${U}`> extends [`${infer KK}`, infer UU]
 					? EvalObject<UU, KK, O>
 					: false
-	      : T extends `:${infer U}`
-	        ? Eval<U> extends [infer V, infer UU]
+				: T extends `:${infer U}`
+					? Eval<U> extends [infer V, infer UU]
 						? EvalObject<UU, '', Merge<{ [P in K]: V } & O>>
 						: false
-	        : false;
+					: false;
 
 // TODO retry
 

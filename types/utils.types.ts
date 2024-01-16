@@ -25,8 +25,8 @@ type _unionToSingleTuple<
 > = [remaining] extends [never]
 	? []
 	: curr extends curr
-	  ? [union, ..._unionToSingleTuple<union, Exclude<remaining, curr>>]
-	  : never;
+		? [union, ..._unionToSingleTuple<union, Exclude<remaining, curr>>]
+		: never;
 
 export declare namespace Utils {
 	/** type helper to prettify complex object types */
@@ -46,8 +46,8 @@ export declare namespace Utils {
 	type dropFirst<T extends readonly unknown[]> = number extends T['length']
 		? T
 		: T extends readonly [unknown, ...infer U]
-		  ? U
-		  : [];
+			? U
+			: [];
 
 	/** global type helper to repeat a type `N` times in a tuple */
 	type tuple<N extends number, T = 1> = N extends N
@@ -81,7 +81,7 @@ export declare namespace Utils {
 				{
 					[K in keyof U]: U[K];
 				} & { [k in Exclude<allUnionKeys<T>, keyof U>]?: never }
-		  >
+			>
 		: never;
 
 	/** Disallow explicitly undefined value for object keys. Used when generic param is constrained to `Partial<ObjType>` */
@@ -111,10 +111,10 @@ export declare namespace Utils {
 		[k in keyof T as string extends k
 			? never
 			: number extends k
-			  ? never
-			  : symbol extends k
-			    ? never
-			    : k]: T[k];
+				? never
+				: symbol extends k
+					? never
+					: k]: T[k];
 	};
 
 	/** omit utility that distributes over the union */
@@ -148,14 +148,14 @@ export declare namespace Utils {
 					: U[k]
 				: U[k]
 			: k extends keyof T
-			  ? T[k]
-			  : never;
+				? T[k]
+				: never;
 	}>;
 
 	/** convert a given union to a union of permutation of tuples */
 	type unionToTuples<T, U = T> = [T] extends [never]
 		? []
 		: U extends U
-		  ? [U, ...unionToTuples<Exclude<T, U>>]
-		  : [];
+			? [U, ...unionToTuples<Exclude<T, U>>]
+			: [];
 }

@@ -40,7 +40,7 @@ type sumPayload<
 			rest,
 			double extends true ? false : true,
 			[...sum, ...sumDigit<double extends true ? doubleNum<last> : last>]
-	  >
+		>
 	: sum['length'];
 
 type mod<
@@ -70,7 +70,7 @@ type verifyLuhn<T extends number> = numberToTuple<T> extends [
 					? 10
 					: m
 				: 0
-	  > extends check
+		> extends check
 		? true
 		: false
 	: false;

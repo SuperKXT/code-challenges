@@ -17,13 +17,13 @@ type CapitalizeNestObjectKeys<T extends object> = T extends unknown[]
 		? [
 				F extends object ? CapitalizeNestObjectKeys<F> : F,
 				...CapitalizeNestObjectKeys<R>,
-		  ]
+			]
 		: T
 	: {
 			[K in keyof T as `${Capitalize<string & K>}`]: T[K] extends object
 				? CapitalizeNestObjectKeys<T[K]>
 				: T[K];
-	  };
+		};
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

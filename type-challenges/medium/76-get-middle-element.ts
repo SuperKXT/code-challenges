@@ -25,8 +25,8 @@
 type GetMiddleElement<T extends unknown[]> = T['length'] extends 2
 	? T
 	: T extends [unknown, ...infer R, unknown]
-	  ? GetMiddleElement<R>
-	  : T;
+		? GetMiddleElement<R>
+		: T;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

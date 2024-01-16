@@ -70,11 +70,11 @@ type Assign<
 					[K in keyof T | keyof F]: K extends keyof F
 						? F[K]
 						: K extends keyof T
-						  ? T[K]
-						  : never;
+							? T[K]
+							: never;
 				},
 				R
-		  >
+			>
 		: Assign<T, R>
 	: T;
 

@@ -34,8 +34,8 @@ type Merge<
 	[K in keyof F | keyof S]: K extends keyof S
 		? S[K]
 		: K extends keyof F
-		  ? F[K]
-		  : never;
+			? F[K]
+			: never;
 };
 
 /* _____________ Test Cases _____________ */

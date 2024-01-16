@@ -26,10 +26,10 @@ type greaterThanDigits<
 > = T['length'] extends 0
 	? false
 	: T[0] extends U[0]
-	  ? greaterThanDigits<shift<T>, shift<U>>
-	  : UF[TF['length']] extends undefined
-	    ? true
-	    : false;
+		? greaterThanDigits<shift<T>, shift<U>>
+		: UF[TF['length']] extends undefined
+			? true
+			: false;
 
 type greaterThan<
 	T extends number,
@@ -39,10 +39,10 @@ type greaterThan<
 > = T extends U
 	? false
 	: TA['length'] extends UA['length']
-	  ? greaterThanDigits<TA, UA>
-	  : UA[TA['length']] extends undefined
-	    ? true
-	    : false;
+		? greaterThanDigits<TA, UA>
+		: UA[TA['length']] extends undefined
+			? true
+			: false;
 
 type RotatedArray<
 	input extends number[],
@@ -51,10 +51,10 @@ type RotatedArray<
 > = [...idx, 1]['length'] extends input['length']
 	? rotated['length']
 	: greaterThan<input[idx['length']], input[[...idx, 1]['length']]> extends true
-	  ? input extends [infer first extends number, ...infer rest extends number[]]
+		? input extends [infer first extends number, ...infer rest extends number[]]
 			? RotatedArray<[...rest, first], [], [...rotated, 1]>
 			: never
-	  : RotatedArray<input, [...idx, 1], rotated>;
+		: RotatedArray<input, [...idx, 1], rotated>;
 
 export const rotatedArray = <const Input extends number[]>(
 	input: Input,

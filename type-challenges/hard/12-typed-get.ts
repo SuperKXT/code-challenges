@@ -39,12 +39,12 @@ type Get<
 > = K extends keyof T
 	? T[K]
 	: K extends `${infer U}.${infer V}`
-	  ? U extends keyof T
+		? U extends keyof T
 			? T[U] extends Record<string, unknown>
 				? Get<T[U], V>
 				: never
 			: never
-	  : never;
+		: never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
