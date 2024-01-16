@@ -187,7 +187,6 @@ const config = {
 			},
 		],
 		'@typescript-eslint/no-unused-vars': 'off',
-		'@typescript-eslint/no-use-before-define': 'warn',
 		'@typescript-eslint/no-useless-empty-export': 'warn',
 		'@typescript-eslint/non-nullable-type-assertion-style': 'off',
 		'@typescript-eslint/prefer-nullish-coalescing': 'off',

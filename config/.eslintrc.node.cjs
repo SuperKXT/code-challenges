@@ -190,7 +190,6 @@ const config = {
 			},
 		],
 		'@typescript-eslint/no-unused-vars': 'off',
-		'@typescript-eslint/no-use-before-define': 'warn',
 		'@typescript-eslint/no-useless-empty-export': 'warn',
 		'@typescript-eslint/no-var-requires': 'off',
 		'@typescript-eslint/non-nullable-type-assertion-style': 'off',
