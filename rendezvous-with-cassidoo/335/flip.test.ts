@@ -15,12 +15,12 @@ test('testing flip against test 1', () => {
 			[3, 2, 1],
 			[6, 5, 4],
 			[9, 8, 7],
-		],
+		] as const,
 		vertical: [
 			[7, 8, 9],
 			[4, 5, 6],
 			[1, 2, 3],
-		],
+		] as const,
 	};
 	expect(result).toStrictEqual(expected);
 	assertType<Readonly<typeof result>>(expected);

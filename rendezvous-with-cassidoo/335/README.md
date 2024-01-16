@@ -30,4 +30,4 @@ flip(array, 'vertical') >
 
 ---
 
-[Solution Playground](https://tsplay.dev/w8gerW)
+[Solution Playground](https://tsplay.dev/wOX6EN)
