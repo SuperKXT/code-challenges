@@ -26,7 +26,6 @@ const config = {
 	},
 	rules: {
 		'array-callback-return': ['warn', { checkForEach: true }],
-		curly: ['warn', 'multi-or-nest', 'consistent'],
 		'default-case-last': 'warn',
 		eqeqeq: 'error',
 		'func-names': ['warn', 'never'],
@@ -44,7 +43,6 @@ const config = {
 		'no-else-return': ['warn', { allowElseIf: false }],
 		'no-extend-native': 'warn',
 		'no-extra-label': 'warn',
-		'no-floating-decimal': 'warn',
 		'no-implicit-coercion': ['warn', { disallowTemplateShorthand: true }],
 		'no-label-var': 'warn',
 		'no-labels': ['warn', { allowLoop: true, allowSwitch: true }],
