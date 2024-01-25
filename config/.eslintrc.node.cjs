@@ -24,6 +24,9 @@ const config = {
 		},
 	},
 	rules: {
+		'no-extra-semi': 'off',
+		'no-mixed-spaces-and-tabs': 'off',
+		'no-unexpected-multiline': 'off',
 		'array-callback-return': ['warn', { checkForEach: true }],
 		'default-case-last': 'warn',
 		eqeqeq: 'error',
