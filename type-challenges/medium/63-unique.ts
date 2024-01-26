@@ -20,11 +20,10 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Eq<T, U> = (<G>() => G extends T ? 1 : 2) extends <G>() => G extends U
-	? 1
-	: 2
-	? true
-	: false;
+type Eq<T, U> =
+	(<G>() => G extends T ? 1 : 2) extends <G>() => G extends U ? 1 : 2
+		? true
+		: false;
 
 type Includes<T extends unknown[], U> = T extends [infer L, ...infer R]
 	? Eq<L, U> extends true

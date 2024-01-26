@@ -160,11 +160,12 @@ type GetTagsKey<
 	V,
 	TagsOrUndefined = [V] extends [Tagged] ? V[typeof KEY] : undefined,
 	TagsKeyOrNever = GetStringKeys<Exclude<TagsOrUndefined, undefined>>,
-> = Equal<TagsKeyOrNever, never> extends true
-	? ''
-	: Equal<TagsKeyOrNever, string> extends true
+> =
+	Equal<TagsKeyOrNever, never> extends true
 		? ''
-		: TagsKeyOrNever;
+		: Equal<TagsKeyOrNever, string> extends true
+			? ''
+			: TagsKeyOrNever;
 
 /**
  * GetTags<null> = [].
@@ -177,13 +178,14 @@ export type GetTags<
 	V,
 	TagsOrUndefined = [V] extends [Tagged] ? V[typeof KEY] : undefined,
 	TagsOrNever = GetStringProps<Exclude<TagsOrUndefined, undefined>>,
-> = Equal<V, unknown> extends true
-	? []
-	: Equal<TagsOrNever, never> extends true
+> =
+	Equal<V, unknown> extends true
 		? []
-		: TagsOrNever extends Tuple
-			? TagsOrNever
-			: [];
+		: Equal<TagsOrNever, never> extends true
+			? []
+			: TagsOrNever extends Tuple
+				? TagsOrNever
+				: [];
 
 /**
  * Tag<number, "foo"> = number with tag "foo".
@@ -195,15 +197,16 @@ export type Tag<
 	T extends string,
 	Tags extends Tuple = GetTags<V>,
 	TagsKey extends string = GetTagsKey<V>,
-> = Equal<V, null> extends true
-	? null
-	: Equal<V, undefined> extends true
-		? undefined
-		: (typeof KEY extends keyof V ? Omit<V, typeof KEY> : V) & {
-				readonly [KEY]?: { 0: 0 } & {
-					[K in `${TagsKey}${Tags['length']}${T}`]?: [...Tags, T];
+> =
+	Equal<V, null> extends true
+		? null
+		: Equal<V, undefined> extends true
+			? undefined
+			: (typeof KEY extends keyof V ? Omit<V, typeof KEY> : V) & {
+					readonly [KEY]?: { 0: 0 } & {
+						[K in `${TagsKey}${Tags['length']}${T}`]?: [...Tags, T];
+					};
 				};
-			};
 
 /**
  * UnTag<null> = null.

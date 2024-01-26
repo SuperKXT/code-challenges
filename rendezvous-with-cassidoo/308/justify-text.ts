@@ -41,15 +41,13 @@ type lines<
 		? result
 		: [...result, currLine];
 
-type spacesRequired<
-	T extends readonly string[],
-	maxWidth extends number,
-> = tuple<maxWidth, ' '> extends readonly [
-	...tuple<stringToTuple<join<T>>['length'], ' '>,
-	...infer spaces extends ' '[],
-]
-	? spaces
-	: [];
+type spacesRequired<T extends readonly string[], maxWidth extends number> =
+	tuple<maxWidth, ' '> extends readonly [
+		...tuple<stringToTuple<join<T>>['length'], ' '>,
+		...infer spaces extends ' '[],
+	]
+		? spaces
+		: [];
 
 type divide<
 	T extends unknown[],

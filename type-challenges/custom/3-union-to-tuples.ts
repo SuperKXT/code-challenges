@@ -7,11 +7,12 @@ import type { Utils } from '../../types/utils.types.js';
  */
 
 /** get the last element of a union */
-type lastInUnion<T> = Utils.unionToIntersection<
-	T extends unknown ? (x: T) => 0 : never
-> extends (x: infer U) => 0
-	? U
-	: never;
+type lastInUnion<T> =
+	Utils.unionToIntersection<T extends unknown ? (x: T) => 0 : never> extends (
+		x: infer U,
+	) => 0
+		? U
+		: never;
 
 type _last = lastInUnion<1 | 2 | 3>;
 //   ^?

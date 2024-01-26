@@ -27,13 +27,14 @@ type AbsoluteIndex<
 	T extends number,
 	Arr extends unknown[],
 	Idx extends 1[] = [],
-> = AbsoluteNo<T> extends T
-	? T
-	: AbsoluteNo<T> extends Idx['length']
-		? Arr['length']
-		: Arr extends [...infer Rest, unknown]
-			? AbsoluteIndex<T, Rest, [...Idx, 1]>
-			: 0;
+> =
+	AbsoluteNo<T> extends T
+		? T
+		: AbsoluteNo<T> extends Idx['length']
+			? Arr['length']
+			: Arr extends [...infer Rest, unknown]
+				? AbsoluteIndex<T, Rest, [...Idx, 1]>
+				: 0;
 
 type Slice<
 	Arr extends unknown[],

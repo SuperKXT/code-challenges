@@ -85,12 +85,8 @@ type max<
 		? 0
 		: val;
 
-type subtract<T extends number, U extends number> = tuple<T> extends [
-	...tuple<U>,
-	...infer rest,
-]
-	? rest['length']
-	: never;
+type subtract<T extends number, U extends number> =
+	tuple<T> extends [...tuple<U>, ...infer rest] ? rest['length'] : never;
 
 type MaximumProfit<
 	Arr extends readonly number[],

@@ -7,7 +7,6 @@ const config = {
 		'plugin:@typescript-eslint/stylistic-type-checked',
 		'plugin:import/recommended',
 		'plugin:import/typescript',
-		'prettier',
 	],
 	plugins: ['import', 'unused-imports', '@typescript-eslint'],
 	parser: '@typescript-eslint/parser',

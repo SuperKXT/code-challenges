@@ -177,12 +177,8 @@ type Tuple<T, Res extends 1[] = []> = 0 extends 1
 		? Res
 		: Tuple<T, [...Res, 1]>;
 
-type _Subtract<M extends number, S extends number> = Tuple<M> extends [
-	...Tuple<S>,
-	...infer Rest,
-]
-	? Rest['length']
-	: never;
+type _Subtract<M extends number, S extends number> =
+	Tuple<M> extends [...Tuple<S>, ...infer Rest] ? Rest['length'] : never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

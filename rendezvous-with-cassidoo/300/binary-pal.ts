@@ -11,11 +11,12 @@ type NumberToBinary<
 	T extends number,
 	Arr extends unknown[] = NumberToArray<Unsigned<T>>,
 	Binary extends unknown[] = [],
-> = Halve<Arr> extends [infer Halved extends unknown[], infer Remainder]
-	? Halved extends []
-		? [Remainder, ...Binary]
-		: NumberToBinary<T, Halved, [Remainder, ...Binary]>
-	: never;
+> =
+	Halve<Arr> extends [infer Halved extends unknown[], infer Remainder]
+		? Halved extends []
+			? [Remainder, ...Binary]
+			: NumberToBinary<T, Halved, [Remainder, ...Binary]>
+		: never;
 
 type IsPalindrome<T extends unknown[]> = T extends [
 	infer F,

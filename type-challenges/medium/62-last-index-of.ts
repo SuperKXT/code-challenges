@@ -19,11 +19,10 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Eq<T, U> = (<G>() => G extends T ? 1 : 2) extends <G>() => G extends U
-	? 1
-	: 2
-	? true
-	: false;
+type Eq<T, U> =
+	(<G>() => G extends T ? 1 : 2) extends <G>() => G extends U ? 1 : 2
+		? true
+		: false;
 
 type LastIndexOf<T extends unknown[], U> = T extends [...infer Rest, infer Last]
 	? Eq<Last, U> extends true

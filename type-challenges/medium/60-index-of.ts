@@ -18,11 +18,10 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Eq<T, U> = (<G>() => G extends T ? 1 : 0) extends <G>() => G extends U
-	? 1
-	: 0
-	? true
-	: false;
+type Eq<T, U> =
+	(<G>() => G extends T ? 1 : 0) extends <G>() => G extends U ? 1 : 0
+		? true
+		: false;
 
 type IndexOf<T extends unknown[], U, Idx extends unknown[] = []> = T extends [
 	infer F,
