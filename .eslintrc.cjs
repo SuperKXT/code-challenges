@@ -221,9 +221,6 @@ const config = {
 	overrides: [
 		{
 			files: ['*.test.ts'],
-			parserOptions: {
-				project: ['./tsconfig.json'],
-			},
 			extends: ['plugin:vitest/all'],
 			plugins: ['vitest'],
 			rules: {
