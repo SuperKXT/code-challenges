@@ -11,7 +11,7 @@ type incrementMap<
 			[k in keyof T]: T[k] extends num
 				? [...tuple<T[k]>, 1]['length'] & number
 				: T[k];
-	  }
+		}
 	: T & { [k in num]: 1 };
 
 type isEven<
@@ -20,8 +20,8 @@ type isEven<
 > = tup extends []
 	? true
 	: tup extends [1, 1, ...infer rest]
-	  ? isEven<never, rest>
-	  : false;
+		? isEven<never, rest>
+		: false;
 
 type Majority<
 	input extends number[],
@@ -41,19 +41,19 @@ type Majority<
 				[...most, 1][newMap[first]] extends undefined
 					? first
 					: newMap[first] extends most['length']
-					  ? never
-					  : winner,
+						? never
+						: winner,
 				isEven<first> extends true ? [...evens, 1] : evens,
 				isEven<first> extends false ? [...odds, 1] : odds
-		  >
+			>
 		: never
 	: [winner] extends [never]
-	  ? evens['length'] extends odds['length']
+		? evens['length'] extends odds['length']
 			? 'none'
 			: evens[odds['length']] extends 1
-			  ? 'evens'
-			  : 'odds'
-	  : winner;
+				? 'evens'
+				: 'odds'
+		: winner;
 
 export const majority = <const Input extends number[]>(
 	input: Input,

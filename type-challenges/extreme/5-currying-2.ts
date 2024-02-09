@@ -54,8 +54,8 @@ type UnshiftBy<
 > = Idx['length'] extends U
 	? T
 	: T extends [unknown, ...infer R]
-	  ? UnshiftBy<R, U, [...Idx, 1]>
-	  : [];
+		? UnshiftBy<R, U, [...Idx, 1]>
+		: [];
 
 type Curry<Params extends unknown[], Return> = <T extends Combinations<Params>>(
 	...args: T

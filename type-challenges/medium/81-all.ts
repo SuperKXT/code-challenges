@@ -22,11 +22,10 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Eq<T, U> = (<G>() => G extends T ? 1 : 2) extends <G>() => G extends U
-	? 1
-	: 2
-	? true
-	: false;
+type Eq<T, U> =
+	(<G>() => G extends T ? 1 : 2) extends <G>() => G extends U ? 1 : 2
+		? true
+		: false;
 
 type All<T extends unknown[], U> = Eq<T[number], U>;
 

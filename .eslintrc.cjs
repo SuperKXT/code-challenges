@@ -8,7 +8,6 @@ const config = {
 		'plugin:import/recommended',
 		'plugin:import/typescript',
 		'plugin:n/recommended',
-		'prettier',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -25,8 +24,10 @@ const config = {
 		},
 	},
 	rules: {
+		'no-extra-semi': 'off',
+		'no-mixed-spaces-and-tabs': 'off',
+		'no-unexpected-multiline': 'off',
 		'array-callback-return': ['warn', { checkForEach: true }],
-		curly: ['warn', 'multi-or-nest', 'consistent'],
 		'default-case-last': 'warn',
 		eqeqeq: 'error',
 		'func-names': ['warn', 'never'],
@@ -44,7 +45,6 @@ const config = {
 		'no-else-return': ['warn', { allowElseIf: false }],
 		'no-extend-native': 'warn',
 		'no-extra-label': 'warn',
-		'no-floating-decimal': 'warn',
 		'no-implicit-coercion': ['warn', { disallowTemplateShorthand: true }],
 		'no-label-var': 'warn',
 		'no-labels': ['warn', { allowLoop: true, allowSwitch: true }],

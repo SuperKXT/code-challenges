@@ -26,8 +26,8 @@ type TupleToUnion<T extends readonly unknown[]> = T extends [
 ]
 	? U | TupleToUnion<V>
 	: T extends []
-	  ? never
-	  : T;
+		? never
+		: T;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

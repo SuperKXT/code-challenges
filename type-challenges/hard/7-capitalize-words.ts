@@ -25,7 +25,7 @@ type CapitalizeWords<
 	? CapitalizeWords<
 			`${Uppercase<U> extends Lowercase<U> ? Capitalize<V> : V}`,
 			`${A}${A extends '' ? Uppercase<U> : U}`
-	  >
+		>
 	: A;
 
 /* _____________ Test Cases _____________ */

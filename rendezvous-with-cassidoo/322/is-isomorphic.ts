@@ -11,8 +11,8 @@ export type IsIsomorphic<
 			: IsIsomorphic<tRest, uRest, map & { [x in first]: mapped }>
 		: false
 	: U extends T
-	  ? true
-	  : false;
+		? true
+		: false;
 
 export const isIsomorphic = <T extends string, U extends string>(
 	first: T,

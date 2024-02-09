@@ -32,8 +32,8 @@ type MyAwaited<T extends Promise<unknown> | Thenable<unknown>> =
 			? MyAwaited<U>
 			: U
 		: T extends Thenable<infer U>
-		  ? U
-		  : never;
+			? U
+			: never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

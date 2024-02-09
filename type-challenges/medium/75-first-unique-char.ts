@@ -23,10 +23,10 @@ type __FirstUniqueCharIndex<
 				? `${L}${R}${F}:[${I} | ${Idx['length']}]`
 				: `${A}${F}:[${Idx['length']}]`,
 			[...Idx, 1]
-	  >
+		>
 	: A extends `${string}:[${infer I extends number}]${string}`
-	  ? I
-	  : -1;
+		? I
+		: -1;
 
 type FirstUniqueCharIndex<
 	T extends string,
@@ -35,8 +35,8 @@ type FirstUniqueCharIndex<
 	? F extends Idx[number]
 		? FirstUniqueCharIndex<R, [...Idx, F]>
 		: R extends `${string}${F}${string}`
-		  ? FirstUniqueCharIndex<R, [...Idx, F]>
-		  : Idx['length']
+			? FirstUniqueCharIndex<R, [...Idx, F]>
+			: Idx['length']
 	: -1;
 
 /* _____________ Test Cases _____________ */

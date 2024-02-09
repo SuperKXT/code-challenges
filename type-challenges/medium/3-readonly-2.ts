@@ -39,12 +39,12 @@ type MyReadonly2<T extends object, K extends keyof T = never> = [K] extends [
 ]
 	? {
 			readonly [Key in keyof T]: T[Key];
-	  }
+		}
 	: {
 			[Key in keyof T as Key extends K ? never : Key]: T[Key];
-	  } & {
+		} & {
 			readonly [Key in keyof T as Key extends K ? Key : never]: T[Key];
-	  };
+		};
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

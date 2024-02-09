@@ -26,10 +26,10 @@ type greaterThanDigits<
 > = T['length'] extends 0
 	? false
 	: T[0] extends U[0]
-	  ? greaterThanDigits<shift<T>, shift<U>>
-	  : UF[TF['length']] extends undefined
-	    ? true
-	    : false;
+		? greaterThanDigits<shift<T>, shift<U>>
+		: UF[TF['length']] extends undefined
+			? true
+			: false;
 
 type greaterThan<
 	T extends number,
@@ -39,10 +39,10 @@ type greaterThan<
 > = T extends U
 	? false
 	: TA['length'] extends UA['length']
-	  ? greaterThanDigits<TA, UA>
-	  : UA[TA['length']] extends undefined
-	    ? true
-	    : false;
+		? greaterThanDigits<TA, UA>
+		: UA[TA['length']] extends undefined
+			? true
+			: false;
 
 type stringToUnion<T extends string> = T extends `${infer first}${infer rest}`
 	? first | stringToUnion<rest>
@@ -92,7 +92,7 @@ type ScoreWordGame<
 				greaterThan<wordScore<first, scores>, highest['score']> extends true
 					? { word: first; score: wordScore<first, scores> }
 					: highest
-		  >
+			>
 		: never
 	: highest['word'];
 
@@ -133,5 +133,5 @@ export type LetterScores<
 			rest,
 			map & { [k in first]: [...offset, ...idx]['length'] },
 			[...idx, 1]
-	  >
+		>
 	: prettify<map>;

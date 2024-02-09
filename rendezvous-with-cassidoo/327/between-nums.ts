@@ -9,8 +9,8 @@ type removeN<
 > = idx['length'] extends n
 	? tup
 	: tup extends [1, ...infer rest extends 1[]]
-	  ? removeN<rest, n, [...idx, 1]>
-	  : [];
+		? removeN<rest, n, [...idx, 1]>
+		: [];
 
 type divisible<
 	num extends number,
@@ -20,18 +20,18 @@ type divisible<
 > = tup extends []
 	? true
 	: [...tup, 1][by] extends undefined
-	  ? false
-	  : divisible<never, by, removeN<tup, by>, [...idx, 1]>;
+		? false
+		: divisible<never, by, removeN<tup, by>, [...idx, 1]>;
 
 type IsPrime<num extends number, idx extends 1[] = [1, 1]> = num extends 0
 	? false
 	: num extends 1
-	  ? true
-	  : idx['length'] extends num
-	    ? true
-	    : divisible<num, idx['length']> extends true
-	      ? false
-	      : IsPrime<num, [...idx, 1]>;
+		? true
+		: idx['length'] extends num
+			? true
+			: divisible<num, idx['length']> extends true
+				? false
+				: IsPrime<num, [...idx, 1]>;
 
 type IsOdd<
 	num extends number,
@@ -39,8 +39,8 @@ type IsOdd<
 > = tup extends [unknown, unknown, ...infer rest]
 	? IsOdd<never, rest>
 	: tup['length'] extends 1
-	  ? true
-	  : false;
+		? true
+		: false;
 
 type IsEven<num extends number> = IsOdd<num> extends true ? false : true;
 
@@ -50,8 +50,8 @@ type checkNum<
 > = check extends 'even'
 	? IsEven<num>
 	: check extends 'odd'
-	  ? IsOdd<num>
-	  : IsPrime<num>;
+		? IsOdd<num>
+		: IsPrime<num>;
 
 type BetweenNums<
 	first extends number,
@@ -80,7 +80,7 @@ type BetweenNums<
 			end,
 			[...idx, 1],
 			[...result, ...(checkNum<curr, check> extends true ? [curr] : [])]
-	  >;
+		>;
 
 const isPrime = (num: number) => {
 	for (let i = 2; i < Math.sqrt(num); i += 2) if (num % i === 0) return false;

@@ -32,24 +32,22 @@ type lines<
 ]
 	? stringToTuple<
 			join<[...currLine, first], ' '>
-	  >[lenTup['length']] extends string
+		>[lenTup['length']] extends string
 		? currLine extends []
 			? lines<rest, len, lenTup, result, [...currLine, first]>
 			: lines<rest, len, lenTup, [...result, currLine], [first]>
 		: lines<rest, len, lenTup, result, [...currLine, first]>
 	: currLine extends []
-	  ? result
-	  : [...result, currLine];
+		? result
+		: [...result, currLine];
 
-type spacesRequired<
-	T extends readonly string[],
-	maxWidth extends number,
-> = tuple<maxWidth, ' '> extends readonly [
-	...tuple<stringToTuple<join<T>>['length'], ' '>,
-	...infer spaces extends ' '[],
-]
-	? spaces
-	: [];
+type spacesRequired<T extends readonly string[], maxWidth extends number> =
+	tuple<maxWidth, ' '> extends readonly [
+		...tuple<stringToTuple<join<T>>['length'], ' '>,
+		...infer spaces extends ' '[],
+	]
+		? spaces
+		: [];
 
 type divide<
 	T extends unknown[],
@@ -58,8 +56,8 @@ type divide<
 > = T extends [...U, ...infer rest]
 	? divide<rest, U, [...result, 1]>
 	: T extends []
-	  ? result['length']
-	  : [...result, 1]['length'];
+		? result['length']
+		: [...result, 1]['length'];
 
 type spacesPerWordRequired<
 	spaces extends ' '[],
@@ -77,8 +75,8 @@ type divideSpaces<
 > = current['length'] extends spacesPerWord
 	? { left: spaces; current: current }
 	: spaces extends [infer first extends ' ', ...infer rest extends ' '[]]
-	  ? divideSpaces<rest, spacesPerWord, [...current, first]>
-	  : { left: spaces; current: current };
+		? divideSpaces<rest, spacesPerWord, [...current, first]>
+		: { left: spaces; current: current };
 
 type justifyLine<
 	line extends readonly string[],
@@ -98,7 +96,7 @@ type justifyLine<
 			maxWidth,
 			divided['left'],
 			spacesPerWord
-	  >}`
+		>}`
 	: '';
 
 type JustifyText<
@@ -112,7 +110,7 @@ type JustifyText<
 	? readonly [
 			justifyLine<first, maxWidth>,
 			...JustifyText<never, maxWidth, rest>,
-	  ]
+		]
 	: readonly [];
 
 export const justifyText = <

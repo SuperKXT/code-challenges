@@ -58,7 +58,7 @@ type DeepMutable<T extends object> = T extends (...args: any[]) => unknown
 	? T
 	: {
 			-readonly [K in keyof T]: T[K] extends object ? DeepMutable<T[K]> : T[K];
-	  };
+		};
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

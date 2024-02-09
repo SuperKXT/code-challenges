@@ -50,16 +50,16 @@ type AddOne<A extends string> = A extends `${infer AH extends
 	? AH extends 9
 		? `0${AddOne<AT>}`
 		: AH extends keyof DigsNext
-		  ? `${DigsNext[AH]}${AT}`
-		  : never
+			? `${DigsNext[AH]}${AT}`
+			: never
 	: `1`;
 
 type SubOne<A> = A extends `${infer AH extends number}${infer AT}`
 	? AH extends 0
 		? `9${SubOne<AT>}`
 		: AH extends keyof DigsPrev
-		  ? `${DigsPrev[AH]}${AT}`
-		  : never
+			? `${DigsPrev[AH]}${AT}`
+			: never
 	: never;
 
 type Add<
@@ -80,12 +80,12 @@ type Mul<
 > = A extends '0'
 	? R
 	: B extends '0'
-	  ? R
-	  : A extends `${infer AH}${infer AT}`
-	    ? AH extends '0'
+		? R
+		: A extends `${infer AH}${infer AT}`
+			? AH extends '0'
 				? Mul<AT, `0${B}`, R>
 				: Mul<SubOne<A>, B, Add<R, B>>
-	    : R;
+			: R;
 
 // todo RETRY
 type Multiply<

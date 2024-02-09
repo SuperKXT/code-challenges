@@ -37,7 +37,7 @@ namespace RLE {
 					First,
 					[1],
 					`${Encoded}${Count['length'] extends 1 ? '' : Count['length']}${Last}`
-			  >
+				>
 		: `${Encoded}${Count['length'] extends 1 ? '' : Count['length']}${Last}`;
 	export type Decode<
 		Str extends string,
@@ -45,8 +45,8 @@ namespace RLE {
 	> = Str extends `${infer Size extends number}${infer Char}${infer Rest}`
 		? Decode<Rest, `${Decoded}${RepeatString<Size, Char>}`>
 		: Str extends `${infer First}${infer Rest}`
-		  ? Decode<Rest, `${Decoded}${First}`>
-		  : Decoded;
+			? Decode<Rest, `${Decoded}${First}`>
+			: Decoded;
 }
 
 type _ = RLE.Encode<'AAABCCXXXXXXY'>;

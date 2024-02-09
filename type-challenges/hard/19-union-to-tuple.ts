@@ -48,11 +48,12 @@ type UnionToIntersection<U> = (
 	? I
 	: never;
 
-type LastInUnion<U> = UnionToIntersection<
-	U extends unknown ? (x: U) => 0 : never
-> extends (x: infer L) => 0
-	? L
-	: never;
+type LastInUnion<U> =
+	UnionToIntersection<U extends unknown ? (x: U) => 0 : never> extends (
+		x: infer L,
+	) => 0
+		? L
+		: never;
 
 type UnionToTuple<T, U = LastInUnion<T>> = [U] extends [never]
 	? []

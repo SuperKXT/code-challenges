@@ -28,13 +28,13 @@ type FlattenDepth<
 > = U['length'] extends D
 	? T
 	: T extends [infer F, ...infer R]
-	  ? [
+		? [
 				...(F extends unknown[] ? FlattenDepth<F, D, [...U, 0]> : [F]),
 				...FlattenDepth<R, D, U>,
-	    ]
-	  : T extends []
-	    ? T
-	    : never;
+			]
+		: T extends []
+			? T
+			: never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

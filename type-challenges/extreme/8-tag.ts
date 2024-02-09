@@ -116,8 +116,8 @@ type Shift<T extends Tuple> = T extends [infer Head, ...infer Tail] ? Tail : [];
 type StartWith<S extends Tuple, T extends Tuple> = S extends []
 	? true
 	: Equal<S[0], T[0]> extends false
-	  ? false
-	  : StartWith<Shift<S>, Shift<T>>;
+		? false
+		: StartWith<Shift<S>, Shift<T>>;
 
 /**
  * Includes<["foo", "bar"], ["quux", "foo", "bar", "qux"]> = true.
@@ -126,10 +126,10 @@ type StartWith<S extends Tuple, T extends Tuple> = S extends []
 type Includes<S extends Tuple, T extends Tuple> = S extends []
 	? true
 	: T extends []
-	  ? false
-	  : Equal<S[0], T[0]> extends true
-	    ? StartWith<S, T>
-	    : Includes<S, Shift<T>>;
+		? false
+		: Equal<S[0], T[0]> extends true
+			? StartWith<S, T>
+			: Includes<S, Shift<T>>;
 
 /**
  * GetStringProps<{ 0: 0; x?: 3 }> = 3.
@@ -160,11 +160,12 @@ type GetTagsKey<
 	V,
 	TagsOrUndefined = [V] extends [Tagged] ? V[typeof KEY] : undefined,
 	TagsKeyOrNever = GetStringKeys<Exclude<TagsOrUndefined, undefined>>,
-> = Equal<TagsKeyOrNever, never> extends true
-	? ''
-	: Equal<TagsKeyOrNever, string> extends true
-	  ? ''
-	  : TagsKeyOrNever;
+> =
+	Equal<TagsKeyOrNever, never> extends true
+		? ''
+		: Equal<TagsKeyOrNever, string> extends true
+			? ''
+			: TagsKeyOrNever;
 
 /**
  * GetTags<null> = [].
@@ -177,13 +178,14 @@ export type GetTags<
 	V,
 	TagsOrUndefined = [V] extends [Tagged] ? V[typeof KEY] : undefined,
 	TagsOrNever = GetStringProps<Exclude<TagsOrUndefined, undefined>>,
-> = Equal<V, unknown> extends true
-	? []
-	: Equal<TagsOrNever, never> extends true
-	  ? []
-	  : TagsOrNever extends Tuple
-	    ? TagsOrNever
-	    : [];
+> =
+	Equal<V, unknown> extends true
+		? []
+		: Equal<TagsOrNever, never> extends true
+			? []
+			: TagsOrNever extends Tuple
+				? TagsOrNever
+				: [];
 
 /**
  * Tag<number, "foo"> = number with tag "foo".
@@ -195,15 +197,16 @@ export type Tag<
 	T extends string,
 	Tags extends Tuple = GetTags<V>,
 	TagsKey extends string = GetTagsKey<V>,
-> = Equal<V, null> extends true
-	? null
-	: Equal<V, undefined> extends true
-	  ? undefined
-	  : (typeof KEY extends keyof V ? Omit<V, typeof KEY> : V) & {
-				readonly [KEY]?: { 0: 0 } & {
-					[K in `${TagsKey}${Tags['length']}${T}`]?: [...Tags, T];
+> =
+	Equal<V, null> extends true
+		? null
+		: Equal<V, undefined> extends true
+			? undefined
+			: (typeof KEY extends keyof V ? Omit<V, typeof KEY> : V) & {
+					readonly [KEY]?: { 0: 0 } & {
+						[K in `${TagsKey}${Tags['length']}${T}`]?: [...Tags, T];
+					};
 				};
-	    };
 
 /**
  * UnTag<null> = null.

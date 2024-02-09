@@ -30,8 +30,8 @@ type AllCombinations<
 > = S extends ''
 	? ''
 	: I extends I
-	  ? '' | I | `${I}${AllCombinations<S, Exclude<T, I>>}`
-	  : '';
+		? '' | I | `${I}${AllCombinations<S, Exclude<T, I>>}`
+		: '';
 
 type _AllCombinations<S extends string, T extends string = StringToUnion<S>> = [
 	T,

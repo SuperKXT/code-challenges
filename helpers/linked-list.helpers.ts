@@ -31,8 +31,8 @@ type ArrayToLinkedList<
 > = number extends Type['length']
 	? LinkedList<Type[number]>
 	: Type extends readonly [infer First, ...infer Rest]
-	  ? ArrayToLinkedList<Rest, InsertNode<Result, First>>
-	  : Result;
+		? ArrayToLinkedList<Rest, InsertNode<Result, First>>
+		: Result;
 
 export const arrayToLinkedList = <const Arr extends readonly unknown[]>(
 	array: Arr,

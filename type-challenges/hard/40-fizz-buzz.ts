@@ -34,17 +34,17 @@ type FizzBuzz<
 > = Result['length'] extends Size
 	? Result
 	: ToThree['length'] extends 2
-	  ? ToFive['length'] extends 4
+		? ToFive['length'] extends 4
 			? FizzBuzz<Size, [...Result, 'FizzBuzz']>
 			: FizzBuzz<Size, [...Result, 'Fizz'], [], [...ToFive, 1]>
-	  : ToFive['length'] extends 4
-	    ? FizzBuzz<Size, [...Result, 'Buzz'], [...ToThree, 1]>
-	    : FizzBuzz<
+		: ToFive['length'] extends 4
+			? FizzBuzz<Size, [...Result, 'Buzz'], [...ToThree, 1]>
+			: FizzBuzz<
 					Size,
 					[...Result, `${[...Result, '0']['length'] & number}`],
 					[...ToThree, 1],
 					[...ToFive, 1]
-	      >;
+				>;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

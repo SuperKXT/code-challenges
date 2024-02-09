@@ -6,14 +6,13 @@ type Combine<
 		? `${T}+${Combine<T, V>}`
 		: never
 	: Str extends T
-	  ? T
-	  : never;
+		? T
+		: never;
 
 type Dice = `${number}d${number}`;
 
-export type CheckNotation<T extends string> = Combine<Dice, T> extends never
-	? 'bad dice notation!'
-	: T;
+export type CheckNotation<T extends string> =
+	Combine<Dice, T> extends never ? 'bad dice notation!' : T;
 
 const diceRegex = /^(\d+d\d+\+)*\d+d\d+$/u;
 

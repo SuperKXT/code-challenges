@@ -24,8 +24,8 @@ type sqrt<
 > = square['length'] extends T
 	? idx['length']
 	: square[T] extends 1
-	  ? never
-	  : sqrt<T, [...idx, 1]>;
+		? never
+		: sqrt<T, [...idx, 1]>;
 
 type reverse<T extends string> = T extends `${infer F}${infer R}`
 	? `${reverse<R>}${F}`
@@ -37,8 +37,8 @@ type reverseNumber<T extends number> =
 type ReversedSquare<T extends number> = [sqrt<T>] extends [never]
 	? false
 	: [sqrt<reverseNumber<T>>] extends [never]
-	  ? false
-	  : true;
+		? false
+		: true;
 
 export const reversedSquare = <T extends number>(num: T): ReversedSquare<T> => {
 	const reverse = Number(String(num).split('').reverse().join(''));

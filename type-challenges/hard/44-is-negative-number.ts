@@ -28,13 +28,14 @@ type IsUnion<T, U = T> = (
 	? false
 	: true;
 
-type IsNegativeNumber<T extends number> = IsUnion<T> extends true
-	? never
-	: number extends T
-	  ? never
-	  : `${T}` extends `-${number}`
-	    ? true
-	    : false;
+type IsNegativeNumber<T extends number> =
+	IsUnion<T> extends true
+		? never
+		: number extends T
+			? never
+			: `${T}` extends `-${number}`
+				? true
+				: false;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first

@@ -57,10 +57,10 @@ type CompareDigitDigits<
 > = T['length'] extends 0
 	? 'same'
 	: T[0] extends U[0]
-	  ? CompareDigitDigits<Shift<T>, Shift<U>>
-	  : UF[TF['length']] extends undefined
-	    ? 'greater'
-	    : 'lesser';
+		? CompareDigitDigits<Shift<T>, Shift<U>>
+		: UF[TF['length']] extends undefined
+			? 'greater'
+			: 'lesser';
 
 export type CompareNum<
 	T extends number,
@@ -70,10 +70,10 @@ export type CompareNum<
 > = T extends U
 	? 'equal'
 	: TA['length'] extends UA['length']
-	  ? CompareDigitDigits<TA, UA>
-	  : UA[TA['length']] extends undefined
-	    ? 'greater'
-	    : 'lesser';
+		? CompareDigitDigits<TA, UA>
+		: UA[TA['length']] extends undefined
+			? 'greater'
+			: 'lesser';
 
 type SmallestOrGreatest<
 	Union extends number,
@@ -84,11 +84,11 @@ type SmallestOrGreatest<
 			V extends V
 				? CompareNum<V, Union> extends (
 						IsGreatest extends true ? 'greater' : 'lesser'
-				  )
+					)
 					? V
 					: never
 				: never,
-	  ] extends [never]
+		] extends [never]
 		? Union
 		: never
 	: never;

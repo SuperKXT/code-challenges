@@ -40,7 +40,7 @@ type sumPayload<
 			rest,
 			double extends true ? false : true,
 			[...sum, ...sumDigit<double extends true ? doubleNum<last> : last>]
-	  >
+		>
 	: sum['length'];
 
 type mod<
@@ -52,28 +52,27 @@ type mod<
 	? mod<never, never, rest, mTuple>
 	: tTuple['length'];
 
-type subtract<T extends number, M extends number> = tuple<T> extends [
-	...tuple<M>,
-	...infer rest extends 1[],
-]
-	? rest['length']
-	: 0;
+type subtract<T extends number, M extends number> =
+	tuple<T> extends [...tuple<M>, ...infer rest extends 1[]]
+		? rest['length']
+		: 0;
 
-type verifyLuhn<T extends number> = numberToTuple<T> extends [
-	...infer payload extends number[],
-	infer check extends number,
-]
-	? subtract<
-			10,
-			mod<sumPayload<payload>, 10> extends infer m extends number
-				? m extends 0
-					? 10
-					: m
-				: 0
-	  > extends check
-		? true
-		: false
-	: false;
+type verifyLuhn<T extends number> =
+	numberToTuple<T> extends [
+		...infer payload extends number[],
+		infer check extends number,
+	]
+		? subtract<
+				10,
+				mod<sumPayload<payload>, 10> extends infer m extends number
+					? m extends 0
+						? 10
+						: m
+					: 0
+			> extends check
+			? true
+			: false
+		: false;
 
 type startsWith<T extends string, S extends string> = T extends `${S}${string}`
 	? true
@@ -101,9 +100,10 @@ type brand<T extends number> = {
 		: b
 	: never;
 
-type LuhnCheck<T extends number> = verifyLuhn<T> extends true
-	? { valid: true; brand: brand<T> }
-	: { valid: false };
+type LuhnCheck<T extends number> =
+	verifyLuhn<T> extends true
+		? { valid: true; brand: brand<T> }
+		: { valid: false };
 
 export const luhnCheck = <T extends number>(number: T): LuhnCheck<T> => {
 	const sum = String(Math.floor(number / 10))

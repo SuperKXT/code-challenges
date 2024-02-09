@@ -23,20 +23,20 @@
 type _IsTuple<T> = [T] extends [never]
 	? false
 	: T extends []
-	  ? true
-	  : T extends [unknown, ...unknown[]]
-	    ? true
-	    : T extends readonly [unknown, ...unknown[]]
-	      ? true
-	      : false;
+		? true
+		: T extends [unknown, ...unknown[]]
+			? true
+			: T extends readonly [unknown, ...unknown[]]
+				? true
+				: false;
 
 type IsTuple<T> = [T] extends [never]
 	? false
 	: T extends readonly unknown[]
-	  ? number extends T['length']
+		? number extends T['length']
 			? false
 			: true
-	  : false;
+		: false;
 
 type _ = IsTuple<readonly [1]>;
 //   ^?

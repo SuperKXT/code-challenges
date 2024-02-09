@@ -6,8 +6,8 @@ type IsAnagram<
 		? IsAnagram<rest, `${before}${after}`>
 		: false
 	: U extends ''
-	  ? true
-	  : false;
+		? true
+		: false;
 
 export const isAnagram = <T extends string, U extends string>(
 	first: T,

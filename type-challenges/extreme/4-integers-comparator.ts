@@ -61,8 +61,8 @@ type CompareTups<
 > = A['length'] extends B['length']
 	? DigitComparator<A, B>
 	: A[B['length']] extends undefined
-	  ? Comparison.Lower
-	  : Comparison.Greater;
+		? Comparison.Lower
+		: Comparison.Greater;
 
 type CheckNegative<
 	A extends number,
@@ -74,8 +74,8 @@ type CheckNegative<
 		? CompareTups<TupB, TupA>
 		: Comparison.Lower
 	: `${B}` extends `-${number}`
-	  ? Comparison.Greater
-	  : CompareTups<TupA, TupB>;
+		? Comparison.Greater
+		: CompareTups<TupA, TupB>;
 
 type Comparator<A extends number, B extends number> = A extends B
 	? Comparison.Equal
