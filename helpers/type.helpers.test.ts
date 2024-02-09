@@ -1,5 +1,3 @@
-/* eslint-disable vitest/no-conditional-in-test */
-/* eslint-disable vitest/no-conditional-tests */
 import {
 	assertArray,
 	assertObject,

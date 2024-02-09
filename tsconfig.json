@@ -47,8 +47,8 @@
 		"noErrorTruncation": true,
 
 		// completeness
-		"skipLibCheck": true,
+		"skipLibCheck": true
 	},
 	"include": ["**/*", "**/*.*.cjs"],
-	"exclude": ["node_modules", "build", "dist", "coverage", "public"],
+	"exclude": ["node_modules", "build", "dist", "coverage", "public"]
 }
