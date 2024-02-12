@@ -1,6 +1,6 @@
 # daysBetween
 
-[issue #335 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/the-most-effective-way-to-do-it-is-to-do-it-5924/)
+[issue #337 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/the-most-effective-way-to-do-it-is-to-do-it-5924/)
 
 **Write a function called daysBetween that takes in two dates, and returns the number of days between those dates.**
 You can choose the date format you'd like to accept!
