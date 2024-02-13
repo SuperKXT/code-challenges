@@ -1,4 +1,4 @@
-# daysBetween
+# fromTo
 
 [issue #339 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/youve-got-to-love-whats-yours-alicia-keys/)
 
@@ -7,19 +7,13 @@
 Example:
 
 ```ts
-let range = fromTo(0,3)
-
-> range()
-0
-> range()
-1
-> range()
-2
-> range()
-null
-
+let range = fromTo(0, 3) > range();
+0 > range();
+1 > range();
+2 > range();
+null;
 ```
 
 ---
 
-[Solution Playground](https://tsplay.dev/wgor6w)
+[Solution Playground](https://tsplay.dev/mqo8Rw)
