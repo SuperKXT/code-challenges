@@ -1,5 +1,4 @@
-export function* fromTo(from: number, to: number) {
-	for (let i = from; i < to; i++) {
-		yield i;
-	}
-}
+export const fromTo = (from: number, to: number) => {
+	let curr = from;
+	return () => (curr < to ? curr++ : null);
+};
