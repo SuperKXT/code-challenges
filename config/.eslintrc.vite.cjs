@@ -8,7 +8,7 @@ const config = {
 		'plugin:import/recommended',
 		'plugin:import/typescript',
 	],
-	plugins: ['import', 'unused-imports', '@typescript-eslint'],
+	plugins: ['import', 'unused-imports', '@typescript-eslint', 'only-warn'],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaVersion: 'latest',
