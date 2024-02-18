@@ -8,7 +8,7 @@ const config = {
 		'plugin:import/recommended',
 		'plugin:import/typescript',
 	],
-	plugins: ['import', 'unused-imports', '@typescript-eslint'],
+	plugins: ['import', 'unused-imports', '@typescript-eslint', 'only-warn'],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaVersion: 'latest',
@@ -234,6 +234,14 @@ const config = {
 					},
 				],
 				'react/no-access-state-in-setstate': 'warn', // cSpell: disable-line
+				'react/jsx-key': [
+					'warn',
+					{
+						warnOnDuplicates: true,
+						checkKeyMustBeforeSpread: true,
+						checkFragmentShorthand: true,
+					},
+				],
 				'react/no-danger': 'warn',
 				'react/no-object-type-as-default-prop': 'warn',
 				'react/no-unstable-nested-components': ['warn', { allowAsProps: true }],

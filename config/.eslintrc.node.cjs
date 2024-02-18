@@ -16,7 +16,7 @@ const config = {
 		project: true,
 		tsconfigRootDir: __dirname,
 	},
-	plugins: ['import', 'unused-imports', '@typescript-eslint'],
+	plugins: ['import', 'unused-imports', '@typescript-eslint', 'only-warn'],
 	settings: {
 		'import/resolver': {
 			node: true,

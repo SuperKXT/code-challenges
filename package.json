@@ -5,7 +5,7 @@
 	"author": "Saad Khan",
 	"type": "module",
 	"scripts": {
-		"lint": "eslint . --fix --report-unused-disable-directives && pnpm format && pnpm spellcheck",
+		"lint": "eslint . --max-warnings=0 --fix --report-unused-disable-directives && pnpm format && pnpm spellcheck",
 		"format": "prettier --write --log-level silent .",
 		"test": "vitest watch",
 		"test-ui": "vitest --ui",
@@ -35,6 +35,7 @@
 		"eslint-plugin-import": "^2.29.1",
 		"eslint-plugin-n": "^16.6.2",
 		"eslint-plugin-unused-imports": "^3.1.0",
+		"eslint-plugin-only-warn": "^1.1.0",
 		"eslint-plugin-vitest": "^0.3.22",
 		"prettier": "^3.2.5",
 		"tsx": "^4.7.1",
