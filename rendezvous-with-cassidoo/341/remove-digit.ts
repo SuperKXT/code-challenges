@@ -70,7 +70,7 @@ type RemoveDigit<
 export const removeDigit = <num extends number, digit extends digitOpts>(
 	num: num,
 	digit: digit,
-): RemoveDigit<num, digitOpts> => {
+): RemoveDigit<num, digit> => {
 	let maxProduct = 0;
 	const numStr = num.toString();
 	for (let idx = 0; idx < numStr.length; idx++) {
