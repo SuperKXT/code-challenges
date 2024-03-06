@@ -1,5 +1,7 @@
 import { formatToken } from './format-token.helpers.js';
 
+import type { Utils } from '../types/utils.types.js';
+
 test('test formatToken against the 1st test string', () => {
 	const input = 'thisIsSomeTestString' as const;
 	const expected = {
@@ -192,14 +194,14 @@ test('test formatToken against the 5th test string', () => {
 });
 
 test('test formatToken against the 6th test string', () => {
-	const input = 'api helpers.helpers.js' as const;
+	const input = 'api helpers.js' as const;
 	const expected = {
-		camel: 'apiHelpersHelpersJs',
-		pascal: 'ApiHelpersHelpersJs',
-		snake: 'api_helpers_helpers_js',
-		kebab: 'api-helpers-helpers-js',
-		constant: 'API_HELPERS_HELPERS_JS',
-		human: 'api helpers helpers js',
+		camel: 'apiHelpersJs',
+		pascal: 'ApiHelpersJs',
+		snake: 'api_helpers_js',
+		kebab: 'api-helpers-js',
+		constant: 'API_HELPERS_JS',
+		human: 'api helpers js',
 	} as const;
 	const response = {
 		camel: formatToken(input, 'camel'),
@@ -379,4 +381,44 @@ test('test formatToken against the 10th test string', () => {
 
 	expect(expected.human).toStrictEqual(response.human);
 	assertType<typeof response.human>(expected.human);
+});
+
+test('test formatToken against a union string type', () => {
+	const input = 'foo string' as 'foo string' | 'bar string';
+	const expected = {
+		camel: 'fooString' as 'fooString' | 'barString',
+		pascal: 'FooString' as 'FooString' | 'BarString',
+		snake: 'foo_string' as 'foo_string' | 'bar_string',
+		kebab: 'foo-string' as 'foo-string' | 'bar-string',
+		constant: 'FOO_STRING' as 'FOO_STRING' | 'BAR_STRING',
+		human: 'foo string' as 'foo string' | 'bar string',
+	} as const;
+	const response = {
+		camel: formatToken(input, 'camel'),
+		pascal: formatToken(input, 'pascal'),
+		snake: formatToken(input, 'snake'),
+		kebab: formatToken(input, 'kebab'),
+		constant: formatToken(input, 'constant'),
+		human: formatToken(input, 'human'),
+	};
+
+	expect(expected.camel).toStrictEqual(response.camel);
+	assertType<Utils.equal<typeof expected.camel, typeof response.camel>>(true);
+
+	expect(expected.pascal).toStrictEqual(response.pascal);
+	assertType<Utils.equal<typeof expected.pascal, typeof response.pascal>>(true);
+
+	expect(expected.snake).toStrictEqual(response.snake);
+	assertType<Utils.equal<typeof expected.snake, typeof response.snake>>(true);
+
+	expect(expected.kebab).toStrictEqual(response.kebab);
+	assertType<Utils.equal<typeof expected.kebab, typeof response.kebab>>(true);
+
+	expect(expected.constant).toStrictEqual(response.constant);
+	assertType<Utils.equal<typeof expected.constant, typeof response.constant>>(
+		true,
+	);
+
+	expect(expected.human).toStrictEqual(response.human);
+	assertType<Utils.equal<typeof expected.human, typeof response.human>>(true);
 });

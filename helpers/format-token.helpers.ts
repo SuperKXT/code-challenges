@@ -99,13 +99,13 @@ type _InnerFormatToken<
 	F extends string = '',
 > = NextLoop<C, S, R, `${F}${_alphaNum<C, S, L, F>}`>;
 
-export type FormatToken<T extends string, S extends Strategy> = {
-	[K in T]: Trim<K> extends ''
-		? Trim<K>
-		: Trim<K> extends `${infer U}${infer V}`
+export type FormatToken<T extends string, S extends Strategy> = T extends T
+	? Trim<T> extends ''
+		? Trim<T>
+		: Trim<T> extends `${infer U}${infer V}`
 			? _InnerFormatToken<U, S, V>
-			: Trim<K>;
-}[T];
+			: Trim<T>
+	: never;
 
 /**
  * Takes a token name, and format strategy and returns the converted token name
