@@ -7,6 +7,7 @@ import {
 	wordSeparators,
 } from './string-literals.helpers.js';
 
+import type { Utils } from '../types/utils.types.js';
 import type {
 	Alphabet,
 	AlphaNumeric,
@@ -38,74 +39,52 @@ const separatorMap = {
 
 type SeparatorMap = typeof separatorMap;
 
-type Trim<T extends string> = T extends ` ${infer U}` | `${infer U} `
-	? Trim<U>
-	: T;
+type _firstChar<
+	char extends string,
+	strategy extends Strategy,
+> = `${SeparatorMap[strategy]}${strategy extends 'kebab' | 'snake' | 'human'
+	? Lowercase<char>
+	: Uppercase<char>}`;
 
-type Not<T, U> = T extends U ? false : true;
+type _formatChar<
+	char extends string,
+	lastChar extends string,
+	strategy extends Strategy,
+	formatted extends string,
+> =
+	char extends Exclude<char, AlphaNumeric> // char !== AlphaNumeric
+		? ''
+		: formatted extends ''
+			? strategy extends 'pascal' | 'constant'
+				? Uppercase<char>
+				: Lowercase<char>
+			: [char, lastChar] extends
+						| [Alphabet, WordSeparators]
+						| [UpperAlphabet, LowerAlphabet]
+						| [Numeric, Exclude<lastChar, Numeric>]
+				? _firstChar<char, strategy>
+				: strategy extends 'constant'
+					? Uppercase<char>
+					: Lowercase<char>;
 
-type NextLoop<
-	C extends string,
-	S extends Strategy,
-	R extends string,
-	F extends string,
-> = R extends `${infer U}${infer V}` ? _InnerFormatToken<U, S, V, C, F> : F;
+type _formatToken<
+	str extends string,
+	strategy extends Strategy,
+	lastChar extends string = '',
+	formatted extends string = '',
+> = str extends `${infer first}${infer rest}`
+	? _formatToken<
+			rest,
+			strategy,
+			first,
+			`${formatted}${_formatChar<first, lastChar, strategy, formatted>}`
+		>
+	: formatted;
 
-type _others<C extends string, S extends Strategy> = S extends 'constant'
-	? Uppercase<C>
-	: Lowercase<C>;
-
-type _separate<
-	C extends string,
-	S extends Strategy,
-> = `${SeparatorMap[S]}${S extends 'kebab' | 'snake' | 'human'
-	? Lowercase<C>
-	: Uppercase<C>}`;
-
-type _separated<C extends string, S extends Strategy, L extends string = ''> = [
-	C,
-	L,
-] extends [Alphabet, WordSeparators]
-	? _separate<C, S>
-	: [C, L] extends [UpperAlphabet, LowerAlphabet]
-		? _separate<C, S>
-		: [C, Not<L, Numeric>] extends [Numeric, true]
-			? _separate<C, S>
-			: _others<C, S>;
-
-type _first<
-	C extends string,
-	S extends Strategy,
-	L extends string = '',
-	F extends string = '',
-> = [L, F] extends ['', string] | [string, '']
-	? S extends 'pascal' | 'constant'
-		? Uppercase<C>
-		: Lowercase<C>
-	: _separated<C, S, L>;
-
-type _alphaNum<
-	C extends string,
-	S extends Strategy,
-	L extends string = '',
-	F extends string = '',
-> = C extends AlphaNumeric ? _first<C, S, L, F> : '';
-
-type _InnerFormatToken<
-	C extends string,
-	S extends Strategy,
-	R extends string,
-	L extends string = '',
-	F extends string = '',
-> = NextLoop<C, S, R, `${F}${_alphaNum<C, S, L, F>}`>;
-
-export type FormatToken<T extends string, S extends Strategy> = T extends T
-	? Trim<T> extends ''
-		? Trim<T>
-		: Trim<T> extends `${infer U}${infer V}`
-			? _InnerFormatToken<U, S, V>
-			: Trim<T>
-	: never;
+export type FormatToken<
+	str extends string,
+	strategy extends Strategy,
+> = str extends str ? _formatToken<Utils.trim<str>, strategy> : never;
 
 /**
  * Takes a token name, and format strategy and returns the converted token name
@@ -113,16 +92,12 @@ export type FormatToken<T extends string, S extends Strategy> = T extends T
  * @param strategy - the strategy to format the string
  * @example formatToken('camelCaseString', 'kebab') => 'camel-case-string'
  */
-export const formatToken = <
-	T extends string,
-	S extends Strategy,
-	Return = FormatToken<T, S>,
->(
+export const formatToken = <T extends string, S extends Strategy>(
 	input: T,
 	strategy: S,
-): Return => {
+): FormatToken<T, S> => {
 	const string = input.trim();
-	if (!string) return '' as Return;
+	if (!string) return '' as never;
 
 	let formatted = '';
 
@@ -151,5 +126,5 @@ export const formatToken = <
 		}
 	}
 
-	return formatted as Return;
+	return formatted as never;
 };
