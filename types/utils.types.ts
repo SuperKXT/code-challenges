@@ -60,6 +60,13 @@ export declare namespace Utils {
 		? _repeatString<S, N>
 		: never;
 
+	/** trim the empty spaces from the start and end of the string */
+	type trim<str extends string> = str extends
+		| ` ${infer trimmed}`
+		| `${infer trimmed} `
+		? trim<trimmed>
+		: str;
+
 	/** global type helper to create a union array type from a union type */
 	type distributedArray<T> = T extends infer I ? I[] : never;
 
@@ -140,8 +147,8 @@ export declare namespace Utils {
 	type deepMerge<T extends object, U extends object> = prettify<{
 		[k in keyof T | keyof U]: k extends keyof U
 			? k extends keyof T
-				? T[k] extends Obj
-					? U[k] extends Obj
+				? T[k] extends object
+					? U[k] extends object
 						? deepMerge<T[k], U[k]>
 						: U[k]
 					: U[k]
