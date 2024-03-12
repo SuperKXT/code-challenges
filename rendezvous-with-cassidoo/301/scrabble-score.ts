@@ -17,11 +17,7 @@ type ScrabbleKey = {
 type ScrabbleKeyScore<
 	T extends string,
 	Keys extends keyof ScrabbleKey = keyof ScrabbleKey,
-> = Keys extends Keys
-	? Keys extends `${string}${T}${string}`
-		? ScrabbleKey[Keys]
-		: never
-	: never;
+> = Keys extends `${string}${T}${string}` ? ScrabbleKey[Keys] : never;
 
 type Scrabble<
 	T extends string,
