@@ -39,9 +39,6 @@ export declare namespace Utils {
 	/** checks if the first type satisfies the second */
 	type satisfies<T extends U, U> = T;
 
-	/** makes sure the wrapped type does not take part in inference in a generic function */
-	type noInfer<T> = [T][T extends T ? 0 : never];
-
 	type dropFirst<T extends readonly unknown[]> = number extends T['length']
 		? T
 		: T extends readonly [unknown, ...infer U]
