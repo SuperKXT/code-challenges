@@ -27,4 +27,4 @@ valleys(arr); // returns 1
 
 ---
 
-[Solution Playground](https://tsplay.dev/WJ3P5w)
+[Solution Playground](https://tsplay.dev/wX0B9w)
