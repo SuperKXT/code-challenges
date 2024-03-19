@@ -44,6 +44,24 @@ type compareNumbers<
 			? 'greater'
 			: 'lesser';
 
+type Valleys<
+	arr extends readonly number[],
+	count extends unknown[] = [],
+	downhill extends boolean = false,
+> = arr extends readonly [
+	infer curr extends number,
+	infer next extends number,
+	...infer rest extends number[],
+]
+	? compareNumbers<curr, next> extends infer res
+		? Valleys<
+				[next, ...rest],
+				[res, downhill] extends ['lesser', true] ? [...count, 1] : count,
+				res extends 'greater' ? true : downhill
+			>
+		: never
+	: count['length'];
+
 type Hills<
 	arr extends readonly number[],
 	count extends unknown[] = [],
@@ -78,24 +96,6 @@ export const hills = <const arr extends readonly number[]>(
 	}
 	return count as never;
 };
-
-type Valleys<
-	arr extends readonly number[],
-	count extends unknown[] = [],
-	downhill extends boolean = false,
-> = arr extends readonly [
-	infer curr extends number,
-	infer next extends number,
-	...infer rest extends number[],
-]
-	? compareNumbers<curr, next> extends infer res
-		? Valleys<
-				[next, ...rest],
-				[res, downhill] extends ['lesser', true] ? [...count, 1] : count,
-				res extends 'greater' ? true : downhill
-			>
-		: never
-	: count['length'];
 
 export const valleys = <const arr extends readonly number[]>(
 	arr: arr,
