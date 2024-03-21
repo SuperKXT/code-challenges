@@ -201,7 +201,7 @@ const config = {
 		'@typescript-eslint/switch-exhaustiveness-check': 'warn',
 		'@typescript-eslint/restrict-template-expressions': [
 			'warn',
-			{ allowAny: true },
+			{ allowAny: false },
 		],
 		'@typescript-eslint/ban-types': [
 			'warn',

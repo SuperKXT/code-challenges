@@ -187,6 +187,10 @@ const config = {
 		],
 		'@typescript-eslint/return-await': 'warn',
 		'@typescript-eslint/switch-exhaustiveness-check': 'warn',
+		'@typescript-eslint/restrict-template-expressions': [
+			'warn',
+			{ allowAny: false },
+		],
 		'@typescript-eslint/ban-types': [
 			'warn',
 			{
