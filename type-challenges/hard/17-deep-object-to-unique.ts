@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 /* eslint-disable prefer-const */
 /*
   553 - Deep object to unique

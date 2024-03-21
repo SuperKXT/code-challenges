@@ -3,9 +3,9 @@ import path from 'path';
 
 import { config } from '../../../config.js';
 
-const LOWER_CASE = 'abcdefghijklmnopqrstuvwxyz' as const;
+const LOWER_CASE = 'abcdefghijklmnopqrstuvwxyz';
 const UPPER_CASE = LOWER_CASE.toUpperCase() as Uppercase<typeof LOWER_CASE>;
-const ITEMS = `${LOWER_CASE}${UPPER_CASE}` as const;
+const ITEMS = `${LOWER_CASE}${UPPER_CASE}`;
 
 export const rucksackReorganization = async (
 	override?: string,
