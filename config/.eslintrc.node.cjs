@@ -220,6 +220,10 @@ const config = {
 				},
 			},
 		],
+		'@typescript-eslint/ban-ts-comment': [
+			'error',
+			{ minimumDescriptionLength: 3 },
+		],
 		'@typescript-eslint/no-namespace': ['warn', { allowDeclarations: true }],
 	},
 	overrides: [
