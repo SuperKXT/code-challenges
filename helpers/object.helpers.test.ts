@@ -2,6 +2,7 @@ import {
 	deepMerge,
 	objectEntries,
 	objectKeys,
+	objectToFormData,
 	objectValues,
 	omit,
 	pick,
@@ -75,4 +76,19 @@ test('testing deepMerge', () => {
 	const result = deepMerge(first, second);
 	expect(result).toStrictEqual(merged);
 	assertType<typeof merged>(result);
+});
+
+test('testing objectToFormData', () => {
+	const first = { a: 1, b: 'old', nested: { d: 1, e: 'old' } };
+	expect(() => {
+		objectToFormData(first);
+	}).toThrow(`invalid value for 'nested': form data does not allow 'object'`);
+	const second = { b: 'new', c: 3, d: true, arr: [1, 2] };
+	const result = objectToFormData(second);
+	assertType<FormData>(result);
+	expect(result.get('b')).toBe('new');
+	expect(result.get('c')).toBe('3');
+	expect(result.get('d')).toBe('true');
+	expect(result.get('arr')).toBe('1');
+	expect(result.getAll('arr')).toStrictEqual(['1', '2']);
 });

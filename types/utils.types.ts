@@ -137,7 +137,7 @@ export declare namespace Utils {
 	type unionToSingleTuple<union> = _unionToSingleTuple<union>;
 
 	/** merge two objects together. the second object has priority */
-	type deepMerge<T extends Obj, U extends Obj> = prettify<{
+	type deepMerge<T extends object, U extends object> = prettify<{
 		[k in keyof T | keyof U]: k extends keyof U
 			? k extends keyof T
 				? T[k] extends Obj
