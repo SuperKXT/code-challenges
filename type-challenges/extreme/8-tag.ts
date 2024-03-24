@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 /* eslint-disable unused-imports/no-unused-vars */
 
 /* eslint-disable no-multi-assign */

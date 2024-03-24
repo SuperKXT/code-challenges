@@ -39,9 +39,6 @@ export declare namespace Utils {
 	/** checks if the first type satisfies the second */
 	type satisfies<T extends U, U> = T;
 
-	/** makes sure the wrapped type does not take part in inference in a generic function */
-	type noInfer<T> = [T][T extends T ? 0 : never];
-
 	type dropFirst<T extends readonly unknown[]> = number extends T['length']
 		? T
 		: T extends readonly [unknown, ...infer U]
@@ -59,6 +56,13 @@ export declare namespace Utils {
 	type repeatString<S extends string, N extends number> = S extends S
 		? _repeatString<S, N>
 		: never;
+
+	/** trim the empty spaces from the start and end of the string */
+	type trim<str extends string> = str extends
+		| ` ${infer trimmed}`
+		| `${infer trimmed} `
+		? trim<trimmed>
+		: str;
 
 	/** global type helper to create a union array type from a union type */
 	type distributedArray<T> = T extends infer I ? I[] : never;
@@ -140,8 +144,8 @@ export declare namespace Utils {
 	type deepMerge<T extends object, U extends object> = prettify<{
 		[k in keyof T | keyof U]: k extends keyof U
 			? k extends keyof T
-				? T[k] extends Obj
-					? U[k] extends Obj
+				? T[k] extends object
+					? U[k] extends object
 						? deepMerge<T[k], U[k]>
 						: U[k]
 					: U[k]

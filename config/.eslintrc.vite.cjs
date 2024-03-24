@@ -187,6 +187,10 @@ const config = {
 		],
 		'@typescript-eslint/return-await': 'warn',
 		'@typescript-eslint/switch-exhaustiveness-check': 'warn',
+		'@typescript-eslint/restrict-template-expressions': [
+			'warn',
+			{ allowAny: false },
+		],
 		'@typescript-eslint/ban-types': [
 			'warn',
 			{
@@ -195,6 +199,10 @@ const config = {
 					extendDefaults: true,
 				},
 			},
+		],
+		'@typescript-eslint/ban-ts-comment': [
+			'error',
+			{ minimumDescriptionLength: 3 },
 		],
 		'@typescript-eslint/no-namespace': ['warn', { allowDeclarations: true }],
 		'@typescript-eslint/array-type': 'off',

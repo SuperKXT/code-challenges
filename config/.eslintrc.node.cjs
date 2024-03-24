@@ -205,7 +205,7 @@ const config = {
 		'@typescript-eslint/switch-exhaustiveness-check': 'warn',
 		'@typescript-eslint/restrict-template-expressions': [
 			'warn',
-			{ allowAny: true },
+			{ allowAny: false },
 		],
 		'@typescript-eslint/ban-types': [
 			'warn',
@@ -219,6 +219,10 @@ const config = {
 					},
 				},
 			},
+		],
+		'@typescript-eslint/ban-ts-comment': [
+			'error',
+			{ minimumDescriptionLength: 3 },
 		],
 		'@typescript-eslint/no-namespace': ['warn', { allowDeclarations: true }],
 	},

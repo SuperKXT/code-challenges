@@ -1,19 +1,19 @@
 import type { Utils } from '../types/utils.types.js';
 
-export const lowerAlphabet = 'abcdefghijklmnopqrstuvwxyz' as const;
+export const lowerAlphabet = 'abcdefghijklmnopqrstuvwxyz';
 export type LowerAlphabet = Utils.stringToUnion<typeof lowerAlphabet>;
 
-export const upperAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' as const;
+export const upperAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 export type UpperAlphabet = Utils.stringToUnion<typeof upperAlphabet>;
 
-export const numeric = '0123456789' as const;
+export const numeric = '0123456789';
 export type Numeric = Utils.stringToUnion<typeof numeric>;
 
-export const alphabet = `${lowerAlphabet}${upperAlphabet}` as const;
+export const alphabet = `${lowerAlphabet}${upperAlphabet}`;
 export type Alphabet = LowerAlphabet | UpperAlphabet;
 
-export const wordSeparators = ` \n-_.${numeric}` as const;
+export const wordSeparators = ` \n-_.${numeric}`;
 export type WordSeparators = Utils.stringToUnion<typeof wordSeparators>;
 
-export const alphaNumeric = `${alphabet}${numeric}` as const;
+export const alphaNumeric = `${alphabet}${numeric}`;
 export type AlphaNumeric = Alphabet | Numeric;

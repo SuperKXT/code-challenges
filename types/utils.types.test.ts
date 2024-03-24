@@ -112,6 +112,18 @@ test('test repeatString type util', () => {
 	assertType<tests>(true);
 });
 
+test('test trim type util', () => {
+	type tests = trueTuple<
+		[
+			Utils.equal<Utils.trim<'  1   '>, '1'>,
+			Utils.equal<Utils.trim<''>, ''>,
+			Utils.equal<Utils.trim<'  foo'>, 'foo'>,
+			Utils.equal<Utils.trim<'foo  ' | ' bar' | 'baz'>, 'foo' | 'bar' | 'baz'>,
+		]
+	>;
+	assertType<tests>(true);
+});
+
 test('test distributedArray type util', () => {
 	type tests = trueTuple<
 		[

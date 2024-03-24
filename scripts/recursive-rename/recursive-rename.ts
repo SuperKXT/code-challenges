@@ -329,7 +329,9 @@ if (!config.isTest) {
 			tree,
 			verbose,
 			yes,
-		}).catch(console.error);
+		}).catch((error: unknown) => {
+			console.error(stringifyError(error));
+		});
 	} catch {
 		throw new Error(RENAME_ERRORS.badArguments);
 	}

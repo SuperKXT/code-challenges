@@ -120,7 +120,7 @@ export const scoreWordGame = <
 
 type prettify<T> = { [k in keyof T]: T[k] } & {};
 
-const alphabet = 'abcdefghijklmnopqrstuvwxyz' as const;
+const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 type offset = tuple<98>;
 

@@ -107,6 +107,7 @@ const store = defineStore({
 	getters: {
 		stringifiedNum() {
 			// @ts-expect-error
+			// eslint-disable-next-line @typescript-eslint/restrict-plus-operands
 			this.num += 1;
 
 			return this.num.toString();
