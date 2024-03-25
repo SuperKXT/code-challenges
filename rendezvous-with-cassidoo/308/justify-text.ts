@@ -121,16 +121,15 @@ export const justifyText = <
 	maxWidth: maxWidth,
 ): JustifyText<words, maxWidth> => {
 	const lines: string[][] = [];
-	const currLine: string[] = [];
+	let currLine: string[] | null = null;
 	for (const word of words) {
-		if ([...currLine, word].join(' ').length >= maxWidth && currLine.length) {
-			lines.push(currLine.splice(0, currLine.length));
-			currLine.push(word);
+		if (!currLine || [...currLine, word].join(' ').length >= maxWidth) {
+			currLine = [word];
+			lines.push(currLine);
 			continue;
 		}
 		currLine.push(word);
 	}
-	if (currLine.length) lines.push(currLine);
 
 	const justified: string[] = [];
 	for (const line of lines) {
