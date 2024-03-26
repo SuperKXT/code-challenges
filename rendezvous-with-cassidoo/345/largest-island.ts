@@ -17,11 +17,12 @@ const exploreIsland = (
 	length += exploreIsland(arr, row - 1, col, visited);
 	return length;
 };
+
 export const largestIsland = (arr: Item[][]): number => {
 	const visited: Visited = new Map();
 	let largest: number = 0;
 	for (let row = 0; row < arr.length; row++) {
-		for (let col = 0; col < (arr[row] as number[]).length; col++) {
+		for (let col = 0; col < (arr[row] as Item[]).length; col++) {
 			const currLength = exploreIsland(arr, row, col, visited);
 			largest = Math.max(largest, currLength);
 		}
