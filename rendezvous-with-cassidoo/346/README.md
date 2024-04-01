@@ -19,4 +19,4 @@ Example:
 
 ---
 
-[Solution Playground](https://tsplay.dev/wjogvN)
+[Solution Playground](https://tsplay.dev/wedJgW)
