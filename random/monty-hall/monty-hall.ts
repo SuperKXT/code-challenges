@@ -6,7 +6,7 @@ const getRandomDoor = (doors: number) => {
 	return (crypto.randomBytes(1).toString('ascii').charCodeAt(0) % doors) + 1;
 };
 
-const tryMontyHall = (args: { iterations: number; doors: 100 }) => {
+export const tryMontyHall = (args: { iterations: number; doors: number }) => {
 	let stay = 0;
 	let change = 0;
 
