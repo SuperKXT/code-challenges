@@ -2,6 +2,11 @@ import { isObject, readableTypeOf } from './type.helpers.js';
 
 import type { Utils } from '../types/utils.types.js';
 
+export const safeObjAccess = (obj: object, key: string) => {
+	if (readableTypeOf(obj) !== 'object' || !(key in obj)) return undefined;
+	return (obj as Record<string, unknown>)[key];
+};
+
 export const objectEntries = <T extends object>(
 	object: T,
 ): [keyof T, T[keyof T]][] => {
@@ -81,4 +86,19 @@ export const objectToFormData = (obj: object) => {
 		else formData.append(key, String(value));
 	}
 	return formData;
+};
+
+export const groupArrayBy = <T extends object, U extends keyof T>(
+	arr: T[],
+	groupBy: U | U[],
+) => {
+	const grouped = new Map<string, T[]>();
+	const groupByArr = Array.isArray(groupBy) ? groupBy : [groupBy];
+	for (const item of arr) {
+		const val = groupByArr.map((key) => item[key]).join('-');
+		const existing = grouped.get(val);
+		if (!existing) grouped.set(val, [item]);
+		else existing.push(item);
+	}
+	return grouped;
 };
