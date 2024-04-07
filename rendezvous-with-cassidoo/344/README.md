@@ -1,6 +1,6 @@
 # hillsValleys
 
-[issue #343 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/if-you-dont-go-towards-the-thing-you-fear-you/)
+[issue #344 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/if-you-dont-go-towards-the-thing-you-fear-you/)
 
 **Given an integer array, write a function hills(arr) and a function valleys(arr) that return the number of hills and valleys, respectively, in the array.**
 The integers represent heights!

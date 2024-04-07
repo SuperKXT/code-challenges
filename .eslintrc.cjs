@@ -40,7 +40,10 @@ const config = {
 		'new-cap': 'warn',
 		'no-alert': 'warn',
 		'no-bitwise': 'warn',
-		'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
+		'no-console': [
+			'warn',
+			{ allow: ['warn', 'error', 'info', 'time', 'timeEnd'] },
+		],
 		'no-constructor-return': 'warn',
 		'no-else-return': ['warn', { allowElseIf: false }],
 		'no-extend-native': 'warn',
