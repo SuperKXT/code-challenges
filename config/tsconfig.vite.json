@@ -18,8 +18,8 @@
 		"noUnusedParameters": false,
 
 		// modules
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext",
+		"module": "Preserve",
+		"moduleResolution": "Bundler",
 		"resolveJsonModule": true,
 		"types": ["vitest/globals"],
 
