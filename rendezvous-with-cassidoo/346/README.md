@@ -1,6 +1,6 @@
 # uniqueSum
 
-[issue #345 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/the-privilege-of-a-lifetime-is-to-become-who-you/)
+[issue #346 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/the-privilege-of-a-lifetime-is-to-become-who-you/)
 
 **Given an array of numbers, add all of the values together but only if the number doesn't repeat a digit.**
 
