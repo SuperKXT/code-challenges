@@ -1,9 +1,9 @@
-type initSideCombo<
+type initCombo<
 	dice extends number,
 	res extends unknown[][] = [],
-> = res['length'] extends dice ? res : initSideCombo<dice, [...res, [1]]>;
+> = res['length'] extends dice ? res : initCombo<dice, [...res, [1]]>;
 
-type updateSideCombo<
+type updateCombo<
 	sideCombo extends unknown[][],
 	sides extends number,
 > = sideCombo extends [
@@ -11,25 +11,25 @@ type updateSideCombo<
 	infer last extends unknown[],
 ]
 	? last['length'] extends sides
-		? [...updateSideCombo<rest, sides>, [1]]
+		? [...updateCombo<rest, sides>, [1]]
 		: [...rest, [...last, 1]]
 	: [[1]];
 
-type addSideCombo<
+type addCombo<
 	sideCombo extends unknown[][],
 	sum extends unknown[] = [],
 > = sideCombo extends [
 	infer first extends unknown[],
 	...infer rest extends unknown[][],
 ]
-	? addSideCombo<rest, [...sum, ...first]>
+	? addCombo<rest, [...sum, ...first]>
 	: sum['length'];
 
 type RollDice<
 	dice extends number,
 	sides extends number,
 	sum extends number,
-	sideCombo extends unknown[][] = initSideCombo<dice>,
+	sideCombo extends unknown[][] = initCombo<dice>,
 	count extends unknown[] = [],
 > = sideCombo[dice] extends unknown[]
 	? count['length']
@@ -37,8 +37,8 @@ type RollDice<
 			dice,
 			sides,
 			sum,
-			updateSideCombo<sideCombo, sides>,
-			addSideCombo<sideCombo> extends sum ? [...count, 1] : count
+			updateCombo<sideCombo, sides>,
+			addCombo<sideCombo> extends sum ? [...count, 1] : count
 		>;
 
 const rollDice = (
