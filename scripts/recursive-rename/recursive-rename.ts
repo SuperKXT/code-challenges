@@ -161,14 +161,14 @@ export const getRenameLogs = (
 };
 
 const getExists = async (file: string): Promise<boolean> => {
-	return access(file)
+	return await access(file)
 		.then(() => true)
 		.catch(() => false);
 };
 
 const getIsFolder = async (file: string): Promise<boolean> => {
-	return getExists(file)
-		.then(async () => stat(file))
+	return await getExists(file)
+		.then(async () => await stat(file))
 		.then((stats) => stats.isDirectory())
 		.catch(() => false);
 };
@@ -177,7 +177,7 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 	const files = await readdir(folder);
 	files.sort((first, second) => first.localeCompare(second));
 
-	return Promise.all(
+	return await Promise.all(
 		files.map(async (file) => {
 			const oldPath = path.join(folder, file);
 			const [name = '', extension = ''] = file.split(/\.(?!.*\..*)/u);
@@ -230,7 +230,7 @@ const renameFiles = async (
 	folder: string,
 	files: RenameResult[],
 ): Promise<RenameResult[]> => {
-	return Promise.all(
+	return await Promise.all(
 		files.map(async (file) => {
 			const oldPath = path.join(folder, file.oldName);
 			const newPath = path.join(folder, file.newName ?? file.oldName);

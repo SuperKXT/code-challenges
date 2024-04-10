@@ -185,7 +185,7 @@ const config = {
 			'warn',
 			{ ignoreStringArrays: true },
 		],
-		'@typescript-eslint/return-await': 'warn',
+		'@typescript-eslint/return-await': ['warn', 'always'],
 		'@typescript-eslint/switch-exhaustiveness-check': 'warn',
 		'@typescript-eslint/restrict-template-expressions': [
 			'warn',

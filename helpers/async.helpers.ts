@@ -3,7 +3,7 @@
  * @param ms the time to wait, in `milliseconds`
  */
 export const wait = async (ms: number) => {
-	return new Promise((resolve) => {
+	return await new Promise((resolve) => {
 		setTimeout(resolve, ms);
 	});
 };
@@ -13,7 +13,7 @@ export const wait = async (ms: number) => {
  * @param val the value to wrap in a promise
  */
 export const promisify = async <const T>(val: T) => {
-	return new Promise<T>((resolve) => {
+	return await new Promise<T>((resolve) => {
 		resolve(val);
 	});
 };
