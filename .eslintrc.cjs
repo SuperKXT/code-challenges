@@ -1,5 +1,6 @@
 /** @type {import('eslint').Linter.Config} */
 const config = {
+	reportUnusedDisableDirectives: true,
 	env: { es2021: true, node: true },
 	extends: [
 		'eslint:recommended',

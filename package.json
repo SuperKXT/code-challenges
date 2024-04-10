@@ -5,7 +5,7 @@
 	"author": "Saad Khan",
 	"type": "module",
 	"scripts": {
-		"lint": "eslint . --max-warnings=0 --fix --report-unused-disable-directives && pnpm format && pnpm spellcheck",
+		"lint": "eslint . --max-warnings=0 --fix && pnpm format && pnpm spellcheck",
 		"format": "prettier --write --log-level silent .",
 		"test": "vitest watch",
 		"test-ui": "vitest --ui",
