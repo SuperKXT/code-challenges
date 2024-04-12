@@ -1,12 +1,16 @@
 // eslint-disable-next-line no-restricted-imports
 import { default as dayjs } from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat.js';
 import utc from 'dayjs/plugin/utc.js';
 import { z } from 'zod';
+
+import { safeObjAccess } from './object.helpers.js';
 
 import type { Dayjs } from 'dayjs';
 import type { Utils } from '../types/utils.types.js';
 
 dayjs.extend(utc);
+dayjs.extend(customParseFormat);
 
 export const dayjsUtc = dayjs;
 
@@ -18,7 +22,7 @@ export const dayjsSchema = z.instanceof(
 export type ZodDayjs = typeof dayjsSchema;
 
 export const datetimeSchema = z.preprocess((value) => {
-	if (dayjsUtc.isDayjs(value)) return value;
+	if (dayjsUtc.isDayjs(value)) return value.isValid() ? value : null;
 	if (value === undefined || value === null) return null;
 	const parsed = dayjsUtc.utc(value as never);
 	return parsed.isValid() ? parsed : null;
@@ -92,9 +96,9 @@ export class DateRange<
 		return this.map(range, (d) => d);
 	}
 
-	private validate(range: Obj): { start: Dayjs; end: Dayjs } {
-		const s = range[this.start];
-		const e = range[this.end];
+	private validate(range: object): { start: Dayjs; end: Dayjs } {
+		const s = safeObjAccess(range, this.start);
+		const e = safeObjAccess(range, this.start);
 		if (!dayjsUtc.isDayjs(s) || !dayjsUtc.isDayjs(e))
 			throw new Error('invalid date range');
 		if (!s.isValid()) throw new Error('invalid start date');
@@ -119,13 +123,13 @@ export class TimeRange<
 		private includeEdges: boolean = false,
 	) {}
 
-	hasRange<T extends Obj>(
+	hasRange<T extends object>(
 		input: T,
 	): input is {
 		[k in keyof T]: k extends Start | End ? T[k] & Dayjs : T[k];
 	} {
-		const start = input[this.start];
-		const end = input[this.end];
+		const start = safeObjAccess(input, this.start);
+		const end = safeObjAccess(input, this.end);
 		return (
 			dayjsUtc.isDayjs(start) &&
 			start.isValid() &&
@@ -134,7 +138,7 @@ export class TimeRange<
 		);
 	}
 
-	hasRangeArray<T extends Obj>(
+	hasRangeArray<T extends object>(
 		input: T[],
 	): input is {
 		[k in keyof T]: k extends Start | End ? T[k] & Dayjs : T[k];
