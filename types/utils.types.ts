@@ -88,7 +88,7 @@ export declare namespace Utils {
 		: never;
 
 	/** Disallow explicitly undefined value for object keys. Used when generic param is constrained to `Partial<ObjType>` */
-	type noUndefinedKeys<T extends Obj> = {
+	type noUndefinedKeys<T extends object> = {
 		[k in keyof T]: T[k] extends undefined ? never : T[k];
 	};
 
@@ -98,10 +98,10 @@ export declare namespace Utils {
 	};
 
 	/** creates a union of the given object or an object where all the keys of the object are undefined */
-	type allOrNone<T extends Obj> = T | { [k in keyof T]?: never };
+	type allOrNone<T extends object> = T | { [k in keyof T]?: never };
 
 	/** make keys that can be undefined optional in the object */
-	type makeUndefinedOptional<T extends Obj> = prettify<
+	type makeUndefinedOptional<T extends object> = prettify<
 		{
 			[k in keyof T as undefined extends T[k] ? k : never]?: T[k];
 		} & {
@@ -110,7 +110,7 @@ export declare namespace Utils {
 	>;
 
 	/** remove index signatures from an object type */
-	type removeIndexSignature<T extends Obj> = {
+	type removeIndexSignature<T extends object> = {
 		[k in keyof T as string extends k
 			? never
 			: number extends k
