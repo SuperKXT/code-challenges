@@ -7,13 +7,15 @@ export const readableTypeOf = (value: unknown) => {
 	return 'object';
 };
 
-export const isObject = (value: unknown): value is Obj =>
+export function assert(val: unknown, error?: string): asserts val {
+	if (!val) throw new Error(error ?? 'assertion failed');
+}
+
+export const isObject = (value: unknown): value is object =>
 	readableTypeOf(value) === 'object';
 
-export const assertObject: Utils.assertFunction<Obj> = (value) => {
-	const type = readableTypeOf(value);
-	if (type !== 'object')
-		throw new TypeError(`Expected object, received ${type}`);
+export const assertObject: Utils.assertFunction<object> = (value) => {
+	assert(isObject(value), `Expected object, received ${readableTypeOf(value)}`);
 };
 
 export const isArray = <Type = unknown>(
@@ -23,38 +25,9 @@ export const isArray = <Type = unknown>(
 	return Array.isArray(value) && (!checker || value.every(checker));
 };
 
-type AssertArray = <Type = unknown>(
+export function assertArray<Type = unknown>(
 	value: unknown,
-	checker?: Utils.assertFunction<Type>,
-) => asserts value is Type[];
-
-export const assertArray: AssertArray = (value, checker) => {
-	if (!Array.isArray(value))
-		throw new TypeError(`Expected array, received ${readableTypeOf(value)}`);
-	try {
-		if (!value.length || !checker) return;
-		value.forEach(checker);
-	} catch (error) {
-		throw new TypeError(
-			`Invalid array member. ${
-				error instanceof Error ? error.message : JSON.stringify(error)
-			}`,
-		);
-	}
-};
-
-export const excludeString = <
-	const T extends string | undefined,
-	const U extends string,
->(
-	input: T,
-	excludeList: U | Readonly<U[]>,
-) => {
-	return (
-		(Array.isArray(excludeList) &&
-			excludeList.includes(input as unknown as U)) ||
-		(excludeList as string) === input
-			? undefined
-			: input
-	) as T extends U ? Exclude<T, U> | undefined : T;
-};
+	checker?: (value: unknown) => value is Type,
+): asserts value is Type[] {
+	if (!isArray(value, checker)) throw new TypeError('Invalid array type');
+}

@@ -1,4 +1,5 @@
 import {
+	assert,
 	assertArray,
 	assertObject,
 	isArray,
@@ -6,14 +7,7 @@ import {
 	readableTypeOf,
 } from './type.helpers.js';
 
-import type { Utils } from '../types/utils.types.js';
-
 const isNumber = (value: unknown): value is number => typeof value === 'number';
-
-const assertNumber: Utils.assertFunction<number> = (value) => {
-	const type = readableTypeOf(value);
-	if (type !== 'number') throw new Error(`Expected number, received ${type}`);
-};
 
 test('should test readableTypeof helper', () => {
 	expect(readableTypeOf(2)).toBe('number');
@@ -28,11 +22,27 @@ test('should test readableTypeof helper', () => {
 	expect(readableTypeOf(() => false)).toBe('function');
 });
 
+test('should test assert helper', () => {
+	const error = 'invalid object!';
+	expect(() => {
+		const a: unknown = 2;
+		assertType<unknown>(a);
+		assert(isObject(a), error);
+		assertType<object>(a);
+	}).toThrow(error);
+	expect(() => {
+		const a: unknown = { fist: 'of fury' };
+		assertType<unknown>(a);
+		assert(isObject(a), error);
+		assertType<object>(a);
+	}).not.toThrow();
+});
+
 test('should test isObject helper', () => {
 	expect(isObject(2)).toBeFalsy();
 	expect(isObject({ fist: 'of fury' })).toBeTruthy();
 	const a: unknown = 2;
-	isObject(a) && assertType<Obj>(a);
+	isObject(a) && assertType<object>(a);
 });
 
 test('should test isArray helper', () => {
@@ -45,19 +55,19 @@ test('should test isArray helper', () => {
 	const a: unknown = 2;
 	isArray(a) && assertType<unknown[]>(a);
 	isArray(a, isNumber) && assertType<number[]>(a);
-	isArray(a, isObject) && assertType<Obj[]>(a);
+	isArray(a, isObject) && assertType<object[]>(a);
 });
 
 test('should test assertObject helper', () => {
 	let a: unknown = 2;
 	expect(() => {
 		assertObject(a);
-		assertType<Obj>(a);
+		assertType<object>(a);
 	}).toThrow('Expected object, received number');
 	expect(() => {
 		a = { fist: 'of fury' };
 		assertObject(a);
-		assertType<Obj>(a);
+		assertType<object>(a);
 	}).not.toThrow();
 	expect(() => {
 		assertObject({ fist: 'of fury' });
@@ -70,7 +80,7 @@ test('should test assertArray helper', () => {
 		a = 2;
 		assertArray(a);
 		assertType<unknown[]>(a);
-	}).toThrow('Expected array, received number');
+	}).toThrow('Invalid array type');
 	expect(() => {
 		a = [2];
 		assertArray(a);
@@ -78,22 +88,22 @@ test('should test assertArray helper', () => {
 	}).not.toThrow();
 	expect(() => {
 		a = [2, 3];
-		assertArray(a, assertObject);
-		assertType<Obj[]>(a);
-	}).toThrow('Invalid array member. Expected object, received number');
+		assertArray(a, isObject);
+		assertType<object[]>(a);
+	}).toThrow('Invalid array type');
 	expect(() => {
 		a = [2];
-		assertArray(a, assertNumber);
+		assertArray(a, isNumber);
 		assertType<number[]>(a);
 	}).not.toThrow();
 	expect(() => {
 		a = { fist: 'of fury' };
 		assertArray(a);
 		assertType<unknown[]>(a);
-	}).toThrow('Expected array, received object');
+	}).toThrow('Invalid array type');
 	expect(() => {
 		a = [[2]];
-		assertArray(a, assertArray);
+		assertArray(a, isArray);
 		assertType<unknown[][]>(a);
 	}).not.toThrow();
 });
