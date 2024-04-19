@@ -20,6 +20,22 @@ const config = {
 	settings: {
 		'import/resolver': { typescript: true },
 	},
+	ignorePatterns: [
+		'package-lock.json',
+		'pnpm-lock.yaml',
+		'node_modules',
+		'vscode-extension',
+		'.git/objects',
+		'.vscode',
+		'.vscode-insiders',
+		'coverage',
+		'build',
+		'dist',
+		'public',
+		'trace',
+		'**/*.mp3',
+		'tsconfig.vitest-temp.json',
+	],
 	rules: {
 		'no-extra-semi': 'off',
 		'no-mixed-spaces-and-tabs': 'off',
