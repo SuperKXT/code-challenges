@@ -18,12 +18,23 @@ const config = {
 		tsconfigRootDir: __dirname,
 	},
 	plugins: ['import', 'unused-imports', '@typescript-eslint', 'only-warn'],
-	settings: {
-		'import/resolver': {
-			node: true,
-			typescript: true,
-		},
-	},
+	settings: { 'import/resolver': { node: true, typescript: true } },
+	ignorePatterns: [
+		'package-lock.json',
+		'pnpm-lock.yaml',
+		'node_modules',
+		'vscode-extension',
+		'.git/objects',
+		'.vscode',
+		'.vscode-insiders',
+		'coverage',
+		'build',
+		'dist',
+		'public',
+		'trace',
+		'**/*.mp3',
+		'tsconfig.vitest-temp.json',
+	],
 	rules: {
 		'no-extra-semi': 'off',
 		'no-mixed-spaces-and-tabs': 'off',
@@ -192,7 +203,6 @@ const config = {
 		],
 		'@typescript-eslint/no-unused-vars': 'off',
 		'@typescript-eslint/no-useless-empty-export': 'warn',
-		'@typescript-eslint/no-var-requires': 'off',
 		'@typescript-eslint/non-nullable-type-assertion-style': 'off',
 		'@typescript-eslint/prefer-nullish-coalescing': 'off',
 		'@typescript-eslint/prefer-reduce-type-parameter': 'off',
@@ -249,13 +259,6 @@ const config = {
 			rules: {
 				'import/no-commonjs': 'off',
 				'no-restricted-globals': 'off',
-			},
-		},
-		{
-			files: ['src/types/db.types.ts'],
-			rules: {
-				'@typescript-eslint/no-namespace': 'off',
-				'max-lines': 'off',
 			},
 		},
 	],
