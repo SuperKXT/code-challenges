@@ -348,7 +348,7 @@ test('test unionToTuples type util', () => {
 	assertType<tests>(true);
 });
 
-test('test nullable type util', () => {
+test('test nullableKeys type util', () => {
 	type tests = trueTuple<
 		[
 			Utils.equal<Utils.nullableKeys<{ foo: 1 }>, { foo: 1 | null }>,
