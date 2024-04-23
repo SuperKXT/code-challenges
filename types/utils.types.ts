@@ -161,4 +161,9 @@ export declare namespace Utils {
 		: U extends U
 			? [U, ...unionToTuples<Exclude<T, U>>]
 			: [];
+
+	/** make the given keys (all if second arg is omitted) of an object nullable */
+	type nullableKeys<obj, keys extends keyof obj = keyof obj> = {
+		[k in keyof obj]: k extends keys ? obj[k] | null : obj[k];
+	};
 }

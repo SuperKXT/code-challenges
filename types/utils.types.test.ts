@@ -347,3 +347,20 @@ test('test unionToTuples type util', () => {
 	>;
 	assertType<tests>(true);
 });
+
+test('test nullable type util', () => {
+	type tests = trueTuple<
+		[
+			Utils.equal<Utils.nullableKeys<{ foo: 1 }>, { foo: 1 | null }>,
+			Utils.equal<
+				Utils.nullableKeys<{ foo: 1; bar: 2 }, 'foo'>,
+				{ foo: 1 | null; bar: 2 }
+			>,
+			Utils.equal<
+				Utils.nullableKeys<{ foo: 1; bar?: 2 | 3; baz: 4 | null }>,
+				{ foo: 1 | null; bar?: 2 | 3 | null; baz: 4 | null }
+			>,
+		]
+	>;
+	assertType<tests>(true);
+});
