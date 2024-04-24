@@ -26,15 +26,16 @@ $ printArrow('left', 5)
    *
     *
 
-$ printArrow('up', 2)
- *
-* *
+$ printArrow('up', 3)
+  *
+ * *
+*   *
 
 $ printArrow('down', 4)
-   *
-  * *
- *   *
 *     *
+ *   *
+  * *
+   *
 ```
 
 ---
