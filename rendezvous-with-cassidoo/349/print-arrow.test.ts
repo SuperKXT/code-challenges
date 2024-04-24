@@ -15,8 +15,15 @@ test('testing printArrow against test 1', () => {
 });
 
 test('testing printArrow against test 3', () => {
-	const result = printArrow('up', 2); // cSpell: disable-line
+	const result = printArrow('up', 2);
 	const expected = ' *\n* *';
+	expect(result).toStrictEqual(expected);
+	assertType<typeof result>(expected);
+});
+
+test('testing printArrow against test 3', () => {
+	const result = printArrow('down', 4);
+	const expected = '   *\n  * *\n *   *\n*     *';
 	expect(result).toStrictEqual(expected);
 	assertType<typeof result>(expected);
 });

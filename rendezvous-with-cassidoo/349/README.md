@@ -29,6 +29,12 @@ $ printArrow('left', 5)
 $ printArrow('up', 2)
  *
 * *
+
+$ printArrow('down', 4)
+   *
+  * *
+ *   *
+*     *
 ```
 
 ---
