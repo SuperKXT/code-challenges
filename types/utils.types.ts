@@ -163,6 +163,11 @@ export declare namespace Utils {
 			: [];
 
 	/** make the given keys (all if second arg is omitted) of an object nullable */
+	type nonNullableKeys<obj, keys extends keyof obj = keyof obj> = {
+		[k in keyof obj]: k extends keys ? Exclude<obj[k], null> : obj[k];
+	};
+
+	/** make the given keys (all if second arg is omitted) of an object nullable */
 	type nullableKeys<obj, keys extends keyof obj = keyof obj> = {
 		[k in keyof obj]: k extends keys ? obj[k] | null : obj[k];
 	};
