@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-restricted-imports
 import { default as dayjs } from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat.js';
 import utc from 'dayjs/plugin/utc.js';
 import { z } from 'zod';
 
@@ -10,7 +9,6 @@ import type { Dayjs } from 'dayjs';
 import type { Utils } from '../types/utils.types.js';
 
 dayjs.extend(utc);
-dayjs.extend(customParseFormat);
 
 export const dayjsUtc = dayjs;
 
