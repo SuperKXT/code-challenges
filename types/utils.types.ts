@@ -100,6 +100,9 @@ export declare namespace Utils {
 	/** creates a union of the given object or an object where all the keys of the object are undefined */
 	type allOrNone<T extends object> = T | { [k in keyof T]?: never };
 
+	/** creates a union of the given object or an object where all the keys of the object are null */
+	type allOrNull<T extends object> = T | { [k in keyof T]: null };
+
 	/** make keys that can be undefined optional in the object */
 	type makeUndefinedOptional<T extends object> = prettify<
 		{

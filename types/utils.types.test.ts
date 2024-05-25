@@ -236,6 +236,21 @@ test('test allOrNone type util', () => {
 	assertType<tests>(true);
 });
 
+test('test allOrNullable type util', () => {
+	type tests = trueTuple<
+		[
+			Utils.equal<
+				Utils.allOrNull<{ foo: 1; bar: 2 } | { baz?: 3 }>,
+				| { foo: 1; bar: 2 }
+				| { foo: null; bar: null }
+				| { baz?: 3 }
+				| { baz?: null }
+			>,
+		]
+	>;
+	assertType<tests>(true);
+});
+
 test('test makeUndefinedOptional type util', () => {
 	type tests = trueTuple<
 		[
