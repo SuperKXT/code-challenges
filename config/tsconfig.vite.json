@@ -18,8 +18,8 @@
 		"noUnusedParameters": false,
 
 		// modules
-		"module": "Preserve",
-		"moduleResolution": "Bundler",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
 		"resolveJsonModule": true,
 		"types": ["vitest/globals"],
 
@@ -50,6 +50,6 @@
 		// completeness
 		"skipLibCheck": true
 	},
-	"include": ["**/*", "./.*.cjs", "pm2/pm2.config.cjs"],
+	"include": ["**/*", "./.*.cjs"],
 	"exclude": ["node_modules", "build", "dist", "coverage", "public"]
 }
