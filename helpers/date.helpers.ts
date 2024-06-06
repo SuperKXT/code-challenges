@@ -1,14 +1,17 @@
 // eslint-disable-next-line no-restricted-imports
 import { default as dayjs } from 'dayjs';
+import duration from 'dayjs/plugin/duration.js';
 import utc from 'dayjs/plugin/utc.js';
 import { z } from 'zod';
 
 import { safeObjAccess } from './object.helpers.js';
+import { pluralize } from './pluralize.helpers.js';
 
 import type { Dayjs } from 'dayjs';
 import type { Utils } from '../types/utils.types.js';
 
 dayjs.extend(utc);
+dayjs.extend(duration);
 
 export const dayjsUtc = dayjs;
 
@@ -20,10 +23,10 @@ export const dayjsSchema = z.instanceof(
 export type ZodDayjs = typeof dayjsSchema;
 
 export const datetimeSchema = z.preprocess((value) => {
-	if (dayjsUtc.isDayjs(value)) return value.isValid() ? value : null;
+	if (dayjsUtc.isDayjs(value)) return value.isValid() ? value.utc() : null;
 	if (value === undefined || value === null) return null;
 	const parsed = dayjsUtc.utc(value as never);
-	return parsed.isValid() ? parsed : null;
+	return parsed.isValid() ? parsed.utc() : null;
 }, dayjsSchema);
 
 export type ZodDatetime = typeof datetimeSchema;
@@ -51,6 +54,33 @@ export const dateFormats = {
 	time: 'h:mm:ss A',
 	datetime: 'YYYY-MM-DD h:mm A',
 } as const;
+
+const utcOffset = dayjsUtc().utcOffset();
+
+export const stringifyDate = (
+	date: Dayjs | undefined | null,
+	format: keyof typeof dateFormats,
+	localTime?: boolean,
+) => {
+	if (!date) return '';
+	const curr = localTime ? date.utc().add(utcOffset, 'minutes') : date;
+	return curr.format(dateFormats[format]);
+};
+
+export const getTimeSince = (date: Dayjs) => {
+	const d = dayjsUtc.duration(dayjsUtc.utc().diff(date));
+	const years = d.years();
+	const months = d.months();
+	const days = d.days();
+	const hours = d.hours();
+	const minutes = d.minutes();
+	let res = pluralize`${minutes} Min[|s] Ago`;
+	if (hours) res = pluralize`${hours} Hr[|s], ${res}`;
+	if (days) res = pluralize`${days} Day[|s], ${res}`;
+	if (months) res = pluralize`${months} Month[|s], ${res}`;
+	if (years) res = pluralize`${years} Year[|s], ${res}`;
+	return res;
+};
 
 export const dayNames = [
 	'monday',
