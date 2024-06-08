@@ -174,4 +174,22 @@ export declare namespace Utils {
 	type nullableKeys<obj, keys extends keyof obj = keyof obj> = {
 		[k in keyof obj]: k extends keys ? obj[k] | null : obj[k];
 	};
+
+	/** make the given keys (all if second arg is omitted) of an object optional */
+	type optionalKeys<obj, keys extends keyof obj = keyof obj> = prettify<
+		{
+			[k in keyof obj as k extends keys ? never : k]: obj[k];
+		} & {
+			[k in keyof obj as k extends keys ? k : never]?: obj[k];
+		}
+	>;
+
+	/** make the given keys (all if second arg is omitted) of an object required */
+	type requiredKeys<obj, keys extends keyof obj = keyof obj> = prettify<
+		{
+			[k in keyof obj as k extends keys ? never : k]: obj[k];
+		} & {
+			[k in keyof obj as k extends keys ? k : never]-?: obj[k];
+		}
+	>;
 }

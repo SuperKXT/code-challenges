@@ -396,3 +396,37 @@ test('test nullableKeys type util', () => {
 	>;
 	assertType<tests>(true);
 });
+
+test('test optionalKeys type util', () => {
+	type tests = trueTuple<
+		[
+			Utils.equal<Utils.optionalKeys<{ foo: 1 }>, { foo?: 1 }>,
+			Utils.equal<
+				Utils.optionalKeys<{ foo: 1; bar: 2 }, 'foo'>,
+				{ foo?: 1; bar: 2 }
+			>,
+			Utils.equal<
+				Utils.optionalKeys<{ foo: 1; bar?: 2 | 3; baz: 4 | null }>,
+				{ foo?: 1; bar?: 2 | 3; baz?: 4 | null }
+			>,
+		]
+	>;
+	assertType<tests>(true);
+});
+
+test('test requiredKeys type util', () => {
+	type tests = trueTuple<
+		[
+			Utils.equal<Utils.requiredKeys<{ foo?: 1 }>, { foo: 1 }>,
+			Utils.equal<
+				Utils.requiredKeys<{ foo?: 1; bar: 2 }, 'foo'>,
+				{ foo: 1; bar: 2 }
+			>,
+			Utils.equal<
+				Utils.requiredKeys<{ foo?: 1; bar?: 2 | 3; baz: 4 | null | undefined }>,
+				{ foo: 1; bar: 2 | 3; baz: 4 | null | undefined }
+			>,
+		]
+	>;
+	assertType<tests>(true);
+});
