@@ -67,19 +67,21 @@ export const stringifyDate = (
 	return curr.format(dateFormats[format]);
 };
 
-export const getTimeSince = (date: Dayjs) => {
-	const d = dayjsUtc.duration(dayjsUtc.utc().diff(date));
+export const getRelativeTime = (date: Dayjs) => {
+	const diff = dayjsUtc.utc().diff(date);
+	const d = dayjsUtc.duration(Math.abs(diff));
 	const years = d.years();
 	const months = d.months();
 	const days = d.days();
 	const hours = d.hours();
 	const minutes = d.minutes();
-	let res = pluralize`${minutes} Min[|s] Ago`;
-	if (hours) res = pluralize`${hours} Hr[|s], ${res}`;
-	if (days) res = pluralize`${days} Day[|s], ${res}`;
-	if (months) res = pluralize`${months} Month[|s], ${res}`;
-	if (years) res = pluralize`${years} Year[|s], ${res}`;
-	return res;
+	const pieces: string[] = [];
+	if (years) pieces.push(pluralize`${years} Year[|s]`);
+	if (months) pieces.push(pluralize`${months} Month[|s]`);
+	if (days) pieces.push(pluralize`${days} Day[|s]`);
+	if (hours) pieces.push(pluralize`${hours} Hr[|s]`);
+	if (minutes || !pieces.length) pieces.push(pluralize`${minutes} Min[|s]`);
+	return `${pieces.join(', ')} ${diff < 0 ? 'From Now' : 'Ago'}`;
 };
 
 export const dayNames = [
