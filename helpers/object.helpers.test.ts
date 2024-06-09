@@ -4,6 +4,7 @@ import {
 	objectEntries,
 	objectKeys,
 	objectToFormData,
+	objectToSearchParams,
 	objectValues,
 	omit,
 	pick,
@@ -139,4 +140,11 @@ test('testing groupArrayBy', () => {
 	]);
 	expected2.set('2-2', [{ foo: 2, bar: 2, baz: 1 }]);
 	expect(result2).toStrictEqual(expected2);
+});
+
+test('testing objectToSearchParams', () => {
+	const val = { a: '1', b: 'old', c: '3', d: 'new' };
+	const result = objectToSearchParams(val);
+	assertType<string>(result);
+	expect(result).toBe('a=1&b=old&c=3&d=new');
 });

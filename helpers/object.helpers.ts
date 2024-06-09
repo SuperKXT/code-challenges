@@ -102,3 +102,12 @@ export const groupArrayBy = <T extends object, U extends keyof T>(
 	}
 	return grouped;
 };
+
+/** Useful for React Native. Use `URLSearchParams` in Node and Browser environments */
+export const objectToSearchParams = (obj: Record<string, string>) => {
+	return Object.entries(obj)
+		.map(
+			([key, val]) => `${encodeURIComponent(key)}=${encodeURIComponent(val)}`,
+		)
+		.join('&');
+};
