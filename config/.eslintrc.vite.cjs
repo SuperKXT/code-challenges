@@ -84,6 +84,11 @@ const config = {
 						name: '@mui/system',
 						message: 'Import from @mui/material instead',
 					},
+					{
+						name: 'react-router-dom',
+						importNames: ['NavLink', 'useNavigate', 'Navigate'],
+						message: 'Please use the local alternative',
+					},
 				],
 			},
 		],
