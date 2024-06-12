@@ -117,8 +117,9 @@ export class DateRange<
 	map<Return>(range: Range, callback: (date: Dayjs) => Return) {
 		const data: Return[] = [];
 		const { start, end } = this.validate(range);
-		for (let d = start; !d.isAfter(end); d = d.add(1, 'day'))
+		for (let d = start; !d.isAfter(end); d = d.add(1, 'day')) {
 			data.push(callback(d));
+		}
 		return data;
 	}
 
@@ -128,7 +129,7 @@ export class DateRange<
 
 	private validate(range: object): { start: Dayjs; end: Dayjs } {
 		const s = safeObjAccess(range, this.start);
-		const e = safeObjAccess(range, this.start);
+		const e = safeObjAccess(range, this.end);
 		if (!dayjsUtc.isDayjs(s) || !dayjsUtc.isDayjs(e))
 			throw new Error('invalid date range');
 		if (!s.isValid()) throw new Error('invalid start date');
