@@ -85,6 +85,10 @@ const config = {
 						message: 'Import from @mui/material instead',
 					},
 					{
+						name: '@mui/icons-material',
+						message: 'Use AppIcon component',
+					},
+					{
 						name: 'react-router-dom',
 						importNames: ['NavLink', 'useNavigate', 'Navigate'],
 						message: 'Please use the local alternative',
