@@ -1,5 +1,3 @@
-const vowels = ['a', 'e', 'i', 'o', 'u'] as const;
-
 export const sortNames = (input: string[]): string[] => {
 	return input.toSorted((a, b) => {
 		const aCount = a.replace(/[^aeiou]/giu, '').length; // cSpell: disable-line
