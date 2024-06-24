@@ -1,6 +1,6 @@
 # dailyTemperatures
 
-[issue #357 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/dont-let-the-past-steal-your-present-cherrie/)
+[issue #358 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/dont-let-the-past-steal-your-present-cherrie/)
 
 **Write a function that takes an array of daily temperatures and
 returns an array where each element is the number of days you
