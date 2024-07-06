@@ -15,7 +15,6 @@ const config = {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 		project: true,
-		tsconfigRootDir: __dirname,
 	},
 	settings: {
 		'import/resolver': { typescript: true },
