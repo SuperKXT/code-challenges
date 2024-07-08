@@ -2,12 +2,12 @@
 
 [issue #360 of rendezvous with cassidoo.](https://buttondown.email/cassidoo/archive/the-things-that-make-you-strange-are-the-things/)
 
-\*\*Write a function that takes an array of integers representing the number of
+**Write a function that takes an array of integers representing the number of
 flowers planted in a line, and an integer k representing the number of
-additional flowers you want to plant.
+additional flowers you want to plant.**
 
-Return whether it's possible to plant all k flowers without
-planting any two flowers adjacent to each other.\*\*
+**Return whether it's possible to plant all k flowers without
+planting any two flowers adjacent to each other.**
 
 Example:
 
@@ -27,4 +27,4 @@ Example:
 
 ---
 
-[Solution Playground](https://tsplay.dev/WkeMjN)
+[Solution Playground](https://tsplay.dev/mLdy4m)
