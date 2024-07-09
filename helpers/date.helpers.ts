@@ -61,13 +61,13 @@ export const stringifyDate = (
 	date: Dayjs | undefined | null,
 	format: keyof typeof dateFormats,
 	localTime?: boolean,
-) => {
+): string => {
 	if (!date) return '';
 	const curr = localTime ? date.utc().add(utcOffset, 'minutes') : date;
 	return curr.format(dateFormats[format]);
 };
 
-export const getRelativeTime = (date: Dayjs) => {
+export const getRelativeTime = (date: Dayjs): string => {
 	const diff = dayjsUtc.utc().diff(date);
 	const d = dayjsUtc.duration(Math.abs(diff));
 	const years = d.years();
@@ -109,12 +109,12 @@ export class DateRange<
 		private includeEdges: boolean = true,
 	) {}
 
-	forEach(range: Range, callback: (date: Dayjs) => void) {
+	forEach(range: Range, callback: (date: Dayjs) => void): void {
 		const { start, end } = this.validate(range);
 		for (let d = start; !d.isAfter(end); d = d.add(1, 'day')) callback(d);
 	}
 
-	map<Return>(range: Range, callback: (date: Dayjs) => Return) {
+	map<Return>(range: Range, callback: (date: Dayjs) => Return): Return[] {
 		const data: Return[] = [];
 		const { start, end } = this.validate(range);
 		for (let d = start; !d.isAfter(end); d = d.add(1, 'day')) {
@@ -123,7 +123,7 @@ export class DateRange<
 		return data;
 	}
 
-	dates(range: Range) {
+	dates(range: Range): Dayjs[] {
 		return this.map(range, (d) => d);
 	}
 
@@ -177,9 +177,9 @@ export class TimeRange<
 		return input.every((row) => this.hasRange(row));
 	}
 
-	createMinuteArray(range: Range) {
+	createMinuteArray(range: Range): number[] {
 		const [startMins, endMins] = this.asMinutes(range);
-		const minuteArr = [];
+		const minuteArr: number[] = [];
 		let idx = startMins;
 		while (true) {
 			if (idx === this.EOD) idx = 0;
@@ -190,7 +190,7 @@ export class TimeRange<
 		return minuteArr;
 	}
 
-	getMinutes(range: Range) {
+	getMinutes(range: Range): number {
 		const [startMins, endMins] = this.asMinutes(range);
 		return (
 			(endMins < startMins ? this.EOD : endMins) -
@@ -199,7 +199,7 @@ export class TimeRange<
 		);
 	}
 
-	createMinuteMap(range: Range) {
+	createMinuteMap(range: Range): Map<number, true> {
 		const [startMins, endMins] = this.asMinutes(range);
 		const map = new Map<number, true>();
 		let idx = startMins;
@@ -212,7 +212,7 @@ export class TimeRange<
 		return map;
 	}
 
-	doMinutesOverlap = (...ranges: Range[]) => {
+	doMinutesOverlap = (...ranges: Range[]): boolean => {
 		const map = new Map<number, true>();
 		for (const range of ranges) {
 			const [startMins, endMins] = this.asMinutes(range);
@@ -233,7 +233,7 @@ export class TimeRange<
 		return false;
 	};
 
-	areMinutesContained = (parent: Range, ...ranges: Range[]) => {
+	areMinutesContained = (parent: Range, ...ranges: Range[]): boolean => {
 		if (!ranges.length) return true;
 		const map = this.createMinuteMap(parent);
 		for (const range of ranges) {
@@ -250,7 +250,7 @@ export class TimeRange<
 		return true;
 	};
 
-	private asMinutes(inp: Range) {
+	private asMinutes(inp: Range): [number, number] {
 		const startMins = inp[this.start].hour() * 60 + inp[this.start].minute();
 		const endMins = inp[this.end].hour() * 60 + inp[this.end].minute();
 		return [startMins, endMins] as const;
