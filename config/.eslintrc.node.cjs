@@ -239,7 +239,7 @@ const config = {
 	},
 	overrides: [
 		{
-			files: ['src/routes/**/*', 'src/plugins/**/*'],
+			files: ['src/routes/**/*'],
 			rules: {
 				'import/no-default-export': 'off',
 			},
