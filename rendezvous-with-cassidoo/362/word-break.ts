@@ -47,9 +47,11 @@ type IncreasingSubsequence = never;
 
 export const wordBreak = (string: string, dict: string[]): boolean => {
 	let curr = string;
-	for (const word of dict) {
-		if (!curr.includes(word)) return false;
-		curr = curr.replace(word, '');
+	const regex = new RegExp(`^(${dict.join('|')})`, 'ui');
+	while (curr !== '') {
+		const matched = curr.match(regex);
+		if (!matched) return false;
+		curr = curr.replace(matched[0], '');
 	}
 	return true;
 };
