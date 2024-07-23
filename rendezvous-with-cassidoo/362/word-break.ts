@@ -1,57 +1,31 @@
-type Fill<T extends number, A extends number[] = []> = A['length'] extends T
-	? A
-	: Fill<T, [...A, 1]>;
-
-type Shift<T extends number[]> = T extends [
-	unknown,
-	...infer R extends number[],
+type dictExists<Str extends string, Dict extends string[]> = Dict extends [
+	infer match extends string,
+	...infer restArr extends string[],
 ]
-	? R
-	: never;
+	? Str extends `${match}${infer restStr}`
+		? restStr
+		: dictExists<Str, restArr>
+	: false;
 
-type NumberToArray<
-	T extends number,
-	R extends string = `${T}`,
-	A extends number[] = [],
-> = R extends `${infer F extends number}${infer L}`
-	? NumberToArray<T, L, [...A, F]>
-	: A;
+type WordBreak<Str extends string, Dict extends string[]> = Str extends ''
+	? true
+	: dictExists<Str, Dict> extends infer rest extends string
+		? WordBreak<rest, Dict>
+		: false;
 
-type GreaterThanDigits<
-	T extends number[],
-	U extends number[],
-	TF extends number[] = Fill<T[0]>,
-	UF extends number[] = Fill<U[0]>,
-> = T['length'] extends 0
-	? false
-	: T[0] extends U[0]
-		? GreaterThanDigits<Shift<T>, Shift<U>>
-		: UF[TF['length']] extends undefined
-			? true
-			: false;
-
-type GreaterThan<
-	T extends number,
-	U extends number,
-	TA extends number[] = NumberToArray<T>,
-	UA extends number[] = NumberToArray<U>,
-> = T extends U
-	? false
-	: TA['length'] extends UA['length']
-		? GreaterThanDigits<TA, UA>
-		: UA[TA['length']] extends undefined
-			? true
-			: false;
-
-type IncreasingSubsequence = never;
-
-export const wordBreak = (string: string, dict: string[]): boolean => {
+export const wordBreak = <
+	const Str extends string,
+	const Dict extends [string, ...string[]],
+>(
+	string: Str,
+	dict: Dict,
+): WordBreak<Str, Dict> => {
 	let curr = string;
 	const regex = new RegExp(`^(${dict.join('|')})`, 'ui');
 	while (curr !== '') {
 		const matched = curr.match(regex);
-		if (!matched) return false;
-		curr = curr.replace(matched[0], '');
+		if (!matched) return false as never;
+		curr = curr.replace(matched[0], '') as Str;
 	}
-	return true;
+	return true as never;
 };
