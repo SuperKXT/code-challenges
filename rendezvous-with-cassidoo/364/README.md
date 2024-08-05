@@ -16,9 +16,8 @@ Example:
 > 5525
 > squares(100)
 > 338350
-
 ```
 
 ---
 
-[Solution Playground](https://tsplay.dev/N7kQRN)
+[Solution Playground](https://tsplay.dev/Wv39kw)
