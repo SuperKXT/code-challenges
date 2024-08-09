@@ -255,6 +255,10 @@ const config = {
 				'react/jsx-max-depth': ['warn', { max: 6 }],
 				'react/jsx-no-constructed-context-values': 'warn',
 				'react/jsx-no-script-url': 'warn',
+				'react/jsx-curly-brace-presence': [
+					'warn',
+					{ props: 'never', propElementValues: 'always' },
+				],
 				'react/jsx-no-useless-fragment': ['warn', { allowExpressions: true }],
 				'react/jsx-sort-props': [
 					'warn',
