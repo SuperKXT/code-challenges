@@ -122,7 +122,7 @@ test('testing groupArrayBy', () => {
 	]);
 	expect(result1).toStrictEqual(expected1);
 
-	const result2 = groupArrayBy(array1, ['foo', 'bar']);
+	const result2 = groupArrayBy(array1, 'foo', 'bar');
 	const expected2 = new Map();
 	expected2.set('1-1', [
 		{ foo: 1, bar: 1, baz: 1 },

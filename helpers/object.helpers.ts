@@ -2,7 +2,7 @@ import { isObject, readableTypeOf } from './type.helpers.js';
 
 import type { Utils } from '../types/utils.types.js';
 
-export const safeObjAccess = (obj: object, key: string) => {
+export const safeObjAccess = (obj: object, key: string): unknown => {
 	if (readableTypeOf(obj) !== 'object' || !(key in obj)) return undefined;
 	return (obj as Record<string, unknown>)[key];
 };
@@ -27,7 +27,7 @@ export const omit = <Type extends object, ToOmit extends keyof Type>(
 ): Utils.prettify<Omit<Type, ToOmit>> => {
 	const omitted = {} as Record<string, unknown>;
 	for (const key in obj) {
-		if (!Object.hasOwn(obj, key) || keys.includes(key)) continue;
+		if (!Object.hasOwn(obj, key) || keys.includes(key as never)) continue;
 		omitted[key] = obj[key];
 	}
 	return omitted as Utils.prettify<Omit<Type, ToOmit>>;
@@ -54,12 +54,12 @@ export const deepMerge = <T extends object, U extends object>(
 		merged[key] =
 			isObject(firstCurr) && isObject(secondCurr)
 				? deepMerge(firstCurr, secondCurr)
-				: secondCurr ?? firstCurr;
+				: (secondCurr ?? firstCurr);
 	}
 	return merged as never;
 };
 
-export const objectToFormData = (obj: object) => {
+export const objectToFormData = (obj: object): FormData => {
 	const formData = new FormData();
 	for (const key in obj) {
 		if (!Object.hasOwn(obj, key)) continue;
@@ -88,14 +88,13 @@ export const objectToFormData = (obj: object) => {
 	return formData;
 };
 
-export const groupArrayBy = <T extends object, U extends keyof T>(
+export const groupArrayBy = <T extends object, const U extends keyof T>(
 	arr: T[],
-	groupBy: U | U[],
+	...groupBy: U[]
 ) => {
 	const grouped = new Map<string, T[]>();
-	const groupByArr = Array.isArray(groupBy) ? groupBy : [groupBy];
 	for (const item of arr) {
-		const val = groupByArr.map((key) => item[key]).join('-');
+		const val = groupBy.map((key) => item[key]).join('-');
 		const existing = grouped.get(val);
 		if (!existing) grouped.set(val, [item]);
 		else existing.push(item);
