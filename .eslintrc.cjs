@@ -169,6 +169,7 @@ const config = {
 			},
 		],
 
+		'@typescript-eslint/method-signature-style': 'warn',
 		'@typescript-eslint/consistent-type-exports': 'warn',
 		'@typescript-eslint/consistent-type-imports': 'warn',
 		'@typescript-eslint/consistent-type-definitions': 'off',
