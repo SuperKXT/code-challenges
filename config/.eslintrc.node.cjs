@@ -47,7 +47,6 @@ const config = {
 		indent: 'off',
 		'logical-assignment-operators': 'warn',
 		'max-depth': ['warn', { max: 7 }],
-		'max-lines': ['warn', 1000],
 		'max-params': ['warn', 5],
 		// TODO turn this rule off after migrating from typebox to zod
 		'new-cap': 'off',
