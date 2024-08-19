@@ -9,7 +9,11 @@ test('testing calculateExecutionTimes against test 1', () => {
 		{ name: 'subTask2', time: 20, event: 'end' },
 		{ name: 'main', time: 25, event: 'end' },
 	]);
-	const expected = { main: 25, subTask1: 5, subTask2: 5 };
+	const expected = {
+		main: 25 as const,
+		subTask1: 5 as const,
+		subTask2: 5 as const,
+	};
 	expect(result).toStrictEqual(expected);
 	assertType<typeof result>(expected);
 });
