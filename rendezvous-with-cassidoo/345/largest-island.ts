@@ -19,7 +19,7 @@ const exploreIsland = (
 };
 
 export const largestIsland = (arr: Item[][]): number => {
-	const visited: Visited = new Map();
+	const visited = new Map<`${number}${number}`, true>();
 	let largest: number = 0;
 	for (let row = 0; row < arr.length; row++) {
 		for (let col = 0; col < (arr[row] as Item[]).length; col++) {
