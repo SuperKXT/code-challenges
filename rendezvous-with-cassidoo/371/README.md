@@ -38,4 +38,4 @@ minLaundryLoads(load2);
 
 ---
 
-[Solution Playground](https://tsplay.dev/w286jm)
+[Solution Playground](https://tsplay.dev/mLVqew)
