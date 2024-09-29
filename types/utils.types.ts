@@ -28,6 +28,9 @@ type _unionToSingleTuple<
 		: never;
 
 export declare namespace Utils {
+	/** types that resolve as falsy  */
+	type falsy = false | '' | 0 | null | undefined;
+
 	/** type helper to prettify complex object types */
 	type prettify<T> = { [k in keyof T]: T[k] } & {};
 
@@ -72,7 +75,7 @@ export declare namespace Utils {
 
 	/** return only the keys of the object whose value is assignable to the given type */
 	type keysOfType<T, Match> = {
-		[k in keyof T]: T[k] extends Match ? k : never;
+		[k in keyof T]-?: T[k] extends Match ? k : never;
 	}[keyof T];
 
 	/** Return a union of keys from all objects in the union */
@@ -192,4 +195,28 @@ export declare namespace Utils {
 			[k in keyof obj as k extends keys ? k : never]-?: obj[k];
 		}
 	>;
+
+	/** extract the properties of a class */
+	type extractClassProps<T> = {
+		[k in keyof T as T[k] extends (...args: any[]) => unknown
+			? never
+			: k]: T[k];
+	};
+
+	type numberEnumFromTuple<Tuple extends readonly string[]> =
+		Tuple extends Tuple
+			? Utils.prettify<{
+					-readonly [k in keyof Omit<Tuple, keyof unknown[]> as Tuple[k] &
+						PropertyKey]: `${k & string}` extends `${infer num extends number}`
+						? num
+						: never;
+				}>
+			: never;
+
+	/** checks if the given type is a union */
+	type isUnion<T, U = T> = (
+		T extends T ? (U extends T ? true : false) : false
+	) extends true
+		? false
+		: true;
 }

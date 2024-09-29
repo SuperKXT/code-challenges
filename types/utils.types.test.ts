@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 import type { Utils } from './utils.types.js';
 
 type trueTuple<T extends true[]> = T[number] extends true ? true : false;
@@ -41,13 +43,12 @@ test('test equal type util', () => {
 	>;
 	type falseTests = falseTuple<
 		[
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			Utils.equal<any, unknown>,
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 			Utils.equal<any, 1>,
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 			Utils.equal<any, never>,
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 			Utils.equal<any, {}>,
 			Utils.equal<unknown, never>,
 			Utils.equal<unknown, {}>,
@@ -156,6 +157,8 @@ test('test keysOfType type util', () => {
 	type tests = trueTuple<
 		[
 			Utils.equal<Utils.keysOfType<{ foo: 1; bar: 2 }, 1 | 2>, 'foo' | 'bar'>,
+			Utils.equal<Utils.keysOfType<{ foo?: 1 }, 1 | undefined>, 'foo'>,
+			Utils.equal<Utils.keysOfType<{ foo?: 1; bar: 2 }, 1>, never>,
 			Utils.equal<Utils.keysOfType<{ foo: 1; bar: 2 }, 3>, never>,
 			Utils.equal<
 				Utils.keysOfType<
@@ -426,6 +429,62 @@ test('test requiredKeys type util', () => {
 				Utils.requiredKeys<{ foo?: 1; bar?: 2 | 3; baz: 4 | null | undefined }>,
 				{ foo: 1; bar: 2 | 3; baz: 4 | null | undefined }
 			>,
+		]
+	>;
+	assertType<tests>(true);
+});
+
+test('test extractClassProps type util', () => {
+	interface Test {
+		foo: 1;
+		bar: 2;
+		func: () => string;
+		opt?: number;
+		func2: () => string;
+	}
+	type tests = trueTuple<
+		[
+			Utils.equal<
+				Utils.extractClassProps<Test>,
+				{ foo: 1; bar: 2; opt?: number }
+			>,
+		]
+	>;
+	assertType<tests>(true);
+});
+
+test('test numberEnumFromTuple type util', () => {
+	type tests = trueTuple<
+		[
+			Utils.equal<
+				Utils.numberEnumFromTuple<['foo', 'bar', 'baz']>,
+				{ foo: 0; bar: 1; baz: 2 }
+			>,
+			Utils.equal<
+				Utils.numberEnumFromTuple<['foo', 'bar'] | ['baz']>,
+				{ foo: 0; bar: 1 } | { baz: 0 }
+			>,
+		]
+	>;
+	assertType<tests>(true);
+});
+
+test('test isUnion type util', () => {
+	type tests = trueTuple<
+		[
+			Utils.equal<Utils.isUnion<string>, false>,
+			Utils.equal<Utils.isUnion<boolean>, true>,
+			Utils.equal<Utils.isUnion<string | number>, true>,
+			Utils.equal<Utils.isUnion<'a' | 'b' | 'c' | 'd'>, true>,
+			Utils.equal<Utils.isUnion<undefined | null | void | ''>, true>,
+			Utils.equal<Utils.isUnion<{ a: string } | { a: number }>, true>,
+			Utils.equal<Utils.isUnion<{ a: string | number }>, false>,
+			Utils.equal<Utils.isUnion<[string | number]>, false>,
+			Utils.equal<Utils.isUnion<string | never>, false>,
+			Utils.equal<Utils.isUnion<string | unknown>, false>,
+			Utils.equal<Utils.isUnion<string | any>, false>,
+			Utils.equal<Utils.isUnion<string | 'a'>, false>,
+			Utils.equal<Utils.isUnion<never>, false>,
 		]
 	>;
 	assertType<tests>(true);
