@@ -46,31 +46,31 @@ import type { Equal, Expect } from '@type-challenges/utils';
 
 type Foo = {
 	[key: string]: unknown;
-	foo(): void;
+	foo: () => void;
 };
 
 type Bar = {
 	[key: number]: unknown;
-	bar(): void;
+	bar: () => void;
 	0: string;
 };
 
 const foobar = Symbol('foobar');
 type FooBar = {
 	[key: symbol]: unknown;
-	[foobar](): void;
+	[foobar]: () => void;
 };
 
 type Baz = {
-	bar(): void;
+	bar: () => void;
 	baz: string;
 };
 
 type _cases = [
-	Expect<Equal<RemoveIndexSignature<Foo>, { foo(): void }>>,
-	Expect<Equal<RemoveIndexSignature<Bar>, { bar(): void; 0: string }>>,
-	Expect<Equal<RemoveIndexSignature<FooBar>, { [foobar](): void }>>,
-	Expect<Equal<RemoveIndexSignature<Baz>, { bar(): void; baz: string }>>,
+	Expect<Equal<RemoveIndexSignature<Foo>, { foo: () => void }>>,
+	Expect<Equal<RemoveIndexSignature<Bar>, { bar: () => void; 0: string }>>,
+	Expect<Equal<RemoveIndexSignature<FooBar>, { [foobar]: () => void }>>,
+	Expect<Equal<RemoveIndexSignature<Baz>, { bar: () => void; baz: string }>>,
 ];
 
 /* _____________ Further Steps _____________ */

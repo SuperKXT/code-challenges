@@ -55,7 +55,7 @@ export const countAndSay = <const T extends number>(
 		const next = string[i + 1] as string;
 		count++;
 		if (curr !== next) {
-			response.push(`${words[count]} ${curr}s`);
+			response.push(`${words[count] as string} ${curr}s`);
 			count = 0;
 		}
 	}

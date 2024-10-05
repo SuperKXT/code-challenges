@@ -48,7 +48,7 @@ type _cases = [
 type ComplexObject = {
 	a: [12, 'foo'];
 	bar: 'hello';
-	prev(): number;
+	prev: () => number;
 };
 
 const fn = (v: boolean) => (v ? 1 : 2);

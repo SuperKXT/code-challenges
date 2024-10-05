@@ -41,7 +41,7 @@ const promiseAllTest2 = promiseAll([1, 2, Promise.resolve(3)] as const);
 //    ^?
 const promiseAllTest3 = promiseAll([1, 2, Promise.resolve(3)]);
 //    ^?
-// eslint-disable-next-line @typescript-eslint/array-type
+
 const promiseAllTest4 = promiseAll<Array<number | Promise<number>>>([1, 2, 3]);
 //    ^?
 
