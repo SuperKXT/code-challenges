@@ -211,6 +211,17 @@ const config = {
 		],
 		'@typescript-eslint/return-await': ['warn', 'always'],
 		'@typescript-eslint/switch-exhaustiveness-check': 'warn',
+		'@typescript-eslint/restrict-template-expressions': [
+			'warn',
+			{
+				allowAny: false,
+				allowBoolean: true,
+				allowNullish: false,
+				allowNumber: true,
+				allowRegExp: false,
+				allowNever: false,
+			},
+		],
 		'@typescript-eslint/ban-types': [
 			'warn',
 			{
