@@ -25,4 +25,4 @@ seeBuildings([3, 7, 8, 3, 6, 1]);
 
 ---
 
-[Solution Playground](https://tsplay.dev/N7DvBm)
+[Solution Playground](https://tsplay.dev/wjM3kW)
