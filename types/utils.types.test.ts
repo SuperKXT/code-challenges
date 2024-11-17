@@ -322,6 +322,19 @@ test('test unionToIntersection type util', () => {
 	assertType<tests>(true);
 });
 
+test('test takeOneFromUnion type util', () => {
+	type union = 'foo' | 42 | true;
+	type member = Utils.takeOneFromUnion<'foo' | 42 | true>;
+
+	type tests = trueTuple<
+		[
+			member extends union ? true : false,
+			Utils.isUnion<member> extends true ? false : true,
+		]
+	>;
+	assertType<tests>(true);
+});
+
 test('test unionToSingleTuple type util', () => {
 	type tests = trueTuple<
 		[
