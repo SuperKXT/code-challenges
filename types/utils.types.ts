@@ -143,6 +143,14 @@ export declare namespace Utils {
 		? U
 		: never;
 
+	/** takes one type from a union of types */
+	type takeOneFromUnion<T> =
+		unionToIntersection<T extends T ? (x: T) => 0 : never> extends (
+			x: infer U,
+		) => 0
+			? U
+			: never;
+
 	/** converts a union to a single tuple where each member is of union type */
 	type unionToSingleTuple<union> = _unionToSingleTuple<union>;
 
