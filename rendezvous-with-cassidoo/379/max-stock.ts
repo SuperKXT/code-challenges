@@ -43,21 +43,32 @@ type GreaterThan<
 			? true
 			: false;
 
+type Count<
+	from extends number,
+	to extends number,
+	idx extends 1[] = [],
+	count extends number[] = [],
+> = idx['length'] extends to
+	? count['length']
+	: Count<
+			from,
+			to,
+			[...idx, 1],
+			[...idx, 1][from] extends 1 ? [...count, 1] : count
+		>;
+
 type MaxStock<
-	Buildings extends number[],
+	Prices extends number[],
+	low extends number = never,
+	high extends number = never,
 	count extends 1[] = [],
-	countWithCurr extends 1[] = [...count, 1],
-> = Buildings extends [
-	infer curr extends number,
-	infer next extends number,
-	...infer rest extends number[],
-]
-	? GreaterThan<curr, next> extends true
-		? countWithCurr['length']
-		: MaxStock<[next, ...rest], countWithCurr>
-	: Buildings extends []
-		? count['length']
-		: countWithCurr['length'];
+> = Prices extends [infer curr extends number, ...infer rest extends number[]]
+	? GreaterThan<low, curr> extends true
+		? MaxStock<rest, curr, curr, [1]>
+		: GreaterThan<curr, high> extends true
+			? MaxStock<rest, low, curr, [...count, 1]>
+			: MaxStock<rest, low, high, count>
+	: Count<low, high>;
 
 export const maxStock = <const Prices extends [number, ...number[]]>(
 	prices: Prices,
@@ -68,8 +79,7 @@ export const maxStock = <const Prices extends [number, ...number[]]>(
 		if (low > price) {
 			low = price;
 			high = price;
-		}
-		if (high < price) {
+		} else if (high < price) {
 			high = price;
 		}
 	}
