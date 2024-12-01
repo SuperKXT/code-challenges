@@ -33,3 +33,30 @@ export const linkedListToArray = <const List extends LinkedList<unknown>>(
 	}
 	return array as LinkedListToArray<List>;
 };
+
+export const inPlaceInsertToSortedArray = (
+	arr: number[],
+	value: number,
+): void => {
+	let low = 0;
+	let high = arr.length - 1;
+	let idx = 0;
+	while (true) {
+		if (low >= high) {
+			idx = high;
+			break;
+		}
+		const mid = Math.floor((low + high) / 2);
+		const midVal = arr[mid] as number;
+		if (midVal === value) {
+			idx = mid;
+			break;
+		} else if (midVal < value) {
+			low = mid + 1;
+		} else {
+			high = mid - 1;
+		}
+	}
+	const idxVal = arr[idx] as number;
+	arr.splice(idxVal > value ? idx : idx + 1, 0, value);
+};

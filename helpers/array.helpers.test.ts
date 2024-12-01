@@ -1,4 +1,9 @@
-import { areArraysEqual, linkedListToArray } from './array.helpers.js';
+import {
+	areArraysEqual,
+	inPlaceInsertToSortedArray,
+	linkedListToArray,
+} from './array.helpers.js';
+import { getRandomInteger } from './random.helpers.js';
 
 type EqualityTest = {
 	first: unknown[];
@@ -48,4 +53,17 @@ test('testing linkedListToArray helper', () => {
 	};
 	expect(test2.response).toStrictEqual(test2.expected);
 	assertType<(typeof test2)['expected']>(test2.response);
+});
+
+test('testing inPlaceInsertToSortedArray helper', () => {
+	const arr: number[] = [];
+	const sourceArr = [];
+	for (let i = 0; i < 100_000; i++) {
+		sourceArr.push(getRandomInteger(0, 100_000));
+	}
+	const sorted = sourceArr.toSorted((a, b) => a - b);
+	for (const value of sourceArr) {
+		inPlaceInsertToSortedArray(arr, value);
+	}
+	expect(arr).toStrictEqual(sorted);
 });
