@@ -39,4 +39,4 @@ rollCall(['A', 'B', 'C']);
 
 ---
 
-[Solution Playground](https://tsplay.dev/mLVGvw)
+[Solution Playground](https://tsplay.dev/w8Dp9w)
