@@ -16,5 +16,5 @@ test('testing aoc-2024-day-3', async () => {
 	const input = await readFile(path.join(dirname, 'input.txt'), 'utf-8');
 	const response = aoc2024Day3(input);
 	expect(response.product).toBe(184122457);
-	expect(response.adjustedProduct).toBe(184122457);
+	expect(response.adjustedProduct).toBe(107862689);
 });
