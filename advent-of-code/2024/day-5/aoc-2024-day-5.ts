@@ -1,3 +1,27 @@
+const getCorrectedPages = (
+	pages: string[],
+	afterMap: Map<string, Set<string>>,
+): string[] => {
+	const corrected: string[] = [];
+	for (let i = 0; i < pages.length; i++) {
+		const page = pages[i] as string;
+		const currSet = afterMap.get(page);
+		for (let j = 0; j < corrected.length; j++) {
+			const p = corrected[j] as string;
+			if (currSet?.has(p)) {
+				corrected[j] = page;
+				corrected.push(p);
+				return getCorrectedPages(
+					[...corrected, ...pages.slice(i + 1)],
+					afterMap,
+				);
+			}
+		}
+		corrected.push(page);
+	}
+	return corrected;
+};
+
 export const aoc2024Day5 = (input: string) => {
 	const [rules, updates] = input.split('\n\n');
 	if (!rules || !updates) throw new Error('Invalid input');
@@ -11,19 +35,28 @@ export const aoc2024Day5 = (input: string) => {
 		if (!afterMap.has(page)) afterMap.set(page, set);
 	}
 
-	let middleSum = 0;
-	updateLoop: for (const update of updates.split('\n')) {
+	let correctSum = 0;
+	let incorrectSum = 0;
+	for (const update of updates.split('\n')) {
 		const pages = update.split(',');
 		const updateSet = new Set<string>();
-		const middle = Number(pages[Math.floor(pages.length / 2)]);
+		let isCorrect = true;
 		for (const page of pages) {
 			const currSet = afterMap.get(page);
-			if (currSet && updateSet.intersection(currSet).size > 0)
-				continue updateLoop;
+			if (currSet && updateSet.intersection(currSet).size > 0) {
+				isCorrect = false;
+			}
 			updateSet.add(page);
 		}
-		middleSum += middle;
+		if (isCorrect) {
+			const middle = Number(pages[Math.floor(pages.length / 2)]);
+			correctSum += middle;
+		} else {
+			const corrected = getCorrectedPages(pages, afterMap);
+			const middle = Number(corrected[Math.floor(corrected.length / 2)]);
+			incorrectSum += middle;
+		}
 	}
 
-	return { middleSum };
+	return { correctSum, incorrectSum };
 };
