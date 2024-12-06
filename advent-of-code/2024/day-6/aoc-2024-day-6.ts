@@ -1,87 +1,95 @@
-import { readFile } from 'fs/promises';
-import path from 'path';
+import { readFile } from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import { Worker } from 'node:worker_threads';
+
+import { cellEnum, dirname } from './enums.js';
 
 import { config } from '../../../config.js';
 
-const directionEnum = {
-	up: '^',
-	right: '>',
-	down: 'v',
-	left: '<',
-} as const;
-type TDirection = (typeof directionEnum)[keyof typeof directionEnum];
+export type TCell = (typeof cellEnum)[keyof typeof cellEnum];
+export type TGrid = TCell[][];
 
-const cellEnum = {
-	obstruction: '#',
-	empty: '.',
-	visited: 'X',
-	...directionEnum,
-} as const;
+export type TWalkGridArgs = { grid: TGrid; start: { x: number; y: number } };
 
-type TCell = (typeof cellEnum)[keyof typeof cellEnum];
-type TGrid = TCell[][];
+export type TWalkGridRes = { count: number };
 
-const nextMap: Record<TDirection, TDirection> = {
-	'^': '>',
-	'>': 'v',
-	v: '<',
-	'<': '^',
-};
+export type TWorkerPoolRes<T> = (({ error: null } & T) | { error: string })[];
 
-const walkGrid = (grid: TGrid, start: { x: number; y: number }) => {
-	const walked = grid.map((r) => [...r]);
-	let direction = cellEnum.up as TDirection;
-	let coords = { ...start };
-	let count = 0;
-	const walkSet = new Set<string>();
-	while (true) {
-		const row = walked[coords.x];
-		if (!row) break;
-		const cell = row[coords.y];
-		if (!cell) break;
-		else if (cell !== cellEnum.visited) {
-			count++;
-			row[coords.y] = cellEnum.visited;
-		}
+class WorkerPool<TArgs, TReturn> {
+	private workerPath: string;
+	private maxWorkers = os.cpus().length;
 
-		const currWalk = `x:${coords.x},y:${coords.y},direction:${direction}`;
-		if (walkSet.has(currWalk)) throw new Error('loop');
-		else walkSet.add(currWalk);
-
-		const nextCoords = { ...coords };
-		if (direction === cellEnum.up) nextCoords.x--;
-		else if (direction === cellEnum.right) nextCoords.y++;
-		else if (direction === cellEnum.down) nextCoords.x++;
-		else nextCoords.y--;
-		const next = walked[nextCoords.x]?.[nextCoords.y];
-		if (!next) break;
-		if (next === cellEnum.obstruction) {
-			direction = nextMap[direction];
-		} else {
-			coords = nextCoords;
-		}
+	constructor(workerPath: string) {
+		this.workerPath = workerPath;
 	}
-	return { count, walked };
-};
+
+	async runTasks(tasks: TArgs[]): Promise<TWorkerPoolRes<TReturn>> {
+		if (!tasks.length) throw new Error('No tasks to run!');
+
+		let currChunk: TArgs[] = [];
+		const chunks: TArgs[][] = [currChunk];
+		const maxSize = Math.ceil(tasks.length / this.maxWorkers);
+		let size = 0;
+		for (const task of tasks) {
+			if (size >= maxSize) {
+				size = 0;
+				currChunk = [];
+				chunks.push(currChunk);
+			}
+			currChunk.push(task);
+			size++;
+		}
+
+		const chunkRes = await Promise.all(
+			chunks.map(async (a) => await this.startWorker(a)),
+		);
+		return chunkRes.flat();
+	}
+
+	private async startWorker(tasks: TArgs[]) {
+		const { promise, resolve, reject } =
+			Promise.withResolvers<TWorkerPoolRes<TReturn>>();
+		const worker = new Worker(this.workerPath, { workerData: tasks });
+
+		worker.on('message', (result) => {
+			worker.terminate();
+			resolve(result as never);
+		});
+
+		worker.on('error', (err) => {
+			worker.terminate();
+			reject(err);
+		});
+
+		// eslint-disable-next-line @typescript-eslint/return-await
+		return promise;
+	}
+}
 
 export const aoc2024Day6 = async (input: string) => {
 	const grid: TGrid = [];
-	const coords = { x: 0, y: 0 };
+	const start = { x: 0, y: 0 };
 	let rowIdx = 0;
 	for (const row of input.split('\n')) {
 		if (!row.trim()) continue;
 		const startIdx = row.indexOf('^');
 		if (startIdx !== -1) {
-			coords.x = rowIdx;
-			coords.y = startIdx;
+			start.x = rowIdx;
+			start.y = startIdx;
 		}
 		grid.push(row.trim().split('') as TCell[]);
 		rowIdx++;
 	}
 
-	const { count } = walkGrid(grid, coords);
+	const pool = new WorkerPool<TWalkGridArgs, TWalkGridRes>(
+		path.join(dirname, 'walk-grid-worker.js'),
+	);
 
-	const candidateGrids: TGrid[] = [];
+	const [res] = await pool.runTasks([{ grid, start }]);
+	const count = res?.error === null ? res.count : 0;
+
+	const tasks: TWalkGridArgs[] = [];
 	for (let x = 0; x < grid.length; x++) {
 		const row = grid[x];
 		if (!row) continue;
@@ -91,30 +99,23 @@ export const aoc2024Day6 = async (input: string) => {
 			const candidate = grid.map((r, xI) =>
 				r.map((c, yI) => (xI === x && yI === y ? cellEnum.obstruction : c)),
 			);
-			candidateGrids.push(candidate);
+			tasks.push({ grid: candidate, start });
 		}
 	}
-	let obstructionCount = 0;
-	await Promise.all(
-		candidateGrids.map((c) => {
-			try {
-				walkGrid(c, coords);
-				return undefined;
-			} catch {
-				obstructionCount++;
-				return undefined;
-			}
-		}),
-	);
+
+	const tasksRes = await pool.runTasks(tasks);
+	const obstructionCount = tasksRes.filter((r) => r.error !== null).length;
 
 	return { count, obstructionCount };
 };
 
 if (!config.isTest) {
-	const sample = await readFile(
-		path.join(config.dirname, 'advent-of-code', '2024', 'day-6', 'sample.txt'),
+	console.time('aoc-2024-day-6');
+	const input = await readFile(
+		path.join(config.dirname, 'advent-of-code', '2024', 'day-6', 'input.txt'),
 		'utf-8',
 	);
-	const res = await aoc2024Day6(sample);
+	const res = await aoc2024Day6(input);
 	console.info(res);
+	console.timeEnd('aoc-2024-day-6');
 }
