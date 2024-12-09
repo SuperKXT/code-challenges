@@ -23,4 +23,4 @@ wrapGifts([1, 2, 3, 4, 5], 6);
 
 ---
 
-[Solution Playground](https://tsplay.dev/w8Dp9w)
+[Solution Playground](https://tsplay.dev/w6D3Rm)
