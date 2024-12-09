@@ -24,6 +24,13 @@ const getCombos = (
 };
 
 export const wrapGifts = (gifts: number[], width: number): number => {
-	const combos = getCombos(gifts, width).sort((a, b) => b.length - a.length);
-	return combos[0]?.length ?? 0;
+	const sorted = gifts.toSorted((a, b) => a - b);
+	let count = 0;
+	let sum = 0;
+	for (const curr of sorted) {
+		sum += curr;
+		if (sum > width) break;
+		count++;
+	}
+	return count;
 };
