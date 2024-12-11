@@ -50,8 +50,6 @@ export const aoc2024Day11 = (input: string) => {
 		count75 += getStoneCount(stone, 75, 0);
 	}
 
-	console.log({ count25, count75 });
-
 	return { count25, count75 };
 };
 
