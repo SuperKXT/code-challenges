@@ -1,3 +1,4 @@
+import { readFile } from 'fs/promises';
 import path from 'path';
 
 import { config } from '../../../config.js';
@@ -80,7 +81,8 @@ export const aoc2024Day10 = (input: string) => {
 
 if (!config.isTest) {
 	console.time('aoc-2024-day-10');
-	const res = aoc2024Day10(path.join(day10Path, 'input.txt'));
+	const input = await readFile(path.join(day10Path, 'input.txt'), 'utf-8');
+	const res = aoc2024Day10(input);
 	console.info(res);
 	console.timeEnd('aoc-2024-day-10');
 }
