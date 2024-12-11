@@ -1,3 +1,4 @@
+import { readFile } from 'fs/promises';
 import path from 'path';
 
 import { config } from '../../../config.js';
@@ -9,39 +10,55 @@ export const day11Path = path.join(
 	'day-11',
 );
 
-export const aoc2024Day11 = (input: string) => {
-	const count = 0;
+const map = new Map<string, number>();
 
-	let nums: bigint[] = input.trim().split(' ').map(BigInt);
-	const iterations = 25;
+const getStoneCount = (stone: bigint, total: number, idx: number): number => {
+	if (idx === total) return 1;
 
-	for (let i = 0; i < iterations; i++) {
-		const newNums: bigint[] = [];
-		for (const num of nums) {
-			if (num === 0n) {
-				newNums.push(1n);
-				continue;
-			}
-			const str = String(num);
-			const isEvenLength = str.length % 2 === 0;
-			if (!isEvenLength) {
-				newNums.push(num * 2024n);
-				continue;
-			}
-			const num1 = BigInt(str.slice(0, str.length / 2));
-			const num2 = BigInt(str.slice(str.length / 2));
-			newNums.push(num1);
-			newNums.push(num2);
+	const key = `${stone}-${idx}-${total}`;
+	const curr = map.get(key);
+
+	if (curr) return curr;
+
+	let count = 0;
+
+	if (stone === 0n) {
+		count = getStoneCount(1n, total, idx + 1);
+	} else {
+		const str = String(stone);
+		const isEvenLength = str.length % 2 === 0;
+		if (!isEvenLength) {
+			count = getStoneCount(stone * 2024n, total, idx + 1);
+		} else {
+			const left = BigInt(str.slice(0, str.length / 2));
+			const right = BigInt(str.slice(str.length / 2));
+			count += getStoneCount(left, total, idx + 1);
+			count += getStoneCount(right, total, idx + 1);
 		}
-		nums = newNums;
+	}
+	map.set(key, count);
+	return count;
+};
+
+export const aoc2024Day11 = (input: string) => {
+	const stones: bigint[] = input.trim().split(' ').map(BigInt);
+	let count25 = 0;
+	let count75 = 0;
+
+	for (const stone of stones) {
+		count25 += getStoneCount(stone, 25, 0);
+		count75 += getStoneCount(stone, 75, 0);
 	}
 
-	return { count: nums.length };
+	console.log({ count25, count75 });
+
+	return { count25, count75 };
 };
 
 if (!config.isTest) {
 	console.time('aoc-2024-day-11');
-	const res = aoc2024Day11(path.join(day11Path, 'input.txt'));
+	const input = await readFile(path.join(day11Path, 'input.txt'), 'utf-8');
+	const res = aoc2024Day11(input);
 	console.info(res);
 	console.timeEnd('aoc-2024-day-11');
 }
