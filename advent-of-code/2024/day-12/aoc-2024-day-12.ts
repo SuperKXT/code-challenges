@@ -11,7 +11,6 @@ export const day12Path = path.join(
 );
 
 type TRegion = { area: number; perimeter: number; coords: Set<string> };
-type TRegionMap = Map<string, TRegion[]>;
 
 const findRegion = (
 	grid: string[],
@@ -20,6 +19,7 @@ const findRegion = (
 	x: number,
 	y: number,
 	passedRegion?: TRegion,
+	// eslint-disable-next-line max-params
 ): void => {
 	const char = grid[x]?.[y];
 	if (!char) return;
