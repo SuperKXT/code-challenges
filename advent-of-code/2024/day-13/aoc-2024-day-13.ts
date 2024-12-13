@@ -20,6 +20,56 @@ const getCoords = (s: string): [number, number] => {
 	return [x, y];
 };
 
+type TCoord = [x: number, y: number];
+type TMachine = { a: TCoord; b: TCoord; prize: TCoord };
+
+/*
+	Button A: X+94, Y+34
+	Button B: X+22, Y+67
+	Prize: X=8400, Y=5400
+
+	EITHER 94 * x + 22 * y = 8400
+	OR 34 * x + 67 * y = 5400
+
+	x = (8400 - 22 * y) / 94
+	x = (5400 - 67 * y) / 34
+	(8400 - 22 * y) / 94  = (5400 - 67 * y) / 34
+	8400 * 34 - 22 * y * 34 = 5400 * 94 - 67 * y * 94
+	(67 * y * 94) - (22 * y * 34) = (5400 * 94) - (8400 * 34)
+	(6298 * y) - (748 * y) = (507600) - (285600)
+	y * (6298  - 748) = 222000;
+	y * 5550 = 222000;
+	y = 222000 / 5550;
+	y = 40;
+	x = (8400 - 22 * 40) / 94
+	x = 80
+
+	Eq1 =>
+		A[X] * x + B[X] * y = Prize[X]
+		x = (Prize[X] - B[X] * y) / A[X]
+	Eq2 =>
+		A[Y] * x + B[Y] * y = Prize[Y]
+		x = (Prize[Y] - B[Y] * y) / A[Y]
+
+	(Prize[X] - B[X] * y) / A[X] = (Prize[Y] - B[Y] * y) / A[Y]
+	(Prize[X] - B[X] * y) * A[Y] = (Prize[Y] - B[Y] * y) * A[X]
+	(Prize[X] * A[Y]) - (B[X] * A[Y] * y) = (Prize[Y] * A[X]) - (B[Y] * A[X] * y)
+	(B[Y] * A[X] * y) - (B[X] * A[Y] * y) = (Prize[Y] * A[X]) - (Prize[X] * A[Y])
+	y * ((B[Y] * A[X]) - (B[X] * A[Y])) = (Prize[Y] * A[X]) - (Prize[X] * A[Y])
+	y = (Prize[Y] * A[X]) - (Prize[X] * A[Y]) / ((B[Y] * A[X]) - (B[X] * A[Y]))
+*/
+const toAdd = 10_000_000_000_000;
+const getTokens = (machine: TMachine, adjust: boolean): number => {
+	const { a, b } = machine;
+	const prize: TCoord = adjust
+		? [machine.prize[0] + toAdd, machine.prize[1] + toAdd]
+		: machine.prize;
+	const y = (prize[1] * a[0] - prize[0] * a[1]) / (b[1] * a[0] - b[0] * a[1]);
+	const x = (prize[0] - b[0] * y) / a[0];
+	if (!Number.isInteger(x) || !Number.isInteger(y)) return 0;
+	return x * 3 + y;
+};
+
 export const aoc2024Day13 = (input: string) => {
 	const machines = input
 		.trim()
@@ -29,27 +79,17 @@ export const aoc2024Day13 = (input: string) => {
 			const a = getCoords(lines[0] ?? '');
 			const b = getCoords(lines[1] ?? '');
 			const prize = getCoords(lines[2] ?? '');
-			return { a, b, prize, tokens: 0 };
+			return { a, b, prize };
 		});
 
-	let count = 0;
-	outer: for (let y = 1; y <= 100; y++) {
-		for (const machine of machines) {
-			const { a, b, prize } = machine;
-			const x = (prize[0] - b[0] * y) / a[0];
-			const xRes = a[0] * x + b[0] * y;
-			const yRes = a[1] * x + b[1] * y;
-			if (xRes === prize[0] && yRes === prize[1]) {
-				machine.tokens = x * 3 + y;
-				count++;
-				if (count === machines.length) break outer;
-			}
-		}
+	let tokens = 0;
+	let adjustedTokens = 0;
+	for (const row of machines) {
+		tokens += getTokens(row, false);
+		adjustedTokens += getTokens(row, true);
 	}
 
-	const tokens = machines.reduce((acc, machine) => acc + machine.tokens, 0);
-
-	return { tokens };
+	return { tokens, adjustedTokens };
 };
 
 if (!config.isTest) {
