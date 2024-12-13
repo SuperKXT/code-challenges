@@ -33,17 +33,16 @@ export const aoc2024Day13 = (input: string) => {
 		});
 
 	let count = 0;
-	outer: for (let iA = 1; iA <= 100; iA++) {
-		for (let iB = 1; iB <= 100; iB++) {
-			for (const machine of machines) {
-				const { a, b, prize } = machine;
-				const x = a[0] * iA + b[0] * iB;
-				const y = a[1] * iA + b[1] * iB;
-				if (x === prize[0] && y === prize[1]) {
-					machine.tokens = iA * 3 + iB;
-					count++;
-					if (count === machines.length) break outer;
-				}
+	outer: for (let y = 1; y <= 100; y++) {
+		for (const machine of machines) {
+			const { a, b, prize } = machine;
+			const x = (prize[0] - b[0] * y) / a[0];
+			const xRes = a[0] * x + b[0] * y;
+			const yRes = a[1] * x + b[1] * y;
+			if (xRes === prize[0] && yRes === prize[1]) {
+				machine.tokens = x * 3 + y;
+				count++;
+				if (count === machines.length) break outer;
 			}
 		}
 	}
