@@ -13,4 +13,5 @@ test('testing aoc-2024-day-14 with input ', async () => {
 	const input = await readFile(path.join(day14Path, 'input.txt'), 'utf-8');
 	const res = aoc2024Day14(input, 'input');
 	expect(res.safetyFactor).toBe(228457125);
+	expect(res.christmasTree).toBe(6493);
 });

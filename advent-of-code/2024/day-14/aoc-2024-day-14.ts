@@ -12,6 +12,32 @@ export const day14Path = path.join(
 
 const regex = /p=(-?\d+),(-?\d+) v=(-?\d+),(-?\d+)/u;
 
+const updateGrid = ({
+	grid,
+	rows,
+	cols,
+	robots,
+}: {
+	grid: number[][];
+	rows: number;
+	cols: number;
+	robots: { p: { x: number; y: number }; v: { x: number; y: number } }[];
+}) => {
+	for (const r of robots) {
+		const prevX = r.p.x;
+		const prevY = r.p.y;
+		if (grid[prevY]?.[prevX] !== undefined) grid[prevY][prevX] -= 1;
+
+		const nX = r.p.x + r.v.x;
+		const nextX = nX < 0 ? cols + nX : nX % cols;
+		r.p.x = nextX;
+		const nY = r.p.y + r.v.y;
+		const nextY = nY < 0 ? rows + nY : nY % rows;
+		r.p.y = nextY;
+		if (grid[nextY]?.[nextX] !== undefined) grid[nextY][nextX] += 1;
+	}
+};
+
 export const aoc2024Day14 = (input: string, type: 'sample' | 'input') => {
 	const gridDimensions = {
 		sample: { rows: 7, cols: 11 },
@@ -38,20 +64,9 @@ export const aoc2024Day14 = (input: string, type: 'sample' | 'input') => {
 			return { p: { x: pX, y: pY }, v: { x: vX, y: vY } };
 		});
 
-	for (let s = 0; s < 100; s++) {
-		for (const r of robots) {
-			const prevX = r.p.x;
-			const prevY = r.p.y;
-			if (grid[prevY]?.[prevX] !== undefined) grid[prevY][prevX] -= 1;
-
-			const nX = r.p.x + r.v.x;
-			const nextX = nX < 0 ? cols + nX : nX % cols;
-			r.p.x = nextX;
-			const nY = r.p.y + r.v.y;
-			const nextY = nY < 0 ? rows + nY : nY % rows;
-			r.p.y = nextY;
-			if (grid[nextY]?.[nextX] !== undefined) grid[nextY][nextX] += 1;
-		}
+	let s = 0;
+	for (s = 0; s < 100; s++) {
+		updateGrid({ grid, rows, cols, robots });
 	}
 
 	const quads = { 1: 0, 2: 0, 3: 0, 4: 0 };
@@ -69,7 +84,19 @@ export const aoc2024Day14 = (input: string, type: 'sample' | 'input') => {
 	}
 	const safetyFactor = quads[1] * quads[2] * quads[3] * quads[4];
 
-	return { safetyFactor };
+	let christmasTree = 0;
+	if (type === 'input') {
+		for (s; s < 25_000; s++) {
+			updateGrid({ grid, rows, cols, robots });
+			const map = grid.map((row) => row.join('')).join('\n');
+			const rx = /[^0]{30,}/u;
+			if (!rx.test(map)) continue;
+			christmasTree = s + 1;
+			break;
+		}
+	}
+
+	return { safetyFactor, christmasTree };
 };
 
 if (!config.isTest) {
