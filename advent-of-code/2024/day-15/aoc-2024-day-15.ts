@@ -163,7 +163,7 @@ export const aoc2024Day15 = (input: string) => {
 		}
 	}
 
-	console.log(grid.map((r) => r.join('')).join('\n'));
+	// console.log(grid.map((r) => r.join('')).join('\n'));
 
 	return { sum };
 };
