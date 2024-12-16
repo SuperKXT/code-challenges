@@ -18,5 +18,5 @@ test('testing aoc-2024-day-15 with sample-2 ', async () => {
 test('testing aoc-2024-day-15 with input ', async () => {
 	const input = await readFile(path.join(day15Path, 'input.txt'), 'utf-8');
 	const res = aoc2024Day15(input);
-	expect(res.sum).toBe(1436703);
+	expect(res.sum).toBe(1430439);
 });

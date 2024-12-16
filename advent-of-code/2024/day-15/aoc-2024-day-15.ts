@@ -77,7 +77,6 @@ export const aoc2024Day15 = (input: string) => {
 		throw new Error('Invalid input');
 
 	for (const move of moves) {
-		// const prevGrid = grid.map((r) => r.slice());
 		const row = grid[pos[0]] ?? [];
 		const col = swappedGrid[pos[1]] ?? [];
 		const nextEmpty = [pos[0], pos[1]] as [number, number];
@@ -115,9 +114,6 @@ export const aoc2024Day15 = (input: string) => {
 					break;
 				}
 			}
-			nextEmpty[1] = row.findIndex(
-				(c, i) => i > pos[1] && c === gridCellEnum.empty,
-			);
 		} else {
 			nextPos[1] = pos[1] - 1;
 			for (let nY = pos[1] - 1; nY >= 0; nY--) {
@@ -138,6 +134,7 @@ export const aoc2024Day15 = (input: string) => {
 			nextEmpty[1] === -1
 		)
 			continue;
+		// const prevGrid = grid.map((r) => r.slice());
 		grid[pos[0]]![pos[1]] = gridCellEnum.empty;
 		grid[nextPos[0]]![nextPos[1]] = gridCellEnum.robot;
 		swappedGrid[pos[1]]![pos[0]] = gridCellEnum.empty;
