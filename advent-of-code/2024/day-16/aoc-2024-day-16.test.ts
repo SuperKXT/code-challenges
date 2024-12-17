@@ -9,7 +9,7 @@ test('testing aoc-2024-day-16 with sample ', async () => {
 	expect(res.cost).toBe(7036);
 });
 
-test.skip('testing aoc-2024-day-16 with input ', async () => {
+test('testing aoc-2024-day-16 with input ', async () => {
 	const input = await readFile(path.join(day16Path, 'input.txt'), 'utf-8');
 	const res = aoc2024Day16(input);
 	expect(res.cost).toBe(1430439);

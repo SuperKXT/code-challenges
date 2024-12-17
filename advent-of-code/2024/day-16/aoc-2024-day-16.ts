@@ -32,14 +32,14 @@ const directionEnum = {
 
 type TDirection = (typeof directionEnum)[keyof typeof directionEnum];
 
-const rotateObj: Record<'left' | 'right', Record<TDirection, TDirection>> = {
-	left: {
+const rotateObj: Record<TRotate, Record<TDirection, TDirection>> = {
+	counter: {
 		[directionEnum.up]: directionEnum.left,
 		[directionEnum.left]: directionEnum.down,
 		[directionEnum.down]: directionEnum.right,
 		[directionEnum.right]: directionEnum.up,
 	},
-	right: {
+	clockwise: {
 		[directionEnum.up]: directionEnum.right,
 		[directionEnum.right]: directionEnum.down,
 		[directionEnum.down]: directionEnum.left,
@@ -47,7 +47,9 @@ const rotateObj: Record<'left' | 'right', Record<TDirection, TDirection>> = {
 	},
 };
 
-const rotate = (direction: TDirection, type: 'left' | 'right'): TDirection => {
+type TRotate = 'counter' | 'clockwise';
+
+const rotate = (direction: TDirection, type: TRotate): TDirection => {
 	return rotateObj[type][direction];
 };
 
@@ -66,47 +68,57 @@ const getNext = (pos: TPos, direction: TDirection): TPos => {
 	];
 };
 
+type TPath = Map<string, TDirection>;
+
+type TPathRes = { cost: number; path: TPath }[];
+
 const getPaths = (
 	grid: TGrid,
 	pos: TPos,
-	direction: TDirection = directionEnum.up,
-	cost: number = 0,
-): number[] => {
+	direction: TDirection = directionEnum.right,
+	run: TPathRes[number] = { cost: 0, path: new Map() },
+): TPathRes => {
 	const curr = grid[pos[0]]?.[pos[1]];
 
 	if (!curr || curr === cellEnum.wall) return [];
-	if (curr === cellEnum.goal) return [cost];
+	if (curr === cellEnum.goal) return [run];
 
-	const costs: number[] = [];
+	const key = `${pos[0]}-${pos[1]}`;
+	if (run.path.has(key)) return [];
+	run.path.set(key, direction);
+
+	const res: TPathRes = [];
 
 	const next = getNext(pos, direction);
-	costs.push(...getPaths(grid, next, direction, cost + 1));
+	const counterDir = rotate(direction, 'counter');
+	const counterPos = getNext(pos, counterDir);
+	const clockwiseDir = rotate(direction, 'clockwise');
+	const clockwisePos = getNext(pos, clockwiseDir);
 
-	const counter = rotate(direction, 'left');
-	costs.push(...getPaths(grid, getNext(pos, counter), counter, cost + 100));
+	res.push(
+		...getPaths(grid, next, direction, {
+			cost: run.cost + 1,
+			path: new Map(run.path),
+		}),
+	);
+	res.push(
+		...getPaths(grid, counterPos, counterDir, {
+			cost: run.cost + 1001,
+			path: new Map(run.path),
+		}),
+	);
+	res.push(
+		...getPaths(grid, clockwisePos, clockwiseDir, {
+			cost: run.cost + 1001,
+			path: new Map(run.path),
+		}),
+	);
 
-	const clockwise = rotate(direction, 'right');
-	costs.push(...getPaths(grid, getNext(pos, clockwise), clockwise, cost + 100));
-
-	return costs;
+	return res;
 };
 
 export const aoc2024Day16 = (input: string) => {
-	const grid: TGrid = input
-		.trim()
-		.split('\n')
-		.map((row) =>
-			row
-				.trim()
-				.split('')
-				.filter(
-					(r) =>
-						r === cellEnum.empty ||
-						r === cellEnum.goal ||
-						r === cellEnum.start ||
-						r === cellEnum.wall,
-				),
-		);
+	const grid: TGrid = [];
 	const rows = input.trim().split('\n');
 	const start: TPos = [0, 0];
 	for (let y = 0; y < rows.length; y++) {
@@ -131,11 +143,25 @@ export const aoc2024Day16 = (input: string) => {
 		}
 	}
 
+	// console.log(grid.map((r) => r.join('')).join('\n'));
+
 	const paths = getPaths(grid, start);
-	console.log({ paths });
 	let cost = Infinity;
 	for (const p of paths) {
-		cost = Math.min(cost, p);
+		cost = Math.min(cost, p.cost);
+		// const pathStr = grid
+		// 	.map((row, y) =>
+		// 		row
+		// 			.map((r, x) => {
+		// 				const curr = p.path.get(`${y}-${x}`);
+		// 				return curr ?? r;
+		// 			})
+		// 			.join(''),
+		// 	)
+		// 	.join('\n');
+		// console.log(`Cost: ${p.cost}, Steps: ${p.path.size}`);
+		// console.log(pathStr);
+		// console.log();
 	}
 
 	return { cost };
