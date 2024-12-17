@@ -12,5 +12,5 @@ test('testing aoc-2024-day-17 with sample ', async () => {
 test('testing aoc-2024-day-17 with input ', async () => {
 	const input = await readFile(path.join(day17Path, 'input.txt'), 'utf-8');
 	const res = aoc2024Day17(input);
-	expect(res.output).toBe('1,2,4,1,2,3,3,2,1');
+	expect(res.output).toBe('1,7,2,1,4,1,5,4,0');
 });
