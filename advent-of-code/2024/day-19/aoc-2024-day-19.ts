@@ -10,26 +10,38 @@ export const day19Path = path.join(
 	'day-19',
 );
 
-const checkDesign = (design: string, towels: string[]): boolean => {
-	if (design === '') return true;
+const checkDesign = (
+	design: string,
+	towels: string[],
+	map: Map<string, number>,
+): number => {
+	if (design === '') return 1;
+	const existing = map.get(design);
+	if (existing !== undefined) return existing;
+	let count = 0;
 	for (const towel of towels) {
 		if (!design.startsWith(towel)) continue;
-		if (checkDesign(design.slice(towel.length), towels)) return true;
+		const curr = checkDesign(design.slice(towel.length), towels, map);
+		count += curr;
 	}
-	return false;
+	map.set(design, count);
+	return count;
 };
 
 export const aoc2024Day19 = (input: string) => {
 	const [towelStr, ...designs] = input.trim().split('\n').filter(Boolean);
 	if (!towelStr || !designs.length) throw new Error('Invalid input');
+	const countMap = new Map<string, number>();
 	const towels = towelStr.split(',').map((r) => r.trim());
-
 	let count = 0;
+	let totalCount = 0;
 	for (const design of designs) {
-		if (checkDesign(design, towels)) count++;
+		const curr = checkDesign(design.trim(), towels, countMap);
+		totalCount += curr;
+		if (curr > 0) count++;
 	}
 
-	return { count };
+	return { count, totalCount };
 };
 
 if (!config.isTest) {
