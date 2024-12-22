@@ -17,9 +17,8 @@
 
 type Merge<T> = { [P in keyof T]: T[P] };
 
-type Escapes = ' ' | '\n' | '\t';
-type EscapeMap = { r: '\r'; n: '\n'; b: '\b'; f: '\f' };
-
+type Escapes = ' ' | '\n' | '\r' | '\t' | '\b' | '\f';
+type EscapeMap = { n: '\n'; r: '\r'; t: '\t'; b: '\b'; f: '\f' };
 type Parse<T extends string> = Eval<T> extends [infer V, unknown] ? V : never;
 
 type Eval<T> = T extends `${Escapes}${infer U}`
@@ -36,7 +35,16 @@ type Eval<T> = T extends `${Escapes}${infer U}`
 						? EvalArray<U>
 						: T extends `${'{'}${infer U}`
 							? EvalObject<U>
-							: false;
+							: EvalNumber<T>;
+
+type EvalNumber<
+	T,
+	S extends string = '',
+> = T extends `${infer n extends number}${infer rest}`
+	? EvalNumber<rest, `${S}${n}`>
+	: S extends `${infer n extends number}`
+		? [n, T]
+		: false;
 
 type EvalString<T, S extends string = ''> = T extends `"${infer U}`
 	? [S, U]
@@ -122,7 +130,7 @@ type _cases = [
 
 	Expect<Equal<Parse<'[]'>, []>>,
 
-	Expect<Equal<Parse<'[1]'>, never>>,
+	Expect<Equal<Parse<'[1]'>, [1]>>,
 
 	Expect<Equal<Parse<'true'>, true>>,
 
