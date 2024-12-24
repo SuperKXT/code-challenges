@@ -1,5 +1,6 @@
 import {
 	areArraysEqual,
+	filterInPlace,
 	inPlaceInsertToSortedArray,
 	linkedListToArray,
 } from './array.helpers.js';
@@ -66,4 +67,15 @@ test('testing inPlaceInsertToSortedArray helper', () => {
 		inPlaceInsertToSortedArray(arr, value);
 	}
 	expect(arr).toStrictEqual(sorted);
+});
+
+test('testing filterInPlace helper', () => {
+	const sourceArr = [];
+	for (let i = 0; i < 10_000; i++) {
+		sourceArr.push(i + 1);
+	}
+	const prev = [...sourceArr];
+	const removed = filterInPlace(sourceArr, (val) => val > 5_000);
+	expect(removed).toBe(5_000);
+	expect(sourceArr).toStrictEqual(prev.filter((r) => r > 5_000));
 });

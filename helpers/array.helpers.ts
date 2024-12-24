@@ -60,3 +60,18 @@ export const inPlaceInsertToSortedArray = (
 	const idxVal = arr[idx] as number;
 	arr.splice(idxVal > value ? idx : idx + 1, 0, value);
 };
+
+export const filterInPlace = <T>(
+	array: T[],
+	check: (row: NoInfer<T>) => boolean,
+): number => {
+	let removed = 0;
+	for (let i = 0; i < array.length; i++) {
+		const shouldKeep = check(array[i] as T);
+		if (shouldKeep) continue;
+		removed++;
+		array.splice(i, 1);
+		i -= 1;
+	}
+	return removed;
+};
