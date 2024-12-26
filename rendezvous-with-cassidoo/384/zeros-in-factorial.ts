@@ -1,13 +1,12 @@
-type TZerosInFactorial<Num extends number> = number;
-
 export const zerosInFactorial = <const Num extends number>(
 	num: Num,
-): TZerosInFactorial<Num> => {
-	let factorial = 1n;
-	for (let i = BigInt(num); i > 0; i--) {
-		factorial *= i;
+): number => {
+	let result = 0;
+	// ? https://www.purplemath.com/modules/factzero.htm
+	let power = 5;
+	while (power <= num) {
+		result += Math.floor(num / power);
+		power *= 5;
 	}
-	const regex = /0+$/u;
-	const zeros = String(factorial).match(regex)?.[0].length ?? 0;
-	return zeros as never;
+	return result as never;
 };
