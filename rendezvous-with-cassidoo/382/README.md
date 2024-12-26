@@ -2,11 +2,11 @@
 
 [issue #382 of rendezvous with cassidoo.](https://buttondown.com/cassidoo/archive/most-of-the-trouble-in-the-world-is-caused-by)
 
-\*\*Write a function wrapGifts that finds the maximum number of gifts that can
+Write a function wrapGifts that finds the maximum number of gifts that can
 be wrapped using a single strip of wrapping paper of a given width.
 
 Each gift has a specific length, and you can only wrap gifts if their
-total length fits within the paper width without cutting the paper.\*\*
+total length fits within the paper width without cutting the paper.
 
 Example:
 
