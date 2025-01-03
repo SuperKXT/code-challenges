@@ -384,11 +384,18 @@ test('test nonNullableKeys type util', () => {
 		[
 			Utils.equal<Utils.nonNullableKeys<{ foo: 1 | null }>, { foo: 1 }>,
 			Utils.equal<
-				Utils.nonNullableKeys<{ foo: 1 | null; bar: 2 | null }, 'foo'>,
+				Utils.nonNullableKeys<
+					{ foo: 1 | null | undefined; bar: 2 | null },
+					'foo'
+				>,
 				{ foo: 1; bar: 2 | null }
 			>,
 			Utils.equal<
-				Utils.nonNullableKeys<{ foo: 1 | null; bar?: 2 | 3; baz: null }>,
+				Utils.nonNullableKeys<{
+					foo: 1 | null;
+					bar?: 2 | 3 | undefined;
+					baz: null;
+				}>,
 				{ foo: 1; bar?: 2 | 3; baz: never }
 			>,
 		]

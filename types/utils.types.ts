@@ -2,9 +2,9 @@ type _repeatString<
 	S extends string,
 	N extends number,
 	T extends 1[] = [],
-> = T['length'] extends N ? '' : `${S}${_repeatString<S, N, [...T, 1]>}`;
+> = T["length"] extends N ? "" : `${S}${_repeatString<S, N, [...T, 1]>}`;
 
-type _tuple<N extends number, T, R extends readonly T[]> = R['length'] extends N
+type _tuple<N extends number, T, R extends readonly T[]> = R["length"] extends N
 	? R
 	: _tuple<N, T, [T, ...R]>;
 
@@ -29,7 +29,7 @@ type _unionToSingleTuple<
 
 export declare namespace Utils {
 	/** types that resolve as falsy  */
-	type falsy = false | '' | 0 | null | undefined;
+	type falsy = false | "" | 0 | null | undefined;
 
 	/** type helper to prettify complex object types */
 	type prettify<T> = { [k in keyof T]: T[k] } & {};
@@ -42,7 +42,7 @@ export declare namespace Utils {
 	/** checks if the first type satisfies the second */
 	type satisfies<T extends U, U> = T;
 
-	type dropFirst<T extends readonly unknown[]> = number extends T['length']
+	type dropFirst<T extends readonly unknown[]> = number extends T["length"]
 		? T
 		: T extends readonly [unknown, ...infer U]
 			? U
@@ -176,9 +176,9 @@ export declare namespace Utils {
 			? [U, ...unionToTuples<Exclude<T, U>>]
 			: [];
 
-	/** make the given keys (all if second arg is omitted) of an object nullable */
+	/** make the given keys (all if second arg is omitted) of an object non-nullable (null and undefined are removed) */
 	type nonNullableKeys<obj, keys extends keyof obj = keyof obj> = {
-		[k in keyof obj]: k extends keys ? Exclude<obj[k], null> : obj[k];
+		[k in keyof obj]: k extends keys ? NonNullable<obj[k]> : obj[k];
 	};
 
 	/** make the given keys (all if second arg is omitted) of an object nullable */
