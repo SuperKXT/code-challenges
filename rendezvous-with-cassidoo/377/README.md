@@ -7,6 +7,7 @@
 Example:
 
 ```ts
+// cSpell: disable
 groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]);
 [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]];
 
@@ -15,6 +16,7 @@ groupAnagrams(["vote", "please"]);
 
 groupAnagrams(["debitcard", "badcredit"]);
 [["debitcard", "badcredit"]];
+// cSpell: enable
 ```
 
 ---

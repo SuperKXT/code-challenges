@@ -1,8 +1,10 @@
 import { rollCall } from "./roll-call.js";
 
 test("testing rollCall 1", () => {
+	// cSpell: disable
 	const result = rollCall(["yzneT", "ydissaC", "enimA"]);
 	const expected = ["Amine", "Cassidy", "Tenzy"];
+	// cSpell: enable
 	expect(result).toStrictEqual(expected);
 	assertType<Readonly<typeof expected>>(result);
 });
