@@ -16,17 +16,17 @@ type StringToArray<S extends string> = S extends `${infer U}${infer V}`
 	? [U, ...StringToArray<V>]
 	: [];
 
-type LengthOfString<S extends string> = StringToArray<S>['length'];
+type LengthOfString<S extends string> = StringToArray<S>["length"];
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<LengthOfString<''>, 0>>,
-	Expect<Equal<LengthOfString<'kumiko'>, 6>>,
-	Expect<Equal<LengthOfString<'reina'>, 5>>,
-	Expect<Equal<LengthOfString<'Sound! Euphonium'>, 16>>,
+	Expect<Equal<LengthOfString<"">, 0>>,
+	Expect<Equal<LengthOfString<"kumiko">, 6>>,
+	Expect<Equal<LengthOfString<"reina">, 5>>,
+	Expect<Equal<LengthOfString<"Sound! Euphonium">, 16>>,
 ];
 
 /* _____________ Further Steps _____________ */

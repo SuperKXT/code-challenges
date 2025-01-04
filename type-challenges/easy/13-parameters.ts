@@ -28,15 +28,15 @@ type MyParameters<T extends (...args: any[]) => unknown> = T extends (
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 const foo = (_arg1: string, _arg2: number): void => undefined;
-const bar = (_arg1: boolean, _arg2: { a: 'A' }): void => undefined;
+const bar = (_arg1: boolean, _arg2: { a: "A" }): void => undefined;
 const baz = (): void => undefined;
 
 type _cases = [
 	Expect<Equal<MyParameters<typeof foo>, [string, number]>>,
-	Expect<Equal<MyParameters<typeof bar>, [boolean, { a: 'A' }]>>,
+	Expect<Equal<MyParameters<typeof bar>, [boolean, { a: "A" }]>>,
 	Expect<Equal<MyParameters<typeof baz>, []>>,
 ];
 

@@ -18,22 +18,22 @@
 
 /* _____________ Your Code Here _____________ */
 
-type TrimLeft<S extends string> = S extends `${' ' | '\n' | '\t'}${infer U}`
+type TrimLeft<S extends string> = S extends `${" " | "\n" | "\t"}${infer U}`
 	? TrimLeft<U>
 	: S;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<TrimLeft<'str'>, 'str'>>,
-	Expect<Equal<TrimLeft<' str'>, 'str'>>,
-	Expect<Equal<TrimLeft<'     str'>, 'str'>>,
-	Expect<Equal<TrimLeft<'     str     '>, 'str     '>>,
-	Expect<Equal<TrimLeft<'   \n\t foo bar '>, 'foo bar '>>,
-	Expect<Equal<TrimLeft<''>, ''>>,
-	Expect<Equal<TrimLeft<' \n\t'>, ''>>,
+	Expect<Equal<TrimLeft<"str">, "str">>,
+	Expect<Equal<TrimLeft<" str">, "str">>,
+	Expect<Equal<TrimLeft<"     str">, "str">>,
+	Expect<Equal<TrimLeft<"     str     ">, "str     ">>,
+	Expect<Equal<TrimLeft<"   \n\t foo bar ">, "foo bar ">>,
+	Expect<Equal<TrimLeft<"">, "">>,
+	Expect<Equal<TrimLeft<" \n\t">, "">>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -1,6 +1,6 @@
-import { binaryPal } from './binary-pal.js';
+import { binaryPal } from "./binary-pal.js";
 
-test('should check if the binary of given number is palindrome', () => {
+test("should check if the binary of given number is palindrome", () => {
 	const response = binaryPal(5);
 	expect(response).toBeTruthy();
 	assertType<true>(response);

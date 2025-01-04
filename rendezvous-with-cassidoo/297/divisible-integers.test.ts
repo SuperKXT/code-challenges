@@ -1,7 +1,7 @@
-import { divisibleIntegers } from './divisible-integers.js';
+import { divisibleIntegers } from "./divisible-integers.js";
 
-import type { Utils } from '../../types/utils.types.js';
-import type { DivisibleIntegerN } from './divisible-integers.js';
+import type { Utils } from "../../types/utils.types.js";
+import type { DivisibleIntegerN } from "./divisible-integers.js";
 
 type Test = {
 	input: number[];
@@ -16,7 +16,7 @@ const tests: Test[] = [
 ];
 
 test.each(tests)(
-	'should return the if the number is divisible to given array digits',
+	"should return the if the number is divisible to given array digits",
 	({ input, outputs }) => {
 		for (let idx = 0; idx < outputs.length; idx++) {
 			const response = divisibleIntegers((idx + 1) as DivisibleIntegerN, input);

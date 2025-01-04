@@ -22,9 +22,9 @@ export const beaconGopher1 = (input: string, row: number): number => {
 	let startCol = 0;
 	let endCol = 0;
 
-	for (const line of input.split('\n')) {
+	for (const line of input.split("\n")) {
 		const [sensorCol, sensorRow, beaconCol, beaconRow] = line
-			.replace(/(Sensor at x=)|( y=)|( closest beacon is at x=)/gu, '')
+			.replace(/(Sensor at x=)|( y=)|( closest beacon is at x=)/gu, "")
 			.split(/,|:/gu)
 			.map(Number) as [number, number, number, number];
 
@@ -84,9 +84,9 @@ export const beaconGopher2 = (input: string, max: number): number => {
 	let startCol = 0;
 	let endCol = 0;
 
-	for (const line of input.split('\n')) {
+	for (const line of input.split("\n")) {
 		const [sensorCol, sensorRow, beaconCol, beaconRow] = line
-			.replace(/(Sensor at x=)|( y=)|( closest beacon is at x=)/gu, '')
+			.replace(/(Sensor at x=)|( y=)|( closest beacon is at x=)/gu, "")
 			.split(/,|:/gu)
 			.map(Number) as [number, number, number, number];
 

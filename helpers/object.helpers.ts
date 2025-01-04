@@ -1,9 +1,9 @@
-import { isObject, readableTypeOf } from './type.helpers.js';
+import { isObject, readableTypeOf } from "./type.helpers.js";
 
-import type { Utils } from '../types/utils.types.js';
+import type { Utils } from "../types/utils.types.js";
 
 export const safeObjAccess = (obj: object, key: string): unknown => {
-	if (readableTypeOf(obj) !== 'object' || !(key in obj)) return undefined;
+	if (readableTypeOf(obj) !== "object" || !(key in obj)) return undefined;
 	return (obj as Record<string, unknown>)[key];
 };
 
@@ -69,20 +69,20 @@ export const objectToFormData = (obj: object): FormData => {
 			continue;
 		}
 		const type = readableTypeOf(value);
-		if (type === 'array') {
+		if (type === "array") {
 			for (const item of value as unknown[]) {
 				const itemType = readableTypeOf(item);
-				if (['object', 'array', 'symbol', 'function'].includes(itemType))
+				if (["object", "array", "symbol", "function"].includes(itemType))
 					throw new Error(
 						`invalid value for '${key}': form data does not allow '${itemType}'`,
 					);
 				formData.append(key, String(item));
 			}
-		} else if (['object', 'symbol', 'function'].includes(type)) {
+		} else if (["object", "symbol", "function"].includes(type)) {
 			throw new Error(
 				`invalid value for '${key}': form data does not allow '${type}'`,
 			);
-		} else if (['undefined', 'null'].includes(type)) continue;
+		} else if (["undefined", "null"].includes(type)) continue;
 		else formData.append(key, String(value));
 	}
 	return formData;
@@ -94,7 +94,7 @@ export const groupArrayBy = <T extends object, const U extends keyof T>(
 ) => {
 	const grouped = new Map<string, T[]>();
 	for (const item of arr) {
-		const val = groupBy.map((key) => item[key]).join('-');
+		const val = groupBy.map((key) => item[key]).join("-");
 		const existing = grouped.get(val);
 		if (!existing) grouped.set(val, [item]);
 		else existing.push(item);
@@ -108,5 +108,5 @@ export const objectToSearchParams = (obj: Record<string, string>) => {
 		.map(
 			([key, val]) => `${encodeURIComponent(key)}=${encodeURIComponent(val)}`,
 		)
-		.join('&');
+		.join("&");
 };

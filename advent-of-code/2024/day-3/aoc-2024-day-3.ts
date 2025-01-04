@@ -12,7 +12,7 @@ export const aoc2024Day3 = (input: string) => {
 	const matches = input.match(regex) ?? [];
 	let disabled = false;
 	for (const curr of matches) {
-		if (curr === 'do()') disabled = false;
+		if (curr === "do()") disabled = false;
 		else if (curr === "don't()") disabled = true;
 		else {
 			product += getProduct(curr);

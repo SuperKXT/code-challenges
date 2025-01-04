@@ -1,14 +1,14 @@
-import { flip } from './flip.js';
+import { flip } from "./flip.js";
 
-test('testing flip against test 1', () => {
+test("testing flip against test 1", () => {
 	const arr = [
 		[1, 2, 3],
 		[4, 5, 6],
 		[7, 8, 9],
 	] as const;
 	const result = {
-		horizontal: flip(arr, 'horizontal'),
-		vertical: flip(arr, 'vertical'),
+		horizontal: flip(arr, "horizontal"),
+		vertical: flip(arr, "vertical"),
 	};
 	const expected = {
 		horizontal: [

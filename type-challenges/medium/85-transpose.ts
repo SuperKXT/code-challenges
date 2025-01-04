@@ -21,7 +21,7 @@
 // TODO RETRY
 type Transpose<
 	T extends number[][],
-	First extends number[] = T['length'] extends 0 ? [] : T[0],
+	First extends number[] = T["length"] extends 0 ? [] : T[0],
 > = {
 	[K in keyof First]: {
 		[K2 in keyof T]: K extends keyof T[K2] ? T[K2][K] : never;
@@ -30,7 +30,7 @@ type Transpose<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<Transpose<[]>, []>>,

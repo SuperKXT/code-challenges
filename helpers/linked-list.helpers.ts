@@ -1,4 +1,4 @@
-import type { Utils } from '../types/utils.types.js';
+import type { Utils } from "../types/utils.types.js";
 
 export type LinkedListNode<Type = unknown> = {
 	value: Type;
@@ -13,22 +13,22 @@ type InsertToNode<
 	Node extends NonNullable<LinkedListNode>,
 	Val,
 > = Utils.prettify<{
-	value: Node['value'];
-	next: Node['next'] extends NonNullable<LinkedListNode>
-		? InsertToNode<Node['next'], Val>
+	value: Node["value"];
+	next: Node["next"] extends NonNullable<LinkedListNode>
+		? InsertToNode<Node["next"], Val>
 		: { value: Val; next: null };
 }>;
 
 type InsertNode<List extends LinkedList<unknown>, Val> = Utils.prettify<{
-	head: List['head'] extends NonNullable<LinkedListNode>
-		? InsertToNode<List['head'], Val>
+	head: List["head"] extends NonNullable<LinkedListNode>
+		? InsertToNode<List["head"], Val>
 		: { value: Val; next: null };
 }>;
 
 type ArrayToLinkedList<
 	Type extends readonly unknown[],
 	Result extends LinkedList<unknown> = { head: null },
-> = number extends Type['length']
+> = number extends Type["length"]
 	? LinkedList<Type[number]>
 	: Type extends readonly [infer First, ...infer Rest]
 		? ArrayToLinkedList<Rest, InsertNode<Result, First>>

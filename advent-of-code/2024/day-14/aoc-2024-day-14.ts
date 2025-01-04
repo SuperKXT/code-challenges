@@ -1,13 +1,13 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export const day14Path = path.join(
 	config.dirname,
-	'advent-of-code',
-	'2024',
-	'day-14',
+	"advent-of-code",
+	"2024",
+	"day-14",
 );
 
 const regex = /p=(-?\d+),(-?\d+) v=(-?\d+),(-?\d+)/u;
@@ -38,7 +38,7 @@ const updateGrid = ({
 	}
 };
 
-export const aoc2024Day14 = (input: string, type: 'sample' | 'input') => {
+export const aoc2024Day14 = (input: string, type: "sample" | "input") => {
 	const gridDimensions = {
 		sample: { rows: 7, cols: 11 },
 		input: { rows: 103, cols: 101 },
@@ -51,13 +51,13 @@ export const aoc2024Day14 = (input: string, type: 'sample' | 'input') => {
 	);
 	const robots = input
 		.trim()
-		.split('\n')
+		.split("\n")
 		.map((s) => {
 			const lines = regex.exec(s.trim());
-			const pX = parseInt(lines?.[1] ?? '');
-			const pY = parseInt(lines?.[2] ?? '');
-			const vX = parseInt(lines?.[3] ?? '');
-			const vY = parseInt(lines?.[4] ?? '');
+			const pX = parseInt(lines?.[1] ?? "");
+			const pY = parseInt(lines?.[2] ?? "");
+			const vX = parseInt(lines?.[3] ?? "");
+			const vY = parseInt(lines?.[4] ?? "");
 			if (isNaN(pX) || isNaN(pY) || isNaN(vX) || isNaN(vY))
 				throw new Error(`Invalid coord string`);
 			if (grid[pY]?.[pX] !== undefined) grid[pY][pX] += 1;
@@ -85,10 +85,10 @@ export const aoc2024Day14 = (input: string, type: 'sample' | 'input') => {
 	const safetyFactor = quads[1] * quads[2] * quads[3] * quads[4];
 
 	let christmasTree = 0;
-	if (type === 'input') {
+	if (type === "input") {
 		for (s; s < 25_000; s++) {
 			updateGrid({ grid, rows, cols, robots });
-			const map = grid.map((row) => row.join('')).join('\n');
+			const map = grid.map((row) => row.join("")).join("\n");
 			const rx = /[^0]{30,}/u;
 			if (!rx.test(map)) continue;
 			christmasTree = s + 1;
@@ -100,9 +100,9 @@ export const aoc2024Day14 = (input: string, type: 'sample' | 'input') => {
 };
 
 if (!config.isTest) {
-	console.time('aoc-2024-day-14');
-	const input = await readFile(path.join(day14Path, 'input.txt'), 'utf-8');
-	const res = aoc2024Day14(input, 'input');
+	console.time("aoc-2024-day-14");
+	const input = await readFile(path.join(day14Path, "input.txt"), "utf-8");
+	const res = aoc2024Day14(input, "input");
 	console.info(res);
-	console.timeEnd('aoc-2024-day-14');
+	console.timeEnd("aoc-2024-day-14");
 }

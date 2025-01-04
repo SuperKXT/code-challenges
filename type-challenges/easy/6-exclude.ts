@@ -24,11 +24,11 @@ type MyExclude<T, U> = T extends U ? never : T;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<MyExclude<'a' | 'b' | 'c', 'a'>, 'b' | 'c'>>,
-	Expect<Equal<MyExclude<'a' | 'b' | 'c', 'a' | 'b'>, 'c'>>,
+	Expect<Equal<MyExclude<"a" | "b" | "c", "a">, "b" | "c">>,
+	Expect<Equal<MyExclude<"a" | "b" | "c", "a" | "b">, "c">>,
 	Expect<
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 		Equal<MyExclude<string | number | (() => void), Function>, string | number>

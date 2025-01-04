@@ -2,17 +2,17 @@
 /* cSpell: disable */
 // @ts-nocheck
 // This scripts checks the number of selected objects and adds the same number of new pages.
-'use strict';
+"use strict";
 
 const pasteOptions = host.CreateStructPasteOptions();
 pasteOptions.ColorConversionOptions.SourceColorProfileList =
-	'sRGB IEC61966-2.1,U.S. Web Coated (SWOP) v2,Dot Gain 20%';
+	"sRGB IEC61966-2.1,U.S. Web Coated (SWOP) v2,Dot Gain 20%";
 
 const selectedGroup = host.ActiveSelectionRange;
 selectedGroup.Copy();
 
 let pasted = host.ActiveDocument.Pages.Item(1)
-	.Layers.Item('Layer 1')
+	.Layers.Item("Layer 1")
 	.PasteEx(pasteOptions);
 
 const selectedObjects = pasted.UngroupEx();
@@ -31,7 +31,7 @@ host.ActiveDocument.InsertPagesEx(
 
 for (let i = 1; i <= numberOfObjects; i++) {
 	host.ActiveDocument.Pages.Item(i + 2)
-		.Layers.Item('Layer 1')
+		.Layers.Item("Layer 1")
 		.PasteEx(pasteOptions);
 
 	let currentSelected = host.ActiveSelectionRange;

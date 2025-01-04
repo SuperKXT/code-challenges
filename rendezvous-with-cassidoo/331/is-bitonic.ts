@@ -1,4 +1,4 @@
-type tuple<T extends number, A extends 1[] = []> = A['length'] extends T
+type tuple<T extends number, A extends 1[] = []> = A["length"] extends T
 	? A
 	: tuple<T, [...A, 1]>;
 
@@ -22,11 +22,11 @@ type greaterThanDigits<
 	U extends number[],
 	TF extends number[] = tuple<T[0]>,
 	UF extends number[] = tuple<U[0]>,
-> = T['length'] extends 0
+> = T["length"] extends 0
 	? false
 	: T[0] extends U[0]
 		? greaterThanDigits<shift<T>, shift<U>>
-		: UF[TF['length']] extends undefined
+		: UF[TF["length"]] extends undefined
 			? true
 			: false;
 
@@ -37,9 +37,9 @@ type greaterThan<
 	UA extends number[] = numberToTuple<U>,
 > = T extends U
 	? false
-	: TA['length'] extends UA['length']
+	: TA["length"] extends UA["length"]
 		? greaterThanDigits<TA, UA>
-		: UA[TA['length']] extends undefined
+		: UA[TA["length"]] extends undefined
 			? true
 			: false;
 
@@ -54,8 +54,8 @@ type IsBitonic<
 	increased extends boolean = false,
 	peak extends number = never,
 	idx extends 1[] = [],
-	curr extends number = input[idx['length']],
-	next extends number = input[[...idx, 1]['length']],
+	curr extends number = input[idx["length"]],
+	next extends number = input[[...idx, 1]["length"]],
 > = next extends undefined
 	? [peak] extends [never]
 		? false

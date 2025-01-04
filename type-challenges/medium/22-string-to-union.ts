@@ -25,16 +25,16 @@ type StringToUnion<T extends string> = T extends `${infer U}${infer V}`
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<StringToUnion<''>, never>>,
-	Expect<Equal<StringToUnion<'t'>, 't'>>,
-	Expect<Equal<StringToUnion<'hello'>, 'h' | 'e' | 'l' | 'o'>>,
+	Expect<Equal<StringToUnion<"">, never>>,
+	Expect<Equal<StringToUnion<"t">, "t">>,
+	Expect<Equal<StringToUnion<"hello">, "h" | "e" | "l" | "o">>,
 	Expect<
 		Equal<
-			StringToUnion<'coronavirus'>,
-			'c' | 'o' | 'r' | 'n' | 'a' | 'v' | 'i' | 'u' | 's'
+			StringToUnion<"coronavirus">,
+			"c" | "o" | "r" | "n" | "a" | "v" | "i" | "u" | "s"
 		>
 	>,
 ];

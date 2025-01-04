@@ -1,9 +1,9 @@
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type tuple<
 	size extends number,
 	res extends unknown[] = [],
-> = res['length'] extends size ? res : tuple<size, [...res, 1]>;
+> = res["length"] extends size ? res : tuple<size, [...res, 1]>;
 
 type numberToTuple<
 	num extends number,
@@ -19,10 +19,10 @@ type compareDigits<
 	tupA extends unknown[] = tuple<digitA>,
 	tupB extends unknown[] = tuple<digitB>,
 > = digitA extends digitB
-	? 'equal'
-	: tupA[tupB['length']] extends 1
-		? 'greater'
-		: 'lesser';
+	? "equal"
+	: tupA[tupB["length"]] extends 1
+		? "greater"
+		: "lesser";
 
 type compareNumbers<
 	numA extends number,
@@ -30,27 +30,27 @@ type compareNumbers<
 	tupA extends number[] = numberToTuple<numA>,
 	tupB extends number[] = numberToTuple<numB>,
 > = numA extends numB
-	? 'equal'
-	: tupA['length'] extends tupB['length']
+	? "equal"
+	: tupA["length"] extends tupB["length"]
 		? [tupA, tupB] extends [
 				[infer firstA extends number, ...infer restA extends number[]],
 				[infer firstB extends number, ...infer restB extends number[]],
 			]
 			? compareDigits<firstA, firstB> extends infer res
-				? res extends 'equal'
+				? res extends "equal"
 					? compareNumbers<numA, numB, restA, restB>
 					: res
 				: never
 			: never
-		: tupA[tupB['length']] extends number
-			? 'greater'
-			: 'lesser';
+		: tupA[tupB["length"]] extends number
+			? "greater"
+			: "lesser";
 
 /* _____________ Test Cases _____________ */
 type _cases = [
-	Expect<Equal<compareNumbers<2050, 205>, 'greater'>>,
-	Expect<Equal<compareNumbers<2050, 2050>, 'equal'>>,
-	Expect<Equal<compareNumbers<2050, 20500>, 'lesser'>>,
-	Expect<Equal<compareNumbers<0, 1>, 'lesser'>>,
-	Expect<Equal<compareNumbers<250_000_001, 250_000_000>, 'greater'>>,
+	Expect<Equal<compareNumbers<2050, 205>, "greater">>,
+	Expect<Equal<compareNumbers<2050, 2050>, "equal">>,
+	Expect<Equal<compareNumbers<2050, 20500>, "lesser">>,
+	Expect<Equal<compareNumbers<0, 1>, "lesser">>,
+	Expect<Equal<compareNumbers<250_000_001, 250_000_000>, "greater">>,
 ];

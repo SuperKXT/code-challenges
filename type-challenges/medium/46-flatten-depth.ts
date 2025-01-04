@@ -25,7 +25,7 @@ type FlattenDepth<
 	T extends unknown[],
 	D extends number = 1,
 	U extends number[] = [],
-> = U['length'] extends D
+> = U["length"] extends D
 	? T
 	: T extends [infer F, ...infer R]
 		? [
@@ -38,7 +38,7 @@ type FlattenDepth<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<FlattenDepth<[]>, []>>,

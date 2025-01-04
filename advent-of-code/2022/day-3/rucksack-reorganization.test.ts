@@ -1,19 +1,19 @@
-import { rucksackReorganization } from './rucksack-reorganization.js';
+import { rucksackReorganization } from "./rucksack-reorganization.js";
 
 const INPUT = [
 	/** cSpell: disable */
-	'vJrwpWtwJgWrhcsFMMfFFhFp',
-	'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL',
-	'PmmdzqPrVvPwwTWBwg',
-	'wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn',
-	'ttgJtRGJQctTZtZT',
-	'CrZsJsPPZsGzwwsLwLmpwMDw',
+	"vJrwpWtwJgWrhcsFMMfFFhFp",
+	"jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+	"PmmdzqPrVvPwwTWBwg",
+	"wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+	"ttgJtRGJQctTZtZT",
+	"CrZsJsPPZsGzwwsLwLmpwMDw",
 	/** cSpell: enable */
-].join('\n');
+].join("\n");
 
 type Solution = Awaited<ReturnType<typeof rucksackReorganization>>;
 
-test('testing rucksackReorganization against example input', async () => {
+test("testing rucksackReorganization against example input", async () => {
 	const response = await rucksackReorganization(INPUT);
 	const solution: Solution = {
 		badgePriority: 70,
@@ -22,7 +22,7 @@ test('testing rucksackReorganization against example input', async () => {
 	expect(response).toStrictEqual(solution);
 });
 
-test('testing rucksackReorganization against actual input', async () => {
+test("testing rucksackReorganization against actual input", async () => {
 	const response = await rucksackReorganization();
 	const solution: Solution = {
 		badgePriority: 2689,

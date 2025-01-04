@@ -2,9 +2,9 @@ type _repeatString<
 	S extends string,
 	N extends number,
 	T extends 1[] = [],
-> = T['length'] extends N ? '' : `${S}${_repeatString<S, N, [...T, 1]>}`;
+> = T["length"] extends N ? "" : `${S}${_repeatString<S, N, [...T, 1]>}`;
 
-type _tuple<N extends number, T, R extends readonly T[]> = R['length'] extends N
+type _tuple<N extends number, T, R extends readonly T[]> = R["length"] extends N
 	? R
 	: _tuple<N, T, [T, ...R]>;
 
@@ -30,7 +30,7 @@ type _unionToSingleTuple<
 
 export declare namespace Utils {
 	/** types that resolve as falsy  */
-	type falsy = false | '' | 0 | null | undefined;
+	type falsy = false | "" | 0 | null | undefined;
 
 	/** type helper to prettify complex object types */
 	type prettify<T> = { [k in keyof T]: T[k] } & {};
@@ -43,7 +43,7 @@ export declare namespace Utils {
 	/** checks if the first type satisfies the second */
 	type satisfies<T extends U, U> = T;
 
-	type dropFirst<T extends readonly unknown[]> = number extends T['length']
+	type dropFirst<T extends readonly unknown[]> = number extends T["length"]
 		? T
 		: T extends readonly [unknown, ...infer U]
 			? U

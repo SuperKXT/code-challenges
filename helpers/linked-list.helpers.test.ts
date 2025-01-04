@@ -1,9 +1,9 @@
 import {
 	arrayToLinkedList,
 	insertToLinkedList,
-} from './linked-list.helpers.js';
+} from "./linked-list.helpers.js";
 
-test('testing arrayToLinkedList helper', () => {
+test("testing arrayToLinkedList helper", () => {
 	const test1 = {
 		response: arrayToLinkedList([1, 2, 3]),
 		expected: {
@@ -11,17 +11,17 @@ test('testing arrayToLinkedList helper', () => {
 		} as const,
 	};
 	expect(test1.response).toStrictEqual(test1.expected);
-	assertType<(typeof test1)['response']>(test1.expected);
+	assertType<(typeof test1)["response"]>(test1.expected);
 
 	const test2 = {
 		response: arrayToLinkedList([]),
 		expected: { head: null } as const,
 	};
 	expect(test2.response).toStrictEqual(test2.expected);
-	assertType<(typeof test2)['response']>(test2.expected);
+	assertType<(typeof test2)["response"]>(test2.expected);
 });
 
-test('testing insertToLinkedList helper', () => {
+test("testing insertToLinkedList helper", () => {
 	const test1 = {
 		list: {
 			head: { value: 1, next: { value: 2, next: { value: 3, next: null } } },

@@ -1,4 +1,4 @@
-import { objectKeys } from '../../helpers/object.helpers.js';
+import { objectKeys } from "../../helpers/object.helpers.js";
 
 const cardIdMap = {
 	Mastercard: [51, 52, 53, 54, 55],
@@ -10,7 +10,7 @@ type CardIdMap = typeof cardIdMap;
 type tuple<
 	T extends number,
 	result extends 1[] = [],
-> = result['length'] extends T ? result : tuple<T, [...result, 1]>;
+> = result["length"] extends T ? result : tuple<T, [...result, 1]>;
 
 type numberToTuple<
 	T extends number,
@@ -21,7 +21,7 @@ type numberToTuple<
 		: never
 	: [];
 
-type doubleNum<T extends number> = [...tuple<T>, ...tuple<T>]['length'] &
+type doubleNum<T extends number> = [...tuple<T>, ...tuple<T>]["length"] &
 	number;
 
 type sumDigit<
@@ -41,7 +41,7 @@ type sumPayload<
 			double extends true ? false : true,
 			[...sum, ...sumDigit<double extends true ? doubleNum<last> : last>]
 		>
-	: sum['length'];
+	: sum["length"];
 
 type mod<
 	T extends number,
@@ -50,11 +50,11 @@ type mod<
 	mTuple extends 1[] = tuple<M>,
 > = tTuple extends [...mTuple, ...infer rest extends 1[]]
 	? mod<never, never, rest, mTuple>
-	: tTuple['length'];
+	: tTuple["length"];
 
 type subtract<T extends number, M extends number> =
 	tuple<T> extends [...tuple<M>, ...infer rest extends 1[]]
-		? rest['length']
+		? rest["length"]
 		: 0;
 
 type verifyLuhn<T extends number> =
@@ -96,7 +96,7 @@ type brand<T extends number> = {
 		: never;
 }[keyof CardIdMap] extends infer b
 	? [b] extends [never]
-		? 'Other'
+		? "Other"
 		: b
 	: never;
 
@@ -107,12 +107,12 @@ type LuhnCheck<T extends number> =
 
 export const luhnCheck = <T extends number>(number: T): LuhnCheck<T> => {
 	const sum = String(Math.floor(number / 10))
-		.split('')
+		.split("")
 		.reverse()
 		.reduce((acc, curr, i) => {
 			const value = Number(curr) * ((i + 1) % 2 === 0 ? 1 : 2);
 			const digitSum = String(value)
-				.split('')
+				.split("")
 				.reduce((acc2, digit) => acc2 + Number(digit), 0);
 			return acc + digitSum;
 		}, 0);
@@ -122,6 +122,6 @@ export const luhnCheck = <T extends number>(number: T): LuhnCheck<T> => {
 	const brand =
 		objectKeys(cardIdMap).find((key) =>
 			cardIdMap[key].some((id) => String(number).startsWith(String(id))),
-		) ?? 'Other';
+		) ?? "Other";
 	return { valid: true, brand } as never;
 };

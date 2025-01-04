@@ -31,14 +31,14 @@ type TupleToNestedObject<T extends readonly string[], U> = T extends [
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<TupleToNestedObject<['a'], string>, { a: string }>>,
-	Expect<Equal<TupleToNestedObject<['a', 'b'], number>, { a: { b: number } }>>,
+	Expect<Equal<TupleToNestedObject<["a"], string>, { a: string }>>,
+	Expect<Equal<TupleToNestedObject<["a", "b"], number>, { a: { b: number } }>>,
 	Expect<
 		Equal<
-			TupleToNestedObject<['a', 'b', 'c'], boolean>,
+			TupleToNestedObject<["a", "b", "c"], boolean>,
 			{ a: { b: { c: boolean } } }
 		>
 	>,

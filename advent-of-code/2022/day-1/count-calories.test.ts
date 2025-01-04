@@ -1,8 +1,8 @@
-import { countCalories } from './count-calories.js';
+import { countCalories } from "./count-calories.js";
 
-import type { CountCaloriesSolution } from './count-calories.js';
+import type { CountCaloriesSolution } from "./count-calories.js";
 
-test('testing countCalories', async () => {
+test("testing countCalories", async () => {
 	const response = await countCalories();
 	const solution: CountCaloriesSolution = {
 		maxCalories: 69626,

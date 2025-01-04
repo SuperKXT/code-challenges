@@ -1,32 +1,32 @@
 type Log = {
 	name: string;
 	time: number;
-	event: 'start' | 'end';
+	event: "start" | "end";
 };
 
 type Tuple<T, Res extends 1[] = []> = 0 extends 1
 	? never
-	: Res['length'] extends T
+	: Res["length"] extends T
 		? Res
 		: Tuple<T, [...Res, 1]>;
 
 type Subtract<M extends number, S extends number> =
-	Tuple<M> extends [...Tuple<S>, ...infer Rest] ? Rest['length'] : never;
+	Tuple<M> extends [...Tuple<S>, ...infer Rest] ? Rest["length"] : never;
 
 type CalculateExecutionTimes<
 	Logs extends Log[],
 	res extends Record<string, number> = {},
 > = Logs extends [infer first extends Log, ...infer rest extends Log[]]
-	? first['event'] extends 'start'
+	? first["event"] extends "start"
 		? CalculateExecutionTimes<
 				rest,
-				Omit<res, first['name']> & Record<first['name'], first['time']>
+				Omit<res, first["name"]> & Record<first["name"], first["time"]>
 			>
 		: CalculateExecutionTimes<
 				rest,
 				{
-					[k in keyof res]: k extends first['name']
-						? Subtract<first['time'], res[k]>
+					[k in keyof res]: k extends first["name"]
+						? Subtract<first["time"], res[k]>
 						: res[k];
 				}
 			>
@@ -37,7 +37,7 @@ export const calculateExecutionTimes = <const Logs extends [Log, ...Log[]]>(
 ): CalculateExecutionTimes<Logs> => {
 	const times: Record<string, number> = {};
 	for (const curr of logs) {
-		if (curr.event === 'start') {
+		if (curr.event === "start") {
 			times[curr.name] = curr.time;
 		} else {
 			times[curr.name] = curr.time - (times[curr.name] ?? 0);

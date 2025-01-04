@@ -27,14 +27,14 @@ type UnionToIntersection<U> = (
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<UnionToIntersection<'foo' | 42 | true>, 'foo' & 42 & true>>,
+	Expect<Equal<UnionToIntersection<"foo" | 42 | true>, "foo" & 42 & true>>,
 	Expect<
 		Equal<
-			UnionToIntersection<(() => 'foo') | ((i: 42) => true)>,
-			(() => 'foo') & ((i: 42) => true)
+			UnionToIntersection<(() => "foo") | ((i: 42) => true)>,
+			(() => "foo") & ((i: 42) => true)
 		>
 	>,
 ];

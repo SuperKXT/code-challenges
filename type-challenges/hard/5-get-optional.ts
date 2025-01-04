@@ -24,7 +24,7 @@ type GetOptional<T extends object, R extends Required<T> = Required<T>> = {
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<GetOptional<{ foo: number; bar?: string }>, { bar?: string }>>,

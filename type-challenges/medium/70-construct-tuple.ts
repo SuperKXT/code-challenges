@@ -21,18 +21,18 @@
 type ConstructTuple<
 	L extends number,
 	A extends unknown[] = [],
-> = A['length'] extends L ? A : ConstructTuple<L, [...A, unknown]>;
+> = A["length"] extends L ? A : ConstructTuple<L, [...A, unknown]>;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<ConstructTuple<0>, []>>,
 	Expect<Equal<ConstructTuple<2>, [unknown, unknown]>>,
-	Expect<Equal<ConstructTuple<999>['length'], 999>>,
+	Expect<Equal<ConstructTuple<999>["length"], 999>>,
 	// @ts-expect-error too big
-	Expect<Equal<ConstructTuple<1000>['length'], 1000>>,
+	Expect<Equal<ConstructTuple<1000>["length"], 1000>>,
 ];
 
 /* _____________ Further Steps _____________ */

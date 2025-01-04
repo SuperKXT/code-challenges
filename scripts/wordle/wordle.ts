@@ -1,31 +1,31 @@
-import chalk from 'chalk';
-import argumentParser from 'minimist-lite';
-import { z } from 'zod';
+import chalk from "chalk";
+import argumentParser from "minimist-lite";
+import { z } from "zod";
 
-import { WORDLE_WORDS } from './word-list.js';
+import { WORDLE_WORDS } from "./word-list.js";
 
-import { config } from '../../config.js';
+import { config } from "../../config.js";
 
 const EXCLUDE_CHARACTERS_REGEX = /\(([a-z]+)\)/giu;
 const VALID_WORD_PATTERN = /((\([a-z]+\))|[a-z*]){5}/iu;
 const DUPLICATE_CHARACTER_REGEX = /(.).*\1/iu;
 /* cspell: disable-next-line */
-const ALPHABETS = 'abcdefghijklmnopqrstuvxwyz';
+const ALPHABETS = "abcdefghijklmnopqrstuvxwyz";
 
 export const DEFAULT_ARGS: Arguments = {
 	a: ALPHABETS,
 	available: ALPHABETS,
-	k: '',
-	known: '',
-	p: '*****',
-	pattern: '*****',
+	k: "",
+	known: "",
+	p: "*****",
+	pattern: "*****",
 	repeat: true,
-	u: '',
-	unavailable: '',
+	u: "",
+	unavailable: "",
 };
 
 const ARGUMENT_SCHEMA = z.strictObject({
-	'--': z.string().array().length(0).optional(),
+	"--": z.string().array().length(0).optional(),
 	_: z.string().array().length(0).optional(),
 	a: z.string().regex(/^[a-z]{0,26}$/iu),
 	available: z.string().regex(/^[a-z]{0,26}$/iu),
@@ -43,7 +43,7 @@ export const findWordle = (parameters: Arguments): string[] => {
 		ARGUMENT_SCHEMA.parse(parameters);
 
 	const availableCharacters = unavailable
-		? available.replace(new RegExp(`[${unavailable}]`, 'giu'), '')
+		? available.replace(new RegExp(`[${unavailable}]`, "giu"), "")
 		: available;
 
 	const regex = new RegExp(
@@ -52,27 +52,27 @@ export const findWordle = (parameters: Arguments): string[] => {
 			.replace(
 				EXCLUDE_CHARACTERS_REGEX,
 				(_, p1: string) =>
-					`[${availableCharacters.replace(new RegExp(`[${p1}]`, 'giu'), '')}]`,
+					`[${availableCharacters.replace(new RegExp(`[${p1}]`, "giu"), "")}]`,
 			),
-		'iu',
+		"iu",
 	);
 
 	const matches = WORDLE_WORDS.filter(
 		(word) =>
 			(repeat || !DUPLICATE_CHARACTER_REGEX.test(word)) &&
-			known.split('').every((character) => word.includes(character)) &&
+			known.split("").every((character) => word.includes(character)) &&
 			regex.test(word),
 	);
 
 	if (!config.isTest) {
 		console.info(
 			[
-				'Found',
+				"Found",
 				chalk.bgGreen(matches.length),
-				`Match${matches.length !== 1 ? 'es' : ''}`,
-			].join(' '),
+				`Match${matches.length !== 1 ? "es" : ""}`,
+			].join(" "),
 		);
-		console.info(chalk.green(matches.join(', ')));
+		console.info(chalk.green(matches.join(", ")));
 	}
 	return matches;
 };
@@ -82,10 +82,10 @@ export type Arguments = z.infer<typeof ARGUMENT_SCHEMA>;
 if (!config.isTest) {
 	const args = argumentParser<Arguments>(process.argv.slice(2), {
 		alias: {
-			available: 'a',
-			known: 'k',
-			pattern: 'p',
-			unavailable: 'u',
+			available: "a",
+			known: "k",
+			pattern: "p",
+			unavailable: "u",
 		},
 		default: DEFAULT_ARGS,
 	});

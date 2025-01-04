@@ -1,6 +1,6 @@
-import { cornerHit } from './cornet-hit.js';
+import { cornerHit } from "./cornet-hit.js";
 
-import type { XY } from './cornet-hit.js';
+import type { XY } from "./cornet-hit.js";
 
 type Test = {
 	boxSize: XY;
@@ -24,7 +24,7 @@ const TESTS: Test[] = [
 	},
 ];
 
-test.each(TESTS)('testing cornerHit', (testCase) => {
+test.each(TESTS)("testing cornerHit", (testCase) => {
 	const result = cornerHit(
 		testCase.boxSize,
 		testCase.initialPosition,

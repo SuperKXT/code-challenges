@@ -1,12 +1,12 @@
 /** cSpell: disable */
-import { mmmPie } from './mmm-pie.js';
+import { mmmPie } from "./mmm-pie.js";
 
-test('should test mmmPie', () => {
+test("should test mmmPie", () => {
 	const response = mmmPie(
 		[
-			{ name: 'Joe', num: 9 },
-			{ name: 'Cami', num: 3 },
-			{ name: 'Cassidy', num: 4 },
+			{ name: "Joe", num: 9 },
+			{ name: "Cami", num: 3 },
+			{ name: "Cassidy", num: 4 },
 		],
 		8,
 	);

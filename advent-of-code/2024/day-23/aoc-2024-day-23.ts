@@ -1,13 +1,13 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export const day23Path = path.join(
 	config.dirname,
-	'advent-of-code',
-	'2024',
-	'day-23',
+	"advent-of-code",
+	"2024",
+	"day-23",
 );
 
 const mix = (a: bigint, b: bigint) => {
@@ -27,17 +27,17 @@ const _getNewSecret = (a: bigint) => {
 };
 
 const _getPrice = (a: bigint) => {
-	return Number(a.toString().at(-1) ?? '');
+	return Number(a.toString().at(-1) ?? "");
 };
 
 export const aoc2024Day23 = (input: string) => {
-	const rows = input.trim().split('\n').filter(Boolean);
-	if (!rows.length) throw new Error('Invalid input');
+	const rows = input.trim().split("\n").filter(Boolean);
+	if (!rows.length) throw new Error("Invalid input");
 	const map = new Map<string, Set<string>>();
 
 	for (const row of rows) {
-		const [left, right] = row.split('-');
-		if (!left || !right) throw new Error('Invalid input');
+		const [left, right] = row.split("-");
+		if (!left || !right) throw new Error("Invalid input");
 
 		const leftMap = map.get(left);
 		if (!leftMap) map.set(left, new Set([right]));
@@ -57,10 +57,10 @@ export const aoc2024Day23 = (input: string) => {
 				if (
 					c2 === pc ||
 					!set.has(c2) ||
-					(!pc.startsWith('t') && !c.startsWith('t') && !c2.startsWith('t'))
+					(!pc.startsWith("t") && !c.startsWith("t") && !c2.startsWith("t"))
 				)
 					continue;
-				const key = [pc, c, c2].sort().join('-');
+				const key = [pc, c, c2].sort().join("-");
 				connectionSet.add(key);
 			}
 		}
@@ -72,9 +72,9 @@ export const aoc2024Day23 = (input: string) => {
 };
 
 if (!config.isTest) {
-	console.time('aoc-2024-day-23');
-	const input = await readFile(path.join(day23Path, 'input.txt'), 'utf-8');
+	console.time("aoc-2024-day-23");
+	const input = await readFile(path.join(day23Path, "input.txt"), "utf-8");
 	const res = aoc2024Day23(input);
 	console.info(res);
-	console.timeEnd('aoc-2024-day-23');
+	console.timeEnd("aoc-2024-day-23");
 }

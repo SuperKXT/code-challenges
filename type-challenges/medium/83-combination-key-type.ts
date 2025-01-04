@@ -13,7 +13,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type ModifierKeys = ['cmd', 'ctrl', 'opt', 'fn'];
+type ModifierKeys = ["cmd", "ctrl", "opt", "fn"];
 
 type CombinationKeyType<T extends string[]> = T extends [
 	infer F extends string,
@@ -27,15 +27,15 @@ type Combs = CombinationKeyType<ModifierKeys>;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type CaseTypeOne =
-	| 'cmd ctrl'
-	| 'cmd opt'
-	| 'cmd fn'
-	| 'ctrl opt'
-	| 'ctrl fn'
-	| 'opt fn';
+	| "cmd ctrl"
+	| "cmd opt"
+	| "cmd fn"
+	| "ctrl opt"
+	| "ctrl fn"
+	| "opt fn";
 
 type _cases = [Expect<Equal<Combs, CaseTypeOne>>];
 

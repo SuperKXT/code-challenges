@@ -45,7 +45,7 @@ type DeepObjectToUniq<O extends object, B extends unknown[] = [O]> = {
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, IsFalse, IsTrue } from '@type-challenges/utils';
+import type { Equal, IsFalse, IsTrue } from "@type-challenges/utils";
 
 type Quz = { quz: 4 };
 
@@ -65,12 +65,12 @@ foo = uniqFoo;
 type _cases = [
 	IsFalse<Equal<UniqQuz, Quz>>,
 	IsFalse<Equal<UniqFoo, Foo>>,
-	IsTrue<Equal<UniqFoo['foo'], Foo['foo']>>,
-	IsTrue<Equal<UniqFoo['bar']['quz'], Foo['bar']['quz']>>,
-	IsFalse<Equal<UniqQuz, UniqFoo['baz']>>,
-	IsFalse<Equal<UniqFoo['bar'], UniqFoo['baz']>>,
-	IsFalse<Equal<UniqBar['baz'], UniqFoo['baz']>>,
-	IsTrue<Equal<keyof UniqBar['baz'], keyof UniqFoo['baz']>>,
+	IsTrue<Equal<UniqFoo["foo"], Foo["foo"]>>,
+	IsTrue<Equal<UniqFoo["bar"]["quz"], Foo["bar"]["quz"]>>,
+	IsFalse<Equal<UniqQuz, UniqFoo["baz"]>>,
+	IsFalse<Equal<UniqFoo["bar"], UniqFoo["baz"]>>,
+	IsFalse<Equal<UniqBar["baz"], UniqFoo["baz"]>>,
+	IsTrue<Equal<keyof UniqBar["baz"], keyof UniqFoo["baz"]>>,
 	IsTrue<Equal<keyof Foo, keyof UniqFoo & string>>,
 ];
 

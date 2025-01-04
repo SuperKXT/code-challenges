@@ -25,19 +25,19 @@ type Reverse<T extends unknown[]> = T extends [infer First, ...infer Rest]
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<Reverse<[]>, []>>,
-	Expect<Equal<Reverse<['a', 'b']>, ['b', 'a']>>,
-	Expect<Equal<Reverse<['a', 'b', 'c']>, ['c', 'b', 'a']>>,
+	Expect<Equal<Reverse<["a", "b"]>, ["b", "a"]>>,
+	Expect<Equal<Reverse<["a", "b", "c"]>, ["c", "b", "a"]>>,
 ];
 
 type _errors = [
 	// @ts-expect-error invalid argument
-	Reverse<'string'>,
+	Reverse<"string">,
 	// @ts-expect-error invalid argument
-	Reverse<{ key: 'value' }>,
+	Reverse<{ key: "value" }>,
 ];
 
 /* _____________ Further Steps _____________ */

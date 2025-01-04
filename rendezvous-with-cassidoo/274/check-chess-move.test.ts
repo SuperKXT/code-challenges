@@ -1,10 +1,10 @@
-import { isValidMove } from './check-chess-move.js';
-import { CHESS_ERRORS } from './check-chess-move.types.js';
+import { isValidMove } from "./check-chess-move.js";
+import { CHESS_ERRORS } from "./check-chess-move.types.js";
 
 import type {
 	ChessResponse,
 	IsValidMoveArgs,
-} from './check-chess-move.types.js';
+} from "./check-chess-move.types.js";
 
 type Test = {
 	input: IsValidMoveArgs;
@@ -12,15 +12,15 @@ type Test = {
 };
 
 const BOARD = [
-	'~~~~~~~~',
-	'~~kb~~~~',
-	'~~K~~~~~',
-	'~~~~~~~~',
-	'~~~~~~~~',
-	'~~~~~~~~',
-	'~~~~~~~~',
-	'~~~R~~~~',
-].join('\n');
+	"~~~~~~~~",
+	"~~kb~~~~",
+	"~~K~~~~~",
+	"~~~~~~~~",
+	"~~~~~~~~",
+	"~~~~~~~~",
+	"~~~~~~~~",
+	"~~~R~~~~",
+].join("\n");
 
 const TESTS: Test[] = [
 	{
@@ -62,6 +62,6 @@ const TESTS: Test[] = [
 	},
 ];
 
-test.each(TESTS)('testing isValidMove', ({ input, response }) => {
+test.each(TESTS)("testing isValidMove", ({ input, response }) => {
 	expect(isValidMove(input)).toStrictEqual(response);
 });

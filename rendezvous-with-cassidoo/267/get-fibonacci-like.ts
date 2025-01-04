@@ -1,8 +1,8 @@
 // 🤬 noUncheckedIndexedAccess: can't live with it, can't live without it
 
 export const ERRORS = {
-	length: 'Sequence length must be greater than 2',
-	undefined: 'Sequence can not have empty spots',
+	length: "Sequence length must be greater than 2",
+	undefined: "Sequence can not have empty spots",
 } as const;
 
 export const getFibonacciLike = (

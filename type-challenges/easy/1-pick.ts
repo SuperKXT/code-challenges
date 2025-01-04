@@ -37,13 +37,13 @@ type MyPick<T extends object, K extends keyof T> = {
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<Expected1, MyPick<Todo, 'title'>>>,
-	Expect<Equal<Expected2, MyPick<Todo, 'title' | 'completed'>>>,
+	Expect<Equal<Expected1, MyPick<Todo, "title">>>,
+	Expect<Equal<Expected2, MyPick<Todo, "title" | "completed">>>,
 	// @ts-expect-error filtering out all objects returns never
-	MyPick<Todo, 'title' | 'completed' | 'invalid'>,
+	MyPick<Todo, "title" | "completed" | "invalid">,
 ];
 
 type Todo = {

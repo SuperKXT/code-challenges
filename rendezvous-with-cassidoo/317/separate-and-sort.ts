@@ -1,4 +1,4 @@
-type tuple<T extends number, tup extends 1[] = []> = tup['length'] extends T
+type tuple<T extends number, tup extends 1[] = []> = tup["length"] extends T
 	? tup
 	: tuple<T, [...tup, 1]>;
 
@@ -14,7 +14,7 @@ type smallest<T extends number[], curr extends 1[] = []> = T extends [
 					? tuple<first>
 					: curr
 		>
-	: curr['length'];
+	: curr["length"];
 
 type without<
 	T extends number[],

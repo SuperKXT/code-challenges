@@ -1,7 +1,7 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export const campCleanup = async (
 	override?: string,
@@ -11,17 +11,17 @@ export const campCleanup = async (
 }> => {
 	const input =
 		override ??
-		(await readFile(path.join(config.dirname, 'input.txt'), 'utf-8'));
+		(await readFile(path.join(config.dirname, "input.txt"), "utf-8"));
 
-	return input.split('\n').reduce(
+	return input.split("\n").reduce(
 		(object, row) => {
 			if (!row) return object;
 
-			const [elfA, elfB] = row.split(',');
+			const [elfA, elfB] = row.split(",");
 			const [elfOneStart = 0, elfOneEnd = 0] =
-				elfA?.split('-').map(Number) ?? [];
+				elfA?.split("-").map(Number) ?? [];
 			const [elfTwoStart = 0, elfTwoEnd = 0] =
-				elfB?.split('-').map(Number) ?? [];
+				elfB?.split("-").map(Number) ?? [];
 
 			const isOneInTwo = elfOneStart >= elfTwoStart && elfOneEnd <= elfTwoEnd;
 			const isTwoInOne = elfTwoStart >= elfOneStart && elfTwoEnd <= elfOneEnd;

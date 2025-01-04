@@ -26,13 +26,13 @@ type Fibonacci<
 	Idx extends unknown[] = [1],
 	Prev extends unknown[] = [],
 	Curr extends unknown[] = [1],
-> = Idx['length'] extends T
-	? Curr['length']
+> = Idx["length"] extends T
+	? Curr["length"]
 	: Fibonacci<T, [...Idx, 1], Curr, [...Prev, ...Curr]>;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<Fibonacci<1>, 1>>,

@@ -1,4 +1,4 @@
-import type { Utils } from '../../../types/utils.types.js';
+import type { Utils } from "../../../types/utils.types.js";
 
 type Row = 0 | 1 | 2 | 3 | 4;
 
@@ -9,11 +9,11 @@ type Position = {
 	col: Col;
 };
 
-const MOVE = ['R', 'L', 'U', 'D'] as const;
+const MOVE = ["R", "L", "U", "D"] as const;
 type Move = (typeof MOVE)[number];
 
 const isMove = (value: unknown): value is Move =>
-	typeof value === 'string' && MOVE.includes(value);
+	typeof value === "string" && MOVE.includes(value);
 
 const getUniquePositions = (array: Position[]) => {
 	return array.reduce<Position[]>((positions, current) => {
@@ -43,24 +43,24 @@ export const ropeBridge = (
 	const firstTail = rope.at(1) as Position[];
 	const lastTail = rope.at(-1) as Position[];
 
-	for (const current of input.split('\n')) {
-		const [direction, repeat] = current.split(' ');
+	for (const current of input.split("\n")) {
+		const [direction, repeat] = current.split(" ");
 		if (!isMove(direction) || isNaN(Number(repeat))) continue;
 
 		[...new Array<undefined>(Number(repeat))].forEach(() => {
 			const headPosition = { ...head.at(-1) } as Position;
 
 			switch (direction) {
-				case 'R':
+				case "R":
 					headPosition.col++;
 					break;
-				case 'L':
+				case "L":
 					headPosition.col--;
 					break;
-				case 'U':
+				case "U":
 					headPosition.row--;
 					break;
-				case 'D':
+				case "D":
 					headPosition.row++;
 					break;
 			}
@@ -77,7 +77,7 @@ export const ropeBridge = (
 					Math.abs(lastTailPosition.row - tailPosition.row) < 2 &&
 					Math.abs(lastTailPosition.col - tailPosition.col) < 2;
 
-				const updateKnot = (key: 'col' | 'row') => {
+				const updateKnot = (key: "col" | "row") => {
 					if (areAdjacent) return;
 
 					if (tailPosition[key] > lastTailPosition[key]) tailPosition[key]--;
@@ -85,8 +85,8 @@ export const ropeBridge = (
 						tailPosition[key]++;
 				};
 
-				updateKnot('row');
-				updateKnot('col');
+				updateKnot("row");
+				updateKnot("col");
 				tail.push(tailPosition);
 			}
 		});

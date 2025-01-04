@@ -1,8 +1,8 @@
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 export const binaryPal = <T extends number>(input: T) => {
 	const binary = Math.abs(input).toString(2);
-	return (binary === binary.split('').reverse().join('')) as BinaryPal<T>;
+	return (binary === binary.split("").reverse().join("")) as BinaryPal<T>;
 };
 
 type BinaryPal<T extends number> = IsPalindrome<NumberToBinary<T>>;
@@ -40,7 +40,7 @@ type Unsigned<T extends number> = `${T}` extends `-${infer U extends number}`
 	? U
 	: T;
 
-type NumberToArray<T extends number, A extends 1[] = []> = A['length'] extends T
+type NumberToArray<T extends number, A extends 1[] = []> = A["length"] extends T
 	? A
 	: NumberToArray<T, [...A, 1]>;
 

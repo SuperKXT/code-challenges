@@ -7,7 +7,7 @@ Given a list of words and a dictionary of letter scores, find the word with the 
 Example:
 
 ```ts
-const wordList = ['apple', 'banana', 'cherry', 'date', 'fig'];
+const wordList = ["apple", "banana", "cherry", "date", "fig"];
 
 const letterScores = [...Array(26).keys()].reduce(
 	(scores, i) => (scores[String.fromCharCode(97 + i)] = i + 1),

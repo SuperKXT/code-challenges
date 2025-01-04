@@ -9,8 +9,8 @@ the minimum number of additional ingredients you need to buy to make the recipe.
 Example:
 
 ```ts
-Input: recipe = ['eggs', 'flour', 'sugar', 'butter'];
-pantry = ['sugar', 'butter', 'milk'];
+Input: recipe = ["eggs", "flour", "sugar", "butter"];
+pantry = ["sugar", "butter", "milk"];
 
 Output: 2;
 ```

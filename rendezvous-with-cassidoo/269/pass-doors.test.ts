@@ -1,4 +1,4 @@
-import { passDoors } from './pass-doors.js';
+import { passDoors } from "./pass-doors.js";
 
 type Test = {
 	input: [number, number];
@@ -12,7 +12,7 @@ const TESTS: Test[] = [
 	{ input: [3, 1], output: 3 },
 ];
 
-test.each(TESTS)('testing passDoors', ({ input, output }) => {
+test.each(TESTS)("testing passDoors", ({ input, output }) => {
 	const response = passDoors(...input);
 	expect(response).toStrictEqual(output);
 });

@@ -22,19 +22,19 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Length<T extends readonly unknown[]> = T['length'];
+type Length<T extends readonly unknown[]> = T["length"];
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
-const tesla = ['tesla', 'model 3', 'model X', 'model Y'] as const;
+const tesla = ["tesla", "model 3", "model X", "model Y"] as const;
 const spaceX = [
-	'FALCON 9',
-	'FALCON HEAVY',
-	'DRAGON',
-	'STARSHIP',
-	'HUMAN SPACEFLIGHT',
+	"FALCON 9",
+	"FALCON HEAVY",
+	"DRAGON",
+	"STARSHIP",
+	"HUMAN SPACEFLIGHT",
 ] as const;
 
 type _cases = [
@@ -43,7 +43,7 @@ type _cases = [
 	// @ts-expect-error incorrect argument
 	Length<5>,
 	// @ts-expect-error incorrect argument
-	Length<'hello world'>,
+	Length<"hello world">,
 ];
 
 /* _____________ Further Steps _____________ */

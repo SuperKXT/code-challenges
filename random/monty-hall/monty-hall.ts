@@ -1,9 +1,9 @@
-import crypto from 'node:crypto';
+import crypto from "node:crypto";
 
-import { config } from '../../config.js';
+import { config } from "../../config.js";
 
 const getRandomDoor = (doors: number) => {
-	return (crypto.randomBytes(1).toString('ascii').charCodeAt(0) % doors) + 1;
+	return (crypto.randomBytes(1).toString("ascii").charCodeAt(0) % doors) + 1;
 };
 
 export const tryMontyHall = (args: { iterations: number; doors: number }) => {
@@ -26,7 +26,7 @@ export const tryMontyHall = (args: { iterations: number; doors: number }) => {
 };
 
 if (!config.isTest) {
-	console.time('Time');
+	console.time("Time");
 	const iterations = 100_000;
 	const doors = 100;
 
@@ -37,5 +37,5 @@ if (!config.isTest) {
 		`\nStay: ${stay}, ${((stay / iterations) * 100).toFixed(3)}%`,
 		`\nChange: ${change}, ${((change / iterations) * 100).toFixed(3)}%`,
 	);
-	console.timeEnd('Time');
+	console.timeEnd("Time");
 }

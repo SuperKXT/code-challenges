@@ -26,7 +26,7 @@ type Shift<T extends readonly unknown[]> = T extends [unknown, ...infer R]
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	// @ts-expect-error invalid argument
@@ -34,7 +34,7 @@ type _cases = [
 	Expect<Equal<Shift<[]>, []>>,
 	Expect<Equal<Shift<[1]>, []>>,
 	Expect<Equal<Shift<[3, 2, 1]>, [2, 1]>>,
-	Expect<Equal<Shift<['a', 'b', 'c', 'd']>, ['b', 'c', 'd']>>,
+	Expect<Equal<Shift<["a", "b", "c", "d"]>, ["b", "c", "d"]>>,
 ];
 
 /* _____________ Further Steps _____________ */

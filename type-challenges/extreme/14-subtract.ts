@@ -54,7 +54,7 @@ type AddTen<T extends Digit> = `1${T}` extends `${infer N extends SubNum}`
 	? N
 	: never;
 
-type Fill<T extends number, R extends 1[] = []> = T extends R['length']
+type Fill<T extends number, R extends 1[] = []> = T extends R["length"]
 	? R
 	: Fill<T, [...R, 1]>;
 
@@ -77,7 +77,7 @@ type ArrToString<T extends number[]> = T extends [
 	...infer R extends number[],
 ]
 	? `${F}${ArrToString<R>}`
-	: '';
+	: "";
 
 type ArrToNumber<T extends Digit[]> = T extends [0, ...infer R extends Digit[]]
 	? ArrToNumber<R>
@@ -87,7 +87,7 @@ type ArrToNumber<T extends Digit[]> = T extends [0, ...infer R extends Digit[]]
 
 type LesserThanDigit<T extends SubNum, U extends SubNum> = T extends U
 	? false
-	: Fill<T>[Fill<U>['length']] extends undefined
+	: Fill<T>[Fill<U>["length"]] extends undefined
 		? true
 		: false;
 
@@ -98,9 +98,9 @@ type LesserThan<
 	ArrB extends Digit[] = NumberToArr<B>,
 > = A extends B
 	? false
-	: [...ArrA, 1][ArrB['length']] extends undefined
+	: [...ArrA, 1][ArrB["length"]] extends undefined
 		? ArrB
-		: [...ArrB, 1][ArrA['length']] extends undefined
+		: [...ArrB, 1][ArrA["length"]] extends undefined
 			? false
 			: [ArrA, ArrB] extends [
 						[...infer RestA extends Digit[], infer LastA extends Digit],
@@ -121,8 +121,8 @@ type SubtractDigit<
 	R extends 1[] = [],
 > = T extends U
 	? 0
-	: [...R, ...S]['length'] extends Exclude<T | U, Lesser>
-		? R['length']
+	: [...R, ...S]["length"] extends Exclude<T | U, Lesser>
+		? R["length"]
 		: SubtractDigit<T, U, Lesser, S, [...R, 1]>;
 
 type GetCarry<T extends Digit[], R extends SubNum[] = []> = T extends [
@@ -173,16 +173,16 @@ type Subtract<
 // BETTER!
 type Tuple<T, Res extends 1[] = []> = 0 extends 1
 	? never
-	: Res['length'] extends T
+	: Res["length"] extends T
 		? Res
 		: Tuple<T, [...Res, 1]>;
 
 type _Subtract<M extends number, S extends number> =
-	Tuple<M> extends [...Tuple<S>, ...infer Rest] ? Rest['length'] : never;
+	Tuple<M> extends [...Tuple<S>, ...infer Rest] ? Rest["length"] : never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<Subtract<1, 1>, 0>>,

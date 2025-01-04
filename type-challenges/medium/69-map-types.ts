@@ -51,11 +51,11 @@ type MapTypes<
 > = {
 	[K in keyof T]: (
 		R extends R
-			? Eq<R['mapFrom'], T[K]> extends true
-				? R['mapTo']
+			? Eq<R["mapFrom"], T[K]> extends true
+				? R["mapTo"]
 				: never
 			: never
-	) extends infer U extends R['mapTo']
+	) extends infer U extends R["mapTo"]
 		? [U] extends [never]
 			? T[K]
 			: U
@@ -64,7 +64,7 @@ type MapTypes<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<

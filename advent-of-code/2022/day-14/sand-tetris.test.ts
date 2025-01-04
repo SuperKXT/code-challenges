@@ -1,16 +1,16 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { sandTetris } from './sand-tetris.js';
+import { sandTetris } from "./sand-tetris.js";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 const EXAMPLE = `498,4 -> 498,6 -> 496,6
 503,4 -> 502,4 -> 502,9 -> 494,9`;
 
 type Solution = ReturnType<typeof sandTetris>;
 
-test('testing sandTetris against example input', () => {
+test("testing sandTetris against example input", () => {
 	const response = sandTetris(EXAMPLE);
 	const solution: Solution = {
 		part1: 24,
@@ -19,9 +19,9 @@ test('testing sandTetris against example input', () => {
 	expect(response).toStrictEqual(solution);
 });
 
-test('testing sandTetris against real input', async () => {
+test("testing sandTetris against real input", async () => {
 	const input = (
-		await readFile(path.join(config.dirname, 'input.txt'), 'utf-8')
+		await readFile(path.join(config.dirname, "input.txt"), "utf-8")
 	).slice(0, -1);
 	const solution: Solution = {
 		part1: 692,

@@ -23,7 +23,7 @@ type __Integer<T extends number> = T extends T & 1 ? T : never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 // eslint-disable-next-line prefer-const
 let x = 1;

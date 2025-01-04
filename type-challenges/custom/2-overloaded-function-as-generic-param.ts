@@ -73,7 +73,7 @@ const wrap = <
 		: never;
 };
 
-const _res1 = wrap(overload, 'foo', 'bar');
+const _res1 = wrap(overload, "foo", "bar");
 //     ^?
 
 const _res2 = wrap(overload, 1);

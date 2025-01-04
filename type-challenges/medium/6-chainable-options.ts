@@ -53,26 +53,26 @@ type Chainable<T extends Record<string, unknown> = {}> = {
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Alike, Expect } from '@type-challenges/utils';
+import type { Alike, Expect } from "@type-challenges/utils";
 
 declare const a: Chainable;
 
 const result1 = a
-	.option('foo', 123)
-	.option('bar', { value: 'Hello World' })
-	.option('name', 'type-challenges')
+	.option("foo", 123)
+	.option("bar", { value: "Hello World" })
+	.option("name", "type-challenges")
 	.get();
 
 const result2 = a
-	.option('name', 'another name')
+	.option("name", "another name")
 	// @ts-expect-error invalid type
-	.option('name', 'last name')
+	.option("name", "last name")
 	.get();
 
 const result3 = a
-	.option('name', 'another name')
+	.option("name", "another name")
 	// @ts-expect-error invalid type
-	.option('name', 123)
+	.option("name", 123)
 	.get();
 
 type _cases = [

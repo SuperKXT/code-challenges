@@ -22,7 +22,7 @@
 
 type CheckRepeatedChars<
 	T extends string,
-	U extends string = '',
+	U extends string = "",
 > = T extends `${infer R}${infer L}`
 	? R extends U
 		? true
@@ -30,13 +30,13 @@ type CheckRepeatedChars<
 	: false;
 
 /* _____________ Test Cases _____________ */
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<CheckRepeatedChars<'abc'>, false>>,
-	Expect<Equal<CheckRepeatedChars<'abb'>, true>>,
-	Expect<Equal<CheckRepeatedChars<'cbc'>, true>>,
-	Expect<Equal<CheckRepeatedChars<''>, false>>,
+	Expect<Equal<CheckRepeatedChars<"abc">, false>>,
+	Expect<Equal<CheckRepeatedChars<"abb">, true>>,
+	Expect<Equal<CheckRepeatedChars<"cbc">, true>>,
+	Expect<Equal<CheckRepeatedChars<"">, false>>,
 ];
 
 /* _____________ Further Steps _____________ */

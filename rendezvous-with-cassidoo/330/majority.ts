@@ -1,7 +1,7 @@
 type tuple<
 	size extends number,
 	res extends 1[] = [],
-> = res['length'] extends size ? res : tuple<size, [...res, 1]>;
+> = res["length"] extends size ? res : tuple<size, [...res, 1]>;
 
 type incrementMap<
 	T extends Record<number, number>,
@@ -9,7 +9,7 @@ type incrementMap<
 > = num extends keyof T
 	? {
 			[k in keyof T]: T[k] extends num
-				? [...tuple<T[k]>, 1]['length'] & number
+				? [...tuple<T[k]>, 1]["length"] & number
 				: T[k];
 		}
 	: T & Record<num, 1>;
@@ -40,7 +40,7 @@ type Majority<
 					: most,
 				[...most, 1][newMap[first]] extends undefined
 					? first
-					: newMap[first] extends most['length']
+					: newMap[first] extends most["length"]
 						? never
 						: winner,
 				isEven<first> extends true ? [...evens, 1] : evens,
@@ -48,11 +48,11 @@ type Majority<
 			>
 		: never
 	: [winner] extends [never]
-		? evens['length'] extends odds['length']
-			? 'none'
-			: evens[odds['length']] extends 1
-				? 'evens'
-				: 'odds'
+		? evens["length"] extends odds["length"]
+			? "none"
+			: evens[odds["length"]] extends 1
+				? "evens"
+				: "odds"
 		: winner;
 
 export const majority = <const Input extends number[]>(
@@ -63,7 +63,7 @@ export const majority = <const Input extends number[]>(
 	let winner: undefined | number = undefined;
 	const count = { even: 0, odd: 0 };
 	for (const num of input.sort((a, b) => a - b)) {
-		count[num % 2 === 0 ? 'even' : 'odd']++;
+		count[num % 2 === 0 ? "even" : "odd"]++;
 		if (curr.num !== num) {
 			if (mostCount < curr.count) {
 				mostCount = curr.count;
@@ -77,6 +77,6 @@ export const majority = <const Input extends number[]>(
 		}
 	}
 	if (winner) return winner as never;
-	if (count.even === count.odd) return 'none' as never;
-	return (count.even > count.odd ? 'evens' : 'odds') as never;
+	if (count.even === count.odd) return "none" as never;
+	return (count.even > count.odd ? "evens" : "odds") as never;
 };

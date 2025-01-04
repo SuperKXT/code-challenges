@@ -33,6 +33,8 @@
 		"trace",
 		"./type-challenges",
 		"./scripts/md-links-to-csv/*.{md,csv}",
+		"sample.txt",
+		"input.txt",
 		"tsconfig.vitest-temp.json"
 	]
 }

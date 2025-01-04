@@ -7,34 +7,35 @@
 Example:
 
 ```ts
-rollCall(['yzneT', 'ydissaC', 'enimA']);
-['Amine', 'Cassidy', 'Tenzy'];
-
+// cSpell: disable
+rollCall(["yzneT", "ydissaC", "enimA"]);
+["Amine", "Cassidy", "Tenzy"];
 rollCall([
-	'rennoD',
-	'nexiV',
-	'recnarP',
-	'temoC',
-	'neztilB',
-	'recnaD',
-	'dipuC',
-	'rehsaD',
-	'hploduR',
+	"rennoD",
+	"nexiV",
+	"recnarP",
+	"temoC",
+	"neztilB",
+	"recnaD",
+	"dipuC",
+	"rehsaD",
+	"hploduR",
 ]);
 [
-	'Blitzen',
-	'Comet',
-	'Cupid',
-	'Dancer',
-	'Dasher',
-	'Donner',
-	'Prancer',
-	'Rudolph',
-	'Vixen',
+	"Blitzen",
+	"Comet",
+	"Cupid",
+	"Dancer",
+	"Dasher",
+	"Donner",
+	"Prancer",
+	"Rudolph",
+	"Vixen",
 ];
 
-rollCall(['A', 'B', 'C']);
-['A', 'B', 'C'];
+rollCall(["A", "B", "C"]);
+["A", "B", "C"];
+// cSpell: enable
 ```
 
 ---

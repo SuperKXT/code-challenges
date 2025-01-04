@@ -1,4 +1,4 @@
-import { maxSubArray } from './max-sub-array.js';
+import { maxSubArray } from "./max-sub-array.js";
 
 type Test = {
 	input: [number[], number];
@@ -13,6 +13,6 @@ const TESTS: Test[] = [
 	{ input: [[1, 1, 1, 1], 2], output: [1, 1] },
 ];
 
-test.each(TESTS)('testing maxSubArray', ({ input, output }) => {
+test.each(TESTS)("testing maxSubArray", ({ input, output }) => {
 	expect(maxSubArray(...input)).toStrictEqual(output);
 });

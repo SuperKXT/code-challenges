@@ -22,7 +22,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type GetMiddleElement<T extends unknown[]> = T['length'] extends 2
+type GetMiddleElement<T extends unknown[]> = T["length"] extends 2
 	? T
 	: T extends [unknown, ...infer R, unknown]
 		? GetMiddleElement<R>
@@ -30,7 +30,7 @@ type GetMiddleElement<T extends unknown[]> = T['length'] extends 2
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<GetMiddleElement<[]>, []>>,
@@ -38,7 +38,7 @@ type _cases = [
 	Expect<Equal<GetMiddleElement<[1, 2, 3, 4, 5, 6]>, [3, 4]>>,
 	Expect<Equal<GetMiddleElement<[() => string]>, [() => string]>>,
 	Expect<
-		Equal<GetMiddleElement<[() => number, '3', [3, 4], 5]>, ['3', [3, 4]]>
+		Equal<GetMiddleElement<[() => number, "3", [3, 4], 5]>, ["3", [3, 4]]>
 	>,
 	Expect<
 		Equal<

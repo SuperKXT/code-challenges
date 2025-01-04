@@ -34,19 +34,19 @@ type MyOmit<T extends object, K extends keyof T> = {
 	[Key in keyof T as Key extends K ? never : Key]: T[Key];
 };
 
-type _ = MyOmit<Todo, 'description'>;
+type _ = MyOmit<Todo, "description">;
 //   ^?
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<Expected1, MyOmit<Todo, 'description'>>>,
-	Expect<Equal<Expected2, MyOmit<Todo, 'description' | 'completed'>>>,
+	Expect<Equal<Expected1, MyOmit<Todo, "description">>>,
+	Expect<Equal<Expected2, MyOmit<Todo, "description" | "completed">>>,
 ];
 
 // @ts-expect-error incorrect argument
-type _error = MyOmit<Todo, 'description' | 'invalid'>;
+type _error = MyOmit<Todo, "description" | "invalid">;
 
 type Todo = {
 	title: string;

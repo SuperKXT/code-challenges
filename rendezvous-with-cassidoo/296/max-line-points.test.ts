@@ -1,4 +1,4 @@
-import { maxPointsOnLine } from './max-line-points.js';
+import { maxPointsOnLine } from "./max-line-points.js";
 
 type Test = {
 	input: [number, number][];
@@ -38,7 +38,7 @@ const tests: Test[] = [
 ];
 
 test.each(tests)(
-	'should return the maximum points in a straight line',
+	"should return the maximum points in a straight line",
 	({ input, output }) => {
 		const response = maxPointsOnLine(input);
 		expect(response).toBe(output);

@@ -30,8 +30,8 @@ type AbsoluteIndex<
 > =
 	AbsoluteNo<T> extends T
 		? T
-		: AbsoluteNo<T> extends Idx['length']
-			? Arr['length']
+		: AbsoluteNo<T> extends Idx["length"]
+			? Arr["length"]
 			: Arr extends [...infer Rest, unknown]
 				? AbsoluteIndex<T, Rest, [...Idx, 1]>
 				: 0;
@@ -39,15 +39,15 @@ type AbsoluteIndex<
 type Slice<
 	Arr extends unknown[],
 	Start extends number = 0,
-	End extends number = Arr['length'],
+	End extends number = Arr["length"],
 	AbsStart extends number = AbsoluteIndex<Start, Arr>,
 	AbsEnd extends number = AbsoluteIndex<End, Arr>,
 	Idx extends 1[] = [],
 	Output extends unknown[] = [],
 > = Arr extends [infer First, ...infer Rest extends unknown[]]
-	? Idx['length'] extends AbsEnd
+	? Idx["length"] extends AbsEnd
 		? Output
-		: Idx['length'] extends AbsStart
+		: Idx["length"] extends AbsStart
 			? Slice<
 					Rest,
 					never,
@@ -57,7 +57,7 @@ type Slice<
 					[...Idx, 1],
 					[...Output, First]
 				>
-			: Output['length'] extends 0
+			: Output["length"] extends 0
 				? Slice<Rest, never, never, AbsStart, AbsEnd, [...Idx, 1], Output>
 				: Slice<
 						Rest,
@@ -72,7 +72,7 @@ type Slice<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type Arr = [1, 2, 3, 4, 5];
 

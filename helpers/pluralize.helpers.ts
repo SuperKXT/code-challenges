@@ -12,17 +12,17 @@ export const pluralize = (
 	)[]
 ): string => {
 	const expressions = inputExpressions.map((value) => {
-		if (typeof value === 'string') return value;
+		if (typeof value === "string") return value;
 
-		if (typeof value === 'number') return [value, value.toString()] as const;
+		if (typeof value === "number") return [value, value.toString()] as const;
 
 		const [number, options] = value;
-		let toShow = '';
-		if (typeof options === 'function') {
-			toShow = options(number) ?? '';
-		} else if (typeof options === 'string') {
-			const array = options.split('|');
-			toShow = (array[number - 1] ?? array.at(-1) ?? '').replace(
+		let toShow = "";
+		if (typeof options === "function") {
+			toShow = options(number) ?? "";
+		} else if (typeof options === "string") {
+			const array = options.split("|");
+			toShow = (array[number - 1] ?? array.at(-1) ?? "").replace(
 				/\$1/gu,
 				number.toString(),
 			);
@@ -39,11 +39,11 @@ export const pluralize = (
 
 		let replaced = input;
 		const [number, value] = lastQuantifier;
-		if (!value) replaced = input.replace(/^\s+/u, '');
+		if (!value) replaced = input.replace(/^\s+/u, "");
 
 		return replaced.replace(/\[(([^|]*\|?)+)\]/gu, (_, string: string) => {
-			const matches = string.split('|');
-			return matches[number - 1] ?? matches.at(-1) ?? '';
+			const matches = string.split("|");
+			return matches[number - 1] ?? matches.at(-1) ?? "";
 		});
 	};
 
@@ -54,12 +54,12 @@ export const pluralize = (
 		if (!lastExpression) break;
 
 		result.push(
-			typeof lastExpression === 'string'
+			typeof lastExpression === "string"
 				? replaceQuantity(lastExpression)
 				: lastExpression[1],
 		);
 		lastQuantifier = quantifiers.shift() ?? lastQuantifier;
 	}
 
-	return result.join('');
+	return result.join("");
 };

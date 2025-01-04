@@ -13,14 +13,14 @@ let array = [
 	[7, 8, 9],
 ];
 
-flip(array, 'horizontal') >
+flip(array, "horizontal") >
 	[
 		[3, 2, 1],
 		[6, 5, 4],
 		[9, 8, 7],
 	];
 
-flip(array, 'vertical') >
+flip(array, "vertical") >
 	[
 		[7, 8, 9],
 		[4, 5, 6],

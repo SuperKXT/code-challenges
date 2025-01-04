@@ -19,7 +19,7 @@ type ArrayReverse<T extends Digit[], Out extends Digit[] = []> = T extends [
 	? ArrayReverse<Rest, [...Out, L]>
 	: Out;
 
-type Fill<T extends number, A extends number[] = []> = A['length'] extends T
+type Fill<T extends number, A extends number[] = []> = A["length"] extends T
 	? A
 	: Fill<T, [...A, 1]>;
 
@@ -38,7 +38,7 @@ type NumberToArray<
 	? NumberToArray<T, L, [...A, F]>
 	: A;
 
-type ArrayToNumber<T extends Digit[], R extends string = ''> = T extends [
+type ArrayToNumber<T extends Digit[], R extends string = ""> = T extends [
 	infer F extends Digit,
 	...infer Rest extends Digit[],
 ]
@@ -52,11 +52,11 @@ type GreaterThanDigits<
 	U extends number[],
 	TF extends number[] = Fill<T[0]>,
 	UF extends number[] = Fill<U[0]>,
-> = T['length'] extends 0
+> = T["length"] extends 0
 	? false
 	: T[0] extends U[0]
 		? GreaterThanDigits<Shift<T>, Shift<U>>
-		: UF[TF['length']] extends undefined
+		: UF[TF["length"]] extends undefined
 			? true
 			: false;
 
@@ -67,9 +67,9 @@ type GreaterThan<
 	UA extends number[] = NumberToArray<U>,
 > = T extends U
 	? false
-	: TA['length'] extends UA['length']
+	: TA["length"] extends UA["length"]
 		? GreaterThanDigits<TA, UA>
-		: UA[TA['length']] extends undefined
+		: UA[TA["length"]] extends undefined
 			? true
 			: false;
 
@@ -94,7 +94,7 @@ type AddDigits<T extends Digit[], R extends unknown[] = []> = T extends [
 	...infer Rest extends Digit[],
 ]
 	? AddDigits<Rest, [...R, ...Fill<F>]>
-	: PadLeft<NumberToArray<R['length']>, 2>;
+	: PadLeft<NumberToArray<R["length"]>, 2>;
 
 type _innerSum<
 	A extends Digit[],
@@ -119,7 +119,7 @@ export type Sum<
 	B extends string | number | bigint,
 	ArrayA extends Digit[] = NumberToArray<UnsignedInt<A>>,
 	ArrayB extends Digit[] = NumberToArray<UnsignedInt<B>>,
-	MaxNum extends number = Max<[ArrayA['length'], ArrayB['length']]>,
+	MaxNum extends number = Max<[ArrayA["length"], ArrayB["length"]]>,
 > = ArrayToNumber<
 	ArrayReverse<
 		_innerSum<
@@ -161,23 +161,23 @@ type GetCombinations<
 	Current extends Combination = { sum: 0; combination: [] },
 	Opts extends Option = Option,
 > = Opts extends Opts
-	? Sum<Current['sum'], Opts> extends infer sum extends number
+	? Sum<Current["sum"], Opts> extends infer sum extends number
 		? sum extends Target
-			? SortTuple<[...Current['combination'], Opts]>
+			? SortTuple<[...Current["combination"], Opts]>
 			: GreaterThan<sum, Target> extends true
 				? never
 				: GetCombinations<
 						Target,
-						{ sum: sum; combination: [...Current['combination'], Opts] }
+						{ sum: sum; combination: [...Current["combination"], Opts] }
 					>
 		: never
 	: never;
 
 type CountUnionMembers<T, Count extends 1[] = [], U = T> = [U] extends [never]
-	? Count['length']
+	? Count["length"]
 	: U extends U
 		? CountUnionMembers<Exclude<T, U>, [...Count, 1]>
-		: Count['length'];
+		: Count["length"];
 
 type WaysToScore<Target extends number> = CountUnionMembers<
 	GetCombinations<Target>
@@ -207,7 +207,7 @@ export const waysToScore = <Target extends number>(
 	const existSet = new Set<string>();
 	let count = 0;
 	for (const candidate of candidates) {
-		const key = candidate.join(',');
+		const key = candidate.join(",");
 		if (existSet.has(key)) continue;
 		existSet.add(key);
 		count++;

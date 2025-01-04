@@ -1,20 +1,20 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export const day16Path = path.join(
 	config.dirname,
-	'advent-of-code',
-	'2024',
-	'day-16',
+	"advent-of-code",
+	"2024",
+	"day-16",
 );
 
 const cellEnum = {
-	empty: '.',
-	wall: '#',
-	start: 'S',
-	goal: 'E',
+	empty: ".",
+	wall: "#",
+	start: "S",
+	goal: "E",
 } as const;
 
 type TCell = (typeof cellEnum)[keyof typeof cellEnum];
@@ -24,10 +24,10 @@ type TGrid = TGridRow[];
 type TPos = [number, number];
 
 const directionEnum = {
-	up: '^',
-	down: 'v',
-	left: '<',
-	right: '>',
+	up: "^",
+	down: "v",
+	left: "<",
+	right: ">",
 } as const;
 
 type TDirection = (typeof directionEnum)[keyof typeof directionEnum];
@@ -47,7 +47,7 @@ const rotateObj: Record<TRotate, Record<TDirection, TDirection>> = {
 	},
 };
 
-type TRotate = 'counter' | 'clockwise';
+type TRotate = "counter" | "clockwise";
 
 const rotate = (direction: TDirection, type: TRotate): TDirection => {
 	return rotateObj[type][direction];
@@ -90,9 +90,9 @@ const getPaths = (
 	const res: TPathRes = [];
 
 	const next = getNext(pos, direction);
-	const counterDir = rotate(direction, 'counter');
+	const counterDir = rotate(direction, "counter");
 	const counterPos = getNext(pos, counterDir);
-	const clockwiseDir = rotate(direction, 'clockwise');
+	const clockwiseDir = rotate(direction, "clockwise");
 	const clockwisePos = getNext(pos, clockwiseDir);
 
 	res.push(
@@ -119,10 +119,10 @@ const getPaths = (
 
 export const aoc2024Day16 = (input: string) => {
 	const grid: TGrid = [];
-	const rows = input.trim().split('\n');
+	const rows = input.trim().split("\n");
 	const start: TPos = [0, 0];
 	for (let y = 0; y < rows.length; y++) {
-		const curr = rows[y]?.trim() ?? '';
+		const curr = rows[y]?.trim() ?? "";
 		if (!curr) continue;
 		const row: TGridRow = [];
 		grid.push(row);
@@ -168,9 +168,9 @@ export const aoc2024Day16 = (input: string) => {
 };
 
 if (!config.isTest) {
-	console.time('aoc-2024-day-16');
-	const input = await readFile(path.join(day16Path, 'input.txt'), 'utf-8');
+	console.time("aoc-2024-day-16");
+	const input = await readFile(path.join(day16Path, "input.txt"), "utf-8");
 	const res = aoc2024Day16(input);
 	console.info(res);
-	console.timeEnd('aoc-2024-day-16');
+	console.timeEnd("aoc-2024-day-16");
 }

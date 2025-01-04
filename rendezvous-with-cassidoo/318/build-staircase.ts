@@ -4,7 +4,7 @@ type BuildStaircase<
 	sum extends 1[] = [1],
 > = sum[T] extends 1
 	? idx extends [unknown, ...infer rest]
-		? rest['length']
+		? rest["length"]
 		: 0
 	: BuildStaircase<T, [...idx, 1], [...sum, ...idx, 1]>;
 

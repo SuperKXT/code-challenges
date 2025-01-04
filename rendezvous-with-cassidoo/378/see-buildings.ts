@@ -1,4 +1,4 @@
-type Fill<T extends number, A extends number[] = []> = A['length'] extends T
+type Fill<T extends number, A extends number[] = []> = A["length"] extends T
 	? A
 	: Fill<T, [...A, 1]>;
 
@@ -22,11 +22,11 @@ type GreaterThanDigits<
 	U extends number[],
 	TF extends number[] = Fill<T[0]>,
 	UF extends number[] = Fill<U[0]>,
-> = T['length'] extends 0
+> = T["length"] extends 0
 	? false
 	: T[0] extends U[0]
 		? GreaterThanDigits<Shift<T>, Shift<U>>
-		: UF[TF['length']] extends undefined
+		: UF[TF["length"]] extends undefined
 			? true
 			: false;
 
@@ -37,9 +37,9 @@ type GreaterThan<
 	UA extends number[] = NumberToArray<U>,
 > = T extends U
 	? false
-	: TA['length'] extends UA['length']
+	: TA["length"] extends UA["length"]
 		? GreaterThanDigits<TA, UA>
-		: UA[TA['length']] extends undefined
+		: UA[TA["length"]] extends undefined
 			? true
 			: false;
 
@@ -53,11 +53,11 @@ type SeeBuildings<
 	...infer rest extends number[],
 ]
 	? GreaterThan<curr, next> extends true
-		? countWithCurr['length']
+		? countWithCurr["length"]
 		: SeeBuildings<[next, ...rest], countWithCurr>
 	: Buildings extends []
-		? count['length']
-		: countWithCurr['length'];
+		? count["length"]
+		: countWithCurr["length"];
 
 export const seeBuildings = <const Buildings extends [number, ...number[]]>(
 	buildings: Buildings,

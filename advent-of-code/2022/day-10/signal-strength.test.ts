@@ -1,9 +1,9 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { signalStrength } from './signal-strength.js';
+import { signalStrength } from "./signal-strength.js";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 const EXAMPLE = `
 addx 15
@@ -155,33 +155,33 @@ noop`;
 
 type Solution = ReturnType<typeof signalStrength>;
 
-test('testing signalStrength against example input', () => {
+test("testing signalStrength against example input", () => {
 	const response = signalStrength(EXAMPLE);
 	const solution: Solution = {
 		crtOutput: [
-			'##..##..##..##..##..##..##..##..##..##..',
-			'###...###...###...###...###...###...###.',
-			'####....####....####....####....####....',
-			'#####.....#####.....#####.....#####.....',
-			'######......######......######......####',
-			'#######.......#######.......#######.....',
-		].join('\n'),
+			"##..##..##..##..##..##..##..##..##..##..",
+			"###...###...###...###...###...###...###.",
+			"####....####....####....####....####....",
+			"#####.....#####.....#####.....#####.....",
+			"######......######......######......####",
+			"#######.......#######.......#######.....",
+		].join("\n"),
 		strength: 13140,
 	};
 	expect(response).toStrictEqual(solution);
 });
 
-test('testing signalStrength against real input', async () => {
-	const input = await readFile(path.join(config.dirname, 'input.txt'), 'utf-8');
+test("testing signalStrength against real input", async () => {
+	const input = await readFile(path.join(config.dirname, "input.txt"), "utf-8");
 	const solution: Solution = {
 		crtOutput: [
-			'###...##...##..####.#..#.#....#..#.####.',
-			'#..#.#..#.#..#.#....#.#..#....#..#.#....',
-			'###..#..#.#....###..##...#....####.###..',
-			'#..#.####.#....#....#.#..#....#..#.#....',
-			'#..#.#..#.#..#.#....#.#..#....#..#.#....',
-			'###..#..#..##..####.#..#.####.#..#.#....',
-		].join('\n'),
+			"###...##...##..####.#..#.#....#..#.####.",
+			"#..#.#..#.#..#.#....#.#..#....#..#.#....",
+			"###..#..#.#....###..##...#....####.###..",
+			"#..#.####.#....#....#.#..#....#..#.#....",
+			"#..#.#..#.#..#.#....#.#..#....#..#.#....",
+			"###..#..#..##..####.#..#.####.#..#.#....",
+		].join("\n"),
 		strength: 16060,
 	};
 	expect(signalStrength(input)).toStrictEqual(solution);

@@ -40,7 +40,7 @@ type PartialByKeys<T extends object, K extends keyof T = keyof T> = Flat<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type User = {
 	name: string;
@@ -61,11 +61,11 @@ type UserPartialNameAndAge = {
 };
 
 type _cases = [
-	Expect<Equal<PartialByKeys<User, 'name'>, UserPartialName>>,
-	Expect<Equal<PartialByKeys<User, 'name' | 'age'>, UserPartialNameAndAge>>,
+	Expect<Equal<PartialByKeys<User, "name">, UserPartialName>>,
+	Expect<Equal<PartialByKeys<User, "name" | "age">, UserPartialNameAndAge>>,
 	Expect<Equal<PartialByKeys<User>, Partial<User>>>,
 	// @ts-expect-error invalid params
-	Expect<Equal<PartialByKeys<User, 'name' | 'unknown'>, UserPartialName>>,
+	Expect<Equal<PartialByKeys<User, "name" | "unknown">, UserPartialName>>,
 ];
 
 /* _____________ Further Steps _____________ */

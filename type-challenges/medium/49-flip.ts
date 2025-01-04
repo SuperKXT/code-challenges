@@ -31,18 +31,18 @@ type Flip<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect, NotEqual } from '@type-challenges/utils';
+import type { Equal, Expect, NotEqual } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<{ a: 'pi' }, Flip<{ pi: 'a' }>>>,
-	Expect<NotEqual<{ b: 'pi' }, Flip<{ pi: 'a' }>>>,
-	Expect<Equal<{ 3.14: 'pi'; true: 'bool' }, Flip<{ pi: 3.14; bool: true }>>>,
+	Expect<Equal<{ a: "pi" }, Flip<{ pi: "a" }>>>,
+	Expect<NotEqual<{ b: "pi" }, Flip<{ pi: "a" }>>>,
+	Expect<Equal<{ 3.14: "pi"; true: "bool" }, Flip<{ pi: 3.14; bool: true }>>>,
 	Expect<
-		Equal<{ val2: 'prop2'; val: 'prop' }, Flip<{ prop: 'val'; prop2: 'val2' }>>
+		Equal<{ val2: "prop2"; val: "prop" }, Flip<{ prop: "val"; prop2: "val2" }>>
 	>,
 	Expect<
 		Equal<
-			{ null: 'val2'; undefined: 'val'; 134: 'val3' },
+			{ null: "val2"; undefined: "val"; 134: "val3" },
 			Flip<{ val2: null; val: undefined; val3: 134n }>
 		>
 	>,

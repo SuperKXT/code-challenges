@@ -23,7 +23,7 @@ type Chunk<
 	Input extends readonly unknown[],
 	Size extends number,
 	Curr extends unknown[] = [],
-> = Curr['length'] extends Size
+> = Curr["length"] extends Size
 	? [Curr, ...Chunk<Input, Size>]
 	: Input extends [infer First, ...infer Rest]
 		? Chunk<Rest, Size, [...Curr, First]>
@@ -33,7 +33,7 @@ type Chunk<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<Chunk<[], 1>, []>>,

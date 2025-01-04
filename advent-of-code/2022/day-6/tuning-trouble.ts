@@ -14,7 +14,7 @@ export const tuningTrouble = (
 
 		if (!solution.packetMarker) {
 			const isPacketMarker =
-				[...new Set(input.slice(index - 4, index).split(''))].length === 4;
+				[...new Set(input.slice(index - 4, index).split(""))].length === 4;
 			if (isPacketMarker) solution.packetMarker = index;
 		}
 
@@ -22,7 +22,7 @@ export const tuningTrouble = (
 
 		if (!solution.messageMarker) {
 			const isMessageMarker =
-				[...new Set(input.slice(index - 14, index).split(''))].length === 14;
+				[...new Set(input.slice(index - 14, index).split(""))].length === 14;
 			if (isMessageMarker) solution.messageMarker = index;
 		}
 

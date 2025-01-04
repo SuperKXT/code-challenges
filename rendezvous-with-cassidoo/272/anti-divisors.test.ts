@@ -1,4 +1,4 @@
-import { findAntiDivisors } from './anti-divisors.js';
+import { findAntiDivisors } from "./anti-divisors.js";
 
 type Test = {
 	input: number;
@@ -19,6 +19,6 @@ const TESTS: Test[] = [
 	{ input: 234, output: [4, 7, 12, 36, 52, 67, 156] },
 ];
 
-test.each(TESTS)('testing findAntiDivisors', ({ input, output }) => {
+test.each(TESTS)("testing findAntiDivisors", ({ input, output }) => {
 	expect(findAntiDivisors(input)).toStrictEqual(output);
 });

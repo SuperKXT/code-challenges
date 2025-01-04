@@ -61,14 +61,14 @@ type UnionToTuple<T, U = LastInUnion<T>> = [U] extends [never]
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type ExtractValuesOfTuple<T extends unknown[]> = T[keyof T & number];
 
 type _cases = [
-	Expect<Equal<UnionToTuple<'a' | 'b'>['length'], 2>>,
-	Expect<Equal<ExtractValuesOfTuple<UnionToTuple<'a' | 'b'>>, 'a' | 'b'>>,
-	Expect<Equal<ExtractValuesOfTuple<UnionToTuple<'a'>>, 'a'>>,
+	Expect<Equal<UnionToTuple<"a" | "b">["length"], 2>>,
+	Expect<Equal<ExtractValuesOfTuple<UnionToTuple<"a" | "b">>, "a" | "b">>,
+	Expect<Equal<ExtractValuesOfTuple<UnionToTuple<"a">>, "a">>,
 	Expect<Equal<ExtractValuesOfTuple<UnionToTuple<unknown>>, unknown>>,
 	Expect<
 		Equal<ExtractValuesOfTuple<UnionToTuple<undefined | void | 1>>, void | 1>
@@ -79,8 +79,8 @@ type _cases = [
 	Expect<Equal<ExtractValuesOfTuple<UnionToTuple<any | 1>>, any>>,
 	Expect<
 		Equal<
-			ExtractValuesOfTuple<UnionToTuple<'d' | 'f' | 1 | never>>,
-			'f' | 'd' | 1
+			ExtractValuesOfTuple<UnionToTuple<"d" | "f" | 1 | never>>,
+			"f" | "d" | 1
 		>
 	>,
 	Expect<
@@ -90,9 +90,9 @@ type _cases = [
 	Expect<
 		Equal<
 			ExtractValuesOfTuple<
-				UnionToTuple<'a' | 'b' | 'c' | 1 | 2 | 'd' | 'e' | 'f' | 'g'>
+				UnionToTuple<"a" | "b" | "c" | 1 | 2 | "d" | "e" | "f" | "g">
 			>,
-			'f' | 'e' | 1 | 2 | 'g' | 'c' | 'd' | 'a' | 'b'
+			"f" | "e" | 1 | 2 | "g" | "c" | "d" | "a" | "b"
 		>
 	>,
 ];

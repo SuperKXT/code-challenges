@@ -1,7 +1,7 @@
-import { DEFAULT_ARGS, findWordle } from './wordle.js';
+import { DEFAULT_ARGS, findWordle } from "./wordle.js";
 
-import type { WordleWord } from './word-list.js';
-import type { Arguments } from './wordle.js';
+import type { WordleWord } from "./word-list.js";
+import type { Arguments } from "./wordle.js";
 
 type Test = {
 	args: Partial<Arguments>;
@@ -11,59 +11,59 @@ type Test = {
 const TEST_CASES: Test[] = [
 	{
 		args: {
-			known: 'qul',
-			pattern: 'q*e(ueq)(ueq)',
+			known: "qul",
+			pattern: "q*e(ueq)(ueq)",
 		},
-		results: ['quell'],
+		results: ["quell"],
 	},
 	{
 		args: {
 			/* cspell: disable-next-line */
-			known: 'crut',
+			known: "crut",
 		},
 		/* cspell: disable */
 		results: [
-			'cruet',
-			'eruct',
-			'cruft',
-			'curst',
-			'crout',
-			'recut',
-			'truck',
-			'cuter',
-			'crust',
-			'court',
-			'curat',
-			'truce',
-			'curet',
+			"cruet",
+			"eruct",
+			"cruft",
+			"curst",
+			"crout",
+			"recut",
+			"truck",
+			"cuter",
+			"crust",
+			"court",
+			"curat",
+			"truce",
+			"curet",
 		],
 		/* cspell: enable */
 	},
 	{
 		args: {
 			/* cspell: disable-next-line */
-			available: 'prudeaqwzxjhiu',
-			pattern: 'p*u(pu)*',
+			available: "prudeaqwzxjhiu",
+			pattern: "p*u(pu)*",
 		},
-		results: ['prude'],
+		results: ["prude"],
 	},
 	{
 		args: {
 			/* cspell: disable-next-line */
-			available: 'qwygjzxmloc',
+			available: "qwygjzxmloc",
 
-			known: 'loc',
-			pattern: '(l)o(o)(co)*',
+			known: "loc",
+			pattern: "(l)o(o)(co)*",
 		},
-		results: ['colly', 'coyly'],
+		results: ["colly", "coyly"],
 	},
 	{
 		args: {
 			/* cspell: disable-next-line */
-			available: 'qwygjzxmloc',
+			available: "qwygjzxmloc",
 
-			known: 'loc',
-			pattern: '(l)o(o)(co)*',
+			known: "loc",
+			pattern: "(l)o(o)(co)*",
 			repeat: false,
 		},
 		results: [],
@@ -71,25 +71,25 @@ const TEST_CASES: Test[] = [
 	{
 		args: {
 			/* cspell: disable-next-line */
-			available: 'qwtypafghjkzxvbm',
+			available: "qwtypafghjkzxvbm",
 			repeat: false,
 		},
 		/* cspell: disable-next-line */
-		results: ['bawty', 'thawy', 'pawky', 'mawky', 'gawky', 'vampy'],
+		results: ["bawty", "thawy", "pawky", "mawky", "gawky", "vampy"],
 	},
 	{
 		args: {
-			known: 'ec',
+			known: "ec",
 
-			pattern: 'e(e)c*(ce)',
+			pattern: "e(e)c*(ce)",
 			/* cspell: disable-next-line */
-			unavailable: 'asduiopkbn',
+			unavailable: "asduiopkbn",
 		},
-		results: ['excel'],
+		results: ["excel"],
 	},
 ];
 
-test.each(TEST_CASES)('testing findWordle', ({ args, results }) => {
+test.each(TEST_CASES)("testing findWordle", ({ args, results }) => {
 	const response = findWordle({
 		...DEFAULT_ARGS,
 		...args,

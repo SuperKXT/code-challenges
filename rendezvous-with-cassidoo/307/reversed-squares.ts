@@ -1,4 +1,4 @@
-type _tuple<N extends number, T, R extends readonly T[]> = R['length'] extends N
+type _tuple<N extends number, T, R extends readonly T[]> = R["length"] extends N
 	? R
 	: _tuple<N, T, [T, ...R]>;
 
@@ -13,16 +13,16 @@ type multiply<
 	U extends number,
 	idx extends 1[] = [],
 	result extends 1[] = [],
-> = idx['length'] extends U
+> = idx["length"] extends U
 	? result
 	: multiply<T, U, [...idx, 1], [...result, ...tuple<T>]>;
 
 type sqrt<
 	T extends number,
 	idx extends 1[] = [],
-	square extends 1[] = multiply<idx['length'], idx['length']>,
-> = square['length'] extends T
-	? idx['length']
+	square extends 1[] = multiply<idx["length"], idx["length"]>,
+> = square["length"] extends T
+	? idx["length"]
 	: square[T] extends 1
 		? never
 		: sqrt<T, [...idx, 1]>;
@@ -41,7 +41,7 @@ type ReversedSquare<T extends number> = [sqrt<T>] extends [never]
 		: true;
 
 export const reversedSquare = <T extends number>(num: T): ReversedSquare<T> => {
-	const reverse = Number(String(num).split('').reverse().join(''));
+	const reverse = Number(String(num).split("").reverse().join(""));
 	return (Number.isInteger(Math.sqrt(num)) &&
 		Number.isInteger(Math.sqrt(reverse))) as never;
 };

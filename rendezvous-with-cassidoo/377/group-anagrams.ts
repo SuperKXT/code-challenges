@@ -5,7 +5,7 @@ type IsAnagram<
 	? U extends `${infer uPrefix}${first}${infer uSuffix}`
 		? IsAnagram<tRest, `${uPrefix}${uSuffix}`>
 		: false
-	: U extends ''
+	: U extends ""
 		? true
 		: false;
 
@@ -43,7 +43,7 @@ export const groupAnagrams = <const Words extends [string, ...string[]]>(
 ): GroupAnagrams<Words> => {
 	const anagrams = new Map<string, string[]>();
 	for (const word of words) {
-		const key = word.split('').sort().join('');
+		const key = word.split("").sort().join("");
 		const existing = anagrams.get(key) ?? [];
 		anagrams.set(key, [...existing, word]);
 	}

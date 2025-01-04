@@ -2,29 +2,29 @@ type Fraction = `${number}/${number}`;
 
 export const fractionMath = (
 	fractionA: Fraction,
-	operation: 'add' | 'divide' | 'multiply' | 'subtract',
+	operation: "add" | "divide" | "multiply" | "subtract",
 	fractionB: Fraction,
 ): Fraction => {
-	const parsedA = fractionA.split('/').map(Number) as [number, number];
-	const parsedB = fractionB.split('/').map(Number) as [number, number];
+	const parsedA = fractionA.split("/").map(Number) as [number, number];
+	const parsedB = fractionB.split("/").map(Number) as [number, number];
 	const solution: [number, number] = [0, 0];
 	switch (operation) {
-		case 'add': {
+		case "add": {
 			solution[0] = parsedA[0] * parsedB[1] + parsedB[0] * parsedA[1];
 			solution[1] = parsedA[1] * parsedB[1];
 			break;
 		}
-		case 'subtract': {
+		case "subtract": {
 			solution[0] = parsedA[0] * parsedB[1] - parsedB[0] * parsedA[1];
 			solution[1] = parsedA[1] * parsedB[1];
 			break;
 		}
-		case 'multiply': {
+		case "multiply": {
 			solution[0] = parsedA[0] * parsedB[0];
 			solution[1] = parsedA[1] * parsedB[1];
 			break;
 		}
-		case 'divide': {
+		case "divide": {
 			solution[0] = parsedA[0] * parsedB[1];
 			solution[1] = parsedA[1] * parsedB[0];
 			break;

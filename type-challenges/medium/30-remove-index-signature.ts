@@ -42,7 +42,7 @@ type RemoveIndexSignature<T extends Record<string, unknown>> = {
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type Foo = {
 	[key: string]: unknown;
@@ -55,7 +55,7 @@ type Bar = {
 	0: string;
 };
 
-const foobar = Symbol('foobar');
+const foobar = Symbol("foobar");
 type FooBar = {
 	[key: symbol]: unknown;
 	[foobar]: () => void;

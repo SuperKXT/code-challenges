@@ -21,15 +21,15 @@ type NumberRange<
 	H extends number,
 	Idx extends unknown[] = [],
 	A extends unknown[] = [],
-> = Idx['length'] extends H
+> = Idx["length"] extends H
 	? L | A[number] | H
 	: Idx[L] extends undefined
 		? NumberRange<L, H, [...Idx, 1], A>
-		: NumberRange<L, H, [...Idx, 1], [...A, Idx['length']]>;
+		: NumberRange<L, H, [...Idx, 1], [...A, Idx["length"]]>;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type Result1 = 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 type Result2 = 0 | 1 | 2;

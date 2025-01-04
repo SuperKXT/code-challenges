@@ -1,4 +1,4 @@
-import { addEventDigits, addEventDigitsSinglePass } from './add-even-digits.js';
+import { addEventDigits, addEventDigitsSinglePass } from "./add-even-digits.js";
 
 type Test = {
 	input: number;
@@ -13,7 +13,7 @@ const TESTS: Test[] = [
 	{ input: -123.456, output: 12 },
 ];
 
-test.each(TESTS)('testing maxSubArray', ({ input, output }) => {
+test.each(TESTS)("testing maxSubArray", ({ input, output }) => {
 	expect(addEventDigits(input)).toStrictEqual(output);
 	expect(addEventDigitsSinglePass(input)).toStrictEqual(output);
 });

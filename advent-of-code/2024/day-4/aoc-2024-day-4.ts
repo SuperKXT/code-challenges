@@ -1,5 +1,5 @@
 export const aoc2024Day4 = (input: string) => {
-	const inputArr = input.split('\n');
+	const inputArr = input.split("\n");
 	const rows = new Map<number, string>();
 	const cols = new Map<number, string>();
 	const diags = new Map<number, string>();
@@ -18,14 +18,14 @@ export const aoc2024Day4 = (input: string) => {
 			if (!cellVal) continue;
 			gridRow.push(cellVal);
 
-			rows.set(rowIdx, `${rows.get(rowIdx) ?? ''}${cellVal}`);
-			cols.set(colIdx, `${cols.get(colIdx) ?? ''}${cellVal}`);
+			rows.set(rowIdx, `${rows.get(rowIdx) ?? ""}${cellVal}`);
+			cols.set(colIdx, `${cols.get(colIdx) ?? ""}${cellVal}`);
 			const diagIdx = rowIdx - colIdx;
-			diags.set(diagIdx, `${diags.get(diagIdx) ?? ''}${cellVal}`);
+			diags.set(diagIdx, `${diags.get(diagIdx) ?? ""}${cellVal}`);
 			const reverseDiagIdx = rowIdx + colIdx;
 			reverseDiags.set(
 				reverseDiagIdx,
-				`${cellVal}${reverseDiags.get(reverseDiagIdx) ?? ''}`,
+				`${cellVal}${reverseDiags.get(reverseDiagIdx) ?? ""}`,
 			);
 		}
 	}
@@ -36,7 +36,7 @@ export const aoc2024Day4 = (input: string) => {
 		for (const str of map.values()) {
 			const matches = [
 				...(str.match(/XMAS/gu) ?? []),
-				...(str.split('').reverse().join('').match(/XMAS/gu) ?? []),
+				...(str.split("").reverse().join("").match(/XMAS/gu) ?? []),
 			];
 			xmasCount += matches.length;
 		}
@@ -48,15 +48,15 @@ export const aoc2024Day4 = (input: string) => {
 		if (!row) continue;
 		for (let colIdx = 1; colIdx < row.length - 1; colIdx++) {
 			const curr = grid[rowIdx]?.[colIdx];
-			if (curr !== 'A') continue;
+			if (curr !== "A") continue;
 			const topLeft = grid[rowIdx - 1]?.[colIdx - 1];
 			const topRight = grid[rowIdx - 1]?.[colIdx + 1];
 			const bottomLeft = grid[rowIdx + 1]?.[colIdx - 1];
 			const bottomRight = grid[rowIdx + 1]?.[colIdx + 1];
-			const isDiag1Mas = topLeft === 'M' && bottomRight === 'S';
-			const isDiag1Sam = topLeft === 'S' && bottomRight === 'M';
-			const isDiag2Mas = bottomLeft === 'M' && topRight === 'S';
-			const isDiag2Sam = bottomLeft === 'S' && topRight === 'M';
+			const isDiag1Mas = topLeft === "M" && bottomRight === "S";
+			const isDiag1Sam = topLeft === "S" && bottomRight === "M";
+			const isDiag2Mas = bottomLeft === "M" && topRight === "S";
+			const isDiag2Sam = bottomLeft === "S" && topRight === "M";
 			if ((isDiag1Mas || isDiag1Sam) && (isDiag2Mas || isDiag2Sam)) {
 				x_masCount++;
 			}

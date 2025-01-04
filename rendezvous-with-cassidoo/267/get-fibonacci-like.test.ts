@@ -2,7 +2,7 @@ import {
 	ERRORS,
 	getFibonacciLike,
 	isFibonacciLike,
-} from './get-fibonacci-like.js';
+} from "./get-fibonacci-like.js";
 
 type GetTest = {
 	input: [number, number, number];
@@ -48,20 +48,20 @@ const CHECK_TESTS: CheckTest[] = [
 ];
 
 test.each(GET_TESTS)(
-	'testing getFibonacciLike for good input',
+	"testing getFibonacciLike for good input",
 	({ input, output }) => {
 		const response = getFibonacciLike(...input);
 		expect(response).toStrictEqual(output);
 	},
 );
 test.each(BAD_GET_TESTS)(
-	'testing getFibonacciLike for bad input',
+	"testing getFibonacciLike for bad input",
 	({ input, error }) => {
 		expect(() => getFibonacciLike(...input)).toThrow(error);
 	},
 );
 
-test.each(CHECK_TESTS)('testing isFibonacciLike', ({ input, output }) => {
+test.each(CHECK_TESTS)("testing isFibonacciLike", ({ input, output }) => {
 	const response = isFibonacciLike(input);
 	expect(response).toStrictEqual(output);
 });

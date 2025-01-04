@@ -20,29 +20,29 @@ type BEM<
 	B extends string,
 	E extends string[],
 	M extends string[],
-> = `${B}${E extends [] ? '' : `__${E[number]}`}${M extends []
-	? ''
+> = `${B}${E extends [] ? "" : `__${E[number]}`}${M extends []
+	? ""
 	: `--${M[number]}`}`;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<BEM<'btn', ['price'], []>, 'btn__price'>>,
+	Expect<Equal<BEM<"btn", ["price"], []>, "btn__price">>,
 	Expect<
 		Equal<
-			BEM<'btn', ['price', 'something'], ['warning', 'success']>,
-			| 'btn__price--warning'
-			| 'btn__price--success'
-			| 'btn__something--warning'
-			| 'btn__something--success'
+			BEM<"btn", ["price", "something"], ["warning", "success"]>,
+			| "btn__price--warning"
+			| "btn__price--success"
+			| "btn__something--warning"
+			| "btn__something--success"
 		>
 	>,
 	Expect<
 		Equal<
-			BEM<'btn', [], ['small', 'medium', 'large']>,
-			'btn--small' | 'btn--medium' | 'btn--large'
+			BEM<"btn", [], ["small", "medium", "large"]>,
+			"btn--small" | "btn--medium" | "btn--large"
 		>
 	>,
 ];

@@ -1,21 +1,21 @@
 const words = [
-	'zero',
-	'one',
-	'two',
-	'three',
-	'four',
-	'five',
-	'six',
-	'seven',
-	'eight',
-	'nine',
-	'ten',
-	'eleven',
-	'twelve',
-	'thirteen',
-	'fourteen',
-	'fifteen',
-	'sixteen',
+	"zero",
+	"one",
+	"two",
+	"three",
+	"four",
+	"five",
+	"six",
+	"seven",
+	"eight",
+	"nine",
+	"ten",
+	"eleven",
+	"twelve",
+	"thirteen",
+	"fourteen",
+	"fifteen",
+	"sixteen",
 ] as const;
 
 type Words = typeof words;
@@ -24,13 +24,13 @@ type joinWords<T extends string[], isFirst = true> = T extends [
 	infer first extends string,
 	...infer rest extends string[],
 ]
-	? `${isFirst extends true ? '' : ', then '}${first}${joinWords<rest, false>}`
-	: '';
+	? `${isFirst extends true ? "" : ", then "}${first}${joinWords<rest, false>}`
+	: "";
 
 type say<char extends string, count extends number[]> = `${Words[[
 	...count,
 	1,
-]['length']]} ${char}s`;
+]["length"]]} ${char}s`;
 
 type CountAndSay<
 	T extends string,
@@ -41,7 +41,7 @@ type CountAndSay<
 		? CountAndSay<`${next}${rest}`, str, [...count, 1]>
 		: CountAndSay<`${next}${rest}`, [...str, say<first, count>]>
 	: T extends `${infer first}${string}`
-		? CountAndSay<'', [...str, say<first, count>]>
+		? CountAndSay<"", [...str, say<first, count>]>
 		: joinWords<str>;
 
 export const countAndSay = <const T extends number>(
@@ -59,5 +59,5 @@ export const countAndSay = <const T extends number>(
 			count = 0;
 		}
 	}
-	return response.join(', then ') as never;
+	return response.join(", then ") as never;
 };

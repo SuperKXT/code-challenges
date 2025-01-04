@@ -15,5 +15,5 @@ export const replaceString = <
 	searchValue: Search,
 	replaceValue: Replace,
 ): ReplaceString<Str, Search, Replace> => {
-	return string.replace(new RegExp(searchValue, 'gu'), replaceValue) as never;
+	return string.replace(new RegExp(searchValue, "gu"), replaceValue) as never;
 };

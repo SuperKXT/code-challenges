@@ -28,7 +28,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type CreateTuple<T extends number, A extends 1[] = []> = A['length'] extends T
+type CreateTuple<T extends number, A extends 1[] = []> = A["length"] extends T
 	? A
 	: CreateTuple<T, [...A, 1]>;
 
@@ -43,9 +43,9 @@ type Max<
 	BT extends 1[] = CreateTuple<B>,
 > = B extends A
 	? B
-	: AT[BT['length']] extends undefined
+	: AT[BT["length"]] extends undefined
 		? B
-		: BT[AT['length']] extends undefined
+		: BT[AT["length"]] extends undefined
 			? A
 			: Max<never, never, Unshift<AT>, Unshift<BT>>;
 
@@ -62,13 +62,13 @@ type Maximum<
 	N extends 1[] = [],
 > = T extends []
 	? never
-	: [U] extends [N['length']]
+	: [U] extends [N["length"]]
 		? U
-		: Maximum<T, U extends N['length'] ? never : U, [...N, 1]>;
+		: Maximum<T, U extends N["length"] ? never : U, [...N, 1]>;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<Maximum<[]>, never>>,

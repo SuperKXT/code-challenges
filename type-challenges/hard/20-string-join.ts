@@ -39,7 +39,7 @@ type Join<T extends string[], D extends string> = T extends [
 	? R extends []
 		? F
 		: `${F}${D}${Join<R, D>}`
-	: '';
+	: "";
 
 declare function join<D extends string>(
 	delimiter: D,
@@ -47,27 +47,27 @@ declare function join<D extends string>(
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 // Edge cases
-const noCharsOutput = join('-')();
-const oneCharOutput = join('-')('a');
-const noDelimiterOutput = join('')('a', 'b', 'c');
+const noCharsOutput = join("-")();
+const oneCharOutput = join("-")("a");
+const noDelimiterOutput = join("")("a", "b", "c");
 
 // Regular cases
-const hyphenOutput = join('-')('a', 'b', 'c');
-const hashOutput = join('#')('a', 'b', 'c');
-const twoCharOutput = join('-')('a', 'b');
-const longOutput = join('-')('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h');
+const hyphenOutput = join("-")("a", "b", "c");
+const hashOutput = join("#")("a", "b", "c");
+const twoCharOutput = join("-")("a", "b");
+const longOutput = join("-")("a", "b", "c", "d", "e", "f", "g", "h");
 
 type _cases = [
-	Expect<Equal<typeof noCharsOutput, ''>>,
-	Expect<Equal<typeof oneCharOutput, 'a'>>,
-	Expect<Equal<typeof noDelimiterOutput, 'abc'>>,
-	Expect<Equal<typeof twoCharOutput, 'a-b'>>,
-	Expect<Equal<typeof hyphenOutput, 'a-b-c'>>,
-	Expect<Equal<typeof hashOutput, 'a#b#c'>>,
-	Expect<Equal<typeof longOutput, 'a-b-c-d-e-f-g-h'>>,
+	Expect<Equal<typeof noCharsOutput, "">>,
+	Expect<Equal<typeof oneCharOutput, "a">>,
+	Expect<Equal<typeof noDelimiterOutput, "abc">>,
+	Expect<Equal<typeof twoCharOutput, "a-b">>,
+	Expect<Equal<typeof hyphenOutput, "a-b-c">>,
+	Expect<Equal<typeof hashOutput, "a#b#c">>,
+	Expect<Equal<typeof longOutput, "a-b-c-d-e-f-g-h">>,
 ];
 
 /* _____________ Further Steps _____________ */

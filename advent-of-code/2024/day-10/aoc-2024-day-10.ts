@@ -1,13 +1,13 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export const day10Path = path.join(
 	config.dirname,
-	'advent-of-code',
-	'2024',
-	'day-10',
+	"advent-of-code",
+	"2024",
+	"day-10",
 );
 
 type TCoord = `${number},${number}`;
@@ -21,7 +21,7 @@ const walkTheTrail = (
 	trekked: Set<TCoord>,
 ): TTrailResult => {
 	const curr = trail[x]?.[y];
-	if (curr === undefined) throw new Error('invalid coordinates');
+	if (curr === undefined) throw new Error("invalid coordinates");
 	if (curr === 9) {
 		const res: TTrailResult = { summits: 0, treks: 0 };
 		res.treks++;
@@ -57,7 +57,7 @@ export const aoc2024Day10 = (input: string) => {
 	const res: TTrailResult = { summits: 0, treks: 0 };
 
 	const grid: number[][] = [];
-	const rows = input.split('\n');
+	const rows = input.split("\n");
 	for (let x = 0; x < rows.length; x++) {
 		const row = rows[x]?.trim();
 		if (!row) continue;
@@ -80,9 +80,9 @@ export const aoc2024Day10 = (input: string) => {
 };
 
 if (!config.isTest) {
-	console.time('aoc-2024-day-10');
-	const input = await readFile(path.join(day10Path, 'input.txt'), 'utf-8');
+	console.time("aoc-2024-day-10");
+	const input = await readFile(path.join(day10Path, "input.txt"), "utf-8");
 	const res = aoc2024Day10(input);
 	console.info(res);
-	console.timeEnd('aoc-2024-day-10');
+	console.timeEnd("aoc-2024-day-10");
 }

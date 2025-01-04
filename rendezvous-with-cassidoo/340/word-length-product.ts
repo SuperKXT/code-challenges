@@ -18,11 +18,11 @@ type greaterThanDigits<
 	numB extends number[],
 	tupleA extends number[] = tuple<numA[0]>,
 	tupleB extends number[] = tuple<numB[0]>,
-> = numA['length'] extends 0
+> = numA["length"] extends 0
 	? false
 	: numA[0] extends numB[0]
 		? greaterThanDigits<shift<numA>, shift<numB>>
-		: tupleB[tupleA['length']] extends undefined
+		: tupleB[tupleA["length"]] extends undefined
 			? true
 			: false;
 
@@ -33,16 +33,16 @@ type greaterThan<
 	UA extends number[] = numberToTuple<U>,
 > = T extends U
 	? false
-	: TA['length'] extends UA['length']
+	: TA["length"] extends UA["length"]
 		? greaterThanDigits<TA, UA>
-		: UA[TA['length']] extends undefined
+		: UA[TA["length"]] extends undefined
 			? true
 			: false;
 
 type tuple<
 	size extends number,
 	res extends unknown[] = [],
-> = res['length'] extends size ? res : tuple<size, [...res, 1]>;
+> = res["length"] extends size ? res : tuple<size, [...res, 1]>;
 
 type stringTuple<str extends string> = str extends `${infer first}${infer rest}`
 	? [first, ...stringTuple<rest>]
@@ -53,8 +53,8 @@ type multiply<
 	numB extends number,
 	idx extends unknown[] = [],
 	res extends unknown[] = [],
-> = idx['length'] extends numB
-	? res['length']
+> = idx["length"] extends numB
+	? res["length"]
 	: multiply<numA, numB, [...idx, 1], [...res, ...tuple<numA>]>;
 
 type nextMax<
@@ -65,8 +65,8 @@ type nextMax<
 > = true extends (charsA extends stringTuple<strB>[number] ? true : false)
 	? currMax
 	: multiply<
-				stringTuple<strA>['length'],
-				stringTuple<strB>['length']
+				stringTuple<strA>["length"],
+				stringTuple<strB>["length"]
 		  > extends infer product extends number
 		? greaterThan<product, currMax> extends true
 			? product
@@ -85,11 +85,11 @@ type WordLengthProduct<
 	arr extends string[],
 	maxProduct extends number = 0,
 	idx extends unknown[] = [],
-> = idx['length'] extends arr['length']
+> = idx["length"] extends arr["length"]
 	? maxProduct
 	: WordLengthProduct<
 			arr,
-			maxProductForWord<arr[idx['length']], arr, maxProduct>,
+			maxProductForWord<arr[idx["length"]], arr, maxProduct>,
 			[...idx, 1]
 		>;
 

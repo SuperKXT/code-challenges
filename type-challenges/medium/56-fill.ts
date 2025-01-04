@@ -28,9 +28,9 @@ type _Fill<
 	T extends unknown[],
 	N,
 	Start extends number = 0,
-	End extends number = T['length'],
+	End extends number = T["length"],
 	Output extends unknown[] = [],
-> = Output['length'] extends T['length']
+> = Output["length"] extends T["length"]
 	? Output
 	: _Fill<
 			T,
@@ -42,8 +42,8 @@ type _Fill<
 				[...Output, 1][Start] extends NonNullable<unknown>
 					? [...Output, 1][End] extends undefined
 						? N
-						: T[Output['length']]
-					: T[Output['length']],
+						: T[Output["length"]]
+					: T[Output["length"]],
 			]
 		>;
 
@@ -51,10 +51,10 @@ type Fill<
 	T extends unknown[],
 	N,
 	Start extends number = 0,
-	End extends number = T['length'],
+	End extends number = T["length"],
 	Count extends unknown[] = [],
-	Flag extends boolean = Count['length'] extends Start ? true : false,
-> = Count['length'] extends End
+	Flag extends boolean = Count["length"] extends Start ? true : false,
+> = Count["length"] extends End
 	? T
 	: T extends [infer First, ...infer Rest]
 		? Flag extends false
@@ -64,7 +64,7 @@ type Fill<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<Fill<[], 0>, []>>,

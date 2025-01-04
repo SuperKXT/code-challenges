@@ -10,7 +10,7 @@ const permutations = (digits: number[]) => {
 	const result: number[] = [];
 	const permute = (arr: number[], m: number[] = []) => {
 		if (!arr.length) {
-			result.push(Number(m.join('')));
+			result.push(Number(m.join("")));
 			return;
 		}
 		for (let idx = 0; idx < arr.length; idx++) {
@@ -27,7 +27,7 @@ export const divisibleIntegers = (
 	n: DivisibleIntegerN,
 	array: number[],
 ): boolean => {
-	const digits = array.map((row) => String(row).split('').map(Number)).flat();
+	const digits = array.map((row) => String(row).split("").map(Number)).flat();
 	switch (n) {
 		case 1:
 			return true;

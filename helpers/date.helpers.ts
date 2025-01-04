@@ -1,14 +1,14 @@
 // eslint-disable-next-line no-restricted-imports
-import { default as dayjs } from 'dayjs';
-import duration from 'dayjs/plugin/duration.js';
-import utc from 'dayjs/plugin/utc.js';
-import { z } from 'zod';
+import { default as dayjs } from "dayjs";
+import duration from "dayjs/plugin/duration.js";
+import utc from "dayjs/plugin/utc.js";
+import { z } from "zod";
 
-import { safeObjAccess } from './object.helpers.js';
-import { pluralize } from './pluralize.helpers.js';
+import { safeObjAccess } from "./object.helpers.js";
+import { pluralize } from "./pluralize.helpers.js";
 
-import type { Dayjs } from 'dayjs';
-import type { Utils } from '../types/utils.types.js';
+import type { Dayjs } from "dayjs";
+import type { Utils } from "../types/utils.types.js";
 
 dayjs.extend(utc);
 dayjs.extend(duration);
@@ -17,7 +17,7 @@ export const dayjsUtc = dayjs;
 
 export const dayjsSchema = z.instanceof(
 	dayjsUtc as unknown as typeof dayjsUtc.Dayjs,
-	{ message: 'Invalid Date' },
+	{ message: "Invalid Date" },
 );
 
 export type ZodDayjs = typeof dayjsSchema;
@@ -50,9 +50,9 @@ export const compareDate = (first: DateLike, second: DateLike): number => {
 };
 
 export const dateFormats = {
-	date: 'YYYY-MM-DD',
-	time: 'h:mm:ss A',
-	datetime: 'YYYY-MM-DD h:mm A',
+	date: "YYYY-MM-DD",
+	time: "h:mm:ss A",
+	datetime: "YYYY-MM-DD h:mm A",
 } as const;
 
 const utcOffset = dayjsUtc().utcOffset();
@@ -62,8 +62,8 @@ export const stringifyDate = (
 	format: keyof typeof dateFormats,
 	localTime?: boolean,
 ): string => {
-	if (!date) return '';
-	const curr = localTime ? date.utc().add(utcOffset, 'minutes') : date;
+	if (!date) return "";
+	const curr = localTime ? date.utc().add(utcOffset, "minutes") : date;
 	return curr.format(dateFormats[format]);
 };
 
@@ -81,43 +81,43 @@ export const getRelativeTime = (date: Dayjs): string => {
 	if (days) pieces.push(pluralize`${days} Day[|s]`);
 	if (hours) pieces.push(pluralize`${hours} Hr[|s]`);
 	if (minutes || !pieces.length) pieces.push(pluralize`${minutes} Min[|s]`);
-	return `${pieces.join(', ')} ${diff < 0 ? 'From Now' : 'Ago'}`;
+	return `${pieces.join(", ")} ${diff < 0 ? "From Now" : "Ago"}`;
 };
 
 export const dayNames = [
-	'monday',
-	'tuesday',
-	'wednesday',
-	'thursday',
-	'friday',
-	'saturday',
-	'sunday',
+	"monday",
+	"tuesday",
+	"wednesday",
+	"thursday",
+	"friday",
+	"saturday",
+	"sunday",
 ] as const;
 
 export type DayName = (typeof dayNames)[number];
 
 export class DateRange<
-	Start extends string = 'start',
-	End extends string = 'end',
+	Start extends string = "start",
+	End extends string = "end",
 	Range extends Utils.prettify<
 		Record<Start, Dayjs> & Record<End, Dayjs>
 	> = Utils.prettify<Record<Start, Dayjs> & Record<End, Dayjs>>,
 > {
 	constructor(
-		private start: Start = 'start' as Start,
-		private end: End = 'end' as End,
+		private start: Start = "start" as Start,
+		private end: End = "end" as End,
 		private includeEdges: boolean = true,
 	) {}
 
 	forEach(range: Range, callback: (date: Dayjs) => void): void {
 		const { start, end } = this.validate(range);
-		for (let d = start; !d.isAfter(end); d = d.add(1, 'day')) callback(d);
+		for (let d = start; !d.isAfter(end); d = d.add(1, "day")) callback(d);
 	}
 
 	map<Return>(range: Range, callback: (date: Dayjs) => Return): Return[] {
 		const data: Return[] = [];
 		const { start, end } = this.validate(range);
-		for (let d = start; !d.isAfter(end); d = d.add(1, 'day')) {
+		for (let d = start; !d.isAfter(end); d = d.add(1, "day")) {
 			data.push(callback(d));
 		}
 		return data;
@@ -131,12 +131,12 @@ export class DateRange<
 		const s = safeObjAccess(range, this.start);
 		const e = safeObjAccess(range, this.end);
 		if (!dayjsUtc.isDayjs(s) || !dayjsUtc.isDayjs(e))
-			throw new Error('invalid date range');
-		if (!s.isValid()) throw new Error('invalid start date');
-		if (!e.isValid()) throw new Error('invalid end date');
+			throw new Error("invalid date range");
+		if (!s.isValid()) throw new Error("invalid start date");
+		if (!e.isValid()) throw new Error("invalid end date");
 		return {
-			start: this.includeEdges ? s : s.add(1, 'day'),
-			end: this.includeEdges ? e : e.add(1, 'day'),
+			start: this.includeEdges ? s : s.add(1, "day"),
+			end: this.includeEdges ? e : e.add(1, "day"),
 		};
 	}
 }

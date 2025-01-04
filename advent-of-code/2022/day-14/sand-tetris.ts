@@ -28,7 +28,7 @@ class Coord {
 	}
 }
 
-type MapRow = ('.' | '#' | '+' | 'o')[];
+type MapRow = ("." | "#" | "+" | "o")[];
 type Map = MapRow[];
 
 const SOURCE = new Coord({ col: 500, row: 0 });
@@ -40,10 +40,10 @@ const getLanding = (
 	col: number = SOURCE.col,
 ): Coord | null => {
 	const mapRow = map[row];
-	if (!mapRow || mapRow[col] !== '.' || !map[row + 1]) return null;
+	if (!mapRow || mapRow[col] !== "." || !map[row + 1]) return null;
 
 	const colOffset = [0, -1, 1].find(
-		(offset) => map[row + 1]?.[col + offset] === '.',
+		(offset) => map[row + 1]?.[col + offset] === ".",
 	);
 	if (colOffset !== undefined) return getLanding(map, row + 1, col + colOffset);
 
@@ -56,12 +56,12 @@ export const sandTetris = (input: string): Solution => {
 		part2: 0,
 	};
 
-	const paths = input.split('\n').map((row) =>
-		row.split(' -> ').map(
+	const paths = input.split("\n").map((row) =>
+		row.split(" -> ").map(
 			(coords) =>
 				new Coord({
-					col: Number(coords.split(',')[0]),
-					row: Number(coords.split(',')[1]),
+					col: Number(coords.split(",")[0]),
+					row: Number(coords.split(",")[1]),
 				}),
 		),
 	);
@@ -80,12 +80,12 @@ export const sandTetris = (input: string): Solution => {
 
 					const direction =
 						to.row < from.row
-							? 'left'
+							? "left"
 							: to.row > from.row
-								? 'right'
+								? "right"
 								: to.col < from.col
-									? 'up'
-									: 'down';
+									? "up"
+									: "down";
 
 					const curr = new Coord(from);
 
@@ -101,16 +101,16 @@ export const sandTetris = (input: string): Solution => {
 						if (curr.equals(to)) break;
 
 						switch (direction) {
-							case 'left':
+							case "left":
 								curr.row--;
 								break;
-							case 'right':
+							case "right":
 								curr.row++;
 								break;
-							case 'up':
+							case "up":
 								curr.col--;
 								break;
-							case 'down':
+							case "down":
 								curr.col++;
 								break;
 						}
@@ -123,16 +123,16 @@ export const sandTetris = (input: string): Solution => {
 	);
 
 	const part1Map: Map = [...new Array<undefined>(end.row + 1)].map<MapRow>(() =>
-		[...new Array<'.'>(ROW_LENGTH)].fill('.'),
+		[...new Array<".">(ROW_LENGTH)].fill("."),
 	);
 	rocks.forEach(({ row, col }) => {
 		const mapRow = part1Map[row];
-		if (mapRow) (part1Map[row] as MapRow)[col] = '#';
+		if (mapRow) (part1Map[row] as MapRow)[col] = "#";
 	});
 	const part2Map: Map = structuredClone(part1Map);
 	part2Map.push(
-		new Array<'.'>(ROW_LENGTH).fill('.'),
-		new Array<'#'>(ROW_LENGTH).fill('#'),
+		new Array<".">(ROW_LENGTH).fill("."),
+		new Array<"#">(ROW_LENGTH).fill("#"),
 	);
 
 	while (true) {
@@ -140,7 +140,7 @@ export const sandTetris = (input: string): Solution => {
 		if (!coord) break;
 
 		const { row, col } = coord;
-		(part1Map[row] as MapRow)[col] = 'o';
+		(part1Map[row] as MapRow)[col] = "o";
 		solution.part1++;
 	}
 
@@ -149,7 +149,7 @@ export const sandTetris = (input: string): Solution => {
 		if (!coord) break;
 
 		const { row, col } = coord;
-		(part2Map[row] as MapRow)[col] = 'o';
+		(part2Map[row] as MapRow)[col] = "o";
 		solution.part2++;
 	}
 

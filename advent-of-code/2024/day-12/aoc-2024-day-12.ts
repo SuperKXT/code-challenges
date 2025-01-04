@@ -1,13 +1,13 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export const day12Path = path.join(
 	config.dirname,
-	'advent-of-code',
-	'2024',
-	'day-12',
+	"advent-of-code",
+	"2024",
+	"day-12",
 );
 
 type TRegion = {
@@ -83,7 +83,7 @@ const findRegion = (
 };
 
 export const aoc2024Day12 = (input: string) => {
-	const rows = input.trim().split('\n');
+	const rows = input.trim().split("\n");
 	const visited = new Set<string>();
 	const regions: TRegion[] = [];
 	for (let x = 0; x < rows.length; x++) {
@@ -104,7 +104,7 @@ export const aoc2024Day12 = (input: string) => {
 				const point = `${x}-${y}`;
 				const isPoint = region.points.has(point);
 				if (!isPoint) continue;
-				for (const dir of ['left', 'right', 'top', 'bottom'] as const) {
+				for (const dir of ["left", "right", "top", "bottom"] as const) {
 					const neighbors = {
 						top: region.points.has(`${x - 1}-${y}`),
 						bottom: region.points.has(`${x + 1}-${y}`),
@@ -112,8 +112,8 @@ export const aoc2024Day12 = (input: string) => {
 						right: region.points.has(`${x}-${y + 1}`),
 					};
 					if (neighbors[dir]) continue;
-					const prevX = dir === 'left' || dir === 'right' ? x - 1 : x;
-					const prevY = dir === 'top' || dir === 'bottom' ? y - 1 : y;
+					const prevX = dir === "left" || dir === "right" ? x - 1 : x;
+					const prevY = dir === "top" || dir === "bottom" ? y - 1 : y;
 					const hasPrev = region.sides.has(`${dir}-${prevX}-${prevY}`);
 					if (!hasPrev) sideCount++;
 				}
@@ -126,9 +126,9 @@ export const aoc2024Day12 = (input: string) => {
 };
 
 if (!config.isTest) {
-	console.time('aoc-2024-day-12');
-	const input = await readFile(path.join(day12Path, 'input.txt'), 'utf-8');
+	console.time("aoc-2024-day-12");
+	const input = await readFile(path.join(day12Path, "input.txt"), "utf-8");
 	const res = aoc2024Day12(input);
 	console.info(res);
-	console.timeEnd('aoc-2024-day-12');
+	console.timeEnd("aoc-2024-day-12");
 }

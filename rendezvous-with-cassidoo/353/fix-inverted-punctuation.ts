@@ -1,8 +1,8 @@
-const delimiters = ['.', '?', '!'] as const;
+const delimiters = [".", "?", "!"] as const;
 
 type Delimiter = (typeof delimiters)[number];
 
-const startMap = { '?': '¿', '!': '¡' } as const;
+const startMap = { "?": "¿", "!": "¡" } as const;
 
 type StartMap = typeof startMap;
 
@@ -17,10 +17,10 @@ type AppendStart<
 
 type FixInvertedPunctuation<
 	Input extends string,
-	Fixed extends string = '',
-	Sentence extends string = '',
+	Fixed extends string = "",
+	Sentence extends string = "",
 > = Input extends `${infer first}${infer rest}`
-	? [Sentence, first] extends ['', ' ']
+	? [Sentence, first] extends ["", " "]
 		? FixInvertedPunctuation<rest, `${Fixed} `, Sentence>
 		: first extends Delimiter
 			? FixInvertedPunctuation<
@@ -33,11 +33,11 @@ type FixInvertedPunctuation<
 export const fixInvertedPunctuation = <Input extends string>(
 	input: Input,
 ): FixInvertedPunctuation<Input> => {
-	let fixed = '';
-	let sentence = '';
+	let fixed = "";
+	let sentence = "";
 	for (const char of input) {
-		if (!sentence && char === ' ') {
-			fixed += ' ';
+		if (!sentence && char === " ") {
+			fixed += " ";
 			continue;
 		}
 		sentence += char;
@@ -46,7 +46,7 @@ export const fixInvertedPunctuation = <Input extends string>(
 			if (start && !sentence.startsWith(start))
 				sentence = `${start}${sentence}`;
 			fixed += sentence;
-			sentence = '';
+			sentence = "";
 		}
 	}
 	fixed += sentence;

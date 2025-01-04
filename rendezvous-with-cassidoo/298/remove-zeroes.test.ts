@@ -1,4 +1,4 @@
-import { removeZeroes } from './remove-zeroes.js';
+import { removeZeroes } from "./remove-zeroes.js";
 
 type Test = {
 	input: number[];
@@ -20,7 +20,7 @@ const tests: Test[] = [
 	},
 ];
 
-test.each(tests)('should return the trimmed array', ({ input, output }) => {
+test.each(tests)("should return the trimmed array", ({ input, output }) => {
 	const response = removeZeroes(input);
 	expect(response).toStrictEqual(output);
 });

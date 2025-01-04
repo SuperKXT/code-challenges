@@ -1,9 +1,9 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { tuningTrouble } from './tuning-trouble.js';
+import { tuningTrouble } from "./tuning-trouble.js";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 type Solution = ReturnType<typeof tuningTrouble>;
 
@@ -15,7 +15,7 @@ type Test = {
 const TESTS: Test[] = [
 	{
 		/** cSpell: disable-next-line */
-		input: 'mjqjpqmgbljsphdztnvjfqwrcgsmlb',
+		input: "mjqjpqmgbljsphdztnvjfqwrcgsmlb",
 		output: {
 			messageMarker: 19,
 			packetMarker: 7,
@@ -23,7 +23,7 @@ const TESTS: Test[] = [
 	},
 	{
 		/** cSpell: disable-next-line */
-		input: 'bvwbjplbgvbhsrlpgdmjqwftvncz',
+		input: "bvwbjplbgvbhsrlpgdmjqwftvncz",
 		output: {
 			messageMarker: 23,
 			packetMarker: 5,
@@ -31,7 +31,7 @@ const TESTS: Test[] = [
 	},
 	{
 		/** cSpell: disable-next-line */
-		input: 'nppdvjthqldpwncqszvftbrmjlhg',
+		input: "nppdvjthqldpwncqszvftbrmjlhg",
 		output: {
 			messageMarker: 23,
 			packetMarker: 6,
@@ -39,7 +39,7 @@ const TESTS: Test[] = [
 	},
 	{
 		/** cSpell: disable-next-line */
-		input: 'nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg',
+		input: "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg",
 		output: {
 			messageMarker: 29,
 			packetMarker: 10,
@@ -47,7 +47,7 @@ const TESTS: Test[] = [
 	},
 	{
 		/** cSpell: disable-next-line */
-		input: 'zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw',
+		input: "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw",
 		output: {
 			messageMarker: 26,
 			packetMarker: 11,
@@ -56,14 +56,14 @@ const TESTS: Test[] = [
 ];
 
 test.each(TESTS)(
-	'testing turningTrouble against example input',
+	"testing turningTrouble against example input",
 	({ input, output }) => {
 		expect(tuningTrouble(input)).toStrictEqual(output);
 	},
 );
 
-test('testing turningTrouble against real input', async () => {
-	const input = await readFile(path.join(config.dirname, 'input.txt'), 'utf-8');
+test("testing turningTrouble against real input", async () => {
+	const input = await readFile(path.join(config.dirname, "input.txt"), "utf-8");
 	const response = tuningTrouble(input);
 	const solution: Solution = {
 		messageMarker: 3476,

@@ -1,5 +1,5 @@
-import os from 'node:os';
-import { Worker } from 'node:worker_threads';
+import os from "node:os";
+import { Worker } from "node:worker_threads";
 
 export type TWorkerPoolRes<T> = (({ error: null } & T) | { error: string })[];
 
@@ -12,7 +12,7 @@ export class WorkerPool<TArgs, TReturn> {
 	}
 
 	async runTasks(tasks: TArgs[]): Promise<TWorkerPoolRes<TReturn>> {
-		if (!tasks.length) throw new Error('No tasks to run!');
+		if (!tasks.length) throw new Error("No tasks to run!");
 
 		let currChunk: TArgs[] = [];
 		const chunks: TArgs[][] = [currChunk];
@@ -39,12 +39,12 @@ export class WorkerPool<TArgs, TReturn> {
 			Promise.withResolvers<TWorkerPoolRes<TReturn>>();
 		const worker = new Worker(this.workerPath, { workerData: tasks });
 
-		worker.on('message', (result) => {
+		worker.on("message", (result) => {
 			worker.terminate();
 			resolve(result as never);
 		});
 
-		worker.on('error', (err) => {
+		worker.on("error", (err) => {
 			worker.terminate();
 			reject(err);
 		});

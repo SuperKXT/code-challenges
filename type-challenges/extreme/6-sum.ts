@@ -42,7 +42,7 @@ type ArrayReverse<T extends Digit[], Out extends Digit[] = []> = T extends [
 	? ArrayReverse<Rest, [...Out, L]>
 	: Out;
 
-type Fill<T extends number, A extends number[] = []> = A['length'] extends T
+type Fill<T extends number, A extends number[] = []> = A["length"] extends T
 	? A
 	: Fill<T, [...A, 1]>;
 
@@ -61,7 +61,7 @@ type NumberToArray<
 	? NumberToArray<T, L, [...A, F]>
 	: A;
 
-type ArrayToNumber<T extends Digit[], R extends string = ''> = T extends [
+type ArrayToNumber<T extends Digit[], R extends string = ""> = T extends [
 	infer F extends Digit,
 	...infer Rest extends Digit[],
 ]
@@ -75,11 +75,11 @@ type GreaterThanDigits<
 	U extends number[],
 	TF extends number[] = Fill<T[0]>,
 	UF extends number[] = Fill<U[0]>,
-> = T['length'] extends 0
+> = T["length"] extends 0
 	? false
 	: T[0] extends U[0]
 		? GreaterThanDigits<Shift<T>, Shift<U>>
-		: UF[TF['length']] extends undefined
+		: UF[TF["length"]] extends undefined
 			? true
 			: false;
 
@@ -90,9 +90,9 @@ type GreaterThan<
 	UA extends number[] = NumberToArray<U>,
 > = T extends U
 	? false
-	: TA['length'] extends UA['length']
+	: TA["length"] extends UA["length"]
 		? GreaterThanDigits<TA, UA>
-		: UA[TA['length']] extends undefined
+		: UA[TA["length"]] extends undefined
 			? true
 			: false;
 
@@ -117,7 +117,7 @@ type AddDigits<T extends Digit[], R extends unknown[] = []> = T extends [
 	...infer Rest extends Digit[],
 ]
 	? AddDigits<Rest, [...R, ...Fill<F>]>
-	: PadLeft<NumberToArray<R['length']>, 2>;
+	: PadLeft<NumberToArray<R["length"]>, 2>;
 
 type _innerSum<
 	A extends Digit[],
@@ -142,7 +142,7 @@ export type Sum<
 	B extends string | number | bigint,
 	ArrayA extends Digit[] = NumberToArray<UnsignedInt<A>>,
 	ArrayB extends Digit[] = NumberToArray<UnsignedInt<B>>,
-	MaxNum extends number = Max<[ArrayA['length'], ArrayB['length']]>,
+	MaxNum extends number = Max<[ArrayA["length"], ArrayB["length"]]>,
 > = ArrayToNumber<
 	ArrayReverse<
 		_innerSum<
@@ -159,18 +159,18 @@ export type SumStringified<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<SumStringified<2, 3>, '5'>>,
-	Expect<Equal<SumStringified<'13', '21'>, '34'>>,
-	Expect<Equal<SumStringified<'328', 7>, '335'>>,
-	Expect<Equal<SumStringified<1_000_000_000_000n, '123'>, '1000000000123'>>,
-	Expect<Equal<SumStringified<9999, 1>, '10000'>>,
-	Expect<Equal<SumStringified<4325234, '39532'>, '4364766'>>,
-	Expect<Equal<SumStringified<728, 0>, '728'>>,
-	Expect<Equal<SumStringified<'0', 213>, '213'>>,
-	Expect<Equal<SumStringified<0, '0'>, '0'>>,
+	Expect<Equal<SumStringified<2, 3>, "5">>,
+	Expect<Equal<SumStringified<"13", "21">, "34">>,
+	Expect<Equal<SumStringified<"328", 7>, "335">>,
+	Expect<Equal<SumStringified<1_000_000_000_000n, "123">, "1000000000123">>,
+	Expect<Equal<SumStringified<9999, 1>, "10000">>,
+	Expect<Equal<SumStringified<4325234, "39532">, "4364766">>,
+	Expect<Equal<SumStringified<728, 0>, "728">>,
+	Expect<Equal<SumStringified<"0", 213>, "213">>,
+	Expect<Equal<SumStringified<0, "0">, "0">>,
 ];
 
 /* _____________ Further Steps _____________ */

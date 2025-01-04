@@ -23,15 +23,15 @@ type If<C extends boolean, T, F> = C extends true ? T : F;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<If<true, 'a', 'b'>, 'a'>>,
-	Expect<Equal<If<false, 'a', 2>, 2>>,
+	Expect<Equal<If<true, "a", "b">, "a">>,
+	Expect<Equal<If<false, "a", 2>, 2>>,
 ];
 
 // @ts-expect-error incorrect argument
-type _error = If<null, 'a', 'b'>;
+type _error = If<null, "a", "b">;
 
 /* _____________ Further Steps _____________ */
 /*

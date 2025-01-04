@@ -1,4 +1,4 @@
-import { combineStrings, INVALID_ERROR } from './combine-strings.js';
+import { combineStrings, INVALID_ERROR } from "./combine-strings.js";
 
 type Test = {
 	input: [string[], number];
@@ -7,38 +7,38 @@ type Test = {
 
 const TESTS: Test[] = [
 	{
-		input: [['a', 'b', 'c', 'd', 'e', 'f', 'g'], 5],
-		output: ['a b c', 'd e f', 'g'],
+		input: [["a", "b", "c", "d", "e", "f", "g"], 5],
+		output: ["a b c", "d e f", "g"],
 	},
 	{
-		input: [['a', 'b', 'c', 'd', 'e', 'f', 'g'], 12],
-		output: ['a b c d e f', 'g'],
+		input: [["a", "b", "c", "d", "e", "f", "g"], 12],
+		output: ["a b c d e f", "g"],
 	},
 	{
-		input: [['alpha', 'beta', 'gamma', 'delta', 'epsilon'], 20],
-		output: ['alpha beta gamma', 'delta epsilon'],
+		input: [["alpha", "beta", "gamma", "delta", "epsilon"], 20],
+		output: ["alpha beta gamma", "delta epsilon"],
 	},
 	{
-		input: [['a', 'bce', 'ghs'], 3],
-		output: ['a', 'bce', 'ghs'],
+		input: [["a", "bce", "ghs"], 3],
+		output: ["a", "bce", "ghs"],
 	},
 	{
-		input: [['a', 'b'], 1],
-		output: ['a', 'b'],
+		input: [["a", "b"], 1],
+		output: ["a", "b"],
 	},
 	{
-		input: [['', ''], 1],
-		output: ['', ''],
+		input: [["", ""], 1],
+		output: ["", ""],
 	},
 ];
 
 test.each(TESTS)(
-	'testing combineStrings for valid inputs',
+	"testing combineStrings for valid inputs",
 	({ input, output }) => {
 		expect(combineStrings(...input)).toStrictEqual(output);
 	},
 );
 
-test('testing combineStrings for invalid inputs', () => {
-	expect(() => combineStrings(['ab', 'base', 'gh'], 2)).toThrow(INVALID_ERROR);
+test("testing combineStrings for invalid inputs", () => {
+	expect(() => combineStrings(["ab", "base", "gh"], 2)).toThrow(INVALID_ERROR);
 });

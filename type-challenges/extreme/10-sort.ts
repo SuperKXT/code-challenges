@@ -30,7 +30,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Fill<T extends number, A extends number[] = []> = A['length'] extends T
+type Fill<T extends number, A extends number[] = []> = A["length"] extends T
 	? A
 	: Fill<T, [...A, 1]>;
 
@@ -54,13 +54,13 @@ type CompareDigitDigits<
 	U extends number[],
 	TF extends number[] = Fill<T[0]>,
 	UF extends number[] = Fill<U[0]>,
-> = T['length'] extends 0
-	? 'same'
+> = T["length"] extends 0
+	? "same"
 	: T[0] extends U[0]
 		? CompareDigitDigits<Shift<T>, Shift<U>>
-		: UF[TF['length']] extends undefined
-			? 'greater'
-			: 'lesser';
+		: UF[TF["length"]] extends undefined
+			? "greater"
+			: "lesser";
 
 export type CompareNum<
 	T extends number,
@@ -68,12 +68,12 @@ export type CompareNum<
 	TA extends number[] = NumberToArray<T>,
 	UA extends number[] = NumberToArray<U>,
 > = T extends U
-	? 'equal'
-	: TA['length'] extends UA['length']
+	? "equal"
+	: TA["length"] extends UA["length"]
 		? CompareDigitDigits<TA, UA>
-		: UA[TA['length']] extends undefined
-			? 'greater'
-			: 'lesser';
+		: UA[TA["length"]] extends undefined
+			? "greater"
+			: "lesser";
 
 type SmallestOrGreatest<
 	Union extends number,
@@ -83,7 +83,7 @@ type SmallestOrGreatest<
 	? [
 			V extends V
 				? CompareNum<V, Union> extends (
-						IsGreatest extends true ? 'greater' : 'lesser'
+						IsGreatest extends true ? "greater" : "lesser"
 					)
 					? V
 					: never
@@ -114,7 +114,7 @@ type Sort<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<Sort<[]>, []>>,

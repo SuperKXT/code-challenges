@@ -22,7 +22,7 @@ type Concat<T extends unknown[], U extends unknown[]> = [...T, ...U];
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<Concat<[], []>, []>>,
@@ -30,8 +30,8 @@ type _cases = [
 	Expect<Equal<Concat<[1, 2], [3, 4]>, [1, 2, 3, 4]>>,
 	Expect<
 		Equal<
-			Concat<['1', 2, '3'], [false, boolean, '4']>,
-			['1', 2, '3', false, boolean, '4']
+			Concat<["1", 2, "3"], [false, boolean, "4"]>,
+			["1", 2, "3", false, boolean, "4"]
 		>
 	>,
 ];

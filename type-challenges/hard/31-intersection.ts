@@ -30,7 +30,7 @@ type Intersection<T extends readonly unknown[]> = T extends [
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<Intersection<[[1, 2], [2, 3], [2, 2]]>, 2>>,

@@ -4,9 +4,9 @@ import {
 	COORDS,
 	SQUARE,
 	WHITE_PIECES,
-} from './check-chess-move.types.js';
+} from "./check-chess-move.types.js";
 
-import type { Utils } from '../../types/utils.types.js';
+import type { Utils } from "../../types/utils.types.js";
 import type {
 	BlackPiece,
 	Board,
@@ -16,7 +16,7 @@ import type {
 	Piece,
 	Position,
 	WhitePiece,
-} from './check-chess-move.types.js';
+} from "./check-chess-move.types.js";
 
 const assertBoard: Utils.assertFunction<Board> = (board: unknown) => {
 	if (!Array.isArray(board) || board.length !== 8)
@@ -26,7 +26,7 @@ const assertBoard: Utils.assertFunction<Board> = (board: unknown) => {
 		if (!Array.isArray(row) || row.length !== 8)
 			throw new Error(CHESS_ERRORS.badColumns);
 
-		if (row.some((cell) => typeof cell !== 'string' || !SQUARE.includes(cell)))
+		if (row.some((cell) => typeof cell !== "string" || !SQUARE.includes(cell)))
 			throw new Error(CHESS_ERRORS.badSquare);
 	}
 };
@@ -43,8 +43,8 @@ const isPosition = (value: unknown): value is Position => {
 	return (
 		Array.isArray(value) &&
 		value.length === 2 &&
-		typeof value[0] === 'number' &&
-		typeof value[1] === 'number' &&
+		typeof value[0] === "number" &&
+		typeof value[1] === "number" &&
 		COORDS.includes(value[0]) &&
 		COORDS.includes(value[1])
 	);
@@ -56,7 +56,7 @@ export const isValidMove = ({
 	to: [toRow, toCol],
 }: IsValidMoveArgs): ChessResponse => {
 	try {
-		const squares = board.split('\n').map((curr) => curr.split(''));
+		const squares = board.split("\n").map((curr) => curr.split(""));
 
 		assertBoard(squares);
 
@@ -64,21 +64,21 @@ export const isValidMove = ({
 		const toPiece = squares[toRow][toCol];
 		const toSquare = squares[toRow][toCol];
 
-		if (piece === '~') throw new Error(CHESS_ERRORS.emptySpace);
+		if (piece === "~") throw new Error(CHESS_ERRORS.emptySpace);
 
-		if (toPiece !== '~' && !isEnemy(piece, toPiece))
+		if (toPiece !== "~" && !isEnemy(piece, toPiece))
 			throw new Error(CHESS_ERRORS.collision);
 
-		const isKill = toPiece !== '~';
+		const isKill = toPiece !== "~";
 
 		const path: Position[] = [];
 
 		if (col === toCol && row === toRow) throw new Error(CHESS_ERRORS.noMove);
 
-		if (piece === 'p' || piece === 'P') {
-			const nextRow = piece === 'p' ? row + 1 : row - 1;
-			const start = piece === 'p' ? 1 : 6;
-			const doubleNext = piece === 'p' ? start + 2 : start - 2;
+		if (piece === "p" || piece === "P") {
+			const nextRow = piece === "p" ? row + 1 : row - 1;
+			const start = piece === "p" ? 1 : 6;
+			const doubleNext = piece === "p" ? start + 2 : start - 2;
 			const nextCol = col + 1;
 			const prevCol = col - 1;
 			const isMove =
@@ -92,7 +92,7 @@ export const isValidMove = ({
 
 			path.push([row, col], [toRow, toCol]);
 			if (toRow === doubleNext) path.splice(1, 0, [doubleNext, col]);
-		} else if (piece === 'r' || piece === 'R') {
+		} else if (piece === "r" || piece === "R") {
 			if (col !== toCol && row !== toRow) throw new Error(CHESS_ERRORS.badRook);
 
 			const isHorizontal = col !== toCol;
@@ -108,7 +108,7 @@ export const isValidMove = ({
 
 				to > from ? current++ : current--;
 			}
-		} else if (piece === 'b' || piece === 'B') {
+		} else if (piece === "b" || piece === "B") {
 			if (Math.abs(toCol - col) !== Math.abs(toRow - row))
 				throw new Error(CHESS_ERRORS.badBishop);
 
@@ -121,7 +121,7 @@ export const isValidMove = ({
 				toRow > row ? currentRow++ : currentRow--;
 				toCol > col ? currentCol++ : currentCol--;
 			}
-		} else if (piece === 'n' || piece === 'N') {
+		} else if (piece === "n" || piece === "N") {
 			const valid = [
 				[row - 1, col - 2],
 				[row - 1, col + 2],
@@ -146,7 +146,7 @@ export const isValidMove = ({
 					toRow > row ? currentRow++ : currentRow--;
 				else toCol > col ? currentCol++ : currentCol--;
 			}
-		} else if (piece === 'q' || piece === 'Q') {
+		} else if (piece === "q" || piece === "Q") {
 			const isHorizontal = row === toRow && col !== toCol;
 			const isVertical = row !== toRow && col === toCol;
 			const isDiagonal = Math.abs(toCol - col) !== Math.abs(toRow - row);
@@ -185,7 +185,7 @@ export const isValidMove = ({
 		}
 
 		path.slice(1, -1).forEach(([currRow, currCol]) => {
-			if (SQUARE[currRow][currCol] !== '~')
+			if (SQUARE[currRow][currCol] !== "~")
 				throw new Error(CHESS_ERRORS.collision);
 		});
 

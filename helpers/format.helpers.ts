@@ -1,48 +1,48 @@
 export const NUMBER_PERIODS = [
-	'',
-	'thousand',
-	'million',
-	'billion',
-	'trillion',
-	'quadrillion',
-	'quintillion',
-	'sextillion',
+	"",
+	"thousand",
+	"million",
+	"billion",
+	"trillion",
+	"quadrillion",
+	"quintillion",
+	"sextillion",
 ] as const;
 
 export const NUMBER_TENS = [
-	'',
-	'',
-	'twenty',
-	'thirty',
-	'forty',
-	'fifty',
-	'sixty',
-	'seventy',
-	'eighty',
-	'ninety',
+	"",
+	"",
+	"twenty",
+	"thirty",
+	"forty",
+	"fifty",
+	"sixty",
+	"seventy",
+	"eighty",
+	"ninety",
 ] as const;
 
 export const NUMBER_UNITS = [
-	'',
-	'one',
-	'two',
-	'three',
-	'four',
-	'five',
-	'six',
-	'seven',
-	'eight',
-	'nine',
-	'ten',
-	'eleven',
-	'twelve',
-	'thirteen',
-	'fourteen',
-	'fifteen',
-	'sixteen',
-	'seventeen',
-	'eighteen',
-	'nineteen',
+	"",
+	"one",
+	"two",
+	"three",
+	"four",
+	"five",
+	"six",
+	"seven",
+	"eight",
+	"nine",
+	"ten",
+	"eleven",
+	"twelve",
+	"thirteen",
+	"fourteen",
+	"fifteen",
+	"sixteen",
+	"seventeen",
+	"eighteen",
+	"nineteen",
 ] as const;
 
 type Periods = typeof NUMBER_PERIODS;
@@ -53,15 +53,15 @@ type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 type Join<
 	T extends readonly string[],
-	Separator extends string = ',',
-	Result extends string = '',
+	Separator extends string = ",",
+	Result extends string = "",
 > = T extends [infer First extends string, ...infer Rest extends string[]]
 	? Join<
 			Rest,
 			Separator,
-			First extends ''
+			First extends ""
 				? Result
-				: Result extends ''
+				: Result extends ""
 					? First
 					: `${Result}${Separator}${First}`
 		>
@@ -82,24 +82,24 @@ type HundredsToWords<
 	Type extends HundredsTuple,
 	Result extends string[] = [],
 > = Type extends [
-	infer Hundred extends Exclude<Digit, '0'>,
+	infer Hundred extends Exclude<Digit, "0">,
 	...infer Rest extends [Digit, Digit],
 ]
-	? HundredsToWords<Rest, Hundred extends 0 ? [] : [Units[Hundred], 'hundred']>
+	? HundredsToWords<Rest, Hundred extends 0 ? [] : [Units[Hundred], "hundred"]>
 	: Type extends [infer Ten extends Digit, infer Unit extends Digit]
 		? `${Ten}${Unit}` extends `${infer I extends number}`
 			? Join<
 					[
 						...Result,
-						...(Units[I] extends Exclude<Units[number], ''>
+						...(Units[I] extends Exclude<Units[number], "">
 							? [Units[I]]
 							: [Tens[Ten], Units[Unit]]),
 					],
-					' '
+					" "
 				>
 			: never
 		: Type extends [infer Unit extends Digit]
-			? Join<[...Result, Units[Unit]], ' '>
+			? Join<[...Result, Units[Unit]], " ">
 			: never;
 
 type NumberToDigits<
@@ -116,7 +116,7 @@ type GroupTuple<
 	Curr extends unknown[] = [],
 	Groups extends unknown[][] = [],
 > = T extends [...infer Rest, infer Last]
-	? [Last, ...Curr]['length'] extends Size
+	? [Last, ...Curr]["length"] extends Size
 		? GroupTuple<Rest, Size, [], [[Last, ...Curr], ...Groups]>
 		: GroupTuple<Rest, Size, [Last, ...Curr], Groups>
 	: Curr extends []
@@ -129,16 +129,16 @@ type FractionalToWords<
 	Result extends string[] = [],
 > = Digits extends [infer First extends Digit, ...infer Rest extends Digit[]]
 	? FractionalToWords<never, Rest, [...Result, Units[First]]>
-	: ` point ${Join<Result, ' '>}`;
+	: ` point ${Join<Result, " ">}`;
 
 type JoinNumberChunks<
 	T extends number,
 	Result extends string[],
-	Sign extends string = `${T}` extends `-${string}` ? 'minus ' : '',
+	Sign extends string = `${T}` extends `-${string}` ? "minus " : "",
 	Fraction extends string = `${T}` extends `${string}.${infer F extends number}`
 		? FractionalToWords<F>
-		: '',
-> = `${Sign}${Join<Result, ', '>}${Fraction}`;
+		: "",
+> = `${Sign}${Join<Result, ", ">}${Fraction}`;
 
 type NumberToWords<
 	T extends number,
@@ -147,11 +147,11 @@ type NumberToWords<
 		3
 	>,
 	Result extends string[] = [],
-	Postfix extends string = ['', ...Periods][Groups['length']],
+	Postfix extends string = ["", ...Periods][Groups["length"]],
 > = number extends T
 	? string
 	: T extends 0
-		? 'zero'
+		? "zero"
 		: Groups extends [
 					infer First extends HundredsTuple,
 					...infer Rest extends HundredsTuple[],
@@ -161,7 +161,7 @@ type NumberToWords<
 					Rest,
 					[
 						...Result,
-						Postfix extends ''
+						Postfix extends ""
 							? HundredsToWords<First>
 							: `${HundredsToWords<First>} ${Postfix}`,
 					]
@@ -171,8 +171,8 @@ type NumberToWords<
 export const numberToWords = <T extends number>(
 	number: T,
 ): NumberToWords<T> => {
-	if (isNaN(number)) throw new Error('invalid number!');
-	if (number === 0) return 'zero' as NumberToWords<T>;
+	if (isNaN(number)) throw new Error("invalid number!");
+	if (number === 0) return "zero" as NumberToWords<T>;
 	const string = Math.trunc(Math.abs(number)).toString();
 
 	const groups = Array.from(
@@ -185,11 +185,11 @@ export const numberToWords = <T extends number>(
 	);
 	const groupWords = groups.map((group, index) => {
 		const postFix = NUMBER_PERIODS[index];
-		const digits = group.padStart(3, '0');
+		const digits = group.padStart(3, "0");
 		const hundreds = NUMBER_UNITS[Number(digits[0])];
 		const pieces = new Array<string | undefined>();
 		pieces.push(hundreds);
-		if (hundreds) pieces.push('hundred');
+		if (hundreds) pieces.push("hundred");
 		const unit = NUMBER_UNITS[Number(digits.slice(1))];
 		if (unit) {
 			pieces.push(unit);
@@ -200,18 +200,18 @@ export const numberToWords = <T extends number>(
 			pieces.push(units);
 		}
 		pieces.push(postFix);
-		return pieces.filter(Boolean).join(' ');
+		return pieces.filter(Boolean).join(" ");
 	});
 
 	const fraction = String(number)
-		.split('.')[1]
-		?.split('')
+		.split(".")[1]
+		?.split("")
 		.map((num) => NUMBER_UNITS[Number(num)])
 		.filter(Boolean)
-		.join(' ');
+		.join(" ");
 
-	const stringified = groupWords.reverse().filter(Boolean).join(', ');
-	return ((number < 0 ? 'minus ' : '') +
+	const stringified = groupWords.reverse().filter(Boolean).join(", ");
+	return ((number < 0 ? "minus " : "") +
 		stringified +
-		(fraction ? ` point ${fraction}` : '')) as NumberToWords<T>;
+		(fraction ? ` point ${fraction}` : "")) as NumberToWords<T>;
 };

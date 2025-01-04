@@ -1,4 +1,4 @@
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 // Converts a union to an intersection by exploiting the contravariance of the function params
 type unionToIntersection<T> = (

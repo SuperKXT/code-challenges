@@ -26,17 +26,17 @@ type Join<T extends string[], U extends string | number> = T extends [
 	? R extends []
 		? F
 		: `${F}${U}${Join<R, U>}`
-	: '';
+	: "";
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<Join<['a', 'p', 'p', 'l', 'e'], '-'>, 'a-p-p-l-e'>>,
-	Expect<Equal<Join<['Hello', 'World'], ' '>, 'Hello World'>>,
-	Expect<Equal<Join<['2', '2', '2'], 1>, '21212'>>,
-	Expect<Equal<Join<['o'], 'u'>, 'o'>>,
+	Expect<Equal<Join<["a", "p", "p", "l", "e"], "-">, "a-p-p-l-e">>,
+	Expect<Equal<Join<["Hello", "World"], " ">, "Hello World">>,
+	Expect<Equal<Join<["2", "2", "2"], 1>, "21212">>,
+	Expect<Equal<Join<["o"], "u">, "o">>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -31,7 +31,7 @@ type FlipArguments<T extends (...args: any[]) => unknown> = (
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<FlipArguments<() => boolean>, () => boolean>>,
@@ -48,11 +48,11 @@ type _cases = [
 
 type _errors = [
 	// @ts-expect-error invalid argument
-	FlipArguments<'string'>,
+	FlipArguments<"string">,
 	// @ts-expect-error invalid arugment
-	FlipArguments<{ key: 'value' }>,
+	FlipArguments<{ key: "value" }>,
 	// @ts-expect-error invalid arugment
-	FlipArguments<['apple', 'banana', 100, { a: 1 }]>,
+	FlipArguments<["apple", "banana", 100, { a: 1 }]>,
 	// @ts-expect-error invalid argument
 	FlipArguments<null | undefined>,
 ];

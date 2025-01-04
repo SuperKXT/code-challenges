@@ -39,7 +39,7 @@ type RequiredByKeys<T extends object, K extends keyof T = keyof T> = Flat<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type User = {
 	name?: string;
@@ -60,11 +60,11 @@ type UserRequiredNameAndAge = {
 };
 
 type _cases = [
-	Expect<Equal<RequiredByKeys<User, 'name'>, UserRequiredName>>,
-	Expect<Equal<RequiredByKeys<User, 'name' | 'age'>, UserRequiredNameAndAge>>,
+	Expect<Equal<RequiredByKeys<User, "name">, UserRequiredName>>,
+	Expect<Equal<RequiredByKeys<User, "name" | "age">, UserRequiredNameAndAge>>,
 	Expect<Equal<RequiredByKeys<User>, Required<User>>>,
 	// @ts-expect-error invalid keys
-	Expect<Equal<RequiredByKeys<User, 'name' | 'unknown'>, UserRequiredName>>,
+	Expect<Equal<RequiredByKeys<User, "name" | "unknown">, UserRequiredName>>,
 ];
 
 /* _____________ Further Steps _____________ */

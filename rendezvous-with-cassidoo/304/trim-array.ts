@@ -1,4 +1,4 @@
-type tuple<T extends number, R extends unknown[] = []> = R['length'] extends T
+type tuple<T extends number, R extends unknown[] = []> = R["length"] extends T
 	? R
 	: tuple<T, [...R, unknown]>;
 

@@ -1,7 +1,7 @@
 type initCombo<
 	dice extends number,
 	res extends unknown[][] = [],
-> = res['length'] extends dice ? res : initCombo<dice, [...res, [1]]>;
+> = res["length"] extends dice ? res : initCombo<dice, [...res, [1]]>;
 
 type updateCombo<
 	sideCombo extends unknown[][],
@@ -10,7 +10,7 @@ type updateCombo<
 	...infer rest extends unknown[][],
 	infer last extends unknown[],
 ]
-	? last['length'] extends sides
+	? last["length"] extends sides
 		? [...updateCombo<rest, sides>, [1]]
 		: [...rest, [...last, 1]]
 	: [[1]];
@@ -23,7 +23,7 @@ type addCombo<
 	...infer rest extends unknown[][],
 ]
 	? addCombo<rest, [...sum, ...first]>
-	: sum['length'];
+	: sum["length"];
 
 type RollDice<
 	dice extends number,
@@ -32,7 +32,7 @@ type RollDice<
 	sideCombo extends unknown[][] = initCombo<dice>,
 	count extends unknown[] = [],
 > = sideCombo[dice] extends unknown[]
-	? count['length']
+	? count["length"]
 	: RollDice<
 			dice,
 			sides,

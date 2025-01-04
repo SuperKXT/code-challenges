@@ -1,6 +1,6 @@
-import type { Utils } from '../../types/utils.types.js';
+import type { Utils } from "../../types/utils.types.js";
 
-type Fill<T extends number, A extends number[] = []> = A['length'] extends T
+type Fill<T extends number, A extends number[] = []> = A["length"] extends T
 	? A
 	: Fill<T, [...A, 1]>;
 
@@ -24,11 +24,11 @@ type GreaterThanDigits<
 	U extends number[],
 	TF extends number[] = Fill<T[0]>,
 	UF extends number[] = Fill<U[0]>,
-> = T['length'] extends 0
+> = T["length"] extends 0
 	? false
 	: T[0] extends U[0]
 		? GreaterThanDigits<Shift<T>, Shift<U>>
-		: UF[TF['length']] extends undefined
+		: UF[TF["length"]] extends undefined
 			? true
 			: false;
 
@@ -46,9 +46,9 @@ type GreaterThan<
 	UA extends number[] = NumberToArray<U>,
 > = T extends U
 	? false
-	: TA['length'] extends UA['length']
+	: TA["length"] extends UA["length"]
 		? GreaterThanDigits<TA, UA>
-		: UA[TA['length']] extends undefined
+		: UA[TA["length"]] extends undefined
 			? true
 			: false;
 
@@ -64,7 +64,7 @@ export type DepthJson<
 	T,
 	Depth extends number = 0,
 	Tup extends unknown[] = Utils.tuple<Depth>,
-	NextDepth extends number = [...Tup, 1]['length'],
+	NextDepth extends number = [...Tup, 1]["length"],
 > = T extends object
 	? Max<
 			| NextDepth
@@ -79,10 +79,10 @@ export const depthJson = <const T>(json: T): DepthJson<T> => {
 		let maxDepth = 0;
 		const curr: { stack: string[]; depth: number } = { stack: [], depth: 0 };
 		for (const char of JSON.stringify(json)) {
-			if (['[', '{'].includes(char)) {
+			if (["[", "{"].includes(char)) {
 				curr.stack.push(char);
 				curr.depth++;
-			} else if ([']', '}'].includes(char)) {
+			} else if (["]", "}"].includes(char)) {
 				curr.stack.pop();
 				maxDepth = Math.max(maxDepth, curr.depth);
 				curr.depth--;

@@ -36,7 +36,7 @@ type GetIndex<
 	V extends T[number],
 > = T extends readonly [...infer Rest, infer Curr]
 	? Equal<Curr, V> extends true
-		? Rest['length']
+		? Rest["length"]
 		: GetIndex<Rest, V>
 	: never;
 
@@ -50,7 +50,7 @@ type TupleIndexes<T extends readonly unknown[]> = T extends readonly [
 	unknown,
 	...infer R,
 ]
-	? TupleIndexes<R> | R['length']
+	? TupleIndexes<R> | R["length"]
 	: never;
 
 type Enum<
@@ -63,20 +63,20 @@ type Enum<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
-const OperatingSystem = ['macOS', 'Windows', 'Linux'] as const;
+const OperatingSystem = ["macOS", "Windows", "Linux"] as const;
 const Command = [
-	'echo',
-	'grep',
-	'sed',
-	'awk',
-	'cut',
-	'uniq',
-	'head',
-	'tail',
-	'xargs',
-	'shift',
+	"echo",
+	"grep",
+	"sed",
+	"awk",
+	"cut",
+	"uniq",
+	"head",
+	"tail",
+	"xargs",
+	"shift",
 ] as const;
 
 type _cases = [
@@ -85,9 +85,9 @@ type _cases = [
 		Equal<
 			Enum<typeof OperatingSystem>,
 			{
-				readonly MacOS: 'macOS';
-				readonly Windows: 'Windows';
-				readonly Linux: 'Linux';
+				readonly MacOS: "macOS";
+				readonly Windows: "Windows";
+				readonly Linux: "Linux";
 			}
 		>
 	>,
@@ -105,16 +105,16 @@ type _cases = [
 		Equal<
 			Enum<typeof Command>,
 			{
-				readonly Echo: 'echo';
-				readonly Grep: 'grep';
-				readonly Sed: 'sed';
-				readonly Awk: 'awk';
-				readonly Cut: 'cut';
-				readonly Uniq: 'uniq';
-				readonly Head: 'head';
-				readonly Tail: 'tail';
-				readonly Xargs: 'xargs';
-				readonly Shift: 'shift';
+				readonly Echo: "echo";
+				readonly Grep: "grep";
+				readonly Sed: "sed";
+				readonly Awk: "awk";
+				readonly Cut: "cut";
+				readonly Uniq: "uniq";
+				readonly Head: "head";
+				readonly Tail: "tail";
+				readonly Xargs: "xargs";
+				readonly Shift: "shift";
 			}
 		>
 	>,

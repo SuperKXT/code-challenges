@@ -1,14 +1,14 @@
 /* eslint-disable no-bitwise */
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export const day17Path = path.join(
 	config.dirname,
-	'advent-of-code',
-	'2024',
-	'day-17',
+	"advent-of-code",
+	"2024",
+	"day-17",
 );
 
 type TRegisters = { a: number; b: number; c: number };
@@ -31,7 +31,7 @@ const combo = (operand: number, registers: TRegisters) => {
 			return registers.c;
 		}
 		default: {
-			throw new Error('Invalid input');
+			throw new Error("Invalid input");
 		}
 	}
 };
@@ -44,17 +44,17 @@ export const aoc2024Day17 = (input: string) => {
 	const c = Number(res?.[2]);
 	const program = res?.[3]
 		?.trim()
-		.split(',')
+		.split(",")
 		.map((s) => Number(s));
 	if (isNaN(a) || isNaN(b) || isNaN(c) || !program?.length)
-		throw new Error('Invalid input');
+		throw new Error("Invalid input");
 	const registers: TRegisters = { a, b, c };
 	let pointer = 0;
 	pr: while (pointer < program.length) {
 		const op = program[pointer];
 		const operand = program[pointer + 1];
 		if (op === undefined || operand === undefined)
-			throw new Error('Invalid input');
+			throw new Error("Invalid input");
 		switch (op) {
 			case 0: {
 				// adv
@@ -100,18 +100,18 @@ export const aoc2024Day17 = (input: string) => {
 				break;
 			}
 			default:
-				throw new Error('Invalid input');
+				throw new Error("Invalid input");
 		}
 		pointer += 2;
 	}
 
-	return { output: output.join(',') };
+	return { output: output.join(",") };
 };
 
 if (!config.isTest) {
-	console.time('aoc-2024-day-17');
-	const input = await readFile(path.join(day17Path, 'input.txt'), 'utf-8');
+	console.time("aoc-2024-day-17");
+	const input = await readFile(path.join(day17Path, "input.txt"), "utf-8");
 	const res = aoc2024Day17(input);
 	console.info(res);
-	console.timeEnd('aoc-2024-day-17');
+	console.timeEnd("aoc-2024-day-17");
 }

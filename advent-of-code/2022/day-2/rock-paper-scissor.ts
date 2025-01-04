@@ -1,14 +1,14 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { z } from 'zod';
+import { z } from "zod";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
-const ARG_1_SCHEMA = z.enum(['a', 'b', 'c']);
+const ARG_1_SCHEMA = z.enum(["a", "b", "c"]);
 type VersusMove = z.infer<typeof ARG_1_SCHEMA>;
 
-const ARG_2_SCHEMA = z.enum(['x', 'y', 'z']);
+const ARG_2_SCHEMA = z.enum(["x", "y", "z"]);
 type PlayerMove = z.infer<typeof ARG_2_SCHEMA>;
 
 type Result = z.infer<typeof ARG_2_SCHEMA>;
@@ -17,47 +17,53 @@ const MATCH_SCHEMA = z.tuple([ARG_1_SCHEMA, ARG_2_SCHEMA]);
 
 const PLAYER_RULES = {
 	x: {
-		loses: 'b',
+		loses: "b",
 		score: 1,
-		wins: 'c',
+		wins: "c",
 	},
 	y: {
-		loses: 'c',
+		loses: "c",
 		score: 2,
-		wins: 'a',
+		wins: "a",
 	},
 	z: {
-		loses: 'a',
+		loses: "a",
 		score: 3,
-		wins: 'b',
+		wins: "b",
 	},
-} satisfies Record<PlayerMove, {
+} satisfies Record<
+	PlayerMove,
+	{
 		score: 1 | 2 | 3;
 		wins: VersusMove;
 		loses: VersusMove;
-	}>;
+	}
+>;
 
 const VERSUS_RULES = {
 	a: {
-		draws: 'x',
-		loses: 'y',
-		wins: 'z',
+		draws: "x",
+		loses: "y",
+		wins: "z",
 	},
 	b: {
-		draws: 'y',
-		loses: 'z',
-		wins: 'x',
+		draws: "y",
+		loses: "z",
+		wins: "x",
 	},
 	c: {
-		draws: 'z',
-		loses: 'x',
-		wins: 'y',
+		draws: "z",
+		loses: "x",
+		wins: "y",
 	},
-} satisfies Record<VersusMove, {
+} satisfies Record<
+	VersusMove,
+	{
 		wins: PlayerMove;
 		loses: PlayerMove;
 		draws: PlayerMove;
-	}>;
+	}
+>;
 
 const getPart1Score = (
 	versusMove: VersusMove,
@@ -77,9 +83,9 @@ const getPart1Score = (
 const getPart2Score = (versusMove: VersusMove, result: Result): number => {
 	const { wins, loses, draws } = VERSUS_RULES[versusMove];
 	switch (result) {
-		case 'z':
+		case "z":
 			return PLAYER_RULES[loses].score + 6;
-		case 'x':
+		case "x":
 			return PLAYER_RULES[wins].score + 0;
 		default:
 			return PLAYER_RULES[draws].score + 3;
@@ -94,18 +100,18 @@ export type RockPaperScissorsSolution = {
 export const rockPaperScissors =
 	async (): Promise<RockPaperScissorsSolution> => {
 		const input = await readFile(
-			path.join(config.dirname, 'input.txt'),
-			'utf-8',
+			path.join(config.dirname, "input.txt"),
+			"utf-8",
 		);
 
 		const score = input
 			.toLowerCase()
-			.split('\n')
+			.split("\n")
 			.reduce(
 				({ part1, part2 }, row) => {
 					try {
 						const [versus, playerOrResult] = MATCH_SCHEMA.parse(
-							row.toLowerCase().split(' '),
+							row.toLowerCase().split(" "),
 						);
 						return {
 							part1: part1 + getPart1Score(versus, playerOrResult),

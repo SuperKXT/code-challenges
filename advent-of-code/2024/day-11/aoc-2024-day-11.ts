@@ -1,13 +1,13 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export const day11Path = path.join(
 	config.dirname,
-	'advent-of-code',
-	'2024',
-	'day-11',
+	"advent-of-code",
+	"2024",
+	"day-11",
 );
 
 const map = new Map<string, number>();
@@ -41,7 +41,7 @@ const getStoneCount = (stone: bigint, total: number, idx: number): number => {
 };
 
 export const aoc2024Day11 = (input: string) => {
-	const stones: bigint[] = input.trim().split(' ').map(BigInt);
+	const stones: bigint[] = input.trim().split(" ").map(BigInt);
 	let count25 = 0;
 	let count75 = 0;
 
@@ -54,9 +54,9 @@ export const aoc2024Day11 = (input: string) => {
 };
 
 if (!config.isTest) {
-	console.time('aoc-2024-day-11');
-	const input = await readFile(path.join(day11Path, 'input.txt'), 'utf-8');
+	console.time("aoc-2024-day-11");
+	const input = await readFile(path.join(day11Path, "input.txt"), "utf-8");
 	const res = aoc2024Day11(input);
 	console.info(res);
-	console.timeEnd('aoc-2024-day-11');
+	console.timeEnd("aoc-2024-day-11");
 }

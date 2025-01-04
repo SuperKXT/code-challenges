@@ -11,14 +11,14 @@ type UniqueSubstring<
 	currLength extends 1[] = [],
 	uniqueChars extends string[] = [],
 	idx extends 1[] = [],
-	curr extends string = strTuple[idx['length']],
-> = idx['length'] extends strTuple['length']
-	? maxLength['length']
+	curr extends string = strTuple[idx["length"]],
+> = idx["length"] extends strTuple["length"]
+	? maxLength["length"]
 	: curr extends uniqueChars[number]
 		? UniqueSubstring<
 				str,
 				strTuple,
-				[...currLength, 1][maxLength['length']] extends number
+				[...currLength, 1][maxLength["length"]] extends number
 					? [...currLength, 1]
 					: maxLength,
 				currStart,
@@ -30,7 +30,7 @@ type UniqueSubstring<
 			? UniqueSubstring<
 					str,
 					strTuple,
-					[...currLength, 1][maxLength['length']] extends number
+					[...currLength, 1][maxLength["length"]] extends number
 						? [...currLength, 1]
 						: maxLength,
 					currStart,

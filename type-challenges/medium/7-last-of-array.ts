@@ -28,7 +28,7 @@ type Last<T extends unknown[]> = T extends [...unknown[], infer V] ? V : never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<Last<[2]>, 2>>,

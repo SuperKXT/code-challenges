@@ -4,7 +4,7 @@ export const treeHouse = (
 	visible: number;
 	scenicScore: number;
 } => {
-	const forest = input.split('\n').filter(Boolean);
+	const forest = input.split("\n").filter(Boolean);
 	const firstRow = forest.at(0) as string;
 	const lastRow = forest.at(-1) as string;
 	const middleRows = forest.slice(1, -1);
@@ -14,7 +14,7 @@ export const treeHouse = (
 
 	for (const row of middleRows) {
 		const rowIndex = forest.indexOf(row);
-		const trees = row.split('').map(Number);
+		const trees = row.split("").map(Number);
 
 		for (let colIndex = 1; colIndex < trees.length - 1; colIndex++) {
 			const current = trees[colIndex] as number;

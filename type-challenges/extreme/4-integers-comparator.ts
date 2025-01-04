@@ -22,7 +22,7 @@
 
 /* _____________ Test Cases _____________ */
 
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 // eslint-disable-next-line no-restricted-syntax
 enum Comparison {
@@ -34,7 +34,7 @@ enum Comparison {
 type CreateTuple<
 	T extends number,
 	Arr extends 1[] = [],
-> = Arr['length'] extends T ? Arr : CreateTuple<T, [...Arr, 1]>;
+> = Arr["length"] extends T ? Arr : CreateTuple<T, [...Arr, 1]>;
 
 type Unshift<T extends number[]> = T extends [
 	number,
@@ -58,9 +58,9 @@ type DigitComparator<A extends number[], B extends number[]> = A[0] extends B[0]
 type CompareTups<
 	A extends number[],
 	B extends number[],
-> = A['length'] extends B['length']
+> = A["length"] extends B["length"]
 	? DigitComparator<A, B>
-	: A[B['length']] extends undefined
+	: A[B["length"]] extends undefined
 		? Comparison.Lower
 		: Comparison.Greater;
 

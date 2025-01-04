@@ -91,10 +91,10 @@ declare function VueBasicProps<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Debug, Equal, Expect, IsAny } from '@type-challenges/utils';
+import type { Debug, Equal, Expect, IsAny } from "@type-challenges/utils";
 
 const alert = (_: any) => {
-	throw new Error('Function not implemented.');
+	throw new Error("Function not implemented.");
 };
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
@@ -114,12 +114,12 @@ VueBasicProps({
 		// eslint-disable-next-line @typescript-eslint/no-shadow
 		type PropsType = Debug<typeof this>;
 		type _cases = [
-			Expect<IsAny<PropsType['propA']>>,
-			Expect<Equal<PropsType['propB'], string>>,
-			Expect<Equal<PropsType['propC'], boolean>>,
-			Expect<Equal<PropsType['propD'], ClassA>>,
-			Expect<Equal<PropsType['propE'], string | number>>,
-			Expect<Equal<PropsType['propF'], RegExp>>,
+			Expect<IsAny<PropsType["propA"]>>,
+			Expect<Equal<PropsType["propB"], string>>,
+			Expect<Equal<PropsType["propC"], boolean>>,
+			Expect<Equal<PropsType["propD"], ClassA>>,
+			Expect<Equal<PropsType["propE"], string | number>>,
+			Expect<Equal<PropsType["propF"], RegExp>>,
 		];
 
 		// @ts-expect-error not available here
@@ -132,8 +132,8 @@ VueBasicProps({
 		this.data();
 
 		return {
-			firstname: 'Type',
-			lastname: 'Challenges',
+			firstname: "Type",
+			lastname: "Challenges",
 			amount: 10,
 		};
 	},

@@ -1,13 +1,13 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export const day19Path = path.join(
 	config.dirname,
-	'advent-of-code',
-	'2024',
-	'day-19',
+	"advent-of-code",
+	"2024",
+	"day-19",
 );
 
 const checkDesign = (
@@ -15,7 +15,7 @@ const checkDesign = (
 	towels: string[],
 	map: Map<string, number>,
 ): number => {
-	if (design === '') return 1;
+	if (design === "") return 1;
 	const existing = map.get(design);
 	if (existing !== undefined) return existing;
 	let count = 0;
@@ -29,10 +29,10 @@ const checkDesign = (
 };
 
 export const aoc2024Day19 = (input: string) => {
-	const [towelStr, ...designs] = input.trim().split('\n').filter(Boolean);
-	if (!towelStr || !designs.length) throw new Error('Invalid input');
+	const [towelStr, ...designs] = input.trim().split("\n").filter(Boolean);
+	if (!towelStr || !designs.length) throw new Error("Invalid input");
 	const countMap = new Map<string, number>();
-	const towels = towelStr.split(',').map((r) => r.trim());
+	const towels = towelStr.split(",").map((r) => r.trim());
 	let count = 0;
 	let totalCount = 0;
 	for (const design of designs) {
@@ -45,9 +45,9 @@ export const aoc2024Day19 = (input: string) => {
 };
 
 if (!config.isTest) {
-	console.time('aoc-2024-day-19');
-	const input = await readFile(path.join(day19Path, 'input.txt'), 'utf-8');
+	console.time("aoc-2024-day-19");
+	const input = await readFile(path.join(day19Path, "input.txt"), "utf-8");
 	const res = aoc2024Day19(input);
 	console.info(res);
-	console.timeEnd('aoc-2024-day-19');
+	console.timeEnd("aoc-2024-day-19");
 }

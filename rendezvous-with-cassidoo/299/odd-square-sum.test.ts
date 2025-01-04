@@ -1,4 +1,4 @@
-import { oddSquareNumbers } from './odd-square-sum.js';
+import { oddSquareNumbers } from "./odd-square-sum.js";
 
 type Test = {
 	input: number;
@@ -29,7 +29,7 @@ const tests: Test[] = [
 ];
 
 test.each(tests)(
-	'should return the sum of odd squares',
+	"should return the sum of odd squares",
 	({ input, output }) => {
 		const response = oddSquareNumbers(input);
 		expect(response).toStrictEqual(output);

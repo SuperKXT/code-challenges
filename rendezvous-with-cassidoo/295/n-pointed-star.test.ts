@@ -1,4 +1,4 @@
-import { getStarAngles } from './n-pointed-star.js';
+import { getStarAngles } from "./n-pointed-star.js";
 
 type Test = {
 	input: number;
@@ -16,15 +16,15 @@ const tests: Test[] = [
 ];
 
 test.each(tests)(
-	'should return the angles of the star with n sides',
+	"should return the angles of the star with n sides",
 	({ input, output }) => {
 		const response = getStarAngles(input);
 		expect(response).toBe(output);
 	},
 );
 
-test('should fail for less then 3 sides', () => {
+test("should fail for less then 3 sides", () => {
 	expect(() => {
 		getStarAngles(2);
-	}).toThrow('stars must have at least 3 sides!');
+	}).toThrow("stars must have at least 3 sides!");
 });

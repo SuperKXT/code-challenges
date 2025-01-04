@@ -33,24 +33,24 @@ type LookUp<U, T> = U extends { type: T } ? U : never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type Cat = {
-	type: 'cat';
-	breeds: 'Abyssinian' | 'Shorthair' | 'Curl' | 'Bengal';
+	type: "cat";
+	breeds: "Abyssinian" | "Shorthair" | "Curl" | "Bengal";
 };
 
 type Dog = {
-	type: 'dog';
-	breeds: 'Hound' | 'Brittany' | 'Bulldog' | 'Boxer';
-	color: 'brown' | 'white' | 'black';
+	type: "dog";
+	breeds: "Hound" | "Brittany" | "Bulldog" | "Boxer";
+	color: "brown" | "white" | "black";
 };
 
 type Animal = Cat | Dog;
 
 type _cases = [
-	Expect<Equal<LookUp<Animal, 'dog'>, Dog>>,
-	Expect<Equal<LookUp<Animal, 'cat'>, Cat>>,
+	Expect<Equal<LookUp<Animal, "dog">, Dog>>,
+	Expect<Equal<LookUp<Animal, "cat">, Cat>>,
 ];
 
 /* _____________ Further Steps _____________ */

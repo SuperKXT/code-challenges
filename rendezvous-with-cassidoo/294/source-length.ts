@@ -1,56 +1,56 @@
-import { readFile } from 'node:fs/promises';
+import { readFile } from "node:fs/promises";
 
-import { config } from '../../config.js';
+import { config } from "../../config.js";
 
 export const NUMBER_PERIODS = [
-	'',
-	'thousand',
-	'million',
-	'billion',
-	'trillion',
-	'quadrillion',
-	'quintillion',
-	'sextillion',
+	"",
+	"thousand",
+	"million",
+	"billion",
+	"trillion",
+	"quadrillion",
+	"quintillion",
+	"sextillion",
 ] as const;
 
 export const NUMBER_TENS = [
-	'',
-	'',
-	'twenty',
-	'thirty',
-	'forty',
-	'fifty',
-	'sixty',
-	'seventy',
-	'eighty',
-	'ninety',
+	"",
+	"",
+	"twenty",
+	"thirty",
+	"forty",
+	"fifty",
+	"sixty",
+	"seventy",
+	"eighty",
+	"ninety",
 ] as const;
 
 export const NUMBER_UNITS = [
-	'',
-	'one',
-	'two',
-	'three',
-	'four',
-	'five',
-	'six',
-	'seven',
-	'eight',
-	'nine',
-	'ten',
-	'eleven',
-	'twelve',
-	'thirteen',
-	'fourteen',
-	'fifteen',
-	'sixteen',
-	'seventeen',
-	'eighteen',
-	'nineteen',
+	"",
+	"one",
+	"two",
+	"three",
+	"four",
+	"five",
+	"six",
+	"seven",
+	"eight",
+	"nine",
+	"ten",
+	"eleven",
+	"twelve",
+	"thirteen",
+	"fourteen",
+	"fifteen",
+	"sixteen",
+	"seventeen",
+	"eighteen",
+	"nineteen",
 ] as const;
 
 export const numberToWords = (number: number): string => {
-	if (number === 0) return 'zero';
+	if (number === 0) return "zero";
 	const string = Math.abs(number).toString();
 
 	const groups = Array.from(
@@ -69,7 +69,7 @@ export const numberToWords = (number: number): string => {
 		const unitNum = tenNum % 10;
 		const tensCount = Math.floor(tenNum / 10);
 		const pieces: string[] = [NUMBER_UNITS[hundredNum] as string];
-		if (pieces[0]) pieces.push('hundred');
+		if (pieces[0]) pieces.push("hundred");
 		const unit = NUMBER_UNITS[tenNum];
 		if (unit) {
 			pieces.push(unit);
@@ -78,12 +78,12 @@ export const numberToWords = (number: number): string => {
 			pieces.push(NUMBER_UNITS[unitNum] as string);
 		}
 		pieces.push(postFix);
-		return pieces.filter(Boolean).join(' ');
+		return pieces.filter(Boolean).join(" ");
 	});
-	return (number < 0 ? 'minus ' : '') + groupWords.filter(Boolean).join(', ');
+	return (number < 0 ? "minus " : "") + groupWords.filter(Boolean).join(", ");
 };
 
 export const getSourceLength = async (): Promise<string> => {
-	const length = (await readFile(config.dirname, 'utf-8')).length;
+	const length = (await readFile(config.dirname, "utf-8")).length;
 	return numberToWords(length);
 };

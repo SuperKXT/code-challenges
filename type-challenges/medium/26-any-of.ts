@@ -19,7 +19,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type False = 0 | '' | false | [] | Record<string, never> | null | undefined;
+type False = 0 | "" | false | [] | Record<string, never> | null | undefined;
 
 type AnyOf<T extends readonly unknown[]> = T extends [infer U, ...infer V]
 	? U extends False
@@ -29,22 +29,22 @@ type AnyOf<T extends readonly unknown[]> = T extends [infer U, ...infer V]
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<
-		Equal<AnyOf<[1, 'test', true, [1], { name: 'test' }, { 1: 'test' }]>, true>
+		Equal<AnyOf<[1, "test", true, [1], { name: "test" }, { 1: "test" }]>, true>
 	>,
-	Expect<Equal<AnyOf<[1, '', false, [], {}]>, true>>,
-	Expect<Equal<AnyOf<[0, 'test', false, [], {}]>, true>>,
-	Expect<Equal<AnyOf<[0, '', true, [], {}]>, true>>,
-	Expect<Equal<AnyOf<[0, '', false, [1], {}]>, true>>,
-	Expect<Equal<AnyOf<[0, '', false, [], { name: 'test' }]>, true>>,
-	Expect<Equal<AnyOf<[0, '', false, [], { 1: 'test' }]>, true>>,
+	Expect<Equal<AnyOf<[1, "", false, [], {}]>, true>>,
+	Expect<Equal<AnyOf<[0, "test", false, [], {}]>, true>>,
+	Expect<Equal<AnyOf<[0, "", true, [], {}]>, true>>,
+	Expect<Equal<AnyOf<[0, "", false, [1], {}]>, true>>,
+	Expect<Equal<AnyOf<[0, "", false, [], { name: "test" }]>, true>>,
+	Expect<Equal<AnyOf<[0, "", false, [], { 1: "test" }]>, true>>,
 	Expect<
-		Equal<AnyOf<[0, '', false, [], { name: 'test' }, { 1: 'test' }]>, true>
+		Equal<AnyOf<[0, "", false, [], { name: "test" }, { 1: "test" }]>, true>
 	>,
-	Expect<Equal<AnyOf<[0, '', false, [], {}, undefined, null]>, false>>,
+	Expect<Equal<AnyOf<[0, "", false, [], {}, undefined, null]>, false>>,
 	Expect<Equal<AnyOf<[]>, false>>,
 ];
 

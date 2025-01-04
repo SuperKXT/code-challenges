@@ -13,11 +13,11 @@ type Solution = {
 };
 
 const PREFIX = {
-	divisor: 'Test: divisible by',
-	falseIndex: 'If false: throw to monkey',
-	items: 'Starting items:',
-	operation: 'Operation: new =',
-	trueIndex: 'If true: throw to monkey',
+	divisor: "Test: divisible by",
+	falseIndex: "If false: throw to monkey",
+	items: "Starting items:",
+	operation: "Operation: new =",
+	trueIndex: "If true: throw to monkey",
 };
 
 export const monkeyBusiness = (input: string): Solution => {
@@ -27,29 +27,29 @@ export const monkeyBusiness = (input: string): Solution => {
 	};
 
 	const monkeys = input
-		.split('\n\n')
+		.split("\n\n")
 		.filter(Boolean)
 		.map((curr) => {
-			const rows = curr.split('\n');
+			const rows = curr.split("\n");
 
 			const [first, op, second] =
-				rows[2]?.replace(PREFIX.operation, '').trim().split(/\s+/gu) ?? [];
+				rows[2]?.replace(PREFIX.operation, "").trim().split(/\s+/gu) ?? [];
 
 			const monkey: Monkey = {
-				divisor: parseInt(rows[3]?.replace(PREFIX.divisor, '') ?? ''),
-				falseIndex: parseInt(rows[5]?.replace(PREFIX.falseIndex, '') ?? ''),
+				divisor: parseInt(rows[3]?.replace(PREFIX.divisor, "") ?? ""),
+				falseIndex: parseInt(rows[5]?.replace(PREFIX.falseIndex, "") ?? ""),
 				inspected: 0,
-				items: (rows[1]?.replace(PREFIX.items, '').split(',') ?? []).map(
+				items: (rows[1]?.replace(PREFIX.items, "").split(",") ?? []).map(
 					Number,
 				),
 				operation: (item: number) => {
-					const left = parseInt(first ?? '') || item;
-					const right = parseInt(second ?? '') || item;
-					if (op === '+') return left + right;
+					const left = parseInt(first ?? "") || item;
+					const right = parseInt(second ?? "") || item;
+					if (op === "+") return left + right;
 
 					return left * right;
 				},
-				trueIndex: parseInt(rows[4]?.replace(PREFIX.trueIndex, '') ?? ''),
+				trueIndex: parseInt(rows[4]?.replace(PREFIX.trueIndex, "") ?? ""),
 			};
 
 			return monkey;

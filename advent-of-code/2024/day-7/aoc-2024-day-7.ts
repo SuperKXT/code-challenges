@@ -1,13 +1,13 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export const day7Path = path.join(
 	config.dirname,
-	'advent-of-code',
-	'2024',
-	'day-7',
+	"advent-of-code",
+	"2024",
+	"day-7",
 );
 
 const getResults = (
@@ -30,21 +30,21 @@ const getResults = (
 export const aoc2024Day7 = (input: string) => {
 	let sumAndProdCount = 0;
 	let totalCount = 0;
-	for (const line of input.split('\n')) {
+	for (const line of input.split("\n")) {
 		if (!line.trim()) continue;
-		const s = line.split(':');
+		const s = line.split(":");
 		const result = Number(s[0]?.trim());
-		if (!result) throw new Error('Invalid equation');
+		if (!result) throw new Error("Invalid equation");
 		const operands =
 			s[1]
 				?.trim()
-				.split(' ')
+				.split(" ")
 				.map((n) => {
 					const num = Number(n);
-					if (!num) throw new Error('Invalid operand');
+					if (!num) throw new Error("Invalid operand");
 					return num;
 				}) ?? [];
-		if (!operands.length) throw new Error('No operands found');
+		if (!operands.length) throw new Error("No operands found");
 		const sumAndProdEqs = getResults(operands).filter(
 			(r) => r === result,
 		).length;
@@ -59,9 +59,9 @@ export const aoc2024Day7 = (input: string) => {
 };
 
 if (!config.isTest) {
-	console.time('aoc-2024-day-7');
-	const input = await readFile(path.join(day7Path, 'input.txt'), 'utf-8');
+	console.time("aoc-2024-day-7");
+	const input = await readFile(path.join(day7Path, "input.txt"), "utf-8");
 	const res = aoc2024Day7(input);
 	console.info(res);
-	console.timeEnd('aoc-2024-day-7');
+	console.timeEnd("aoc-2024-day-7");
 }

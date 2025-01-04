@@ -20,7 +20,7 @@
 
 type ReverseString<
 	T extends string,
-	R extends string = '',
+	R extends string = "",
 > = T extends `${infer F}${infer L}` ? ReverseString<L, `${F}${R}`> : R;
 
 type BinaryToDecimal<
@@ -29,28 +29,28 @@ type BinaryToDecimal<
 	B extends 1[] = [1],
 	R extends 1[] = [],
 > = RS extends `${infer F}${infer L}`
-	? BinaryToDecimal<never, L, [...B, ...B], F extends '1' ? [...R, ...B] : R>
-	: R['length'];
+	? BinaryToDecimal<never, L, [...B, ...B], F extends "1" ? [...R, ...B] : R>
+	: R["length"];
 
 type _BinaryToDecimal<
 	S extends string,
 	R extends unknown[] = [],
 > = S extends `${infer F}${infer L}`
-	? F extends '0'
+	? F extends "0"
 		? _BinaryToDecimal<L, [...R, ...R]>
 		: _BinaryToDecimal<L, [...R, ...R, 1]>
-	: R['length'];
+	: R["length"];
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<BinaryToDecimal<'10'>, 2>>,
-	Expect<Equal<BinaryToDecimal<'0011'>, 3>>,
-	Expect<Equal<BinaryToDecimal<'00000000'>, 0>>,
-	Expect<Equal<BinaryToDecimal<'11111111'>, 255>>,
-	Expect<Equal<BinaryToDecimal<'10101010'>, 170>>,
+	Expect<Equal<BinaryToDecimal<"10">, 2>>,
+	Expect<Equal<BinaryToDecimal<"0011">, 3>>,
+	Expect<Equal<BinaryToDecimal<"00000000">, 0>>,
+	Expect<Equal<BinaryToDecimal<"11111111">, 255>>,
+	Expect<Equal<BinaryToDecimal<"10101010">, 170>>,
 ];
 
 /* _____________ Further Steps _____________ */

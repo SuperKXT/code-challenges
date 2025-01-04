@@ -34,11 +34,11 @@ type Pop<T extends unknown[]> = T extends [...infer U, unknown]
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<Pop<[3, 2, 1]>, [3, 2]>>,
-	Expect<Equal<Pop<['a', 'b', 'c', 'd']>, ['a', 'b', 'c']>>,
+	Expect<Equal<Pop<["a", "b", "c", "d"]>, ["a", "b", "c"]>>,
 	Expect<Equal<Pop<[]>, []>>,
 ];
 

@@ -14,14 +14,14 @@
 
 type __FirstUniqueCharIndex<
 	T extends string,
-	A extends string = '',
+	A extends string = "",
 	Idx extends 1[] = [],
 > = T extends `${infer F}${infer O}`
 	? __FirstUniqueCharIndex<
 			O,
 			A extends `${infer L}${F}:[${infer I}]${infer R}`
-				? `${L}${R}${F}:[${I} | ${Idx['length']}]`
-				: `${A}${F}:[${Idx['length']}]`,
+				? `${L}${R}${F}:[${I} | ${Idx["length"]}]`
+				: `${A}${F}:[${Idx["length"]}]`,
 			[...Idx, 1]
 		>
 	: A extends `${string}:[${infer I extends number}]${string}`
@@ -36,19 +36,19 @@ type FirstUniqueCharIndex<
 		? FirstUniqueCharIndex<R, [...Idx, F]>
 		: R extends `${string}${F}${string}`
 			? FirstUniqueCharIndex<R, [...Idx, F]>
-			: Idx['length']
+			: Idx["length"]
 	: -1;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<FirstUniqueCharIndex<'leetcode'>, 0>>,
-	Expect<Equal<FirstUniqueCharIndex<'loveleetcode'>, 2>>,
-	Expect<Equal<FirstUniqueCharIndex<'aabb'>, -1>>,
-	Expect<Equal<FirstUniqueCharIndex<''>, -1>>,
-	Expect<Equal<FirstUniqueCharIndex<'aaa'>, -1>>,
+	Expect<Equal<FirstUniqueCharIndex<"leetcode">, 0>>,
+	Expect<Equal<FirstUniqueCharIndex<"loveleetcode">, 2>>,
+	Expect<Equal<FirstUniqueCharIndex<"aabb">, -1>>,
+	Expect<Equal<FirstUniqueCharIndex<"">, -1>>,
+	Expect<Equal<FirstUniqueCharIndex<"aaa">, -1>>,
 ];
 
 /* _____________ Further Steps _____________ */

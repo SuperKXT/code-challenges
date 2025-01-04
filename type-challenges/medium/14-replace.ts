@@ -22,7 +22,7 @@ type Replace<
 	S extends string,
 	From extends string,
 	To extends string,
-> = From extends ''
+> = From extends ""
 	? S
 	: S extends `${infer U}${From}${infer V}`
 		? `${U}${To}${V}`
@@ -30,15 +30,15 @@ type Replace<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<Replace<'foobar', 'bar', 'foo'>, 'foofoo'>>,
-	Expect<Equal<Replace<'foobarbar', 'bar', 'foo'>, 'foofoobar'>>,
-	Expect<Equal<Replace<'foobarbar', '', 'foo'>, 'foobarbar'>>,
-	Expect<Equal<Replace<'foobarbar', 'bar', ''>, 'foobar'>>,
-	Expect<Equal<Replace<'foobarbar', 'bra', 'foo'>, 'foobarbar'>>,
-	Expect<Equal<Replace<'', '', ''>, ''>>,
+	Expect<Equal<Replace<"foobar", "bar", "foo">, "foofoo">>,
+	Expect<Equal<Replace<"foobarbar", "bar", "foo">, "foofoobar">>,
+	Expect<Equal<Replace<"foobarbar", "", "foo">, "foobarbar">>,
+	Expect<Equal<Replace<"foobarbar", "bar", "">, "foobar">>,
+	Expect<Equal<Replace<"foobarbar", "bra", "foo">, "foobarbar">>,
+	Expect<Equal<Replace<"", "", "">, "">>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -1,6 +1,6 @@
-import { largestIsland } from './largest-island.js';
+import { largestIsland } from "./largest-island.js";
 
-test('testing largestIsland against test 1', () => {
+test("testing largestIsland against test 1", () => {
 	const arr: (0 | 1)[][] = [
 		[0, 1, 1, 1, 0, 0, 0, 1, 1],
 		[0, 1, 1, 1, 0, 1, 0, 0, 0],

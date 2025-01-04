@@ -3,9 +3,9 @@ type Solution = {
 	withoutRegex: string;
 };
 
-const VOWELS = 'aeiou'; // cSpell: disable-line
-const CONSONANTS = 'bcdfghjklmnpqrstvwxyz'; // cSpell: disable-line
-const REGEX = new RegExp(`(?<=[${VOWELS}]\\s*)[${CONSONANTS}]`, 'gu');
+const VOWELS = "aeiou"; // cSpell: disable-line
+const CONSONANTS = "bcdfghjklmnpqrstvwxyz"; // cSpell: disable-line
+const REGEX = new RegExp(`(?<=[${VOWELS}]\\s*)[${CONSONANTS}]`, "gu");
 
 export const capitalAfterVowel = (input: string): Solution => {
 	return {
@@ -15,6 +15,6 @@ export const capitalAfterVowel = (input: string): Solution => {
 			const isConsonantAfterVowel =
 				CONSONANTS.includes(char) && last && VOWELS.includes(last);
 			return isConsonantAfterVowel ? char.toUpperCase() : char;
-		}).join(''),
+		}).join(""),
 	};
 };

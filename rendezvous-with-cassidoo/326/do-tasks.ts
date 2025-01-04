@@ -4,7 +4,7 @@ type Task = { name: string; duration: number };
 type tuple<
 	size extends number,
 	tup extends 1[] = [],
-> = tup['length'] extends size ? tup : tuple<size, [...tup, 1]>;
+> = tup["length"] extends size ? tup : tuple<size, [...tup, 1]>;
 
 type numberToTuple<
 	T extends number,
@@ -18,7 +18,7 @@ type removeFromTuple<
 	tup extends unknown[],
 	toRemove extends number,
 	idx extends 1[] = [],
-> = idx['length'] extends toRemove
+> = idx["length"] extends toRemove
 	? tup
 	: tup extends [unknown, ...infer rest]
 		? removeFromTuple<rest, toRemove, [...idx, 1]>
@@ -29,11 +29,11 @@ type greaterThanDigits<
 	U extends number[],
 	TF extends number[] = tuple<T[0]>,
 	UF extends number[] = tuple<U[0]>,
-> = T['length'] extends 0
+> = T["length"] extends 0
 	? false
 	: T[0] extends U[0]
 		? greaterThanDigits<removeFromTuple<T, 1>, removeFromTuple<U, 1>>
-		: UF[TF['length']] extends undefined
+		: UF[TF["length"]] extends undefined
 			? true
 			: false;
 
@@ -44,9 +44,9 @@ type greaterThan<
 	UA extends number[] = numberToTuple<U>,
 > = T extends U
 	? false
-	: TA['length'] extends UA['length']
+	: TA["length"] extends UA["length"]
 		? greaterThanDigits<TA, UA>
-		: UA[TA['length']] extends undefined
+		: UA[TA["length"]] extends undefined
 			? true
 			: false;
 
@@ -67,13 +67,13 @@ type minDurationTask<
 	infer first extends Task,
 	...infer rest extends Task[],
 ]
-	? includes<names, first['name']> extends true
+	? includes<names, first["name"]> extends true
 		? minDurationTask<rest, names, min>
 		: minDurationTask<
 				rest,
 				names,
 				min extends Task
-					? greaterThan<min['duration'], first['duration']> extends false
+					? greaterThan<min["duration"], first["duration"]> extends false
 						? min
 						: first
 					: first
@@ -87,8 +87,8 @@ type sortNames<
 	infer first extends Task,
 	...infer rest extends Task[],
 ]
-	? includes<names, first['name']> extends true
-		? [first['name'], ...sortNames<rest, names>]
+	? includes<names, first["name"]> extends true
+		? [first["name"], ...sortNames<rest, names>]
 		: sortNames<rest, names>
 	: [];
 
@@ -104,8 +104,8 @@ type DoWork<
 		? DoWork<
 				tasks,
 				time,
-				removeFromTuple<timeTup, minTask['duration']>,
-				[...names, minTask['name']]
+				removeFromTuple<timeTup, minTask["duration"]>,
+				[...names, minTask["name"]]
 			>
 		: sortNames<tasks, names>;
 

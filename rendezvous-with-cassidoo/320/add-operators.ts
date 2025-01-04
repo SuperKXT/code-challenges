@@ -1,10 +1,10 @@
-const operators = ['+', '-', '*', '/'] as const;
+const operators = ["+", "-", "*", "/"] as const;
 
 type Result = { string: string; amount: number };
 
 const digitOperate = (
 	[first, ...rest]: string[],
-	string: string = '',
+	string: string = "",
 	amount?: number,
 ): Result[] => {
 	const results: Result[] = [];
@@ -14,18 +14,18 @@ const digitOperate = (
 	} else {
 		for (const operator of operators) {
 			let nextAmount = amount;
-			const nextString = string + (string ? operator : '') + first;
+			const nextString = string + (string ? operator : "") + first;
 			switch (operator) {
-				case '+':
+				case "+":
 					nextAmount += Number(first);
 					break;
-				case '-':
+				case "-":
 					nextAmount -= Number(first);
 					break;
-				case '*':
+				case "*":
 					nextAmount *= Number(first);
 					break;
-				case '/':
+				case "/":
 					nextAmount /= Number(first);
 					break;
 			}

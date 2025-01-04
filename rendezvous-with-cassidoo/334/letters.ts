@@ -4,22 +4,22 @@ type excludeFromTuple<
 	count extends 1[] = [],
 > = tuple extends [infer first, ...infer rest]
 	? [
-			...(count['length'] extends idx ? [] : [first]),
+			...(count["length"] extends idx ? [] : [first]),
 			...excludeFromTuple<rest, idx, [...count, 1]>,
 		]
 	: [];
 
 type _Letters<
 	input extends string[],
-	prefix extends string = '',
+	prefix extends string = "",
 	idx extends 1[] = [],
-> = idx['length'] extends input['length']
+> = idx["length"] extends input["length"]
 	? []
 	: [
-			`${prefix}${input[idx['length']]}`,
+			`${prefix}${input[idx["length"]]}`,
 			..._Letters<
-				excludeFromTuple<input, idx['length']>,
-				`${prefix}${input[idx['length']]}`
+				excludeFromTuple<input, idx["length"]>,
+				`${prefix}${input[idx["length"]]}`
 			>,
 			..._Letters<input, prefix, [...idx, 1]>,
 		];
@@ -36,7 +36,7 @@ type removeDuplicates<
 
 type Letters<input extends string[]> = removeDuplicates<_Letters<input>>;
 
-const _letters = (input: string[], prefix: string = ''): string[] => {
+const _letters = (input: string[], prefix: string = ""): string[] => {
 	const res: string[] = [];
 	for (let i = 0; i < input.length; i++) {
 		const curr = input[i] as string;

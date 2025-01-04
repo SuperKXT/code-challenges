@@ -1,30 +1,30 @@
-import { access, readdir, rename, stat } from 'node:fs/promises';
-import path from 'node:path';
+import { access, readdir, rename, stat } from "node:fs/promises";
+import path from "node:path";
 
-import chalk from 'chalk';
-import argumentParser from 'minimist-lite';
-import prompt from 'prompt';
-import { z } from 'zod';
+import chalk from "chalk";
+import argumentParser from "minimist-lite";
+import prompt from "prompt";
+import { z } from "zod";
 
-import { RENAME_ERRORS } from './recursive-rename.types.js';
+import { RENAME_ERRORS } from "./recursive-rename.types.js";
 
-import { config } from '../../config.js';
-import { stringifyError } from '../../helpers/error.helpers.js';
-import { formatToken } from '../../helpers/format-token.helpers.js';
+import { config } from "../../config.js";
+import { stringifyError } from "../../helpers/error.helpers.js";
+import { formatToken } from "../../helpers/format-token.helpers.js";
 
 import type {
 	RenameOptions,
 	RenameResult,
 	RenameResultType,
-} from './recursive-rename.types.js';
+} from "./recursive-rename.types.js";
 
 const PARAMS_SCHEMA = z.strictObject({
-	'--': z.string().array().length(0).optional(),
+	"--": z.string().array().length(0).optional(),
 	_: z.tuple([z.string()]),
 	h: z.boolean().optional(),
 	help: z.boolean().optional(),
 	o: z.boolean().optional(),
-	'only-changes': z.boolean().optional(),
+	"only-changes": z.boolean().optional(),
 	t: z.boolean().optional(),
 	tree: z.boolean().optional(),
 	v: z.boolean().optional(),
@@ -82,20 +82,20 @@ export const getRecursiveLogs = ({
 
 		if (
 			verbose &&
-			(!onlyChanges || type !== 'unchanged' || (tree && children))
+			(!onlyChanges || type !== "unchanged" || (tree && children))
 		) {
 			const log = [
-				tree && '  '.repeat(depth - 1),
-				tree && chalk.dim('|_ '),
+				tree && "  ".repeat(depth - 1),
+				tree && chalk.dim("|_ "),
 				!tree && `${labels[type]} `,
 				!tree && `${chalk.dim(resultPath)}/`,
-				type === 'unchanged' ? oldName : chalk.strikethrough(oldName),
-				type !== 'unchanged' &&
-					chalk[type === 'success' ? 'green' : 'red'](` ${newName}`),
-				type === 'error' && ` ${chalk.bgRed(` ${error} `)}`,
+				type === "unchanged" ? oldName : chalk.strikethrough(oldName),
+				type !== "unchanged" &&
+					chalk[type === "success" ? "green" : "red"](` ${newName}`),
+				type === "error" && ` ${chalk.bgRed(` ${error} `)}`,
 			]
 				.filter(Boolean)
-				.join('');
+				.join("");
 
 			response.logs.push(log);
 		}
@@ -128,11 +128,11 @@ export const getRenameLogs = (
 	isConfirmation?: boolean,
 ): string => {
 	const labels: Record<RenameResultType, string> = {
-		error: chalk.bgRedBright(!isConfirmation ? '   ERROR   ' : '   ISSUE   '),
+		error: chalk.bgRedBright(!isConfirmation ? "   ERROR   " : "   ISSUE   "),
 		success: chalk.bgGreenBright(
-			!isConfirmation ? '  SUCCESS  ' : '  POSSIBLE ',
+			!isConfirmation ? "  SUCCESS  " : "  POSSIBLE ",
 		),
-		unchanged: chalk.bgYellowBright(' UNCHANGED '),
+		unchanged: chalk.bgYellowBright(" UNCHANGED "),
 	};
 
 	const { logs, success, error, unchanged } = getRecursiveLogs({
@@ -146,18 +146,18 @@ export const getRenameLogs = (
 
 	logs.push(
 		[
-			'\n',
+			"\n",
 			labels.success,
 			chalk.bold.green(` ${success.length} `),
 			labels.error,
 			chalk.bold.red(` ${error.length} `),
 			labels.unchanged,
 			chalk.bold.yellow(` ${unchanged.length} `),
-			'\n',
-		].join(''),
+			"\n",
+		].join(""),
 	);
 
-	return logs.join('\n');
+	return logs.join("\n");
 };
 
 const getExists = async (file: string): Promise<boolean> => {
@@ -180,13 +180,13 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 	return await Promise.all(
 		files.map(async (file) => {
 			const oldPath = path.join(folder, file);
-			const [name = '', extension = ''] = file.split(/\.(?!.*\..*)/u);
+			const [name = "", extension = ""] = file.split(/\.(?!.*\..*)/u);
 
-			const newName = `${formatToken(name, 'kebab')}${
-				extension ? '.' : ''
+			const newName = `${formatToken(name, "kebab")}${
+				extension ? "." : ""
 			}${extension}`;
 			const newPath = newName !== file ? path.join(folder, newName) : oldPath;
-			let children: RenameResult['children'];
+			let children: RenameResult["children"];
 
 			try {
 				const isFolder = await getIsFolder(oldPath);
@@ -197,7 +197,7 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 						children,
 						oldName: file,
 						path: folder,
-						type: 'unchanged',
+						type: "unchanged",
 					};
 				}
 
@@ -210,7 +210,7 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 					newName,
 					oldName: file,
 					path: folder,
-					type: 'success',
+					type: "success",
 				};
 			} catch (error) {
 				return {
@@ -219,7 +219,7 @@ const findFiles = async (folder: string): Promise<RenameResult[]> => {
 					newName,
 					oldName: file,
 					path: folder,
-					type: 'error',
+					type: "error",
 				};
 			}
 		}),
@@ -239,7 +239,7 @@ const renameFiles = async (
 				? await renameFiles(newPath, file.children)
 				: undefined;
 
-			if (file.type === 'success') {
+			if (file.type === "success") {
 				try {
 					await rename(oldPath, newPath);
 				} catch (error) {
@@ -247,7 +247,7 @@ const renameFiles = async (
 						...file,
 						children,
 						error: stringifyError(error),
-						type: 'error',
+						type: "error",
 					};
 				}
 			}
@@ -261,15 +261,15 @@ const renameFiles = async (
 };
 
 export const RECURSIVE_RENAME_HELP = [
-	'kebab-rename PATH \x12b[9m[OPTIONS]',
-	'\n',
-].join('\n');
+	"kebab-rename PATH \x12b[9m[OPTIONS]",
+	"\n",
+].join("\n");
 
 export const recursiveRename = async (
 	location: string,
 	{ yes, verbose, onlyChanges, tree }: RenameOptions,
 ): Promise<RenameResult[]> => {
-	const folder = location.replace(/\/+$/u, '');
+	const folder = location.replace(/\/+$/u, "");
 
 	if (!(await getIsFolder(folder))) throw new Error(RENAME_ERRORS.badPath);
 
@@ -279,20 +279,20 @@ export const recursiveRename = async (
 		console.info(getRenameLogs(files, verbose, onlyChanges, tree, true));
 
 		prompt.start();
-		prompt.message = '';
-		prompt.delimiter = '';
+		prompt.message = "";
+		prompt.delimiter = "";
 		const { confirm } = await prompt.get({
 			properties: {
 				confirm: {
-					description: 'Do you want to continue? [y/n]: ',
-					message: 'Please enter y for yes or n for no',
+					description: "Do you want to continue? [y/n]: ",
+					message: "Please enter y for yes or n for no",
 					pattern: /^[yn]$/iu,
-					type: 'string',
+					type: "string",
 				},
 			},
 		});
 
-		if (confirm !== 'y' && confirm !== 'Y') return [];
+		if (confirm !== "y" && confirm !== "Y") return [];
 	}
 
 	const results = await renameFiles(folder, files);
@@ -306,11 +306,11 @@ if (!config.isTest) {
 	try {
 		const args = argumentParser<Params>(process.argv.slice(2), {
 			alias: {
-				help: 'h',
-				'only-changes': 'o',
-				tree: 't',
-				verbose: 'v',
-				yes: 'y',
+				help: "h",
+				"only-changes": "o",
+				tree: "t",
+				verbose: "v",
+				yes: "y",
 			},
 		});
 
@@ -318,7 +318,7 @@ if (!config.isTest) {
 			_: [folder],
 			verbose,
 			yes,
-			'only-changes': onlyChanges,
+			"only-changes": onlyChanges,
 			tree,
 			help,
 		} = PARAMS_SCHEMA.parse(args);

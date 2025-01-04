@@ -1,7 +1,7 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export type CountCaloriesSolution = {
 	maxIndex: number;
@@ -11,11 +11,11 @@ export type CountCaloriesSolution = {
 };
 
 export const countCalories = async (): Promise<CountCaloriesSolution> => {
-	const input = await readFile(path.join(config.dirname, 'input.txt'), 'utf-8');
+	const input = await readFile(path.join(config.dirname, "input.txt"), "utf-8");
 
-	const calories = input.split('\n\n').map((row) =>
+	const calories = input.split("\n\n").map((row) =>
 		row
-			.split('\n')
+			.split("\n")
 			.map(Number)
 			.reduce((sum, current) => sum + current, 0),
 	);

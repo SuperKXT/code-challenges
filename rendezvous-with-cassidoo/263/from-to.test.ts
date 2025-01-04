@@ -1,4 +1,4 @@
-import { fromTo } from './from-to.js';
+import { fromTo } from "./from-to.js";
 
 type Test = {
 	min: number;
@@ -13,7 +13,7 @@ const TESTS: Test[] = [
 	{ max: 0, min: 1 },
 ];
 
-test.each(TESTS)('testing fromTo', ({ min, max }) => {
+test.each(TESTS)("testing fromTo", ({ min, max }) => {
 	const generator = fromTo(min, max);
 	for (let index = min; index <= max; index++) expect(index).toBe(generator());
 

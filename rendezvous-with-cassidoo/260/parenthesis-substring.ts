@@ -4,7 +4,7 @@ export const parenthesisSubstring = (string: string): number => {
 	let currentLongest: number = 0;
 
 	for (let index = 0; index < string.length; index++) {
-		if (string[index] === '(') {
+		if (string[index] === "(") {
 			startParens++;
 		} else if (startParens > 0) {
 			currentLongest += 2;

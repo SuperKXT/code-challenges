@@ -1,13 +1,13 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export const day9Path = path.join(
 	config.dirname,
-	'advent-of-code',
-	'2024',
-	'day-9',
+	"advent-of-code",
+	"2024",
+	"day-9",
 );
 
 const getChecksum = (disk: string[]) => {
@@ -42,7 +42,7 @@ export const aoc2024Day9 = (input: string) => {
 				disk.push(fileId.toString());
 			} else {
 				spacesToFill.add(idx);
-				disk.push('.');
+				disk.push(".");
 			}
 			idx++;
 		}
@@ -53,10 +53,10 @@ export const aoc2024Day9 = (input: string) => {
 	const frag = [...disk];
 	for (const spaceIdx of spacesToFill) {
 		const file = files.pop();
-		if (!file) throw new Error('bad input');
+		if (!file) throw new Error("bad input");
 		if (file.idx <= spaceIdx) break;
 		frag[spaceIdx] = file.id.toString();
-		frag[file.idx] = '.';
+		frag[file.idx] = ".";
 	}
 
 	const fragChecksum = getChecksum(frag);
@@ -68,7 +68,7 @@ export const aoc2024Day9 = (input: string) => {
 			if (space.size < file.size) continue;
 			for (let i = 0; i < file.size; i++) {
 				defrag[space.idx + i] = file.id.toString();
-				defrag[file.idx + i] = '.';
+				defrag[file.idx + i] = ".";
 			}
 			space.idx += file.size;
 			space.size -= file.size;
@@ -82,9 +82,9 @@ export const aoc2024Day9 = (input: string) => {
 };
 
 if (!config.isTest) {
-	console.time('aoc-2024-day-9');
-	const input = await readFile(path.join(day9Path, 'input.txt'), 'utf-8');
+	console.time("aoc-2024-day-9");
+	const input = await readFile(path.join(day9Path, "input.txt"), "utf-8");
 	const res = aoc2024Day9(input);
 	console.info(res);
-	console.timeEnd('aoc-2024-day-9');
+	console.timeEnd("aoc-2024-day-9");
 }

@@ -4,8 +4,8 @@ export const supplyStacks = (
 	part1: string;
 	part2: string;
 } => {
-	const parts = input.split('\n\n');
-	const stackRows = parts[0]?.split('\n').slice(0, -1) ?? [];
+	const parts = input.split("\n\n");
+	const stackRows = parts[0]?.split("\n").slice(0, -1) ?? [];
 	const stacks = stackRows.reduce<string[][]>((array, row) => {
 		let index = 0;
 		for (let idx = 1; idx < row.length; idx += 4) {
@@ -13,7 +13,7 @@ export const supplyStacks = (
 			const lastIndex = index++;
 			if (!array[lastIndex]) array.push([]);
 
-			if (!current || current === ' ') continue;
+			if (!current || current === " ") continue;
 
 			array[lastIndex]?.push(current);
 		}
@@ -23,7 +23,7 @@ export const supplyStacks = (
 	const part1Stacks = structuredClone(stacks);
 	const part2Stacks = structuredClone(stacks);
 
-	const moveRows = parts[1]?.split('\n').filter(Boolean) ?? [];
+	const moveRows = parts[1]?.split("\n").filter(Boolean) ?? [];
 	const moves = moveRows.reduce<[number, number, number][]>(
 		(array, row) => [
 			...array,
@@ -42,7 +42,7 @@ export const supplyStacks = (
 	}
 
 	return {
-		part1: part1Stacks.map((stack: string[]) => stack[0]).join(''),
-		part2: part2Stacks.map((stack: string[]) => stack[0]).join(''),
+		part1: part1Stacks.map((stack: string[]) => stack[0]).join(""),
+		part2: part2Stacks.map((stack: string[]) => stack[0]).join(""),
 	};
 };

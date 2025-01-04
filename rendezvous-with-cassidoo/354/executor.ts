@@ -6,7 +6,7 @@ class Task {
 	}
 
 	run(): void {
-		console.info('run!');
+		console.info("run!");
 	}
 }
 

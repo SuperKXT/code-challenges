@@ -20,15 +20,15 @@
 /* _____________ Your Code Here _____________ */
 
 type RemoveLeadingZeros<T extends string> = T extends `0${infer V}`
-	? V extends ''
-		? '0'
+	? V extends ""
+		? "0"
 		: RemoveLeadingZeros<V>
 	: T;
 type ParseInt<T extends string> =
 	RemoveLeadingZeros<T> extends `${infer U extends number}` ? U : never;
 type ReverseString<T extends string> = T extends `${infer L}${infer R}`
 	? `${ReverseString<R>}${L}`
-	: '';
+	: "";
 
 type PositiveMinusOne<T extends string> = T extends `${infer D extends
 	number}${infer R}`
@@ -52,7 +52,7 @@ type MinusOne<T extends number> = T extends 0
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<MinusOne<1>, 0>>,

@@ -20,9 +20,9 @@ type Filter<T extends unknown[], P> = T extends [infer First, ...infer Rest]
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
-type Falsy = false | 0 | '' | null | undefined;
+type Falsy = false | 0 | "" | null | undefined;
 
 type _cases = [
 	Expect<Equal<Filter<[0, 1, 2], 2>, [2]>>,

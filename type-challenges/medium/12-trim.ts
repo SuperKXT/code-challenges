@@ -18,7 +18,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Space = ' ' | '\n' | '\t';
+type Space = " " | "\n" | "\t";
 type Trim<S extends string> = S extends
 	| `${Space}${infer U}`
 	| `${infer U}${Space}`
@@ -27,17 +27,17 @@ type Trim<S extends string> = S extends
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<Trim<'str'>, 'str'>>,
-	Expect<Equal<Trim<' str'>, 'str'>>,
-	Expect<Equal<Trim<'     str'>, 'str'>>,
-	Expect<Equal<Trim<'str   '>, 'str'>>,
-	Expect<Equal<Trim<'     str     '>, 'str'>>,
-	Expect<Equal<Trim<'   \n\t foo bar \t'>, 'foo bar'>>,
-	Expect<Equal<Trim<''>, ''>>,
-	Expect<Equal<Trim<' \n\t '>, ''>>,
+	Expect<Equal<Trim<"str">, "str">>,
+	Expect<Equal<Trim<" str">, "str">>,
+	Expect<Equal<Trim<"     str">, "str">>,
+	Expect<Equal<Trim<"str   ">, "str">>,
+	Expect<Equal<Trim<"     str     ">, "str">>,
+	Expect<Equal<Trim<"   \n\t foo bar \t">, "foo bar">>,
+	Expect<Equal<Trim<"">, "">>,
+	Expect<Equal<Trim<" \n\t ">, "">>,
 ];
 
 /* _____________ Further Steps _____________ */

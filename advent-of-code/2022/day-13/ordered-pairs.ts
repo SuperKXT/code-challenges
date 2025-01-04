@@ -14,7 +14,7 @@ const checkPacketOrder = (
 		const right = rightPacket[index];
 		if (right === undefined) return false;
 
-		if (typeof left === 'number' && typeof right === 'number') {
+		if (typeof left === "number" && typeof right === "number") {
 			if (left < right) return true;
 
 			if (left > right) return false;
@@ -40,10 +40,10 @@ export const orderedPairs = (input: string): Solution => {
 	};
 
 	const pairs = input
-		.split('\n\n')
+		.split("\n\n")
 		.map(
 			(row) =>
-				row.split('\n').map((curr) => JSON.parse(curr)) as [Packet, Packet],
+				row.split("\n").map((curr) => JSON.parse(curr)) as [Packet, Packet],
 		);
 
 	for (const pair of pairs) {

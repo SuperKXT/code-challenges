@@ -33,7 +33,7 @@ type _IsTuple<T> = [T] extends [never]
 type IsTuple<T> = [T] extends [never]
 	? false
 	: T extends readonly unknown[]
-		? number extends T['length']
+		? number extends T["length"]
 			? false
 			: true
 		: false;
@@ -42,7 +42,7 @@ type _ = IsTuple<readonly [1]>;
 //   ^?
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<IsTuple<[]>, true>>,

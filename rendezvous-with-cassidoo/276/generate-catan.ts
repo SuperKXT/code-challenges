@@ -3,9 +3,9 @@ import {
 	CATAN_ERRORS,
 	DOUBLE_PIECES,
 	SINGLE_PIECES,
-} from './generate-catan.types.js';
+} from "./generate-catan.types.js";
 
-import type { Board, Cell, ProspectiveBoard } from './generate-catan.types.js';
+import type { Board, Cell, ProspectiveBoard } from "./generate-catan.types.js";
 
 const isBadNeighbor = (
 	cell: Cell,
@@ -13,7 +13,7 @@ const isBadNeighbor = (
 	col: number,
 	board: ProspectiveBoard,
 ): boolean => {
-	if (cell !== '6' && cell !== '8') return false;
+	if (cell !== "6" && cell !== "8") return false;
 
 	const topLeftCol = row <= 2 ? col - 1 : col;
 	const bottomLeftCol = row < 2 ? col : col - 1;
@@ -25,7 +25,7 @@ const isBadNeighbor = (
 		board[row + 1]?.[bottomLeftCol],
 		board[row + 1]?.[bottomLeftCol + 1],
 	].filter(Boolean);
-	const badCell = cell === '6' ? '8' : '6';
+	const badCell = cell === "6" ? "8" : "6";
 	return neighbors.some((current) => current === badCell);
 };
 
@@ -33,7 +33,7 @@ export const assertValidCatanBoard = (input: string) => {
 	if (!BOARD_REGEX.test(input)) throw new Error(CATAN_ERRORS.badFormatting);
 
 	const board = input
-		.split('\n')
+		.split("\n")
 		.map((row) => row.split(/\s+/u).filter(Boolean)) as Board;
 
 	const counts: Partial<Record<Cell, number>> = {};
@@ -78,11 +78,11 @@ export const generateCatanBoard = (): string => {
 	];
 
 	const board: ProspectiveBoard = [
-		['', '', ''],
-		['', '', '', ''],
-		['', '', '', '', ''],
-		['', '', '', ''],
-		['', '', ''],
+		["", "", ""],
+		["", "", "", ""],
+		["", "", "", "", ""],
+		["", "", "", ""],
+		["", "", ""],
 	];
 
 	board.forEach((boardRow, row) => {
@@ -94,8 +94,8 @@ export const generateCatanBoard = (): string => {
 
 	try {
 		const boardString = board
-			.map((row) => `${' '.repeat(5 - row.length)}${row.join(' ')}`)
-			.join('\n');
+			.map((row) => `${" ".repeat(5 - row.length)}${row.join(" ")}`)
+			.join("\n");
 		assertValidCatanBoard(boardString);
 		return boardString;
 	} catch {

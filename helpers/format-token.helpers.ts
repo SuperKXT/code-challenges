@@ -5,9 +5,9 @@ import {
 	numeric,
 	upperAlphabet,
 	wordSeparators,
-} from './string-literals.helpers.js';
+} from "./string-literals.helpers.js";
 
-import type { Utils } from '../types/utils.types.js';
+import type { Utils } from "../types/utils.types.js";
 import type {
 	Alphabet,
 	AlphaNumeric,
@@ -15,17 +15,17 @@ import type {
 	Numeric,
 	UpperAlphabet,
 	WordSeparators,
-} from './string-literals.helpers.js';
+} from "./string-literals.helpers.js";
 
-type Strategy = 'camel' | 'pascal' | 'snake' | 'kebab' | 'constant' | 'human';
+type Strategy = "camel" | "pascal" | "snake" | "kebab" | "constant" | "human";
 
 const separatorMap = {
-	camel: '',
-	pascal: '',
-	snake: '_',
-	kebab: '-',
-	constant: '_',
-	human: ' ',
+	camel: "",
+	pascal: "",
+	snake: "_",
+	kebab: "-",
+	constant: "_",
+	human: " ",
 } as const;
 
 type SeparatorMap = typeof separatorMap;
@@ -33,7 +33,7 @@ type SeparatorMap = typeof separatorMap;
 type _firstChar<
 	char extends string,
 	strategy extends Strategy,
-> = `${SeparatorMap[Strategy]}${strategy extends 'kebab' | 'snake' | 'human'
+> = `${SeparatorMap[Strategy]}${strategy extends "kebab" | "snake" | "human"
 	? Lowercase<char>
 	: Uppercase<char>}`;
 
@@ -44,9 +44,9 @@ type _formatChar<
 	formatted extends string,
 > =
 	char extends Exclude<char, AlphaNumeric> // char !== AlphaNumeric
-		? ''
-		: formatted extends ''
-			? strategy extends 'pascal' | 'constant'
+		? ""
+		: formatted extends ""
+			? strategy extends "pascal" | "constant"
 				? Uppercase<char>
 				: Lowercase<char>
 			: [char, lastChar] extends
@@ -54,15 +54,15 @@ type _formatChar<
 						| [UpperAlphabet, LowerAlphabet]
 						| [Numeric, Exclude<lastChar, Numeric>]
 				? _firstChar<char, strategy>
-				: strategy extends 'constant'
+				: strategy extends "constant"
 					? Uppercase<char>
 					: Lowercase<char>;
 
 type _formatToken<
 	str extends string,
 	strategy extends Strategy,
-	lastChar extends string = '',
-	formatted extends string = '',
+	lastChar extends string = "",
+	formatted extends string = "",
 > = str extends `${infer first}${infer rest}`
 	? _formatToken<
 			rest,
@@ -88,9 +88,9 @@ export const formatToken = <T extends string, S extends Strategy>(
 	strategy: S,
 ): FormatToken<T, S> => {
 	const string = input.trim();
-	if (!string) return '' as never;
+	if (!string) return "" as never;
 
-	let formatted = '';
+	let formatted = "";
 
 	for (let index = 0; index < string.length; index++) {
 		const current = string[index] as string;
@@ -99,7 +99,7 @@ export const formatToken = <T extends string, S extends Strategy>(
 		if (!alphaNumeric.includes(current)) continue;
 
 		if (!last || !formatted) {
-			formatted += ['pascal', 'constant'].includes(strategy)
+			formatted += ["pascal", "constant"].includes(strategy)
 				? current.toUpperCase()
 				: current.toLowerCase();
 		} else if (
@@ -107,13 +107,13 @@ export const formatToken = <T extends string, S extends Strategy>(
 			(upperAlphabet.includes(current) && lowerAlphabet.includes(last)) ||
 			(numeric.includes(current) && !numeric.includes(last))
 		) {
-			const char = ['kebab', 'snake', 'human'].includes(strategy)
+			const char = ["kebab", "snake", "human"].includes(strategy)
 				? current.toLowerCase()
 				: current.toUpperCase();
 			formatted += `${separatorMap[strategy]}${char}`;
 		} else {
 			formatted +=
-				strategy === 'constant' ? current.toUpperCase() : current.toLowerCase();
+				strategy === "constant" ? current.toUpperCase() : current.toLowerCase();
 		}
 	}
 

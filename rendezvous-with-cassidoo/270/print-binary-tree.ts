@@ -1,14 +1,14 @@
 export const printBinaryTree = (nodes: number): string => {
 	if (
-		typeof nodes !== 'number' ||
+		typeof nodes !== "number" ||
 		nodes < 1 ||
 		nodes === Infinity ||
 		isNaN(nodes)
 	)
-		return '';
+		return "";
 
 	const steps = Math.max(1, Math.ceil(Math.log2(nodes)));
-	let tree = '';
+	let tree = "";
 	for (let step = 1; step <= steps; step++) {
 		const availableNodes = Math.min(2 ** (step - 1), nodes) * 2;
 		const stepNodes = Math.min(
@@ -20,18 +20,18 @@ export const printBinaryTree = (nodes: number): string => {
 		for (let subStep = 1; subStep <= subSteps; subStep++) {
 			let node = 0;
 			while (node < stepNodes) {
-				tree += new Array(spaces - subStep + 1).join(' ');
-				tree += '/';
+				tree += new Array(spaces - subStep + 1).join(" ");
+				tree += "/";
 				node++;
 				if (node === stepNodes) continue;
 
-				tree += new Array((subStep - 1) * 2 + 1).join(' ');
-				tree += '\\';
+				tree += new Array((subStep - 1) * 2 + 1).join(" ");
+				tree += "\\";
 				node++;
 				if (node !== stepNodes)
-					tree += new Array(spaces - subStep + 1).join(' ');
+					tree += new Array(spaces - subStep + 1).join(" ");
 			}
-			tree += '\n';
+			tree += "\n";
 		}
 	}
 	return tree;

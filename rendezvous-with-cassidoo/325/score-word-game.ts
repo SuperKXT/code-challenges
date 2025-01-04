@@ -1,7 +1,7 @@
 type tuple<
 	size extends number,
 	tup extends 1[] = [],
-> = tup['length'] extends size ? tup : tuple<size, [...tup, 1]>;
+> = tup["length"] extends size ? tup : tuple<size, [...tup, 1]>;
 
 type shift<T extends number[]> = T extends [
 	unknown,
@@ -23,11 +23,11 @@ type greaterThanDigits<
 	U extends number[],
 	TF extends number[] = tuple<T[0]>,
 	UF extends number[] = tuple<U[0]>,
-> = T['length'] extends 0
+> = T["length"] extends 0
 	? false
 	: T[0] extends U[0]
 		? greaterThanDigits<shift<T>, shift<U>>
-		: UF[TF['length']] extends undefined
+		: UF[TF["length"]] extends undefined
 			? true
 			: false;
 
@@ -38,9 +38,9 @@ type greaterThan<
 	UA extends number[] = numberToTuple<U>,
 > = T extends U
 	? false
-	: TA['length'] extends UA['length']
+	: TA["length"] extends UA["length"]
 		? greaterThanDigits<TA, UA>
-		: UA[TA['length']] extends undefined
+		: UA[TA["length"]] extends undefined
 			? true
 			: false;
 
@@ -53,15 +53,15 @@ type strLength<
 	tup extends 1[] = [],
 > = T extends `${string}${infer rest}`
 	? strLength<rest, [...tup, 1]>
-	: tup['length'];
+	: tup["length"];
 
 type multiply<
 	times extends number,
 	tup extends 1[],
 	res extends 1[] = [],
 	idx extends 1[] = [],
-> = idx['length'] extends times
-	? res['length']
+> = idx["length"] extends times
+	? res["length"]
 	: multiply<times, tup, [...res, ...tup], [...idx, 1]>;
 
 type wordScore<
@@ -80,7 +80,7 @@ type wordScore<
 type ScoreWordGame<
 	str extends readonly string[],
 	scores extends Record<stringToUnion<str[number]>, number>,
-	highest extends { score: number; word: string } = { score: 0; word: '' },
+	highest extends { score: number; word: string } = { score: 0; word: "" },
 > = str extends readonly [
 	infer first extends string,
 	...infer rest extends string[],
@@ -89,12 +89,12 @@ type ScoreWordGame<
 		? ScoreWordGame<
 				rest,
 				scores,
-				greaterThan<wordScore<first, scores>, highest['score']> extends true
+				greaterThan<wordScore<first, scores>, highest["score"]> extends true
 					? { word: first; score: wordScore<first, scores> }
 					: highest
 			>
 		: never
-	: highest['word'];
+	: highest["word"];
 
 export const scoreWordGame = <
 	const Str extends readonly string[],
@@ -103,7 +103,7 @@ export const scoreWordGame = <
 	words: Str,
 	scores: Scores,
 ): ScoreWordGame<Str, Scores> => {
-	const winner: { score: number; word: string } = { score: 0, word: '' };
+	const winner: { score: number; word: string } = { score: 0, word: "" };
 	for (const word of words) {
 		const score =
 			word.length *
@@ -120,7 +120,7 @@ export const scoreWordGame = <
 
 type prettify<T> = { [k in keyof T]: T[k] } & {};
 
-type alphabet = 'abcdefghijklmnopqrstuvwxyz';
+type alphabet = "abcdefghijklmnopqrstuvwxyz";
 
 type offset = tuple<98>;
 
@@ -131,7 +131,7 @@ export type LetterScores<
 > = tup extends `${infer first}${infer rest}`
 	? LetterScores<
 			rest,
-			map & Record<first, [...offset, ...idx]['length']>,
+			map & Record<first, [...offset, ...idx]["length"]>,
 			[...idx, 1]
 		>
 	: prettify<map>;

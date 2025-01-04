@@ -1,6 +1,6 @@
-import { getRandomInteger } from './random.helpers.js';
+import { getRandomInteger } from "./random.helpers.js";
 
-test('testing getRandomInteger helper', () => {
+test("testing getRandomInteger helper", () => {
 	const min = 0;
 	const max = 100_000;
 	for (let i = 0; i < 100_000; i++) {

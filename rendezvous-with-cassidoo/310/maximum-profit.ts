@@ -1,7 +1,7 @@
 type tuple<
 	T extends number,
 	result extends 1[] = [],
-> = result['length'] extends T ? result : tuple<T, [...result, 1]>;
+> = result["length"] extends T ? result : tuple<T, [...result, 1]>;
 
 type digit = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0;
 
@@ -15,10 +15,10 @@ type numberToTuple<
 		: [];
 
 type compareDigit<T extends digit, U extends digit> = T extends U
-	? 'equal'
+	? "equal"
 	: tuple<U> extends [...tuple<T>, ...unknown[]]
-		? 'less'
-		: 'greater';
+		? "less"
+		: "greater";
 
 type compareNumInner<tTuple extends digit[], uTuple extends digit[]> = [
 	tTuple,
@@ -27,12 +27,12 @@ type compareNumInner<tTuple extends digit[], uTuple extends digit[]> = [
 	[infer tFirst extends digit, ...infer tRest extends digit[]],
 	[infer uFirst extends digit, ...infer uRest extends digit[]],
 ]
-	? compareDigit<tFirst, uFirst> extends 'less'
-		? 'less'
-		: compareDigit<tFirst, uFirst> extends 'greater'
-			? 'greater'
+	? compareDigit<tFirst, uFirst> extends "less"
+		? "less"
+		: compareDigit<tFirst, uFirst> extends "greater"
+			? "greater"
 			: compareNumInner<tRest, uRest>
-	: 'equal';
+	: "equal";
 
 type compareNum<
 	T extends number,
@@ -40,11 +40,11 @@ type compareNum<
 	tTuple extends digit[] = numberToTuple<T>,
 	uTuple extends digit[] = numberToTuple<U>,
 > = T extends U
-	? 'equal'
-	: tTuple[uTuple['length']] extends digit
-		? 'greater'
-		: uTuple[tTuple['length']] extends digit
-			? 'less'
+	? "equal"
+	: tTuple[uTuple["length"]] extends digit
+		? "greater"
+		: uTuple[tTuple["length"]] extends digit
+			? "less"
 			: compareNumInner<tTuple, uTuple>;
 
 type min<
@@ -58,7 +58,7 @@ type min<
 			rest,
 			[val] extends [never]
 				? first
-				: compareNum<first, val> extends 'less'
+				: compareNum<first, val> extends "less"
 					? first
 					: val
 		>
@@ -77,7 +77,7 @@ type max<
 			rest,
 			[val] extends [never]
 				? first
-				: compareNum<first, val> extends 'greater'
+				: compareNum<first, val> extends "greater"
 					? first
 					: val
 		>
@@ -86,7 +86,7 @@ type max<
 		: val;
 
 type subtract<T extends number, U extends number> =
-	tuple<T> extends [...tuple<U>, ...infer rest] ? rest['length'] : never;
+	tuple<T> extends [...tuple<U>, ...infer rest] ? rest["length"] : never;
 
 type MaximumProfit<
 	Arr extends readonly number[],
@@ -96,7 +96,7 @@ type MaximumProfit<
 	...infer rest extends number[],
 ]
 	? first extends minVal
-		? compareNum<minVal, max<rest>> extends 'less'
+		? compareNum<minVal, max<rest>> extends "less"
 			? subtract<max<rest>, minVal>
 			: 0
 		: MaximumProfit<rest, minVal>

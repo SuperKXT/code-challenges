@@ -18,7 +18,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Tuple<T extends number, R extends 1[] = []> = R['length'] extends T
+type Tuple<T extends number, R extends 1[] = []> = R["length"] extends T
 	? R
 	: Tuple<T, [...R, 1]>;
 
@@ -28,12 +28,12 @@ type InclusiveRange<
 	Idx extends 1[] = Tuple<Lower>,
 	Result extends number[] = [],
 > = Idx[Higher] extends undefined
-	? InclusiveRange<Lower, Higher, [...Idx, 1], [...Result, Idx['length']]>
+	? InclusiveRange<Lower, Higher, [...Idx, 1], [...Result, Idx["length"]]>
 	: Result;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<InclusiveRange<200, 1>, []>>,

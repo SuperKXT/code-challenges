@@ -34,15 +34,15 @@ type _RequiredKeys<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<RequiredKeys<{ a: number; b?: string }>, 'a'>>,
-	Expect<Equal<RequiredKeys<{ a: undefined; b?: undefined }>, 'a'>>,
+	Expect<Equal<RequiredKeys<{ a: number; b?: string }>, "a">>,
+	Expect<Equal<RequiredKeys<{ a: undefined; b?: undefined }>, "a">>,
 	Expect<
 		Equal<
 			RequiredKeys<{ a: undefined; b?: undefined; c: string; d: null }>,
-			'a' | 'c' | 'd'
+			"a" | "c" | "d"
 		>
 	>,
 	Expect<Equal<RequiredKeys<{}>, never>>,

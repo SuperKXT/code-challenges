@@ -1,34 +1,34 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export const day15Path = path.join(
 	config.dirname,
-	'advent-of-code',
-	'2024',
-	'day-15',
+	"advent-of-code",
+	"2024",
+	"day-15",
 );
 
 const gridCellEnum = {
-	empty: '.',
-	box: 'O',
-	wall: '#',
-	robot: '@',
-	boxLeft: '[',
-	boxRight: ']',
+	empty: ".",
+	box: "O",
+	wall: "#",
+	robot: "@",
+	boxLeft: "[",
+	boxRight: "]",
 } as const;
 type TGridCell = (typeof gridCellEnum)[keyof typeof gridCellEnum];
 
 type TGridRow = TGridCell[];
 type TGrid = TGridRow[];
 
-const movements = ['^', 'v', '>', '<'] as const;
+const movements = ["^", "v", ">", "<"] as const;
 type TMovement = (typeof movements)[number];
 
 export const aoc2024Day15Part1 = (input: string) => {
-	const split = input.trim().split('\n\n');
+	const split = input.trim().split("\n\n");
 	const grid: TGrid = [];
 	const swappedGrid: TGrid = [];
 	let rows = 1;
@@ -36,8 +36,8 @@ export const aoc2024Day15Part1 = (input: string) => {
 	const pos = [0, 0] as [number, number];
 	let cY = 0;
 	let cX = 0;
-	for (const curr of split[0]?.trim() ?? '') {
-		if (curr === '\n') {
+	for (const curr of split[0]?.trim() ?? "") {
+		if (curr === "\n") {
 			rows++;
 			cols = cX + 1;
 			cY++;
@@ -51,7 +51,7 @@ export const aoc2024Day15Part1 = (input: string) => {
 		if (!swappedGrid[cX]) swappedGrid[cX] = swappedRow;
 
 		if (curr === gridCellEnum.robot) {
-			if (pos[0] !== 0 && pos[1] !== 1) throw new Error('Invalid input');
+			if (pos[0] !== 0 && pos[1] !== 1) throw new Error("Invalid input");
 			pos[0] = cY;
 			pos[1] = cX;
 		}
@@ -62,7 +62,7 @@ export const aoc2024Day15Part1 = (input: string) => {
 			curr !== gridCellEnum.box &&
 			curr !== gridCellEnum.robot
 		)
-			throw new Error('Invalid input');
+			throw new Error("Invalid input");
 
 		row[cX] = curr;
 		swappedRow[cY] = curr;
@@ -72,18 +72,18 @@ export const aoc2024Day15Part1 = (input: string) => {
 	const moves =
 		split[1]
 			?.trim()
-			.split('')
+			.split("")
 			.filter((s): s is TMovement => movements.includes(s)) ?? [];
 
 	if (!grid.length || !grid[0] || !moves.length)
-		throw new Error('Invalid input');
+		throw new Error("Invalid input");
 
 	for (const move of moves) {
 		const row = grid[pos[0]] ?? [];
 		const col = swappedGrid[pos[1]] ?? [];
 		const nextEmpty = [pos[0], pos[1]] as [number, number];
 		const nextPos = [pos[0], pos[1]] as [number, number];
-		if (move === '^') {
+		if (move === "^") {
 			nextPos[0] = pos[0] - 1;
 			for (let nX = pos[0] - 1; nX >= 0; nX--) {
 				if (col[nX] === gridCellEnum.wall) {
@@ -94,7 +94,7 @@ export const aoc2024Day15Part1 = (input: string) => {
 					break;
 				}
 			}
-		} else if (move === 'v') {
+		} else if (move === "v") {
 			nextPos[0] = pos[0] + 1;
 			for (let nX = pos[0] + 1; nX < col.length; nX++) {
 				if (col[nX] === gridCellEnum.wall) {
@@ -105,7 +105,7 @@ export const aoc2024Day15Part1 = (input: string) => {
 					break;
 				}
 			}
-		} else if (move === '>') {
+		} else if (move === ">") {
 			nextPos[1] = pos[1] + 1;
 			for (let nY = pos[1] + 1; nY < row.length; nY++) {
 				if (row[nY] === gridCellEnum.wall) {
@@ -174,12 +174,12 @@ const makeMove = (
 	curr: TGridCell = gridCellEnum.robot,
 ): boolean => {
 	const nextPos: [number, number] = [
-		move === '^' ? pos[0] - 1 : move === 'v' ? pos[0] + 1 : pos[0],
-		move === '<' ? pos[1] - 1 : move === '>' ? pos[1] + 1 : pos[1],
+		move === "^" ? pos[0] - 1 : move === "v" ? pos[0] + 1 : pos[0],
+		move === "<" ? pos[1] - 1 : move === ">" ? pos[1] + 1 : pos[1],
 	];
 	const movedSet = new Set<string>();
 	const nextCell = grid[nextPos[0]]?.[nextPos[1]];
-	if (!nextCell) throw new Error('invalid grid!');
+	if (!nextCell) throw new Error("invalid grid!");
 
 	if (nextCell === gridCellEnum.wall) return false;
 
@@ -188,7 +188,7 @@ const makeMove = (
 
 	let success = true;
 	if (nextCell !== gridCellEnum.empty) {
-		if (move === '^' || move === 'v') {
+		if (move === "^" || move === "v") {
 			if (nextCell === gridCellEnum.boxLeft) {
 				const right: [number, number] = [nextPos[0], nextPos[1] + 1];
 				success =
@@ -219,15 +219,15 @@ const makeMove = (
 };
 
 export const aoc2024Day15Part2 = (input: string) => {
-	const split = input.trim().split('\n\n');
+	const split = input.trim().split("\n\n");
 	let grid: TGrid = [];
 	let rows = 1;
 	let cols = 1;
 	const pos = [0, 0] as [number, number];
 	let cY = 0;
 	let cX = 0;
-	for (const curr of split[0]?.trim() ?? '') {
-		if (curr === '\n') {
+	for (const curr of split[0]?.trim() ?? "") {
+		if (curr === "\n") {
 			rows++;
 			cols = cX + 1;
 			cY++;
@@ -238,7 +238,7 @@ export const aoc2024Day15Part2 = (input: string) => {
 		if (!grid[cY]) grid[cY] = row;
 
 		if (curr === gridCellEnum.robot) {
-			if (pos[0] !== 0 && pos[1] !== 1) throw new Error('Invalid input');
+			if (pos[0] !== 0 && pos[1] !== 1) throw new Error("Invalid input");
 			pos[0] = cY;
 			pos[1] = cX;
 			row[cX] = gridCellEnum.robot;
@@ -252,7 +252,7 @@ export const aoc2024Day15Part2 = (input: string) => {
 		} else if (curr === gridCellEnum.empty) {
 			row[cX] = gridCellEnum.empty;
 			row[cX + 1] = gridCellEnum.empty;
-		} else throw new Error('Invalid input');
+		} else throw new Error("Invalid input");
 
 		cX += 2;
 	}
@@ -260,11 +260,11 @@ export const aoc2024Day15Part2 = (input: string) => {
 	const moves =
 		split[1]
 			?.trim()
-			.split('')
+			.split("")
 			.filter((s): s is TMovement => movements.includes(s)) ?? [];
 
 	if (!grid.length || !grid[0] || !moves.length)
-		throw new Error('Invalid input');
+		throw new Error("Invalid input");
 
 	for (const move of moves) {
 		const updated = structuredClone(grid);
@@ -290,10 +290,10 @@ export const aoc2024Day15Part2 = (input: string) => {
 };
 
 if (!config.isTest) {
-	console.time('aoc-2024-day-15');
-	const input = await readFile(path.join(day15Path, 'input.txt'), 'utf-8');
+	console.time("aoc-2024-day-15");
+	const input = await readFile(path.join(day15Path, "input.txt"), "utf-8");
 	const part1 = aoc2024Day15Part1(input);
 	const part2 = aoc2024Day15Part2(input);
 	console.info({ part1, part2 });
-	console.timeEnd('aoc-2024-day-15');
+	console.timeEnd("aoc-2024-day-15");
 }

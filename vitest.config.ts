@@ -1,5 +1,5 @@
 /* eslint-disable import/no-default-export */
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
 	test: {
@@ -7,11 +7,11 @@ export default defineConfig({
 		clearMocks: true,
 		coverage: {
 			enabled: true,
-			reporter: ['html'],
+			reporter: ["html"],
 		},
-		environment: 'node',
+		environment: "node",
 		typecheck: {
-			include: ['**/*.test.{ts,tsx}'],
+			include: ["**/*.test.{ts,tsx}"],
 		},
 	},
 });

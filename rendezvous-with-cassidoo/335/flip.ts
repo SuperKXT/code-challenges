@@ -15,20 +15,20 @@ type mapReverse<T extends readonly (readonly unknown[])[]> =
 
 type Flip<
 	input extends readonly (readonly unknown[])[],
-	direction extends 'horizontal' | 'vertical',
+	direction extends "horizontal" | "vertical",
 > = Readonly<
-	direction extends 'vertical' ? reverseTuple<input> : mapReverse<input>
+	direction extends "vertical" ? reverseTuple<input> : mapReverse<input>
 >;
 
 export const flip = <
 	const Input extends readonly (readonly unknown[])[],
-	Direction extends 'horizontal' | 'vertical',
+	Direction extends "horizontal" | "vertical",
 >(
 	input: Input,
 	direction: Direction,
 ): Flip<Input, Direction> => {
 	return (
-		direction === 'vertical'
+		direction === "vertical"
 			? input.toReversed()
 			: input.map((row) => row.toReversed())
 	) as never;

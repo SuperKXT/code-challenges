@@ -1,5 +1,5 @@
 type FindPair<T extends Shoe> = T extends `${infer foot}-${infer size}`
-	? `${foot extends 'L' ? 'R' : 'L'}-${size}`
+	? `${foot extends "L" ? "R" : "L"}-${size}`
 	: never;
 
 type MaxPairs<
@@ -20,9 +20,9 @@ type MaxPairs<
 				},
 				Count
 			>
-	: Count['length'];
+	: Count["length"];
 
-type Foot = 'L' | 'R';
+type Foot = "L" | "R";
 type Shoe = `${Foot}-${number}`;
 
 export const maxPairs = <const Pairs extends [Shoe, ...Shoe[]]>(
@@ -31,8 +31,8 @@ export const maxPairs = <const Pairs extends [Shoe, ...Shoe[]]>(
 	let count = 0;
 	const found = new Map<Shoe, number>();
 	for (const shoe of pairs) {
-		const [foot, size] = shoe.split('-') as [Foot, number];
-		const pair: Shoe = `${foot === 'L' ? 'R' : 'L'}-${size}`;
+		const [foot, size] = shoe.split("-") as [Foot, number];
+		const pair: Shoe = `${foot === "L" ? "R" : "L"}-${size}`;
 		const pairCount = found.get(pair) ?? 0;
 		if (pairCount) {
 			found.set(pair, pairCount - 1);

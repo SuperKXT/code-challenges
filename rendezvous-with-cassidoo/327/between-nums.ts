@@ -1,4 +1,4 @@
-type tuple<num extends number, tup extends 1[] = []> = tup['length'] extends num
+type tuple<num extends number, tup extends 1[] = []> = tup["length"] extends num
 	? tup
 	: tuple<num, [...tup, 1]>;
 
@@ -6,7 +6,7 @@ type removeN<
 	tup extends 1[],
 	n extends number,
 	idx extends 1[] = [],
-> = idx['length'] extends n
+> = idx["length"] extends n
 	? tup
 	: tup extends [1, ...infer rest extends 1[]]
 		? removeN<rest, n, [...idx, 1]>
@@ -27,9 +27,9 @@ type IsPrime<num extends number, idx extends 1[] = [1, 1]> = num extends 0
 	? false
 	: num extends 1
 		? true
-		: idx['length'] extends num
+		: idx["length"] extends num
 			? true
-			: divisible<num, idx['length']> extends true
+			: divisible<num, idx["length"]> extends true
 				? false
 				: IsPrime<num, [...idx, 1]>;
 
@@ -38,7 +38,7 @@ type IsOdd<
 	tup extends unknown[] = tuple<num>,
 > = tup extends [unknown, unknown, ...infer rest]
 	? IsOdd<never, rest>
-	: tup['length'] extends 1
+	: tup["length"] extends 1
 		? true
 		: false;
 
@@ -46,29 +46,29 @@ type IsEven<num extends number> = IsOdd<num> extends true ? false : true;
 
 type checkNum<
 	num extends number,
-	check extends 'even' | 'odd' | 'prime',
-> = check extends 'even'
+	check extends "even" | "odd" | "prime",
+> = check extends "even"
 	? IsEven<num>
-	: check extends 'odd'
+	: check extends "odd"
 		? IsOdd<num>
 		: IsPrime<num>;
 
 type BetweenNums<
 	first extends number,
 	second extends number,
-	check extends 'even' | 'odd' | 'prime',
+	check extends "even" | "odd" | "prime",
 	firstTup extends 1[] = tuple<first>,
 	secondTup extends 1[] = tuple<second>,
-	start extends 1[] = firstTup[secondTup['length']] extends 1
+	start extends 1[] = firstTup[secondTup["length"]] extends 1
 		? secondTup
 		: firstTup,
-	end extends 1[] = firstTup[secondTup['length']] extends 1
+	end extends 1[] = firstTup[secondTup["length"]] extends 1
 		? firstTup
 		: secondTup,
 	idx extends 1[] = [1],
 	result extends number[] = [],
-	curr extends number = [...start, ...idx]['length'],
-> = curr extends end['length']
+	curr extends number = [...start, ...idx]["length"],
+> = curr extends end["length"]
 	? result
 	: BetweenNums<
 			never,
@@ -90,7 +90,7 @@ const isPrime = (num: number) => {
 export const betweenNums = <
 	First extends number,
 	Second extends number,
-	Check extends 'even' | 'odd' | 'prime',
+	Check extends "even" | "odd" | "prime",
 >(
 	first: First,
 	second: Second,
@@ -99,13 +99,13 @@ export const betweenNums = <
 	const result: number[] = [];
 	for (let i = Math.min(first, second) + 1; i < Math.max(first, second); i++) {
 		switch (check) {
-			case 'even':
+			case "even":
 				if (i % 2 === 0) result.push(i);
 				break;
-			case 'odd':
+			case "odd":
 				if (i % 2 !== 0) result.push(i);
 				break;
-			case 'prime':
+			case "prime":
 				if (isPrime(i)) result.push(i);
 				break;
 		}

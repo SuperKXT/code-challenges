@@ -1,11 +1,11 @@
-type Option = 'hex' | 'hsl' | 'rgb';
+type Option = "hex" | "hsl" | "rgb";
 
 const HEX_REGEX = /^#[0-9A-F]{6}$/u;
 const RGB_REGEX = /^rgb\(\d{1,3},\d{1,3},\d{1,3}\)$/u;
 const HSL_REGEX = /^hsl\(\d{1,3},\d{1,3},\d{1,3}\)$/u;
 
 const parseHex = (input: string): [number, number, number] => {
-	if (!input.match(HEX_REGEX)) throw new Error('invalid hex color!');
+	if (!input.match(HEX_REGEX)) throw new Error("invalid hex color!");
 
 	return (input.slice(1).match(/.{2}/gu) as RegExpExecArray).map((row) =>
 		parseInt(`0x${row}`, 16),
@@ -13,30 +13,30 @@ const parseHex = (input: string): [number, number, number] => {
 };
 
 const parseHsl = (input: string): [number, number, number] => {
-	if (!input.match(HSL_REGEX)) throw new Error('invalid hsl color!');
+	if (!input.match(HSL_REGEX)) throw new Error("invalid hsl color!");
 
 	return input
 		.slice(4, -1)
-		.split(',')
+		.split(",")
 		.map((row, index) => {
 			const number = Number(row);
 			if (isNaN(number) || number < 0 || number > (index === 0 ? 360 : 100))
-				throw new Error('invalid rgb color!');
+				throw new Error("invalid rgb color!");
 
 			return number;
 		}) as [number, number, number];
 };
 
 const parseRgb = (input: string): [number, number, number] => {
-	if (!input.match(RGB_REGEX)) throw new Error('invalid rgb color!');
+	if (!input.match(RGB_REGEX)) throw new Error("invalid rgb color!");
 
 	return input
 		.slice(4, -1)
-		.split(',')
+		.split(",")
 		.map((row) => {
 			const number = Number(row);
 			if (isNaN(number) || number < 0 || number > 255)
-				throw new Error('invalid rgb color!');
+				throw new Error("invalid rgb color!");
 
 			return number;
 		}) as [number, number, number];
@@ -44,8 +44,8 @@ const parseRgb = (input: string): [number, number, number] => {
 
 const toHexString = (rgb: [number, number, number]): string => {
 	return `#${rgb
-		.map((row) => row.toString(16).padStart(2, '0').toUpperCase())
-		.join('')}`;
+		.map((row) => row.toString(16).padStart(2, "0").toUpperCase())
+		.join("")}`;
 };
 
 const rgbToHsl = (
@@ -116,23 +116,23 @@ export const convertColor = <T extends Option>(
 	input: string,
 ): string => {
 	switch (from) {
-		case 'hex': {
+		case "hex": {
 			const rgb = parseHex(input);
-			if (to === 'rgb') return `rgb(${rgb.join(',')})`;
-			return `(${rgbToHsl(rgb).join(',')})`;
+			if (to === "rgb") return `rgb(${rgb.join(",")})`;
+			return `(${rgbToHsl(rgb).join(",")})`;
 		}
-		case 'hsl': {
+		case "hsl": {
 			const hsl = parseHsl(input);
 			const rgb = hslToRgb(hsl);
-			if (to === 'rgb') return `rgb(${rgb.join(',')})`;
+			if (to === "rgb") return `rgb(${rgb.join(",")})`;
 			return toHexString(rgb);
 		}
-		case 'rgb': {
+		case "rgb": {
 			const rgb = parseRgb(input);
-			if (to === 'hex') return toHexString(rgb);
-			return `hsl(${rgbToHsl(rgb).join(',')})`;
+			if (to === "hex") return toHexString(rgb);
+			return `hsl(${rgbToHsl(rgb).join(",")})`;
 		}
 		default:
-			throw new Error('invalid option!');
+			throw new Error("invalid option!");
 	}
 };

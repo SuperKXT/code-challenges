@@ -1,4 +1,4 @@
-import type { LinkedList, LinkedListNode } from './linked-list.helpers.js';
+import type { LinkedList, LinkedListNode } from "./linked-list.helpers.js";
 
 export const areArraysEqual = <Type extends unknown[]>(
 	first: Type,
@@ -13,13 +13,13 @@ export const areArraysEqual = <Type extends unknown[]>(
 };
 
 type _LinkedListToArray<T extends NonNullable<LinkedListNode>> =
-	T['next'] extends NonNullable<LinkedListNode>
-		? [T['value'], ..._LinkedListToArray<T['next']>]
-		: [T['value']];
+	T["next"] extends NonNullable<LinkedListNode>
+		? [T["value"], ..._LinkedListToArray<T["next"]>]
+		: [T["value"]];
 
 type LinkedListToArray<T extends LinkedList<unknown>> =
-	T['head'] extends NonNullable<LinkedListNode>
-		? _LinkedListToArray<T['head']>
+	T["head"] extends NonNullable<LinkedListNode>
+		? _LinkedListToArray<T["head"]>
 		: [];
 
 export const linkedListToArray = <const List extends LinkedList<unknown>>(

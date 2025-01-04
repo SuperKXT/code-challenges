@@ -3,7 +3,7 @@ type digitOpts = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 type tuple<
 	size extends number,
 	res extends unknown[] = [],
-> = res['length'] extends size ? res : tuple<size, [...res, 1]>;
+> = res["length"] extends size ? res : tuple<size, [...res, 1]>;
 
 type shift<arr extends number[]> = arr extends [
 	unknown,
@@ -25,11 +25,11 @@ type greaterThanDigits<
 	numB extends number[],
 	tupleA extends number[] = tuple<numA[0]>,
 	tupleB extends number[] = tuple<numB[0]>,
-> = numA['length'] extends 0
+> = numA["length"] extends 0
 	? false
 	: numA[0] extends numB[0]
 		? greaterThanDigits<shift<numA>, shift<numB>>
-		: tupleB[tupleA['length']] extends undefined
+		: tupleB[tupleA["length"]] extends undefined
 			? true
 			: false;
 
@@ -40,9 +40,9 @@ type greaterThan<
 	UA extends number[] = numberToTuple<U>,
 > = T extends U
 	? false
-	: TA['length'] extends UA['length']
+	: TA["length"] extends UA["length"]
 		? greaterThanDigits<TA, UA>
-		: UA[TA['length']] extends undefined
+		: UA[TA["length"]] extends undefined
 			? true
 			: false;
 
@@ -50,7 +50,7 @@ type RemoveDigit<
 	num extends number,
 	digit extends digitOpts,
 	numStr extends string = `${num}`,
-	prevStr extends string = '',
+	prevStr extends string = "",
 	max extends number = 0,
 > = numStr extends `${infer first extends number}${infer rest}`
 	? [first, `${prevStr}${rest}`] extends [

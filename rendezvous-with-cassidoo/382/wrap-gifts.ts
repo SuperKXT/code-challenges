@@ -23,7 +23,7 @@ type TCompareNumber<
 	bTup extends string[] = TDigitTuple<B>,
 > = A extends B
 	? 0
-	: aTup['length'] extends bTup['length']
+	: aTup["length"] extends bTup["length"]
 		? aTup extends [
 				infer aFirst extends string,
 				...infer aRest extends string[],
@@ -39,7 +39,7 @@ type TCompareNumber<
 					: never
 				: never
 			: never
-		: aTup[bTup['length']] extends string
+		: aTup[bTup["length"]] extends string
 			? 1
 			: -1;
 type TSmallest<
@@ -77,7 +77,7 @@ type TSort<
 type TTuple<
 	size extends number,
 	res extends unknown[] = [],
-> = size extends res['length'] ? res : TTuple<size, [...res, 1]>;
+> = size extends res["length"] ? res : TTuple<size, [...res, 1]>;
 
 type TWrapGifts<
 	nums extends number[],
@@ -87,12 +87,12 @@ type TWrapGifts<
 	sum extends unknown[] = [],
 > = sorted extends [infer first extends number, ...infer rest extends number[]]
 	? TCompareNumber<
-			[...sum, ...TTuple<first>]['length'] & number,
+			[...sum, ...TTuple<first>]["length"] & number,
 			width
 		> extends 1
-		? count['length']
+		? count["length"]
 		: TWrapGifts<nums, width, rest, [...count, 1], [...sum, ...TTuple<first>]>
-	: count['length'];
+	: count["length"];
 
 export const wrapGifts = <const TGifts extends number[], TWidth extends number>(
 	gifts: TGifts,

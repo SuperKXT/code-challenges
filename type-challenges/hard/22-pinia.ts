@@ -96,13 +96,13 @@ declare function defineStore<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 const store = defineStore({
-	id: '',
+	id: "",
 	state: () => ({
 		num: 0,
-		str: '',
+		str: "",
 	}),
 	getters: {
 		stringifiedNum() {
@@ -152,7 +152,7 @@ store.increment(2);
 // @ts-expect-error
 store.setNum();
 // @ts-expect-error
-store.setNum('3');
+store.setNum("3");
 store.setNum(3);
 const r = store.reset();
 

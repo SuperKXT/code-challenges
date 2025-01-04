@@ -29,7 +29,7 @@ type ObjectEntries<T extends object, U = Required<T>> = {
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type Model = {
 	name: string;
@@ -38,15 +38,15 @@ type Model = {
 };
 
 type ModelEntries =
-	| ['name', string]
-	| ['age', number]
-	| ['locations', string[] | null];
+	| ["name", string]
+	| ["age", number]
+	| ["locations", string[] | null];
 
 type _cases = [
 	Expect<Equal<ObjectEntries<Model>, ModelEntries>>,
 	Expect<Equal<ObjectEntries<Partial<Model>>, ModelEntries>>,
-	Expect<Equal<ObjectEntries<{ key?: undefined }>, ['key', undefined]>>,
-	Expect<Equal<ObjectEntries<{ key: undefined }>, ['key', undefined]>>,
+	Expect<Equal<ObjectEntries<{ key?: undefined }>, ["key", undefined]>>,
+	Expect<Equal<ObjectEntries<{ key: undefined }>, ["key", undefined]>>,
 ];
 
 /* _____________ Further Steps _____________ */

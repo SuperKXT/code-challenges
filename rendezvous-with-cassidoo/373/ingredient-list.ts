@@ -8,7 +8,7 @@ type IngredientList<
 			Pantry,
 			ingredient extends Pantry[number] ? _Count : [..._Count, 1]
 		>
-	: _Count['length'];
+	: _Count["length"];
 
 export const ingredientList = <
 	const Recipe extends [string, ...string[]],

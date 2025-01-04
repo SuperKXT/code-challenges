@@ -1,4 +1,4 @@
-import { getColumnNumber } from './get-column-number.js';
+import { getColumnNumber } from "./get-column-number.js";
 
 type Test = {
 	input: string;
@@ -6,18 +6,18 @@ type Test = {
 };
 
 const TESTS: Test[] = [
-	{ input: 'A', output: 1 },
-	{ input: 'B', output: 2 },
-	{ input: 'C', output: 3 },
-	{ input: 'Z', output: 26 },
-	{ input: 'AA', output: 27 },
-	{ input: 'AB', output: 28 },
-	{ input: 'AH', output: 34 },
-	{ input: 'BQ', output: 69 },
-	{ input: 'DF', output: 110 },
-	{ input: 'AAA', output: 703 },
+	{ input: "A", output: 1 },
+	{ input: "B", output: 2 },
+	{ input: "C", output: 3 },
+	{ input: "Z", output: 26 },
+	{ input: "AA", output: 27 },
+	{ input: "AB", output: 28 },
+	{ input: "AH", output: 34 },
+	{ input: "BQ", output: 69 },
+	{ input: "DF", output: 110 },
+	{ input: "AAA", output: 703 },
 ];
 
-test.each(TESTS)('testing generateArrays', ({ input, output }) => {
+test.each(TESTS)("testing generateArrays", ({ input, output }) => {
 	expect(getColumnNumber(input)).toStrictEqual(output);
 });

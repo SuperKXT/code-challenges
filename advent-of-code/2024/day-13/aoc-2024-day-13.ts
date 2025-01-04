@@ -1,21 +1,21 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 export const day13Path = path.join(
 	config.dirname,
-	'advent-of-code',
-	'2024',
-	'day-13',
+	"advent-of-code",
+	"2024",
+	"day-13",
 );
 
 const coordRegex = /(?<=(?:X\+|=)|(?:Y\+|=))\d+/gu;
 
 const getCoords = (s: string): [number, number] => {
 	const matches = s.match(coordRegex);
-	const x = parseInt(matches?.[0] ?? '');
-	const y = parseInt(matches?.[1] ?? '');
+	const x = parseInt(matches?.[0] ?? "");
+	const y = parseInt(matches?.[1] ?? "");
 	if (isNaN(x) || isNaN(y)) throw new Error(`Invalid coord string`);
 	return [x, y];
 };
@@ -73,12 +73,12 @@ const getTokens = (machine: TMachine, adjust: boolean): number => {
 export const aoc2024Day13 = (input: string) => {
 	const machines = input
 		.trim()
-		.split('\n\n')
+		.split("\n\n")
 		.map((s) => {
-			const lines = s.split('\n');
-			const a = getCoords(lines[0] ?? '');
-			const b = getCoords(lines[1] ?? '');
-			const prize = getCoords(lines[2] ?? '');
+			const lines = s.split("\n");
+			const a = getCoords(lines[0] ?? "");
+			const b = getCoords(lines[1] ?? "");
+			const prize = getCoords(lines[2] ?? "");
 			return { a, b, prize };
 		});
 
@@ -93,9 +93,9 @@ export const aoc2024Day13 = (input: string) => {
 };
 
 if (!config.isTest) {
-	console.time('aoc-2024-day-13');
-	const input = await readFile(path.join(day13Path, 'input.txt'), 'utf-8');
+	console.time("aoc-2024-day-13");
+	const input = await readFile(path.join(day13Path, "input.txt"), "utf-8");
 	const res = aoc2024Day13(input);
 	console.info(res);
-	console.timeEnd('aoc-2024-day-13');
+	console.timeEnd("aoc-2024-day-13");
 }

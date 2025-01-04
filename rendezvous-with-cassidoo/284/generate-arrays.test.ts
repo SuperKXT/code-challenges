@@ -1,4 +1,4 @@
-import { generateArrays } from './generate-arrays.js';
+import { generateArrays } from "./generate-arrays.js";
 
 type Test = {
 	input: number;
@@ -24,6 +24,6 @@ const TESTS: Test[] = [
 	},
 ];
 
-test.each(TESTS)('testing generateArrays', ({ input, output }) => {
+test.each(TESTS)("testing generateArrays", ({ input, output }) => {
 	expect(generateArrays(input)).toStrictEqual(output);
 });

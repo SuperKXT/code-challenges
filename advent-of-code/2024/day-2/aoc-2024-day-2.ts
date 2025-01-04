@@ -15,10 +15,10 @@ const isSafeReport = (report: string[]) => {
 export const aoc2024Day2 = (input: string) => {
 	let safeCount = 0;
 	let adjustedSafeCount = 0;
-	for (const row of input.split('\n')) {
+	for (const row of input.split("\n")) {
 		const trimmed = row.trim();
 		if (!trimmed) continue;
-		const report = trimmed.split(' ');
+		const report = trimmed.split(" ");
 
 		const isSafe = isSafeReport(report);
 

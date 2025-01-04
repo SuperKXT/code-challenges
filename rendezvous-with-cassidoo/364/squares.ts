@@ -39,7 +39,7 @@ type Add<
 	B extends string,
 > = A extends `${infer AH}${infer AT}`
 	? B extends `${infer BH}${infer BT}`
-		? BH extends '0'
+		? BH extends "0"
 			? `${AH}${Add<AT, BT>}`
 			: Add<AddOne<A>, SubOne<B>>
 		: A
@@ -52,13 +52,13 @@ type ToNum<Str extends string> = Str extends `${infer N extends number}`
 type Multiply<
 	A extends string,
 	B extends string,
-	R extends string = '0',
-> = A extends '0'
+	R extends string = "0",
+> = A extends "0"
 	? R
-	: B extends '0'
+	: B extends "0"
 		? R
 		: A extends `${infer AH}${infer AT}`
-			? AH extends '0'
+			? AH extends "0"
 				? Multiply<AT, `0${B}`, R>
 				: Multiply<SubOne<A>, B, Add<R, B>>
 			: R;
@@ -66,13 +66,13 @@ type Multiply<
 type Squares<
 	Num extends number,
 	Idx extends unknown[] = [1],
-	Res extends string = '0',
+	Res extends string = "0",
 > = Idx[Num] extends 1
 	? ToNum<Reverse<Res>>
 	: Squares<
 			Num,
 			[...Idx, 1],
-			Add<Res, Multiply<Reverse<Idx['length']>, Reverse<Idx['length']>>>
+			Add<Res, Multiply<Reverse<Idx["length"]>, Reverse<Idx["length"]>>>
 		>;
 
 export const squares = <const Num extends number>(num: Num): Squares<Num> => {

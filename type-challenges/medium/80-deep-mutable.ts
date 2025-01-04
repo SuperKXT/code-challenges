@@ -62,7 +62,7 @@ type DeepMutable<T extends object> = T extends (...args: any[]) => unknown
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type Test1 = {
 	readonly title: string;
@@ -81,14 +81,14 @@ type Test2 = {
 			readonly g: {
 				readonly h: {
 					readonly i: true;
-					readonly j: 's';
+					readonly j: "s";
 				};
-				readonly k: 'hello';
+				readonly k: "hello";
 			};
 			readonly l: readonly [
-				'hi',
+				"hi",
 				{
-					readonly m: readonly ['hey'];
+					readonly m: readonly ["hey"];
 				},
 			];
 		};
@@ -112,14 +112,14 @@ type DeepMutableTest2 = {
 			g: {
 				h: {
 					i: true;
-					j: 's';
+					j: "s";
 				};
-				k: 'hello';
+				k: "hello";
 			};
 			l: [
-				'hi',
+				"hi",
 				{
-					m: ['hey'];
+					m: ["hey"];
 				},
 			];
 		};
@@ -133,7 +133,7 @@ type _cases = [
 
 type _errors = [
 	// @ts-expect-error invalid argument
-	DeepMutable<'string'>,
+	DeepMutable<"string">,
 	// @ts-expect-error invalid argument
 	DeepMutable<0>,
 ];

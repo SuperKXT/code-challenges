@@ -31,7 +31,7 @@ type Mutable<T extends Readonly<object>> = {
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type Todo1 = {
 	title: string;
@@ -51,7 +51,7 @@ type _cases = [
 
 type _errors = [
 	// @ts-expect-error invalid argument
-	Mutable<'string'>,
+	Mutable<"string">,
 	// @ts-expect-error invalid argument
 	Mutable<0>,
 ];

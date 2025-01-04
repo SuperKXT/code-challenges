@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-type tuple<Len extends number, tup extends 1[] = []> = tup['length'] extends Len
+type tuple<Len extends number, tup extends 1[] = []> = tup["length"] extends Len
 	? tup
 	: tuple<Len, [...tup, 1]>;
 
@@ -23,7 +23,7 @@ export type KPal<
 ]
 	? first extends last
 		? KPal<never, never, rest, removeTup>
-		: removeTup['length'] extends 0
+		: removeTup["length"] extends 0
 			? false
 			: KPal<never, never, [...rest, last], removeOne<removeTup>>
 	: true;

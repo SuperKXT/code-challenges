@@ -26,7 +26,7 @@ type First<T extends unknown[]> = T extends [infer U, ...unknown[]] ? U : never;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<First<[3, 2, 1]>, 3>>,
@@ -37,9 +37,9 @@ type _cases = [
 
 type _errors = [
 	// @ts-expect-error incorrect argument
-	First<'notArray'>,
+	First<"notArray">,
 	// @ts-expect-error incorrect argument
-	First<{ 0: 'arrayLike' }>,
+	First<{ 0: "arrayLike" }>,
 ];
 
 /* _____________ Further Steps _____________ */

@@ -1,18 +1,18 @@
-import type { Utils } from '../types/utils.types.js';
+import type { Utils } from "../types/utils.types.js";
 
 export const readableTypeOf = (value: unknown) => {
-	if (typeof value !== 'object') return typeof value;
-	if (value === null) return 'null';
-	if (Array.isArray(value)) return 'array';
-	return 'object';
+	if (typeof value !== "object") return typeof value;
+	if (value === null) return "null";
+	if (Array.isArray(value)) return "array";
+	return "object";
 };
 
 export function assert(val: unknown, error?: string): asserts val {
-	if (!val) throw new Error(error ?? 'assertion failed');
+	if (!val) throw new Error(error ?? "assertion failed");
 }
 
 export const isObject = (value: unknown): value is object =>
-	readableTypeOf(value) === 'object';
+	readableTypeOf(value) === "object";
 
 export const assertObject: Utils.assertFunction<object> = (value) => {
 	assert(isObject(value), `Expected object, received ${readableTypeOf(value)}`);
@@ -29,5 +29,5 @@ export function assertArray<Type = unknown>(
 	value: unknown,
 	checker?: (value: unknown) => value is Type,
 ): asserts value is Type[] {
-	if (!isArray(value, checker)) throw new TypeError('Invalid array type');
+	if (!isArray(value, checker)) throw new TypeError("Invalid array type");
 }

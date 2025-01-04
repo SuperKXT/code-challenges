@@ -48,17 +48,17 @@ type MyReadonly2<T extends object, K extends keyof T = never> = [K] extends [
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Alike, Expect } from '@type-challenges/utils';
+import type { Alike, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Alike<MyReadonly2<Todo1>, Readonly<Todo1>>>,
-	Expect<Alike<MyReadonly2<Todo1, 'title' | 'description'>, Expected>>,
-	Expect<Alike<MyReadonly2<Todo2, 'title' | 'description'>, Expected>>,
-	Expect<Alike<MyReadonly2<Todo2, 'description'>, Expected>>,
+	Expect<Alike<MyReadonly2<Todo1, "title" | "description">, Expected>>,
+	Expect<Alike<MyReadonly2<Todo2, "title" | "description">, Expected>>,
+	Expect<Alike<MyReadonly2<Todo2, "description">, Expected>>,
 ];
 
 // @ts-expect-error invalid arguments
-type _error = MyReadonly2<Todo1, 'title' | 'invalid'>;
+type _error = MyReadonly2<Todo1, "title" | "invalid">;
 
 type Todo1 = {
 	title: string;

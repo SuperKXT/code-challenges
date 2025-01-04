@@ -34,7 +34,7 @@ type _IsPalindrome<
 
 type IsPalindrome<T extends string | number> =
 	`${T}` extends `${infer F}${infer S}`
-		? S extends ''
+		? S extends ""
 			? true
 			: `${T}` extends `${F}${infer R}${F}`
 				? IsPalindrome<R>
@@ -43,13 +43,13 @@ type IsPalindrome<T extends string | number> =
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<IsPalindrome<'abc'>, false>>,
-	Expect<Equal<IsPalindrome<'b'>, true>>,
-	Expect<Equal<IsPalindrome<'abca'>, false>>,
-	Expect<Equal<IsPalindrome<'abcba'>, true>>,
+	Expect<Equal<IsPalindrome<"abc">, false>>,
+	Expect<Equal<IsPalindrome<"b">, true>>,
+	Expect<Equal<IsPalindrome<"abca">, false>>,
+	Expect<Equal<IsPalindrome<"abcba">, true>>,
 	Expect<Equal<IsPalindrome<121>, true>>,
 	Expect<Equal<IsPalindrome<19260817>, false>>,
 ];

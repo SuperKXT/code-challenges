@@ -3,8 +3,8 @@ import {
 	filterInPlace,
 	inPlaceInsertToSortedArray,
 	linkedListToArray,
-} from './array.helpers.js';
-import { getRandomInteger } from './random.helpers.js';
+} from "./array.helpers.js";
+import { getRandomInteger } from "./random.helpers.js";
 
 type EqualityTest = {
 	first: unknown[];
@@ -21,7 +21,7 @@ const EQUALITY_TESTS: EqualityTest[] = [
 	{
 		areEqual: false,
 		first: [1, 2, 3, 4],
-		second: ['1', '2', '3', '4'],
+		second: ["1", "2", "3", "4"],
 	},
 	{
 		areEqual: false,
@@ -31,14 +31,14 @@ const EQUALITY_TESTS: EqualityTest[] = [
 ];
 
 test.each(EQUALITY_TESTS)(
-	'testing areArraysEqual helper',
+	"testing areArraysEqual helper",
 	({ first, second, areEqual }) => {
 		const response = areArraysEqual(first, second);
 		expect(response).toStrictEqual(areEqual);
 	},
 );
 
-test('testing linkedListToArray helper', () => {
+test("testing linkedListToArray helper", () => {
 	const test1 = {
 		response: linkedListToArray({
 			head: { next: { next: { next: null, value: 3 }, value: 2 }, value: 1 },
@@ -46,17 +46,17 @@ test('testing linkedListToArray helper', () => {
 		expected: [1, 2, 3] as const,
 	};
 	expect(test1.response).toStrictEqual(test1.expected);
-	assertType<(typeof test1)['expected']>(test1.response);
+	assertType<(typeof test1)["expected"]>(test1.response);
 
 	const test2 = {
 		response: linkedListToArray({ head: null }),
 		expected: [] as const,
 	};
 	expect(test2.response).toStrictEqual(test2.expected);
-	assertType<(typeof test2)['expected']>(test2.response);
+	assertType<(typeof test2)["expected"]>(test2.response);
 });
 
-test('testing inPlaceInsertToSortedArray helper', () => {
+test("testing inPlaceInsertToSortedArray helper", () => {
 	const arr: number[] = [];
 	const sourceArr = [];
 	for (let i = 0; i < 100_000; i++) {
@@ -69,7 +69,7 @@ test('testing inPlaceInsertToSortedArray helper', () => {
 	expect(arr).toStrictEqual(sorted);
 });
 
-test('testing filterInPlace helper', () => {
+test("testing filterInPlace helper", () => {
 	const sourceArr = [];
 	for (let i = 0; i < 10_000; i++) {
 		sourceArr.push(i + 1);

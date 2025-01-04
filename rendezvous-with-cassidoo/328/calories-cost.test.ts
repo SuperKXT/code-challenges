@@ -1,6 +1,6 @@
-import { caloriesCost } from './calories-cost.js';
+import { caloriesCost } from "./calories-cost.js";
 
-test('testing caloriesCost against test 1', () => {
+test("testing caloriesCost against test 1", () => {
 	const calories = [200, 400, 600, 800];
 	const prices = [50, 60, 80, 100];
 	const dailyGoal = 1200;

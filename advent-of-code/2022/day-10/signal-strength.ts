@@ -1,9 +1,9 @@
-const COMMANDS = ['addx', 'noop'] as const;
+const COMMANDS = ["addx", "noop"] as const;
 
 type Command = (typeof COMMANDS)[number];
 
 const isCommand = (value: unknown): value is Command =>
-	typeof value === 'string' && COMMANDS.includes(value);
+	typeof value === "string" && COMMANDS.includes(value);
 
 type Solution = {
 	strength: number;
@@ -19,13 +19,13 @@ type Clock = {
 const getCrtOutput = ({
 	register,
 	cycle,
-}: Clock): '.' | '\n.' | '\n#' | '#' => {
+}: Clock): "." | "\n." | "\n#" | "#" => {
 	const sprite = [register - 1, register, register + 1];
 	const position = (cycle - 1) % 40;
 	const isEol = cycle > 1 && position === 0;
 	return sprite.includes(position)
-		? `${isEol ? '\n' : ''}#`
-		: `${isEol ? '\n' : ''}.`;
+		? `${isEol ? "\n" : ""}#`
+		: `${isEol ? "\n" : ""}.`;
 };
 
 export const signalStrength = (input: string): Solution => {
@@ -36,23 +36,23 @@ export const signalStrength = (input: string): Solution => {
 	};
 
 	const solution: Solution = {
-		crtOutput: '',
+		crtOutput: "",
 		strength: 0,
 	};
 
-	for (const row of input.split('\n')) {
-		const [command, num] = row.split(' ');
-		if (!isCommand(command) || (command === 'addx' && isNaN(Number(num))))
+	for (const row of input.split("\n")) {
+		const [command, num] = row.split(" ");
+		if (!isCommand(command) || (command === "addx" && isNaN(Number(num))))
 			continue;
 
 		const prevRegister = clock.register;
 
 		switch (command) {
-			case 'noop':
+			case "noop":
 				clock.cycle++;
 				solution.crtOutput += getCrtOutput(clock);
 				break;
-			case 'addx':
+			case "addx":
 				clock.cycle++;
 				solution.crtOutput += getCrtOutput(clock);
 				clock.cycle++;

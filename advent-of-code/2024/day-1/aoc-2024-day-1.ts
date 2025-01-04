@@ -1,10 +1,10 @@
-import { inPlaceInsertToSortedArray } from '../../../helpers/array.helpers.js';
+import { inPlaceInsertToSortedArray } from "../../../helpers/array.helpers.js";
 
 export const aoc2024Day1 = (input: string) => {
 	const leftArr: number[] = [];
 	const rightArr: number[] = [];
 	const rightCountMap = new Map<number, number>();
-	for (const row of input.split('\n')) {
+	for (const row of input.split("\n")) {
 		const split = row.trim().split(/\s+/u);
 		const left = Number(split[0]);
 		const right = Number(split[1]);

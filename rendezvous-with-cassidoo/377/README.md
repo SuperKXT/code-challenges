@@ -7,14 +7,14 @@
 Example:
 
 ```ts
-groupAnagrams(['eat', 'tea', 'tan', 'ate', 'nat', 'bat']);
-[['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']];
+groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]);
+[["eat", "tea", "ate"], ["tan", "nat"], ["bat"]];
 
-groupAnagrams(['vote', 'please']);
-[['vote'], ['please']];
+groupAnagrams(["vote", "please"]);
+[["vote"], ["please"]];
 
-groupAnagrams(['debitcard', 'badcredit']);
-[['debitcard', 'badcredit']];
+groupAnagrams(["debitcard", "badcredit"]);
+[["debitcard", "badcredit"]];
 ```
 
 ---

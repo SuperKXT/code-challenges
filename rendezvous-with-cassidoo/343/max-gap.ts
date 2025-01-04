@@ -1,10 +1,10 @@
 type tuple<
 	size extends number,
 	res extends unknown[] = [],
-> = res['length'] extends size ? res : tuple<size, [...res, 1]>;
+> = res["length"] extends size ? res : tuple<size, [...res, 1]>;
 
 type subtract<first extends number, second extends number> =
-	tuple<second> extends [...tuple<first>, ...infer rest] ? rest['length'] : 0;
+	tuple<second> extends [...tuple<first>, ...infer rest] ? rest["length"] : 0;
 
 type MaxGap<nums extends number[], max extends number = 0> = nums extends [
 	infer first extends number,

@@ -31,7 +31,7 @@ type AppendArgument<Fn extends (...args: any[]) => unknown, A> = Fn extends (
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type Case1 = AppendArgument<(a: number, b: string) => number, boolean>;
 type Result1 = (a: number, b: string, x: boolean) => number;

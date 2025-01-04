@@ -1,7 +1,7 @@
 type tuple<
 	size extends number,
 	res extends unknown[] = [],
-> = res['length'] extends size ? res : tuple<size, [...res, 1]>;
+> = res["length"] extends size ? res : tuple<size, [...res, 1]>;
 
 type numberToTuple<
 	num extends number,
@@ -17,10 +17,10 @@ type compareDigits<
 	tupA extends unknown[] = tuple<digitA>,
 	tupB extends unknown[] = tuple<digitB>,
 > = digitA extends digitB
-	? 'equal'
-	: tupA[tupB['length']] extends 1
-		? 'greater'
-		: 'lesser';
+	? "equal"
+	: tupA[tupB["length"]] extends 1
+		? "greater"
+		: "lesser";
 
 type compareNumbers<
 	numA extends number,
@@ -28,21 +28,21 @@ type compareNumbers<
 	tupA extends number[] = numberToTuple<numA>,
 	tupB extends number[] = numberToTuple<numB>,
 > = numA extends numB
-	? 'equal'
-	: tupA['length'] extends tupB['length']
+	? "equal"
+	: tupA["length"] extends tupB["length"]
 		? [tupA, tupB] extends [
 				[infer firstA extends number, ...infer restA extends number[]],
 				[infer firstB extends number, ...infer restB extends number[]],
 			]
 			? compareDigits<firstA, firstB> extends infer res
-				? res extends 'equal'
+				? res extends "equal"
 					? compareNumbers<never, never, restA, restB>
 					: res
 				: never
 			: never
-		: tupA[tupB['length']] extends number
-			? 'greater'
-			: 'lesser';
+		: tupA[tupB["length"]] extends number
+			? "greater"
+			: "lesser";
 
 type Valleys<
 	arr extends readonly number[],
@@ -56,11 +56,11 @@ type Valleys<
 	? compareNumbers<curr, next> extends infer res
 		? Valleys<
 				[next, ...rest],
-				[res, downhill] extends ['lesser', true] ? [...count, 1] : count,
-				res extends 'greater' ? true : downhill
+				[res, downhill] extends ["lesser", true] ? [...count, 1] : count,
+				res extends "greater" ? true : downhill
 			>
 		: never
-	: count['length'];
+	: count["length"];
 
 type Hills<
 	arr extends readonly number[],
@@ -74,11 +74,11 @@ type Hills<
 	? compareNumbers<curr, next> extends infer res
 		? Hills<
 				[next, ...rest],
-				[res, uphill] extends ['greater', true] ? [...count, 1] : count,
-				res extends 'lesser' ? true : uphill
+				[res, uphill] extends ["greater", true] ? [...count, 1] : count,
+				res extends "lesser" ? true : uphill
 			>
 		: never
-	: count['length'];
+	: count["length"];
 
 export const hills = <const arr extends readonly number[]>(
 	arr: arr,

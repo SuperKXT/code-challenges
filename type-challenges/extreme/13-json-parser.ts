@@ -17,8 +17,8 @@
 
 type Merge<T> = { [P in keyof T]: T[P] };
 
-type Escapes = ' ' | '\n' | '\r' | '\t' | '\b' | '\f';
-type EscapeMap = { n: '\n'; r: '\r'; t: '\t'; b: '\b'; f: '\f' };
+type Escapes = " " | "\n" | "\r" | "\t" | "\b" | "\f";
+type EscapeMap = { n: "\n"; r: "\r"; t: "\t"; b: "\b"; f: "\f" };
 type Parse<T extends string> = Eval<T> extends [infer V, unknown] ? V : never;
 
 type Eval<T> = T extends `${Escapes}${infer U}`
@@ -31,22 +31,22 @@ type Eval<T> = T extends `${Escapes}${infer U}`
 				? [null, U]
 				: T extends `"${infer U}`
 					? EvalString<U>
-					: T extends `${'['}${infer U}`
+					: T extends `${"["}${infer U}`
 						? EvalArray<U>
-						: T extends `${'{'}${infer U}`
+						: T extends `${"{"}${infer U}`
 							? EvalObject<U>
 							: EvalNumber<T>;
 
 type EvalNumber<
 	T,
-	S extends string = '',
+	S extends string = "",
 > = T extends `${infer n extends number}${infer rest}`
 	? EvalNumber<rest, `${S}${n}`>
 	: S extends `${infer n extends number}`
 		? [n, T]
 		: false;
 
-type EvalString<T, S extends string = ''> = T extends `"${infer U}`
+type EvalString<T, S extends string = ""> = T extends `"${infer U}`
 	? [S, U]
 	: (
 				T extends `\\${infer C}${infer U}`
@@ -72,7 +72,7 @@ type EvalArray<T, A extends unknown[] = []> = T extends `${Escapes}${infer U}`
 
 type EvalObject<
 	T,
-	K extends string = '',
+	K extends string = "",
 	O = {},
 > = T extends `${Escapes}${infer U}`
 	? EvalObject<U, K, O>
@@ -86,7 +86,7 @@ type EvalObject<
 					: false
 				: T extends `:${infer U}`
 					? Eval<U> extends [infer V, infer UU]
-						? EvalObject<UU, '', Merge<Record<K, V> & O>>
+						? EvalObject<UU, "", Merge<Record<K, V> & O>>
 						: false
 					: false;
 
@@ -94,7 +94,7 @@ type EvalObject<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<
@@ -115,27 +115,27 @@ type _cases = [
 				c: [
 					true,
 					false,
-					'hello',
+					"hello",
 					{
-						a: 'b';
+						a: "b";
 						b: false;
 					},
 				];
 				b: false;
-				a: 'b';
+				a: "b";
 			}
 		>
 	>,
-	Expect<Equal<Parse<'{}'>, {}>>,
+	Expect<Equal<Parse<"{}">, {}>>,
 
-	Expect<Equal<Parse<'[]'>, []>>,
+	Expect<Equal<Parse<"[]">, []>>,
 
-	Expect<Equal<Parse<'[1]'>, [1]>>,
+	Expect<Equal<Parse<"[1]">, [1]>>,
 
-	Expect<Equal<Parse<'true'>, true>>,
+	Expect<Equal<Parse<"true">, true>>,
 
 	Expect<
-		Equal<Parse<'["Hello", true, false, null]'>, ['Hello', true, false, null]>
+		Equal<Parse<'["Hello", true, false, null]'>, ["Hello", true, false, null]>
 	>,
 
 	Expect<
@@ -145,7 +145,7 @@ type _cases = [
         "hello\\r\\n\\b\\f": "world"
       }`>,
 			{
-				'hello\r\n\b\f': 'world';
+				"hello\r\n\b\f": "world";
 			}
 		>
 	>,

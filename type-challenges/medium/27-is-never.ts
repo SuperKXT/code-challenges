@@ -27,13 +27,13 @@ type IsNever<T> = [T] extends [never] ? true : false;
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<IsNever<never>, true>>,
 	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 	Expect<Equal<IsNever<never | string>, false>>,
-	Expect<Equal<IsNever<''>, false>>,
+	Expect<Equal<IsNever<"">, false>>,
 	Expect<Equal<IsNever<undefined>, false>>,
 	Expect<Equal<IsNever<null>, false>>,
 	Expect<Equal<IsNever<[]>, false>>,

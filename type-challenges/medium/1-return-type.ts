@@ -33,21 +33,21 @@ type MyReturnType<T extends (...args: any[]) => unknown> = T extends (
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<string, MyReturnType<() => string>>>,
 	Expect<Equal<123, MyReturnType<() => 123>>>,
 	Expect<Equal<ComplexObject, MyReturnType<() => ComplexObject>>>,
 	Expect<Equal<Promise<boolean>, MyReturnType<() => Promise<boolean>>>>,
-	Expect<Equal<() => 'foo', MyReturnType<() => () => 'foo'>>>,
+	Expect<Equal<() => "foo", MyReturnType<() => () => "foo">>>,
 	Expect<Equal<1 | 2, MyReturnType<typeof fn>>>,
 	Expect<Equal<1 | 2, MyReturnType<typeof fn1>>>,
 ];
 
 type ComplexObject = {
-	a: [12, 'foo'];
-	bar: 'hello';
+	a: [12, "foo"];
+	bar: "hello";
 	prev: () => number;
 };
 

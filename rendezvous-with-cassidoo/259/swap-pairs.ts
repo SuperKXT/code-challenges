@@ -1,10 +1,10 @@
-import type { LinkedList } from '../../helpers/linked-list.helpers.js';
+import type { LinkedList } from "../../helpers/linked-list.helpers.js";
 
 export const swapArrayPairsWithRegex = (array: number[]): number[] =>
 	array
-		.join('')
-		.replace(/(.)(.)/gu, '$2$1')
-		.split('')
+		.join("")
+		.replace(/(.)(.)/gu, "$2$1")
+		.split("")
 		.map(Number);
 
 export const swapArrayPairsWithRecursion = (array: number[]): number[] => {

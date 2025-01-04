@@ -10,13 +10,13 @@ type DeleteVar<
 type UpdateMap<
 	str extends string,
 	Lookup extends { vars: string[]; map: Record<string, unknown> },
-	name extends string = '',
-	val extends string = '',
+	name extends string = "",
+	val extends string = "",
 	eqFound extends boolean = false,
 > = str extends `${infer curr}${infer rest}`
-	? curr extends ' '
+	? curr extends " "
 		? UpdateMap<rest, Lookup, name, val, eqFound>
-		: curr extends '='
+		: curr extends "="
 			? UpdateMap<rest, Lookup, name, val, true>
 			: UpdateMap<
 					rest,
@@ -26,8 +26,8 @@ type UpdateMap<
 					eqFound
 				>
 	: {
-			vars: [...Lookup['vars'], name];
-			map: Lookup['map'] & Record<name, [val]>;
+			vars: [...Lookup["vars"], name];
+			map: Lookup["map"] & Record<name, [val]>;
 		};
 
 type ReturnUnused<
@@ -49,10 +49,10 @@ type FindUnused<
 	? curr extends `log(${infer name extends string})`
 		? FindUnused<
 				rest,
-				{ vars: Lookup['vars']; map: DeleteVar<Lookup['map'], name> }
+				{ vars: Lookup["vars"]; map: DeleteVar<Lookup["map"], name> }
 			>
 		: FindUnused<rest, UpdateMap<curr, Lookup>>
-	: ReturnUnused<Lookup['vars'], Lookup['map']>;
+	: ReturnUnused<Lookup["vars"], Lookup["map"]>;
 
 const deleteVar = (vars: Map<string, string[]>, varName: string) => {
 	const curr = vars.get(varName);
@@ -71,7 +71,7 @@ export const findUnused = <const Arr extends [string, ...string[]]>(
 			const varVal = log[1].trim();
 			deleteVar(vars, varVal);
 		} else {
-			const [varStr, expr] = curr.split('=');
+			const [varStr, expr] = curr.split("=");
 			const dep = expr?.trim();
 			if (varStr) vars.set(varStr.trim(), dep && vars.has(dep) ? [dep] : []);
 		}

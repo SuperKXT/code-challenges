@@ -1,12 +1,12 @@
-import type { Utils } from '../types/utils.types.js';
+import type { Utils } from "../types/utils.types.js";
 
-export const lowerAlphabet = 'abcdefghijklmnopqrstuvwxyz';
+export const lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
 export type LowerAlphabet = Utils.stringToUnion<typeof lowerAlphabet>;
 
-export const upperAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+export const upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 export type UpperAlphabet = Utils.stringToUnion<typeof upperAlphabet>;
 
-export const numeric = '0123456789';
+export const numeric = "0123456789";
 export type Numeric = Utils.stringToUnion<typeof numeric>;
 
 export const alphabet = `${lowerAlphabet}${upperAlphabet}`;

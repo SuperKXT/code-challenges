@@ -1,4 +1,4 @@
-import { repeatedGroups } from './repeated-groups.js';
+import { repeatedGroups } from "./repeated-groups.js";
 
 type Test = {
 	input: number[];
@@ -18,6 +18,6 @@ const TESTS: Test[] = [
 	},
 ];
 
-test.each(TESTS)('testing repeatedGroups', ({ input, output }) => {
+test.each(TESTS)("testing repeatedGroups", ({ input, output }) => {
 	expect(repeatedGroups(input)).toStrictEqual(output);
 });

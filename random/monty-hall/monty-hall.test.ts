@@ -1,6 +1,6 @@
-import { tryMontyHall } from './monty-hall.js';
+import { tryMontyHall } from "./monty-hall.js";
 
-test('testing tryMontyHall', () => {
+test("testing tryMontyHall", () => {
 	const iterations = 10_000;
 	const result = {
 		100: tryMontyHall({ iterations, doors: 100 }),

@@ -72,10 +72,10 @@ declare function SimpleVue<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 const alert = (_: unknown) => {
-	throw new Error('Function not implemented.');
+	throw new Error("Function not implemented.");
 };
 
 SimpleVue({
@@ -90,8 +90,8 @@ SimpleVue({
 		this.data();
 
 		return {
-			firstname: 'Type',
-			lastname: 'Challenges',
+			firstname: "Type",
+			lastname: "Challenges",
 			amount: 10,
 		};
 	},

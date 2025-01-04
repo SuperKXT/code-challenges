@@ -7,7 +7,7 @@ type dictExists<Str extends string, Dict extends string[]> = Dict extends [
 		: dictExists<Str, restArr>
 	: false;
 
-type WordBreak<Str extends string, Dict extends string[]> = Str extends ''
+type WordBreak<Str extends string, Dict extends string[]> = Str extends ""
 	? true
 	: dictExists<Str, Dict> extends infer rest extends string
 		? WordBreak<rest, Dict>
@@ -21,11 +21,11 @@ export const wordBreak = <
 	dict: Dict,
 ): WordBreak<Str, Dict> => {
 	let curr = string;
-	const regex = new RegExp(`^(${dict.join('|')})`, 'ui');
-	while (curr !== '') {
+	const regex = new RegExp(`^(${dict.join("|")})`, "ui");
+	while (curr !== "") {
 		const matched = curr.match(regex);
 		if (!matched) return false as never;
-		curr = curr.replace(matched[0], '') as Str;
+		curr = curr.replace(matched[0], "") as Str;
 	}
 	return true as never;
 };

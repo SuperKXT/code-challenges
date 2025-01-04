@@ -3,9 +3,9 @@ import {
 	lowerAlphabet,
 	upperAlphabet,
 	wordSeparators,
-} from './string-literals.helpers.js';
+} from "./string-literals.helpers.js";
 
-export const humanizeCases = ['lower', 'sentence', 'title', 'upper'] as const;
+export const humanizeCases = ["lower", "sentence", "title", "upper"] as const;
 
 export type HumanizeCase = (typeof humanizeCases)[number];
 
@@ -17,13 +17,13 @@ export type HumanizeCase = (typeof humanizeCases)[number];
  */
 export const humanizeToken = (
 	input: string,
-	casing: HumanizeCase = 'title',
+	casing: HumanizeCase = "title",
 ): string => {
 	const string = input.trim();
-	if (!string.trim()) return '';
+	if (!string.trim()) return "";
 
-	let result: string = '';
-	let currentWord: string = '';
+	let result: string = "";
+	let currentWord: string = "";
 
 	for (let index = 0; index < string.length; index++) {
 		const current = string[index] as string;
@@ -44,18 +44,18 @@ export const humanizeToken = (
 		const first = currentWord[0];
 		if (first) {
 			const formatted =
-				casing === 'lower'
+				casing === "lower"
 					? currentWord.toLowerCase()
-					: casing === 'upper'
+					: casing === "upper"
 						? currentWord.toUpperCase()
 						: currentWord.toUpperCase() === currentWord
 							? currentWord
-							: casing === 'title' || !result
+							: casing === "title" || !result
 								? `${first.toUpperCase()}${currentWord.slice(1).toLowerCase()}`
 								: currentWord.toLowerCase();
-			result += `${result.length ? ' ' : ''}${formatted}`;
+			result += `${result.length ? " " : ""}${formatted}`;
 		}
-		currentWord = '';
+		currentWord = "";
 	}
 
 	return result;

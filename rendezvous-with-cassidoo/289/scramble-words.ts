@@ -1,15 +1,15 @@
 const scramble = (word: string) => {
 	return word
-		.split('')
+		.split("")
 		.sort(() => Math.random() - 0.5)
-		.join('');
+		.join("");
 };
 
 export const scrambleWords = (string: string): string => {
 	return string
-		.split(' ')
+		.split(" ")
 		.map((word) => {
-			const hasPeriod = word.endsWith('.');
+			const hasPeriod = word.endsWith(".");
 			const trimmed = hasPeriod ? word.slice(0, word.length - 1) : word;
 			if (trimmed.length < 4) return word;
 
@@ -19,7 +19,7 @@ export const scrambleWords = (string: string): string => {
 			let scrambled = scramble(inner);
 			while (scrambled === inner) scrambled = scramble(inner);
 
-			return [first, ...scrambled, last, hasPeriod ? '.' : ''].join('');
+			return [first, ...scrambled, last, hasPeriod ? "." : ""].join("");
 		})
-		.join(' ');
+		.join(" ");
 };

@@ -26,16 +26,16 @@ type StartsWith<T extends string, U extends string> = T extends `${U}${string}`
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<StartsWith<'abc', 'ac'>, false>>,
-	Expect<Equal<StartsWith<'abc', 'ab'>, true>>,
-	Expect<Equal<StartsWith<'abc', 'abc'>, true>>,
-	Expect<Equal<StartsWith<'abc', 'abcd'>, false>>,
-	Expect<Equal<StartsWith<'abc', ''>, true>>,
-	Expect<Equal<StartsWith<'abc', ' '>, false>>,
-	Expect<Equal<StartsWith<'', ''>, true>>,
+	Expect<Equal<StartsWith<"abc", "ac">, false>>,
+	Expect<Equal<StartsWith<"abc", "ab">, true>>,
+	Expect<Equal<StartsWith<"abc", "abc">, true>>,
+	Expect<Equal<StartsWith<"abc", "abcd">, false>>,
+	Expect<Equal<StartsWith<"abc", "">, true>>,
+	Expect<Equal<StartsWith<"abc", " ">, false>>,
+	Expect<Equal<StartsWith<"", "">, true>>,
 ];
 
 /* _____________ Further Steps _____________ */

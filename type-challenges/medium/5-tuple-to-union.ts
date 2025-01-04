@@ -31,10 +31,10 @@ type TupleToUnion<T extends readonly unknown[]> = T extends [
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<TupleToUnion<[123, '456', true]>, 123 | '456' | true>>,
+	Expect<Equal<TupleToUnion<[123, "456", true]>, 123 | "456" | true>>,
 	Expect<Equal<TupleToUnion<[123]>, 123>>,
 ];
 

@@ -1,4 +1,3 @@
- 
 /* eslint-disable @typescript-eslint/prefer-for-of */
 /*
   925 - Assert Array Index
@@ -106,19 +105,19 @@
 type HashMapHelper<
 	T extends number,
 	R extends unknown[] = [],
-> = R['length'] extends T ? R : HashMapHelper<T, [...R, unknown]>;
+> = R["length"] extends T ? R : HashMapHelper<T, [...R, unknown]>;
 
 type HashMap = {
-	'0': HashMapHelper<0>;
-	'1': HashMapHelper<1>;
-	'2': HashMapHelper<2>;
-	'3': HashMapHelper<3>;
-	'4': HashMapHelper<4>;
-	'5': HashMapHelper<5>;
-	'6': HashMapHelper<6>;
-	'7': HashMapHelper<7>;
-	'8': HashMapHelper<8>;
-	'9': HashMapHelper<9>;
+	"0": HashMapHelper<0>;
+	"1": HashMapHelper<1>;
+	"2": HashMapHelper<2>;
+	"3": HashMapHelper<3>;
+	"4": HashMapHelper<4>;
+	"5": HashMapHelper<5>;
+	"6": HashMapHelper<6>;
+	"7": HashMapHelper<7>;
+	"8": HashMapHelper<8>;
+	"9": HashMapHelper<9>;
 	a: HashMapHelper<1>;
 	b: HashMapHelper<2>;
 	c: HashMapHelper<3>;
@@ -152,7 +151,7 @@ type Hash<
 	RR extends unknown[] = [],
 > = T extends `${infer L}${infer R}`
 	? Hash<R, [...RR, ...HashMap[keyof HashMap & L]]>
-	: RR['length'];
+	: RR["length"];
 
 type IsKeyHelper<K extends string> = K extends `${infer L}${infer R}`
 	? L extends keyof HashMap
@@ -160,14 +159,14 @@ type IsKeyHelper<K extends string> = K extends `${infer L}${infer R}`
 		: false
 	: true;
 
-type IsKey<K extends string> = K extends '' ? false : IsKeyHelper<K>;
+type IsKey<K extends string> = K extends "" ? false : IsKeyHelper<K>;
 
 declare const KEY: unique symbol;
 
 function assertArrayIndex<A extends readonly unknown[], K extends string>(
-	array: number extends A['length'] ? A : never,
+	array: number extends A["length"] ? A : never,
 	key: IsKey<K> extends true ? K : never,
-): asserts array is number extends A['length']
+): asserts array is number extends A["length"]
 	? A & { readonly [KEY]: Hash<K> } & Readonly<Record<Hash<K>, A[number]>>
 	: never {
 	return undefined;
@@ -187,7 +186,7 @@ const array = [1, 2, 3, 4];
 const first = array[1 as keyof typeof array & number];
 //    ^?
 
-assertArrayIndex(matrix, 'rows');
+assertArrayIndex(matrix, "rows");
 
 let sum = 0;
 
@@ -197,7 +196,7 @@ for (let i = 0 as Index<typeof matrix>; i < matrix.length; i += 1) {
 	// @ts-expect-error: number | undefined in not assignable to number
 	const x: number[] = matrix[0];
 
-	assertArrayIndex(columns, 'columns');
+	assertArrayIndex(columns, "columns");
 
 	for (let j = 0 as Index<typeof columns>; j < columns.length; j += 1) {
 		sum += columns[j];
@@ -215,7 +214,7 @@ for (let i = 0 as Index<typeof matrix>; i < matrix.length; i += 1) {
 
 const a: string[] = [];
 
-assertArrayIndex(a, 'a');
+assertArrayIndex(a, "a");
 
 for (let p = 0 as Index<typeof a>; p < a.length; p += 1) {
 	const value: string = a[p];
@@ -224,7 +223,7 @@ for (let p = 0 as Index<typeof a>; p < a.length; p += 1) {
 	const z: string = a[2];
 }
 
-a.push('qux');
+a.push("qux");
 // @ts-expect-error: number is not assignable to string
 a.push(3);
 
@@ -234,7 +233,7 @@ for (const value of a) {
 
 const b: number[] = [];
 
-assertArrayIndex(b, 'b');
+assertArrayIndex(b, "b");
 
 for (let p = 0 as Index<typeof a>; p < b.length; p += 1) {
 	// @ts-expect-error: number | undefined is not assignable to string
@@ -243,7 +242,7 @@ for (let p = 0 as Index<typeof a>; p < b.length; p += 1) {
 
 const c: string[] = [];
 
-assertArrayIndex(c, 'c');
+assertArrayIndex(c, "c");
 
 for (let p = 0; p < c.length; p += 1) {
 	// @ts-expect-error: string | undefined is not assignable to string
@@ -255,7 +254,7 @@ for (let p = 0; p < c.length; p += 1) {
 
 const d: readonly number[] = [];
 
-assertArrayIndex(d, 'd');
+assertArrayIndex(d, "d");
 
 for (let p = 0 as Index<typeof d>; p < d.length; p += 1) {
 	const value: number = d[p];
@@ -271,17 +270,17 @@ d.push(3);
 const e: [number] = [0];
 
 // @ts-expect-error: [number] is not assignable to never
-assertArrayIndex(e, 'e');
+assertArrayIndex(e, "e");
 
 const f: readonly [boolean] = [false];
 
 // @ts-expect-error: [boolean] is not assignable to never
-assertArrayIndex(f, 'f');
+assertArrayIndex(f, "f");
 
 const tuple = [5, 7] as const;
 
 // @ts-expect-error: readonly [5, 7] is not assignable to never
-assertArrayIndex(tuple, 'tuple');
+assertArrayIndex(tuple, "tuple");
 
 /* _____________ Further Steps _____________ */
 /*

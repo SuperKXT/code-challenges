@@ -2,7 +2,7 @@
 type Tuple<
 	T extends number,
 	Result extends 1[] = [],
-> = Result['length'] extends T ? Result : Tuple<T, [...Result, 1]>;
+> = Result["length"] extends T ? Result : Tuple<T, [...Result, 1]>;
 
 type ScrabbleKey = {
 	EAIONRTLSU: 1;
@@ -28,19 +28,19 @@ type Scrabble<
 			? `Invalid Character ${First}`
 			: Scrabble<Rest, [...Score, ...Tuple<N>]>
 		: `Invalid Character ${First}`
-	: Score['length'];
+	: Score["length"];
 
-const onePoints = ['E', 'A', 'I', 'O', 'N', 'R', 'T', 'L', 'S', 'U'];
-const twoPoints = ['D', 'G'];
-const threePoints = ['B', 'C', 'M', 'P'];
-const fourPoints = ['F', 'H', 'V', 'W', 'Y'];
-const fivePoints = ['K'];
-const eightPoints = ['J', 'X'];
-const tenPoints = ['Q', 'Z'];
+const onePoints = ["E", "A", "I", "O", "N", "R", "T", "L", "S", "U"];
+const twoPoints = ["D", "G"];
+const threePoints = ["B", "C", "M", "P"];
+const fourPoints = ["F", "H", "V", "W", "Y"];
+const fivePoints = ["K"];
+const eightPoints = ["J", "X"];
+const tenPoints = ["Q", "Z"];
 
 export const scrabbleScore = <T extends string>(input: T): Scrabble<T> => {
 	let score = 0;
-	for (const letter of input.toUpperCase().split('')) {
+	for (const letter of input.toUpperCase().split("")) {
 		if (onePoints.includes(letter)) score += 1;
 		else if (twoPoints.includes(letter)) score += 2;
 		else if (threePoints.includes(letter)) score += 3;
@@ -48,7 +48,7 @@ export const scrabbleScore = <T extends string>(input: T): Scrabble<T> => {
 		else if (fivePoints.includes(letter)) score += 5;
 		else if (eightPoints.includes(letter)) score += 8;
 		else if (tenPoints.includes(letter)) score += 10;
-		else throw new Error('invalid letter');
+		else throw new Error("invalid letter");
 	}
 	return score as never;
 };

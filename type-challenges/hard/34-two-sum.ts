@@ -19,14 +19,14 @@
 
 /* _____________ Your Code Here _____________ */
 
-type CreateTuple<T extends number, R extends 1[] = []> = R['length'] extends T
+type CreateTuple<T extends number, R extends 1[] = []> = R["length"] extends T
 	? R
 	: CreateTuple<T, [...R, 1]>;
 
 type AddCheck<F extends number, S extends number, U extends number> = [
 	...CreateTuple<F>,
 	...CreateTuple<S>,
-]['length'] extends U
+]["length"] extends U
 	? true
 	: false;
 
@@ -44,7 +44,7 @@ type TwoSum<T extends number[], U extends number> = T extends [
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
 	Expect<Equal<TwoSum<[3, 3], 6>, true>>,

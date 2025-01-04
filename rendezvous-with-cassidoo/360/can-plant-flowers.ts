@@ -1,7 +1,7 @@
 type Tuple<
 	size extends number,
 	res extends 1[] = [],
-> = res['length'] extends size ? res : Tuple<size, [...res, 1]>;
+> = res["length"] extends size ? res : Tuple<size, [...res, 1]>;
 
 type Flag = 0 | 1;
 

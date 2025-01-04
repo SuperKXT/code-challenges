@@ -1,9 +1,9 @@
-import { readFile } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
-import { monkeyBusiness } from './monkey-business.js';
+import { monkeyBusiness } from "./monkey-business.js";
 
-import { config } from '../../../config.js';
+import { config } from "../../../config.js";
 
 const EXAMPLE = `Monkey 0:
   Starting items: 79, 98
@@ -35,7 +35,7 @@ Monkey 3:
 
 type Solution = ReturnType<typeof monkeyBusiness>;
 
-test('testing monkeyBusiness against example input', () => {
+test("testing monkeyBusiness against example input", () => {
 	const response = monkeyBusiness(EXAMPLE);
 	const solution: Solution = {
 		bigMb: 2713310158,
@@ -44,8 +44,8 @@ test('testing monkeyBusiness against example input', () => {
 	expect(response).toStrictEqual(solution);
 });
 
-test('testing monkeyBusiness against real input', async () => {
-	const input = await readFile(path.join(config.dirname, 'input.txt'), 'utf-8');
+test("testing monkeyBusiness against real input", async () => {
+	const input = await readFile(path.join(config.dirname, "input.txt"), "utf-8");
 	const solution: Solution = {
 		bigMb: 21816744824,
 		monkeyBusiness: 120056,

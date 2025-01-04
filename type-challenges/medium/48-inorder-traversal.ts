@@ -39,12 +39,12 @@ type TreeNode = {
 };
 
 type InOrderTraversal<T extends TreeNode | null> = [T] extends [TreeNode]
-	? [...InOrderTraversal<T['left']>, T['val'], ...InOrderTraversal<T['right']>]
+	? [...InOrderTraversal<T["left"]>, T["val"], ...InOrderTraversal<T["right"]>]
 	: [];
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 const tree1 = {
 	val: 1,

@@ -59,8 +59,8 @@ type DeepPick<
 >;
 
 /* _____________ Test Cases _____________ */
-import type { Equal, Expect } from '@type-challenges/utils';
-import type { Utils } from '../../types/utils.types.js';
+import type { Equal, Expect } from "@type-challenges/utils";
+import type { Utils } from "../../types/utils.types.js";
 
 type TObj = {
 	a: number;
@@ -84,15 +84,15 @@ type TObj = {
 };
 
 type _cases = [
-	Expect<Equal<DeepPick<TObj, ''>, unknown>>,
-	Expect<Equal<DeepPick<TObj, 'a'>, { a: number }>>,
-	Expect<Equal<DeepPick<TObj, 'a' | ''>, { a: number } & unknown>>,
+	Expect<Equal<DeepPick<TObj, "">, unknown>>,
+	Expect<Equal<DeepPick<TObj, "a">, { a: number }>>,
+	Expect<Equal<DeepPick<TObj, "a" | "">, { a: number } & unknown>>,
 	Expect<
-		Equal<DeepPick<TObj, 'a' | 'obj.e'>, { a: number } & { obj: { e: string } }>
+		Equal<DeepPick<TObj, "a" | "obj.e">, { a: number } & { obj: { e: string } }>
 	>,
 	Expect<
 		Equal<
-			DeepPick<TObj, 'a' | 'obj.e' | 'obj.obj2.i'>,
+			DeepPick<TObj, "a" | "obj.e" | "obj.obj2.i">,
 			{ a: number } & { obj: { e: string } } & { obj: { obj2: { i: boolean } } }
 		>
 	>,

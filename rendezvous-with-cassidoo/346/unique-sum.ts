@@ -10,7 +10,7 @@ type areDigitsUnique<
 type tuple<
 	size extends number,
 	res extends unknown[] = [],
-> = res['length'] extends size ? res : tuple<size, [...res, 1]>;
+> = res["length"] extends size ? res : tuple<size, [...res, 1]>;
 
 type UniqueSum<arr extends number[], sum extends unknown[] = []> = arr extends [
 	infer first extends number,
@@ -20,14 +20,14 @@ type UniqueSum<arr extends number[], sum extends unknown[] = []> = arr extends [
 			rest,
 			areDigitsUnique<first> extends true ? [...sum, ...tuple<first>] : sum
 		>
-	: sum['length'];
+	: sum["length"];
 
 export const uniqueSum = <const Arr extends number[]>(
 	arr: Arr,
 ): UniqueSum<Arr> => {
 	let sum = 0;
 	for (const num of arr) {
-		const uniqueDigits = new Set(num.toString().split(''));
+		const uniqueDigits = new Set(num.toString().split(""));
 		if (uniqueDigits.size !== num.toString().length) continue;
 		sum += num;
 	}

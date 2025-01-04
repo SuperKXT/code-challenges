@@ -22,7 +22,7 @@
 
 type SnakeCase<
 	T extends string,
-	S extends string = '',
+	S extends string = "",
 > = T extends `${infer F}${infer R}`
 	? F extends Lowercase<F>
 		? SnakeCase<R, `${S}${F}`>
@@ -31,16 +31,16 @@ type SnakeCase<
 
 /* _____________ Test Cases _____________ */
 // eslint-disable-next-line import/first
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from "@type-challenges/utils";
 
 type _cases = [
-	Expect<Equal<SnakeCase<'hello'>, 'hello'>>,
-	Expect<Equal<SnakeCase<'userName'>, 'user_name'>>,
-	Expect<Equal<SnakeCase<'getElementById'>, 'get_element_by_id'>>,
+	Expect<Equal<SnakeCase<"hello">, "hello">>,
+	Expect<Equal<SnakeCase<"userName">, "user_name">>,
+	Expect<Equal<SnakeCase<"getElementById">, "get_element_by_id">>,
 	Expect<
 		Equal<
-			SnakeCase<'getElementById' | 'getElementByClassNames'>,
-			'get_element_by_id' | 'get_element_by_class_names'
+			SnakeCase<"getElementById" | "getElementByClassNames">,
+			"get_element_by_id" | "get_element_by_class_names"
 		>
 	>,
 ];
