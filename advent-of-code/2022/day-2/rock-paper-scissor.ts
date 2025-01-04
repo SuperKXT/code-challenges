@@ -1,5 +1,5 @@
-import { readFile } from 'fs/promises';
-import path from 'path';
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 
 import { z } from 'zod';
 
@@ -31,13 +31,11 @@ const PLAYER_RULES = {
 		score: 3,
 		wins: 'b',
 	},
-} satisfies {
-	[key in PlayerMove]: {
+} satisfies Record<PlayerMove, {
 		score: 1 | 2 | 3;
 		wins: VersusMove;
 		loses: VersusMove;
-	};
-};
+	}>;
 
 const VERSUS_RULES = {
 	a: {
@@ -55,13 +53,11 @@ const VERSUS_RULES = {
 		loses: 'x',
 		wins: 'y',
 	},
-} satisfies {
-	[key in VersusMove]: {
+} satisfies Record<VersusMove, {
 		wins: PlayerMove;
 		loses: PlayerMove;
 		draws: PlayerMove;
-	};
-};
+	}>;
 
 const getPart1Score = (
 	versusMove: VersusMove,

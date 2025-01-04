@@ -1,6 +1,6 @@
-import { appendFileSync, existsSync, mkdirSync, rmSync } from 'fs';
-import { tmpdir } from 'os';
-import path from 'path';
+import { appendFileSync, existsSync, mkdirSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 
 import { getRenameLogs, recursiveRename } from './recursive-rename.js';
 import { RENAME_ERRORS } from './recursive-rename.types.js';

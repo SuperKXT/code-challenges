@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 
 import chalk from 'chalk';
 import prompt from 'prompt';

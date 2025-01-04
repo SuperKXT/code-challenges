@@ -100,8 +100,8 @@ export class DateRange<
 	Start extends string = 'start',
 	End extends string = 'end',
 	Range extends Utils.prettify<
-		{ [k in Start]: Dayjs } & { [k in End]: Dayjs }
-	> = Utils.prettify<{ [k in Start]: Dayjs } & { [k in End]: Dayjs }>,
+		Record<Start, Dayjs> & Record<End, Dayjs>
+	> = Utils.prettify<Record<Start, Dayjs> & Record<End, Dayjs>>,
 > {
 	constructor(
 		private start: Start = 'start' as Start,
@@ -144,7 +144,7 @@ export class DateRange<
 export class TimeRange<
 	Start extends string,
 	End extends string,
-	Range extends { [k in Start]: Dayjs } & { [k in End]: Dayjs },
+	Range extends Record<Start, Dayjs> & Record<End, Dayjs>,
 > {
 	private EOD = 1440;
 

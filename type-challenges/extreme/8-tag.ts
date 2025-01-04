@@ -202,9 +202,7 @@ export type Tag<
 		: Equal<V, undefined> extends true
 			? undefined
 			: (typeof KEY extends keyof V ? Omit<V, typeof KEY> : V) & {
-					readonly [KEY]?: { 0: 0 } & {
-						[K in `${TagsKey}${Tags['length']}${T}`]?: [...Tags, T];
-					};
+					readonly [KEY]?: { 0: 0 } & Partial<Record<`${TagsKey}${Tags['length']}${T}`, [...Tags, T]>>;
 				};
 
 /**

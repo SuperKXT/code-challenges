@@ -12,7 +12,7 @@ type incrementMap<
 				? [...tuple<T[k]>, 1]['length'] & number
 				: T[k];
 		}
-	: T & { [k in num]: 1 };
+	: T & Record<num, 1>;
 
 type isEven<
 	num extends number,

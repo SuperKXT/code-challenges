@@ -15,7 +15,7 @@ type MinLaundryLoads<
 		: MinLaundryLoads<
 				rest,
 				[...Count, 1],
-				Existing & { [k in ItemKey<first>]: 1 }
+				Existing & Record<ItemKey<first>, 1>
 			>
 	: Count['length'];
 

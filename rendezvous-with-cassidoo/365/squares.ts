@@ -27,7 +27,7 @@ type UpdateMap<
 				>
 	: {
 			vars: [...Lookup['vars'], name];
-			map: Lookup['map'] & { [k in name]: [val] };
+			map: Lookup['map'] & Record<name, [val]>;
 		};
 
 type ReturnUnused<

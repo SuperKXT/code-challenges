@@ -1,5 +1,5 @@
-import { readFile } from 'fs/promises';
-import path from 'path';
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 
 import { aoc2024Day16, day16Path } from './aoc-2024-day-16.js';
 

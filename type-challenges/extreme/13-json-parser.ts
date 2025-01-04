@@ -86,7 +86,7 @@ type EvalObject<
 					: false
 				: T extends `:${infer U}`
 					? Eval<U> extends [infer V, infer UU]
-						? EvalObject<UU, '', Merge<{ [P in K]: V } & O>>
+						? EvalObject<UU, '', Merge<Record<K, V> & O>>
 						: false
 					: false;
 

@@ -47,7 +47,7 @@ type Chainable<T extends Record<string, unknown> = {}> = {
 	option: <K extends string, V>(
 		key: K extends keyof T ? never : K,
 		value: V,
-	) => Chainable<Omit<T, K> & { [Key in K]: V }>;
+	) => Chainable<Omit<T, K> & Record<K, V>>;
 	get: () => Prettify<T>;
 };
 

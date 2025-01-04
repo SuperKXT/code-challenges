@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 
 const salt = 'gb6jUQ8bTrGRgu6K5HRu';
 

@@ -8,7 +8,7 @@ export type IsIsomorphic<
 			? map[first] extends mapped
 				? IsIsomorphic<tRest, uRest, map>
 				: false
-			: IsIsomorphic<tRest, uRest, map & { [x in first]: mapped }>
+			: IsIsomorphic<tRest, uRest, map & Record<first, mapped>>
 		: false
 	: U extends T
 		? true

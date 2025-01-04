@@ -20,7 +20,7 @@ type CalculateExecutionTimes<
 	? first['event'] extends 'start'
 		? CalculateExecutionTimes<
 				rest,
-				Omit<res, first['name']> & { [k in first['name']]: first['time'] }
+				Omit<res, first['name']> & Record<first['name'], first['time']>
 			>
 		: CalculateExecutionTimes<
 				rest,

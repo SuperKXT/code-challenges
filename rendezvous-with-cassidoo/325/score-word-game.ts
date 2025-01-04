@@ -131,7 +131,7 @@ export type LetterScores<
 > = tup extends `${infer first}${infer rest}`
 	? LetterScores<
 			rest,
-			map & { [k in first]: [...offset, ...idx]['length'] },
+			map & Record<first, [...offset, ...idx]['length']>,
 			[...idx, 1]
 		>
 	: prettify<map>;

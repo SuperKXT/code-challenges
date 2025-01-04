@@ -1,5 +1,5 @@
-import { access, readdir, rename, stat } from 'fs/promises';
-import path from 'path';
+import { access, readdir, rename, stat } from 'node:fs/promises';
+import path from 'node:path';
 
 import chalk from 'chalk';
 import argumentParser from 'minimist-lite';

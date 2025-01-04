@@ -60,9 +60,7 @@ type Out =
 type prettify<T> = { [k in keyof T]: T[k] } & {};
 
 type _distributeVal<T, Key extends keyof T, Val = T[Key]> = Val extends Val
-	? nestedDistribute<Omit<T, Key>> & {
-			[x in Key]: Val extends object ? nestedDistribute<Val> : Val;
-		}
+	? nestedDistribute<Omit<T, Key>> & Record<Key, Val extends object ? nestedDistribute<Val> : Val>
 	: {};
 
 type _distributeOnce<T, Keys extends keyof T = keyof T> = prettify<

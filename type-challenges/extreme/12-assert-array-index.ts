@@ -168,9 +168,7 @@ function assertArrayIndex<A extends readonly unknown[], K extends string>(
 	array: number extends A['length'] ? A : never,
 	key: IsKey<K> extends true ? K : never,
 ): asserts array is number extends A['length']
-	? A & { readonly [KEY]: Hash<K> } & {
-			readonly [key in Hash<K>]: A[number];
-		}
+	? A & { readonly [KEY]: Hash<K> } & Readonly<Record<Hash<K>, A[number]>>
 	: never {
 	return undefined;
 }
