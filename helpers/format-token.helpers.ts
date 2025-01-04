@@ -33,7 +33,7 @@ type SeparatorMap = typeof separatorMap;
 type _firstChar<
 	char extends string,
 	strategy extends Strategy,
-> = `${SeparatorMap[Strategy]}${strategy extends "kebab" | "snake" | "human"
+> = `${SeparatorMap[strategy]}${strategy extends "kebab" | "snake" | "human"
 	? Lowercase<char>
 	: Uppercase<char>}`;
 
