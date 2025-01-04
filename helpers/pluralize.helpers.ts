@@ -12,33 +12,22 @@ export const pluralize = (
 	)[]
 ): string => {
 	const expressions = inputExpressions.map((value) => {
-		switch (typeof value) {
-			case 'string':
-				return value;
-			case 'number':
-				return [value, value.toString()] as const;
-			default: {
-				const [number, options] = value;
-				let toShow = '';
-				switch (typeof options) {
-					case 'function': {
-						toShow = options(number) ?? '';
-						break;
-					}
-					case 'string': {
-						const array = options.split('|');
-						toShow = (array[number - 1] ?? array.at(-1) ?? '').replace(
-							/\$1/gu,
-							number.toString(),
-						);
-						break;
-					}
-					default:
-						break;
-				}
-				return [value[0], toShow] as const;
-			}
+		if (typeof value === 'string') return value;
+
+		if (typeof value === 'number') return [value, value.toString()] as const;
+
+		const [number, options] = value;
+		let toShow = '';
+		if (typeof options === 'function') {
+			toShow = options(number) ?? '';
+		} else if (typeof options === 'string') {
+			const array = options.split('|');
+			toShow = (array[number - 1] ?? array.at(-1) ?? '').replace(
+				/\$1/gu,
+				number.toString(),
+			);
 		}
+		return [value[0], toShow] as const;
 	});
 
 	const result: string[] = [];
