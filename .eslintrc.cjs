@@ -126,11 +126,11 @@ const config = {
 			{ name: "__filename", message: "Import __filename from config instead" },
 			{ name: "Buffer", message: "Use Uint8Array instead." },
 		],
-		"n/no-missing-import": "off",
+
 		"n/no-process-env": "warn",
 		"n/no-unpublished-import": "off",
 		"n/prefer-node-protocol": "warn",
-
+		"n/no-missing-import": "off",
 		"import/consistent-type-specifier-style": ["warn", "prefer-top-level"],
 		"import/first": "warn",
 		"import/newline-after-import": "warn",
