@@ -66,9 +66,6 @@ const movePad: TPad = new Map([
 	['>', [1, 2]],
 ]);
 
-const numPadCache = new Map<string, string[]>();
-const movePadCache = new Map<string, string[]>();
-
 export const aoc2024Day21 = (input: string) => {
 	const codes = input.trim().split('\n').filter(Boolean);
 	if (!codes.length) throw new Error('Invalid input');
@@ -96,12 +93,6 @@ export const aoc2024Day21 = (input: string) => {
 			movePad2Curr = char;
 		}
 
-		console.log(
-			`Code: ${code}, length: ${movePad3Path.length}, Path: ${movePad3Path.join('')}`,
-		);
-		console.log(`Pad 1: ${movePad1Path.join('')}`);
-		console.log(`Pad 2: ${movePad2Path.join('')}`);
-		console.log();
 		const len = movePad3Path.length;
 		complexity += len * parseInt(code);
 	}

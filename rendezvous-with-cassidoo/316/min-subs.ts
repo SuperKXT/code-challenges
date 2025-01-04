@@ -1,7 +1,4 @@
-export const minSubs = <const T extends readonly number[]>(
-	input: T,
-	count: number,
-): number[] => {
+export const minSubs = (input: number[], count: number): number[] => {
 	let maxSum: number = Infinity;
 	let result: number[] = [];
 	for (let i = 0; i < input.length - count; i++) {

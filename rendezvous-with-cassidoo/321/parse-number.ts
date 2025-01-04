@@ -1,3 +1,3 @@
-export const parseNumber = <T extends string>(_string: T): number => {
+export const parseNumber = (_string: string): number => {
 	return 1;
 };

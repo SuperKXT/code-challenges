@@ -13,9 +13,7 @@ const monthMap = {
 	11: 'Dec',
 } as const;
 
-export const returnGift = <const Input extends string>(
-	input: Input,
-): string => {
+export const returnGift = (input: string): string => {
 	const date = new Date(input);
 	if (isNaN(date.getTime())) throw new Error('Invalid date');
 	date.setDate(date.getDate() + (date.getMonth() === 11 ? 90 : 30) - 1);

@@ -1,4 +1,4 @@
-export const explodeString = <str extends string>(string: str): string[] => {
+export const explodeString = (string: string): string[] => {
 	const sorted = string.split('').sort();
 	const result: string[] = [];
 	while (sorted[0])

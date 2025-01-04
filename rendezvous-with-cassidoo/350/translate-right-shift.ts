@@ -1,3 +1,3 @@
-export const translateShiftRight = <Str extends string>(str: Str): string => {
+export const translateShiftRight = (str: string): string => {
 	return str;
 };

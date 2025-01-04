@@ -1,10 +1,8 @@
 import type { Utils } from '../../../types/utils.types.js';
 
-const ROW = [0, 1, 2, 3, 4] as const;
-type Row = (typeof ROW)[number];
+type Row = 0 | 1 | 2 | 3 | 4;
 
-const COL = [0, 1, 2, 3, 4, 5] as const;
-type Col = (typeof COL)[number];
+type Col = 0 | 1 | 2 | 3 | 4 | 5;
 
 type Position = {
 	row: Row;

@@ -1,7 +1,4 @@
-export const passDoors = <Doors extends number>(
-	noOfDoors: Doors,
-	passes: number,
-): number => {
+export const passDoors = (noOfDoors: number, passes: number): number => {
 	const doors = new Array<boolean>(noOfDoors).fill(false);
 	for (let pass = 1; pass <= passes; pass++) {
 		for (let index = pass; index <= noOfDoors; index += pass)

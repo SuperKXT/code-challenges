@@ -1,4 +1,4 @@
-const alphabets = [
+type AlphabetArray = [
 	'a',
 	'b',
 	'c',
@@ -25,9 +25,7 @@ const alphabets = [
 	'x',
 	'y',
 	'z',
-] as const;
-
-type AlphabetArray = typeof alphabets;
+];
 
 type Alphabet = AlphabetArray[number];
 

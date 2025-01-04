@@ -120,12 +120,12 @@ export const scoreWordGame = <
 
 type prettify<T> = { [k in keyof T]: T[k] } & {};
 
-const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+type alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 type offset = tuple<98>;
 
 export type LetterScores<
-	tup extends string = typeof alphabet,
+	tup extends string = alphabet,
 	map extends Record<string, number> = {},
 	idx extends 1[] = [],
 > = tup extends `${infer first}${infer rest}`

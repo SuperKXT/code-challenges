@@ -30,7 +30,7 @@ type _cases = [
 	Expect<Equal<MyExclude<'a' | 'b' | 'c', 'a'>, 'b' | 'c'>>,
 	Expect<Equal<MyExclude<'a' | 'b' | 'c', 'a' | 'b'>, 'c'>>,
 	Expect<
-		// eslint-disable-next-line @typescript-eslint/ban-types
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 		Equal<MyExclude<string | number | (() => void), Function>, string | number>
 	>,
 ];

@@ -1,9 +1,6 @@
 type Direction = 'left' | 'right' | 'up' | 'down';
 
-export const printArrow = <Dir extends Direction, Size extends number>(
-	direction: Dir,
-	size: Size,
-): string => {
+export const printArrow = (direction: Direction, size: number): string => {
 	switch (direction) {
 		case 'left': {
 			let string = '*';

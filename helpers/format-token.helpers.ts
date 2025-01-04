@@ -17,16 +17,7 @@ import type {
 	WordSeparators,
 } from './string-literals.helpers.js';
 
-const formatStrategies = [
-	'camel',
-	'pascal',
-	'snake',
-	'kebab',
-	'constant',
-	'human',
-] as const;
-
-type Strategy = (typeof formatStrategies)[number];
+type Strategy = 'camel' | 'pascal' | 'snake' | 'kebab' | 'constant' | 'human';
 
 const separatorMap = {
 	camel: '',
@@ -42,7 +33,7 @@ type SeparatorMap = typeof separatorMap;
 type _firstChar<
 	char extends string,
 	strategy extends Strategy,
-> = `${SeparatorMap[strategy]}${strategy extends 'kebab' | 'snake' | 'human'
+> = `${SeparatorMap[Strategy]}${strategy extends 'kebab' | 'snake' | 'human'
 	? Lowercase<char>
 	: Uppercase<char>}`;
 

@@ -14,7 +14,7 @@ const config = {
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
-		projectService: true,
+		project: true,
 		tsconfigRootDir: __dirname,
 	},
 	plugins: ['import', 'unused-imports', '@typescript-eslint', 'only-warn'],
@@ -126,6 +126,7 @@ const config = {
 			{ name: '__filename', message: 'Import __filename from config instead' },
 			{ name: 'Buffer', message: 'Use Uint8Array instead.' },
 		],
+		'n/no-missing-import': 'off',
 		'n/no-process-env': 'warn',
 		'n/no-unpublished-import': 'off',
 		'n/prefer-node-protocol': 'warn',
@@ -213,7 +214,13 @@ const config = {
 			{ ignoreStringArrays: true },
 		],
 		'@typescript-eslint/return-await': ['warn', 'always'],
-		'@typescript-eslint/switch-exhaustiveness-check': 'warn',
+		'@typescript-eslint/switch-exhaustiveness-check': [
+			'warn',
+			{
+				considerDefaultExhaustiveForUnions: true,
+				requireDefaultForNonUnion: true,
+			},
+		],
 		'@typescript-eslint/restrict-template-expressions': [
 			'warn',
 			{
@@ -244,6 +251,7 @@ const config = {
 		'@typescript-eslint/no-namespace': ['warn', { allowDeclarations: true }],
 		'@typescript-eslint/array-type': 'off',
 		'@typescript-eslint/prefer-regexp-exec': 'off',
+		'@typescript-eslint/no-empty-object-type': 'off',
 	},
 	overrides: [
 		{
@@ -267,6 +275,7 @@ const config = {
 			files: ['type-challenges/**/*'],
 			rules: {
 				'@typescript-eslint/no-explicit-any': 'off',
+				'unused-imports/no-unused-vars': 'off',
 			},
 		},
 	],

@@ -1,5 +1,5 @@
 /* eslint-disable import/first */
-/* eslint-disable unused-imports/no-unused-vars */
+ 
 /*
   26401 - JSON Schema to TypeScript
   -------

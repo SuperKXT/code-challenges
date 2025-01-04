@@ -1,4 +1,4 @@
-/* eslint-disable unused-imports/no-unused-vars */
+ 
 /* eslint-disable new-cap */
 /*
   17 - Currying 1

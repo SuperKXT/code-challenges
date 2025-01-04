@@ -1,6 +1,4 @@
-export const zerosInFactorial = <const Num extends number>(
-	num: Num,
-): number => {
+export const zerosInFactorial = (num: number): number => {
 	let result = 0;
 	// ? https://www.purplemath.com/modules/factzero.htm
 	let power = 5;

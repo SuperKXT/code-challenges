@@ -19,14 +19,14 @@ const prune = (a: bigint) => {
 	return a % 16777216n;
 };
 
-const getNewSecret = (a: bigint) => {
+const _getNewSecret = (a: bigint) => {
 	const num1 = prune(mix(a, a * 64n));
 	const num2 = prune(mix(num1, num1 / 32n));
 	const num3 = prune(mix(num2, num2 * 2048n));
 	return num3;
 };
 
-const getPrice = (a: bigint) => {
+const _getPrice = (a: bigint) => {
 	return Number(a.toString().at(-1) ?? '');
 };
 
@@ -50,7 +50,6 @@ export const aoc2024Day23 = (input: string) => {
 
 	const connectionSet = new Set<string>();
 	for (const [pc, set] of map.entries()) {
-		const [f, s] = Array.from(set);
 		for (const c of set) {
 			const cSet = map.get(c);
 			if (!cSet) continue;
@@ -66,8 +65,6 @@ export const aoc2024Day23 = (input: string) => {
 			}
 		}
 	}
-	console.log(map);
-	console.log(connectionSet);
 
 	const connections = connectionSet.size;
 

@@ -19,6 +19,7 @@
 /* _____________ Your Code Here _____________ */
 
 type Eq<T, U> =
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 	(<G>() => G extends T ? 1 : 0) extends <G>() => G extends U ? 1 : 0
 		? true
 		: false;
