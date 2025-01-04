@@ -14,7 +14,7 @@ const config = {
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
-		project: true,
+		projectService: true,
 		tsconfigRootDir: __dirname,
 	},
 	plugins: ['import', 'unused-imports', '@typescript-eslint', 'only-warn'],
@@ -128,7 +128,7 @@ const config = {
 		],
 		'n/no-process-env': 'warn',
 		'n/no-unpublished-import': 'off',
-		'n/no-missing-import': 'off',
+		'n/prefer-node-protocol': 'warn',
 
 		'import/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
 		'import/first': 'warn',
@@ -225,15 +225,14 @@ const config = {
 				allowNever: false,
 			},
 		],
-		'@typescript-eslint/ban-types': [
+		'@typescript-eslint/no-restricted-types': [
 			'warn',
 			{
 				types: {
-					'{}': false,
-					extendDefaults: true,
 					Buffer: {
-						message: 'Use Uint8Array instead.',
+						message: 'Use Uint8Array instead',
 						suggest: ['Uint8Array'],
+						fixWith: 'Uint8Array',
 					},
 				},
 			},
@@ -244,6 +243,7 @@ const config = {
 		],
 		'@typescript-eslint/no-namespace': ['warn', { allowDeclarations: true }],
 		'@typescript-eslint/array-type': 'off',
+		'@typescript-eslint/prefer-regexp-exec': 'off',
 	},
 	overrides: [
 		{
