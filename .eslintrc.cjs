@@ -252,6 +252,7 @@ const config = {
 		"@typescript-eslint/array-type": "off",
 		"@typescript-eslint/prefer-regexp-exec": "off",
 		"@typescript-eslint/no-empty-object-type": "off",
+		"@typescript-eslint/no-base-to-string": "off",
 	},
 	overrides: [
 		{

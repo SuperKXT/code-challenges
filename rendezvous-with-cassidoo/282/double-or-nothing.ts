@@ -34,7 +34,6 @@ const spin = async (
 	}
 	console.info(
 		chalk.red("INCORRECT!"),
-		// eslint-disable-next-line @typescript-eslint/no-base-to-string
 		chalk.blue(`Spin Result: ${spinResult}, Your Choice: ${String(choice)}`),
 	);
 	return 0;
