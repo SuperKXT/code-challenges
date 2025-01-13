@@ -13,9 +13,8 @@ Example:
 
 > natoNotate('3spooky5me')
 > "Three Sierra Papa Oscar Oscar Kilo Yankee Five Mike Echo"
-
 ```
 
 ---
 
-[Solution Playground](https://tsplay.dev/mqMEYm)
+[Solution Playground](https://tsplay.dev/mLjlkw)
